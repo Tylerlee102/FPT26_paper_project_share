@@ -1,0 +1,1 @@
+Clean collaborator archive. Excluded disposable pytest-cache-files-* folders, Python cache folders, .git metadata, and upload_to_google_drive to avoid recursive archives and Windows access-denied cache issues.

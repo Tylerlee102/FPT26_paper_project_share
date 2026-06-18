@@ -1,0 +1,199 @@
+% Paste-ready Results section for the IEEE draft.
+%
+% Add this package in the preamble if it is not already present:
+% \usepackage{booktabs}
+%
+% Add this line after \begin{document}, before this section:
+% \input{paper/snippets/result_macros.tex}
+%
+% The generated table paths below assume this file is compiled from the
+% repository root or that the paper/ directory is uploaded beside the manuscript.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{End-to-End Decode Comparison}
+
+The default MXFP4 persistent-state design reaches
+\OursMxfpFourBThirtyTwoLatencyUs per token in RTL cosimulation and uses
+\OursMxfpFourBThirtyTwoPowerW of Vivado-estimated post-implementation on-chip
+power. Against the cited H100 baseline, this corresponds to
+\HeadlineSpeedupVsHOneHundred speedup and
+\HeadlineEnergyEfficiencyVsHOneHundred energy efficiency. Against the cited
+FPGA baseline, the same design gives \HeadlineSpeedupVsUsc speedup and
+\HeadlineEnergyEfficiencyVsUsc energy-efficiency gain relative to the cited
+FPGA energy upper bound. These results support the main architectural claim:
+the benefit comes from combining native MXFP4 arithmetic with persistent
+recurrent-state dataflow, rather than from reduced precision alone.
+
+\begin{table}[t]
+\centering
+\caption{Batch-one Gated DeltaNet decode comparison. Baseline rows are cited
+prior-work values; our row is measured from RTL cosimulation and Vivado
+post-implementation estimates.}
+\label{tab:results-main}
+\begin{tabular}{llll}
+\toprule
+System & Datapath/state & Latency & Energy \\
+\midrule
+H100 baseline & HBM state traffic & \HOneHundredBaselineLatencyUs & \HOneHundredBaselineEnergyMj \\
+FPGA baseline & Persistent state & \UscBaselineLatencyUs & \UscBaselineEnergyMj \\
+Ours & MXFP4 persistent state & \OursMxfpFourBThirtyTwoLatencyUs & \OursMxfpFourBThirtyTwoEnergyMj \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Implementation Evidence}
+
+The implementation closes timing for the Alveo U55C target. HLS C-synthesis
+estimates \OursMxfpFourBThirtyTwoCsynthFmaxMhz, and Vivado implementation
+reports \OursMxfpFourBThirtyTwoImplWnsNs post-implementation slack. The default
+design uses \OursMxfpFourBThirtyTwoLutPct of LUTs,
+\OursMxfpFourBThirtyTwoBramPct of BRAM, and \OursMxfpFourBThirtyTwoDspPct of
+DSPs. The FP4 element multiply is LUT-based, while the remaining DSP usage
+comes from wider HLS-generated fixed-point operations outside the native E2M1
+multiply primitive; the source-level native MAC evidence reports no DSP pragma
+in the MAC source.
+
+\begin{table}[t]
+\centering
+\caption{Measured implementation evidence for the default MXFP4 configuration.}
+\label{tab:results-implementation}
+\begin{tabular}{lp{0.52\linewidth}}
+\toprule
+Metric & Result \\
+\midrule
+C-sim parity & \HlsCsimVectorsPassed/\HlsCsimVectorsTotal vectors \\
+C/RTL cosim length & \OursMxfpFourBThirtyTwoTokensCosim \\
+HLS estimated Fmax & \OursMxfpFourBThirtyTwoCsynthFmaxMhz \\
+HLS latency & \OursMxfpFourBThirtyTwoCsynthLatencyCycles \\
+RTL cosim latency & \OursMxfpFourBThirtyTwoLatencyCycles \\
+Post-implementation slack & \OursMxfpFourBThirtyTwoImplWnsNs \\
+Vivado-estimated on-chip power & \OursMxfpFourBThirtyTwoPowerW \\
+Resource utilization & \OursMxfpFourBThirtyTwoLutPct LUT, \OursMxfpFourBThirtyTwoBramPct BRAM, \OursMxfpFourBThirtyTwoDspPct DSP \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Parallelism and Block-Size Sweep}
+
+The design sweep shows that the default block-size and parallelism point is the
+best current headline configuration. Wider parallelism increases resource use
+without improving the measured end-to-end latency in the present artifact,
+which indicates that the token path is limited by state movement, interface
+packing, and HLS scheduling rather than by the number of raw arithmetic lanes
+alone. Smaller parallelism reduces area and power, but it also increases
+latency.
+
+\begin{table*}[t]
+\centering
+\caption{MXFP4 design sweep. Non-default rows are retained as design-space
+evidence, not as the headline implementation point.}
+\label{tab:results-sweep}
+\begin{tabular}{lllll}
+\toprule
+Configuration & Latency & Power & LUT & DSP \\
+\midrule
+Default, $B=32$, $P_K=16$, $P_V=8$ &
+\OursMxfpFourBThirtyTwoLatencyUs &
+\OursMxfpFourBThirtyTwoPowerW &
+\OursMxfpFourBThirtyTwoLutPct &
+\OursMxfpFourBThirtyTwoDspPct \\
+Small fabric, $B=32$, $P_K=8$, $P_V=4$ &
+\OursMxfpFourPkEightPvFourBThirtyTwoLatencyUs &
+\OursMxfpFourPkEightPvFourBThirtyTwoPowerW &
+\OursMxfpFourPkEightPvFourBThirtyTwoLutPct &
+\OursMxfpFourPkEightPvFourBThirtyTwoDspPct \\
+Wide fabric, $B=32$, $P_K=32$, $P_V=16$ &
+\OursMxfpFourPkThirtyTwoPvSixteenBThirtyTwoLatencyUs &
+\OursMxfpFourPkThirtyTwoPvSixteenBThirtyTwoPowerW &
+\OursMxfpFourPkThirtyTwoPvSixteenBThirtyTwoLutPct &
+\OursMxfpFourPkThirtyTwoPvSixteenBThirtyTwoDspPct \\
+$B=16$, default parallelism &
+\OursMxfpFourBSixteenPkSixteenPvEightLatencyUs &
+\OursMxfpFourBSixteenPkSixteenPvEightPowerW &
+\OursMxfpFourBSixteenPkSixteenPvEightLutPct &
+\OursMxfpFourBSixteenPkSixteenPvEightDspPct \\
+$B=16$, wide fabric &
+\OursMxfpFourBSixteenPkThirtyTwoPvSixteenLatencyUs &
+\OursMxfpFourBSixteenPkThirtyTwoPvSixteenPowerW &
+\OursMxfpFourBSixteenPkThirtyTwoPvSixteenLutPct &
+\OursMxfpFourBSixteenPkThirtyTwoPvSixteenDspPct \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Synthetic Numerical Fidelity}
+
+The current accuracy evidence is synthetic-only because the Qwen3-Next capture
+status is \QwenCaptureStatus. Under the deterministic synthetic harness, MXFP4
+keeps output direction closer to the FP32 reference than the INT4 fallback. With
+block size 32, MXFP4 reaches \SyntheticMxfpFourBThirtyTwoOutputCosine output
+cosine and \SyntheticMxfpFourBThirtyTwoOutputRelLTwo output relative $L_2$
+error. With block size 16, MXFP4 reaches
+\SyntheticMxfpFourBSixteenOutputCosine output cosine and
+\SyntheticMxfpFourBSixteenOutputRelLTwo output relative $L_2$ error. The INT4
+fallback output cosine is \SyntheticIntFourOutputCosine.
+
+\begin{table}[t]
+\centering
+\caption{Synthetic quantization fidelity. These values should not be described
+as Qwen3-Next perplexity or real-model quality results.}
+\label{tab:results-accuracy}
+\begin{tabular}{lll}
+\toprule
+Configuration & Output cosine & Output relative $L_2$ \\
+\midrule
+MXFP4, $B=32$ & \SyntheticMxfpFourBThirtyTwoOutputCosine & \SyntheticMxfpFourBThirtyTwoOutputRelLTwo \\
+MXFP4, $B=16$ & \SyntheticMxfpFourBSixteenOutputCosine & \SyntheticMxfpFourBSixteenOutputRelLTwo \\
+INT4 fallback & \SyntheticIntFourOutputCosine & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Long-Run State Drift and Traffic Avoidance}
+
+The long-token synthetic stress tests show why recurrent-state precision is a
+first-order design choice. Over \SyntheticDriftTokens, MXFP4 state reaches
+\SyntheticDriftMxfpFourFinalOutputCosine final output cosine and
+\SyntheticDriftMxfpFourFinalStateRelLTwo final state relative $L_2$ error,
+while the MXFP8-state fallback reaches
+\SyntheticDriftMxfpEightFinalOutputCosine final output cosine and
+\SyntheticDriftMxfpEightFinalStateRelLTwo final state relative $L_2$ error.
+This supports keeping MXFP4 as the native arithmetic path while retaining
+MXFP8 state as the safer fallback for accumulated recurrent-state quality.
+
+\begin{table}[t]
+\centering
+\caption{Synthetic recurrent-state stress evidence. These tests broaden the
+synthetic fidelity boundary when real Qwen3-Next activation capture is
+unavailable.}
+\label{tab:results-state-stress}
+\input{paper/tables/recurrent_state_stress.tex}
+\end{table}
+
+The storage and traffic accounting also supports the persistent-state dataflow
+claim. Including MXFP4 scale metadata, the $B=32$ recurrent state occupies
+\StateStorageMxfpFourBThirtyTwoBytes bytes, a
+\StateStorageMxfpFourBThirtyTwoReductionVsFpThirtyTwoPct reduction versus
+FP32 and a \StateStorageMxfpFourBThirtyTwoReductionVsBfSixteenPct reduction
+versus BF16. A naive three-pass off-chip state path would move
+\OffchipMxfpFourBThirtyTwoNaiveThreePassBytesPerToken bytes per token for
+the same MXFP4 $B=32$ state, whereas the persistent-state datapath has
+\OffchipMxfpFourBThirtyTwoPersistentBytesPerToken steady-state off-chip
+recurrent-state traffic.
+
+\begin{table}[t]
+\centering
+\caption{Recurrent-state storage and off-chip traffic accounting for MXFP4
+$B=32$.}
+\label{tab:results-state-traffic}
+\input{paper/tables/state_storage_traffic.tex}
+\end{table}
+
+Overall, the measured results establish a simulation-backed hardware result for
+one batch-one Gated DeltaNet decode layer. The strongest supported claims are
+RTL-cosim latency, Vivado implementation timing, post-implementation resource
+use, and synthetic numerical fidelity. The final manuscript should avoid
+claiming completed Qwen3-Next perplexity until realistic activation capture is
+available.

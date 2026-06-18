@@ -1,0 +1,286 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
+| Date             : Tue May  5 18:48:17 2026
+| Host             : meow running 64-bit major release  (build 9200)
+| Command          : report_power -file reports/vivado/impl_power.rpt
+| Design           : gdn_top
+| Device           : xcu55c-fsvh2892-2L-e
+| Design State     : routed
+| Grade            : extended
+| Process          : typical
+| Characterization : Production
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Power Report
+
+Table of Contents
+-----------------
+1. Summary
+1.1 On-Chip Components
+1.2 Power Supply Summary
+1.3 Confidence Level
+2. Settings
+2.1 Environment
+2.2 Clock Constraints
+3. Detailed Reports
+3.1 By Hierarchy
+
+1. Summary
+----------
+
++--------------------------+--------------+
+| Total On-Chip Power (W)  | 3.860        |
+|   FPGA Power (W)         | 3.473        |
+|   HBM Power (W)          | 0.387        |
+| Design Power Budget (W)  | Unspecified* |
+| Power Budget Margin (W)  | NA           |
+| Dynamic (W)              | 0.576        |
+| Device Static (W)        | 3.285        |
+| Effective TJA (C/W)      | 0.4          |
+| Max Ambient (C)          | 98.3         |
+| Junction Temperature (C) | 26.7         |
+| Confidence Level         | Medium       |
+| Setting File             | ---          |
+| Simulation Activity File | ---          |
+| Design Nets Matched      | NA           |
++--------------------------+--------------+
+* Specify Design Power Budget using, set_operating_conditions -design_power_budget <value in Watts>
+
+
+1.1 On-Chip Components
+----------------------
+
++--------------------------+-----------+----------+-----------+-----------------+
+| On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
++--------------------------+-----------+----------+-----------+-----------------+
+| Clocks                   |     0.173 |        3 |       --- |             --- |
+| CLB Logic                |     0.095 |    53566 |       --- |             --- |
+|   LUT as Logic           |     0.067 |    25649 |   1303680 |            1.97 |
+|   LUT as Shift Register  |     0.013 |      450 |    600960 |            0.07 |
+|   Register               |     0.006 |    18795 |   2607360 |            0.72 |
+|   CARRY8                 |     0.006 |     1409 |    162960 |            0.86 |
+|   LUT as Distributed RAM |     0.004 |      512 |    600960 |            0.09 |
+|   BUFG                   |    <0.001 |        4 |        96 |            4.17 |
+|   Others                 |     0.000 |      520 |       --- |             --- |
+|   F7/F8 Muxes            |     0.000 |      497 |   1303680 |            0.04 |
+| Signals                  |     0.097 |    45526 |       --- |             --- |
+| Block RAM                |     0.038 |      9.5 |      2016 |            0.47 |
+| DSPs                     |     0.172 |      168 |      9024 |            1.86 |
+| Static Power             |     3.285 |          |           |                 |
+| Total                    |     3.860 |          |           |                 |
++--------------------------+-----------+----------+-----------+-----------------+
+
+
+1.2 Power Supply Summary
+------------------------
+
++------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+| Source     | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
++------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+| Vccint     |       0.850 |     1.946 |       0.673 |      1.274 |       NA    | Unspecified | NA         |
+| Vccint_io  |       0.850 |     0.238 |       0.000 |      0.238 |       NA    | Unspecified | NA         |
+| Vccbram    |       0.850 |     0.035 |       0.005 |      0.030 |       NA    | Unspecified | NA         |
+| Vccaux     |       1.800 |     0.821 |       0.000 |      0.821 |       NA    | Unspecified | NA         |
+| Vccaux_io  |       1.800 |     0.035 |       0.000 |      0.035 |       NA    | Unspecified | NA         |
+| Vcco33     |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco25     |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco18     |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco15     |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco135    |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco12     |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco10     |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vccadc     |       1.800 |     0.024 |       0.000 |      0.024 |       NA    | Unspecified | NA         |
+| VCC_IO_HBM |       1.200 |     0.082 |       0.000 |      0.082 |       NA    | Unspecified | NA         |
+| VCC_HBM    |       1.200 |     0.153 |       0.000 |      0.153 |       NA    | Unspecified | NA         |
+| VCCAUX_HBM |       2.500 |     0.043 |       0.000 |      0.043 |       NA    | Unspecified | NA         |
+| MGTYAVcc   |       0.900 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| MGTYAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| MGTYVccaux |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
++------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+
+
+1.3 Confidence Level
+--------------------
+
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| User Input Data             | Confidence | Details                                        | Action                                                                                                     |
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Design implementation state | High       | Design is routed                               |                                                                                                            |
+| Clock nodes activity        | High       | User specified more than 95% of clocks         |                                                                                                            |
+| I/O nodes activity          | High       | User specified more than 95% of inputs         |                                                                                                            |
+| Internal nodes activity     | Medium     | User specified less than 25% of internal nodes | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views |
+| Device models               | High       | Device models are Production                   |                                                                                                            |
+|                             |            |                                                |                                                                                                            |
+| Overall confidence level    | Medium     |                                                |                                                                                                            |
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+
+
+2. Settings
+-----------
+
+2.1 Environment
+---------------
+
++-----------------------+--------------------------+
+| Ambient Temp (C)      | 25.0                     |
+| ThetaJA (C/W)         | 0.4                      |
+| Airflow (LFM)         | 250                      |
+| Heat Sink             | medium (Medium Profile)  |
+| ThetaSA (C/W)         | 0.5                      |
+| Board Selection       | medium (10"x10")         |
+| # of Board Layers     | 12to15 (12 to 15 Layers) |
+| Board Temperature (C) | 25.0                     |
++-----------------------+--------------------------+
+
+
+2.2 Clock Constraints
+---------------------
+
++--------+--------+-----------------+
+| Clock  | Domain | Constraint (ns) |
++--------+--------+-----------------+
+| ap_clk | ap_clk |             4.0 |
++--------+--------+-----------------+
+
+
+3. Detailed Reports
+-------------------
+
+3.1 By Hierarchy
+----------------
+
++---------------------------------------------------------------------------------------------------+-----------+
+| Name                                                                                              | Power (W) |
++---------------------------------------------------------------------------------------------------+-----------+
+| gdn_top                                                                                           |     0.576 |
+|   control_r_s_axi_U                                                                               |     0.010 |
+|   gmem0_m_axi_U                                                                                   |     0.017 |
+|     bus_read                                                                                      |     0.007 |
+|       rreq_burst_conv                                                                             |     0.005 |
+|     load_unit_0                                                                                   |     0.010 |
+|       buff_rdata                                                                                  |     0.005 |
+|       fifo_rreq                                                                                   |     0.002 |
+|   gmem1_m_axi_U                                                                                   |     0.017 |
+|     bus_read                                                                                      |     0.007 |
+|       rreq_burst_conv                                                                             |     0.006 |
+|     load_unit_0                                                                                   |     0.010 |
+|       buff_rdata                                                                                  |     0.005 |
+|       fifo_rreq                                                                                   |     0.003 |
+|   gmem2_m_axi_U                                                                                   |     0.017 |
+|     bus_read                                                                                      |     0.007 |
+|       rreq_burst_conv                                                                             |     0.006 |
+|     load_unit_0                                                                                   |     0.010 |
+|       buff_rdata                                                                                  |     0.005 |
+|       fifo_rreq                                                                                   |     0.003 |
+|   gmem3_m_axi_U                                                                                   |     0.017 |
+|     bus_read                                                                                      |     0.007 |
+|       rreq_burst_conv                                                                             |     0.006 |
+|     load_unit_0                                                                                   |     0.010 |
+|       buff_rdata                                                                                  |     0.005 |
+|       fifo_rreq                                                                                   |     0.002 |
+|   gmem4_m_axi_U                                                                                   |     0.018 |
+|     bus_read                                                                                      |     0.007 |
+|       rreq_burst_conv                                                                             |     0.006 |
+|     load_unit_0                                                                                   |     0.011 |
+|       buff_rdata                                                                                  |     0.005 |
+|       fifo_rreq                                                                                   |     0.002 |
+|   gmem5_m_axi_U                                                                                   |     0.023 |
+|     bus_write                                                                                     |     0.014 |
+|       wreq_burst_conv                                                                             |     0.006 |
+|       wreq_throttle                                                                               |     0.007 |
+|     store_unit_0                                                                                  |     0.009 |
+|       buff_wdata                                                                                  |     0.004 |
+|       bus_wide_gen.wreq_offset                                                                    |     0.001 |
+|       fifo_wreq                                                                                   |     0.002 |
+|   gmem6_m_axi_U                                                                                   |     0.026 |
+|     bus_write                                                                                     |     0.016 |
+|       wreq_burst_conv                                                                             |     0.006 |
+|       wreq_throttle                                                                               |     0.008 |
+|     store_unit_0                                                                                  |     0.010 |
+|       buff_wdata                                                                                  |     0.003 |
+|       bus_wide_gen.wreq_offset                                                                    |     0.002 |
+|       fifo_wreq                                                                                   |     0.003 |
+|   grp_gdn_top_impl_fu_204                                                                         |     0.426 |
+|     gdn_mulmulmultop_impl_ap_uint_const_128_ap_uint_const_4_ap_uint_const_128_U                   |     0.002 |
+|     gdn_top_impl_ap_uint_const_128_ap_uint_const_4_ap_uint_const_128_1_U                          |     0.002 |
+|     gdn_top_impl_ap_uint_const_128_ap_uint_const_4_ap_uint_const_128_2_U                          |     0.002 |
+|     gdn_top_impl_ap_uint_const_128_ap_uint_const_4_ap_uint_const_128_3_U                          |     0.002 |
+|     grp_gdn_top_impl_Pipeline_load_heads_load_head_vecs_fu_1365                                   |     0.003 |
+|     grp_gdn_top_impl_Pipeline_predict_heads_predict_row_tiles_predict_col_tiles_predict_s_fu_1429 |     0.037 |
+|     grp_gdn_top_impl_Pipeline_update_load_rows_update_load_cols_fu_1457                           |     0.008 |
+|       flow_control_loop_pipe_sequential_init_U                                                    |     0.001 |
+|     grp_gdn_top_impl_Pipeline_update_store_rows_update_store_cols_fu_1530                         |     0.001 |
+|     mul_15s_17s_31_1_1_U315                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U316                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U317                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U319                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U320                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U321                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U322                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U323                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U324                                                                       |     0.002 |
+|     mul_15s_17s_31_1_1_U325                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U326                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U327                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U328                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U329                                                                       |     0.003 |
+|     mul_15s_17s_31_1_1_U330                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U331                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U332                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U333                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U334                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U335                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U336                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U337                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U338                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U339                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U340                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U341                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U342                                                                       |     0.002 |
+|     mul_15s_17s_31_1_1_U343                                                                       |     0.001 |
+|     mul_15s_17s_31_1_1_U344                                                                       |     0.002 |
+|     mul_15s_17s_31_1_1_U346                                                                       |     0.001 |
+|     mul_31s_33ns_61_2_1_U263                                                                      |     0.006 |
+|     mul_31s_33ns_61_2_1_U264                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U265                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U266                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U267                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U268                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U269                                                                      |     0.006 |
+|     mul_31s_33ns_61_2_1_U270                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U271                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U272                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U273                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U274                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U275                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U276                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U277                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U278                                                                      |     0.006 |
+|     mul_31s_33ns_61_2_1_U279                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U280                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U281                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U282                                                                      |     0.006 |
+|     mul_31s_33ns_61_2_1_U283                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U284                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U285                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U286                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U287                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U288                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U289                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U290                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U291                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U292                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U293                                                                      |     0.007 |
+|     mul_31s_33ns_61_2_1_U294                                                                      |     0.006 |
+|     mul_7s_16s_23_1_1_U474                                                                        |     0.001 |
+|     mul_7s_16s_23_1_1_U476                                                                        |     0.002 |
+|     mul_7s_16s_23_1_1_U478                                                                        |     0.002 |
+|     mul_7s_16s_23_1_1_U480                                                                        |     0.001 |
+|     predicted_1_U                                                                                 |     0.002 |
+|     predicted_2_U                                                                                 |     0.002 |
+|     predicted_3_U                                                                                 |     0.002 |
+|     predicted_U                                                                                   |     0.002 |
++---------------------------------------------------------------------------------------------------+-----------+
+
+

@@ -1,0 +1,386 @@
+﻿\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{textcomp}
+
+% Allow compilation either from the repository root or from paper/.
+\newcommand{\PaperRoot}{}
+\IfFileExists{paper/snippets/result_macros.tex}{%
+  \renewcommand{\PaperRoot}{paper/}%
+}{%
+  \renewcommand{\PaperRoot}{}%
+}
+\newcommand{\PaperInput}[1]{\input{\PaperRoot#1}}
+\newcommand{\PaperAsset}[1]{\PaperRoot#1}
+\PaperInput{snippets/result_macros.tex}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Native MXFP4 Dataflow for Persistent Gated DeltaNet Decode on an FPGA\\
+\thanks{All authors contributed equally to this work.}
+}
+
+\author{\IEEEauthorblockN{Tyler Lee, Jason Blocklove, Ramesh Karri}
+\IEEEauthorblockA{\textit{Department of Electrical and Computer Engineering} \\
+\textit{New York University Tandon School of Engineering}\\
+Brooklyn, NY 11201, USA \\
+tl2966@nyu.edu}
+\and
+\IEEEauthorblockN{Jared Qu, Anirvan Kothuri, Jason Zheng}
+\IEEEauthorblockA{\textit{Department of Electrical and Computer Engineering} \\
+\textit{Stony Brook University}\\
+Stony Brook, NY 11794, USA \\
+wolfedqu@gmail.com, anirvanssk@gmail.com, zhengjason219@gmail.com}
+}
+
+\maketitle
+
+\begin{abstract}
+Large Language Models (LLMs) face increasing latency and energy costs during autoregressive decoding because attention state and recurrent state must be accessed repeatedly during token generation. Hybrid architectures such as Qwen3-Next reduce part of the full-attention memory burden by using Gated DeltaNet layers, but efficient hardware support is still needed for the fixed recurrent state used by these layers. This work presents a simulation-only native MXFP4 persistent-state datapath for one batch-one Gated DeltaNet decode layer on a Xilinx Alveo U55C FPGA. The design uses block-scaled FP4 values with shared block exponents and keeps the recurrent state on chip during decode.
+
+The default MXFP4 implementation achieves 51.472 microseconds per token in RTL cosimulation and consumes 8.976 W after Vivado implementation. Compared with the cited H100 baseline, this corresponds to a 5.537x speedup and a 216.011x improvement in energy efficiency. Compared with the cited FPGA baseline, the design achieves a 1.228x speedup and a 20.562x improvement in energy efficiency. The implementation closes timing with 0.065 ns of positive post-implementation slack. Current numerical-quality evidence is based on deterministic synthetic tests; realistic Qwen3-Next activation capture is still required before claiming full-model perplexity or final model quality.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Large Language Models, Hardware Accelerator, FPGA, MXFP4, Linear Attention, Hybrid Transformers, Memory Hierarchy Partitioning, Xilinx Alveo U55C.
+\end{IEEEkeywords}
+
+\section{Introduction}
+Autoregressive decoding in large language models introduces measurable latency at inference time because each generated token requires sequential access to model state from previous tokens. To understand this delay, it is useful to look at the architecture used by many modern LLMs. Many widely used systems are built on the Transformer architecture \cite{b2}, where self-attention relates each token to prior context through stored key and value representations. During decode, these representations are kept in memory as a key-value cache (KV cache) \cite{b6}. As the generated sequence becomes longer, the KV cache grows and must be accessed repeatedly, increasing memory traffic and making token generation sensitive to bandwidth and state movement \cite{b7}.
+
+Linear-attention models reduce this pressure by replacing some growing token-history storage with a fixed recurrent state. Gated DeltaNet (GDN) is one such model: it compresses history into a recurrent state matrix $S$ that is updated at each decode step \cite{b3}. This fixed-state representation trades some fine-grained history for lower memory growth, making it attractive for hardware acceleration. Hybrid models combine linear-attention and full-attention layers, such as the 3:1 structure in which most layers use linear attention while selected layers retain full attention \cite{b9}. For a single generated token, full attention grows with sequence length, while the linear-attention state update remains fixed-size with respect to the prior sequence \cite{b3}. This makes the recurrent-state path an important target for reducing decode latency and memory traffic.
+
+This specific replacement technique targeting the growing KV caches of each internal macro block of a block layer structure does make the memory usage a lot more efficient than without \cite{b6}. However, traditional implementations utilizing high-precision data formats such as FP32 will quickly saturate the limited memory on these kinds of FPGAs \cite{b4}. When these state matrices start to exceed the local capacity, the hardware must go on to use external bandwidth memory. To break this memory wall and improve efficiency of current integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C accelerator to create an efficient connection between the local memory and external memory \cite{b5}. This can be done by treating the URAM and BRAM as the permanent execution area for those compressed S matrices and reserving the high bandwidth memory (HBM) for the growing KV caches of the full attention layers.
+
+By maximizing the efficiency of the data format itself, we can make a better case for the limited on-chip storage available. Numerical states can be packed into extremely compact 4-bit OCP microscaling formats through the specific utilization of 4-bit E2M1 elements that are bounded by a shared 8-bit E8M0 block scale \cite{b12}. The processing elements will be able to perform continuous linear attention updates without having to request a time-consuming demand to the external memory bus. By focusing on one piece of a hybrid attention model, we can improve the performance and efficiency of the entire implementation that is being used. In a hybrid model like the previously mentioned 3:1 structure, we can look at the primary building block that makes up 75\% of the core pipeline and focus entirely on improving what makes up the bulk of the model which naturally means optimizing the entire system as a whole \cite{b9}.
+
+The contributions of this research include five main areas. First, we provide a native MXFP4 persistent-state datapath for a batch-one Gated DeltaNet decode layer on an FPGA. Second, we utilize an FPGA LUT-based implementation of the FP4 E2M1 element-multiply operation with shared block-exponent values to enable microscale arithmetic operations. Third, we implement a persistent-state dataflow in which the recurrent state is maintained on chip during token decoding, eliminating repeated off-chip memory accesses to load the recurrent state. Fourth, we evaluate our design using HLS C/RTL cosimulation and Vivado post-implementation reports for latency, timing, resource utilization, and power consumption. Fifth, we report synthetic numerical fidelity, recurrent-state stress, and state-storage/traffic accounting while clearly distinguishing these results from a full Qwen3-Next perplexity evaluation.
+
+To recap the main discussions made before, the primary objective of this research is to maximize the use of low-latency on-chip memory resources that maintains the precision needed for long context models. By mapping 4-bit MXFP4 multipliers directly onto the LUT resources of the FPGAs, parallel computation is achieved. This paper effectively introduces a new data packaging method optimization that can break the modern memory wall and unlock higher potential of hybrid linear attention architectures on high-end FPGA fabric \cite{b5}.
+
+\section{Related Work}
+
+\subsection{Memory Bottlenecks in LLM Decode}
+Transformers are typically limited by memory movement in addition to compute throughput. The growth of the key-value cache (KV cache) with increasing sequence length reduces both the ability to use high-bandwidth memory resources efficiently and the overall accelerator utilization at longer context lengths. A number of previous studies have identified memory movement as a limiting factor for LLM inference \cite{b1,b4,b7}. These include studies that demonstrate how systems such as vLLM improve LLM serving throughput by managing KV-cache memory more efficiently \cite{b4}, as well as studies of general LLM serving that identify memory bandwidth and cache movement as primary limitations \cite{b1,b7}.
+
+\subsection{Linear Attention and Gated DeltaNet}
+The use of linear or hybrid attention architectures can reduce reliance on large KV caches during long-context decoding by replacing some attention layers with fixed-state recurrent layers. One example of this type of architecture is the Gated DeltaNet family of models, which utilizes a recurrent state matrix as part of its decoding process \cite{b3}. Rather than storing each previous key vector and each previous value vector in order to compute the next output, the layer stores a compact representation of the history of input data in a fixed-size state.
+
+A fixed-size recurrent state provides an advantage for FPGA accelerators. If the recurrent state remains resident on chip, then the design can avoid repeatedly moving the recurrent state between on-chip memory and external memory \cite{b10}.
+
+\subsection{FPGA Acceleration for Attention Models}
+This work uses field-programmable gate arrays (FPGAs) as a basis for implementing application-specific architectures, specifically in terms of dataflow architecture. These devices provide flexibility to map memory banks based upon the specific requirements of the workload or application and enable pipelined operation and custom mapping of arithmetic units.
+
+Prior work on using FPGAs for persistent-state architectures demonstrated that storing linear attention states on chip improves memory efficiency when performing decode-related workloads \cite{b10}. Building upon this general approach, the current research focuses on the native MXFP4 datapath rather than a BF16-style high-precision datapath.
+
+A key distinction of this research is the integration of persistent-state dataflow with microscaled 4-bit floating-point (MXFP4) arithmetic. The intent of the overall design is not to accelerate all layers of a large language model (LLM), but rather to isolate the memory and arithmetic behavior related to updating the recurrent state within a single Gated DeltaNet decode layer.
+
+\subsection{Low-Precision and Microscaling Formats}
+Reduced-precision data formats reduce memory usage and arithmetic cost. However, a fixed low-bit-width representation may limit the ability to represent large ranges in individual elements. To improve upon fixed-format representations, microscaling provides a method of using a single exponent value that is common to multiple elements \cite{b12}. MXFP4 utilizes 4-bit E2M1 values with a common scale applied to a small group of values, or block. This results in compact storage for each individual element and allows the entire block to store a larger local dynamic range. Due to these characteristics, MXFP4 represents a strong candidate for hardware-based implementations on FPGAs.
+
+The E2M1 element multiply in MXFP4 can be directly implemented in FPGA LUT logic, while the block exponent determines the alignment before accumulation. As such, MXFP4 has been selected as the primary datapath and is used as the basis for comparison in this work, while INT4 is used as the primary alternative comparison for evaluation purposes.
+
+\section{Problem Formulation and Workload Definition}
+This study focuses on processing one batch-one Gated DeltaNet decode layer during autoregressive inference. The accelerator processes one token at a time and updates a static recurrent state after each token. The default model configuration uses 32 attention heads with a head size of 128. For each generated token, the kernel receives a query vector, key vector, value vector, beta parameter, and output gate. These input vectors are used to access the prior recurrent state, compute the delta-rule update, store the updated state back into on-chip memory, and generate the gated output vector.
+
+In order to provide an isolated examination of the hardware behavior of the recurrent-state update and the native MXFP4 arithmetic datapath, the focus of this study is intentionally constrained to a single Gated DeltaNet decode layer. Therefore, this work does not consider prefill, full-model inference, training, projection layers, or end-to-end LLM serving. Focusing on the batch-one single-token decode case allows us to evaluate which components of the system contribute to the latency associated with autoregressive generation.
+
+\section{Hardware Architecture}
+
+Figure~\ref{fig:mxfp4_gdn_datapath} summarizes the proposed native MXFP4 persistent-state Gated DeltaNet decode datapath. The upper portion shows the token-level recurrent-state path, while the lower portion isolates the native MXFP4 arithmetic reused during prediction, state update, and output generation.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.90\textwidth]{\PaperAsset{figures/mxfp4_gdn_datapath_paper_fit.png}}
+\caption{Native MXFP4 persistent-state Gated DeltaNet decode datapath with resident state and reused LUT-based arithmetic.}
+\label{fig:mxfp4_gdn_datapath}
+\end{figure*}
+
+\subsection{Persistent Recurrent State}
+As opposed to an existing KV cache that expands in size as sequence length increases, the recurrent state of Gated DeltaNet consists of a fixed-size recurrent-state matrix \cite{b3}. The recurrent-state matrix stores the compressed information of previous tokens, functioning as a compact associative memory that addresses the standard LLM memory wall \cite{b1,b4,b7}. The recurrent-state is updated after every decode cycle.
+
+The recurrent state $S_t$ is stored within partitions of on-chip FPGA memory banks \cite{b10}. With respect to the stored recurrent state $S_t$, it allows access to different parts of the state matrix in parallel. On-chip storage of the recurrent state results in reduced latency and energy consumption since each decode step will need to load the prior state; modify it; and save the modified version. However, accessing the full state matrix repeatedly off-chip and back to on-chip will become a resource-consumptive task, worsening the memory-bound limits of standard decode paths \cite{b7}.
+
+The recurrent state is the primary persistent storage entity in the Gated DeltaNet decode layer. By using MXFP4, the amount of storage required for each element is reduced to 4 bits per element plus a small amount of shared block-scale metadata. In comparison, BF16 requires 16 bits per element, while FP32 requires 32 bits per element. Consequently, MXFP4 reduces the storage requirements for recurrent-state elements by nearly 4 times compared with BF16 and 8 times compared with FP32, before accounting for the small overhead associated with block-scale metadata.
+
+\begin{table}[t]
+\centering
+\caption{Recurrent-state storage comparison by numeric format.}
+\label{tab:memory_footprint}
+\begin{tabular}{lll}
+\hline
+Format & Bits per Element & Storage Relative to MXFP4 \\
+\hline
+MXFP4 & 4 + block-scale metadata & 1x \\
+INT8 & 8 & 2x \\
+BF16 / FP16 & 16 & 4x \\
+FP32 & 32 & 8x \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Gated DeltaNet Update Path}
+Every decode step uses the current key and value to update the recurrent-state. First, the prior state is multiplied by the key vector to create a prediction based on delta-rule dynamics \cite{b3}:
+\begin{equation}
+r_t = S_{t-1} k_t
+\end{equation}
+
+The prediction is what the prior state already holds for the upcoming key. The hardware performs a comparison between the prediction and the new value vector:
+\begin{equation}
+e_t = r_t - v_t
+\end{equation}
+
+The error ($e_t$) is created due to a difference between what was stored by the prior state and what information is presented by the new token. This error is scaled by the beta input and is used to update the state:
+\begin{equation}
+S_t = S_{t-1} - \beta_t e_t k_t^T
+\end{equation}
+
+This state update is a rank-one update. It changes the state by applying both the direction of the key and the error against the value.
+
+Following the recurrent state update, the design utilizes the query vector and the recurrent state to produce the intermediate output vector:
+\begin{equation}
+o_t = S_t q_t
+\end{equation}
+
+As this is a Gated DeltaNet layer, the design applies an output gate to the intermediate output. The gated output can be represented as:
+\begin{equation}
+y_t = g_t \odot o_t
+\end{equation}
+where $g_t$ is the output gate and $\odot$ is elementwise multiplication. The output gate controls how much of the recurrent-state output is forwarded to subsequent layers. As such, the gating mechanism provides a means of regulating the recurrent-state contribution to each generated token.
+
+\subsection{Five-Step Token Pipeline}
+Gated DeltaNet could naively be implemented over three steps. First, an old-state $S_{t-1}$ would have been loaded so that a prediction could be made regarding how to retrieve data using a key vector. Next, the retrieved data would have been used to correct/update the state. Lastly, an updated-state would have been loaded so that an output could be produced using a query vector. The resulting design would be inefficient for an FPGA implementation because the largest structure (the state-matrix) must be traversed completely by every token.
+
+However, we were able to optimize the sequence of calculations such that only partial traversal of the full state-matrix occurs, implementing a fused dataflow framework tailored for linear attention bottlenecks \cite{b10}. We did this by limiting use of reusable terms derived from state-data used in computing retrieval terms to those computations used in generating an output; therefore, no additional full read of an updated-state needs occur for output generation purposes. Every token goes through five states.
+
+First, the input preparation module puts each token in its corresponding scaled MXFP4-block. Second, the state-read module loads up the current-state $S_{t-1}$ from parallel memory-banks in order to calculate retrieval terms for the delta-rule. Third, the delta-update module calculates beta-scaled error and state-corrective terms. Fourth, the write-back phase writes updated-state $S_t$ directly back to memory-banks where they reside. Fifth, the output-generation module generates final-token-output $o_t$ by adding query-vectors with previously-generated-state-derived-terms. As such, we eliminate a second-full read of-state.
+
+Overall, our optimization reduces total-state-traversal work from approximately three full passes to less than two by collapsing these passes into a tighter, five-phase pipelined datapath design \cite{b10}.
+
+\subsection{MXFP4 Quantization Method}
+The proposed design utilizes MXFP4 as the primary arithmetic format. MXFP4 is a representation where each value is represented as a 4-bit E2M1 element (one sign bit, two exponent bits and one mantissa bit), along with a common E8M0 block exponent. Unlike the other formats which assign an independent exponent to each value, the format provides a single exponent for all values within a block. Assigning one exponent to all values within a block provides a reduction in memory usage while providing greater dynamic range than would be possible with a flat INT4 format.
+
+Each value in a block is approximated as the product of the shared block scale, and a quantized E2M1 element. The shared exponent captures the scale of the entire block, while the E2M1 element captures the signed mantissa and exponent information for each individual element.
+
+The default hardware datapath operates with an MXFP4 block size of 32. The evaluation of the quantization of the recurrent-state was performed via a synthetic software reference and remains part of the numerical fidelity boundary until realistic Qwen3-Next activation capture is available. Maintaining the recurrent-state on chip is important since each token requires both access to its prior state, updating of that state, and generating the output vector.
+
+\begin{table}[t]
+\centering
+\caption{Arithmetic formats used in the proposed datapath.}
+\label{tab:data_formats}
+\begin{tabular}{lll}
+\hline
+Tensor / Value & Format & Notes \\
+\hline
+Weights & MXFP4 & Block size 32 \\
+Activations & MXFP4 & Dynamic per token \\
+Recurrent state & MXFP4 & Stored on chip \\
+Beta & INT8 & Scaling parameter \\
+Partial products & Q4.3 & From E2M1 multiply \\
+Accumulator & INT24 & Block-aligned accumulation \\
+Final output & FP16 & Output format \\
+\hline
+\end{tabular}
+\end{table}
+
+The FP4 element multiply is implemented as a native E2M1 operation, rather than by converting operands into BF16 or FP32. The multiply path consists of: sign XOR on the sign bits, exponent addition with bias adjustment, mantissa multiplication, normalization; the normalized result of the element multiply is then aligned based upon the shared block exponents, before being accumulated.
+
+MXFP4 quantizes elements differently than flat INT4. Flat INT4 uses extremely compact values, however it also lacks local dynamic-range flexibility. MXFP4 maintains the same 4-bit element width as INT4 while utilizing the block exponents to adapt to local tensor magnitude. The synthetic numerical results in this paper demonstrate that MXFP4 retains better output directionality than the currently used INT4 fallback under the current deterministic test conditions.
+
+\subsection{LUT-Based E2M1 Multiplication}
+LUT-based E2M1 multipliers are utilized in the FPGA LUT logic as they avoid conversion of operands from BF16 (or FP32) format and provide a direct path to E2M1 multiplications. Each E2M1 is split into three parts: Sign, Exponent, and Mantissa. An XOR operation is performed on the Sign field. A biased sum of Exponents is calculated. The Mantissas are multiplied together and then normalized. The resulting fixed point partial-product is prepared for accumulation. Additionally, this process minimizes the physical area of the inner Multiplier Block and eliminates the requirement for large floating-point DSP Blocks that would be necessary to process four-bit inputs.
+
+\subsection{Block-Exponent Alignment}
+Since MXFP4 employs shared block-scales, the magnitudes of the products of two blocks can vary. After generation of partial-products, these values are therefore adjusted with regard to their block-exponents prior to summation. If two blocks have exponents $s_a$ and $s_b$, then
+\begin{equation}
+s_{prod} = s_a + s_b
+\end{equation}
+is the combined exponent of the product. Next, the partial-product will be shifted-left so that it is placed in the correct range for summation with an accumulator. This approach ensures the numeric correctness of the scaled values in MXFP4.
+
+\subsection{Design Parameters}
+Three design parameters determine the behavior of the overall design architecture: Block Size ($B$), Key Parallelism ($P_K$) and Value Parallelism ($P_V$).
+
+\section{Experimental Methodology}
+
+\subsection{Experimental Setup}
+The proposed accelerator is evaluated as a simulation-only FPGA design targeting the AMD Alveo U55C platform. The target device is the Xilinx \texttt{xcu55c-fsvh2892-2L-e}, and the design is synthesized using Vitis HLS with a target clock period of 4 ns, corresponding to 250 MHz. Post-synthesis and post-implementation reports are generated through the Xilinx FPGA tool flow to estimate timing, resource utilization, and power.
+
+The evaluated kernel implements one Gated DeltaNet decode layer for batch-one autoregressive inference. The kernel receives one token's query, key, value, beta, and gate inputs, updates the recurrent state, and produces one output vector. Projection layers, tokenizer logic, full-model scheduling, and multi-layer execution are outside the scope of this evaluation \cite{b3,b10}.
+
+\subsection{Reference Models and Verification}
+The software reference is implemented in Python for high-precision matrix validation. The FP32 model provides the baseline for Gated DeltaNet recurrence, and the custom MXFP4 reference defines the quantized behavior expected from the RTL design.
+
+Deterministic test vectors are generated using a fixed seed to ensure that the simulation results can be reproduced. These vectors include token inputs, recurrent state values, quantized MXFP4 operands, and expected output values.
+
+\subsection{Quantization Configuration}
+The evaluated design uses MXFP4 as the primary low-precision format. Each element is represented using a four-bit E2M1 value, and each block shares an E8M0 scale with a default block size of $B=32$ \cite{b12}. Quantization uses deterministic block-scaled conversion and round-to-nearest-even behavior so that the software reference and HLS implementation can be compared bit-exactly.
+
+Weights use MXFP4 with block size 32, activations use dynamic per-token MXFP4 with block size 32, and the recurrent state is stored in MXFP4 on chip. The beta value is represented using symmetric INT8. Element multiplication produces Q4.3 fixed-point partial products, block accumulation uses INT24, and the final pre-dequantized output is represented in FP16.
+
+\subsection{Hardware Configuration and LUT-Based Datapath}
+The default hardware configuration uses block size $B=32$, key-direction parallelism $P_K=16$, and value-direction parallelism $P_V=8$.
+
+In order to optimize the FPGA datapath for four-bit floating-point arithmetic, the FP4 element multiply is implemented using LUT-based E2M1 logic rather than DSP-based floating-point multiplication. The multiplier performs sign XOR, exponent addition with bias adjustment, mantissa multiplication, normalization, and subnormal handling before producing a Q4.3 fixed-point partial product. Block-exponent alignment then shifts and accumulates these partial products using the shared MXFP4 block scales.
+
+\subsection{Simulation and Synthesis Flow}
+The evaluation uses a hierarchical verification flow based on the Xilinx Vitis HLS toolchain. First, HLS C simulation verifies functional correctness against the quantized MXFP4 software reference. Second, HLS C synthesis estimates latency, initiation interval, and initial resource mapping. The synthesis reports are analyzed to confirm that the native E2M1 multiply primitive maps to LUT logic rather than DSP blocks.
+
+Third, RTL cosimulation verifies the generated RTL behavior over multiple autoregressive decode steps, confirming that the persistent recurrent state updates in place without requiring repeated off-chip recurrent-state traffic. Finally, post-implementation Vivado reports provide the authoritative estimates for timing closure, total power consumption, and resource utilization. The final utilization metrics report LUTs, BRAM, URAM where applicable, and DSP usage.
+
+\subsection{Baselines}
+The proposed design is evaluated against two primary baselines to contextualize latency and resource efficiency. The first baseline is an NVIDIA H100 PCIe GPU using FP32/BF16 arithmetic as a general-purpose accelerator reference for autoregressive LLM inference. The second baseline is a prior FPGA persistent-state Gated DeltaNet accelerator using BF16 arithmetic and standard DSP mapping \cite{b10}. This baseline is critical for architectural comparison because it targets the same linear-attention decode bottleneck but does not use the native MXFP4 datapath.
+
+Speedup is computed by dividing the baseline latency by the latency of the proposed design:
+\begin{equation}
+\text{Speedup} = \frac{T_{\text{baseline}}}{T_{\text{ours}}}
+\end{equation}
+
+Energy per token is computed to demonstrate the power efficiency of the four-bit datapath:
+\begin{equation}
+E_{\text{token}} = P \times T_{\text{token}}
+\end{equation}
+where $P$ is the post-implementation power in watts and $T_{\text{token}}$ is the absolute token latency in seconds.
+
+\subsection{Evaluation Metrics}
+The architectural evaluation is divided into three metric categories: performance, hardware utilization, and numerical fidelity.
+
+Performance is quantified primarily by latency per decoded token, measured in microseconds ($\mu$s), and the corresponding energy per token, derived from post-implementation power estimates in watts. Hardware utilization metrics focus on the absolute consumption and percentage of available resources on the Alveo U55C. LUT utilization is tracked to validate the area efficiency of the native FP4 datapath, while BRAM utilization is tracked to validate the storage feasibility of the persistent MXFP4 recurrent state. DSP usage is monitored to distinguish the LUT-based FP4 multiply primitive from other wider fixed-point arithmetic that may still be inferred by HLS.
+
+Numerical fidelity is evaluated using output cosine similarity and state relative L2 error. These synthetic metrics compare the MXFP4 output against the high-precision FP32 reference model and quantify the isolated error introduced by the four-bit MXFP4 quantization pipeline.
+
+\subsection{Provenance and Reproducibility}
+To ensure scientific rigor and reduce transcription errors, reported performance metrics are extracted automatically from generated toolchain reports rather than entered manually. Latency values are extracted from HLS and RTL cosimulation logs, while resource utilization and power estimates are parsed directly from Vivado post-implementation reports.
+
+These extracted values are aggregated into a machine-readable JSON data file and mapped to their source reports through a tracked provenance file. This automated extraction flow ensures that every table and figure in the manuscript can be traced back to a source file, line number, extraction script, timestamp, and Git revision.
+
+\section{Results and Evaluation}
+The default MXFP4 persistent-state design achieves an RTL cosimulated latency of \OursMxfpFourBThirtyTwoLatencyUs per token. Vivado post-implementation analysis reports \OursMxfpFourBThirtyTwoPowerW of power for this configuration. Compared with the cited H100 baseline, the design demonstrates a \HeadlineSpeedupVsHOneHundred speedup and a \HeadlineEnergyEfficiencyVsHOneHundred improvement in energy efficiency. Compared with the cited FPGA baseline, the design provides a \HeadlineSpeedupVsUsc speedup and a \HeadlineEnergyEfficiencyVsUsc improvement in energy efficiency.
+
+\subsection{Performance and Energy}
+The latency and energy results support the main architectural argument of this work. The proposed MXFP4 design reduces latency relative to both cited baselines while also lowering per-token energy. This improvement comes from keeping the recurrent state on chip and using a compact native MXFP4 datapath for decode computation.
+
+\begin{table}[t]
+\centering
+\caption{Latency and energy comparison for batch-one Gated DeltaNet decode.}
+\label{tab:performance_results}
+\scriptsize
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{0.92}
+\begin{tabular}{lccc}
+\hline
+Design & Latency & Energy & Power \\
+\hline
+H100 baseline & \HOneHundredBaselineLatencyUs & \HOneHundredBaselineEnergyMj & \HOneHundredBaselinePowerW \\
+FPGA baseline & \UscBaselineLatencyUs & \UscBaselineEnergyMj & \UscBaselinePowerW \\
+Ours MXFP4 & \OursMxfpFourBThirtyTwoLatencyUs & \OursMxfpFourBThirtyTwoEnergyMj & \OursMxfpFourBThirtyTwoPowerW \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Implementation and Synthetic Fidelity}
+The design meets the timing target on the Alveo U55C FPGA. The FP4 element multiply is mapped to LUT logic, while the remaining DSP usage comes from wider fixed-point operations produced by HLS outside the native E2M1 multiply primitive.
+
+The current numerical-quality results should be interpreted as synthetic evidence only. Since realistic Qwen3-Next activation capture is not yet available, this draft should not claim final Qwen3-Next perplexity or complete model quality. Under the deterministic synthetic test harness, MXFP4 preserves output direction better than the INT4 fallback.
+
+\begin{table}[t]
+\centering
+\caption{Implementation evidence and synthetic numerical fidelity.}
+\label{tab:evidence_results}
+\scriptsize
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{0.92}
+\begin{tabular}{lp{0.50\linewidth}}
+\hline
+Metric & Result \\
+\hline
+C-sim parity & \HlsCsimVectorsPassed/\HlsCsimVectorsTotal vectors \\
+C/RTL cosim length & \OursMxfpFourBThirtyTwoTokensCosim \\
+RTL cosim latency & \OursMxfpFourBThirtyTwoLatencyCycles \\
+HLS estimated Fmax & \OursMxfpFourBThirtyTwoCsynthFmaxMhz \\
+Post-implementation slack & \OursMxfpFourBThirtyTwoImplWnsNs \\
+Resource utilization & \OursMxfpFourBThirtyTwoLutPct LUT, \OursMxfpFourBThirtyTwoBramPct BRAM, \OursMxfpFourBThirtyTwoDspPct DSP \\
+INT4 output cosine & \SyntheticIntFourOutputCosine \\
+MXFP4 $B=32$ output cosine & \SyntheticMxfpFourBThirtyTwoOutputCosine \\
+MXFP4 $B=16$ output cosine & \SyntheticMxfpFourBSixteenOutputCosine \\
+Qwen3-Next capture & \QwenCaptureStatus \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{State Precision and Traffic}
+The newer recurrent-state stress data clarify the boundary of the current synthetic evidence. MXFP4 remains the native arithmetic path, while MXFP8 recurrent state is retained as a safer fallback for accumulated recurrent-state drift. The storage and traffic accounting also shows the main dataflow benefit: the MXFP4 recurrent state is compact enough to remain resident on chip, avoiding steady-state off-chip recurrent-state traffic.
+
+\begin{table}[t]
+\centering
+\caption{Synthetic recurrent-state stress evidence.}
+\label{tab:state_stress_results}
+\scriptsize
+\resizebox{\linewidth}{!}{\PaperInput{tables/recurrent_state_stress.tex}}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Recurrent-state storage and off-chip traffic accounting for MXFP4 $B=32$.}
+\label{tab:state_traffic_results}
+\scriptsize
+\resizebox{\linewidth}{!}{\PaperInput{tables/state_storage_traffic.tex}}
+\end{table}
+
+Overall, these results support the hardware portion of the claim for a simulation-backed, single-layer Gated DeltaNet decode accelerator. The strongest supported results are RTL cosimulation latency, Vivado timing closure, post-implementation resource use, post-implementation power, and synthetic numerical fidelity. Full model-quality claims should be deferred until realistic Qwen3-Next activation data is available.
+
+\section{Discussion and Limitations}
+
+\subsection{Scalability and BRAM Capacity Ceiling}
+The current existing architecture has been created to be optimal for processing tasks in the single-layer single-token inference batch size one configuration. This approach can help maximize on-chip data locality and reduce repeated recurrent-state movement through external memory. Although this configuration works for the evaluated design point, the main scaling restriction is connected with the limited on-chip memory capacity of the Xilinx Alveo U55C FPGA. For larger recurrent state tensors, larger batch sizes, or expanded model configurations, the amount of memory required by the algorithm may become greater than the on-chip SRAM capacity, making off-chip HBM use necessary. Consequently, DRAM bandwidth limitations may appear again, a bottleneck extensively documented in large-batch LLM serving systems \cite{b1,b4,b7}. The memory-bound nature of autoregressive decode, in which each generated token requires access to model state, makes bandwidth a dominant constraint at increasing batch sizes \cite{b5}. Further research may evaluate tiling and buffer hierarchies across BRAM, URAM, and HBM, a direction also identified in persistent-state FPGA dataflow designs for linear attention \cite{b10}.
+
+\subsection{LUT Routing Congestion}
+The LUT-based E2M1 multiply primitive is compact in area, but a full neural layer can instantiate many parallel multiply paths. The evaluated parallelism point uses $P_K=16$ and $P_V=8$, which creates many routes from 6-input lookup tables into the surrounding accumulation and alignment logic. Such logic architecture can place pressure on FPGA interconnect as the design scales, increasing wire length and potentially reducing timing margin. Possible ways to address this problem include floorplanning related logic into pblocks, retiming, and reevaluating the parallelism ratio relative to throughput \cite{b10}.
+
+\subsection{The ``Stubborn Compiler'' Threat (HLS DSP Inference)}
+The MXFP4 datapath code is written in C++ and implemented through Vitis HLS. The intended architectural point is that the FP4 element multiply primitive is implemented using lookup tables rather than DSP48E2 blocks. The current post-implementation results show that the full design still uses some DSP resources because wider fixed-point operations outside the native E2M1 multiply primitive can be inferred by HLS. Therefore, the correct claim is not that the entire implementation is DSP-free, but that the FP4 element multiply itself is LUT-based. Future revisions can further constrain adders and accumulators to fabric implementations using HLS binding directives and compare those resource results against the current implementation.
+
+\subsection{Synthetic vs. Realistic Data Accuracy}
+Testing in the present case is done through deterministic synthetic vectors. However, these vectors do not fully reflect the activation distributions of a complete language model. Distributions obtained from LLMs can contain high-magnitude outliers, widely observed in transformer-based models \cite{b2}, which may cause quantization error in regions where uniform or Gaussian synthetic distributions would not. This challenge is not unique to transformer architectures; recent linear and hybrid attention models, including GDN variants \cite{b3} and hybrid linear attention architectures \cite{b8}, similarly exhibit activation distributions that complicate low-bit quantization. This means that perplexity and downstream model quality have not yet been validated. Further testing must include real Qwen3-Next activation captures and perplexity evaluation on a canonical benchmark dataset.
+
+\section{Future Work}
+A number of enhancements are necessary before using this design to make strong full-model assertions. First, an accurate Qwen3-Next layer activation-capture mechanism is required. The current fidelity results are based on deterministic synthetic vectors that do not fully represent the layer activation distribution of a real model. Once accurate Qwen3-Next activation captures are available, the MXFP4 datapath can be evaluated against realistic tensor distributions.
+
+Second, a full perplexity evaluation is needed to relate numerical similarity to model quality. Output cosine similarity is useful for debugging and early quantization analysis, but it does not replace perplexity or downstream task evaluation. A future version of this work should therefore report perplexity on a standard benchmark dataset.
+
+Third, future work should further constrain non-FP4 arithmetic mapping. Although the FP4 element multiply is LUT-based, wider fixed-point operations can still be mapped onto DSP blocks by HLS. A follow-up implementation should test stricter HLS binding directives for adders and accumulators and compare timing, area, and power against the current implementation.
+
+Finally, the design should be evaluated on physical FPGA hardware. Board-level measurements would allow comparison between Vivado-estimated power and actual power consumption. They would also expose runtime overheads that are not captured by the current simulation flow.
+
+\section{Conclusion}
+This paper presents a simulation-backed native MXFP4 persistent-state datapath for one batch-one Gated DeltaNet decode layer on a Xilinx Alveo U55C FPGA. The design keeps recurrent state on chip and uses block-scaled FP4 arithmetic to reduce decode latency and energy cost.
+
+The default implementation achieves 51.472 microseconds per token in RTL cosimulation and 0.462 millijoules per token. Compared with the cited H100 baseline, this corresponds to a 5.537x speedup and a 216.011x improvement in energy efficiency. The design also closes timing after Vivado implementation with 0.065 ns of positive slack while using 6.64\% LUT, 3.67\% BRAM, and 7.27\% DSP.
+
+The current numerical results are limited to deterministic synthetic tests. Realistic Qwen3-Next activation capture and full-model perplexity evaluation remain future work. Therefore, the supported claim of this draft is a hardware-level result for RTL latency, implementation timing, resource use, power, and synthetic numerical fidelity, not a final Qwen3-Next model-quality claim.
+
+\begin{thebibliography}{00}
+
+\bibitem{b1} R. Pope et al., "Efficiently scaling transformer inference," in Proceedings of Machine Learning and Systems (MLSys), vol. 5, 2023, pp. 606--624.
+\bibitem{b2} A. Vaswani et al., "Attention is all you need," in Advances in Neural Information Processing Systems (NeurIPS), vol. 30, 2017, pp. 5998--6008.
+\bibitem{b3} S. Yang, J. Kautz, and A. Hatamizadeh, "Gated Delta Networks: Improving Mamba2 with Delta Rule," arXiv preprint arXiv:2412.06464, 2024.
+\bibitem{b4} Y. Sheng et al., "High-throughput generative LLM inference with vLLM," in Proceedings of the 29th Symposium on Operating Systems Principles (SOSP), 2023, pp. 163--181.
+\bibitem{b5} C. Wolters, X. Yang, U. Schlichtmann, and T. Suzumura, "Memory Is All You Need: An Overview of Compute-in-Memory Architectures for Accelerating Large Language Model Inference," arXiv preprint arXiv:2406.08413, 2024.
+\bibitem{b6} H. Wu and K. Tu, "Layer-Condensed KV Cache for Efficient Inference of Large Language Models," arXiv preprint arXiv:2405.10637, 2024.
+\bibitem{b7} P. G. Recasens et al., "Mind the Memory Gap: Unveiling GPU Bottlenecks in Large-Batch LLM Inference," in 2025 IEEE 18th International Conference on Cloud Computing (CLOUD), 2025, pp. 277--287.
+\bibitem{b8} D. Wang et al., "A Systematic Analysis of Hybrid Linear Attention," arXiv preprint arXiv:2507.06457, 2025.
+\bibitem{b9} Y. Zhang et al., "Kimi Linear: An Expressive, Efficient Attention Architecture," arXiv preprint arXiv:2510.26692, 2025.
+\bibitem{b10} N. Gupta, P. Wang, R. Kannan, and V. K. Prasanna, "A Persistent-State Dataflow Accelerator for Memory-Bound Linear Attention Decode on FPGA," 2026.
+\bibitem{b11} H. Guo et al., "Log-Linear Attention," arXiv preprint arXiv:2506.04761, 2025.
+\bibitem{b12} B. D. Rouhani et al., "Microscaling data formats for deep learning," arXiv preprint arXiv:2310.10537, 2023.
+
+\end{thebibliography}
+
+\end{document}

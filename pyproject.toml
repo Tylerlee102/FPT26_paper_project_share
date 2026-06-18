@@ -1,0 +1,43 @@
+[project]
+name = "gdn-fpga"
+version = "0.1.0"
+description = "Native MXFP4 persistent-state dataflow accelerator for Gated DeltaNet decode"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8",
+  "hypothesis>=6",
+  "jinja2>=3",
+]
+qwen = [
+  "torch",
+  "transformers",
+  "datasets",
+  "accelerate",
+  "safetensors",
+]
+microsoft_mx = [
+  "mx @ git+https://github.com/microsoft/microxcaling.git",
+]
+full = [
+  "torch",
+  "transformers",
+  "datasets",
+  "accelerate",
+  "safetensors",
+  "pytest>=8",
+  "hypothesis>=6",
+  "jinja2>=3",
+]
+
+[tool.setuptools.packages.find]
+include = ["golden*", "reports*", "scripts*"]
+exclude = ["data*", "gdn_mxfp4_hls*", "hls*", "paper*", "vivado*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

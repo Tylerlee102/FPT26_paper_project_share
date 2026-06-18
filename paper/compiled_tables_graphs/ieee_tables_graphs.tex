@@ -1,0 +1,95 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\sisetup{
+  detect-all,
+  table-number-alignment = center
+}
+
+\title{IEEE-Style Tables for MXFP4 GDN Decode}
+\author{Anonymous Submission}
+
+\begin{document}
+\maketitle
+
+\begin{table}[t]
+\centering
+\caption{End-to-End Decode Performance}
+\label{tab:end_to_end_decode}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Platform & Format & Latency ($\mu$s) & Power (W) & Speedup \\
+\midrule
+NVIDIA H100 PCIe & FP32/BF16 & 285.0 & 350.0 & 1.00$\times$ \\
+USC FPGA Baseline & BF16 & 63.2 & $\le$150.0 & 4.51$\times$ \\
+Ours (Alveo U55C) & MXFP4 & 51.472 & 8.976 & 5.54$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Post-Implementation Resource Utilization}
+\label{tab:resource_utilization}
+\begin{tabular}{@{}lcl@{}}
+\toprule
+Resource & Utilization & Notes \\
+\midrule
+LUT  & 6.64\% & Native E2M1 multiply \\
+DSP  & 7.27\% & Fixed-point alignment \\
+BRAM & 3.67\% & Persistent state \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table*}[t]
+\centering
+\caption{Parallelism and Block-Size Sweep}
+\label{tab:parallelism_sweep}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Config $(B, P_K, P_V)$ & Latency ($\mu$s) & LUT & DSP & BRAM & Power \\
+\midrule
+$(32,16,8)$ Default & 51.472 & 6.64\% & 7.27\% & 3.67\% & 8.976 W \\
+$(16,32,16)$ & 8240.176 & 24.96\% & 28.72\% & 0.57\% & 11.004 W \\
+$(32,32,16)$ & 8240.176 & 24.96\% & 28.72\% & 0.57\% & 11.004 W \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table}[t]
+\centering
+\caption{Synthetic Quantization Ablation}
+\label{tab:quantization_ablation}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Format & Synthetic Output Cosine & State Relative L2 Error \\
+\midrule
+FP32 & 1.000 & 0.000 \\
+Flat INT4 & 0.967 & -- \\
+MXFP4 $B=16$ & 0.982292 & 0.117084 \\
+MXFP4 $B=32$ & 0.981823 & 0.117550 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Per-Tensor Sensitivity Profile}
+\label{tab:tensor_sensitivity}
+\begin{tabular}{@{}lc@{}}
+\toprule
+Tensor & Output Cosine Similarity \\
+\midrule
+Value & 0.999580 \\
+Key & 0.999523 \\
+Gate & 0.995668 \\
+State & 0.993845 \\
+Query & 0.992969 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}

@@ -1,0 +1,6 @@
+format,block_size,state_bytes,one_read_write_bytes,naive_three_pass_bytes,persistent_steady_state_bytes,traffic_reduction_vs_three_pass_pct
+FP32,none,2097152,4194304,6291456,0,100.0
+BF16/FP16,none,1048576,2097152,3145728,0,100.0
+INT8,none,524288,1048576,1572864,0,100.0
+MXFP4,16,294912,589824,884736,0,100.0
+MXFP4,32,278528,557056,835584,0,100.0

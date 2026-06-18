@@ -1,0 +1,54 @@
+\documentclass[tikz,border=6pt]{standalone}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    title={\textbf{B. Log-scale bar plot}},
+    ybar,
+    ymode=log,
+    log basis y=10,
+    log origin=infty,
+    ymin=0.1,
+    ymax=200,
+    width=11cm,
+    height=7cm,
+    bar width=30pt,
+    ylabel={\textbf{Energy (mJ/token)}},
+    symbolic x coords={H100,FPGA,Ours},
+    xtick=data,
+    ytick={0.1,1,10,100},
+    yticklabels={0.1,1,10,100},
+    grid=major,
+    major grid style={gray!25},
+    axis line style={black},
+    tick label style={font=\large},
+    label style={font=\large},
+    title style={font=\Large},
+    nodes near coords,
+    nodes near coords style={
+        font=\bfseries,
+        anchor=south,
+        yshift=2pt
+    },
+    enlarge x limits=0.35,
+]
+\addplot[
+    draw=black,
+    fill=blue!70
+] coordinates {
+    (H100,99.8)
+    (FPGA,9.5)
+};
+
+\addplot[
+    draw=black,
+    fill=green!55!black
+] coordinates {
+    (Ours,0.462)
+};
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+*.egg-info/
+
+# Local IDE/tool metadata
+.Xil/
+.gitconfig.codex
+
+# Build and generated artifacts
+build/
+gdn_mxfp4_hls/
+vitis_hls.log
+clockInfo.txt
+*.jou
+*.log
+reports/cosim/*
+!reports/cosim/.gitkeep
+!reports/cosim/results.md
+!reports/cosim/gdn_top_cosim.rpt
+!reports/cosim/latency.csv
+!reports/cosim/summary.md
+reports/csynth/*
+!reports/csynth/.gitkeep
+!reports/csynth/handoff.md
+!reports/csynth/util.md
+!reports/csynth/csynth.rpt
+!reports/csynth/csynth_design_size.rpt
+!reports/csynth/gdn_top_csynth.rpt
+!reports/csynth/gdn_top_impl_csynth.rpt
+!reports/csynth/gdn_top_impl_Pipeline_cols_csynth.rpt
+!reports/csynth/gdn_top_impl_Pipeline_predict_cols_csynth.rpt
+!reports/csynth/gdn_top_impl_Pipeline_update_heads_update_rows_update_cols_csynth.rpt
+!reports/csynth/native_mac_evidence.md
+reports/csynth/*.xml
+reports/vivado/*.log
+reports/vivado/*.jou
+reports/csynth_default_backup/
+paper/pack/*.zip
+iter_*_CongestedCLBsAndNets.txt
+-p/
+
+# Vendored/local tool downloads
+tools/
+
+# Generated vectors and calibration captures
+data/vectors/**/*.npz
+data/vectors/**/manifest.json
+data/calibration/*.npz
+
+# LaTeX build byproducts
+*.aux
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.out
+*.synctex.gz

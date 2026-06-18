@@ -1,0 +1,114 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 360 212] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 2098 >>
+stream
+0.130 0.270 0.520 rg
+BT /F2 12 Tf 16.00 192.00 Td (Machine-Traceable Paper Pipeline) Tj ET
+0.90 w
+0.130 0.270 0.520 RG
+0.940 0.980 1.000 rg
+16.00 130.00 78.00 42.00 re B
+0.050 0.060 0.070 rg
+BT /F2 8 Tf 22.00 159.00 Td (Reports) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 6 Tf 22.00 137.00 Td (HLS, cosim, Vivado) Tj ET
+0.90 w
+0.050 0.480 0.450 RG
+0.940 0.960 0.980 rg
+114.00 130.00 82.00 42.00 re B
+0.050 0.060 0.070 rg
+BT /F2 8 Tf 120.00 159.00 Td (Extractors) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 6 Tf 120.00 137.00 Td (benchmark scripts) Tj ET
+0.90 w
+0.860 0.420 0.120 RG
+1.000 0.970 0.910 rg
+216.00 130.00 126.00 42.00 re B
+0.050 0.060 0.070 rg
+BT /F2 8 Tf 222.00 159.00 Td (numbers.json + provenance) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 6 Tf 222.00 137.00 Td (value, source, line, SHA) Tj ET
+0.90 w
+0.380 0.280 0.580 RG
+0.960 0.950 1.000 rg
+66.00 50.00 96.00 42.00 re B
+0.050 0.060 0.070 rg
+BT /F2 8 Tf 72.00 79.00 Td (Generated paper assets) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 6 Tf 72.00 57.00 Td (macros, tables, figures) Tj ET
+0.90 w
+0.200 0.550 0.240 RG
+0.960 1.000 0.950 rg
+202.00 50.00 94.00 42.00 re B
+0.050 0.060 0.070 rg
+BT /F2 8 Tf 208.00 79.00 Td (Submission pack) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 6 Tf 208.00 57.00 Td (PDF + reproducibility) Tj ET
+0.90 w
+0.130 0.270 0.520 RG
+94.00 151.00 m 114.00 151.00 l S
+0.90 w
+0.130 0.270 0.520 RG
+114.00 151.00 m 118.98 147.65 l S
+0.90 w
+0.130 0.270 0.520 RG
+114.00 151.00 m 118.98 154.35 l S
+0.90 w
+0.050 0.480 0.450 RG
+196.00 151.00 m 216.00 151.00 l S
+0.90 w
+0.050 0.480 0.450 RG
+216.00 151.00 m 220.98 147.65 l S
+0.90 w
+0.050 0.480 0.450 RG
+216.00 151.00 m 220.98 154.35 l S
+0.90 w
+0.860 0.420 0.120 RG
+278.00 130.00 m 150.00 92.00 l S
+0.90 w
+0.860 0.420 0.120 RG
+150.00 92.00 m 144.27 93.79 l S
+0.90 w
+0.860 0.420 0.120 RG
+150.00 92.00 m 146.18 87.37 l S
+0.90 w
+0.380 0.280 0.580 RG
+162.00 71.00 m 202.00 71.00 l S
+0.90 w
+0.380 0.280 0.580 RG
+202.00 71.00 m 206.98 67.65 l S
+0.90 w
+0.380 0.280 0.580 RG
+202.00 71.00 m 206.98 74.35 l S
+0.740 0.180 0.180 rg
+BT /F2 8 Tf 16.00 23.00 Td (Measured values are not typed into the manuscript by hand.) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer << /Size 7 /Root 1 0 R >>
+startxref
+2546
+%%EOF

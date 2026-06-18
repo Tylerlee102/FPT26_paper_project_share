@@ -1,0 +1,2 @@
+rtl,status,latency_min_cycles,latency_avg_cycles,latency_max_cycles,interval_min_cycles,interval_avg_cycles,interval_max_cycles,total_execution_cycles,tokens
+verilog,Pass,12868,12868,12868,12888,12888,12888,1649644,128

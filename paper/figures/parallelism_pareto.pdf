@@ -1,0 +1,86 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 350 230] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 1465 >>
+stream
+0.130 0.270 0.520 rg
+BT /F2 12 Tf 16.00 207.00 Td (Parallelism Sweep Pareto View) Tj ET
+0.80 w
+0.420 0.450 0.480 RG
+48.00 42.00 m 298.00 42.00 l S
+0.80 w
+0.420 0.450 0.480 RG
+48.00 42.00 m 48.00 177.00 l S
+0.420 0.450 0.480 rg
+BT /F1 8 Tf 122.00 20.00 Td (LUT utilization \(%\)) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 8 Tf 8.00 107.00 Td (log latency) Tj ET
+0.80 w
+0.200 0.550 0.240 RG
+0.200 0.550 0.240 rg
+98.21 39.00 6.00 6.00 re B
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 106.21 45.00 Td (ours b32 pk16 pv8) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 5 Tf 106.21 36.00 Td (post_impl) Tj ET
+0.80 w
+0.380 0.280 0.580 RG
+0.380 0.280 0.580 rg
+97.56 167.21 6.00 6.00 re B
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 105.56 173.21 Td (block b16 pk16 pv8) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 5 Tf 105.56 164.21 Td (post_impl) Tj ET
+0.80 w
+0.380 0.280 0.580 RG
+0.380 0.280 0.580 rg
+245.00 162.81 6.00 6.00 re B
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 253.00 168.81 Td (block b16 pk32 pv16) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 5 Tf 253.00 159.81 Td (post_impl) Tj ET
+0.80 w
+0.380 0.280 0.580 RG
+0.380 0.280 0.580 rg
+245.00 162.81 6.00 6.00 re B
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 253.00 168.81 Td (parallel pk32 pv16 b32) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 5 Tf 253.00 159.81 Td (post_impl) Tj ET
+0.80 w
+0.380 0.280 0.580 RG
+0.380 0.280 0.580 rg
+61.35 174.00 6.00 6.00 re B
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 69.35 180.00 Td (parallel pk8 pv4 b32) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 5 Tf 69.35 171.00 Td (post_impl) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer << /Size 7 /Root 1 0 R >>
+startxref
+1913
+%%EOF

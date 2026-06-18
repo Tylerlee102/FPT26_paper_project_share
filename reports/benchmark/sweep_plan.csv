@@ -1,0 +1,6 @@
+config,p_k,p_v,block_size,purpose,status
+parallel_pk8_pv4_b32,8,4,32,parallelism,csynth_cosim_post_impl_done
+parallel_pk16_pv8_b32,16,8,32,parallelism_default,default_cosim_post_impl_done
+parallel_pk32_pv16_b32,32,16,32,parallelism,csynth_cosim_post_impl_done
+block_b16_pk16_pv8,16,8,16,block_size,csynth_cosim_post_impl_done
+block_b16_pk32_pv16,32,16,16,block_size_max_parallelism,csynth_cosim_post_impl_done

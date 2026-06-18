@@ -1,0 +1,94 @@
+% Fixed abstract and introduction snippet.
+% Requires the generated result macros before \begin{document}:
+% \input{paper/snippets/result_macros.tex}
+
+\begin{abstract}
+Large language models (LLMs) face increasing latency and energy costs during
+autoregressive decoding because attention state and recurrent state must be
+accessed repeatedly during token generation. Hybrid architectures such as
+Qwen3-Next reduce part of the full-attention memory burden by using Gated
+DeltaNet layers, but efficient hardware support is still needed for the fixed
+recurrent state used by these layers. This work presents a simulation-only
+native Open Compute Project (OCP) Microscaling FP4 (MXFP4) persistent-state
+datapath for one batch-one Gated DeltaNet decode layer on a Xilinx Alveo U55C
+field-programmable gate array (FPGA). The design uses block-scaled FP4 values
+with shared block exponents and keeps the recurrent state on chip during decode.
+
+The default MXFP4 implementation achieves \OursMxfpFourBThirtyTwoLatencyUs per
+token in register-transfer level (RTL) cosimulation and consumes
+\OursMxfpFourBThirtyTwoPowerW after Vivado implementation. Compared with the
+cited H100 baseline, this corresponds to \HeadlineSpeedupVsHOneHundred speedup
+and \HeadlineEnergyEfficiencyVsHOneHundred improvement in energy efficiency.
+Compared with the cited FPGA baseline, the design achieves
+\HeadlineSpeedupVsUsc speedup and \HeadlineEnergyEfficiencyVsUsc improvement in
+energy efficiency. Current numerical-quality evidence is based on deterministic
+synthetic tests; realistic Qwen3-Next activation capture is still required
+before claiming full-model perplexity or final model quality.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Large language models, hardware accelerator, field-programmable gate array
+(FPGA), MXFP4, linear attention, hybrid transformers, memory hierarchy
+partitioning, Xilinx Alveo U55C.
+\end{IEEEkeywords}
+
+\section{Introduction}
+Autoregressive decoding in large language models introduces measurable latency
+at inference time because each generated token requires sequential access to
+model state from previous tokens. In the Transformer architecture, each newly
+generated token attends to prior context through stored key and value
+representations \cite{b2}. During decode, these representations are kept in
+memory as a key-value cache (KV cache) \cite{b6}. As the generated sequence
+becomes longer, the KV cache grows and must be accessed repeatedly, increasing
+memory capacity pressure and off-chip memory traffic \cite{b7}.
+
+Linear-attention and hybrid-attention models reduce this pressure by replacing
+some full-attention layers with fixed-state recurrent layers. Gated DeltaNet
+(GDN) is one such model family: it compresses token history into a recurrent
+state matrix $S$ instead of storing every prior key and value vector
+\cite{b8,b3}. In hybrid architectures, linear-attention layers can be interleaved
+with full-attention layers so that the model reduces memory growth while still
+preserving strong sequence-modeling capability \cite{b9}. For a single decoded
+token, full attention scales as $O(N)$ with sequence length $N$, while a
+linear-attention recurrent update can be evaluated in $O(1)$ time with respect
+to sequence length \cite{b8}.
+
+This change improves the asymptotic memory behavior, but it does not remove the
+hardware challenge. The recurrent state must still be read, updated, and
+preserved every token. If that state is repeatedly moved through external memory,
+the decode kernel can become dominated by memory traffic rather than arithmetic.
+This motivates a persistent-state FPGA datapath in which the GDN recurrent state
+remains resident in on-chip memory during decode \cite{b10,b4}.
+
+The second challenge is numeric format. High-precision formats such as FP32 and
+BF16 are robust, but they increase state storage and arithmetic cost. Flat INT4
+is compact, but its limited dynamic range can be brittle for neural activations.
+MXFP4 provides a middle point: each value is stored as a compact E2M1 FP4
+element, while a shared E8M0 exponent provides local block scaling
+\cite{b11}. This keeps element storage compact while giving each block a wider
+effective dynamic range than a fixed-point 4-bit format.
+
+In this work, we implement a native MXFP4 datapath for one batch-one Gated
+DeltaNet decode layer on a Xilinx Alveo U55C FPGA. The recurrent state is stored
+in on-chip block RAM (BRAM) and UltraRAM (URAM), while the FP4 element multiply
+is mapped to lookup-table (LUT) logic instead of first expanding operands into
+FP32 or BF16 \cite{b12}. This lets the design reduce recurrent-state storage and repeated
+memory movement while preserving the structure of the delta-rule update.
+
+The contributions of this work are fivefold. First, we present a native MXFP4
+persistent-state datapath for Gated DeltaNet decode on an FPGA. Second, we
+implement the E2M1 FP4 element multiply using LUT logic with shared
+block-exponent handling. Third, we specialize the token schedule so the
+recurrent state remains on chip during autoregressive decode. Fourth, we
+evaluate latency, timing, resource utilization, power, and synthetic numerical
+fidelity through high-level synthesis (HLS) C/RTL cosimulation and Vivado
+post-implementation reports. Fifth, we report recurrent-state stress and
+state-storage/traffic accounting while reserving full-model quality claims for
+future realistic Qwen3-Next activation capture.
+
+By focusing on the recurrent linear-attention component of a hybrid model, this
+paper studies how low-precision block-scaled arithmetic and persistent on-chip
+state can reduce decode latency and energy cost \cite{b5}. The result is a
+simulation-backed accelerator design that supports the hardware-level claim for
+MXFP4 Gated DeltaNet decode, while clearly separating those results from future
+full-model perplexity evaluation.

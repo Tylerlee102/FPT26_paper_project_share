@@ -1,0 +1,59 @@
+================================================================
+== Design Size Report
+================================================================
+
+* Total Instructions per Compilation Phase
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+| Phase         | Step                       | Instructions | Description                                                                            |
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+| Compile/Link  |                            |  8,356       | After all functions are compiled and linked into a single design                       |
+|               |                            |              |                                                                                        |
+| Unroll/Inline |                            |              | After user unroll and inline pragmas are applied                                       |
+|               | (1) unroll                 | 40,839       | user unroll pragmas are applied                                                        |
+|               | (2) simplification         | 22,953       | simplification of applied user unroll pragmas                                          |
+|               | (3) inline                 | 21,814       | user inline pragmas are applied                                                        |
+|               | (4) simplification         | 21,687       | simplification of applied user inline pragmas                                          |
+|               |                            |              |                                                                                        |
+| Array/Struct  |                            |              | After user array partition and struct aggregate/disaggregate pragmas are applied       |
+|               | (1) array partition        | 80,523       | user array partition pragmas are applied                                               |
+|               | (2) simplification         | 22,344       | simplification of applied user array partition & struct aggregate/disaggregate pragmas |
+|               | (3) aggregate/disaggregate | 22,349       | user struct aggregate/disaggregate pragmas are applied                                 |
+|               | (4) array reshape          | 22,358       | apply array reshape pragmas                                                            |
+|               | (5) access patterns        | 22,390       | array access pattern optmizations                                                      |
+|               |                            |              |                                                                                        |
+| Performance   |                            |              | After transformations are applied to meet performance pragma targets                   |
+|               | (1) loop simplification    | 22,388       | loop and instruction simplification                                                    |
+|               | (2) parallelization        | 22,372       | loops are unrolled or pipelined to meet performance targets                            |
+|               | (3) array partition        | 22,372       | arrays are partitioned to meet performance targets                                     |
+|               | (4) simplification         | 22,308       | simplification of design after performance transformations                             |
+|               |                            |              |                                                                                        |
+| HW Transforms |                            |              | After hardware transfomations                                                          |
+|               | (1) lowering               | 22,313       | initial conversion to HW specific instructions                                         |
+|               | (2) optimizations          | 22,308       | high level synthesis optimizations                                                     |
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+
+* Instructions per Function for each Compilation Phase
++-------------------------+-------------------------+-----------------+---------------+--------------+-------------+---------------+
+| Function                | Location                | Compile/Link    | Unroll/Inline | Array/Struct | Performance | HW Transforms |
++-------------------------+-------------------------+-----------------+---------------+--------------+-------------+---------------+
+| + gdn_top               | gdn_top.cpp:172         | 8,356           | 21,687        | 22,390       | 22,308      | 22,308        |
+|  + gdn_top_impl         | gdn_top.cpp:7           | 8,341           | 21,660        | 22,351       | 22,269      | 22,264        |
+|     phase1_prepare      | phase1_prepare.cpp:5    |   63            |               |              |             |               |
+|     phase2_state_read   | phase2_state_read.cpp:5 |   42            |               |              |             |               |
+|   + e2m1_mul_q4_3       | mac_e2m1.cpp:48         | 2,812 (2 calls) |               |              |             |               |
+|      to_u4              | mx_types.hpp:50         |   40 (4 calls)  |               |              |             |               |
+|   + decode_e2m1_q3      | mac_e2m1.cpp:5          | 1,612 (4 calls) |               |              |             |               |
+|      to_u4              | mx_types.hpp:50         |   40 (4 calls)  |               |              |             |               |
+|     phase3_delta_update | phase3_update.cpp:5     |  881            |               |              |             |               |
+|     encode_e2m1_q3      | mac_e2m1.cpp:23         |  754            |               |              |             |               |
+|     phase5_apply_gate   | phase5_output.cpp:5     | 1,107           |               |              |             |               |
++-------------------------+-------------------------+-----------------+---------------+--------------+-------------+---------------+
+
+* Design Size Message Settings
++---------------------------------------------+--------+------------------------------------------------------------------+
+| Message Setting                             | Value  | Description                                                      |
++---------------------------------------------+--------+------------------------------------------------------------------+
+| config_compile -design_size_maximum_warning | 100000 | Show a warning when total design instructions exceeds this value |
++---------------------------------------------+--------+------------------------------------------------------------------+
+
+

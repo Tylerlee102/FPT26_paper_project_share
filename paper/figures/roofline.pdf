@@ -1,0 +1,64 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 350 220] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 845 >>
+stream
+0.130 0.270 0.520 rg
+BT /F2 12 Tf 16.00 198.00 Td (Roofline-Style Positioning) Tj ET
+0.80 w
+0.420 0.450 0.480 RG
+48.00 42.00 m 298.00 42.00 l S
+0.80 w
+0.420 0.450 0.480 RG
+48.00 42.00 m 48.00 172.00 l S
+0.420 0.450 0.480 rg
+BT /F1 8 Tf 75.00 20.00 Td (arithmetic intensity \(conceptual\)) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 8 Tf 9.00 110.00 Td (perf.) Tj ET
+1.30 w
+0.050 0.480 0.450 RG
+58.00 57.00 m 173.00 138.00 l S
+1.30 w
+0.050 0.480 0.450 RG
+173.00 138.00 m 283.00 138.00 l S
+0.80 w
+0.860 0.420 0.120 RG
+0.860 0.420 0.120 rg
+199.00 100.00 8.00 8.00 re B
+0.050 0.060 0.070 rg
+BT /F2 8 Tf 211.00 110.00 Td (Ours MXFP4) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 7 Tf 211.00 97.00 Td (51.47 us/token, 8.98 W) Tj ET
+0.050 0.480 0.450 rg
+BT /F1 7 Tf 188.00 146.00 Td (compute roof) Tj ET
+0.050 0.480 0.450 rg
+BT /F1 7 Tf 84.00 87.00 Td (memory slope) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer << /Size 7 /Root 1 0 R >>
+startxref
+1292
+%%EOF

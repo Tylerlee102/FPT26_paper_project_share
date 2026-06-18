@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500">
+  <defs>
+    <style>
+      .bg { fill: #f7f9fb; }
+      .title { font: 700 27px Arial, sans-serif; fill: #111827; }
+      .section { font: 700 19px Arial, sans-serif; fill: #111827; }
+      .label { font: 700 17px Arial, sans-serif; fill: #111827; }
+      .small { font: 400 14px Arial, sans-serif; fill: #1f2937; }
+      .tiny { font: 400 12px Arial, sans-serif; fill: #334155; }
+      .box { rx: 10; ry: 10; stroke-width: 3; }
+      .input { fill: #eaf3ff; stroke: #1d4e89; }
+      .phase { fill: #ffffff; stroke: #475569; }
+      .state { fill: #fff4d6; stroke: #a16207; }
+      .math { fill: #ecfdf3; stroke: #15803d; }
+      .result { fill: #f1f5f9; stroke: #334155; }
+      .soft { fill: none; stroke: #cbd5e1; stroke-width: 2; }
+      .arrow { stroke: #475569; stroke-width: 3; fill: none; marker-end: url(#arrow); stroke-linecap: round; }
+    </style>
+    <marker id="arrow" viewBox="0 0 9 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 9 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1000" height="500"/>
+  <text class="title" x="34" y="40" text-anchor="start">Native MXFP4 Persistent-State Gated DeltaNet Decode Datapath</text>
+
+  <rect class="soft" x="28" y="58" width="944" height="258" rx="16"/>
+  <text class="section" x="48" y="91" text-anchor="start">Token-level datapath</text>
+  <rect class="box input" x="60" y="125" width="145" height="88"/>
+  <text class="label" x="133" y="154" text-anchor="middle">Token inputs</text>
+  <text class="small" x="133" y="185" text-anchor="middle">q<tspan baseline-shift="sub" font-size="10">t</tspan>, k<tspan baseline-shift="sub" font-size="10">t</tspan>, v<tspan baseline-shift="sub" font-size="10">t</tspan></text>
+  <text class="small" x="133" y="204" text-anchor="middle">beta<tspan baseline-shift="sub" font-size="10">t</tspan>, gate</text>
+  <rect class="box input" x="245" y="125" width="155" height="88"/>
+  <text class="label" x="323" y="154" text-anchor="middle">MXFP4 pack</text>
+  <text class="small" x="323" y="185" text-anchor="middle">E2M1 elements</text>
+  <text class="small" x="323" y="204" text-anchor="middle">E8M0 block scale</text>
+  <rect class="box phase" x="440" y="108" width="292" height="118"/>
+  <text class="label" x="586" y="136" text-anchor="middle">Stateful GDN compute</text>
+  <text class="small" x="586" y="166" text-anchor="middle">predict: r<tspan baseline-shift="sub" font-size="10">t</tspan> = S<tspan baseline-shift="sub" font-size="10">t-1</tspan> k<tspan baseline-shift="sub" font-size="10">t</tspan></text>
+  <text class="small" x="586" y="187" text-anchor="middle">update: S<tspan baseline-shift="sub" font-size="10">t</tspan> = S<tspan baseline-shift="sub" font-size="10">t-1</tspan> - beta<tspan baseline-shift="sub" font-size="10">t</tspan> e<tspan baseline-shift="sub" font-size="10">t</tspan> k<tspan baseline-shift="sub" font-size="10">t</tspan><tspan baseline-shift="super" font-size="10">T</tspan></text>
+  <text class="small" x="586" y="208" text-anchor="middle">output: o<tspan baseline-shift="sub" font-size="10">t</tspan> = S<tspan baseline-shift="sub" font-size="10">t</tspan> q<tspan baseline-shift="sub" font-size="10">t</tspan>, then gate</text>
+  <rect class="box state" x="500" y="253" width="195" height="54"/>
+  <text class="label" x="598" y="274" text-anchor="middle">On-chip state</text>
+  <text class="small" x="598" y="297" text-anchor="middle">MXFP4 S<tspan baseline-shift="sub" font-size="10">t</tspan> in BRAM/URAM</text>
+  <rect class="box result" x="770" y="125" width="170" height="88"/>
+  <text class="label" x="855" y="154" text-anchor="middle">Packed output</text>
+  <text class="small" x="855" y="185" text-anchor="middle">FP16 boundary</text>
+  <text class="small" x="855" y="204" text-anchor="middle">value</text>
+  <path class="arrow" d="M 213 169 L 237 169"/>
+  <path class="arrow" d="M 408 169 L 432 169"/>
+  <path class="arrow" d="M 740 169 L 762 169"/>
+  <path class="arrow" d="M 563 229 L 563 246"/>
+  <path class="arrow" d="M 620 250 L 620 233"/>
+
+  <rect class="soft" x="28" y="342" width="944" height="128" rx="16"/>
+  <text class="section" x="48" y="374" text-anchor="start">Native MXFP4 arithmetic reused by the compute block</text>
+  <rect class="box math" x="65" y="400" width="250" height="55"/>
+  <text class="label" x="190" y="423" text-anchor="middle">E2M1 LUT multiply</text>
+  <text class="tiny" x="190" y="444" text-anchor="middle">sign XOR, exponent add, mantissa multiply</text>
+  <rect class="box math" x="375" y="400" width="250" height="55"/>
+  <text class="label" x="500" y="423" text-anchor="middle">Block-scale alignment</text>
+  <text class="tiny" x="500" y="444" text-anchor="middle">combine E8M0 scales, shift partials</text>
+  <rect class="box math" x="685" y="400" width="255" height="55"/>
+  <text class="label" x="813" y="423" text-anchor="middle">Fixed-point accumulation</text>
+  <text class="tiny" x="813" y="444" text-anchor="middle">Q4.3 partials into INT24 accumulator</text>
+  <path class="arrow" d="M 323 428 L 367 428"/>
+  <path class="arrow" d="M 633 428 L 677 428"/>
+</svg>

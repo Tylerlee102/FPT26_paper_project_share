@@ -1,0 +1,481 @@
+Comment fix review sheet
+Source comments: overleaf-comments-2026-06-18.xlsx
+Draft source: pasted Overleaf text from 2026-06-18
+
+Use this file to approve fixes one by one. "Skip" means I would not edit it
+because you already fixed it or because the reviewer comment was positive.
+
+01. Token vs natural-language words
+Status: Skip, already fixed.
+Original comment: Natural language words and tokens are not equivalent.
+Original wording: The pasted draft already explains that tokens may be words,
+subwords, punctuation, or tokenizer-defined units.
+Fix: No further change.
+
+02. Define MAC
+Status: Edit.
+Original wording: That means the number of MAC operations for large scale token
+history would be lower...
+Fix: That means the number of multiply-accumulate (MAC) operations for long
+token histories is lower for the linear-attention portion because the
+per-token recurrent update is fixed-size rather than growing with sequence
+length.
+
+03. Introduction has too much related-work detail
+Status: Edit.
+Original wording: The introduction includes the recurrent state explanation,
+3:1 block explanation, full complexity discussion, prior replacement technique,
+MXFP4 details, E2M1/E8M0 details, and system-level claims all in one long block.
+Fix: Keep the introduction to problem, motivation, and contribution. Move the
+detailed linear-attention background to Related Work and the E2M1/E8M0 details
+to the architecture or quantization section.
+
+04. Broader implication of O(N^2) vs O(N)
+Status: Edit.
+Original wording: It should be noted that the total algorithm complexity on an
+entire execution sequence has the full attention layer scale quadratically as
+O(N^2) and the linear attention layer scale to O(N).
+Fix: Over a full sequence, this scaling difference means the full-attention
+portion becomes increasingly expensive as context grows, while the
+linear-attention recurrent update grows only linearly across generated tokens.
+This makes the recurrent-state path a useful target for reducing decode memory
+traffic and latency.
+
+05. Replace "a lot"
+Status: Edit.
+Original wording: This specific replacement technique ... does make the memory
+usage a lot more efficient than without.
+Fix: Prior persistent-state FPGA work showed that keeping linear-attention
+state on chip can reduce repeated recurrent-state movement for decode
+workloads.
+
+06. Main contribution hidden
+Status: Edit.
+Original wording: To break this memory wall and improve efficiency of current
+integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C
+accelerator...
+Fix: The main contribution is a native MXFP4 persistent-state datapath for one
+batch-one Gated DeltaNet decode layer on a Xilinx Alveo U55C FPGA.
+
+07. Citation mixed with "what we did"
+Status: Edit.
+Original wording: ... we implement a 4-bit MXFP4 datapath ... to create an
+efficient connection between the local memory and external memory~\cite{b5}.
+Fix: Prior work motivates the memory-wall problem. Separately, this paper
+implements a native MXFP4 datapath for the resident Gated DeltaNet recurrent
+state.
+
+08. Passive voice: "can be done"
+Status: Edit.
+Original wording: This can be done by treating the URAM and BRAM as the
+permanent execution area...
+Fix: The design treats BRAM/URAM as the resident execution area for the
+compressed recurrent state and reserves HBM for data that must remain off chip.
+
+09. Awkward wording: "make a better case"
+Status: Edit.
+Original wording: By maximizing the efficiency of the data format itself, we
+can make a better case for the limited on-chip storage available.
+Fix: A more compact data format lets more recurrent-state data remain in
+limited on-chip memory.
+
+10. Define OCP
+Status: Edit.
+Original wording: 4-bit OCP microscaling formats.
+Fix: 4-bit Open Compute Project (OCP) Microscaling formats.
+
+11. Define MXFP4 clearly
+Status: Edit.
+Original wording: We implement a 4-bit MXFP4 datapath...
+Fix: MXFP4 is a 4-bit microscaling floating-point format that stores each
+element as an E2M1 value and applies a shared E8M0 scale to a block of values.
+
+12. Define E2M1
+Status: Edit.
+Original wording: 4-bit E2M1 elements.
+Fix: E2M1 means one sign bit, two exponent bits, and one mantissa bit.
+
+13. Define E8M0
+Status: Edit.
+Original wording: shared 8-bit E8M0 block scale.
+Fix: E8M0 is an 8-bit exponent-only shared scale stored once per MXFP4 block.
+
+14. Future tense "will be"
+Status: Edit.
+Original wording: The processing elements will be able to perform continuous
+linear attention updates...
+Fix: The processing elements perform continuous linear-attention updates
+without repeatedly requesting the recurrent state from external memory.
+
+15. Remove "To recap..."
+Status: Edit.
+Original wording: To recap the main discussion points made before, the primary
+objective...
+Fix: The primary objective is to maximize use of low-latency on-chip memory
+while preserving enough numerical fidelity for long-context decode studies.
+
+16. General fluff
+Status: Edit.
+Original wording: The introduction repeats memory-wall motivation and states the
+same contribution several times.
+Fix: Keep one motivation paragraph, one MXFP4 definition paragraph, and one
+contribution paragraph.
+
+17. Define LUT
+Status: Edit.
+Original wording: By mapping 4-bit MXFP4 multipliers directly onto the LUT
+resources...
+Fix: By mapping 4-bit MXFP4 multipliers directly onto field-programmable gate
+array lookup table (LUT) resources...
+
+18. Define FPGA earlier
+Status: Edit.
+Original wording: Definition appears later as field-programmable gate arrays
+(FPGAs).
+Fix: The main contribution is a native MXFP4 persistent-state datapath for one
+batch-one Gated DeltaNet decode layer on a Xilinx Alveo U55C
+field-programmable gate array (FPGA).
+
+19. Preserve strong intro ending
+Status: Keep, but use as intro close.
+Original wording: This paper introduces a new data packaging optimization method
+that can break through the modern memory wall...
+Fix: By combining persistent-state dataflow with block-scaled FP4 arithmetic,
+the design reduces recurrent-state storage, avoids steady-state off-chip
+recurrent-state traffic, and exposes the hardware value of native MXFP4
+arithmetic for hybrid linear-attention decode.
+
+20. Related Work duplicate citation sentence
+Status: Skip, already fixed according to your reply.
+Original wording: A number of previous studies...
+Fix: No further change unless it still appears in the active Overleaf version.
+
+21. Move FPGA definition up
+Status: Edit.
+Original wording: This work uses field-programmable gate arrays (FPGAs)...
+Fix: Define FPGA in the introduction at first use. Later sections can simply
+use "FPGAs" or "Xilinx Alveo U55C FPGA."
+
+22. Active wording in Related Work
+Status: Edit.
+Original wording: Building upon this general approach, the current research
+focuses...
+Fix: Building on this approach, we focus on the numeric datapath used for the
+resident recurrent state rather than on a BF16-style high-precision datapath.
+
+23. Vague "this research"
+Status: Edit.
+Original wording: A key distinction of this research is...
+Fix: A key distinction of the proposed design is...
+
+24. Repeated LLM definition
+Status: Edit.
+Original wording: large language model (LLM) appears again after being defined.
+Fix: Define large language models (LLMs) once in the introduction, then use
+LLMs after that.
+
+25. Cite reduced-precision memory/arithmetic claim
+Status: Edit.
+Original wording: Reduced-precision data formats reduce memory usage and
+arithmetic cost.
+Fix: Reduced-precision formats lower storage and arithmetic cost by using fewer
+bits per element, but this can reduce the dynamic range available to each
+value~[Microscaling citation].
+
+26. Cite fixed low-bit dynamic-range limitation
+Status: Edit.
+Original wording: However, a fixed low-bit-width representation may limit the
+ability to represent large ranges in individual elements.
+Fix: A fixed low-bit-width representation can limit dynamic range because each
+element must fit into the same small value grid; microscaling addresses this by
+sharing an exponent across a block of elements~[Microscaling citation].
+
+27. Expand Problem Formulation
+Status: Edit.
+Original wording: This study focuses on processing one batch-one Gated DeltaNet
+decode layer during autoregressive inference.
+Fix: Add why: This workload isolates the recurrent-state update and native
+MXFP4 arithmetic without mixing in prefill, projections, full-model scheduling,
+or unrelated Transformer layers.
+
+28. Alternatives considered
+Status: Edit.
+Original wording: No alternatives are discussed.
+Fix: We considered broader formulations, including prefill, full Transformer
+attention, projection layers, and multi-layer scheduling, but those choices
+would mix the recurrent-state datapath with unrelated system effects.
+
+29. Figure too small / whitespace
+Status: Edit if you have the figure asset.
+Original wording: Single-column figure using width=\linewidth.
+Fix: Use a two-column figure with reduced whitespace in the image asset, e.g.,
+figure* and width around 0.86 to 0.90 textwidth. Best fix also requires editing
+the image itself to remove internal whitespace.
+
+30. Explain why architecture is shaped this way
+Status: Edit.
+Original wording: Figure summarizes the proposed datapath...
+Fix: The datapath is architected around two requirements: keep recurrent state
+resident on chip and keep FP4 arithmetic native to FPGA fabric rather than
+converting through BF16/FP32.
+
+31. Explain citations b1,b4,b7 near memory wall
+Status: Edit.
+Original wording: ... addresses the standard LLM memory wall \cite{b1,b4,b7}.
+Fix: Systems papers show KV-cache management and memory bandwidth dominate LLM
+serving at long contexts, motivating a design that avoids repeated recurrent
+state movement.
+
+32. Reference storage table
+Status: Edit.
+Original wording: Table is inserted without being referenced.
+Fix: Table 1 summarizes the storage implication of using MXFP4 for this
+recurrent state.
+
+33. Explain block-scale metadata
+Status: Edit.
+Original wording: MXFP4 and block-scale metadata.
+Fix: The metadata is the E8M0 scale stored once per block, so element storage
+remains compact while each block keeps a wider local range than flat INT4.
+
+34. Remove citation from own design statement
+Status: Edit.
+Original wording: The recurrent state St is stored within partitions of on-chip
+FPGA memory banks \cite{b10}.
+Fix: Our design stores St within partitioned on-chip FPGA memory banks. Prior
+persistent-state work motivates this placement.
+
+35. Repetitive recurrent-state paragraph
+Status: Edit.
+Original wording: With respect to the stored recurrent state St, it allows
+access to different parts...
+Fix: The state matrix is partitioned across memory banks so multiple rows and
+columns can be accessed in parallel.
+
+36. Reference BF16/FP32 storage table
+Status: Edit.
+Original wording: BF16 requires 16 bits per element, while FP32 requires 32
+bits per element.
+Fix: As shown in Table 1, BF16/FP16 require 16 bits per element and FP32
+requires 32 bits per element, before accounting for MXFP4 block-scale overhead.
+
+37. Keep Gated DeltaNet equations
+Status: Keep with light cleanup.
+Original wording: Equation sequence is clear and reviewer liked it.
+Fix: Keep the equation sequence, optionally tighten explanations and punctuation.
+
+38. Arithmetic-format table not referenced
+Status: Edit.
+Original wording: Arithmetic format table appears without reference.
+Fix: Table 2 lists the formats used by each tensor and intermediate value.
+
+39. Naive vs proposed design visualization
+Status: Edit.
+Original wording: Five-step pipeline is described in prose and table, then
+repeated again in prose.
+Fix: Keep the table and reference it. Remove the repeated prose list. Add one
+sentence explaining that the table replaces a naive three-pass traversal.
+
+40. Quantization boundary needs explanation
+Status: Edit.
+Original wording: The evaluation of the quantization of the recurrent-state was
+performed via a synthetic software reference...
+Fix: The recurrent-state quantization results remain a numerical-fidelity
+boundary until realistic Qwen3-Next activation capture is available.
+
+41. Multiply-path explanation
+Status: Edit.
+Original wording: The multiply path consists of sign XOR, exponent addition...
+Fix: The multiply path uses sign XOR, exponent addition with bias adjustment,
+mantissa handling, normalization, subnormal handling, and Q4.3 fixed-point
+partial-product generation.
+
+42. Repetitive LUT-based E2M1 subsection
+Status: Edit.
+Original wording: The FP4 Element Multiply and LUT-Based E2M1 Multiplication
+subsections say nearly the same thing.
+Fix: Merge them into one "MXFP4 Quantization and Arithmetic" subsection.
+
+43. Design Parameters subsection too small
+Status: Edit.
+Original wording: Three design parameters determine the behavior...
+Fix: Fold this into the quantization/architecture paragraph: The main design
+parameters are block size B, key-direction parallelism P_K, and value-direction
+parallelism P_V.
+
+44. AMD/Xilinx consistency
+Status: Edit.
+Original wording: AMD Alveo U55C, Xilinx FPGA tool flow, Xilinx Alveo U55C are
+mixed.
+Fix: Use "Xilinx Alveo U55C" consistently in the paper. Use "Vivado" and
+"Vitis HLS" for tools.
+
+45. HLS-specific design choices
+Status: Edit.
+Original wording: The design is synthesized using Vitis HLS...
+Fix: Add a paragraph saying the implementation uses pipeline II=1, array
+partitioning by P_K and P_V, BRAM binding for resident state, unroll/inline
+directives, and separate AXI memory bundles.
+
+46. Place HLS pragmas in Simulation/Synthesis section
+Status: Edit.
+Original wording: HLS C synthesis estimates latency, initiation interval, and
+initial resource mapping.
+Fix: Add the HLS design-choice paragraph before or inside Simulation and
+Synthesis Flow.
+
+47. Power question
+Status: Edit.
+Original wording: total power consumption.
+Fix: Power is reported from Vivado report_power. The main energy calculation
+uses total on-chip power, while the report also separates dynamic and static
+components.
+
+48. Simulation-only but one FPGA part
+Status: Edit.
+Original wording: simulation-only FPGA design targeting the AMD Alveo U55C.
+Fix: The U55C is used because it is the target platform for this implementation
+flow and provides the BRAM/URAM/HBM hierarchy relevant to persistent-state
+dataflow. Comparing multiple FPGA parts is left as a portability study.
+
+49. Open-source/code-data release
+Status: Needs your decision.
+Original wording: Provenance and reproducibility section does not say whether
+code/data will be released.
+Fix option A: The anonymized review version preserves the local artifact trail;
+public release details can be finalized after review constraints are known.
+Fix option B: The code, generated reports, and provenance files will be
+released after anonymized review.
+Fix option C: Artifacts are available on request.
+
+50. Latency table not referenced
+Status: Edit.
+Original wording: Table appears after prose without reference.
+Fix: Table 3 shows that the default MXFP4 design is faster than both cited
+baselines for the evaluated single-layer decode kernel.
+
+51. Results prose repeats latency table
+Status: Edit.
+Original wording: The base MXFP4 design achieved latency X and power Y, then
+compares all numbers repeated from the table.
+Fix: Keep the table values in the table. Prose should explain that the gain
+comes from resident recurrent-state storage and native FP4 arithmetic.
+
+52. Results prose repeats resource table
+Status: Edit.
+Original wording: The design met timing target... LUT utilization... BRAM...
+DSP...
+Fix: As shown in the resource table, utilization remains below device capacity
+at the default point. Explain DSP caveat in prose.
+
+53. Resource table not referenced
+Status: Edit.
+Original wording: Post-implementation timing/resource table appears without
+reference.
+Fix: As shown in Table 5, resource utilization remains well below device
+capacity at the default B=32, P_K=16, P_V=8 point.
+
+54. Activation-capture caveat belongs in limitations
+Status: Edit.
+Original wording: Given that realistic Qwen3-Next activation capture is still
+blocked...
+Fix: Move the caveat to "Synthetic vs. Realistic Data Accuracy." Results should
+only say what the synthetic test harness shows.
+
+55. Accuracy table not referenced
+Status: Edit.
+Original wording: Synthetic accuracy table appears without reference.
+Fix: Table 6 shows that MXFP4 preserves output direction better than the INT4
+fallback under deterministic synthetic conditions.
+
+56. Remove unnecessary citations from own results
+Status: Edit.
+Original wording: MXFP4 reached output cosine similarity ... \cite{b10,b12}.
+Fix: These are our generated synthetic results, so no citation is needed for
+the numbers. Keep a citation only if defining cosine similarity or background.
+
+57. Recurrent-state stress table not referenced
+Status: Edit.
+Original wording: Stress table appears without reference.
+Fix: Table 7 reports longer synthetic stress tests for MXFP4 and MXFP8
+recurrent state.
+
+58. Explain what stress data means
+Status: Edit.
+Original wording: MXFP4 is always the native four-bit arithmetic path and MXFP8
+will always be a safer fallback...
+Fix: The result shows a design boundary: MXFP4 is the native four-bit arithmetic
+path, while MXFP8 recurrent state is safer when accumulated recurrent-state
+drift becomes the limiting factor.
+
+59. Storage/traffic table not referenced
+Status: Edit.
+Original wording: Storage and traffic table appears without reference.
+Fix: Table 8 supports the persistent-state dataflow claim.
+
+60. Define HBM
+Status: Edit.
+Original wording: HBM appears in limitations without definition.
+Fix: high bandwidth memory (HBM).
+
+61. Move tiling/buffer hierarchy to Future Work
+Status: Edit.
+Original wording: Further research may evaluate tiling and buffer hierarchies
+inside the BRAM capacity limitation paragraph.
+Fix: Put this in Future Work: Larger design-space studies should combine
+parallelism sweeps with floorplanning and memory-hierarchy experiments across
+BRAM, URAM, and HBM.
+
+62. Bound when DRAM pressure returns
+Status: Edit.
+Original wording: Consequently, DRAM bandwidth limitations may appear again.
+Fix: DRAM or HBM traffic returns when recurrent-state tensors, batch size, or
+model configuration grow beyond available on-chip SRAM and force part of the
+state to spill off chip.
+
+63. Larger parallelism values
+Status: Edit.
+Original wording: Possible ways to address this problem include floorplanning,
+retiming, and reevaluating the parallelism ratio...
+Fix: Add the existing sweep results. The wider P_K=32, P_V=16 fabric increases
+LUT use from 6.64 percent to 24.96 percent and DSP use from 7.27 percent to
+28.72 percent, while the smaller P_K=8, P_V=4 fabric lowers utilization but
+increases latency.
+
+64. HLS binding directives for DSP issue
+Status: Edit.
+Original wording: Future revisions can further constrain adders and
+accumulators...
+Fix: We did not force all non-FP4 arithmetic into fabric in this run because
+that would change the timing/resource tradeoff being measured and would require
+a controlled ablation. The correct claim is that the FP4 element multiply is
+LUT-based, not that the entire implementation is DSP-free.
+
+65. Shorten Future Work
+Status: Edit.
+Original wording: Four long paragraphs: activation capture, perplexity,
+non-FP4 arithmetic binding, physical FPGA hardware.
+Fix: Future work should evaluate the MXFP4 datapath with realistic Qwen3-Next
+activation captures and full perplexity benchmarks. A second direction is to
+test stricter HLS binding directives for non-FP4 adders and accumulators, then
+compare timing, area, and power against the current implementation. Larger
+design-space studies should combine parallelism sweeps with floorplanning and
+memory-hierarchy experiments across BRAM, URAM, and HBM. Finally, board-level
+measurements should compare Vivado-estimated power with measured runtime power
+on physical FPGA hardware.
+
+66. Global consistency
+Status: Edit.
+Original wording examples: recurrent-state, recurrent state, current-state,
+state-matrix, final-token-output.
+Fix: Use "recurrent state" as the noun phrase, hyphenate only when used as a
+compound adjective such as "recurrent-state update." Avoid phrases like
+"current-state" and "final-token-output."
+
+67. IEEE citation order
+Status: Edit.
+Original issue: The first citation in the paper was b2, so the first displayed
+citation was [2].
+Fix: Reorder the bibliography labels by first appearance in the paper, or move
+to BibTeX later. In the fixed draft, the first-use order is b1, b2, b3, etc.
+

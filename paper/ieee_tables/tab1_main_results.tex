@@ -1,0 +1,16 @@
+% AUTO-GENERATED -- DO NOT EDIT BY HAND
+\begin{table}[t]
+\centering
+\caption{Batch-1 decode comparison. Latency and energy baselines are cited from prior work; MXFP4 values are measured post-implementation.}
+\label{tab:main-ieee}
+\begin{tabular}{llrrrrr}
+\toprule
+System & Datapath / state & Lat. & Speedup & Energy & Eff. & Power \\
+ &  & ($\mu$s) & vs. H100 & (mJ) & vs. H100 & (W) \\
+\midrule
+H100 PCIe GPU~\cite{gupta_gdn} & HBM state traffic & 285.0 & 1.00$\times$ & 99.8 & 1.00$\times$ & 350.0 \\
+USC FPGA~\cite{gupta_gdn} & persistent state & 63.2 & 4.51$\times$ & 9.5 & 10.51$\times$ & $\le$150.0 \\
+Ours & MXFP4 persistent state & 51.47 & 5.54$\times$ & 0.462 & 216.0$\times$ & 8.976 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,100 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 360 230] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 1802 >>
+stream
+0.130 0.270 0.520 rg
+BT /F2 12 Tf 16.00 207.00 Td (Recurrent-State Precision Stress) Tj ET
+0.420 0.450 0.480 rg
+BT /F1 7 Tf 16.00 191.00 Td (Higher output cosine is better; lower state rel. L2 is better.) Tj ET
+0.80 w
+0.420 0.450 0.480 RG
+48.00 55.00 m 303.00 55.00 l S
+0.80 w
+0.420 0.450 0.480 RG
+48.00 55.00 m 48.00 170.00 l S
+0.80 w
+0.860 0.420 0.120 RG
+0.860 0.420 0.120 rg
+66.00 55.00 16.00 73.98 re B
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 64.00 132.98 Td (0.643) Tj ET
+0.80 w
+0.050 0.480 0.450 RG
+0.050 0.480 0.450 rg
+86.00 55.00 16.00 107.25 re B
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 84.00 166.25 Td (0.933) Tj ET
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 58.00 39.00 Td (Drift cos.) Tj ET
+0.80 w
+0.860 0.420 0.120 RG
+0.860 0.420 0.120 rg
+151.00 55.00 16.00 85.96 re B
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 149.00 144.96 Td (0.747) Tj ET
+0.80 w
+0.050 0.480 0.450 RG
+0.050 0.480 0.450 rg
+171.00 55.00 16.00 108.72 re B
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 169.00 167.72 Td (0.945) Tj ET
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 143.00 39.00 Td (Boundary cos.) Tj ET
+0.80 w
+0.860 0.420 0.120 RG
+0.860 0.420 0.120 rg
+236.00 55.00 16.00 106.72 re B
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 234.00 165.72 Td (0.928) Tj ET
+0.80 w
+0.050 0.480 0.450 RG
+0.050 0.480 0.450 rg
+256.00 55.00 16.00 107.49 re B
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 254.00 166.49 Td (0.935) Tj ET
+0.050 0.060 0.070 rg
+BT /F1 6 Tf 228.00 39.00 Td (Stress worst cos.) Tj ET
+0.80 w
+0.860 0.420 0.120 RG
+0.860 0.420 0.120 rg
+224.00 183.00 8.00 8.00 re B
+0.050 0.060 0.070 rg
+BT /F1 7 Tf 236.00 184.00 Td (MXFP4 state) Tj ET
+0.80 w
+0.050 0.480 0.450 RG
+0.050 0.480 0.450 rg
+224.00 170.00 8.00 8.00 re B
+0.050 0.060 0.070 rg
+BT /F1 7 Tf 236.00 171.00 Td (MXFP8 state) Tj ET
+0.740 0.180 0.180 rg
+BT /F2 7 Tf 16.00 27.00 Td (1024-token state rel. L2: MXFP4=0.865, MXFP8=0.344) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer << /Size 7 /Root 1 0 R >>
+startxref
+2250
+%%EOF
