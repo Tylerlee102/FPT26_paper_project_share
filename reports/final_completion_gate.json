@@ -192,13 +192,13 @@
       "status": "PASS"
     }
   ],
-  "generated_at": "2026-08-05T21:12:30.022056+00:00",
+  "generated_at": "2026-08-05T21:14:27.717347+00:00",
   "nonpassing_gate_count": 5,
   "paper_pdf_permitted": true,
   "release_state": "READY FOR HUMAN SUBMISSION REVIEW",
   "required_gate_count": 8,
   "required_nonpassing_gate_count": 0,
   "schema": 1,
-  "source_revision": "2231e42661a6e4cd8321ad7eed8317ee9bffc1a3",
+  "source_revision": "227ee410a962925872682b25d5b6b4de1a6c28ec",
   "status": "PASS"
 }
