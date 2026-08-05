@@ -1,0 +1,60 @@
+{
+  "activation_stack_depth": 2,
+  "adaptive_min_entries": 1,
+  "base_residual_block_fraction": 0.75,
+  "base_stack_depth": 3,
+  "capacities": [
+    7
+  ],
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      1,
+      7,
+      8,
+      14,
+      28,
+      64,
+      128,
+      255,
+      256
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 256,
+    "trace_family": "high_retention",
+    "value_dim": 128
+  },
+  "fold_decay_threshold": 0.85,
+  "fold_policy": "fixed",
+  "initial_state_mode": "random",
+  "input_stream_sha256": "e4a093eebba9fd78149c9bc2369043a7fc1eb33bc5c39a63ffcb36d760860e1d",
+  "limitations": [
+    "synthetic inputs",
+    "floating Q/DQ candidate, not the encoded-integer oracle",
+    "logical storage bytes, not placed BRAM/URAM allocation",
+    "not closed-loop Qwen quality evidence"
+  ],
+  "log_precision": "mxfp8_e4m3",
+  "numpy": "2.3.5",
+  "outputs": {
+    "reports/benchmark/corrected/write_log_failure_diagnostics/high_retention_basers3_r7_random_checkpoints.csv": "e6c6a24baa7e06ed8210c0d2997c5fdb2e56eb5fa320dda8eb9c2ab5d3174109",
+    "reports/benchmark/corrected/write_log_failure_diagnostics/high_retention_basers3_r7_random_tokens.csv": "4eaed5f26127f035db4abceb7431409ef7cce731caa541d507f13f922880cb92"
+  },
+  "python": "3.12.10",
+  "schema": 1,
+  "source_hashes": {
+    "golden/gdn_fp32.py": "7ebc9b7a0ba400a553e9c079b2e2e98596723dcc8b1d137b0477c798e34697c5",
+    "golden/gdn_mxfp4.py": "22e9975b4a60a948a909fa0fc35630b1bc6ad68f7464b5c8e0c68f70bcaa44b8",
+    "golden/gdn_write_log.py": "955a47a7af4821fd132a56df07496777bfa1944f1ca5dd45af66124be5c4ad33",
+    "golden/mx_format.py": "b0f8bee046465f342e8049b33a91c3e424c3c2c6e69fb53e85d2d63656be269d",
+    "scripts/long_sequence_stability.py": "977ba478f143676388bbc78b87777330269e150abafc38c68b848a9647b05c14",
+    "scripts/write_log_stability.py": "1dd4e5195fd84175ad733cea38a72b7296e8873ad35c5eee6ca514d1d8061ed3"
+  },
+  "status": "diagnostic_only",
+  "timestamp": "2026-08-02T07:45:30.955748+00:00"
+}

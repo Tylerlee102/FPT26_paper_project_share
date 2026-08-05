@@ -1,0 +1,78 @@
+================================================================
+== Design Size Report
+================================================================
+
+* Total Instructions per Compilation Phase
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+| Phase         | Step                       | Instructions | Description                                                                            |
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+| Compile/Link  |                            | 4,310        | After all functions are compiled and linked into a single design                       |
+|               |                            |              |                                                                                        |
+| Unroll/Inline |                            |              | After user unroll and inline pragmas are applied                                       |
+|               | (1) unroll                 | 2,214        | user unroll pragmas are applied                                                        |
+|               | (2) simplification         | 1,315        | simplification of applied user unroll pragmas                                          |
+|               | (3) inline                 | 1,262        | user inline pragmas are applied                                                        |
+|               | (4) simplification         | 1,262        | simplification of applied user inline pragmas                                          |
+|               |                            |              |                                                                                        |
+| Array/Struct  |                            |              | After user array partition and struct aggregate/disaggregate pragmas are applied       |
+|               | (1) array partition        | 8,764        | user array partition pragmas are applied                                               |
+|               | (2) simplification         | 7,799        | simplification of applied user array partition & struct aggregate/disaggregate pragmas |
+|               | (3) aggregate/disaggregate | 7,807        | user struct aggregate/disaggregate pragmas are applied                                 |
+|               | (4) array reshape          | 7,815        | apply array reshape pragmas                                                            |
+|               | (5) access patterns        | 7,783        | array access pattern optmizations                                                      |
+|               |                            |              |                                                                                        |
+| Performance   |                            |              | After transformations are applied to meet performance pragma targets                   |
+|               | (1) loop simplification    | 7,763        | loop and instruction simplification                                                    |
+|               | (2) parallelization        | 7,694        | loops are unrolled or pipelined to meet performance targets                            |
+|               | (3) array partition        | 7,712        | arrays are partitioned to meet performance targets                                     |
+|               | (4) simplification         | 7,712        | simplification of design after performance transformations                             |
+|               |                            |              |                                                                                        |
+| HW Transforms |                            | 7,882        | After hardware transfomations                                                          |
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+
+* Instructions per Function for each Compilation Phase
++-------------------------------+----------------------+-----------------+---------------+--------------+-------------+---------------+
+| Function                      | Location             | Compile/Link    | Unroll/Inline | Array/Struct | Performance | HW Transforms |
++-------------------------------+----------------------+-----------------+---------------+--------------+-------------+---------------+
+| + gdn_bf16_top                | gdn_bf16_top.cpp:649 | 4,310           | 1,262         | 7,783        | 7,712       | 7,882         |
+|  + gdn_bf16_top_impl          | gdn_bf16_top.cpp:328 | 4,291           | 1,231         | 7,740        | 7,659       | 7,817         |
+|     clear_command_counters    | gdn_bf16_top.cpp:60  |   37            |               |              |             |               |
+|     clear_counters            | gdn_bf16_top.cpp:51  |   26 (2 calls)  |               |              |             |               |
+|     payload_status            | gdn_bf16_top.cpp:116 |   36            |               |              |             |               |
+|     accumulate_counters       | gdn_bf16_top.cpp:89  |  168 (7 calls)  |               |              |             |               |
+|   + publish_result            | gdn_bf16_top.cpp:100 |  495 (11 calls) |               |              |             |               |
+|      copy_command_counters    | gdn_bf16_top.cpp:78  |  242 (11 calls) |               |              |             |               |
+|      copy_counters            | gdn_bf16_top.cpp:69  |  176 (11 calls) |               |              |             |               |
+|   + phase1_validate_token     | gdn_bf16_top.cpp:185 |  656            |   73          |   97         |   87        |   92          |
+|      finite_bf16              | gdn_bf16_top.cpp:27  |  492 (3 calls)  |               |              |             |               |
+|      unit_interval_bf16       | gdn_bf16_top.cpp:32  |   34 (2 calls)  |               |              |             |               |
+|     unpack_state_element      | gdn_bf16_top.cpp:38  |  108 (2 calls)  |               |              |             |               |
+|   + phase2_decay_predict_tile | gdn_bf16_top.cpp:241 |  629            |  154          | 2,071        | 2,039       | 2,039         |
+|    + decode_accum             | gdn_bf16_top.cpp:16  |  198 (3 calls)  |               |              |             |               |
+|       decode_bf16             | gdn_bf16_top.cpp:9   |  144 (3 calls)  |               |              |             |               |
+|      reduce_128               | gdn_bf16_top.cpp:136 |  302            |  103          |  514         |  482        |  482          |
+|   + phase3_delta_tile         | gdn_bf16_top.cpp:270 |  198            |   19          |   69         |   69        |   69          |
+|    + decode_accum             | gdn_bf16_top.cpp:16  |  132 (2 calls)  |               |              |             |               |
+|       decode_bf16             | gdn_bf16_top.cpp:9   |   96 (2 calls)  |               |              |             |               |
+|   + phase4_update_state_tile  | gdn_bf16_top.cpp:286 |  209            |   25          | 1,530        | 1,530       | 1,530         |
+|    + decode_accum             | gdn_bf16_top.cpp:16  |   66            |               |              |             |               |
+|       decode_bf16             | gdn_bf16_top.cpp:9   |   48            |               |              |             |               |
+|      encode_bf16              | gdn_bf16_top.cpp:21  |   47            |               |              |             |               |
+|   + phase5_output_tile        | gdn_bf16_top.cpp:306 |  492            |  141          | 1,048        | 1,014       | 1,017         |
+|    + decode_accum             | gdn_bf16_top.cpp:16  |   66            |               |              |             |               |
+|       decode_bf16             | gdn_bf16_top.cpp:9   |   48            |               |              |             |               |
+|      reduce_128               | gdn_bf16_top.cpp:136 |  302            |  103          |  514         |  482        |  482          |
+|      encode_bf16              | gdn_bf16_top.cpp:21  |   47            |               |              |             |               |
+|     pack_state_element        | gdn_bf16_top.cpp:43  |  130 (2 calls)  |               |              |             |               |
+|   + phase1_validate_state     | gdn_bf16_top.cpp:224 |  208            |   27          |   32         |   27        |   34          |
+|      finite_bf16              | gdn_bf16_top.cpp:27  |  164            |               |              |             |               |
++-------------------------------+----------------------+-----------------+---------------+--------------+-------------+---------------+
+
+* Design Size Message Settings
++---------------------------------------------+--------+------------------------------------------------------------------+
+| Message Setting                             | Value  | Description                                                      |
++---------------------------------------------+--------+------------------------------------------------------------------+
+| config_compile -design_size_maximum_warning | 100000 | Show a warning when total design instructions exceeds this value |
++---------------------------------------------+--------+------------------------------------------------------------------+
+
+

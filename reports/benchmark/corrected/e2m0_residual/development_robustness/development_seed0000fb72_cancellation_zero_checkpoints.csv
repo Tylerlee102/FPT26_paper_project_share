@@ -1,0 +1,7 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_0000fb72_cancellation_zero,development,64370,cancellation,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_cancellation_zero,development,64370,cancellation,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,64,0.9999206909580164,0.01261086354703329,0.0010838843882083893,0.05309207342617744,0.015512436628341675,9,0,0,1,7,538256,PASS
+synthetic_0000fb72_cancellation_zero,development,64370,cancellation,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_cancellation_zero,development,64370,cancellation,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,256,0.9999236241688434,0.01236076707372999,0.0010489225387573242,0.052035158553802696,0.013712599873542786,36,0,0,4,7,538256,PASS
+synthetic_0000fb72_cancellation_zero,development,64370,cancellation,fp32,0,1024,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_cancellation_zero,development,64370,cancellation,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,1024,0.9999174400571657,0.012868131676022156,0.0011827237904071808,0.05246233860527533,0.015783578157424927,146,0,0,2,7,538256,PASS

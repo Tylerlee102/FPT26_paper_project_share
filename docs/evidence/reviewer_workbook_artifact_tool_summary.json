@@ -1,0 +1,29 @@
+{
+  "ndjson": "{\"kind\":\"workbook\",\"id\":\"wb/uzhi33\",\"sheets\":1,\"tables\":1}\n{\"kind\":\"sheet\",\"id\":\"ws/sad073\",\"name\":\"Comments\",\"index\":0,\"range\":\"A1:H94\",\"address\":\"A1:H94\",\"tables\":1}\n{\"kind\":\"table\",\"sheet\":\"Comments\",\"address\":\"A1:H94\",\"rows\":94,\"cols\":8,\"values\":[[\"Thread ID\",\"Reply #\",\"Author\",\"Date\",\"Comment\",\"Highlighted Text\",\"Context\",\"Char Position\"],[\"6a33db3e6572004fe08a8096\",0,\"jason.blocklove\",\"18 June, 4:49 am\",\"Natural language words and tokens are not equivalent\",\"cache)~\\\\cite{b6}.\",\"\\\\section{Introduction}\\nAutoregressive decoding in large language models (LLMs) introduces measurable latency at inference time because each generated token d...\",5035],[\"6a33db3e6572004fe08a8096\",1,\"Ty Boy\",\"18 June, 10:03 am\",\"I explained it in the text now\",null,null,null],[\"6a33ddd5dc32bf2129204dad\",0,\"jason.blocklove\",\"18 June, 5:00 am\",\"Define\",\"MAC\",\"These two are defined with an algorithm complexity with respect to sequence length, $N$, as $\\\\mathcal{O}(N)$ for a full-attention layer and $\\\\mathcal{O}(1)$ ...\",6116],[\"6a33f47fdc32bf2129205845\",0,\"jason.blocklove\",\"18 June, 6:37 am\",\"The majority of this has a level of detail that's more appropriate for the related works section, rather than the introduction. The introduction should very ...\",\"This linear-time sequence model compresses the history of data down into a single fixed grid known as a recurrent state matrix~$S$~\\\\cite{b3}. The tradeoff wi...\",\"Naturally, when the LLM has to process long histories of token data, then the KV cache would also be bigger, slowing down the processing time of the model~\\\\c...\",5358],[\"6a33f4b76572004fe08a8bc5\",0,\"jason.blocklove\",\"18 June, 6:37 am\",\"What is the broader implication of these metrics?\",\"It should be noted that the total algorithm complexity on an entire execution sequence has the full attention layer scale quadratically as $\\\\mathcal{O}(N^2)$...\",\"These two are defined with an algorithm complexity with respect to sequence length, $N$, as $\\\\mathcal{O}(N)$ for a full-attention layer and $\\\\mathcal{O}(1)$ ...\",6277],[\"6a33f510537013d3d71a2f20\",0,\"jason.blocklove\",\"18 June, 6:39 am\",\"How much is \\\"a lot\\\"? Can you cite an actual data point from that paper?\",\"a lot\",\"This specific replacement technique targeting the growing KV caches of each internal macro block of a whole layer structure does make the memory usage a lot ...\",6928],[\"6a33f59d87496cf05d0b1b90\",0,\"jason.blocklove\",\"18 June, 6:41 am\",\"This is your main contribution and it's kind of hidden in the middle of this paragraph. What you're doing should jump out a lot more than this. Also, it's a ...\",\"To break this memory wall and improve efficiency of current integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C accelerator to cr...\",\"This specific replacement technique targeting the growing KV caches of each internal macro block of a whole layer structure does make the memory usage a lot ...\",7259],[\"6a33faa0dc32bf2129205b87\",0,\"jason.blocklove\",\"18 June, 7:03 am\",\"It can be done, or it's what you did? Too much passive-voice is being used\",\"can be done\",\"This specific replacement technique targeting the growing KV caches of each internal macro block of a whole layer structure does make the memory usage a lot ...\",7506],[\"6a33fb05537013d3d71a3253\",0,\"jason.blocklove\",\"18 June, 7:04 am\",\"Awkward wording\",\"we can make a better case for the limited on-chip storage available\",\"By maximizing the efficiency of the data format itself, we can make a better case for the limited on-chip storage available. Numerical states can be packed i...\",7773]],\"valuesTruncated\":true,\"valuesPreviewRows\":10,\"valuesPreviewCols\":8,\"valuesPreviewAddress\":\"A1:H10\"}",
+  "truncated": false,
+  "metadata": {
+    "revision": "p7mcpv",
+    "target": {
+      "id": "wb/uzhi33",
+      "beforeLines": 0,
+      "afterLines": 0
+    },
+    "kind": {
+      "requested": "workbook,sheet,table,thread,drawing",
+      "tokens": [
+        "workbook",
+        "sheet",
+        "table",
+        "thread",
+        "drawing"
+      ]
+    },
+    "include": {
+      "tokens": []
+    },
+    "exclude": {
+      "tokens": []
+    },
+    "notices": []
+  }
+}

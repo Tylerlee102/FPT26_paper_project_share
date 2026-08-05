@@ -1,0 +1,917 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{url}
+
+\setlength{\textfloatsep}{6pt plus 1pt minus 2pt}
+\setlength{\floatsep}{6pt plus 1pt minus 2pt}
+\setlength{\intextsep}{6pt plus 1pt minus 2pt}
+
+\input{paper/corrected/snippets/corrected_result_macros.tex}
+
+\title{Can Native MXFP4 Replace BF16 in FPGA Gated DeltaNet Decode?\\
+Cost and Long-Horizon Recurrent-State Drift}
+
+\author{\IEEEauthorblockN{Anonymous Authors}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper asks whether native Open Compute Project (OCP) MXFP4 arithmetic can
+replace bfloat16 (BF16)-style arithmetic in a persistent-state Gated DeltaNet
+recurrence-core kernel on an AMD Alveo U55C field-programmable gate array
+(FPGA). Persistent state and the five-phase token schedule are inherited from
+prior work and held fixed. We implement E2M1 products in integer lookup-table (LUT) logic and
+E8M0-aware accumulation, then separate floating quantize/dequantize (Q/DQ)
+diagnostics from the native encoded path. At token \CorrectedLongTraceTokens,
+BF16 gives \CorrectedBfSixteenCosineEightK{} output cosine and
+\CorrectedBfSixteenStateRelLTwoEightK{} recurrent-state relative $L_2$ error
+against single-precision floating point (FP32). MXFP4 Q/DQ gives
+\CorrectedQdqMxfpFourCosineEightK{} and
+\CorrectedQdqMxfpFourStateRelLTwoEightK{}, whereas the native encoded path gives
+\CorrectedNativeEncodedCosineEightK{} and
+\CorrectedNativeEncodedStateRelLTwoEightK{}. The encoded HLS kernel uses
+\CorrectedUniformToBfSixteenLutRatio{} times the LUTs and
+\CorrectedUniformToBfSixteenStepRatio{} times the maximum estimated STEP cycles
+of the fixed-geometry BF16 kernel. A recurrence-aware residual/write-log
+candidate passes \CorrectedHeldoutSeedBlocks{} test seed blocks crossed with
+two initial-state conditions and two \CorrectedLongTraceTokens{}-token
+development conditions, but uses \CorrectedCandidateToBfSixteenLutRatio{} times
+the BF16 LUTs and misses \CorrectedCandidateFailedIiLoops{} explicit II=1
+constraints. Thus the present native MXFP4 implementations do not support
+replacing BF16. The corrected candidate's out-of-context post-route image fits
+using \CorrectedPostrouteLut{} CLB LUTs and \CorrectedPostrouteUram{} of
+\CorrectedDeviceAvailableUram{} URAMs, but has
+\CorrectedPostrouteTwoFiftyWnsNs{} ns worst negative slack at
+\CorrectedPostrouteTargetMhz{} MHz; the first passing point in the tested
+fixed-route sweep is \CorrectedPostrouteFirstClosingMhz{} MHz. The long-horizon
+quality result is layer-level and synthetic. Four short model-derived Qwen
+layer-12 recurrence traces preserve the same arithmetic ordering but contain
+only \CorrectedQwenRecurrentMinTokens{}--\CorrectedQwenRecurrentMaxTokens{}
+valid tokens each. Power is a vectorless estimate rather than board energy.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Gated DeltaNet, MXFP4, recurrent state, FPGA, numerical drift, Vitis HLS
+\end{IEEEkeywords}
+
+\section{Introduction}
+Gated DeltaNet (GDN) replaces a growing attention history with a fixed-size
+recurrent matrix that is decayed and updated once per token
+\cite{gateddeltanet}. This makes the numerical state persistent: an arithmetic
+error written at one token can affect every later token. Lowering state
+precision therefore changes more than storage cost. It changes the dynamical
+system implemented by the decoder.
+
+Gupta et al. map GDN decode to a field-programmable gate array (FPGA) using persistent on-chip state and a
+five-phase BF16 pipeline \cite{gupta2026}. We use that organization as the
+baseline dataflow. Neither persistent state nor the five-phase schedule is a
+contribution of this work. We study only the arithmetic replacement inside that
+recurrence-core boundary.
+
+The Open Compute Project (OCP) MXFP4 format stores \CorrectedBlockSize{} E2M1
+elements with one E8M0 scale
+\cite{ocpmx}. Its \CorrectedMxfpFourLogicalBitsPerValue{} logical bits per value
+are attractive for a recurrent
+state that is read and rewritten every token. The shared exponent also creates
+two risks. Values below the block range disappear during alignment, and a
+scale change requantizes the complete block. Those errors feed back through
+the next state update.
+
+We evaluate the replacement as a controlled experiment. The recurrence,
+logical K-by-V state, layer dimensions, U55C target,
+\CorrectedTargetClockNs{} ns constraint, $P_K=\CorrectedPk$,
+$P_V=\CorrectedPv$, and block size \CorrectedBlockSize{} are fixed. The study
+contributes:
+
+\begin{enumerate}
+  \item an encoded-integer MXFP4 recurrence oracle and native high-level
+        synthesis (HLS) arithmetic with explicit E2M1 decoding, E8M0 alignment,
+        round-to-nearest-even (RNE), Q1.15 controls, and event counters;
+  \item long synthetic traces at \CorrectedCheckpointSet{} tokens for
+        FP32, BF16, MXFP4 floating Q/DQ, native encoded MXFP4, flat INT4, and
+        a floating-Q/DQ MXFP8-state fallback, plus four short model-derived
+        recurrence traces and
+        \CorrectedScalePolicyCount{} scale
+        refresh policies;
+  \item a fixed-geometry BF16, encoded-MXFP4, and native-MXFP8 HLS comparison and a
+        separately classified recurrence-aware correction, including
+        out-of-context post-route timing, utilization, design-rule, and
+        vectorless-power evidence for the correction and MXFP8 baseline; and
+  \item an evidence-backed negative answer for the current implementations,
+        including the numerical failure of native encoded MXFP4 and the hardware cost
+        of the correction that meets the frozen long-horizon synthetic gate.
+\end{enumerate}
+
+The evaluation covers one recurrence core, synthetic recurrent traces, four
+short model-derived layer-12 recurrence traces, matched HLS estimates, and
+out-of-context implementation attempts. It does not measure Qwen3-Next
+perplexity, downstream accuracy, or board energy. Within that boundary, can native MXFP4 replace BF16-style
+arithmetic while reducing FPGA cost and limiting empirical recurrent-state
+drift over long synthetic decode traces?
+
+\section{Background and Scope}
+\subsection{Microscaling Representation}
+An E2M1 element contains \CorrectedETwoMOneSignBits{} sign bit,
+\CorrectedETwoMOneExponentBits{} exponent bits, and
+\CorrectedETwoMOneMantissaBits{} mantissa bit. Its positive finite magnitude
+codebook is $\{\CorrectedETwoMOneMagnitudeCodebook\}$. Both signed-zero codes
+decode to zero, and the encoder emits positive zero. An E8M0 byte encodes the
+shared power-of-two scale $2^{e-\CorrectedEEightMZeroBias{}}$ for codes
+\CorrectedEEightMZeroValidMinimum{} through
+\CorrectedEEightMZeroValidMaximum{}. Code
+\CorrectedEEightMZeroInvalidCode{} is invalid; an all-zero block uses scale code
+\CorrectedEEightMZeroZeroBlockScale{}. NaN and infinity inputs are rejected.
+These rules follow the OCP representation \cite{ocpmx}; scale selection and RNE
+at each state-write boundary are implementation choices.
+
+\subsection{Recurrence-Core Boundary}
+The head counts and K-by-V dimensions follow the pinned official
+Qwen3-Next-80B-A3B-Instruct configuration and Transformers implementation
+\cite{qwen3nextmodel,transformersqwen}.
+For value head $h$, query/key head $p(h)=\lfloor h/2\rfloor$ serves the
+corresponding pair of value heads. With logical state
+$S_h\in\mathbb{R}^{K\times V}$ and
+$K=\CorrectedKeyDim$, $V=\CorrectedValueDim$, the
+token recurrence is
+\begin{align}
+S_h^{d} &= \alpha_h S_h, \\
+u_h &= \beta_h\left(v_h-k_{p(h)}^\mathsf{T}S_h^{d}\right), \\
+S_h' &= S_h^{d}+k_{p(h)}u_h^\mathsf{T}, \\
+o_h &= q_{p(h)}^\mathsf{T}S_h'.
+\end{align}
+The query is normalized and scaled by $1/\sqrt{\CorrectedKeyDim}$ before entering the
+kernel; the key is normalized. Gated RMSNorm, the $z$ branch, projections,
+depthwise convolution, and output projection are outside the measured
+boundary. We therefore call the implementation a GDN recurrence-core kernel,
+not a complete GDN layer.
+Holding the unchanged convolution, projections, and output normalization outside
+the boundary isolates arithmetic-induced drift and cost in the persistent
+recurrence rather than mixing them with unmodified layer components.
+
+The operation order is decay, prediction from the decayed state, delta
+formation, rank-one write, and output from the updated state. The software
+oracle was checked against pinned Transformers and FLA recurrent, chunk, and
+cache paths before quantized experiments were admitted
+\cite{transformersqwen,fla021}.
+
+\subsection{Prior Work and Component Ownership}
+DeltaNet establishes the rank-one erase/write recurrence and parallel training
+formulations on which GDN builds \cite{deltanet}; the gated recurrence itself is
+inherited from Yang et al. \cite{gateddeltanet}. The persistent-state FPGA
+organization, paired-head handling, and five phases are inherited from Gupta
+et al. \cite{gupta2026}. MXFP4-B32 is standardized \cite{ocpmx}. QLlama maps
+microscaling quantization to FPGA inference, while Jack of All Scales studies
+MXFP dot-product mappings and digital signal-processing (DSP) block support on
+Agilex-5 \cite{qllama,jackscales}. MXFormer implements block-exponent-aligned
+MXFP4 compute in charge-trap memory, MicroMix mixes MXFP4/6/8 channels, and
+MXAttention and an MXFP post-training-quantization benchmark identify scaling,
+clipping, and underflow as material quality factors
+\cite{mxformer,micromix,mxattention,mxfpbenchmark}. These are precedents for
+alignment, mixed precision, and scale-policy studies. Zhang et al. quantize the chunk-wise GDN
+matrix-inversion path rather than token-serial recurrent state
+\cite{quantgdn}. KIVI retains recent full-precision entries beside a quantized
+cache, and SSDi8 uses a persistent INT8 state-space path with error correction
+\cite{kivi,ssdi8}. These works establish prior art for the component ideas. Our
+scope is the matched arithmetic-replacement experiment and its verification,
+not the invention of those constituents.
+Table~\ref{tab:ownership} makes the resulting ownership boundaries explicit.
+
+\begin{table}[t]
+\centering
+\caption{Component ownership relative to the corrected implementation.}
+\label{tab:ownership}
+\footnotesize
+\begin{tabular}{@{}p{0.36\linewidth}p{0.18\linewidth}p{0.33\linewidth}@{}}
+\toprule
+Component & Classification & Basis \\
+\midrule
+Persistent on-chip state & Inherited & Gupta et al. \cite{gupta2026} \\
+Five-phase token schedule & Inherited & Gupta et al. \cite{gupta2026} \\
+Qwen recurrence and core boundary & Corrected & Pinned software parity \\
+OCP MXFP4-B32 state & Modified & Standard format in a recurrent path \\
+E2M1/E8M0 FPGA arithmetic & Modified & OCP format plus QLlama and Jack of All
+Scales \cite{ocpmx,qllama,jackscales} \\
+Encoded arithmetic oracle & Newly proposed & Artifact-specific independent
+integer implementation \\
+E2M1/E2M0 residual plus fixed write log & Modified & Related
+residual-buffer methods exist \cite{kivi,ssdi8}; no first-use claim \\
+Long-horizon drift harness & Newly proposed & Same recurrence and synthetic
+input prefix \\
+\addlinespace
+\multicolumn{3}{p{0.92\linewidth}}{\emph{Note:} Newly proposed identifies
+ownership within this artifact, not a claim of literature priority.} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Numerical Method}
+\subsection{Uniform MXFP4 Path}
+The matched BF16 comparator rounds state and operands to BF16 at their declared
+boundaries and performs reductions in FP32. The MXFP8-state fallback changes
+only the recurrent state to eight-bit E4M3 elements under E8M0 B32 scales while
+retaining MXFP4 token operands; flat INT4 uses signed symmetric four-bit quantization
+with a tensor-wide scale.
+
+We report a floating Q/DQ MXFP4 diagnostic and a distinct native encoded path.
+The Q/DQ diagnostic quantizes at named boundaries but performs the intervening
+recurrence in floating point. It does not represent the HLS accumulator or its
+event behavior. The encoded path below is the software counterpart of the
+native HLS arithmetic.
+
+The uniform path stores E2M1 elements in B32 blocks with an E8M0 scale per
+block. For nonzero block maximum $m$ and largest finite E2M1 magnitude
+$x_{\max}$, the selected scale power is
+$s=\lceil\log_2(m/x_{\max})\rceil$; its biased E8M0 code is clamped to the
+valid range. Elements are divided by $2^s$ and rounded to E2M1 with RNE. Zero
+has a canonical encoding. If E2M1 magnitude code $r$ denotes $r/2$, a product
+has integer magnitude $r_a r_b$ and power $s_a+s_b-2$.
+One flat 128-term reduction aligns every product directly to the greatest nonzero product exponent (power),
+applies RNE to the full exponent-difference shift, and accumulates in ascending
+key-index order with signed \CorrectedAccumulatorBits{}-bit saturation after
+every addition. A nonzero term rounded to zero is counted as an alignment
+underflow. This uniform baseline has no guard-bit offset; the five guard bits
+described below belong only to the corrected candidate.
+
+Each synthetic STEP record supplies normalized $q$ and $k$, value $v$, decay
+$\alpha$, delta gate $\beta$, and the selected initial state $S$. The MXFP4
+paths encode $q$, $k$, $v$, and every state write; $\alpha$ and $\beta$ use
+unsigned Q1.15 fixed point. There are no projection weights in a test vector
+because all projections are outside the recurrence-core boundary. The MXFP8
+fallback changes only state element codes to E4M3 under B32 E8M0 scales; flat
+INT4 changes the same token operands and state under its declared tensor-wide
+scale. Requantization, element and accumulator saturation, scale clamps,
+alignment underflows, and scale changes are explicit state-write events. The
+complete contract is versioned in the artifact rather than inferred from C++
+types.
+
+The element product uses sign exclusive-or (XOR), table-based E2M1 magnitude
+multiplication, and exponent addition. No floating-point type appears in the
+active native arithmetic sources. The resulting E2M1 element-product logic is
+integer based;
+wider coefficient operations may still map to DSPs and are reported as such.
+
+\subsection{Recurrence-Aware Correction}
+Native encoded MXFP4 fails the frozen finite-trace thresholds, so we also
+evaluate one locally frozen correction. The base state has an E2M1 primary term and a dense
+signed \CorrectedEZeroResidualBits{}-bit E2M0-style residual, each with B32
+scales. \CorrectedResidualStackTerms{}-term residual-stacked E2M1 vectors
+represent token inputs and live rank-one writes.
+Up to \CorrectedLogCapacity{} writes remain in a log with Q1.15 decay
+coefficients. At capacity, all \CorrectedLogCapacity{} entries are folded
+tilewise into the base and the log is cleared.
+This candidate aligns shared exponents with \CorrectedAlignmentGuardBits{}
+guard bits before signed \CorrectedAccumulatorBits{}-bit accumulation.
+
+This representation is a mitigation, not the controlled uniform replacement.
+It changes the physical state representation and adds a periodic fold. Its
+logical payload is \CorrectedLogicalStateBytes{} bytes per layer, only
+\CorrectedBytesBelowMxfpEight{} bytes below a uniform
+MXFP8-E4M3-B32 state. Exact arithmetic equivalence was tested separately before
+quantized evaluation.
+
+\section{FPGA Implementation}
+Both controlled baselines use equivalent persistent-state command semantics and
+the same five-phase token organization. Commands select one of
+\CorrectedNumLayers{} runtime layer slots and support RESET, LOAD, STEP, and
+READBACK. Their data-plane encodings are not identical: BF16 transports BF16
+tensors, whereas MXFP4 transports encoded elements and scales and returns
+expanded integer output fields. Packing and token quantization are outside both
+HLS kernels. Before interface packing, a STEP consumes
+\CorrectedBfSixteenStepInputBytes{} logical input bytes in the BF16 kernel and
+\CorrectedUniformMxfpFourStepInputBytes{} in the uniform MXFP4 kernel; the
+corrected residual-stack candidate consumes
+\CorrectedCandidateStepInputBytes{}. BF16 returns
+\CorrectedBfSixteenOutputBytes{} logical output bytes, while the native kernels'
+expanded INT32-mantissa/INT16-exponent fields total
+\CorrectedNativeExpandedOutputBytes{}. These are type-layout counts, not
+measured AXI traffic; RESET has no tensor payload, and resident-state LOAD and
+READBACK use their separately reported logical state payloads. The HLS target is
+\texttt{xcu55c-fsvh2892-2L-e} under Vitis HLS
+\CorrectedHlsToolVersion{} at \CorrectedTargetClockNs{} ns with
+$P_K=\CorrectedPk$, $P_V=\CorrectedPv$, and B32.
+We retain the U55C target used by the inherited BF16 dataflow so the arithmetic
+comparison does not also change devices. We fix this target and parallelism
+point for the replacement rather than tune each format independently.
+
+The corrected candidate adds packed primary and residual banks,
+\CorrectedLogCapacity{} packed key/update log entries, per-head gamma and lambda
+coefficients, and event counters. A non-mutating snapshot exposes all
+persistent fields for exact verification. Folding is atomic at the command
+boundary.
+
+Figure~\ref{fig:datapath} maps the correction onto the inherited five-phase
+schedule. The base state remains resident while each STEP decays its
+coefficient, evaluates the base and live writes, appends the new rank-one
+update, and reads the output from the updated logical state. When the
+\CorrectedLogCapacity{}-entry log fills, a tilewise fold runs after the output
+has observed the newest write.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{paper/figures/corrected/corrected_candidate_datapath.pdf}
+\caption{Corrected-candidate datapath on the inherited five-phase token
+schedule. Gray denotes inherited control and scheduling, orange denotes native
+MX arithmetic, teal and blue denote the corrected persistent representation,
+and the dashed path is the periodic atomic fold. Dimensions and rates are
+generated from the numerical contract; the drawing is logical architecture,
+not physical-placement evidence.}
+\label{fig:datapath}
+\end{figure*}
+
+Logically, B32 blocks run along the V-column axis within each K row. The code
+partitions the K and V access lanes by $P_K$ and $P_V$ and targets an initiation
+interval (II) of \CorrectedTargetIi{} on inner loops. Source directives request
+block RAM and UltraRAM bindings, but the inferred memory counts contradict
+bit-capacity lower bounds for the declared deep arrays and are excluded from
+paper conclusions.
+After removing invalid pipeline directives from long validation and
+requantization loops, HLS estimates a \CorrectedCandidatePathNs{} ns path. The
+\CorrectedTargetClockNs{} ns target and tool-reported uncertainty imply a
+\CorrectedConfiguredTimingBudgetNs{} ns effective budget, so the estimate
+misses the configured margin by \CorrectedConfiguredTimingShortfallNs{} ns.
+\CorrectedCandidateFailedIiLoops{} remaining targeted loops achieve
+II=\CorrectedFailedLoopIi{} rather than II=\CorrectedTargetIi{}. HLS reports
+\CorrectedCandidateDsp{} DSPs for coefficient and
+wider arithmetic; the E2M1 element multiplier itself remains integer logic.
+These source bindings and estimates do not establish a physically allocated
+\CorrectedNumLayers{}-layer bank by themselves;
+Section~\ref{sec:postroute} separately reports the corrected candidate's
+out-of-context implementation.
+
+\section{Evaluation}
+\subsection{Questions and Controls}
+The experiments answer three questions:
+
+\begin{itemize}
+  \item Does native encoded MXFP4 limit empirical output and recurrent-state
+        drift over
+        \CorrectedLongTraceTokens{} synthetic tokens relative to FP32 and BF16?
+  \item Do floating-Q/DQ scale refresh policies or an MXFP8-E4M3 state
+        fallback meet the same finite-trace criteria?
+  \item If a recurrence-aware correction meets the finite-trace thresholds,
+        does its HLS estimate improve on the fixed-geometry BF16 kernel?
+  \item Does that corrected candidate physically fit and close the declared
+        clock target after out-of-context routing?
+\end{itemize}
+
+The controlled nominal baseline variants use \CorrectedNumQkHeads{} query/key heads,
+\CorrectedNumValueHeads{} value heads, $K=\CorrectedKeyDim$,
+$V=\CorrectedValueDim$, the
+same K-by-V state, and the same generated input prefix. The development seed is
+\texttt{\CorrectedSeedHex}. Required checkpoints are \CorrectedCheckpointSet.
+The nominal trace draws query and key vectors from independent standard normal
+distributions before normalization. Values and random initial states are
+zero-mean normal with standard deviations \CorrectedSyntheticValueStdDev{} and
+\CorrectedSyntheticInitialStateStdDev{}, respectively. Nominal decay and delta
+gates follow $\mathcal{U}[\CorrectedNominalAlphaMinimum,
+\CorrectedNominalAlphaMaximum]$ and
+$\mathcal{U}[\CorrectedNominalBetaMinimum,\CorrectedNominalBetaMaximum]$.
+The high-retention correction traces keep the vector distributions but use
+$\alpha\sim\mathcal{U}[\CorrectedHighRetentionAlphaMinimum,
+\CorrectedHighRetentionAlphaMaximum]$ and
+$\beta\sim\mathcal{U}[\CorrectedHighRetentionBetaMinimum,
+\CorrectedHighRetentionBetaMaximum]$, with both random and zero initial states.
+Changing the trace-family tag changes the deterministic RNG stream, even at the
+same seed. The correction results are therefore not paired numerical ablations
+of the nominal baseline trace.
+The frozen engineering gate requires output cosine at least
+\CorrectedOutputCosineThreshold{} at every checkpoint, final state relative
+$L_2$ at most \CorrectedFinalStateRelLTwoThreshold{}, and zero element
+saturation, accumulator saturation, and scale-clamp events. These are the three
+hard-event counters; alignment underflows and deliberate E2M0 residual clips
+are reported but excluded from the zero-event condition. We fixed these
+complementary diagnostics before test-set access: cosine constrains observable
+output direction, while state relative $L_2$ constrains hidden-state magnitude.
+They were not calibrated to downstream model quality.
+
+The correction uses \CorrectedHeldoutSeedBlocks{} test seed blocks crossed with
+random and zero initial states, producing \CorrectedHeldoutPairedConditions{}
+paired \CorrectedHeldoutTraceTokens{}-token conditions. Every artifact was
+deterministically recomputed by the same implementation and compared field by
+field with its recorded comma-separated values (CSV) artifact. This checks
+integrity and determinism, not implementation independence. The
+\CorrectedExtendedRunCount{} \CorrectedLongTraceTokens{}-token
+development runs use the same
+recorded seed with random and zero initial states. Each longer run was fully
+recomputed from source and compared field by field with its recorded CSV
+artifact. The encoded HLS candidate was
+also checked for \CorrectedArithmeticCsimCases{} frozen arithmetic cases and for
+\CorrectedStatefulCsimTokens{} stateful C-simulation tokens through repeated
+folds and final snapshot readback.
+
+The corrected candidate is synthesized and routed out of context for the
+declared U55C part. A source-level clock-buffer insertion is hash-checked
+against the HLS-generated top before implementation. Timing is re-reported on
+the same routed checkpoint at several clock periods; the first passing tested
+point is not interpreted as a binary-searched maximum frequency. Post-route
+power uses Vivado vectorless activity propagation at a timing-closed
+\CorrectedPostroutePowerPeriodNs{} ns period. It is a tool estimate, not board
+telemetry. Vitis HLS/XSIM also runs
+\CorrectedEZeroControlCosimCommands{} exact early-return commands through the
+generated RTL. Those commands exercise control/status behavior but no recurrent
+state transition. A direct AXI harness over the same HLS-generated Verilog
+additionally completes an exact candidate LOAD in
+\CorrectedEZeroRtlDirectLoadCycles{} cycles. Two isolated official 64-token
+XSIM attempts exhaust host memory before transaction one, so neither result is
+reported as candidate recurrent RTL parity.
+
+Separately, a pinned real Qwen3-Next layer-input capture at layer
+\CorrectedQwenCaptureLayer{} is combined with the matching checkpoint
+projection weights to reconstruct query, key, value, decay, and delta-gate
+inputs at the post-convolution, pre-query/key-normalization recurrence
+boundary. The \CorrectedQwenRecurrentPromptCount{} prompt traces contain
+\CorrectedQwenRecurrentTotalTokens{} valid tokens in total, with
+\CorrectedQwenRecurrentMinTokens{}--\CorrectedQwenRecurrentMaxTokens{} tokens
+per prompt. They are evaluated as floating Q/DQ diagnostics and are not mixed
+into the synthetic long-horizon curves. This is a short real-input recurrence
+check, not closed-loop quantized model inference.
+
+\subsection{Metrics and Evidence Levels}
+Output cosine similarity flattens all value heads and V coordinates at each
+token. State relative $L_2$ flattens all heads, K rows, and V columns and is
+$\|S_q-S_{32}\|_F/\max(\|S_{32}\|_F,
+\CorrectedRelativeLTwoDenominatorFloor)$; maximum absolute state error and
+arithmetic events are also recorded. Exact equality returns cosine one and zero
+error; the artifact specifies the near-zero-norm cosine convention. No headwise
+minimum, percentile, or acceptance gate is computed. Software traces, HLS C simulation, HLS
+synthesis,
+register-transfer-level (RTL) simulation, post-route implementation, and board
+measurement are separate evidence levels. A PASS at one level does not fill a
+missing later level.
+
+\section{Results}
+\subsection{Uniform Arithmetic Replacement}
+Figure~\ref{fig:long} and Table~\ref{tab:long} show the controlled synthetic
+trace. BF16 remains close to FP32 through the final checkpoint. Both MXFP4 Q/DQ
+and native encoded MXFP4 fail the frozen criteria, and the encoded path drifts
+more than its floating diagnostic. Flat INT4 also fails. The floating-Q/DQ
+MXFP8-E4M3 state fallback
+improves on four-bit state but still misses both final criteria. Thus the Q/DQ
+curve cannot be paired with the encoded HLS cost as if they were one
+implementation.
+
+Two supplemental full-geometry, \CorrectedLongTraceTokens{}-token Q/DQ
+traces test deterministic exponent cycling and alternating-sign cancellation.
+Each pair below reports (output cosine, state relative $L_2$) at token 8192.
+Dynamic range gives BF16
+$($\CorrectedDynamicRangeBfSixteenCosineEightK{},
+\CorrectedDynamicRangeBfSixteenStateRelLTwoEightK{}$)$, MXFP4
+$($\CorrectedDynamicRangeQdqMxfpFourCosineEightK{},
+\CorrectedDynamicRangeQdqMxfpFourStateRelLTwoEightK{}$)$, and MXFP8 state
+$($\CorrectedDynamicRangeMxfpEightStateCosineEightK{},
+\CorrectedDynamicRangeMxfpEightStateRelLTwoEightK{}$)$.
+Cancellation gives BF16
+$($\CorrectedCancellationBfSixteenCosineEightK{},
+\CorrectedCancellationBfSixteenStateRelLTwoEightK{}$)$, MXFP4
+$($\CorrectedCancellationQdqMxfpFourCosineEightK{},
+\CorrectedCancellationQdqMxfpFourStateRelLTwoEightK{}$)$, and MXFP8 state
+$($\CorrectedCancellationMxfpEightStateCosineEightK{},
+\CorrectedCancellationMxfpEightStateRelLTwoEightK{}$)$.
+BF16 stays within both full-trace thresholds; every low-precision variant
+fails at least one, although MXFP8 state is the strongest low-precision
+comparator. These traces are synthetic range/cancellation probes, not
+model-derived outlier evidence.
+
+\paragraph{Real-capture checks.}
+The pinned Qwen layer-input capture contains
+\CorrectedQwenCaptureElements{} values. Its absolute-value 99th and 99.9th
+percentiles are \CorrectedQwenCaptureAbsPnn{} and
+\CorrectedQwenCaptureAbsPnnn{}, while the maximum is
+\CorrectedQwenCaptureAbsMax{}, or \CorrectedQwenCaptureMaxToPnn{} times the
+99th percentile. This confirms that a real layer boundary can contain a much
+wider tail than the nominal Gaussian trace. The reconstructed recurrence traces
+in Table~\ref{tab:qwen-recurrence} give BF16 mean final output cosine/state
+relative $L_2$ of
+\CorrectedQwenRecurrentBfSixteenMeanFinalCosine{}/
+\CorrectedQwenRecurrentBfSixteenMeanStateRelLTwo{}, MXFP4 gives
+\CorrectedQwenRecurrentMxfpFourMeanFinalCosine{}/
+\CorrectedQwenRecurrentMxfpFourMeanStateRelLTwo{}, MXFP8 state gives
+\CorrectedQwenRecurrentMxfpEightStateMeanFinalCosine{}/
+\CorrectedQwenRecurrentMxfpEightStateMeanStateRelLTwo{}, and INT4 gives
+\CorrectedQwenRecurrentIntFourMeanFinalCosine{}/
+\CorrectedQwenRecurrentIntFourMeanStateRelLTwo{}. The ordering agrees with the
+synthetic study, but these short traces cannot establish long-horizon stability,
+perplexity, or downstream accuracy.
+
+\begin{table*}[t]
+\centering
+\caption{Floating-Q/DQ recurrence diagnostics on four model-derived Qwen
+layer-12 prompt traces. Final values are averaged per prompt; ``worst'' and
+maximum absolute error range over all prompts and valid token positions.}
+\label{tab:qwen-recurrence}
+\scriptsize
+\resizebox{\textwidth}{!}{\input{paper/corrected/tables/qwen_recurrent_stability.tex}}
+\end{table*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{paper/figures/corrected/long_sequence_stability_panel.pdf}
+\caption{Layer-level synthetic output cosine (left) and recurrent-state relative
+$L_2$ error (right) versus token index. The horizontal threshold guides are
+engineering criteria, not model-quality guarantees. Each line is one
+deterministic nominal development trace. Curves distinguish floating Q/DQ from
+native encoded MXFP4; one seed cannot estimate trace-population uncertainty.}
+\label{fig:long}
+\end{figure*}
+
+\begin{table*}[t]
+\centering
+\caption{Controlled synthetic drift at every required checkpoint. Each
+cell gives output cosine and state relative $L_2$ against FP32.}
+\label{tab:long}
+\scriptsize
+\resizebox{\textwidth}{!}{\input{paper/corrected/tables/long_sequence.tex}}
+\end{table*}
+
+No tested floating-Q/DQ scale policy rescues uniform MXFP4. Fixed scales retain
+more output direction but produce extensive state-element clipping; frequent
+refresh reduces clipping without satisfying the drift gate. Periodic and
+threshold-triggered refresh also fail.
+Table~\ref{tab:scales} reports the complete token-\CorrectedLongTraceTokens{}
+ablation rather than
+selecting one favorable
+metric.
+
+\begin{table*}[t]
+\centering
+\caption{Uniform-MXFP4 block-scale policies at token \CorrectedLongTraceTokens.
+Clips and scale
+changes are cumulative floating quantize/dequantize diagnostics.}
+\label{tab:scales}
+\footnotesize
+\input{paper/corrected/tables/scale_policy.tex}
+\end{table*}
+
+\subsection{Fixed-Geometry HLS Cost}
+Table~\ref{tab:hls} holds the recurrence, dataflow, target, parallelism, and
+block size fixed. The native encoded MXFP4 point is larger and has a longer
+estimated STEP schedule than BF16, so the HLS cost hypothesis fails. Native
+MXFP8 is also synthesized at the same boundary as a wider low-precision
+baseline. The
+different data-plane encodings and excluded packing mean this is not an
+end-to-end interface or energy ratio. All inferred memory counts are omitted
+because they conflict with bit-capacity lower bounds for the declared arrays.
+
+\begin{table}[t]
+\centering
+\caption{Fixed-geometry U55C HLS logic and schedule estimates. Memory counts,
+packing, and transport are excluded.}
+\label{tab:hls}
+\scriptsize
+\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/controlled_hls.tex}}
+\end{table}
+
+Figure~\ref{fig:tradeoff} places the evidence levels side by side without filling
+missing measurements. The declared \CorrectedNumLayers{}-core BF16 state is
+\CorrectedBfSixteenAllLayerStateMiB{} MiB and requires an ideal minimum of
+\CorrectedBfSixteenIdealUram{} URAM288 primitives, already above the U55C total
+of \CorrectedDeviceAvailableUram{}. Uniform MXFP4 is
+\CorrectedUniformMxfpFourAllLayerStateMiB{} MiB and has an ideal lower bound of
+\CorrectedUniformMxfpFourIdealUram{} URAM288 plus
+\CorrectedUniformMxfpFourIdealBram{} BRAM18K, so it passes only the raw-bit
+necessary condition. These totals cover one sequence of recurrence-core state;
+they exclude weights, convolution state, full-attention key/value caches,
+activations, ports, banking, replication, scratch space, placement, and
+routing. Consequently, they do not establish which complete model fits on the
+card. The matched all-layer BF16 synthesis requires
+\CorrectedBfSixteenRambRequired{} RAMB36/FIFO primitives versus
+\CorrectedBfSixteenRambAvailable{} available, so physical fit is
+\CorrectedBfSixteenPhysicalFit{} and no BF16 routed timing or power result
+exists. A reduced-layer design is not substituted because it would change the
+controlled state layout. The HLS panel contains matched BF16, native encoded MXFP4, and native
+MXFP8 kernels; matched INT4 remains unrun. No energy axis is shown because
+energy was not measured.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{paper/figures/corrected/tradeoff_evidence.pdf}
+\caption{Evidence-level storage, quality, and schedule view, not a measured
+Pareto frontier. (a) Logical recurrent-state payload for
+\CorrectedNumLayers{} cores; raw PASS/FAIL is only a necessary primitive-bit
+capacity condition. (b) Layer-level synthetic output cosine at token
+\CorrectedLongTraceTokens{}; floating Q/DQ and native encoded paths remain
+distinct. (c) Matched fixed-geometry HLS maximum STEP estimates; the unavailable
+INT4 hardware point is marked not run rather than imputed.}
+\label{fig:tradeoff}
+\end{figure*}
+
+\subsection{Recurrence-Aware Correction}
+The correction passes all \CorrectedHeldoutSeedBlocks{} test seed blocks under
+both initial-state conditions. Table~\ref{tab:corrected-quality} reports the
+worst of the \CorrectedHeldoutPairedConditions{} paired test conditions beside
+the two fully recomputed \CorrectedLongTraceTokens{}-token development
+conditions. Passing the three-hard-counter gate does not imply event-free
+arithmetic: the longer runs contain large alignment-underflow and deliberate
+residual-clip counts. The seed block, not each initial-state condition, is the
+stochastic unit. These are finite-trace engineering checks, not a
+lossless-arithmetic or robustness claim.
+
+\begin{table}[t]
+\centering
+\caption{Corrected-candidate test and development results. Test values are the
+worst across \CorrectedHeldoutSeedBlocks{} seed blocks, each paired with random
+and zero initial state. Development values are the worst or total across
+\CorrectedExtendedRunCount{} fully recomputed conditions. Dashes denote
+diagnostics not aggregated for the test set.}
+\label{tab:corrected-quality}
+\scriptsize
+\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/corrected_quality.tex}}
+\end{table}
+
+The numerical recovery does not produce an FPGA Pareto improvement.
+Table~\ref{tab:mitigation-cost} compares logical storage and HLS estimates with
+both baselines. The correction is larger and slower even before physical
+implementation; its periodic fold also creates a large command burst. Three
+explicit II=\CorrectedTargetIi{} constraints fail.
+
+\begin{table}[t]
+\centering
+\caption{Logical storage and per-layer HLS command estimates for the
+recurrence-aware mitigation. ``Amortized'' charges one fold every
+\CorrectedFoldPeriodTokens{} STEPs; it is not service p99.}
+\label{tab:mitigation-cost}
+\scriptsize
+\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/mitigation_hls.tex}}
+\end{table}
+
+\subsection{Post-Route and Generated-RTL Evidence}
+\label{sec:postroute}
+The corrected candidate physically fits the U55C in the out-of-context flow.
+It uses \CorrectedPostrouteLut{} CLB LUTs, \CorrectedPostrouteFf{} flip-flops,
+\CorrectedPostrouteBram{} BRAM tiles, \CorrectedPostrouteUram{} URAMs, and
+\CorrectedPostrouteDsp{} DSPs. URAM is the limiting reported resource at
+\CorrectedPostrouteUramPercent{} percent. The implementation has
+\CorrectedPostrouteDrcWarnings{} design-rule warnings but no critical warnings
+or errors.
+
+Physical fit does not imply target timing. At
+\CorrectedPostrouteTargetMhz{} MHz the design has
+\CorrectedPostrouteTwoFiftyWnsNs{} ns WNS, and the
+\CorrectedPostrouteSecondaryMhz{}-MHz check also fails. The first passing point
+in the tested fixed-route sweep is \CorrectedPostrouteFirstClosingMhz{} MHz.
+The \CorrectedPostrouteCriticalPathNs{} ns target-clock critical path is
+\CorrectedPostrouteCriticalRoutePercent{} percent routing with
+\CorrectedPostrouteCriticalLogicLevels{} logic levels and terminates at a
+resident-state URAM reset/write-enable pin. It is not an E2M1 multiplier path.
+
+Official Vitis HLS/XSIM co-simulation passes
+\CorrectedEZeroControlCosimCommands{} of
+\CorrectedEZeroControlCosimCommands{} generated-RTL control commands at
+\CorrectedEZeroControlCosimLatency{} cycles per command. Both commands return
+before a recurrent update, so the candidate's
+\CorrectedStatefulCsimTokens{}-token exact recurrent result remains C
+simulation, not RTL parity. The direct Verilator snapshot LOAD is
+\CorrectedEZeroRtlDirectLoadStatus{}, but the harness completes
+\CorrectedEZeroRtlCompletedSteps{} recurrent
+STEPs; the required 64-token candidate result is therefore
+\CorrectedEZeroRtlSixtyFourStatus{}. Table~\ref{tab:postroute} preserves this
+boundary.
+
+\begin{table}[t]
+\centering
+\caption{Corrected-candidate out-of-context physical and generated-RTL
+evidence. Power is vectorless; the closing frequency is the first passing
+tested fixed-route point.}
+\label{tab:postroute}
+\scriptsize
+\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/postroute_evidence.tex}}
+\end{table}
+
+At a timing-closed \CorrectedPostroutePowerPeriodNs{} ns period, Vivado reports
+\CorrectedPostroutePowerTotalW{} W total on-chip power:
+\CorrectedPostroutePowerDynamicW{} W dynamic and
+\CorrectedPostroutePowerStaticW{} W static, with
+\CorrectedPostroutePowerConfidence{} confidence. No measured activity, board
+telemetry, matched routed BF16 design, or recurrent RTL service latency is
+available, so we do not derive energy per token or an energy-efficiency ratio.
+The matched native-MXFP8 image also fits, using
+\CorrectedMxfpEightPostrouteLut{} LUTs and
+\CorrectedMxfpEightPostrouteUram{} URAMs. It fails the 250-MHz check and first
+closes at \CorrectedMxfpEightPostrouteFirstClosingMhz{} MHz in the tested
+fixed-route sweep. Its \CorrectedMxfpEightPostroutePowerTotalW{} W vectorless
+estimate is not measured energy.
+
+\section{Discussion}
+The controlled answer is no for the current implementations. Floating Q/DQ
+already predicts substantial four-bit drift, while the native encoded path is
+worse and records \CorrectedNativeEncodedAlignmentUnderflowsEightK{} alignment
+underflows through token \CorrectedLongTraceTokens. The encoded HLS point also
+costs more than BF16. Adding a dense residual and recent-write log restores the
+finite-trace engineering criteria, but its worst longer-run state error is close
+to the boundary and its computation costs more than BF16.
+
+This result separates representation density from implementation cost. Shared
+scales reduce bits, but exponent comparison, alignment, requantization, and
+folding add control and arithmetic. The E2M1 multiplier is small and DSP-free;
+the surrounding recurrence is not. Table~\ref{tab:resource-ablation} localizes
+the dominant generated hierarchy. The correction's fold engine and update
+quantizer account for \CorrectedCorrectionMachineryLutPercent{} percent of its
+top-level LUT estimate. A useful replacement must reduce the full state-update
+path, not only the encoded element width.
+
+\begin{table}[t]
+\centering
+\caption{Generated HLS hierarchy ablation. Shares are relative to each
+variant's own top-level LUT estimate and are not routed utilization.}
+\label{tab:resource-ablation}
+\scriptsize
+\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/resource_ablation.tex}}
+\end{table}
+
+The word \emph{drift} is deliberate. For one head, let $E_t$ be candidate minus
+reference state. For the same external token inputs, define $R_t$ as the exact
+residual between the implemented candidate transition and the ideal reference
+transition applied to the candidate state. This residual includes input and
+state quantization, alignment, accumulation, scale, clipping, and fold error.
+The recurrence then gives
+\begin{equation}
+E_t=\alpha_t(I-\beta_t k_tk_t^{\mathsf T})E_{t-1}+R_t.
+\end{equation}
+For normalized $k_t$ and $\beta_t\in[0,1]$,
+\begin{equation}
+\lVert E_t\rVert_F\leq
+\alpha_t\lVert E_{t-1}\rVert_F+\lVert R_t\rVert_F.
+\end{equation}
+Let $P_t=k_tk_t^{\mathsf T}$. The parallel and orthogonal components obey
+the exact identity
+\begin{equation}
+\begin{split}
+\lVert(I-\beta_tP_t)E\rVert_F^2={}&
+(1-\beta_t)^2\lVert k_t^{\mathsf T}E\rVert_2^2\\
+&+\lVert(I-P_t)E\rVert_F^2.
+\end{split}
+\end{equation}
+Thus the delta gate attenuates only error parallel to the current key; the
+worst-case operator norm is one because $K>1$. Unrolling the one-step bound
+gives
+\begin{equation}
+\lVert E_T\rVert_F\leq
+\Bigl(\prod_{i=1}^{T}\alpha_i\Bigr)\lVert E_0\rVert_F+
+\sum_{j=1}^{T}\Bigl(\prod_{i=j+1}^{T}\alpha_i\Bigr)\lVert R_j\rVert_F.
+\end{equation}
+If $\alpha_i\leq\bar\alpha<1$ and $\lVert R_i\rVert_F\leq\bar R$, the
+right-hand side is at most
+$\bar\alpha^T\lVert E_0\rVert_F+
+(1-\bar\alpha^T)\bar R/(1-\bar\alpha)$.
+Our protocol permits decay arbitrarily close to one, so it supplies no uniform
+contraction margin. Changing keys may attenuate different directions, but a
+persistent-excitation bound is not established. These relations explain why
+repeated local errors matter, but they are not a formal stability certificate. We do
+not have a conservative bound on $R_t$ spanning
+input and base quantization, logged coefficients, folding, alignment,
+accumulation, scale changes, and clipping. ``Stable'' in the engineering gate
+therefore means only that the measured finite traces stay within its thresholds.
+
+The correction also changes the experimental role of MXFP8. Uniform MXFP8
+state is a stronger numerical baseline than MXFP4, while the corrected
+candidate's logical payload is only \CorrectedPercentBelowMxfpEight{} percent
+smaller. Both the corrected candidate and native MXFP8 physically fit out of
+context, but neither closes 250 MHz. Without measured activity, a routed BF16
+comparator, or board energy, their power estimates do not establish an energy
+advantage for the more complex representation.
+
+\section{Limitations and Threats to Validity}
+The long-horizon numerical evidence is layer-level and synthetic. The short
+Qwen diagnostic reconstructs query, key, value, decay, and delta-gate inputs
+at one pinned layer boundary, but contains only
+\CorrectedQwenRecurrentMinTokens{}--\CorrectedQwenRecurrentMaxTokens{} valid
+tokens per prompt. It is not closed-loop execution and supports neither
+perplexity nor downstream-task claims. The kernel excludes projections,
+normalization, full-attention layers, and their key-value cache.
+
+The nominal study uses one development seed. The correction uses a separate
+high-retention trace family and only \CorrectedHeldoutSeedBlocks{} test seed
+blocks crossed with two initial states, so it is not a paired numerical
+ablation. Its registration was not externally timestamped with the full
+dependency closure; replay checks integrity, not independence. Metrics flatten
+heads and have no trace-population confidence interval or FP64 long-horizon
+curve. Thresholds are not calibrated to model quality. The longer-run error is
+only
+\CorrectedExtendedStateRelLTwoGateMargin{} below its boundary, and changing that
+boundary alone to \CorrectedStateRelLTwoSensitivityProbe{} rejects both test and
+development conditions. Section~VII supplies no formal stability certificate.
+
+BF16 and uniform-MXFP4 results remain HLS estimates. The correction and native
+MXFP8 baseline are routed out of context; both fit but fail 250 MHz. The
+fixed-route sweeps are not global frequency searches, and matched all-layer
+BF16 fails capacity before routing. Xilinx Runtime (XRT), xclbin, board checks, and synchronized
+same-boundary GPU measurements are absent; vectorless power is not board energy.
+
+Packing and token quantization are excluded, and no multi-layer service latency
+is measured. Verification is asymmetric: uniform MXFP4 has a 64-token RTL
+trace; the correction has 64-token C parity, a two-command RTL control smoke,
+and one exact direct-RTL LOAD. Two isolated XSIM runs exhaust host memory before
+transaction one, and no candidate recurrent STEP completes. Results cover one
+U55C and one parallelism point; cross-device and longer real-trace studies
+remain open.
+
+\section{Conclusion}
+Native encoded MXFP4 does not replace BF16 in this persistent-state GDN core:
+it has more drift and higher fixed-geometry HLS cost. A residual/write-log
+mitigation meets bounded synthetic criteria but exceeds BF16 cost, misses II
+and routed clock targets, and lacks recurrent RTL parity. The corrected and
+MXFP8 images fit out of context, but longer real traces, closed-loop quality,
+and measured board energy remain necessary.
+
+\begin{thebibliography}{00}
+\bibitem{gateddeltanet}
+S. Yang, J. Kautz, and A. Hatamizadeh, ``Gated Delta Networks: Improving
+Mamba2 with Delta Rule,'' in \emph{Proc. Int. Conf. Learning Representations},
+2025.
+
+\bibitem{gupta2026}
+N. Gupta, P. Wang, R. Kannan, and V. K. Prasanna, ``A Persistent-State
+Dataflow Accelerator for Memory-Bound Linear Attention Decode on FPGA,''
+arXiv preprint arXiv:2603.05931v1 [cs.AR], Mar. 2026, doi:
+10.48550/arXiv.2603.05931. [Online]. Available:
+\url{https://arxiv.org/abs/2603.05931}
+
+\bibitem{ocpmx}
+Open Compute Project, ``OCP Microscaling Formats (MX) Specification,'' ver.
+1.0, Sep. 2023. [Online]. Available:
+\url{https://www.opencompute.org/documents/ocp-microscaling-formats-mx-v1-0-spec-final-pdf}
+
+\bibitem{qwen3nextmodel}
+Qwen Team, ``Qwen3-Next-80B-A3B-Instruct,'' Hugging Face model repository,
+rev. 9c7f2fbe84465e40164a94cc16cd30b6999b0cc7, accessed Aug. 1, 2026.
+[Online]. Available:
+\url{https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct/tree/9c7f2fbe84465e40164a94cc16cd30b6999b0cc7}
+
+\bibitem{transformersqwen}
+Hugging Face, ``Qwen3-Next implementation,'' \emph{Transformers}, ver. 4.57.0,
+commit 8ac2b916b042b1f78b75c9eb941c0f5d2cdd8e10, 2025. [Online]. Available:
+\url{https://github.com/huggingface/transformers/blob/8ac2b916b042b1f78b75c9eb941c0f5d2cdd8e10/src/transformers/models/qwen3_next/modeling_qwen3_next.py}
+
+\bibitem{fla021}
+FLA Contributors, ``Gated delta rule implementation,''
+\emph{flash-linear-attention}, ver. 0.2.1, commit
+a670dff4c2537fc1a82486584dd9569e18fba833, 2025. [Online]. Available:
+\url{https://github.com/fla-org/flash-linear-attention/tree/a670dff4c2537fc1a82486584dd9569e18fba833/fla/ops/gated_delta_rule}
+
+\bibitem{deltanet}
+S. Yang, B. Wang, Y. Zhang, Y. Shen, and Y. Kim, ``Parallelizing Linear
+Transformers with the Delta Rule over Sequence Length,'' in \emph{Advances in
+Neural Information Processing Systems}, vol. 37, 2024, doi:
+10.52202/079017-3668.
+
+\bibitem{qllama}
+H. Wen, Z. Wang, J. Dong, W. Lou, L. Gong, C. Wang, and X. Zhou,
+``QLlama: An FPGA-Based Microscaling Quantization Accelerator for
+Energy-Efficient Llama2 Inference,'' \emph{IEEE Embedded Systems Letters},
+vol. 17, no. 5, pp. 337--340, 2025, doi: 10.1109/LES.2025.3600563.
+
+\bibitem{jackscales}
+M. Mekhemer, A. Elsousy, B. Venkatesh, R. Rowley, V. Betz, N. Kapre, and
+A. Boutros, ``Jack of All Scales: A Versatile FPGA Tensor Block for MXFP
+Precisions,'' arXiv preprint arXiv:2607.13898v1 [cs.AR], Jul. 2026, doi:
+10.48550/arXiv.2607.13898.
+
+\bibitem{mxformer}
+G. Karfakis \emph{et al.}, ``MXFormer: A Microscaling Floating-Point
+Charge-Trap Transistor Compute-in-Memory Transformer Accelerator,'' arXiv
+preprint arXiv:2602.12480v1 [cs.AR], Feb. 2026, doi:
+10.48550/arXiv.2602.12480.
+
+\bibitem{micromix}
+W. Liu, H. Meng, Y. Luo, P. Zhang, and X. Ma, ``MicroMix: Efficient
+Mixed-Precision Quantization with Microscaling Formats for Large Language
+Models,'' in \emph{Proc. Int. Conf. Learning Representations}, 2026.
+
+\bibitem{mxattention}
+J. Yu \emph{et al.}, ``MXAttention: Data-Free Optimal Scaling and
+Pre-Normalization Quantization for MXFP4 Attention,'' arXiv preprint
+arXiv:2607.24377v1, Jul. 2026, doi: 10.48550/arXiv.2607.24377.
+
+\bibitem{mxfpbenchmark}
+M. Zhang \emph{et al.}, ``Benchmarking Post-Training Quantization of Large
+Language Models under Microscaling Floating Point Formats,'' arXiv preprint
+arXiv:2601.09555v1, Jan. 2026, doi: 10.48550/arXiv.2601.09555.
+
+\bibitem{quantgdn}
+L. Zhang \emph{et al.}, ``When Good Enough Is Optimal: Multiplication-Only
+Matrix Inversion Approximation for Quantized Gated DeltaNet,''
+in \emph{Proc. 43rd Int. Conf. Machine Learning}, PMLR, vol. 306, 2026.
+
+\bibitem{kivi}
+Z. Liu, J. Yuan, H. Jin, S. Zhong, Z. Xu, V. Braverman, B. Chen, and X. Hu,
+``KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache,'' in
+\emph{Proc. 41st Int. Conf. Machine Learning}, PMLR, vol. 235,
+pp. 32332--32344, 2024.
+
+\bibitem{ssdi8}
+H. Kim, B. Ko, M. Kang, M. Kim, D. Lee, J. Lee, S. Yoon, and D. Jung,
+``SSDi8: Accurate and Efficient 8-bit Quantization for State Space Duality,''
+in \emph{Proc. Int. Conf. Learning Representations}, 2026.
+\end{thebibliography}
+
+\end{document}

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 import re
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -29,7 +29,7 @@ def write_report(path: Path) -> None:
     lines = [
         "# Vivado Placement Seed Sweep Status",
         "",
-        f"Generated: {datetime.now(UTC).isoformat()}",
+        f"Generated: {datetime.now(timezone.utc).isoformat()}",
         f"Implementation Tcl: `{impl_tcl.relative_to(ROOT).as_posix()}`",
         "",
         "Status: not_run",

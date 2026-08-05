@@ -1,0 +1,125 @@
+{
+  "answer_at_hls_estimate_stage": "FAIL: uniform MXFP4 does not reduce both LUT count and STEP latency relative to the matched BF16 baseline",
+  "controlled_configuration": {
+    "block_size": 32,
+    "key_dim": 128,
+    "num_layers": 36,
+    "num_qk_heads": 16,
+    "num_sequences": 1,
+    "num_value_heads": 32,
+    "p_k": 16,
+    "p_v": 8,
+    "pipeline": "same persistent-state five-phase GDN command kernel",
+    "state_orientation": "KxV",
+    "value_dim": 128
+  },
+  "energy_comparison": "BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT",
+  "hls_lut_and_step_cost_advantage": "FAIL",
+  "limitations": [
+    "HLS estimates are not post-route resource, timing, or power measurements",
+    "reported BRAM/URAM counts are not accepted as physical-capacity proof",
+    "the BF16 and MXFP8 baselines have bounded C-sim but no long-token RTL parity run",
+    "energy is externally blocked because no U55C/XRT board environment is available"
+  ],
+  "physical_resource_comparison": "NOT_RUN",
+  "ratios": {
+    "mxfp4_to_bf16_bram_18k": 1.8461538461538463,
+    "mxfp4_to_bf16_estimated_clock_ns": 1.0,
+    "mxfp4_to_bf16_ff": 1.1247217745030318,
+    "mxfp4_to_bf16_lut": 1.6364888894122636,
+    "mxfp4_to_bf16_step_cycles_max": 1.4365789752676936,
+    "mxfp4_to_bf16_uram_reported": 0.25,
+    "mxfp8_to_bf16_lut": 1.684946831686666,
+    "mxfp8_to_bf16_step_cycles_max": 1.4879518984657791
+  },
+  "raw_input_sha256": {
+    "reports/csynth/corrected/baseline_csynth_summary.json": "E41A7D78948384082C447C09A04679BC013457E8440F541E773126C3916A0CD3",
+    "reports/csynth/corrected/bf16_hls_summary.json": "010349D332F8843CF6E3B6511B486116BF5FF6033744CE672BF1552C558F2F95",
+    "reports/csynth/corrected/mxfp8_hls_summary.json": "1EF6CB422542513C70838B5B9332073F9192B9498630E3FD6C55F70D9CE17657",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_csynth.rpt": "8BDC9291800EB9EEC02E8DC7798A74F8F917997585006C6B146A49FAB04F4A63"
+  },
+  "rows": [
+    {
+      "arithmetic": "BF16 state; BF16 operands; FP32 accumulation",
+      "bram_18k": 13,
+      "dsp": 0,
+      "energy_status": "BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT",
+      "estimated_clock_ns": 2.92,
+      "estimated_fmax_mhz": 342.4657534246575,
+      "evidence_stage": "Vitis HLS C-synthesis estimate",
+      "ff": 39087,
+      "lut": 84919,
+      "post_route_status": "NOT_RUN",
+      "step_cycles_max": 4225728,
+      "step_cycles_min": 4225728,
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "uram": 128,
+      "variant": "BF16"
+    },
+    {
+      "arithmetic": "E2M1 state/operands with E8M0 block scales and integer accumulation",
+      "bram_18k": 24,
+      "dsp": 3,
+      "energy_status": "BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT",
+      "estimated_clock_ns": 2.92,
+      "estimated_fmax_mhz": 342.4657534246575,
+      "evidence_stage": "Vitis HLS C-synthesis estimate",
+      "ff": 43962,
+      "lut": 138969,
+      "post_route_status": "NOT_RUN",
+      "step_cycles_max": 6070592,
+      "step_cycles_min": 4972864,
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "uram": 32,
+      "variant": "uniform_mxfp4"
+    },
+    {
+      "arithmetic": "E4M3 state/operands with E8M0 block scales and integer accumulation",
+      "bram_18k": 25,
+      "dsp": 3,
+      "energy_status": "BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT",
+      "estimated_clock_ns": 2.92,
+      "estimated_fmax_mhz": 342.4657534246575,
+      "evidence_stage": "Vitis HLS C-synthesis estimate",
+      "ff": 44715,
+      "lut": 143084,
+      "post_route_status": "NOT_RUN",
+      "step_cycles_max": 6287680,
+      "step_cycles_min": 5189952,
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "uram": 64,
+      "variant": "native_mxfp8"
+    }
+  ],
+  "schema": 1,
+  "scope": "controlled BF16, uniform native-MXFP4, and native-MXFP8 HLS estimate comparison",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 15724,
+      "changed_file_count": 2,
+      "sha256": "417EEEF0B9C74485D821F5A2CD38642D13D8A3BB3DD8D93314114AFA1EA5762D"
+    },
+    "files": {
+      "hls/include/gdn_params.hpp": {
+        "bytes": 3045,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82"
+      },
+      "scripts/hls_arithmetic_comparison.py": {
+        "bytes": 10919,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "FA5CFD0F2B4C30A0045B5AEDBB118DBE811EE45BA4CFBCCE9AE20B009C4E96A3"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "timestamp": "2026-08-05T17:04:12.616401+00:00"
+}

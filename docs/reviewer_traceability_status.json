@@ -1,0 +1,485 @@
+{
+  "comment_row_count": 68,
+  "directive_row_count": 25,
+  "generated_at": "2026-08-05T20:50:35.476920+00:00",
+  "rows": [
+    {
+      "id": "R01",
+      "source_line": 21,
+      "status": "PASS"
+    },
+    {
+      "id": "R02",
+      "source_line": 22,
+      "status": "PASS"
+    },
+    {
+      "id": "R03",
+      "source_line": 23,
+      "status": "PASS"
+    },
+    {
+      "id": "R04",
+      "source_line": 24,
+      "status": "PASS"
+    },
+    {
+      "id": "R05",
+      "source_line": 25,
+      "status": "PASS"
+    },
+    {
+      "id": "R06",
+      "source_line": 26,
+      "status": "PASS"
+    },
+    {
+      "id": "R07",
+      "source_line": 27,
+      "status": "PASS"
+    },
+    {
+      "id": "R08",
+      "source_line": 28,
+      "status": "PASS"
+    },
+    {
+      "id": "R09",
+      "source_line": 29,
+      "status": "PASS"
+    },
+    {
+      "id": "R10",
+      "source_line": 30,
+      "status": "PASS"
+    },
+    {
+      "id": "R11",
+      "source_line": 31,
+      "status": "PASS"
+    },
+    {
+      "id": "R12",
+      "source_line": 32,
+      "status": "PASS"
+    },
+    {
+      "id": "R13",
+      "source_line": 33,
+      "status": "PASS"
+    },
+    {
+      "id": "R14",
+      "source_line": 34,
+      "status": "PASS"
+    },
+    {
+      "id": "R15",
+      "source_line": 35,
+      "status": "PASS"
+    },
+    {
+      "id": "R16",
+      "source_line": 36,
+      "status": "PASS"
+    },
+    {
+      "id": "R17",
+      "source_line": 37,
+      "status": "PASS"
+    },
+    {
+      "id": "R18",
+      "source_line": 38,
+      "status": "PASS"
+    },
+    {
+      "id": "R19",
+      "source_line": 39,
+      "status": "PASS"
+    },
+    {
+      "id": "R20",
+      "source_line": 40,
+      "status": "PASS"
+    },
+    {
+      "id": "R21",
+      "source_line": 41,
+      "status": "PASS"
+    },
+    {
+      "id": "R22",
+      "source_line": 42,
+      "status": "PASS"
+    },
+    {
+      "id": "R23",
+      "source_line": 43,
+      "status": "PASS"
+    },
+    {
+      "id": "R24",
+      "source_line": 44,
+      "status": "PASS"
+    },
+    {
+      "id": "R25",
+      "source_line": 45,
+      "status": "PASS"
+    },
+    {
+      "id": "R26",
+      "source_line": 46,
+      "status": "PASS"
+    },
+    {
+      "id": "R27",
+      "source_line": 47,
+      "status": "PASS"
+    },
+    {
+      "id": "R28",
+      "source_line": 48,
+      "status": "PASS"
+    },
+    {
+      "id": "R29",
+      "source_line": 49,
+      "status": "PASS"
+    },
+    {
+      "id": "R30",
+      "source_line": 50,
+      "status": "PASS"
+    },
+    {
+      "id": "R31",
+      "source_line": 51,
+      "status": "PASS"
+    },
+    {
+      "id": "R32",
+      "source_line": 52,
+      "status": "PASS"
+    },
+    {
+      "id": "R33",
+      "source_line": 53,
+      "status": "PASS"
+    },
+    {
+      "id": "R34",
+      "source_line": 54,
+      "status": "PASS"
+    },
+    {
+      "id": "R35",
+      "source_line": 55,
+      "status": "PASS"
+    },
+    {
+      "id": "R36",
+      "source_line": 56,
+      "status": "PASS"
+    },
+    {
+      "id": "R37",
+      "source_line": 57,
+      "status": "PASS"
+    },
+    {
+      "id": "R38",
+      "source_line": 58,
+      "status": "PASS"
+    },
+    {
+      "id": "R39",
+      "source_line": 59,
+      "status": "PASS"
+    },
+    {
+      "id": "R40",
+      "source_line": 60,
+      "status": "PASS"
+    },
+    {
+      "id": "R41",
+      "source_line": 61,
+      "status": "PASS"
+    },
+    {
+      "id": "R42",
+      "source_line": 62,
+      "status": "PASS"
+    },
+    {
+      "id": "R43",
+      "source_line": 63,
+      "status": "PASS"
+    },
+    {
+      "id": "R44",
+      "source_line": 64,
+      "status": "PASS"
+    },
+    {
+      "id": "R45",
+      "source_line": 65,
+      "status": "PASS"
+    },
+    {
+      "id": "R46",
+      "source_line": 66,
+      "status": "PASS"
+    },
+    {
+      "id": "R47",
+      "source_line": 67,
+      "status": "PASS"
+    },
+    {
+      "id": "R48",
+      "source_line": 68,
+      "status": "PASS"
+    },
+    {
+      "id": "R49",
+      "source_line": 69,
+      "status": "PASS"
+    },
+    {
+      "id": "R50",
+      "source_line": 70,
+      "status": "PASS"
+    },
+    {
+      "id": "R51",
+      "source_line": 71,
+      "status": "PASS"
+    },
+    {
+      "id": "R52",
+      "source_line": 72,
+      "status": "PASS"
+    },
+    {
+      "id": "R53",
+      "source_line": 73,
+      "status": "PASS"
+    },
+    {
+      "id": "R54",
+      "source_line": 74,
+      "status": "PASS"
+    },
+    {
+      "id": "R55",
+      "source_line": 75,
+      "status": "PASS"
+    },
+    {
+      "id": "R56",
+      "source_line": 76,
+      "status": "PASS"
+    },
+    {
+      "id": "R57",
+      "source_line": 77,
+      "status": "PASS"
+    },
+    {
+      "id": "R58",
+      "source_line": 78,
+      "status": "PASS"
+    },
+    {
+      "id": "R59",
+      "source_line": 79,
+      "status": "PASS"
+    },
+    {
+      "id": "R60",
+      "source_line": 80,
+      "status": "PASS"
+    },
+    {
+      "id": "R61",
+      "source_line": 81,
+      "status": "PASS"
+    },
+    {
+      "id": "R62",
+      "source_line": 82,
+      "status": "PASS"
+    },
+    {
+      "id": "R63",
+      "source_line": 83,
+      "status": "PASS"
+    },
+    {
+      "id": "R64",
+      "source_line": 84,
+      "status": "PASS"
+    },
+    {
+      "id": "R65",
+      "source_line": 85,
+      "status": "PASS"
+    },
+    {
+      "id": "R66",
+      "source_line": 86,
+      "status": "PASS"
+    },
+    {
+      "id": "R67",
+      "source_line": 87,
+      "status": "PASS"
+    },
+    {
+      "id": "R68",
+      "source_line": 88,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-01",
+      "source_line": 97,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-02",
+      "source_line": 98,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-03",
+      "source_line": 99,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-04",
+      "source_line": 100,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-05",
+      "source_line": 101,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-06",
+      "source_line": 102,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-07",
+      "source_line": 103,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-08",
+      "source_line": 104,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-09",
+      "source_line": 105,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-10",
+      "source_line": 106,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-11",
+      "source_line": 107,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-12",
+      "source_line": 108,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-13",
+      "source_line": 109,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-14",
+      "source_line": 110,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-15",
+      "source_line": 111,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-16",
+      "source_line": 112,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-17",
+      "source_line": 113,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-18",
+      "source_line": 114,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-19",
+      "source_line": 115,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-20",
+      "source_line": 116,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-21",
+      "source_line": 117,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-22",
+      "source_line": 118,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-23",
+      "source_line": 119,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-24",
+      "source_line": 120,
+      "status": "PASS"
+    },
+    {
+      "id": "Directive-25",
+      "source_line": 121,
+      "status": "PASS"
+    }
+  ],
+  "schema": 1,
+  "status": "PASS",
+  "status_counts": {
+    "BLOCKED_EXTERNAL": 0,
+    "FAIL": 0,
+    "NOT_RUN": 0,
+    "PASS": 93
+  },
+  "traceability_source": "docs/reviewer_traceability.md",
+  "traceability_source_sha256": "C448C3947B85888E745A98DBD2B6D0CB59617A80697EF6F35F3EE72BF62EA85B",
+  "visual_audit": "paper/corrected/paper_visual_audit.json",
+  "visual_audit_sha256": "5FAD8C83C9D4A068FEDB39CF1A6448AC1D33009A73CD4913DF77C88B6DAC4228",
+  "visual_audit_status": "PASS"
+}

@@ -1,91 +1,127 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import re
-from datetime import UTC, datetime
+import shutil
+from datetime import datetime, timezone
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_LOG = ROOT / "gdn_mxfp4_hls" / "u55c_250mhz" / "csim" / "report" / "gdn_top_csim.log"
-FALLBACK_LOGS = (
-    ROOT / "gdn_mxfp4_hls" / "u55c_250mhz" / "sim" / "report" / "verilog" / "gdn_top.log",
-    ROOT / "gdn_mxfp4_hls" / "u55c_250mhz" / "sim" / "wrapc_pc" / "run_xsim.log",
+SOURCE_LOG = (
+    ROOT
+    / "gdn_mxfp4_hls"
+    / "u55c_250mhz"
+    / "csim"
+    / "report"
+    / "gdn_top_csim.log"
 )
-OUT_PATH = ROOT / "reports" / "csim" / "results.md"
+TRACE = ROOT / "data" / "vectors" / "corrected_gdn_command_trace.bin"
+TRACE_MANIFEST = (
+    ROOT / "reports" / "golden" / "corrected_hls_command_trace_manifest.json"
+)
+OUT_DIR = ROOT / "reports" / "csim" / "corrected"
+OUT_PATH = OUT_DIR / "results.md"
+RAW_LOG = OUT_DIR / "gdn_top_csim.log"
+RUN_MANIFEST = OUT_DIR / "csim_manifest.json"
 SOURCE_GLOBS = (
     "hls/include/*.hpp",
     "hls/src/*.cpp",
     "hls/tb/tb_gdn_top.cpp",
+    "hls/tcl/run_csim.tcl",
+    "scripts/generate_hls_command_trace.py",
 )
 
 
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest().upper()
+
+
 def _parse_csim_log(text: str) -> tuple[int, int, bool]:
-    match = re.search(r"tb_gdn_top PASS vectors=(\d+)/(\d+)", text)
+    match = re.search(
+        r"tb_gdn_top PASS hand_commands=(\d+) oracle_steps=(\d+)", text
+    )
     if match is None:
-        raise ValueError("Could not find tb_gdn_top vector pass count in C-sim log")
-    done = "CSim done with 0 errors" in text or "C/RTL co-simulation finished: PASS" in text
+        raise ValueError("corrected C-sim PASS marker is absent")
+    done = "CSim done with 0 errors" in text
     return int(match.group(1)), int(match.group(2)), done
 
 
-def _source_freshness(source_log: Path) -> tuple[bool, str]:
+def _source_freshness() -> tuple[bool, str]:
     sources: list[Path] = []
     for pattern in SOURCE_GLOBS:
         sources.extend(ROOT.glob(pattern))
-    if not sources:
-        return False, "No HLS sources found for freshness check."
+    sources.extend([TRACE, TRACE_MANIFEST])
     latest = max(sources, key=lambda path: path.stat().st_mtime)
-    log_mtime = source_log.stat().st_mtime
-    latest_mtime = latest.stat().st_mtime
-    stale = latest_mtime > log_mtime + 1.0
-    latest_stamp = datetime.fromtimestamp(latest_mtime, UTC).isoformat()
-    log_stamp = datetime.fromtimestamp(log_mtime, UTC).isoformat()
+    stale = latest.stat().st_mtime > SOURCE_LOG.stat().st_mtime + 1.0
     detail = (
-        f"latest source `{latest.relative_to(ROOT).as_posix()}` modified {latest_stamp}; "
-        f"parity log `{source_log.relative_to(ROOT).as_posix()}` modified {log_stamp}"
+        f"latest input `{latest.relative_to(ROOT).as_posix()}` modified "
+        f"{datetime.fromtimestamp(latest.stat().st_mtime, timezone.utc).isoformat()}; "
+        f"log modified "
+        f"{datetime.fromtimestamp(SOURCE_LOG.stat().st_mtime, timezone.utc).isoformat()}"
     )
     return stale, detail
 
 
-def _find_source_log() -> Path | None:
-    if SOURCE_LOG.exists():
-        return SOURCE_LOG
-    for path in FALLBACK_LOGS:
-        if path.exists() and "tb_gdn_top PASS vectors=" in path.read_text(encoding="utf-8", errors="replace"):
-            return path
-    return None
-
-
 def main() -> int:
-    source_log = _find_source_log()
-    if source_log is None:
-        print(f"Missing C-sim or cosim parity log: {SOURCE_LOG}")
+    if not SOURCE_LOG.exists():
+        print(f"Missing corrected C-sim log: {SOURCE_LOG}")
         return 2
-
-    text = source_log.read_text(encoding="utf-8", errors="replace")
-    passed, total, done = _parse_csim_log(text)
-    stale, freshness = _source_freshness(source_log)
+    text = SOURCE_LOG.read_text(encoding="utf-8", errors="replace")
+    hand_commands, oracle_steps, done = _parse_csim_log(text)
+    stale, freshness = _source_freshness()
     if not done:
-        raise RuntimeError("Parity log did not report zero errors or cosim PASS")
+        raise RuntimeError("C-sim log did not report zero errors")
+    if stale:
+        raise RuntimeError(f"C-sim evidence is stale: {freshness}")
 
-    OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(SOURCE_LOG, RAW_LOG)
+    trace_manifest = json.loads(TRACE_MANIFEST.read_text(encoding="utf-8"))
+    generated = datetime.now(timezone.utc).isoformat()
+    source_hashes: dict[str, str] = {}
+    for pattern in SOURCE_GLOBS:
+        for path in sorted(ROOT.glob(pattern)):
+            source_hashes[path.relative_to(ROOT).as_posix()] = _sha256(path)
+    run_manifest = {
+        "status": "PASS",
+        "generated_at": generated,
+        "tool": "Vitis HLS 2025.2 build 6295257",
+        "target": "xcu55c-fsvh2892-2L-e",
+        "clock_ns": 4.0,
+        "hand_commands": hand_commands,
+        "oracle_steps": oracle_steps,
+        "trace_sha256": _sha256(TRACE),
+        "trace_manifest_sha256": _sha256(TRACE_MANIFEST),
+        "raw_log_sha256": _sha256(RAW_LOG),
+        "source_sha256": source_hashes,
+        "freshness": freshness,
+    }
+    RUN_MANIFEST.write_text(
+        json.dumps(run_manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     OUT_PATH.write_text(
         "\n".join(
             [
-                "# HLS C-Simulation Results",
+                "# Corrected HLS C-Simulation Results",
                 "",
-                f"Generated: {datetime.now(UTC).isoformat()}",
+                f"Generated: `{generated}`",
                 "",
-                f"- Source log: `{source_log.relative_to(ROOT).as_posix()}`",
-                f"- Status: {'stale - rerun required' if stale else 'current'}",
+                "- Status: `PASS`",
+                f"- Target: `{run_manifest['target']}` at 4.0 ns",
+                f"- Hand-derived command checks: `{hand_commands}`",
+                f"- Full-dimension encoded-oracle steps: `{oracle_steps}`",
+                f"- Trace SHA256: `{run_manifest['trace_sha256']}`",
+                f"- Raw C-sim log SHA256: `{run_manifest['raw_log_sha256']}`",
                 f"- Freshness: {freshness}",
-                f"- `tb_gdn_top PASS vectors={passed}/{total}`",
-                "- `CSim done with 0 errors`",
                 "",
-                "Coverage notes:",
+                "The testbench compares status, generation, all eight per-command and",
+                "cumulative counters, every output mantissa/exponent tuple, and the",
+                "complete final recurrent-state element/scale readback. It does not",
+                "establish RTL or board parity.",
                 "",
-                "- The vectors are deterministic HLS fixed-point parity cases generated inside `hls/tb/tb_gdn_top.cpp`.",
-                "- The testbench checks packed output parity; MXFP4 state writeback checks are enabled when `GDN_STATE_READBACK=1`.",
-                "- Qwen3-Next captured realistic-vector parity remains pending until the real calibration capture is available.",
+                f"Trace input-stream SHA256: `{trace_manifest['input_stream_sha256']}`.",
                 "",
             ]
         ),

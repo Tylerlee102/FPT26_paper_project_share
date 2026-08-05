@@ -25,15 +25,15 @@ class TestGdnInt4(unittest.TestCase):
 
     def test_int4_decode_step_shapes_and_error_budget(self) -> None:
         rng = np.random.default_rng(9)
-        q = rng.normal(0.0, 0.1, size=(2, 8)).astype(np.float32)
-        k = rng.normal(0.0, 0.1, size=(2, 8)).astype(np.float32)
+        q = rng.normal(0.0, 0.1, size=(1, 8)).astype(np.float32)
+        k = rng.normal(0.0, 0.1, size=(1, 8)).astype(np.float32)
         v = rng.normal(0.0, 0.1, size=(2, 8)).astype(np.float32)
+        alpha = rng.uniform(0.85, 1.0, size=(2,)).astype(np.float32)
         beta = rng.uniform(0.0, 0.5, size=(2,)).astype(np.float32)
-        gate = rng.uniform(0.5, 1.0, size=(2, 8)).astype(np.float32)
         state = rng.normal(0.0, 0.02, size=(2, 8, 8)).astype(np.float32)
 
-        fp32_output, fp32_state = fp32_decode_step(q, k, v, beta, gate, state)
-        int4_output, int4_state = int4_decode_step(q, k, v, beta, gate, state)
+        fp32_output, fp32_state = fp32_decode_step(q, k, v, alpha, beta, state)
+        int4_output, int4_state = int4_decode_step(q, k, v, alpha, beta, state)
 
         self.assertEqual(int4_output.shape, fp32_output.shape)
         self.assertEqual(int4_state.shape, fp32_state.shape)

@@ -1,0 +1,9 @@
+{
+  "output": "build/vivado/e2m0_ooc_rtl/gdn_e2m0_top.v",
+  "output_sha256": "505A61EBCF431B43A9373CBAE2AFB8643B5DE2B05091799C395220D0907D5BA9",
+  "source": "gdn_e2m0_hls/u55c_250mhz/syn/verilog/gdn_e2m0_top.v",
+  "source_sha256": "26D4D9F7610CD4B06C4C021581659E19AF06D73E859DF506D3660845F0040C93",
+  "status": "PASS",
+  "timestamp": "2026-08-04T10:11:43.179791+00:00",
+  "transformation": "insert_top_level_bufgce_and_rewire_internal_ap_clk"
+}

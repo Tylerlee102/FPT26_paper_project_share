@@ -1,0 +1,319 @@
+{
+  "attempt_history": [
+    {
+      "attempt": "raw_ooc_clock",
+      "sha256": "CF032AB795C5FF59557E29226B7C400EA3739293C93C890C803E340AB143FE17",
+      "source": "reports/vivado/corrected/e2m0/attempt1_raw_clock/impl_timing.rpt",
+      "target_period_ns": 4.0,
+      "ths_ns": -55625.488,
+      "tns_ns": -81368.453,
+      "whs_ns": -3.02,
+      "wns_ns": -7.934
+    },
+    {
+      "attempt": "post_synthesis_bufg_insertion",
+      "sha256": "A982AB7B6840786B733070452622CE6278688B1991AC0E9A612C49179F3275E7",
+      "source": "reports/vivado/corrected/e2m0/attempt2_post_synth_bufg/impl_timing.rpt",
+      "target_period_ns": 4.0,
+      "ths_ns": -7716.663,
+      "tns_ns": -62288.711,
+      "whs_ns": -2.703,
+      "wns_ns": -4.387
+    },
+    {
+      "attempt": "source_level_bufg_aggressive_route",
+      "sha256": "403EB41C0AF8A6830355C69CE9FDFF25DD52E9ACB67821BAD2AB67921E3AC5BC",
+      "source": "reports/vivado/corrected/e2m0/impl_timing.rpt",
+      "target_period_ns": 4.0,
+      "ths_ns": 0.0,
+      "tns_ns": -34623.242,
+      "whs_ns": 0.01,
+      "wns_ns": -1.54
+    }
+  ],
+  "claim_boundary": {
+    "bitstream_or_xclbin_execution": "NOT_RUN",
+    "measured_board_power_or_energy": "NOT_RUN",
+    "post_route_250mhz": "NOT_SUPPORTED",
+    "post_route_first_tested_closing_frequency": "SUPPORTED",
+    "post_route_fit": "SUPPORTED",
+    "vectorless_power_estimate": "SUPPORTED_WITH_MEDIUM_CONFIDENCE"
+  },
+  "critical_path_at_4ns": {
+    "classification": "resident-state reset/write-enable path into URAM",
+    "crosses_slr_1_to_0": true,
+    "data_path_delay_ns": 4.971,
+    "destination": "grp_gdn_e2m0_top_impl_fu_550/resident_primary_U/ram_reg_uram_79/EN_A",
+    "logic_delay_ns": 0.375,
+    "logic_levels": 5,
+    "path_group": "ap_clk",
+    "path_type": "Setup (Max at Slow Process Corner)",
+    "route_delay_ns": 4.596,
+    "route_delay_percent": 92.45624622812312,
+    "source": "grp_gdn_e2m0_top_impl_fu_550/icmp_ln1459_reg_13948_reg[0]_replica_5"
+  },
+  "drc": {
+    "by_rule": {
+      "DPIP-2": 10,
+      "DPOP-3": 11,
+      "DPOP-4": 16,
+      "RTSTAT-10": 1
+    },
+    "critical_warning_count": 0,
+    "error_count": 0,
+    "signoff_status": "PASS_WITH_WARNINGS",
+    "violation_count": 38,
+    "warning_count": 38
+  },
+  "first_tested_closing_point": {
+    "frequency_mhz": 180.18018018018017,
+    "period_ns": 5.55,
+    "qualification": "first passing point in the tested fixed-route period sweep; not a binary-searched maximum frequency",
+    "status": "PASS",
+    "whs_ns": 0.01,
+    "wns_ns": 0.01
+  },
+  "generated_at": "2026-08-04T10:22:11.126987+00:00",
+  "implemented_200mhz_timing": "FAIL",
+  "limitations": [
+    "Out-of-context kernel implementation; no U55C shell integration or xclbin was built.",
+    "The design fits but fails setup at 250 MHz and 200 MHz; 180.18 MHz is the first passing tested fixed-route point.",
+    "Power uses Vivado vectorless activity propagation at 5.6 ns with medium confidence, not measured board telemetry.",
+    "No energy-per-token value is derived because candidate RTL service latency and measured activity are unavailable."
+  ],
+  "physical_fit": "PASS",
+  "power_at_5p6ns": {
+    "components": {
+      "block_ram_w": 0.151,
+      "clb_logic_w": 1.058,
+      "clocks_w": 0.533,
+      "dsps_w": 0.054,
+      "signals_w": 1.078,
+      "uram_w": 0.708
+    },
+    "confidence": "Medium",
+    "dynamic_w": 3.582,
+    "energy_per_token": "NOT_RUN",
+    "frequency_mhz": 178.57142857142858,
+    "measured_on_board": false,
+    "method": "Vivado vectorless activity propagation",
+    "period_ns": 5.6,
+    "static_w": 3.41,
+    "timing_closed_at_this_period": true,
+    "total_on_chip_w": 6.991
+  },
+  "raw_artifact_sha256": {
+    "build/vivado/e2m0_ooc_rtl/manifest.json": "378130459A4DFC1B0064F0A2C33B9629C7C4E058CBE03C49AFB5808380211167",
+    "build/vivado/gdn_e2m0_vivado/e2m0_post_impl.dcp": "1A642224484505F3D27F2A3D00E9F90B22D6637BB9F56BE82A483A6B80965741",
+    "reports/vivado/corrected/e2m0/impl_drc.rpt": "D1A44C8D5F6A5BD48545141E4AFB66A5B364DB80BF42F2713891985767982C76",
+    "reports/vivado/corrected/e2m0/impl_timing.rpt": "403EB41C0AF8A6830355C69CE9FDFF25DD52E9ACB67821BAD2AB67921E3AC5BC",
+    "reports/vivado/corrected/e2m0/impl_util.rpt": "F97244C1BE8F3FCEE6D0D298D1A2D964C55040E3C9F2A14A5FCAE00876F1AD86",
+    "reports/vivado/corrected/e2m0/postroute_sweep/power_5p600ns.rpt": "D67C3DDFCAFAE432DFCF84B87B0517CCEC81831D8035AA117B566E8ADD8309AE",
+    "reports/vivado/corrected/e2m0/postroute_sweep/timing_4p000ns.rpt": "CED95BFC007CF53689DAB060F3AAB9BF41A2EBFFD442A304E5FFFAA00C41F19C",
+    "reports/vivado/corrected/e2m0/postroute_sweep/timing_5p000ns.rpt": "F9C84CEBEDBD5E14869824D6018E20D1F7628A139D8E62DED79116FAD02C6E5E",
+    "reports/vivado/corrected/e2m0/postroute_sweep/timing_5p500ns.rpt": "5232AF1F0DDEDF71C42E6E74E76E225FEE057B5F591DCBA274A2530AD8BF20EB",
+    "reports/vivado/corrected/e2m0/postroute_sweep/timing_5p550ns.rpt": "E7E22E768DBB32230411711CBBC758B9165CF2C6AE66C4D8712B8ECE9C17934B",
+    "reports/vivado/corrected/e2m0/postroute_sweep/timing_5p600ns.rpt": "63CAED8DB96AA0C7E368798A262392C142E7DA90FD6C3D34A11CCA2B54F1939C",
+    "reports/vivado/corrected/e2m0/postroute_sweep/timing_6p000ns.rpt": "FAB24AFBEC35FAAAA79422AF498C04717A21E1A9FA229E23EC7E5177C1422D6E",
+    "reports/vivado/vivado_e2m0-impl.log": "4F2A33D225DC20AEFDB5D3277B6D8C8FC73069C260060FC1B492DA53F3B65856",
+    "reports/vivado/vivado_e2m0-postroute-sweep.log": "4FAAE6945EF665B0D57A47FF27C299B3D1E42B8CA6576ECEBFCAFD121B4A9949"
+  },
+  "route_completion": "PASS",
+  "rtl_transformation": {
+    "integrity_status": "PASS",
+    "output": "build/vivado/e2m0_ooc_rtl/gdn_e2m0_top.v",
+    "output_sha256": "505A61EBCF431B43A9373CBAE2AFB8643B5DE2B05091799C395220D0907D5BA9",
+    "source": "gdn_e2m0_hls/u55c_250mhz/syn/verilog/gdn_e2m0_top.v",
+    "source_sha256": "26D4D9F7610CD4B06C4C021581659E19AF06D73E859DF506D3660845F0040C93",
+    "status": "PASS",
+    "timestamp": "2026-08-04T10:11:43.179791+00:00",
+    "transformation": "insert_top_level_bufgce_and_rewire_internal_ap_clk"
+  },
+  "schema": 1,
+  "scope": "out-of-context post-route implementation of the corrected E2M0 residual/write-log candidate",
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "target_clock": {
+    "frequency_mhz": 250.0,
+    "period_ns": 4.0,
+    "status": "FAIL",
+    "timing": {
+      "frequency_mhz": 250.0,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 306555,
+      "period_ns": 4.0,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 116980,
+      "setup_failing_endpoints": 50318,
+      "setup_status": "FAIL",
+      "setup_total_endpoints": 306869,
+      "sha256": "CED95BFC007CF53689DAB060F3AAB9BF41A2EBFFD442A304E5FFFAA00C41F19C",
+      "source": "reports/vivado/corrected/e2m0/postroute_sweep/timing_4p000ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": -34623.242,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.54,
+      "wpws_ns": 1.3
+    }
+  },
+  "timing_sweep": [
+    {
+      "frequency_mhz": 250.0,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 306555,
+      "period_ns": 4.0,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 116980,
+      "setup_failing_endpoints": 50318,
+      "setup_status": "FAIL",
+      "setup_total_endpoints": 306869,
+      "sha256": "CED95BFC007CF53689DAB060F3AAB9BF41A2EBFFD442A304E5FFFAA00C41F19C",
+      "source": "reports/vivado/corrected/e2m0/postroute_sweep/timing_4p000ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": -34623.242,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.54,
+      "wpws_ns": 1.3
+    },
+    {
+      "frequency_mhz": 200.0,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 306555,
+      "period_ns": 5.0,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 116980,
+      "setup_failing_endpoints": 13323,
+      "setup_status": "FAIL",
+      "setup_total_endpoints": 306869,
+      "sha256": "F9C84CEBEDBD5E14869824D6018E20D1F7628A139D8E62DED79116FAD02C6E5E",
+      "source": "reports/vivado/corrected/e2m0/postroute_sweep/timing_5p000ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": -2344.406,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -0.54,
+      "wpws_ns": 1.8
+    },
+    {
+      "frequency_mhz": 181.8181818181818,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 306555,
+      "period_ns": 5.5,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 116980,
+      "setup_failing_endpoints": 53,
+      "setup_status": "FAIL",
+      "setup_total_endpoints": 306869,
+      "sha256": "5232AF1F0DDEDF71C42E6E74E76E225FEE057B5F591DCBA274A2530AD8BF20EB",
+      "source": "reports/vivado/corrected/e2m0/postroute_sweep/timing_5p500ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": -0.941,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -0.04,
+      "wpws_ns": 2.05
+    },
+    {
+      "frequency_mhz": 180.18018018018017,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 306555,
+      "period_ns": 5.55,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 116980,
+      "setup_failing_endpoints": 0,
+      "setup_status": "PASS",
+      "setup_total_endpoints": 306869,
+      "sha256": "E7E22E768DBB32230411711CBBC758B9165CF2C6AE66C4D8712B8ECE9C17934B",
+      "source": "reports/vivado/corrected/e2m0/postroute_sweep/timing_5p550ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": 0.0,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": 0.01,
+      "wpws_ns": 2.075
+    },
+    {
+      "frequency_mhz": 178.57142857142858,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 306555,
+      "period_ns": 5.6,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 116980,
+      "setup_failing_endpoints": 0,
+      "setup_status": "PASS",
+      "setup_total_endpoints": 306869,
+      "sha256": "63CAED8DB96AA0C7E368798A262392C142E7DA90FD6C3D34A11CCA2B54F1939C",
+      "source": "reports/vivado/corrected/e2m0/postroute_sweep/timing_5p600ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": 0.0,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": 0.06,
+      "wpws_ns": 2.1
+    },
+    {
+      "frequency_mhz": 166.66666666666666,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 306555,
+      "period_ns": 6.0,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 116980,
+      "setup_failing_endpoints": 0,
+      "setup_status": "PASS",
+      "setup_total_endpoints": 306869,
+      "sha256": "FAB24AFBEC35FAAAA79422AF498C04717A21E1A9FA229E23EC7E5177C1422D6E",
+      "source": "reports/vivado/corrected/e2m0/postroute_sweep/timing_6p000ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": 0.0,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": 0.46,
+      "wpws_ns": 2.3
+    }
+  ],
+  "tool": {
+    "target_device": "xcu55c-fsvh2892-2L-e",
+    "tool_version": "Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025"
+  },
+  "utilization": {
+    "block_ram_tiles": {
+      "available": 2016,
+      "used": 353,
+      "utilization_percent": 17.51
+    },
+    "bufgce": {
+      "available": 288,
+      "used": 1,
+      "utilization_percent": 0.35
+    },
+    "clb_luts": {
+      "available": 1303680,
+      "used": 208523,
+      "utilization_percent": 15.99
+    },
+    "clb_registers": {
+      "available": 2607360,
+      "used": 111027,
+      "utilization_percent": 4.26
+    },
+    "dsps": {
+      "available": 9024,
+      "used": 44,
+      "utilization_percent": 0.49
+    },
+    "uram": {
+      "available": 960,
+      "used": 624,
+      "utilization_percent": 65.0
+    }
+  }
+}

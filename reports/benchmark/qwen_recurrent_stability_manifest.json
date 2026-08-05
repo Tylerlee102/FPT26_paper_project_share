@@ -1,0 +1,145 @@
+{
+  "aggregate": {
+    "bf16_qdq_fp32_accum_state_bf16": {
+      "max_state_abs_error": 0.019169330596923828,
+      "mean_final_output_cosine_fp32": 0.999991252704719,
+      "mean_final_state_rel_l2": 0.005893844352315457,
+      "nonfinite_events": 0,
+      "worst_output_cosine_fp32": 0.9999828064117845,
+      "worst_state_rel_l2": 0.006567816610582679
+    },
+    "flat_int4_qdq": {
+      "max_state_abs_error": 0.4050605297088623,
+      "mean_final_output_cosine_fp32": 0.8660712712725239,
+      "mean_final_state_rel_l2": 0.7745231919669394,
+      "nonfinite_events": 0,
+      "worst_output_cosine_fp32": 0.7519249817358398,
+      "worst_state_rel_l2": 0.822525858793407
+    },
+    "mxfp4_qdq_state_mxfp4_b32": {
+      "max_state_abs_error": 0.6159488558769226,
+      "mean_final_output_cosine_fp32": 0.9820479871398721,
+      "mean_final_state_rel_l2": 0.324787928774988,
+      "nonfinite_events": 0,
+      "worst_output_cosine_fp32": 0.9676750418199244,
+      "worst_state_rel_l2": 0.3388829136396676
+    },
+    "mxfp4_qdq_state_mxfp8_b32": {
+      "max_state_abs_error": 0.46683406829833984,
+      "mean_final_output_cosine_fp32": 0.9891728460442457,
+      "mean_final_state_rel_l2": 0.207192147269526,
+      "nonfinite_events": 0,
+      "worst_output_cosine_fp32": 0.9696698475976059,
+      "worst_state_rel_l2": 0.2199432580622261
+    }
+  },
+  "arithmetic_boundary": "floating_qdq_recurrence_diagnostic",
+  "input": "C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/data/calibration/qwen3_next_80b_a3b_layer12_recurrence.npz",
+  "input_sha256": "e20955ebcb60d14c4ca69b1b9aa4ac200460d0d35b10743418222205b5618d84",
+  "limitations": [
+    "Four real prompt traces contain only 12 to 18 valid tokens each.",
+    "The low-precision paths are floating Q/DQ diagnostics, not HLS bit-exact execution.",
+    "No full-model logits or perplexity are evaluated."
+  ],
+  "schema": 1,
+  "source_metadata": {
+    "characterization": {
+      "alpha": {
+        "max": 0.9999460577964783,
+        "max_abs": 0.9999460577964783,
+        "min": 3.5965638289781054e-07,
+        "p999_abs": 0.9999262690544128,
+        "p99_abs": 0.9997575283050537
+      },
+      "beta": {
+        "max": 0.999777615070343,
+        "max_abs": 0.999777615070343,
+        "min": 0.06364604830741882,
+        "p999_abs": 0.9997483491897583,
+        "p99_abs": 0.9996253848075867
+      },
+      "k": {
+        "max": 2.726890802383423,
+        "max_abs": 2.726890802383423,
+        "min": -0.27846455574035645,
+        "p999_abs": 1.064821481704712,
+        "p99_abs": 0.44840115308761597
+      },
+      "q": {
+        "max": 3.350104331970215,
+        "max_abs": 3.350104331970215,
+        "min": -0.27846455574035645,
+        "p999_abs": 1.610742449760437,
+        "p99_abs": 0.5063478350639343
+      },
+      "v": {
+        "max": 2.8875083923339844,
+        "max_abs": 2.8875083923339844,
+        "min": -0.27846452593803406,
+        "p999_abs": 0.9630387425422668,
+        "p99_abs": 0.28890520334243774
+      }
+    },
+    "layer_index": 12,
+    "limitations": [
+      "The source capture records four short prompts, not a long contiguous decode.",
+      "The source capture labeled the model revision as default; checkpoint weight history predates the capture.",
+      "This artifact stops at the recurrence-core boundary and does not establish full-model perplexity."
+    ],
+    "model_id": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+    "recurrence_boundary": "post_causal_conv_pre_qk_normalization",
+    "schema": 1,
+    "source": "real_qwen3_next_layer12_hidden_states_plus_checkpoint_projections",
+    "source_capture": "C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/data/calibration/qwen3_next_80b_a3b_layer12.npz",
+    "source_capture_metadata": {
+      "captured_arrays": [
+        "attention_mask",
+        "input_ids",
+        "layer_input",
+        "layer_output",
+        "mlp_gate",
+        "mlp_shared_expert_gate",
+        "mlp_shared_expert_gate_proj"
+      ],
+      "experts_implementation": "eager",
+      "layer_index": 12,
+      "max_capture_tokens": 32,
+      "max_length": 128,
+      "model_id": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "model_path": "/workspace/models/Qwen3-Next-80B-A3B-Instruct",
+      "num_prompts": 4,
+      "prompt_sha256": "fdffbe80ff20aac8e0a8b074fc0f4b958e05bf0445fe20bcb04266e3b4d966d2",
+      "revision": "default",
+      "schema": 1,
+      "source": "huggingface_qwen3_next",
+      "timestamp": "2026-06-18T04:06:18.882559+00:00",
+      "torch_version": "2.8.0+cu128",
+      "transformers_version": "5.12.1"
+    },
+    "source_capture_sha256": "91fed973063039ce4519ef0276ac0f59bfec372ada0f80033047df368370f9b1",
+    "timestamp": "2026-08-05T05:59:53.178065+00:00",
+    "total_valid_tokens": 60,
+    "valid_tokens_per_prompt": [
+      14,
+      18,
+      16,
+      12
+    ],
+    "weights": "C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/data/calibration/qwen3_next_80b_a3b_layer12_recurrence_weights.npz",
+    "weights_revision": "9c7f2fbe84465e40164a94cc16cd30b6999b0cc7",
+    "weights_sha256": "4cbda5ff27bbbad55d5928a0c9bae378e6c3dd8034e1c70c4a0cae502b60ea07",
+    "weights_shard": "model-00011-of-00041.safetensors"
+  },
+  "status": "PASS",
+  "summary_csv": "C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/reports/benchmark/qwen_recurrent_stability_summary.csv",
+  "summary_sha256": "4c2a4b434352ab76e31689c446a0a0882565a36b8b2f98966bcb17addc02834d",
+  "timestamp": "2026-08-05T16:47:28.358031+00:00",
+  "trace_csv": "C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/reports/benchmark/qwen_recurrent_stability.csv",
+  "trace_sha256": "13dc9bf0b22e915d084b562fae5deea43a2060f044a3b58e0a3b2c3004034718",
+  "variants": [
+    "bf16_qdq_fp32_accum_state_bf16",
+    "mxfp4_qdq_state_mxfp4_b32",
+    "mxfp4_qdq_state_mxfp8_b32",
+    "flat_int4_qdq"
+  ]
+}

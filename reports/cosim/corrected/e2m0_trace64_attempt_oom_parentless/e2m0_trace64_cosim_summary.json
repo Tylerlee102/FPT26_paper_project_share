@@ -1,0 +1,89 @@
+{
+  "c_precheck": {
+    "marker": "PASS: 64 encoded random-state tokens, exact outputs/counters, and final snapshot",
+    "status": "PASS"
+  },
+  "generated_at": "2026-08-05T18:49:13.170434+00:00",
+  "interpretation": "The C oracle completed exactly, but XSIM exhausted host memory before the first of 66 RTL transactions. This attempt is not parity evidence.",
+  "limitations": [
+    "This is generated-RTL co-simulation, not post-route or board execution.",
+    "The trace is deterministic, synthetic, and limited to 64 sequential recurrent updates."
+  ],
+  "raw_artifact_sha256": {
+    "reports/cosim/corrected/e2m0_trace64_attempt_oom_parentless/raw/c_precheck.log": "19DCC8EBD7A84E37FE5AAE5B6D49371693D43181DAF71351A41FEBF2E19AA087",
+    "reports/cosim/corrected/e2m0_trace64_attempt_oom_parentless/raw/cosim_report.rpt": "DBBC12706BAA867D4D4AC3767D144861DAFCCC8D56E56583AFE3252CBFE131E4",
+    "reports/cosim/corrected/e2m0_trace64_attempt_oom_parentless/raw/e2m0_resident_trace64_manifest.json": "CEBA0700681B672B372998FAFB0E1DE8806E03C8B15BB039717FFBAC315BCF14",
+    "reports/cosim/corrected/e2m0_trace64_attempt_oom_parentless/raw/solution_log.log": "B2DDA08D05CE434748F871C325730C1A402E7A1B0B3E63E12AAC577CF2BCFCC8",
+    "reports/cosim/corrected/e2m0_trace64_attempt_oom_parentless/raw/xsim_log.log": "786E3303D452E29F518A23DF51099E1E1796BD33600CFE6287DEED0215F48413"
+  },
+  "required_64_token_rtl_parity": "NOT_ESTABLISHED",
+  "rtl_simulation": {
+    "completed_transactions": 0,
+    "failed_allocation_bytes": 8388608,
+    "failure": "host out of memory",
+    "first_completed": 0,
+    "last_simulation_time": 110000,
+    "progress_records": 1,
+    "simulator_reported_memory_consumed_bytes": 472657556,
+    "status": "FAIL",
+    "total_transactions": 66
+  },
+  "schema": 1,
+  "scope": "official Vitis HLS/XSIM 64-token generated-RTL parity for the corrected E2M0 residual/write-log candidate",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 103250,
+      "changed_file_count": 5,
+      "sha256": "8B371A8B7383DC10E0EEA456293D53A7C4C110ABE8530BD211D12776BE71913E"
+    },
+    "files": {
+      "hls/e2m0/include/gdn_e2m0_kernel.hpp": {
+        "bytes": 10237,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B9A662F2DCDFC9BDCD552CF3F90410258FA7FB72EB5A9606208A172B8072EC6A"
+      },
+      "hls/e2m0/src/e2m0_arithmetic.cpp": {
+        "bytes": 14775,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "A1D6361E843B8AC60B32B5AA7CCFD2482D2B8F724D2DD58A55F1C51F17011384"
+      },
+      "hls/e2m0/src/gdn_e2m0_top.cpp": {
+        "bytes": 58224,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "8408CD27675FD7759C543272A2F00404A7DD7F310D306F202F93A85D4EF6C429"
+      },
+      "hls/e2m0/tb/tb_gdn_e2m0_trace.cpp": {
+        "bytes": 14740,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "C8DDB95104A0D95361ACBB9C01DD107E37A11CC9B0E13E6859F0B7B328526616"
+      },
+      "hls/e2m0/tcl/run_trace_cosim.tcl": {
+        "bytes": 1459,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "A7A6EB2DA0B6210C46138FBADBF35C1782A14EA057A0F4327333976AFA9B6853"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "FAIL",
+  "tool": {
+    "hls": "AMD Vitis HLS 2025.2",
+    "rtl_simulator": "AMD XSIM 2025.2",
+    "target_part": "xcu55c-fsvh2892-2L-e",
+    "target_period_ns": 4.0
+  },
+  "trace": {
+    "manifest_sha256": "CEBA0700681B672B372998FAFB0E1DE8806E03C8B15BB039717FFBAC315BCF14",
+    "path": "data/vectors/e2m0_resident_trace64.bin",
+    "sha256": "DCE02DB61B60AF9121D2DD597927B58597DEBF2FEA022633AEFEBF32C7862B93",
+    "tokens": 64
+  },
+  "working_tree_dirty": true
+}

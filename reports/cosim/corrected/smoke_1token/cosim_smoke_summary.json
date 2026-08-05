@@ -1,0 +1,105 @@
+{
+  "c_testbench": {
+    "hand_commands": 12,
+    "oracle_steps": 1,
+    "status": "PASS"
+  },
+  "current_source_matches_smoke": false,
+  "current_source_sha256": {
+    "hls/include/block_exp_align.hpp": "59CA155733E5634B37D3017BDD884C46772844C91BA0952ABED4E8D22AC9947C",
+    "hls/include/gdn_kernel.hpp": "D1DE2A9CB607D3F0CE11A7E9C459CD63A5EC6A5A1248E26E0555C412CA896F9E",
+    "hls/include/gdn_params.hpp": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82",
+    "hls/include/mac_e2m1.hpp": "8EE518BFDBA121D5EF3C30CAF97142CA0E42BE31234F9ECD476113F66FA9D150",
+    "hls/include/mx_types.hpp": "AB1BD900904C946167AF0037997A81FBF8665E5543A7027097724FE9BBAC97AC",
+    "hls/src/block_exp_align.cpp": "94E58D52037E27E1E83EA7584511F1FA56BAE317FB30CD53338406BB92890F4B",
+    "hls/src/gdn_top.cpp": "BEC4EDFC88441C0CF4F1B084E6EFE6590D76704201FE6FBB5BA7260D7366BB76",
+    "hls/src/mac_e2m1.cpp": "02641D16AF280EAD3DD885171688FC1E523F026D4EA3A1A7B0A5DAEA74E37B80",
+    "hls/src/phase1_prepare.cpp": "F9154842A1EFEFB211636A1B4C358F682812CB62EFF460F0189DBDB0338BD736",
+    "hls/src/phase2_state_read.cpp": "0C034D0484759BF49A44A32FDB12B4A42D8D460E0845BA2B75F7174B9AF29B67",
+    "hls/src/phase3_update.cpp": "6AA56A83F6BCBFAD26DFA3587A34F74135163B0BCD65E6ABA9B4B2722952A86E",
+    "hls/src/phase4_state_write.cpp": "09BBE3CA09E5668757BA302BA5F7CD9C58302EFF2AE03AA5A3E6D02AF799F806",
+    "hls/src/phase5_output.cpp": "1EC39F69B61687A802801CB5CE4C9880AD74BC7EB54E83586F05C941B0053C37",
+    "hls/tb/tb_block_exp.cpp": "B4980C10C73C13140DE2C38A557283AFB0D2245A84AD9EF00D71223B29ED19E0",
+    "hls/tb/tb_gdn_top.cpp": "AC77577C638A4EB1AE4D8FB38806020ACC95378F43F64DD7A3C972885BAC1F87",
+    "hls/tb/tb_mac_e2m1.cpp": "679C87049F415F9B50A7FA83039AC26EE68C41C0EE81D53F767669292990A797",
+    "hls/tb/tb_phaseN.cpp": "6E4E06F97527A9E76CB8A042411261F57959EFF79522A15361313CDCBBFE7A6C",
+    "hls/tcl/run_cosim.tcl": "DD3B1334D37A3EFB4592BF37D121EF1F960D91EA3843AD83465E370BE3543F42"
+  },
+  "feasibility_decision": {
+    "decision": "Do not launch the required 64-token XSIM run on this host: the bounded one-token smoke exhausted memory before the first valid recurrent STEP completed.",
+    "status": "FAIL"
+  },
+  "limitations": [
+    "The C testbench PASS does not establish RTL parity.",
+    "No complete recurrent STEP reached the RTL post-check.",
+    "The selected residual-stack/write-log candidate is not implemented in this RTL.",
+    "The simulator-reported memory counter is copied verbatim and is not host peak working set.",
+    "The later transport-pipeline cleanup changed HLS source, so current RTL still requires a new parity run."
+  ],
+  "raw_artifact_sha256": {
+    "reports/cosim/corrected/smoke_1token/raw/c_tb.log": "D6E8D2CD907F1B1FF40BD2F5EC1FDB4E6E6E7E84F602AE4BC5C1E835E068F2BB",
+    "reports/cosim/corrected/smoke_1token/raw/cosim_options.xml": "BE7104BF27D573A92F603BF011347FE69E39A83570798D4B86D25706AB47C46E",
+    "reports/cosim/corrected/smoke_1token/raw/extraction_at_run.json": "3404FBE7400E4DACC79BBC8555935072E671F83EFEF9491688B892D4AD301E68",
+    "reports/cosim/corrected/smoke_1token/raw/gdn_top_cosim.rpt": "A61A7E7E02D0A611A8E9A28DBEECB9F915FC54F6A7AA7BA6D2A9AEC6CC2E697A",
+    "reports/cosim/corrected/smoke_1token/raw/gdn_top_verilog.log": "A14CA3A536EBE5DF98DF75C5DD75C788C1EB3FE1177713A9E1D82F7C92737694",
+    "reports/cosim/corrected/smoke_1token/raw/temp.log": "E7C0DAD3B5F32370AF6BA14E11B0E87EA5C89BC6915DC8036EA8A4ED9D203EFB",
+    "reports/cosim/corrected/smoke_1token/raw/u55c_250mhz.log": "8C722421E369BF83106CD0836D1BBF80305334FC8B500FFB58CE548FF7B95292",
+    "reports/cosim/corrected/smoke_1token/raw/xelab.log": "CEE2C248450138AF216EC3AF63A1E6D8E8EF29CD191A474170CD4B0293215B4E",
+    "reports/cosim/corrected/smoke_1token/raw/xsim.log": "64BE9D28EEC283D685312618E5CFD66E8714152527A785D75487BE6963BDD83F"
+  },
+  "required_64_token_rtl_parity": "NOT_RUN",
+  "required_64_token_transaction_count": 141,
+  "rtl_simulation": {
+    "completed_transactions": 3,
+    "failed_allocation_bytes": 8388608,
+    "failed_on_first_valid_step": true,
+    "failure": "out of memory",
+    "hls_elapsed_seconds": 673,
+    "last_simulation_time": 236334000,
+    "simulator_reported_memory_consumed_bytes": 67606072,
+    "status": "FAIL",
+    "tool": "XSIM",
+    "total_transactions": 15
+  },
+  "schema": 1,
+  "scope": "one-token corrected uniform-MXFP4 RTL co-simulation smoke before transport-pipeline cleanup",
+  "source_mismatches": {
+    "hls/src/block_exp_align.cpp": {
+      "current": "94E58D52037E27E1E83EA7584511F1FA56BAE317FB30CD53338406BB92890F4B",
+      "smoke": "E5EE1B0E01835BEA2327D66363A5852253A555CAB97BCC79ED6F56849A3B0193"
+    },
+    "hls/src/phase1_prepare.cpp": {
+      "current": "F9154842A1EFEFB211636A1B4C358F682812CB62EFF460F0189DBDB0338BD736",
+      "smoke": "8706FEE7839015A888517E9DFA617F4F37DBC804DED725D2EC31039A51A7FAB2"
+    }
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "source_sha256": {
+    "hls/include/block_exp_align.hpp": "59CA155733E5634B37D3017BDD884C46772844C91BA0952ABED4E8D22AC9947C",
+    "hls/include/gdn_kernel.hpp": "D1DE2A9CB607D3F0CE11A7E9C459CD63A5EC6A5A1248E26E0555C412CA896F9E",
+    "hls/include/gdn_params.hpp": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82",
+    "hls/include/mac_e2m1.hpp": "8EE518BFDBA121D5EF3C30CAF97142CA0E42BE31234F9ECD476113F66FA9D150",
+    "hls/include/mx_types.hpp": "AB1BD900904C946167AF0037997A81FBF8665E5543A7027097724FE9BBAC97AC",
+    "hls/src/block_exp_align.cpp": "E5EE1B0E01835BEA2327D66363A5852253A555CAB97BCC79ED6F56849A3B0193",
+    "hls/src/gdn_top.cpp": "BEC4EDFC88441C0CF4F1B084E6EFE6590D76704201FE6FBB5BA7260D7366BB76",
+    "hls/src/mac_e2m1.cpp": "02641D16AF280EAD3DD885171688FC1E523F026D4EA3A1A7B0A5DAEA74E37B80",
+    "hls/src/phase1_prepare.cpp": "8706FEE7839015A888517E9DFA617F4F37DBC804DED725D2EC31039A51A7FAB2",
+    "hls/src/phase2_state_read.cpp": "0C034D0484759BF49A44A32FDB12B4A42D8D460E0845BA2B75F7174B9AF29B67",
+    "hls/src/phase3_update.cpp": "6AA56A83F6BCBFAD26DFA3587A34F74135163B0BCD65E6ABA9B4B2722952A86E",
+    "hls/src/phase4_state_write.cpp": "09BBE3CA09E5668757BA302BA5F7CD9C58302EFF2AE03AA5A3E6D02AF799F806",
+    "hls/src/phase5_output.cpp": "1EC39F69B61687A802801CB5CE4C9880AD74BC7EB54E83586F05C941B0053C37",
+    "hls/tb/tb_block_exp.cpp": "B4980C10C73C13140DE2C38A557283AFB0D2245A84AD9EF00D71223B29ED19E0",
+    "hls/tb/tb_gdn_top.cpp": "AC77577C638A4EB1AE4D8FB38806020ACC95378F43F64DD7A3C972885BAC1F87",
+    "hls/tb/tb_mac_e2m1.cpp": "679C87049F415F9B50A7FA83039AC26EE68C41C0EE81D53F767669292990A797",
+    "hls/tb/tb_phaseN.cpp": "6E4E06F97527A9E76CB8A042411261F57959EFF79522A15361313CDCBBFE7A6C",
+    "hls/tcl/run_cosim.tcl": "DD3B1334D37A3EFB4592BF37D121EF1F960D91EA3843AD83465E370BE3543F42"
+  },
+  "status": "FAIL",
+  "timestamp": "2026-08-02T01:09:43.488528+00:00",
+  "trace": {
+    "path": "reports/cosim/corrected/smoke_1token/trace.bin",
+    "sha256": "67D2D2A1A0345D8844F20F292414BD65D0D81FEBAAB29D34C2A8DADF1A5B6175",
+    "status": "PASS",
+    "tokens": 1
+  }
+}

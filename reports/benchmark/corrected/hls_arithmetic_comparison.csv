@@ -1,0 +1,4 @@
+variant,arithmetic,target_device,target_clock_ns,estimated_clock_ns,estimated_fmax_mhz,step_cycles_min,step_cycles_max,lut,ff,bram_18k,uram,dsp,evidence_stage,post_route_status,energy_status
+BF16,BF16 state; BF16 operands; FP32 accumulation,xcu55c-fsvh2892-2L-e,4.0,2.92,342.4657534246575,4225728,4225728,84919,39087,13,128,0,Vitis HLS C-synthesis estimate,NOT_RUN,BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT
+uniform_mxfp4,E2M1 state/operands with E8M0 block scales and integer accumulation,xcu55c-fsvh2892-2L-e,4.0,2.92,342.4657534246575,4972864,6070592,138969,43962,24,32,3,Vitis HLS C-synthesis estimate,NOT_RUN,BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT
+native_mxfp8,E4M3 state/operands with E8M0 block scales and integer accumulation,xcu55c-fsvh2892-2L-e,4.0,2.92,342.4657534246575,5189952,6287680,143084,44715,25,64,3,Vitis HLS C-synthesis estimate,NOT_RUN,BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT

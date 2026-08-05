@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-08-04T11:29:16.443888+00:00",
+  "limitations": [
+    "single deterministic layer-level synthetic trace",
+    "thresholds are engineering criteria, not model-quality guarantees",
+    "full-resolution standalone plots remain separate artifacts"
+  ],
+  "outputs": {
+    "paper/figures/corrected/long_sequence_stability_panel.pdf": "54D38A75A6503DC748A61B240D8DC6B9AA19492FF3D1B31F707532389182CBE3"
+  },
+  "schema": 1,
+  "scope": "paper-scale combined long-sequence synthetic drift panel",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 35914,
+      "changed_file_count": 3,
+      "sha256": "FCA71C5E877002E2CF4AF815FDD62023D7508C70273009DAE2351A2BEF16CAEA"
+    },
+    "files": {
+      "scripts/corrected_long_trace_panel.py": {
+        "bytes": 10863,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "A77FD7A7517644829E9DE4F7ED0565426A42CEAC61117DA4CFB409E17E629B0D"
+      },
+      "scripts/plot_long_sequence_stability.py": {
+        "bytes": 22532,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "9DA01DF904233A7F74611310DAC763E70225BE6AFE8B02E1F7AA46821C3FE92E"
+      },
+      "scripts/reportlab_fonts.py": {
+        "bytes": 944,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "D68D3699969A05E16B49E1323BBFCB95666940DF7FCA3B6513A189A2DCE4767A"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "status": "PASS",
+  "upstream_manifest": "paper/figures/corrected/long_trace_plot_manifest.json",
+  "upstream_manifest_sha256": "348A9BDFFB44200A5FDD255912E807FD0BB66C2C767934FA881A8C431A472E99",
+  "upstream_output_sha256": {
+    "paper/figures/corrected/output_cosine_vs_token.pdf": "715b27f27769127b076c798c62c9cf25af8258a8a269bd95afb01ed0a6f94f65",
+    "paper/figures/corrected/state_relative_l2_vs_token.pdf": "bfe99d439384c9b88b352f2a493612cfaeeeb1b60a2140bdc2b47aa8c4a4e938"
+  },
+  "variants": [
+    "fp32",
+    "bf16_qdq_fp32_accum_state_bf16",
+    "native_mxfp4_encoded_act_b32_state_b32",
+    "mxfp4_qdq_act_b32_state_b32",
+    "mxfp4_qdq_act_b32_mxfp8_e4m3_state_b32",
+    "flat_int4_qdq"
+  ]
+}

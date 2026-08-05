@@ -1,0 +1,37 @@
+﻿[
+    {
+        "path":  "hls/tcl/run_cosim.tcl",
+        "sha256":  "15B4ED301665E983D6FE4D31BA4A3205A4CE61D60230D1515470E29758F851C9",
+        "bytes":  1595
+    },
+    {
+        "path":  "hls/src/gdn_top.cpp",
+        "sha256":  "BEC4EDFC88441C0CF4F1B084E6EFE6590D76704201FE6FBB5BA7260D7366BB76",
+        "bytes":  21045
+    },
+    {
+        "path":  "hls/src/block_exp_align.cpp",
+        "sha256":  "94E58D52037E27E1E83EA7584511F1FA56BAE317FB30CD53338406BB92890F4B",
+        "bytes":  4450
+    },
+    {
+        "path":  "hls/src/phase1_prepare.cpp",
+        "sha256":  "F9154842A1EFEFB211636A1B4C358F682812CB62EFF460F0189DBDB0338BD736",
+        "bytes":  4450
+    },
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current/trace.bin",
+        "sha256":  "67D2D2A1A0345D8844F20F292414BD65D0D81FEBAAB29D34C2A8DADF1A5B6175",
+        "bytes":  574074
+    },
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current/raw/xsim.log",
+        "sha256":  "323E95FD11B145884A650546FB596A3901FB98C172B522EC60BE3188A1F9045A",
+        "bytes":  112219
+    },
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current/raw/u55c_250mhz.log",
+        "sha256":  "D8C12D05B4596CA70F3CC601FA9FC1AEF8EB1791360A2E0AB7655B1CA1BF0DC2",
+        "bytes":  305686
+    }
+]

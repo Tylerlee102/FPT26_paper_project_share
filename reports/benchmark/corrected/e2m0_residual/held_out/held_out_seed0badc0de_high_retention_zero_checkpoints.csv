@@ -1,0 +1,11 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_0badc0de_high_retention_zero,held_out,195936478,high_retention,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0badc0de_high_retention_zero,held_out,195936478,high_retention,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,64,0.9979998962795598,0.06321929456744435,0.002933841198682785,0.062292454340912205,0.072101891040802,9,0,0,1,7,538256,PASS
+synthetic_0badc0de_high_retention_zero,held_out,195936478,high_retention,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0badc0de_high_retention_zero,held_out,195936478,high_retention,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,256,0.9959089701780878,0.09036287479072677,0.004818287678062916,0.08901864426074499,0.17807522416114807,36,0,0,4,7,538256,PASS
+synthetic_0badc0de_high_retention_zero,held_out,195936478,high_retention,fp32,0,1024,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0badc0de_high_retention_zero,held_out,195936478,high_retention,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,1024,0.9953503086760925,0.09634162753111301,0.005654387176036835,0.09540339803452962,0.17455792427062988,146,0,0,2,7,538256,PASS
+synthetic_0badc0de_high_retention_zero,held_out,195936478,high_retention,fp32,0,4096,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0badc0de_high_retention_zero,held_out,195936478,high_retention,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,4096,0.995467971482463,0.09515551306241145,0.005740371532738209,0.09611302182575515,0.1752341389656067,585,0,0,1,7,538256,PASS
+synthetic_0badc0de_high_retention_zero,held_out,195936478,high_retention,fp32,0,8192,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0badc0de_high_retention_zero,held_out,195936478,high_retention,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,8192,0.9953265090161706,0.09657078962553367,0.005482608452439308,0.09529809151792024,0.17367464303970337,1170,0,0,2,7,538256,PASS

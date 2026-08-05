@@ -1,0 +1,75 @@
+{
+  "capacity": 7,
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "hls_parity",
+    "state_block_size": 32,
+    "tokens": 64,
+    "trace_family": "high_retention",
+    "value_dim": 128
+  },
+  "independent_reference": "frozen scalar oracle, via its exhaustively cross-checked vectorized executor",
+  "input_stream_sha256": "C7FB4E674E628396DE7977395A13AC0319DC55CE26609F8007DB9BD72F359AF1",
+  "schema": 1,
+  "scope": "encoded_e2m0_hls_csim_trace",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 106697,
+      "changed_file_count": 5,
+      "sha256": "DA95D67A54798856C2501A81BFD0D83FD7CBD3606D1AD463C2B724B064E20CAA"
+    },
+    "files": {
+      "golden/gdn_e2m0_encoded.py": {
+        "bytes": 40292,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "2E5FBC997FC1222BF72F102FDEC2B3CDAF6CE52A12DCDB1F11F795AA5AC5175D"
+      },
+      "golden/gdn_e2m0_encoded_vectorized.py": {
+        "bytes": 19455,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "1513DA3204765EC819D9AC9856E8DFFCB338E926213C7D4D67EB2EF080A92B14"
+      },
+      "golden/gdn_mxfp4_encoded.py": {
+        "bytes": 22670,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402"
+      },
+      "golden/gdn_mxfp4_encoded_vectorized.py": {
+        "bytes": 13109,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D"
+      },
+      "scripts/generate_e2m0_hls_trace.py": {
+        "bytes": 7494,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "037C238E6CBB3D2B3F03090378A3F0FD2F5FF3D3AFDEDC991A05CE68B6AA9F6A"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_sha256": {
+    "golden/gdn_e2m0_encoded.py": "2E5FBC997FC1222BF72F102FDEC2B3CDAF6CE52A12DCDB1F11F795AA5AC5175D",
+    "golden/gdn_e2m0_encoded_vectorized.py": "1513DA3204765EC819D9AC9856E8DFFCB338E926213C7D4D67EB2EF080A92B14",
+    "golden/gdn_mxfp4_encoded.py": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402",
+    "golden/gdn_mxfp4_encoded_vectorized.py": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D",
+    "scripts/generate_e2m0_hls_trace.py": "037C238E6CBB3D2B3F03090378A3F0FD2F5FF3D3AFDEDC991A05CE68B6AA9F6A"
+  },
+  "stack_depth": 2,
+  "status": "PASS",
+  "timestamp": "2026-08-02T12:16:34.467667+00:00",
+  "trace": "data/vectors/e2m0_resident_trace64.bin",
+  "trace_sha256": "DCE02DB61B60AF9121D2DD597927B58597DEBF2FEA022633AEFEBF32C7862B93"
+}

@@ -1,0 +1,55 @@
+{
+  "limitations": [
+    "selection uses one development seed and synthetic nominal inputs",
+    "held-out synthetic traces are not yet evaluated",
+    "logical bytes are not physical BRAM/URAM allocation",
+    "latency, energy, RTL, board, and closed-loop model evidence are NOT_RUN"
+  ],
+  "logical_baseline_bytes": {
+    "bf16_state": 1048576,
+    "mxfp4_b32_state": 278528,
+    "mxfp8_e4m3_b32_state": 540672
+  },
+  "output_csv": "reports/benchmark/corrected/write_log_selection.csv",
+  "schema": 1,
+  "scope": "development-only configuration freeze for held-out synthetic runs",
+  "selected_configuration": {
+    "activation_block_size": 32,
+    "activation_stack_depth": 2,
+    "base_blocks_per_row": 4,
+    "base_residual_block_fraction": 0.75,
+    "base_residual_blocks_per_row": 3,
+    "base_stack_depth": 2,
+    "fold_policy": "fixed_atomic_all_head",
+    "key_dim": 128,
+    "log_capacity": 7,
+    "log_precision": "mxfp8_e4m3",
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "state_block_size": 32,
+    "value_dim": 128
+  },
+  "selected_variant": "mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7",
+  "selection_row": {
+    "dropped_entries": 0,
+    "logical_state_bytes": 536912,
+    "output_cosine_fp32": 0.9949263251976871,
+    "physical_evidence": "NOT_RUN",
+    "reduction_vs_bf16_percent": 48.79608154296875,
+    "reduction_vs_mxfp8_percent": 0.6954308712121215,
+    "required_checkpoint_count": 5,
+    "source": "reports/benchmark/corrected/write_log_selected_development_checkpoints.csv",
+    "state_max_abs": 0.04027240723371506,
+    "state_rel_l2": 0.0977672541761802,
+    "synthetic_gate": "PASS",
+    "tokens": 8192,
+    "variant": "mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7"
+  },
+  "source_hashes": {
+    "reports/benchmark/corrected/long_trace_checkpoints.csv": "aa69f0476651b04ee894cfd1ce0396dd63151c8572ad4eff2fbe4d54d38ae38c",
+    "reports/benchmark/corrected/write_log_development_checkpoints.csv": "114b6883dd5fe1c846f7f4f4eb42e91c262b20b1bd4ea8b75748040fc246b9ee",
+    "reports/benchmark/corrected/write_log_selected_development_checkpoints.csv": "ff126a4234ca7f3708781dd49bc3c69f0feeae508fa7f70b2f6ffadab64e8d42"
+  },
+  "status": "PASS",
+  "timestamp": "2026-08-01T23:49:55.482326+00:00"
+}

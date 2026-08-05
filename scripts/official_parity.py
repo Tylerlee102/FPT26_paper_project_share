@@ -1,0 +1,596 @@
+"""Pinned Transformers/FLA parity for the Qwen3-Next recurrence core.
+
+This module keeps heavyweight imports inside :func:`run_parity` so its pure
+configuration and metric helpers remain testable in the repository's base
+environment. The runtime command is intended for the pinned Linux/CUDA venv.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import importlib.metadata
+import json
+import platform
+import subprocess
+import sys
+import types
+from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Callable
+
+import numpy as np
+
+from golden.gdn_fp32 import gdn_decode_sequence
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_OUTPUT_DIR = ROOT / "reports" / "golden" / "official_parity"
+DEFAULT_TRANSFORMERS_SOURCE = Path("/opt/gdn-parity/src/transformers")
+DEFAULT_FLA_SOURCE = Path("/opt/gdn-parity/src/flash-linear-attention")
+
+EXPECTED_TRANSFORMERS_COMMIT = "8ac2b916b042b1f78b75c9eb941c0f5d2cdd8e10"
+EXPECTED_FLA_COMMIT = "a670dff4c2537fc1a82486584dd9569e18fba833"
+
+FP32_REL_L2_LIMIT = 1e-5
+FP32_MAX_ABS_LIMIT = 5e-5
+BF16_REL_L2_LIMIT = 3e-2
+BF16_MAX_ABS_LIMIT = 1.25e-1
+BF16_COSINE_LIMIT = 0.999
+
+
+@dataclass(frozen=True)
+class ParityConfiguration:
+    seed: int = 0xFB72
+    tokens: int = 128
+    prefill_tokens: int = 64
+    qk_heads: int = 16
+    value_heads: int = 32
+    key_dim: int = 128
+    value_dim: int = 128
+    device: str = "cuda"
+
+
+def validate_configuration(config: ParityConfiguration) -> None:
+    if config.tokens < 2:
+        raise ValueError("tokens must be at least two")
+    if not 0 < config.prefill_tokens < config.tokens:
+        raise ValueError("prefill_tokens must be between zero and tokens")
+    if config.qk_heads <= 0 or config.value_heads <= 0:
+        raise ValueError("head counts must be positive")
+    if config.value_heads % config.qk_heads:
+        raise ValueError("value_heads must be divisible by qk_heads")
+    if config.key_dim <= 0 or config.value_dim <= 0:
+        raise ValueError("head dimensions must be positive")
+
+
+def error_metrics(reference: object, candidate: object) -> dict[str, float]:
+    reference64 = np.asarray(reference, dtype=np.float64).reshape(-1)
+    candidate64 = np.asarray(candidate, dtype=np.float64).reshape(-1)
+    if reference64.shape != candidate64.shape:
+        raise ValueError("metric arrays must have identical shapes")
+    if not np.all(np.isfinite(reference64)) or not np.all(np.isfinite(candidate64)):
+        raise ValueError("metric arrays must be finite")
+    if reference64.size == 0:
+        return {"cosine": 1.0, "rel_l2": 0.0, "max_abs": 0.0}
+    difference = candidate64 - reference64
+    reference_norm = float(np.linalg.norm(reference64))
+    candidate_norm = float(np.linalg.norm(candidate64))
+    cosine_denominator = reference_norm * candidate_norm
+    cosine = (
+        1.0
+        if cosine_denominator <= 1e-24 and reference_norm <= 1e-12 and candidate_norm <= 1e-12
+        else 0.0
+        if cosine_denominator <= 1e-24
+        else float(np.dot(reference64, candidate64) / cosine_denominator)
+    )
+    return {
+        "cosine": max(-1.0, min(1.0, cosine)),
+        "rel_l2": float(np.linalg.norm(difference) / max(reference_norm, 1e-12)),
+        "max_abs": float(np.max(np.abs(difference))),
+    }
+
+
+def comparison_status(
+    output_metrics: dict[str, float],
+    state_metrics: dict[str, float],
+    *,
+    precision: str,
+) -> str:
+    if precision == "fp32":
+        passed = (
+            output_metrics["rel_l2"] <= FP32_REL_L2_LIMIT
+            and state_metrics["rel_l2"] <= FP32_REL_L2_LIMIT
+            and output_metrics["max_abs"] <= FP32_MAX_ABS_LIMIT
+            and state_metrics["max_abs"] <= FP32_MAX_ABS_LIMIT
+        )
+    elif precision == "bf16":
+        passed = (
+            output_metrics["rel_l2"] <= BF16_REL_L2_LIMIT
+            and state_metrics["rel_l2"] <= BF16_REL_L2_LIMIT
+            and output_metrics["max_abs"] <= BF16_MAX_ABS_LIMIT
+            and state_metrics["max_abs"] <= BF16_MAX_ABS_LIMIT
+            and output_metrics["cosine"] >= BF16_COSINE_LIMIT
+            and state_metrics["cosine"] >= BF16_COSINE_LIMIT
+        )
+    else:
+        raise ValueError(f"unsupported precision: {precision}")
+    return "PASS" if passed else "FAIL"
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest().upper()
+
+
+def _git_commit(path: Path) -> str:
+    return subprocess.check_output(
+        ["git", "-C", str(path), "rev-parse", "HEAD"], text=True
+    ).strip()
+
+
+def _pip_check() -> str:
+    completed = subprocess.run(
+        [sys.executable, "-m", "pip", "check"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    report = (completed.stdout + completed.stderr).strip()
+    if completed.returncode != 0:
+        raise RuntimeError(f"pip check failed: {report}")
+    return report
+
+
+def _minimal_package(name: str, path: Path) -> types.ModuleType:
+    package = types.ModuleType(name)
+    package.__path__ = [str(path)]  # type: ignore[attr-defined]
+    package.__package__ = name
+    return package
+
+
+def _load_fla_ops(fla_source: Path) -> tuple[Callable[..., Any], Callable[..., Any]]:
+    """Load only the pinned FLA ops without executing unrelated model registries."""
+
+    fla_root = fla_source / "fla"
+    for name in tuple(sys.modules):
+        if name == "fla" or name.startswith("fla."):
+            del sys.modules[name]
+    fla_package = _minimal_package("fla", fla_root)
+    fla_package.__version__ = "0.2.1"
+    sys.modules["fla"] = fla_package
+    sys.modules["fla.ops"] = _minimal_package("fla.ops", fla_root / "ops")
+    sys.modules["fla.modules"] = _minimal_package("fla.modules", fla_root / "modules")
+
+    from fla.ops.gated_delta_rule import (  # type: ignore[import-not-found]
+        chunk_gated_delta_rule,
+        fused_recurrent_gated_delta_rule,
+    )
+
+    return chunk_gated_delta_rule, fused_recurrent_gated_delta_rule
+
+
+def _to_numpy(tensor: Any) -> np.ndarray:
+    return tensor.detach().float().cpu().numpy()
+
+
+def _comparison_row(
+    name: str,
+    *,
+    reference_output: np.ndarray,
+    candidate_output: np.ndarray,
+    reference_state: np.ndarray,
+    candidate_state: np.ndarray,
+    precision: str,
+) -> dict[str, object]:
+    output = error_metrics(reference_output, candidate_output)
+    state = error_metrics(reference_state, candidate_state)
+    return {
+        "comparison": name,
+        "precision": precision,
+        "output_cosine": output["cosine"],
+        "output_rel_l2": output["rel_l2"],
+        "output_max_abs": output["max_abs"],
+        "state_cosine": state["cosine"],
+        "state_rel_l2": state["rel_l2"],
+        "state_max_abs": state["max_abs"],
+        "status": comparison_status(output, state, precision=precision),
+    }
+
+
+def _cache_contiguous(
+    chunk_fn: Callable[..., Any],
+    recurrent_fn: Callable[..., Any],
+    *,
+    q: Any,
+    k: Any,
+    v: Any,
+    g: Any,
+    beta: Any,
+    initial_state: Any,
+    prefill_tokens: int,
+) -> tuple[Any, Any]:
+    prefix_output, state = chunk_fn(
+        q[:, :prefill_tokens],
+        k[:, :prefill_tokens],
+        v[:, :prefill_tokens],
+        g=g[:, :prefill_tokens],
+        beta=beta[:, :prefill_tokens],
+        initial_state=initial_state,
+        output_final_state=True,
+        use_qk_l2norm_in_kernel=True,
+    )
+    outputs = [prefix_output]
+    for token in range(prefill_tokens, q.shape[1]):
+        output, state = recurrent_fn(
+            q[:, token : token + 1],
+            k[:, token : token + 1],
+            v[:, token : token + 1],
+            g=g[:, token : token + 1],
+            beta=beta[:, token : token + 1],
+            initial_state=state,
+            output_final_state=True,
+            use_qk_l2norm_in_kernel=True,
+        )
+        outputs.append(output)
+    import torch
+
+    return torch.cat(outputs, dim=1), state
+
+
+def _generate_inputs(config: ParityConfiguration) -> dict[str, np.ndarray]:
+    rng = np.random.default_rng(config.seed)
+    return {
+        "q": rng.normal(0.0, 1.0, size=(1, config.tokens, config.qk_heads, config.key_dim)).astype(np.float32),
+        "k": rng.normal(0.0, 1.0, size=(1, config.tokens, config.qk_heads, config.key_dim)).astype(np.float32),
+        "v": rng.normal(0.0, 0.25, size=(1, config.tokens, config.value_heads, config.value_dim)).astype(np.float32),
+        "alpha": rng.uniform(0.95, 0.999, size=(1, config.tokens, config.value_heads)).astype(np.float32),
+        "beta": rng.uniform(0.0, 1.0, size=(1, config.tokens, config.value_heads)).astype(np.float32),
+        "state": rng.normal(0.0, 0.05, size=(1, config.value_heads, config.key_dim, config.value_dim)).astype(np.float32),
+    }
+
+
+def run_parity(
+    config: ParityConfiguration,
+    *,
+    output_dir: Path,
+    transformers_source: Path,
+    fla_source: Path,
+) -> tuple[list[dict[str, object]], dict[str, object]]:
+    validate_configuration(config)
+    transformers_commit = _git_commit(transformers_source)
+    fla_commit = _git_commit(fla_source)
+    if transformers_commit != EXPECTED_TRANSFORMERS_COMMIT:
+        raise RuntimeError(f"unexpected Transformers commit: {transformers_commit}")
+    if fla_commit != EXPECTED_FLA_COMMIT:
+        raise RuntimeError(f"unexpected FLA commit: {fla_commit}")
+
+    import torch
+    import transformers
+    from transformers.models.qwen3_next import modeling_qwen3_next as official
+
+    if transformers.__version__ != "4.57.0":
+        raise RuntimeError(f"unexpected Transformers version: {transformers.__version__}")
+    if torch.__version__ != "2.8.0+cu128":
+        raise RuntimeError(f"unexpected PyTorch version: {torch.__version__}")
+    if not torch.cuda.is_available():
+        raise RuntimeError("CUDA is unavailable")
+    pip_check_report = _pip_check()
+
+    chunk_fla, recurrent_fla = _load_fla_ops(fla_source)
+    inputs = _generate_inputs(config)
+    repeat = config.value_heads // config.qk_heads
+    device = torch.device(config.device)
+
+    q_base_fp32 = torch.from_numpy(inputs["q"]).to(device)
+    k_base_fp32 = torch.from_numpy(inputs["k"]).to(device)
+    q_fp32 = q_base_fp32.repeat_interleave(repeat, dim=2)
+    k_fp32 = k_base_fp32.repeat_interleave(repeat, dim=2)
+    v_fp32 = torch.from_numpy(inputs["v"]).to(device)
+    g_fp32 = torch.log(torch.from_numpy(inputs["alpha"]).to(device))
+    beta_fp32 = torch.from_numpy(inputs["beta"]).to(device)
+    state_fp32 = torch.from_numpy(inputs["state"]).to(device)
+
+    with torch.no_grad():
+        torch_recurrent_fp32, torch_recurrent_state_fp32 = official.torch_recurrent_gated_delta_rule(
+            q_fp32,
+            k_fp32,
+            v_fp32,
+            g_fp32,
+            beta_fp32,
+            initial_state=state_fp32,
+            output_final_state=True,
+            use_qk_l2norm_in_kernel=True,
+        )
+        torch_chunk_fp32, torch_chunk_state_fp32 = official.torch_chunk_gated_delta_rule(
+            q_fp32,
+            k_fp32,
+            v_fp32,
+            g_fp32,
+            beta_fp32,
+            initial_state=state_fp32,
+            output_final_state=True,
+            use_qk_l2norm_in_kernel=True,
+        )
+        torch_cache_fp32, torch_cache_state_fp32 = _cache_contiguous(
+            official.torch_chunk_gated_delta_rule,
+            official.torch_recurrent_gated_delta_rule,
+            q=q_fp32,
+            k=k_fp32,
+            v=v_fp32,
+            g=g_fp32,
+            beta=beta_fp32,
+            initial_state=state_fp32,
+            prefill_tokens=config.prefill_tokens,
+        )
+
+    numpy_output, numpy_state = gdn_decode_sequence(
+        inputs["q"][0],
+        inputs["k"][0],
+        inputs["v"][0],
+        _to_numpy(g_fp32.exp())[0],
+        inputs["beta"][0],
+        inputs["state"][0],
+    )
+    recurrent_fp32_np = _to_numpy(torch_recurrent_fp32)[0]
+    recurrent_state_fp32_np = _to_numpy(torch_recurrent_state_fp32)[0]
+    rows = [
+        _comparison_row(
+            "numpy_fp32_vs_transformers_recurrent_fp32",
+            reference_output=numpy_output,
+            candidate_output=recurrent_fp32_np,
+            reference_state=numpy_state,
+            candidate_state=recurrent_state_fp32_np,
+            precision="fp32",
+        ),
+        _comparison_row(
+            "transformers_chunk_fp32_vs_recurrent_fp32",
+            reference_output=recurrent_fp32_np,
+            candidate_output=_to_numpy(torch_chunk_fp32)[0],
+            reference_state=recurrent_state_fp32_np,
+            candidate_state=_to_numpy(torch_chunk_state_fp32)[0],
+            precision="fp32",
+        ),
+        _comparison_row(
+            "transformers_cache_fp32_vs_recurrent_fp32",
+            reference_output=recurrent_fp32_np,
+            candidate_output=_to_numpy(torch_cache_fp32)[0],
+            reference_state=recurrent_state_fp32_np,
+            candidate_state=_to_numpy(torch_cache_state_fp32)[0],
+            precision="fp32",
+        ),
+    ]
+
+    q_bf16 = q_fp32.to(torch.bfloat16)
+    k_bf16 = k_fp32.to(torch.bfloat16)
+    v_bf16 = v_fp32.to(torch.bfloat16)
+    beta_bf16 = beta_fp32.to(torch.bfloat16)
+    with torch.no_grad():
+        torch_recurrent_bf16, torch_recurrent_state_bf16 = official.torch_recurrent_gated_delta_rule(
+            q_bf16,
+            k_bf16,
+            v_bf16,
+            g_fp32,
+            beta_bf16,
+            initial_state=state_fp32,
+            output_final_state=True,
+            use_qk_l2norm_in_kernel=True,
+        )
+        fla_recurrent_bf16, fla_recurrent_state_bf16 = recurrent_fla(
+            q_bf16,
+            k_bf16,
+            v_bf16,
+            g_fp32,
+            beta_bf16,
+            initial_state=state_fp32,
+            output_final_state=True,
+            use_qk_l2norm_in_kernel=True,
+        )
+        fla_chunk_bf16, fla_chunk_state_bf16 = chunk_fla(
+            q_bf16,
+            k_bf16,
+            v_bf16,
+            g_fp32,
+            beta_bf16,
+            initial_state=state_fp32,
+            output_final_state=True,
+            use_qk_l2norm_in_kernel=True,
+        )
+        fla_cache_bf16, fla_cache_state_bf16 = _cache_contiguous(
+            chunk_fla,
+            recurrent_fla,
+            q=q_bf16,
+            k=k_bf16,
+            v=v_bf16,
+            g=g_fp32,
+            beta=beta_bf16,
+            initial_state=state_fp32,
+            prefill_tokens=config.prefill_tokens,
+        )
+    torch_recurrent_bf16_np = _to_numpy(torch_recurrent_bf16)[0]
+    torch_recurrent_state_bf16_np = _to_numpy(torch_recurrent_state_bf16)[0]
+    rows.extend(
+        [
+            _comparison_row(
+                "fla_recurrent_bf16_vs_transformers_recurrent_bf16",
+                reference_output=torch_recurrent_bf16_np,
+                candidate_output=_to_numpy(fla_recurrent_bf16)[0],
+                reference_state=torch_recurrent_state_bf16_np,
+                candidate_state=_to_numpy(fla_recurrent_state_bf16)[0],
+                precision="bf16",
+            ),
+            _comparison_row(
+                "fla_chunk_bf16_vs_transformers_recurrent_bf16",
+                reference_output=torch_recurrent_bf16_np,
+                candidate_output=_to_numpy(fla_chunk_bf16)[0],
+                reference_state=torch_recurrent_state_bf16_np,
+                candidate_state=_to_numpy(fla_chunk_state_bf16)[0],
+                precision="bf16",
+            ),
+            _comparison_row(
+                "fla_cache_bf16_vs_transformers_recurrent_bf16",
+                reference_output=torch_recurrent_bf16_np,
+                candidate_output=_to_numpy(fla_cache_bf16)[0],
+                reference_state=torch_recurrent_state_bf16_np,
+                candidate_state=_to_numpy(fla_cache_state_bf16)[0],
+                precision="bf16",
+            ),
+        ]
+    )
+    torch.cuda.synchronize()
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    input_path = output_dir / "official_parity_inputs.npz"
+    np.savez_compressed(input_path, **inputs)
+    arrays_path = output_dir / "official_parity_outputs.npz"
+    np.savez_compressed(
+        arrays_path,
+        numpy_output=numpy_output,
+        numpy_state=numpy_state,
+        transformers_recurrent_fp32=recurrent_fp32_np,
+        transformers_recurrent_state_fp32=recurrent_state_fp32_np,
+        transformers_chunk_fp32=_to_numpy(torch_chunk_fp32)[0],
+        transformers_chunk_state_fp32=_to_numpy(torch_chunk_state_fp32)[0],
+        transformers_cache_fp32=_to_numpy(torch_cache_fp32)[0],
+        transformers_cache_state_fp32=_to_numpy(torch_cache_state_fp32)[0],
+        transformers_recurrent_bf16=torch_recurrent_bf16_np,
+        transformers_recurrent_state_bf16=torch_recurrent_state_bf16_np,
+        fla_recurrent_bf16=_to_numpy(fla_recurrent_bf16)[0],
+        fla_recurrent_state_bf16=_to_numpy(fla_recurrent_state_bf16)[0],
+        fla_chunk_bf16=_to_numpy(fla_chunk_bf16)[0],
+        fla_chunk_state_bf16=_to_numpy(fla_chunk_state_bf16)[0],
+        fla_cache_bf16=_to_numpy(fla_cache_bf16)[0],
+        fla_cache_state_bf16=_to_numpy(fla_cache_state_bf16)[0],
+    )
+
+    source_files = {
+        "transformers_modeling": transformers_source
+        / "src/transformers/models/qwen3_next/modeling_qwen3_next.py",
+        "fla_recurrent": fla_source / "fla/ops/gated_delta_rule/fused_recurrent.py",
+        "fla_chunk": fla_source / "fla/ops/gated_delta_rule/chunk.py",
+        "fla_wy": fla_source / "fla/ops/gated_delta_rule/wy_fast.py",
+        "local_fp32": ROOT / "golden/gdn_fp32.py",
+        "parity_harness": Path(__file__).resolve(),
+    }
+    metadata: dict[str, object] = {
+        "schema": 1,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "status": "PASS" if all(row["status"] == "PASS" for row in rows) else "FAIL",
+        "configuration": asdict(config),
+        "command": [sys.executable, *sys.argv],
+        "runtime": {
+            "python": platform.python_version(),
+            "numpy": np.__version__,
+            "torch": torch.__version__,
+            "torch_cuda": torch.version.cuda,
+            "triton": importlib.metadata.version("triton"),
+            "transformers": transformers.__version__,
+            "flash_linear_attention": importlib.metadata.version("flash-linear-attention"),
+            "datasets": importlib.metadata.version("datasets"),
+            "gpu": torch.cuda.get_device_name(0),
+            "compute_capability": list(torch.cuda.get_device_capability(0)),
+            "pip_check": pip_check_report,
+        },
+        "revisions": {
+            "transformers": transformers_commit,
+            "flash_linear_attention": fla_commit,
+        },
+        "thresholds": {
+            "fp32_rel_l2": FP32_REL_L2_LIMIT,
+            "fp32_max_abs": FP32_MAX_ABS_LIMIT,
+            "bf16_rel_l2": BF16_REL_L2_LIMIT,
+            "bf16_max_abs": BF16_MAX_ABS_LIMIT,
+            "bf16_cosine": BF16_COSINE_LIMIT,
+        },
+        "source_hashes": {name: _sha256(path) for name, path in source_files.items()},
+        "artifact_hashes": {
+            input_path.name: _sha256(input_path),
+            arrays_path.name: _sha256(arrays_path),
+        },
+        "comparisons": rows,
+        "notes": [
+            "Transformers 4.57.0 automatically enables FLA only for fla>=0.2.2; pinned FLA 0.2.1 is loaded directly from its official operator modules.",
+            "The loader bypasses unrelated FLA model registration without modifying either pinned source tree.",
+            "No model weights or datasets are used in this operator-level parity run.",
+        ],
+    }
+    return rows, metadata
+
+
+METRIC_FIELDS = [
+    "comparison",
+    "precision",
+    "output_cosine",
+    "output_rel_l2",
+    "output_max_abs",
+    "state_cosine",
+    "state_rel_l2",
+    "state_max_abs",
+    "status",
+]
+
+
+def write_results(output_dir: Path, rows: list[dict[str, object]], metadata: dict[str, object]) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    metrics_path = output_dir / "official_parity_metrics.csv"
+    with metrics_path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=METRIC_FIELDS)
+        writer.writeheader()
+        writer.writerows(rows)
+    metadata["artifact_hashes"] = {
+        **dict(metadata["artifact_hashes"]),
+        metrics_path.name: _sha256(metrics_path),
+    }
+    manifest_path = output_dir / "official_parity_manifest.json"
+    manifest_path.write_text(json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _parse_int(value: str) -> int:
+    return int(value, 0)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--transformers-source", type=Path, default=DEFAULT_TRANSFORMERS_SOURCE)
+    parser.add_argument("--fla-source", type=Path, default=DEFAULT_FLA_SOURCE)
+    parser.add_argument("--seed", type=_parse_int, default=0xFB72)
+    parser.add_argument("--tokens", type=int, default=128)
+    parser.add_argument("--prefill-tokens", type=int, default=64)
+    parser.add_argument("--qk-heads", type=int, default=16)
+    parser.add_argument("--value-heads", type=int, default=32)
+    parser.add_argument("--key-dim", type=int, default=128)
+    parser.add_argument("--value-dim", type=int, default=128)
+    args = parser.parse_args()
+    config = ParityConfiguration(
+        seed=args.seed,
+        tokens=args.tokens,
+        prefill_tokens=args.prefill_tokens,
+        qk_heads=args.qk_heads,
+        value_heads=args.value_heads,
+        key_dim=args.key_dim,
+        value_dim=args.value_dim,
+    )
+    rows, metadata = run_parity(
+        config,
+        output_dir=args.output_dir,
+        transformers_source=args.transformers_source,
+        fla_source=args.fla_source,
+    )
+    write_results(args.output_dir, rows, metadata)
+    for row in rows:
+        print(
+            f"{row['status']} {row['comparison']}: "
+            f"output_rel_l2={float(row['output_rel_l2']):.6g}, "
+            f"state_rel_l2={float(row['state_rel_l2']):.6g}"
+        )
+    return 0 if metadata["status"] == "PASS" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

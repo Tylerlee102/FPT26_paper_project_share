@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import re
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 from .xilinx_tools import find_vitis_hls
@@ -72,7 +72,7 @@ def collect_evidence(root: Path) -> GateEvidence:
 
 def build_decision_gate_report(root: Path, *, remaining_work_days: str = "0") -> str:
     evidence = collect_evidence(root)
-    timestamp = datetime.now(UTC).isoformat()
+    timestamp = datetime.now(timezone.utc).isoformat()
 
     csim_status = "MISSING"
     csim_detail = "No HLS C-sim result file found; bit-exact 32/32 vector status is unknown."

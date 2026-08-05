@@ -1,0 +1,5 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_0000fb72_nominal,development,64370,nominal,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_nominal,development,64370,nominal,mxfp4_rs2_act_rs1_base_b32_mxfp8_log_b32_r8,0,64,0.9880648578896599,0.15414021334987985,0.0034875482961069793,0.19501414314578502,0.10057300329208374,8,0,0,0,8,330384,PASS
+synthetic_0000fb72_nominal,development,64370,nominal,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_nominal,development,64370,nominal,mxfp4_rs2_act_rs1_base_b32_mxfp8_log_b32_r8,0,256,0.9874168896873794,0.15820621718896974,0.003397944034077227,0.2016987407683781,0.13361310958862305,32,0,0,0,8,330384,PASS

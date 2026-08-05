@@ -1,0 +1,1575 @@
+{
+  "dirty_patch": {
+    "bytes": 1864391,
+    "changed_file_count": 226,
+    "path": "docs/evidence/current_corrected_source.patch",
+    "sha256": "65ABCBE91C7626E3F99083B3D1254AA5F74331DBA3A3CA7A2693C29C00C02FA4"
+  },
+  "excluded_paths": [
+    "docs/evidence_manifest.md"
+  ],
+  "files": {
+    "AGENTS.md": {
+      "bytes": 10007,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "FD611F174749609A600B21E5937F2FB7E482D077ACB20A22EBC60BB2CB9764CF"
+    },
+    "Makefile": {
+      "bytes": 2715,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "60F34D874D203F6EDCA13CC9FE4AC4EBEDFA01A0BE29AD26E7F34D6D6282B5C8"
+    },
+    "README.md": {
+      "bytes": 5737,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "AEAC41A19E151B6B301F1A0FCF8624E851B9168E7DBBD9490923F9688859E9E6"
+    },
+    "docs/author_decisions.md": {
+      "bytes": 1575,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "4F9290487008648ABF3FA594B04ADBF859EB8AA5B4023A744A10A56AAD12BDAA"
+    },
+    "docs/decision_review_response.md": {
+      "bytes": 11688,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "C224371C4119DC19C47D617815278CA00B99046A3435A8545CDA04353C698E9E"
+    },
+    "docs/e2m0_encoded_preregistration.md": {
+      "bytes": 2289,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "4F005D3B928C59D621940DCBBF789CF670AEAF00F7659AED95E9543D92C73C2B"
+    },
+    "docs/e2m0_residual_preregistration.md": {
+      "bytes": 2891,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "780EA22484DC9099A99575E563F0A63D9EB44CBC8AF65CED69B67DCC222DF3CD"
+    },
+    "docs/experimental_protocol.md": {
+      "bytes": 35776,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "3D2671D2A4B6041F1E5A87563CCF606B5E7C66A51EF7A60B5C9AC5651B21E1CF"
+    },
+    "docs/final_completion_gate.md": {
+      "bytes": 2314,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "916293B9F5C7766931DC980449FF9462DC3FBE4DCAABF8DE0ABBB77A5E53EB41"
+    },
+    "docs/hls_trace_format.md": {
+      "bytes": 1661,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "DF615B1C7560D5253E384B6CA0F5250E3A7A8E34C12536B5145AD0CA469F0AD8"
+    },
+    "docs/implementation_status.md": {
+      "bytes": 14517,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "7577327B2E7D7234243C601FC7C6E5E7374EFB0EE8F9471985D29BA6356B1287"
+    },
+    "docs/numerical_contract.md": {
+      "bytes": 23124,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "C0E18121ADE95409D5AB0FCCE91C3F5CC2F7EA2DA314568B4810C4FFC96B5BE6"
+    },
+    "docs/paper_reframing_blueprint.md": {
+      "bytes": 4858,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "28305530AF2AE50BB4B5627CA1F51585ED5FCE75CC28EA12735BF8B0B25FD41C"
+    },
+    "docs/prior_art_matrix.md": {
+      "bytes": 19194,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "FC7F04F6AE0504ACD98EC9291A8F234D2F17447040A602C0149FDF4D5ADAC3A5"
+    },
+    "docs/reviewer_traceability.md": {
+      "bytes": 43647,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "EB23CB5DFAD6CBB54070423670F6903CA690A62962E64BFABECB55184525F25B"
+    },
+    "docs/reviewer_traceability_status.json": {
+      "bytes": 8956,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "B0A04FD6B6882B9E51AEBC4C376C5A28E3FFE9EC3D57EB49328C10F784155B69"
+    },
+    "docs/synthetic_trace_protocol.json": {
+      "bytes": 4538,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "7D485020F522054CCEE8D3129A682E20E865D78FF17E22E7DB486E63DAD88BBA"
+    },
+    "docs/venue_requirements_2026_08_02.md": {
+      "bytes": 2101,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "E0D07B44BB6928B1A3E843AF2ED69196299A8C186F4023009C1ACA0962073C95"
+    },
+    "docs/write_log_selection.md": {
+      "bytes": 1773,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "12665B1DD29A14B6E794CCDB2B0555B8AAEB8A9FC90878500682026822E7D463"
+    },
+    "golden/__init__.py": {
+      "bytes": 355,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "BFF94C1755EA34A8F38CC744E5337E47CE248990F95BDF59668A2E35693D6A03"
+    },
+    "golden/calibrate.py": {
+      "bytes": 11951,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "AD6B8BE0061737B9A49BF553DEF3D53244CC10867899411583C1D416D6DB84D5"
+    },
+    "golden/cosim_trace.py": {
+      "bytes": 1331,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "2E88DD548F10449F5087089858A1748C65DCC59A1BAF33F7355132B3BD7CF15B"
+    },
+    "golden/gdn_bf16.py": {
+      "bytes": 1585,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "E020E4DBE5B2940FB06199FCD7B9B2C6E4E05F5F7923623871BCA7F9FDEE6D0F"
+    },
+    "golden/gdn_e2m0_encoded.py": {
+      "bytes": 40292,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "2E5FBC997FC1222BF72F102FDEC2B3CDAF6CE52A12DCDB1F11F795AA5AC5175D"
+    },
+    "golden/gdn_e2m0_encoded_vectorized.py": {
+      "bytes": 19455,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "1513DA3204765EC819D9AC9856E8DFFCB338E926213C7D4D67EB2EF080A92B14"
+    },
+    "golden/gdn_e2m0_residual.py": {
+      "bytes": 8281,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "D3412E7E3EF8C7D43AB9E3E8190D5AC3C7EF7C88BD18D645A885F6A6AF65F692"
+    },
+    "golden/gdn_fp32.py": {
+      "bytes": 8406,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "7EBC9B7A0BA400A553E9C079B2E2E98596723DCC8B1D137B0477C798E34697C5"
+    },
+    "golden/gdn_int4.py": {
+      "bytes": 1690,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "D871306A336F2DAA888643AEACCB6763E418F15E5F400C5489BE8EBF61D2224D"
+    },
+    "golden/gdn_mxfp4.py": {
+      "bytes": 4313,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "22E9975B4A60A948A909FA0FC35630B1BC6AD68F7464B5C8E0C68F70BCAA44B8"
+    },
+    "golden/gdn_mxfp4_encoded.py": {
+      "bytes": 22670,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402"
+    },
+    "golden/gdn_mxfp4_encoded_vectorized.py": {
+      "bytes": 13109,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D"
+    },
+    "golden/gdn_oracle_fp64.py": {
+      "bytes": 11102,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "9C37880B58EF7272E1D441330D54576BE7512596A775FA9DDC25D4620F7CDB3F"
+    },
+    "golden/gdn_resident_state.py": {
+      "bytes": 20318,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "CA7DF6CDF24E0D05D57F547AC83ECB7492219DB5EE271D6B13BB5D67C86FB282"
+    },
+    "golden/gdn_write_log.py": {
+      "bytes": 15974,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "955A47A7AF4821FD132A56DF07496777BFA1944F1CA5DD45AF66124BE5C4AD33"
+    },
+    "golden/mx_format.py": {
+      "bytes": 10211,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "B0F8BEE046465F342E8049B33A91C3E424C3C2C6E69FB53E85D2D63656BE269D"
+    },
+    "golden/mxfp4_scale_policy.py": {
+      "bytes": 4930,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "2E966021A48E02DFB8E7B1A39B0884F4105095DC1D5219FDBF7F5B7A29AE8596"
+    },
+    "golden/vectors.py": {
+      "bytes": 7359,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "E34404870F54DC708378D234F3C91C677EF6F778EA8DB3C486C96A248A7F9A1E"
+    },
+    "hls/bf16/include/gdn_bf16_kernel.hpp": {
+      "bytes": 2208,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "7B89B4E23292430AA6C7387DE724CE6C18FB3A18FF9A76591505C6A9FE1358A7"
+    },
+    "hls/bf16/src/gdn_bf16_top.cpp": {
+      "bytes": 22726,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "BC8E26B0980E8FF43785D9DD33B81202517E9E16DD79C19F6F5B12B603B40847"
+    },
+    "hls/bf16/tb/tb_gdn_bf16_top.cpp": {
+      "bytes": 3419,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "8405CD12BB546A943E3DCDD2EFC37926589CBCA4C842BA1F85D4DE6BEB598D41"
+    },
+    "hls/bf16/tcl/run_csim.tcl": {
+      "bytes": 380,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "BD62C2041026DF2E7D25BB01CBE14E6444E3D927E9A10272026FF79DACBB2CB6"
+    },
+    "hls/bf16/tcl/run_csynth.tcl": {
+      "bytes": 339,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "2E2BD0E68C7ADB62304481C5CC4EFD617D19698281A9C999E63887DCD2ED3F10"
+    },
+    "hls/e2m0/include/gdn_e2m0_kernel.hpp": {
+      "bytes": 10237,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "B9A662F2DCDFC9BDCD552CF3F90410258FA7FB72EB5A9606208A172B8072EC6A"
+    },
+    "hls/e2m0/src/e2m0_arithmetic.cpp": {
+      "bytes": 14775,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "A1D6361E843B8AC60B32B5AA7CCFD2482D2B8F724D2DD58A55F1C51F17011384"
+    },
+    "hls/e2m0/src/gdn_e2m0_top.cpp": {
+      "bytes": 58224,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "8408CD27675FD7759C543272A2F00404A7DD7F310D306F202F93A85D4EF6C429"
+    },
+    "hls/e2m0/tb/tb_e2m0_arithmetic.cpp": {
+      "bytes": 6661,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "D3DAFE7C611AAD5B0681A00A9B5079375A2BE40F788283A1BDB3391EF91F6DF1"
+    },
+    "hls/e2m0/tb/tb_gdn_e2m0_smoke.cpp": {
+      "bytes": 7390,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "2489168E7D1385FC9D24F75A546539569370A7BC8DB496BD5777E6B3F7AF7656"
+    },
+    "hls/e2m0/tb/tb_gdn_e2m0_trace.cpp": {
+      "bytes": 14740,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "C8DDB95104A0D95361ACBB9C01DD107E37A11CC9B0E13E6859F0B7B328526616"
+    },
+    "hls/e2m0/tcl/run_arithmetic_csim.tcl": {
+      "bytes": 587,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "4A69AC15E5BCCEE83CBFAF596F36D1658398FF4A4DA46FE949B93F15A57EA05B"
+    },
+    "hls/e2m0/tcl/run_csim.tcl": {
+      "bytes": 448,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "ED099402548A9ACC230A10194CD758F1CE3780D5F76AD4EA95B5CE3C747D703F"
+    },
+    "hls/e2m0/tcl/run_csynth.tcl": {
+      "bytes": 405,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "9A1685BAD39C73F47B7D3DE60E4C439F74DC181C51AB28D1E22B95606930D2A4"
+    },
+    "hls/e2m0/tcl/run_trace_csim.tcl": {
+      "bytes": 779,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "FCE897C396CC0C6E481F84C13C9619A98891DEBE49A2997638E994DB11952444"
+    },
+    "hls/include/block_exp_align.hpp": {
+      "bytes": 818,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "59CA155733E5634B37D3017BDD884C46772844C91BA0952ABED4E8D22AC9947C"
+    },
+    "hls/include/gdn_kernel.hpp": {
+      "bytes": 5185,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "D1DE2A9CB607D3F0CE11A7E9C459CD63A5EC6A5A1248E26E0555C412CA896F9E"
+    },
+    "hls/include/gdn_params.hpp": {
+      "bytes": 3045,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82"
+    },
+    "hls/include/mac_e2m1.hpp": {
+      "bytes": 315,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "8EE518BFDBA121D5EF3C30CAF97142CA0E42BE31234F9ECD476113F66FA9D150"
+    },
+    "hls/include/mx_types.hpp": {
+      "bytes": 1112,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "AB1BD900904C946167AF0037997A81FBF8665E5543A7027097724FE9BBAC97AC"
+    },
+    "hls/rtl_tb/axi_memory_model.sv": {
+      "bytes": 5554,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "64BEC39EDAD6BBF85F6DB6FBC2B2B285029F411998FCB248E0D01F59B6D73030"
+    },
+    "hls/rtl_tb/tb_gdn_top_direct.sv": {
+      "bytes": 20582,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "041A4E506E6281C475C03A72B55E76680803AE8A7FA71ED63C7F238E173341C1"
+    },
+    "hls/src/block_exp_align.cpp": {
+      "bytes": 4450,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "94E58D52037E27E1E83EA7584511F1FA56BAE317FB30CD53338406BB92890F4B"
+    },
+    "hls/src/gdn_top.cpp": {
+      "bytes": 21045,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "BEC4EDFC88441C0CF4F1B084E6EFE6590D76704201FE6FBB5BA7260D7366BB76"
+    },
+    "hls/src/mac_e2m1.cpp": {
+      "bytes": 2285,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "02641D16AF280EAD3DD885171688FC1E523F026D4EA3A1A7B0A5DAEA74E37B80"
+    },
+    "hls/src/phase1_prepare.cpp": {
+      "bytes": 4450,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "F9154842A1EFEFB211636A1B4C358F682812CB62EFF460F0189DBDB0338BD736"
+    },
+    "hls/src/phase2_state_read.cpp": {
+      "bytes": 1890,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "0C034D0484759BF49A44A32FDB12B4A42D8D460E0845BA2B75F7174B9AF29B67"
+    },
+    "hls/src/phase3_update.cpp": {
+      "bytes": 1398,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "6AA56A83F6BCBFAD26DFA3587A34F74135163B0BCD65E6ABA9B4B2722952A86E"
+    },
+    "hls/src/phase4_state_write.cpp": {
+      "bytes": 8961,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "09BBE3CA09E5668757BA302BA5F7CD9C58302EFF2AE03AA5A3E6D02AF799F806"
+    },
+    "hls/src/phase5_output.cpp": {
+      "bytes": 1347,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "1EC39F69B61687A802801CB5CE4C9880AD74BC7EB54E83586F05C941B0053C37"
+    },
+    "hls/tb/tb_block_exp.cpp": {
+      "bytes": 1035,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "B4980C10C73C13140DE2C38A557283AFB0D2245A84AD9EF00D71223B29ED19E0"
+    },
+    "hls/tb/tb_gdn_top.cpp": {
+      "bytes": 16013,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "AC77577C638A4EB1AE4D8FB38806020ACC95378F43F64DD7A3C972885BAC1F87"
+    },
+    "hls/tb/tb_mac_e2m1.cpp": {
+      "bytes": 1134,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "679C87049F415F9B50A7FA83039AC26EE68C41C0EE81D53F767669292990A797"
+    },
+    "hls/tb/tb_phaseN.cpp": {
+      "bytes": 393,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "6E4E06F97527A9E76CB8A042411261F57959EFF79522A15361313CDCBBFE7A6C"
+    },
+    "hls/tcl/run_cosim.tcl": {
+      "bytes": 1595,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "15B4ED301665E983D6FE4D31BA4A3205A4CE61D60230D1515470E29758F851C9"
+    },
+    "hls/tcl/run_csim.tcl": {
+      "bytes": 1221,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "8FB0631DC36A86DA9100B06E9C7080F8EB15F3AA2BA303EBDD1F255C8EC4C102"
+    },
+    "hls/tcl/run_csynth.tcl": {
+      "bytes": 1010,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "D6A0032C855980F590D53839DE0932D6FE09BD79D90DFDEF27D7573ECCAA248C"
+    },
+    "hls/tcl/run_export.tcl": {
+      "bytes": 94,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "59C2FBBC8B840C9AC69CE08A8A0A16F73A45997ECB5F197CCF302CDA8CE46F18"
+    },
+    "paper/README.md": {
+      "bytes": 2942,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "09B684662678B16225B6C54084F5FBB14CADFAE9B1B9FB8635B93B0B32A9EF4E"
+    },
+    "paper/abstract_intro_fixed.tex": {
+      "bytes": 5955,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "CD0E0D7432DEA10FB27D37D30BBFA8C1E4EC2DBBD0BA83178BC0ED75374C37F7"
+    },
+    "paper/corrected/paper.tex": {
+      "bytes": 42321,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "E9845A599C78F98EF40DDBD00013054E457049A8A944EDBF22B2616DF5D858D2"
+    },
+    "paper/corrected/snippets/corrected_result_macros.tex": {
+      "bytes": 7358,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "3D3BE7E3C301FB90260D3E2069BBCA899F3859809C11195DCF4E07FFECAE73B4"
+    },
+    "paper/corrected/tables/controlled_hls.tex": {
+      "bytes": 263,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "EDFDF6B993B18EBBB0688FC16D97F159E0E4A671E6D915BD56543F207A912E8D"
+    },
+    "paper/corrected/tables/corrected_extended.tex": {
+      "bytes": 537,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "894F804599CDE5B4C9CF5D08FD0CD4FDE849E1CF0FC4949816DEC665B094BCD2"
+    },
+    "paper/corrected/tables/corrected_heldout.tex": {
+      "bytes": 482,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "445EBEC67A7D322CF5F371DF6C055F3F185362A8155CC9D11F861131E291C201"
+    },
+    "paper/corrected/tables/corrected_quality.tex": {
+      "bytes": 605,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "96A41D79CF2507B6F38291F99176703EC4D96403E47C9CD5D7B22FA1F16F74A3"
+    },
+    "paper/corrected/tables/long_sequence.tex": {
+      "bytes": 956,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "139C96863FC825093C10D5B150D5B7C39FBB54B843E3C55383F8E5D71D2B342A"
+    },
+    "paper/corrected/tables/mitigation_hls.tex": {
+      "bytes": 449,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "A0799DD0BB0F77B652B020AEDE5FF66D971A0BBA225E55EC8C78EEC833C93B14"
+    },
+    "paper/corrected/tables/resource_ablation.tex": {
+      "bytes": 375,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "B740AD529781D3218FA8E8676BA29DF7F8FB07C8191B8FD605CD241E8EAD41AB"
+    },
+    "paper/corrected/tables/scale_policy.tex": {
+      "bytes": 548,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "1E5C313544E3969ADCD75B228DE15A323069A7576E819B6AE7AA08443BF356E8"
+    },
+    "paper/example_report.md": {
+      "bytes": 8787,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "1403FAC7BCF68982FF0ED445A8F08ED6B0D3FB31884E5FE9AF2A17E23BBFCEE0"
+    },
+    "paper/example_research_paper_draft.tex": {
+      "bytes": 38396,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "EF2C846340A88594AEC77A9E9AF074EE0FFE472541B4F5CCB0F44859B9CF7DE4"
+    },
+    "paper/ieee_template_decoding_overview_removed.tex": {
+      "bytes": 37540,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "8D709320037EDEAC86EDF92A904CD11272117E09BEC90B9E1412A3926EF935F6"
+    },
+    "paper/ieee_template_smaller_graphs.tex": {
+      "bytes": 43220,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "9E9C88BC1D3099C83E1BB675449DC2DB90DF7D69FA20DA67ADBB1CC68BB6DFEA"
+    },
+    "paper/overleaf_comments_fixed_2026_06_18.tex": {
+      "bytes": 33403,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "40EB0D831D23C3A81DFE982B273DC2DB1F3FF6E44E949DE04C529D5CA142BFBC"
+    },
+    "paper/overleaf_ready_from_original_tables.tex": {
+      "bytes": 45891,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "29FF0E6B9377FD1441561E657301F6788B222D365682B1C31F904A567DF56F47"
+    },
+    "paper/overleaf_ready_mxfp4_gdn.tex": {
+      "bytes": 45891,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "29FF0E6B9377FD1441561E657301F6788B222D365682B1C31F904A567DF56F47"
+    },
+    "pyproject.toml": {
+      "bytes": 919,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "3B4BC5701AD58DE6F827A29E847E2F1D8D4776C2F8A48284DDB3DFA939248C74"
+    },
+    "reports/README.md": {
+      "bytes": 833,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "BE3D92C69EF5D811020F76A4C12CA89BD7DADC0B14B0AAD9130AE67FC426AFCE"
+    },
+    "reports/known_issues.md": {
+      "bytes": 5736,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "EE40A547F02A5FC6EB93FD4BEC21D237EE04B592CEB804F85A5249753A585560"
+    },
+    "scripts/__init__.py": {
+      "bytes": 34,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "9211B1BD14CA8BB02CEA7A7E0EF852D39FD19593AE9A3BACD732C4E6EF85FBED"
+    },
+    "scripts/aggregate_e2m0_encoded_extended.py": {
+      "bytes": 14922,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "E86CE503867DFE85F5478AE8F04FD703125EC10CE7E1AE77F87F1AAFBDEBC0AC"
+    },
+    "scripts/aggregate_e2m0_encoded_held_out.py": {
+      "bytes": 16815,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "77C13C165C8AC42859941DEDD69DE9D9528250E8222D122293602CE78E6C3D81"
+    },
+    "scripts/aggregate_long_trace_stress.py": {
+      "bytes": 15751,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "5509C873BFE432185D41C6E42679DAC9ED9BBCFC85FEBA8258F9E7449649802D"
+    },
+    "scripts/aggregate_write_log_held_out.py": {
+      "bytes": 8523,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "5629FA756178CBB01E1C8B93CD88540ABE54F3756B7ADA894E63F6062E65CC89"
+    },
+    "scripts/benchmark.py": {
+      "bytes": 38282,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "52B7B9FCABE2CE1FAA7479375DE71918FB6635AC5C9748BC4D67E68CF1395C0C"
+    },
+    "scripts/bf16_hls_report.py": {
+      "bytes": 12862,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "A13257843A302F42183A3AFB28849D67FC2232187E143E9C74B9FA186FD061D9"
+    },
+    "scripts/build_corrected_paper.py": {
+      "bytes": 6620,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "A8B204CDF2BD9E8B97075ED2ADFC11EB32A67DD2CC6C2FD1A0714279D745C0FC"
+    },
+    "scripts/corrected_cosim_report.py": {
+      "bytes": 9439,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "8251DF34265BB751BBF00FAA5F1A4652E804AEF81E3F4E9E2CA38C15AC634983"
+    },
+    "scripts/corrected_datapath_figure.py": {
+      "bytes": 14425,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "FC2A570ECDAD6F52342900FEDF97324D4301050E8D8CB2D28427234380344C10"
+    },
+    "scripts/corrected_hls_report.py": {
+      "bytes": 12586,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "AB3A527F63B5131B53B673E29AE950845E5974CDE9C7C6ADF56BD045E7954FAF"
+    },
+    "scripts/corrected_long_trace_panel.py": {
+      "bytes": 10704,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "56C83CD624693E7FE9AF4309016373751672858EEFE88110B4703A9324684942"
+    },
+    "scripts/corrected_paper_assets.py": {
+      "bytes": 81043,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "1E1591D19E27ED8AC322B8114475CE0DAF4B0A33829A331B6AA9E82AC0EC3C7F"
+    },
+    "scripts/cosim_report.py": {
+      "bytes": 6395,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "B39D99787966D9573AB06C3EEB156459EEF84C1502A3A5002136942559AD19D1"
+    },
+    "scripts/cosim_sweep.py": {
+      "bytes": 5005,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "18E7F84A25C2B63C1E56726EB38C5A8571781FCF153C962F2FADE01807B0778D"
+    },
+    "scripts/csim_report.py": {
+      "bytes": 4703,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "BADDB30EC8DA746E449825544B9CB21548EF293A425D196C44525D6E8C2716BA"
+    },
+    "scripts/decision_gate.py": {
+      "bytes": 8413,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "0D9BCDDA7F0E7ED614EC899C2CA8A6B1147EA356E4202FA0F82AAE29D1B84FEB"
+    },
+    "scripts/direct_rtl_report.py": {
+      "bytes": 8020,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "F721EF06AB703A1DEB9D5812ACA44B6FF71F220B04C8E35549712B69C090119C"
+    },
+    "scripts/direct_rtl_trace_report.py": {
+      "bytes": 13143,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "DDCF2D91B5EE85F55B8258E5F151EE9F69C9218D2F4B413AB8C9AF545730FC19"
+    },
+    "scripts/e2m0_encoded_stability.py": {
+      "bytes": 16228,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "63DE0F936D61F7879B08CD587935F76790FE9633FF7244F17D60EF8CAD90E1FC"
+    },
+    "scripts/e2m0_hls_report.py": {
+      "bytes": 23697,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "9432EE7DA90ADA7A06AD3CB055488C101178A13B548ED72A4EF738211C8A240A"
+    },
+    "scripts/e2m0_residual_stability.py": {
+      "bytes": 17602,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "63BB5F8CF90C70115006C95EBAC4022DB32BA9B54E3ED2E2EBFF50B72828671D"
+    },
+    "scripts/evidence_source_snapshot.py": {
+      "bytes": 8255,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "CD3E08E9D58CD8D1B05B4C026A6C11CF0F970D6E7BB28D96BAF604171D95A425"
+    },
+    "scripts/example_report.py": {
+      "bytes": 15033,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "56B3EFEFE99520AE502A4F724C47AC9FC063D030618D556255B38DC605BEC6F5"
+    },
+    "scripts/final_completion_gate.py": {
+      "bytes": 18706,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "199B8EE356E0FE1B38464153CFC954D0FCD960197995DA287E3D6C3AF4334347"
+    },
+    "scripts/finalize_corrected_paper.py": {
+      "bytes": 5032,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "F45D4567ACBCA4B1267C83F7040C8A9F72ACCE773D8F3A0C26D13E00015C44BF"
+    },
+    "scripts/generate_direct_rtl_trace_assets.py": {
+      "bytes": 8858,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "D9F5A821D606D5110F088836BEB918B7CACB6DBFA690D3FE514C57882E82242C"
+    },
+    "scripts/generate_e2m0_hls_arithmetic_vectors.py": {
+      "bytes": 6281,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "03CE10493033401E2153F079995CC0259EA28199F4EBF5E0C09E33508E082C83"
+    },
+    "scripts/generate_e2m0_hls_trace.py": {
+      "bytes": 7494,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "037C238E6CBB3D2B3F03090378A3F0FD2F5FF3D3AFDEDC991A05CE68B6AA9F6A"
+    },
+    "scripts/generate_hls_command_trace.py": {
+      "bytes": 9609,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "84FB674239115389824F8F53F91DAB33B5522F066FE0E0FFFA41C92D6E0CA56C"
+    },
+    "scripts/hls_arithmetic_comparison.py": {
+      "bytes": 9572,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "02B44440E5D971AD4A95854799D2F30A34FECF2E393A3B5EE025C8CD10ADE895"
+    },
+    "scripts/hls_flow.py": {
+      "bytes": 3659,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "8F9137D7D8B82712732343BADAAAD1A8D73C1DBE49729F45039A4E635E183BD0"
+    },
+    "scripts/hls_report.py": {
+      "bytes": 4213,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "4E4C65275B18BA5EE920891702992BFA3E478DECE39D7C6E0C1288057F16FC8D"
+    },
+    "scripts/hls_source_check.py": {
+      "bytes": 322,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "8308DD93C1314BCB1BFF76570F2EAC00158012D2D5124FA1F5D3567F1B02A3A2"
+    },
+    "scripts/ieee_assets.py": {
+      "bytes": 23239,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "466B2B525A7B3B35175BECF0FCA3690DAB455034211DF08BB0E93083DE354EF8"
+    },
+    "scripts/interrupted_cosim_report.py": {
+      "bytes": 8025,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "520F5221F36E1D582A872E83F19F8ACF855E6192F0392A10EAB581566E0785C2"
+    },
+    "scripts/long_sequence_stability.py": {
+      "bytes": 20364,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "977BA478F143676388BBC78B87777330269E150ABAFC38C68B848A9647B05C14"
+    },
+    "scripts/native_encoded_long_trace.py": {
+      "bytes": 17937,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "04A0227D3E67B9869E8900436300CC26B9E0822DBCA638FE3FE133D54A6CF983"
+    },
+    "scripts/native_mac_evidence.py": {
+      "bytes": 2665,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "F6DE45394A18EB694FF61B4D990886C7826CD375B2FC4B486AC35F829C9646FE"
+    },
+    "scripts/offchip_traffic.py": {
+      "bytes": 5026,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "D4561EEACEFB3C035558607807F0A00BE55D5F51726FBD4CBC96BD8B17FEDC7D"
+    },
+    "scripts/official_parity.py": {
+      "bytes": 22270,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "0D31E602FCE7FEAFA49DD4147DE17E1C6FE0D9DF490898CBB2EFCE8626FD61A0"
+    },
+    "scripts/paper_figures.py": {
+      "bytes": 20737,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "0F027CB04F52F1ED3001D33D85810F2083D76CC85CF2E256969AC6511FE7FB08"
+    },
+    "scripts/paper_graph_previews.py": {
+      "bytes": 16061,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "BD0FAB0E9BEF53300E576841C1DDD6259847F24B8F9FD646537D49388149F83D"
+    },
+    "scripts/paper_pack.py": {
+      "bytes": 14723,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "8364F0AF074A0AF01CAC211561AB2801AF4DD7949EA7105A29BA2F3CA2D06DE0"
+    },
+    "scripts/paper_table_previews.py": {
+      "bytes": 18938,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "D13BC0E84922D84D0A0FF71D196F0C758136E93051795C2734D1C44E5E3D8F92"
+    },
+    "scripts/paper_tables.py": {
+      "bytes": 10336,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "4879F94BEDD074DCCE4A06F8754E366476E012AA190F79E4E2E1E98BF1DBD028"
+    },
+    "scripts/plot_long_sequence_stability.py": {
+      "bytes": 22420,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "27982C4BFC105B687895B94628BC8445F79A3B81263318926DB7EBB602DD57AA"
+    },
+    "scripts/plot_write_log_held_out.py": {
+      "bytes": 19244,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "8F55492F5BB276BC552A48B9FBB6F7D3AC7B1485DB66AE32441CB021D34E4C23"
+    },
+    "scripts/qwen_capture.py": {
+      "bytes": 14578,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "54B648336956535A42D9113B7C435167487A067B261056674CD5D1486A34D7BC"
+    },
+    "scripts/qwen_status.py": {
+      "bytes": 5134,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "3418EB5055845B3F03DC2A30199EA3A5F6D86E3F46F53C9C9F260EBB785992D9"
+    },
+    "scripts/reconcile_reviewer_workbook.py": {
+      "bytes": 23406,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "98538ACF70BBEEC1C4ECFF0FB6BA81FF6D50290EBD694CFF066E3654C12B0730"
+    },
+    "scripts/record_paper_visual_audit.py": {
+      "bytes": 6372,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "6F29C7CBB11D51A35840D0BCF5122D2375C922B63C16F808FDE84FEC44F003CC"
+    },
+    "scripts/replacement_question_summary.py": {
+      "bytes": 22957,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "037FDF796D3FE0AD10007B8082102DE9AA45BF929742E1B34787F8E360464C0C"
+    },
+    "scripts/reviewer_traceability_status.py": {
+      "bytes": 4865,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "F7244882BC41A465BC626FA4CB80EE63CAEE9D8EFCA2395152F0A82F7BC934D8"
+    },
+    "scripts/run_e2m0_residual_matrix.py": {
+      "bytes": 10710,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "8895EB46B6E727CDF7930AAF69473D13B0E92DE148F474CC325DA32555BFF412"
+    },
+    "scripts/run_selected_write_log_matrix.py": {
+      "bytes": 10497,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "BD208AB5D8EF9FA24CB11096A7D8107959104EFFCE32A4CCA1B0741029C2F313"
+    },
+    "scripts/scale_policy_ablation.py": {
+      "bytes": 15836,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "329D88D1BF6527EB95A6121752574401BC0DDAB16A5668FF1A801A93783C7D5F"
+    },
+    "scripts/select_write_log_candidate.py": {
+      "bytes": 7749,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "A9574D84F475F83EE1C5EE4C93BFEEE23F99B9F2D06738D0CEACF283800E2598"
+    },
+    "scripts/state_boundary.py": {
+      "bytes": 184,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "7763B2359DF40BA5E9D8AE2C017FDA684E77C6231017C1DB4643176E2095A3E7"
+    },
+    "scripts/state_capacity_lower_bound.py": {
+      "bytes": 10960,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "EC630038959FD8CF8083D55F35EA8FE27E3D2B6A5E9FA41F4209BEC66A91F60F"
+    },
+    "scripts/state_drift.py": {
+      "bytes": 184,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "7763B2359DF40BA5E9D8AE2C017FDA684E77C6231017C1DB4643176E2095A3E7"
+    },
+    "scripts/storage_overhead.py": {
+      "bytes": 4704,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "E19CCFA8CAEB4345E2DC49CEE13146E3C09A55C7D9FA106B1BEB61B1507A7031"
+    },
+    "scripts/stress_accuracy.py": {
+      "bytes": 184,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "7763B2359DF40BA5E9D8AE2C017FDA684E77C6231017C1DB4643176E2095A3E7"
+    },
+    "scripts/sweep.py": {
+      "bytes": 5081,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "751B03791794A5D3408EADEB27B77C5A8774FFC86FD834B447ED371530E4C1CA"
+    },
+    "scripts/tradeoff_evidence_figure.py": {
+      "bytes": 14037,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "6308C801AE1F1954D2DDA39E24E220C9EBC370DDB311817A1DA658BC22D07C50"
+    },
+    "scripts/validate_paper_pack.py": {
+      "bytes": 15478,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "0CBC826D3DCCDF57C5E4022D56F58C33CB85AD9C5D1F1B540EE1F4F5DD3B40CA"
+    },
+    "scripts/verify_e2m0_encoded_stability.py": {
+      "bytes": 10895,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "B06B8ED6A9C19F2FF0FDC2D39E5408CA839298075F5F8EAE99B08D7B56495AF3"
+    },
+    "scripts/verify_e2m0_residual_matrix.py": {
+      "bytes": 17861,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "AAF9C4EC87ACEFBF3600786FCC221FDDB982D9D96266AB95ECB6504EC46C4950"
+    },
+    "scripts/verify_e2m0_residual_stability.py": {
+      "bytes": 8751,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "6DDCF5D845FC2D74672047CDC614D4B13F03A208B9E90A5FEECF705589A382B8"
+    },
+    "scripts/verify_hls_command_trace.py": {
+      "bytes": 7754,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "404340090A93A1E3787F73757CC73CA177117AB3BC19CC76ACDA7159B10E8854"
+    },
+    "scripts/verify_native_encoded_long_trace.py": {
+      "bytes": 10292,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "0089DFEF28DFB113ABE725BB33B1FC116A846E56AB52FD9B882098181322102B"
+    },
+    "scripts/verify_official_parity.py": {
+      "bytes": 8560,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "F748E2C8B7B0630FD8BC95213F965ABF4746A02A23E082C4CB59574880146ADF"
+    },
+    "scripts/verify_synthetic_stability.py": {
+      "bytes": 14792,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "ED67EDF7AD000C8FE0CD8A9E097CD0EB683D0873DD0249AEDC0DA6DB4D3692B4"
+    },
+    "scripts/verify_vectorized_encoded_oracle.py": {
+      "bytes": 10830,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "7AFF4DFEBD3DDFDAA5CD44CC832927373714F0DF2C3E4B32FFEC7454A0A381C6"
+    },
+    "scripts/verify_write_log_stability.py": {
+      "bytes": 10010,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "523C219C901B789B950B30F459FB0EEA867C91E3DE8E14C20844966DA4F927E9"
+    },
+    "scripts/vivado_flow.py": {
+      "bytes": 2537,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "1AE4432A7D8D8EBA1AEEAA31284334D693D9A4CFC308A9012556A315D660E5CE"
+    },
+    "scripts/vivado_report.py": {
+      "bytes": 1424,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "70F56E031E3706DD113AD49FF8D5ADAFA7BA5A2352E01A16E922A6280BA14CFE"
+    },
+    "scripts/vivado_seed_status.py": {
+      "bytes": 2832,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "DD28E3E7D53A8409EFB1F0A059A889AD3EFFFD451F64C2BF4142CC17C41A2963"
+    },
+    "scripts/vivado_sweep.py": {
+      "bytes": 2589,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "6A0EB88B36DFF57CD65C8BEEC1BF1DF710CE272EE6E07726BCFCCAC487091320"
+    },
+    "scripts/write_log_stability.py": {
+      "bytes": 24433,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "1DD4E5195FD84175AD733CEA38A72B7296E8873AD35C5EEE6CA514D1D8061ED3"
+    },
+    "scripts/xilinx_tools.py": {
+      "bytes": 3837,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "CA5A919C109C692DFCA5BC70F83836581592A7E85D82D1799373D55D9E7E8039"
+    },
+    "tests/test_aggregate_e2m0_encoded_extended.py": {
+      "bytes": 5859,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "4D2D90BC637DEE0E147B903AA2E3F1EF2FB99F4717F8F242BFAD4DD10BD45B03"
+    },
+    "tests/test_aggregate_e2m0_encoded_held_out.py": {
+      "bytes": 1915,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "5434DB43ED1A138376F74E0017FF122FE1E9707921439D755A0E4AAF586AB302"
+    },
+    "tests/test_aggregate_long_trace_stress.py": {
+      "bytes": 3209,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "A8F12BFDF1BE3B0FB6B9222FC2A0E936394E9D63D8FF2F11D6CE2AA692181E09"
+    },
+    "tests/test_bf16_hls_report.py": {
+      "bytes": 983,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "F4E499883607985728FDA09978E2AD2E9635D37CF87F8A1A7F7198D452CA838D"
+    },
+    "tests/test_build_corrected_paper.py": {
+      "bytes": 418,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "C1B3323DEB12273DF329CF93AAAB6540D5BA2E49F17DD79194772A0F4E368772"
+    },
+    "tests/test_calibrate.py": {
+      "bytes": 2248,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "E80DCA101B043884BAAA318517E5B7C765E3AE92503BB5BFF0145ABE85359CC1"
+    },
+    "tests/test_citation_archival_audit.py": {
+      "bytes": 3555,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "A936297548CB3E0E76D4DC6BE0B454BACB9125D63DDF3BF61016BFF65683BA41"
+    },
+    "tests/test_corrected_cosim_report.py": {
+      "bytes": 616,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "F89CC64F4CCF220B39FEF084092A1216129A231EC9F5FA72C5D786AD03698A9E"
+    },
+    "tests/test_corrected_datapath_figure.py": {
+      "bytes": 1546,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "1B648A49CBE2F7C9B53A0C89FD687A8A7C05AF3DDA3162720ADC1D63FA355A8D"
+    },
+    "tests/test_corrected_hls_report.py": {
+      "bytes": 690,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "7200CA8B7CA28B26DB34B079FF4F931251627C5165E7341CEA8591B873D52821"
+    },
+    "tests/test_corrected_long_trace_panel.py": {
+      "bytes": 1303,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "C22AF46A9DA5E8C745BD371B267801BFC862D9F81FFC123D8E18647247F7544A"
+    },
+    "tests/test_corrected_manuscript.py": {
+      "bytes": 9255,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "57FAFF878941CF545708EE542A0E01E53B56A331BEFA95FCE3A18CEB9C233F07"
+    },
+    "tests/test_corrected_pack_validator.py": {
+      "bytes": 5269,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "AF4FF73CC10285E4017EE4D8FBD59D0285E49E231D456C983BAF6BFC825F34EE"
+    },
+    "tests/test_corrected_paper_assets.py": {
+      "bytes": 8144,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "15F66E59B83BDE6F1F8E0A2B9BDAA3CF3D4C548586CBE86C121B4C26ECE02EDE"
+    },
+    "tests/test_corrected_status_docs.py": {
+      "bytes": 2758,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "213CD237D6C96171C0612A093E5B2CEBFEC6B7CF76DD2437BA042B0F744268FC"
+    },
+    "tests/test_cosim_parity.py": {
+      "bytes": 1506,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "8C1F3E486A51E63BDADBED47A9679C7A7714F1321966291CCDFC48CA4C0A9F8E"
+    },
+    "tests/test_decision_gate.py": {
+      "bytes": 1393,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "E2E77A936D504240EA285EA5B78884CE6F65DCFB82285D552045AE17282504FC"
+    },
+    "tests/test_decision_review_response.py": {
+      "bytes": 1465,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "BDF4D015C44B9B92076078284C7B1A1297A89F32433E330A134A250E0DB7A15A"
+    },
+    "tests/test_direct_rtl_report.py": {
+      "bytes": 1500,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "97E7CCAD7BA54A51169B466F680EAA1CB6D150C76A0CEBD4F40BC46D2CF7D8AD"
+    },
+    "tests/test_direct_rtl_trace_report.py": {
+      "bytes": 2487,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "86CB1F546858B0BADF0CD30C8EED58C417A0A43975562EE63EBFBDC24DCB18F2"
+    },
+    "tests/test_e2m0_encoded_preregistration.py": {
+      "bytes": 1383,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "BECF4AAE07C4C59E10FE884913AC697DDABC6DD737C8BDC49EF6DA89DD7A652F"
+    },
+    "tests/test_e2m0_encoded_stability.py": {
+      "bytes": 2869,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "0FBBE2B35B3F33E5AE863FCA482675E4D338536F81FB7789379A05CB6B7AFAD7"
+    },
+    "tests/test_e2m0_hls_report.py": {
+      "bytes": 2275,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "3551C654E2E18B83107A4B28A3FDF140FD9E83CCE372FAAA7BE424F58C28E178"
+    },
+    "tests/test_e2m0_residual_stability.py": {
+      "bytes": 3240,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "79ABFC42E289FAFB95117638CFA0EBD5B8E05620A0731FF789CB0F0F96269757"
+    },
+    "tests/test_evidence_source_snapshot.py": {
+      "bytes": 2692,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "21CF8D30CC17CE888CAF9E29A083ECC100D11E23A1959E0BC1F5F24CA5685E7E"
+    },
+    "tests/test_final_completion_gate.py": {
+      "bytes": 2427,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "C44E155D37C7BD32C685526F5784A30AC7E8A7CEEC6AFBCF14363DCE61BC6772"
+    },
+    "tests/test_finalize_corrected_paper.py": {
+      "bytes": 365,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "8CEF65EE9779A00784CCD3203AE781C7DC04279C72D965441FAB6C1681322079"
+    },
+    "tests/test_gdn_bf16.py": {
+      "bytes": 1957,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "0C47AC3640BAC85C697BA1FDB26917F0D7D6EEFE4A1CB5A1104E9362F02010E0"
+    },
+    "tests/test_gdn_e2m0_encoded.py": {
+      "bytes": 4560,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "B580645E1EAEBD11BEB069B1F0F650B0FA3831DDBC85E4FEA7267DEBDCCACFE7"
+    },
+    "tests/test_gdn_e2m0_encoded_vectorized.py": {
+      "bytes": 2956,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "F229A2B8D8E0C73AC49465C1C696832E15733A06B7BDA7A596D93C70A8B912A8"
+    },
+    "tests/test_gdn_e2m0_residual.py": {
+      "bytes": 3410,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "E709E64CC72DD738627252AD402EEF33B78977D0062D3A0D14FE466C8C5966D0"
+    },
+    "tests/test_gdn_fp32.py": {
+      "bytes": 7292,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "52C0C7F89E2A6AD45D12B7F13D0D5AF8B0C15FEF353CA3A14F8B1D7B0B4395B2"
+    },
+    "tests/test_gdn_int4.py": {
+      "bytes": 1726,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "1EF525C40AB91079C148F5651E56EAE7DB30DAA042D87B5AAB49A9FBDF807FFF"
+    },
+    "tests/test_gdn_mxfp4.py": {
+      "bytes": 2785,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "0EBBFBF087BD4C3047B163F41D38BA673C28F4AA9643F9C893D52610F4FA2A29"
+    },
+    "tests/test_gdn_mxfp4_encoded.py": {
+      "bytes": 11041,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "31C2543FF7E18B53D7652EA8B95DF47A10523E109541375F1DAEF9E571002158"
+    },
+    "tests/test_gdn_mxfp4_encoded_vectorized.py": {
+      "bytes": 4109,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "0F9AEBCA02B4188D98ACDC3091CA11F45A3EE35CE8BC709F731559029C97C0AB"
+    },
+    "tests/test_gdn_oracle_fp64.py": {
+      "bytes": 5425,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "C69615AE16E423BEB5AFD97320F981AC16F5BF58D3C561FD9055E3CFA35BAFC6"
+    },
+    "tests/test_gdn_resident_state.py": {
+      "bytes": 11157,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "3DD5038CAC0BE7C1111E7EB5050683FE885D308AB7789EA7411409B6BC0A60A6"
+    },
+    "tests/test_gdn_write_log.py": {
+      "bytes": 10514,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "1E7984D089C1DE4D5A684D4CE9DC641A8590D9BFF5694E35DC51AFD20A3A4E4A"
+    },
+    "tests/test_generate_direct_rtl_trace_assets.py": {
+      "bytes": 1237,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "FFAEAF67B2AED969E1EAC5B7CA09D40EA7157188530116E61529344B50C5615E"
+    },
+    "tests/test_hls_arithmetic_comparison.py": {
+      "bytes": 1054,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "1BA47D55F4EDC32E52D3D6734E3E6CE13F10D7CD201BCDF864EF6864C069D7FE"
+    },
+    "tests/test_hls_bf16_sources.py": {
+      "bytes": 1505,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "228AB98D0ADA9871EF30BFA1C0D4C3219176292EC8C2EEA65770DDCF6B6B2BF7"
+    },
+    "tests/test_hls_command_trace.py": {
+      "bytes": 528,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "1771599DC17621A4A5006AF12988A386EAFBB890228C9DBF92960D49FB1C01EF"
+    },
+    "tests/test_hls_e2m0_sources.py": {
+      "bytes": 2129,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "6FC8B2DA41C43B5A189252CAEAC7D58485402700E5D190FC5F244DB26E8D6D4A"
+    },
+    "tests/test_hls_sources.py": {
+      "bytes": 5747,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "F21DB484594D92B62271B59DAC9E8956241BF1199B3660E46F8832AF6B8A3C35"
+    },
+    "tests/test_interrupted_cosim_report.py": {
+      "bytes": 759,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "B98FCEF1D6D24D810BAB4A05971952D751F19595D73A9BCF3A273319EBF8BDEC"
+    },
+    "tests/test_long_sequence_stability.py": {
+      "bytes": 4382,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "040B209B704BCFB4F0D69E4FAEB8466D45E50CC248A5F7078EC3812B19D3E5C2"
+    },
+    "tests/test_mx_format.py": {
+      "bytes": 6405,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "01BAF33A3107AAB511C345194DF63DCBD9BB1B5D8EA5AD5281A031E0011C79DF"
+    },
+    "tests/test_mxfp4_scale_policy.py": {
+      "bytes": 4654,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "16C78942B31305FF81532FB7AB0491CBA86899A155EDA5E8B286D5ABF1E9FCF4"
+    },
+    "tests/test_native_encoded_long_trace.py": {
+      "bytes": 1245,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "D5C3EE8C69C66CAFB6D225E4077291556B5D4615C1690C45FCD2B3FFDEF5A584"
+    },
+    "tests/test_official_parity.py": {
+      "bytes": 2302,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "1391C91B127072CC616AEF4C91BC33E35B557424B1997D1989E6F6F90F45170C"
+    },
+    "tests/test_paper_pack_gate.py": {
+      "bytes": 5894,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "E6B1F49A273F47B4C84CC2D03FBEAE03416968300AA2FB1747669A3E1FC0FBCE"
+    },
+    "tests/test_paper_provenance.py": {
+      "bytes": 10100,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "39D0569F4185DB7F100F9117C74DBB8F0272529D7ECA443558D39B40A5739BBA"
+    },
+    "tests/test_plot_long_sequence_stability.py": {
+      "bytes": 3387,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "AB3FBFEE8F03F2588FE14B5E6BDF2DE7BF038A0402B6E987C9117C4A30BD1433"
+    },
+    "tests/test_plot_write_log_held_out.py": {
+      "bytes": 1203,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "192494609D42630897EDC170EDD147E50E90A107194AFCDCC39C72BAC3B5DE74"
+    },
+    "tests/test_record_paper_visual_audit.py": {
+      "bytes": 2088,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "D8C4D0231E79BB67BDD0C9266ED10AD528A36EE05292301E3C28B9D0940D2F8A"
+    },
+    "tests/test_replacement_question_summary.py": {
+      "bytes": 11624,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "3E823AFB2FFCD8F69806459E3679D3B6A6EBA13D010E35A287CB84F77A7E9E05"
+    },
+    "tests/test_reports.py": {
+      "bytes": 5789,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "8EEFEA7423B0251B67A7F7E6BDC30F9760D6F8841AADAEBAEA6B90D44B47289B"
+    },
+    "tests/test_repository_safety.py": {
+      "bytes": 692,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "04901E410A344F5529A3D59EC3BBDFD7D8A6456DE494524001651D3A7EF7D167"
+    },
+    "tests/test_reviewer_traceability.py": {
+      "bytes": 1655,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "332469FB8244EA356789E5F82E1FED637839E010762568BE93FE4E94122DD935"
+    },
+    "tests/test_reviewer_traceability_status.py": {
+      "bytes": 1417,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "DC78A65DF2DA955434A172A282C8912E65E1946659407BFEABC39E2789A93FA1"
+    },
+    "tests/test_run_e2m0_residual_matrix.py": {
+      "bytes": 1757,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "524F023D7CD143349419A6486500D75BAA44E9D6ACB53E9FE7CD0438F6CB680E"
+    },
+    "tests/test_scale_policy_ablation.py": {
+      "bytes": 3799,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "F432538A97E5060DB59D02570EDBDAD739D1079D47546242118549998BA12243"
+    },
+    "tests/test_state_capacity_lower_bound.py": {
+      "bytes": 1378,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "1A01714E7D80C6C43B479F6A035A6D21805D881482905E3F28DD5A27AA99061D"
+    },
+    "tests/test_synthetic_trace_protocol.py": {
+      "bytes": 6562,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "BADEB5D9B533C907356B1D42972C5C17B9762E0734CF24F8F0EE29280E14C5F8"
+    },
+    "tests/test_tradeoff_evidence_figure.py": {
+      "bytes": 1950,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "37E167946103B3220489F4A7CEA99AE9AC80744E590D49220F0DDC08CD691ABE"
+    },
+    "tests/test_vectors.py": {
+      "bytes": 2140,
+      "changed_from_revision": true,
+      "git_state": "tracked",
+      "sha256": "097802A1ED6CEA30A8759F36A004FC62905512327A76D6DF90DCEE598C703224"
+    },
+    "tests/test_venue_requirements.py": {
+      "bytes": 720,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "EC1C6C516801EDAA8D53B2C353C079DDD927083F3B16EE0A154C4E2F1A49B80D"
+    },
+    "tests/test_verify_e2m0_residual_matrix.py": {
+      "bytes": 683,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "A31E37E5F613E4C0E92A92DE8BA93B55FDEA3F32D163946C8A48B4513F28D4C8"
+    },
+    "tests/test_verify_synthetic_stability.py": {
+      "bytes": 2519,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "3780262C46D376032DFE81D30AAE715E3AD67024A5C3DBF06489CE994414609E"
+    },
+    "tests/test_verify_vectorized_encoded_oracle.py": {
+      "bytes": 543,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "89B35B04CCB0BB202E2A764272FDF23F05E4714C7314758AA12752C8417F3355"
+    },
+    "tests/test_write_log_stability.py": {
+      "bytes": 6625,
+      "changed_from_revision": true,
+      "git_state": "untracked",
+      "sha256": "59DB0BB72FE8D91FAB30B8D40AA656C2399D9BD115E3CA063FA454DAE8CB0F94"
+    },
+    "vivado/constraints/timing.xdc": {
+      "bytes": 205,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "54348ED096CACBD5DE16C841B9CE7DF11054A3D3F6B9AD00A3DCFA9C87FF2014"
+    },
+    "vivado/tcl/create_project.tcl": {
+      "bytes": 1460,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "B9481CCB8CBC2187C84289D15D06D068367181EACBCDED2756AF9A405649D25D"
+    },
+    "vivado/tcl/run_impl.tcl": {
+      "bytes": 459,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "7D2D53249445DE6C662466C8D77B916A73D7529F93648FA354B0243D07F6E484"
+    },
+    "vivado/tcl/run_synth.tcl": {
+      "bytes": 360,
+      "changed_from_revision": false,
+      "git_state": "tracked",
+      "sha256": "0A2CF2D6685C35A9DF94E8F32FAAB421BBB8EF8F5348AF53B10DA5DE5393C13A"
+    }
+  },
+  "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "method": "Concatenated git diff --binary output against HEAD for every matched tracked file and git diff --no-index --binary /dev/null output for every matched untracked file, ordered by repository-relative path.",
+  "patterns": [
+    "AGENTS.md",
+    "Makefile",
+    "README.md",
+    "pyproject.toml",
+    "docs/*.md",
+    "docs/*.json",
+    "golden/*.py",
+    "hls/bf16/include/*.hpp",
+    "hls/bf16/src/*.cpp",
+    "hls/bf16/tb/*.cpp",
+    "hls/bf16/tcl/*.tcl",
+    "hls/e2m0/include/*.hpp",
+    "hls/e2m0/src/*.cpp",
+    "hls/e2m0/tb/*.cpp",
+    "hls/e2m0/tcl/*.tcl",
+    "hls/include/*.hpp",
+    "hls/rtl_tb/*.sv",
+    "hls/src/*.cpp",
+    "hls/tb/*.cpp",
+    "hls/tcl/*.tcl",
+    "paper/*.md",
+    "paper/*.tex",
+    "paper/corrected/*.tex",
+    "paper/corrected/snippets/*.tex",
+    "paper/corrected/tables/*.tex",
+    "reports/README.md",
+    "reports/known_issues.md",
+    "scripts/*.py",
+    "tests/*.py",
+    "vivado/constraints/*.xdc",
+    "vivado/tcl/*.tcl"
+  ],
+  "schema": 1,
+  "status": "PASS",
+  "timestamp": "2026-08-04T01:35:52.699424+00:00"
+}

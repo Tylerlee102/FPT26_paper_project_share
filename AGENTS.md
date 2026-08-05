@@ -1,246 +1,257 @@
-# AGENTS.md - Native MXFP4 Persistent-State Dataflow Accelerator for Gated DeltaNet
+# AGENTS.md - Evidence-Gated MXFP GDN Recurrence-Core Research
 
-Specification for autonomous coding work in this repository. This file is the
-source of truth for implementation decisions. If a decision is not covered here,
-stop and ask before acting.
+This file is the repository contract for autonomous work. The July 31, 2026
+review directive supersedes the earlier MXFP4-primary phase plan.
 
-Version 2, dated 2026-05-03. This version pivots from INT4-only to MXFP4-primary
-with an INT4 fallback gate at the end of Phase 4. Every number that appears in
-the manuscript must be machine-traceable to a source file.
+Version 3, dated 2026-07-31.
 
-## Mission
+## Objective
 
-Build a simulation-only native MXFP4 datapath on FPGA for one Gated DeltaNet
-decode layer of Qwen3-Next. The accelerator uses block-scaled FP4 elements
-(E2M1 with E8M0 shared scales per 16- or 32-element block), persistent-state
-dataflow, and LUT-based FP4 multiply logic. FP4 MACs must not use DSPs.
+Determine whether native MXFP4 arithmetic can replace BF16-style arithmetic in
+a persistent-state Qwen3-Next Gated DeltaNet (GDN) recurrence core while:
 
-Target device and tool flow:
+- preserving long-horizon recurrent-state stability;
+- improving physically measured FPGA cost or energy at a matched boundary; and
+- remaining distinguishable from prior persistent-state, quantized-state, and
+  MXFP FPGA work.
 
-- Xilinx Alveo U55C, `xcu55c-fsvh2892-2L-e`
-- Vitis HLS, 250 MHz target clock
-- Vivado post-implementation reports for area, timing, and power
-- HLS C/RTL cosimulation for authoritative latency/parity
+Persistent recurrent state, paired-head sharing, and the five-stage dataflow are
+inherited from prior work. They are not contributions by themselves. Until the
+prior-art matrix and experiments support a narrower claim, use no claim of
+"first", "novel", "certified", "guaranteed", or "minimum precision".
 
-Headline claim template:
+The maximum permitted completion label is `READY FOR HUMAN SUBMISSION REVIEW`.
+It is never a guarantee of acceptance.
 
-> We present the first native MXFP4 FPGA accelerator for Gated DeltaNet decode,
-> with a parameterized LUT-based E2M1 MAC fabric and block-exponent-aware
-> persistent-state dataflow, achieving N x speedup and M x energy efficiency
-> over the BF16 baseline at iso-area while preserving model quality on
-> Qwen3-Next-80B layers.
+## Status Vocabulary
 
-The numerical placeholders must be filled from `paper/numbers.json`; never type
-paper numbers by hand.
+Every requirement uses exactly one status:
 
-## Scope
+- `PASS`
+- `FAIL`
+- `NOT_RUN`
+- `BLOCKED_EXTERNAL`
 
-In scope:
+Any `FAIL`, `NOT_RUN`, or `BLOCKED_EXTERNAL` item in the final completion gate
+means `NOT PAPER READY`. A script prepared for a different machine is not
+experimental evidence.
 
-- One GDN decode kernel, batch=1, single-token autoregressive.
-- Native MXFP4 weights, activations, and preferably recurrent state.
-- MXFP8 recurrent-state fallback if MXFP4 state does not meet quality.
-- INT4 fallback path only if the Phase 4 human decision gate selects it.
-- Deterministic synthetic vectors and realistic Qwen3-Next activation captures.
-- Bit-exact Python/HLS parity and report-driven paper tables/figures.
+For each `PASS`, `docs/evidence_manifest.md` must record the command and exit
+code, source revision and dirty-patch hash, input hashes, configuration and
+seeds, tool versions, raw output path, independent verification method, and
+timestamp.
 
-Out of scope:
+## Preserving Evidence
 
-- Prefill, parallel scan, full end-to-end inference, training, QAT, and
-  side-channel work.
-- DSP-based FP4 multiply.
-- Hand-edited paper numbers or hand-edited generated result macros.
+- Never overwrite or delete the submitted PDF or prior generated evidence.
+- Store preserved material under `legacy/` and label invalidated results as
+  legacy rather than reusing them.
+- A recurrence, kernel-boundary, arithmetic-contract, or target change
+  invalidates dependent C simulation, RTL, synthesis, implementation, power,
+  benchmark, table, and figure results.
+- `paper/numbers.json` and `paper/provenance.json` are generated outputs. Do not
+  hand-edit measurements or generated LaTeX.
+- Do not push, publish, submit, or open a pull request without approval.
 
-## Repository Layout
+Ask before large model or dataset downloads, licensed-tool installation,
+multi-hour synthesis sweeps, paid compute, or FPGA programming.
 
-Required top-level structure:
+## Authoritative Recurrence
+
+Pin the official Qwen3-Next checkpoint and software sources in the evidence
+manifest. For value/state head `h` in `0..31`, let `p(h) = floor(h/2)` select one
+of 16 query/key heads. The logical state is K-by-V with `K = V = 128`.
+
+After depthwise causal convolution and SiLU, the recurrence inputs have shapes:
 
 ```text
-gdn-fpga/
-  AGENTS.md
-  README.md
-  pyproject.toml
-  Makefile
-  golden/
-  hls/
-  vivado/
-  tests/
-  data/
-  reports/
-  paper/
+q, k: [B, T, 16, 128]
+v:    [B, T, 32, 128]
+z:    [B, T, 32, 128]
+a, b: [B, T, 32]
 ```
 
-The paper LaTeX lives in a separate repository. It must import generated macros,
-tables, and figures from this repository.
+For token `t` and value head `h`:
 
-## Make Targets
+```text
+q_norm = q[p(h)] * rsqrt(sum(q[p(h)]^2) + 1e-6)
+k_norm = k[p(h)] * rsqrt(sum(k[p(h)]^2) + 1e-6)
 
-Required entry points:
+beta  = sigmoid(b[h])
+g     = -exp(A_log[h]) * softplus(a[h] + dt_bias[h])
+alpha = exp(g)
 
-- `make setup`
-- `make golden`
-- `make vectors`
-- `make hls-csim`
-- `make hls-csynth`
-- `make hls-cosim`
-- `make vivado-synth`
-- `make vivado-impl`
-- `make benchmark`
-- `make paper-tables`
-- `make paper-figures`
-- `make paper-pack`
-- `make ci`
-- `make clean`
-
-On Windows systems without `make`, equivalent `python -m ...` commands are
-acceptable, but generated artifacts must remain in the same paths.
-
-## Phases
-
-There are seven phases.
-
-1. Golden FP32 model and deterministic vectors.
-2. MXFP4 quantization reference and synthetic/realistic accuracy checks.
-3. HLS implementation, including the novel `mac_e2m1.cpp` and
-   `block_exp_align.cpp` modules.
-4. MXFP4 decision gate. The workflow must halt and ask a human for the MXFP4-vs-INT4
-   decision.
-5. HLS cosimulation and Vivado synth/implementation.
-6. Benchmark sweeps and paper-number extraction.
-7. Paper pack generation.
-
-## Phase 1 Requirements
-
-`golden/gdn_fp32.py` implements:
-
-```python
-S_t = S_{t-1} - beta_t * (S_{t-1} k_t - v_t) k_t^T
+S_decay = alpha * S_prev[h]
+u       = beta * (v[h] - transpose(k_norm) * S_decay)
+S_new   = S_decay + k_norm * transpose(u)
+o[h]    = transpose(q_norm / sqrt(128)) * S_new
 ```
 
-followed by the output gate. Default Qwen3-Next constants are `num_heads=32` and
-`head_dim=128`.
+Required ordering:
 
-## Phase 2 Requirements
+1. Decay the state.
+2. Predict from the decayed state.
+3. Form the beta-scaled delta.
+4. Apply the rank-one write.
+5. Read the output from the updated state.
 
-`golden/mx_format.py` owns E2M1, E8M0, E4M3, block grouping, and round-to-nearest
-even behavior. `golden/gdn_mxfp4.py` is the bit-exact software reference for HLS.
+The post-recurrence operation is gated RMSNorm, not elementwise gate
+multiplication:
 
-Quantization recipe:
-
-- Weights: MXFP4, block size 32, per-output-channel.
-- Activations: dynamic per-token MXFP4, block size 32.
-- State: MXFP4 state, block size 16, unless quality requires MXFP8.
-- Beta: symmetric INT8.
-- Element multiply: E2M1 x E2M1 to fixed Q4.3 partials.
-- Block accumulator: INT24.
-- Final pre-dequant output: FP16.
-
-If MXFP4 PPL degradation exceeds the allowed threshold after mitigations, stop
-and ask.
-
-## Phase 3 Requirements
-
-HLS files under `hls/src` and `hls/include` must implement a five-phase
-persistent-state dataflow. FP4 multiply must be LUT-based and native:
-
-- sign XOR
-- 2-bit exponent add with bias adjustment
-- implicit-leading-one mantissa multiply
-- subnormal handling
-- Q4.3 fixed-point partial output
-
-`block_exp_align.cpp` must align partial products using shared E8M0 block scales
-and accumulate into INT24.
-
-Default compile-time parameters:
-
-```cpp
-constexpr int NUM_HEADS = 32;
-constexpr int HEAD_DIM = 128;
-constexpr int P_K = 16;
-constexpr int P_V = 8;
-constexpr int BLOCK_SIZE = 32;
-constexpr float CLOCK_NS = 4.0f;
-constexpr bool USE_MXFP4 = true;
+```text
+y[h] = RMSNorm(o[h], learned_weight, eps=1e-6) * SiLU(z[h])
 ```
 
-## Phase 4 Decision Gate
+The heads are concatenated and passed through `out_proj`.
 
-The workflow must halt for explicit human decision. Proceed with MXFP4 only if all are
-true:
+## Hardware Boundary
 
-- C-sim bit-exact vectors pass.
-- C-synthesis Fmax is at least 200 MHz.
-- Inner loops have II=1.
-- LUT and BRAM utilization are below 80%.
-- Remaining work to Phase 5 is no more than 3 person-days.
+The preferred boundary is the **GDN recurrence core**.
 
-If any criterion fails and the human chooses fallback, set `USE_MXFP4=false` and
-document the INT4 fallback decision in `reports/decision_gate.md`.
+Inputs:
 
-## Phase 5 Requirements
+- normalized and `1/sqrt(128)`-scaled query;
+- normalized key;
+- post-convolution value;
+- alpha and beta in `[0, 1]`; and
+- resident-state control or explicit state load data.
 
-HLS cosimulation must run for at least 64 tokens and be bit-exact. Vivado reports
-must include timing, utilization, and power. Do not proceed if any cosim bit
-differs from the golden reference.
+Outputs:
 
-## Phase 6 Requirements
+- recurrence output `o`; and
+- updated recurrent state.
 
-Required sweeps:
+Gated RMSNorm, `z`, projections, convolution, and `out_proj` remain outside the
+kernel unless implemented and included in every baseline. Do not call the
+kernel a complete GDN layer without that larger boundary.
 
-- `(P_K, P_V) in {(8,4), (16,8), (32,16)}`
-- `BLOCK_SIZE in {16, 32}`
-- MXFP8 state comparison if MXFP4 state holds
+If hardware stores V-by-K, document the transpose and test round trips in both
+directions.
 
-Every table/figure cell must trace through `paper/provenance.json`.
+## Reference Hierarchy
 
-## Phase 7 Requirements
+Maintain three separate references:
 
-`make paper-pack` produces `paper/pack/submission_<git_sha>.zip` containing:
+1. An independent FP64 mathematical oracle.
+2. Pinned official Transformers and FLA references, compared using
+   dtype-appropriate tolerances.
+3. An independently structured encoded-integer MX oracle that specifies every
+   scale, alignment, rounding, saturation, and state-write point.
 
-- `paper/numbers.json`
-- `paper/provenance.json`
-- generated tables, snippets, and PDF figures
-- Vivado reports
-- HLS C-synthesis reports
-- cosim latency CSVs and reports
-- calibration data SHA256 manifest
-- git log or explicit no-commit note
-- this `AGENTS.md`
+Only encoded MX oracle versus HLS C simulation, RTL cosimulation, and board
+output may be called bit-exact. FP32/BF16 comparisons use numerical tolerances.
+Test recurrent versus chunk execution and prefill-plus-decode versus contiguous
+execution.
 
-## Paper Data Pipeline
+## Numerical Scope
 
-`paper/numbers.json` is the canonical source of every paper measurement. Each key
-is snake_case and stores `value`, `units`, `source`, `source_line`, `extractor`,
-`git_sha`, and `timestamp`. External citations must use `source: "external"` and
-must include precise citation notes.
+- OCP MXFP4-B32 is E2M1 plus one E8M0 scale per 32 elements: 17 bytes per
+  block, or 4.25 bits/value.
+- E8M0 with 16 elements is custom `MX-like FP4-B16`, not OCP MXFP4 or NVFP4.
+- Name MXFP8 explicitly as E4M3 or E5M2.
+- This design selects round-to-nearest, ties-to-even (RNE); do not attribute the
+  entire recurrence arithmetic policy to OCP.
+- The numerical contract in `docs/numerical_contract.md` is authoritative for
+  block axes, scale selection, exceptional values, products, alignment,
+  reduction, accumulator widths, quantization boundaries, alpha/beta, and
+  state-control semantics.
+- The existing unsigned beta divided by 127 is prohibited because it can exceed
+  one.
 
-`paper/provenance.json` maps every `numbers.json` key to the source file, line,
-extractor, timestamp, and git SHA.
+## Required Correction Tests
 
-Generated LaTeX files under `paper/snippets` and `paper/tables` must not be
-edited by hand. Generated figures under `paper/figures` must read exclusively
-from `paper/numbers.json`.
+Correct state decay, initialization, reset, scale use/update, active exponent
+alignment, changing scales, orientation, layer/sequence selection, persistence,
+and output semantics before accepting HLS evidence.
 
-## Cross-Phase Rules
+Tests must cover random nonzero state; alpha/beta endpoints; changing exponents;
+extreme magnitudes; cancellation; saturation; multiple tokens; sequence reset;
+interleaved layers; load/readback; all 36 GDN layer IDs; and adversarial vectors
+with independently computed expectations. Source-string checks and trivial
+zero-state vectors are not correctness evidence.
 
-- Use deterministic seeds. Default seed is `0xFB72` or `GDN_SEED`.
-- No bare equality on floats.
-- `gdn_mxfp4.py` is the bit-exact reference for HLS.
-- HLS cosim is the bit-exact reference for synthesized RTL.
-- Skipped or xfailed tests require entries in `reports/known_issues.md`.
-- Do not loosen tolerances or regenerate failing vectors to hide a bug.
-- Do not edit `paper/numbers.json` or generated LaTeX macros by hand.
+## Evidence Gates
+
+Work proceeds in order:
+
+1. `G0`: read-only repository, manuscript, provenance, evidence, and prior-art
+   audit.
+2. `G1`: exact official recurrence and reference parity.
+3. `G2`: encoded numerical oracle and corrected HLS baseline.
+4. `G3`: software-only novelty feasibility and held-out selection.
+5. `G4`: real closed-loop Qwen evaluation with cache-faithful decode.
+6. `G5`: model-wide GDN recurrent-state subsystem and physical implementation.
+7. `G6`: U55C board parity, telemetry, and matched baselines.
+8. `G7`: evidence-only paper rewrite, provenance validation, and rendered PDF
+   audit.
+
+Do not let an earlier green report validate code changed by a later gate.
+
+PDF release is staged to avoid circular authorization. After every upstream
+experimental and hardware gate passes, an internal
+`paper_audit_candidate.pdf` may be compiled solely for page-by-page review; it
+must be marked ineligible for submission. The final `paper.pdf` may only be an
+exact-byte copy of that audited candidate, and may only be created after all
+eleven completion gates pass. The paper pack is subject to the same all-PASS
+gate.
+
+## Evaluation Requirements
+
+The primary arithmetic comparison is controlled at the recurrence-core boundary
+with the same layer, state layout, target, block size, and parallelism. Required
+baselines are BF16 state, uniform MXFP8 state, uniform MXFP4 state, and MXFP4
+compute with MXFP8 state. INT4 is supplemental.
+
+Long-trace checkpoints include 64, 256, 1024, 4096, and 8192 decode tokens.
+Report output cosine similarity, state relative L2 error, maximum state error,
+and all saturation/overflow events over token index. Real-model quality requires
+closed-loop replacement; offline activation captures are diagnostic only.
+
+Hardware comparisons use the same recurrence boundary. Vivado power multiplied
+by simulated latency is estimated energy, not board energy. GPU energy may not
+be derived from TDP.
+
+For Qwen3-Next-80B-A3B, separately account for all 36 GDN states, convolution
+state, full-attention KV cache, weights, activations, buffers, and host traffic.
+Use the phrase **model-wide GDN recurrent-state subsystem**, not complete model
+residency.
+
+## Candidate Research Direction
+
+A lazily decayed MXFP4 base plus a bounded higher-precision rank-one write log is
+only a hypothesis. Establish exact-arithmetic equivalence and a precise
+prior-art gap before naming or implementing it in HLS. Select at most one
+mechanism after preregistered software experiments show a Pareto improvement in
+quality, physical memory, average and p99 latency, and energy.
+
+Do not call an empirical drift controller certified or error-bounded unless a
+conservative finite-arithmetic bound includes every implemented error source,
+is independently checked, contains all observed adversarial error, and remains
+non-vacuous on real traces.
+
+## Completion Gate
+
+`READY FOR HUMAN SUBMISSION REVIEW` requires all of the following to be `PASS`:
+
+- defensible prior-art gap;
+- exact official recurrence parity;
+- independent encoded-integer MX reference;
+- HLS C simulation and RTL bit parity;
+- closed-loop real-model quality;
+- selected method's Pareto advantage;
+- physical all-layer state-bank fit;
+- post-route timing and DRC;
+- real-board parity and energy;
+- complete reviewer traceability; and
+- paper provenance and final PDF visual audit.
+
+Otherwise report `NOT PAPER READY` and state exactly what remains.
 
 ## Stop And Ask
 
-Stop for human input if:
-
-- Phase 2 PPL degradation exceeds the hard floor after documented mitigations.
-- Phase 4 decision gate is reached.
-- HLS cannot close 200 MHz after reasonable pipelining/retiming attempts.
-- Cosim disagreement cannot be localized after one debug pass.
-- Vivado implementation fails to fit.
-- Calibration data cannot be collected.
-- Test expectations in this file conflict.
-- `paper-pack` fails provenance validation.
+Stop for human input before any large download, paid run, multi-hour synthesis,
+tool installation, FPGA programming, publication, submission, push, or pull
+request. Also stop if prior art is substantially equivalent, a gate cannot be
+made reproducible, HLS cannot close timing after a bounded repair pass, RTL
+parity remains unexplained after one debug pass, the implementation does not
+fit, or final provenance validation fails.

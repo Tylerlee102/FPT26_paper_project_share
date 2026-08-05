@@ -1,0 +1,47 @@
+G0/G1 local attachment and runtime recheck
+Timestamp: 2026-08-01T02:07:50.3280417-07:00
+Host: Tyler, America/Los_Angeles
+Source revision: bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe
+
+AUTHORITATIVE REVIEWER ATTACHMENT
+
+Command class:
+  rg --files C:\Users\tyboy\.codex\attachments
+  rg -l <exact UUID and exact recoverable-comment phrases> attachment store
+
+Observed:
+  Attachment-store files enumerated: 154
+  Path/name matches for UUID 63cd9dfa-cbf1-43b5-bb3b-43baf511092d: 0
+  Content hits for that UUID: only the remediation directive and the aggregate
+    pasted-text attachment index, both of which merely reference the missing path
+  Exact content hit for "Natural language words and tokens are not equivalent.": 0
+  Exact content hit for "Comment fix review sheet": 0
+
+Conclusion:
+  The authoritative reviewer source remains BLOCKED_EXTERNAL. The recoverable
+  67-row local review sheet cannot be promoted to authoritative identity.
+
+LOCAL OFFICIAL-RUNTIME INVENTORY
+
+Python environments inspected:
+  C:\Users\tyboy\AppData\Local\Programs\Python\Python312\python.exe
+  C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe
+  C:\Users\tyboy\OneDrive\Documents\mit_2026\.external\Paper2Agent\PipeSense_Agent_Codex\PipeSense-ARM-env\Scripts\python.exe
+  C:\Users\tyboy\OneDrive\Documents\PatchReserve\.venv\Scripts\python.exe
+
+Import-spec result in every environment:
+  torch: false
+  transformers: false
+  fla: false
+  causal_conv1d: false
+  triton: false
+
+Additional searches:
+  Hugging Face cache: absent
+  modeling_qwen3_next.py under Documents/.cache: absent
+  cached transformers/torch/flash-linear-attention wheel: none found
+
+Conclusion:
+  Pinned Transformers/FLA runtime parity remains NOT_RUN. Completing it requires
+  an explicit dependency-install/environment decision; no package was installed
+  and no model or dataset was downloaded during this recheck.

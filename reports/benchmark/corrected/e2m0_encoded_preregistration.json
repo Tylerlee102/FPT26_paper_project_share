@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "registration_status": "PASS",
+  "registered_at": "2026-08-02T10:10:40.7553223Z",
+  "candidate_evidence_status": "NOT_RUN",
+  "candidate_name": "mxfp4_rs2_act_e2m1_e2m0_state_mxfp4rs2_log_r7_q1_15_int32_guard5",
+  "scope": "encoded-integer layer-level synthetic recurrent stability",
+  "controlled_configuration": {
+    "num_value_heads": 32,
+    "num_qk_heads": 16,
+    "key_dim": 128,
+    "value_dim": 128,
+    "activation_block_size": 32,
+    "state_block_size": 32,
+    "capacity": 7,
+    "fold_policy": "fixed all-head atomic at capacity",
+    "accumulator_bits": 32,
+    "alignment_guard_bits": 5,
+    "coefficient_format": "Q1.15",
+    "logical_state_bytes": 537744,
+    "target": "AMD Alveo U55C xcu55c-fsvh2892-2L-e"
+  },
+  "quality_gate": {
+    "checkpoint_output_cosine_minimum": 0.99,
+    "final_state_relative_l2_maximum": 0.1,
+    "element_saturations_required": 0,
+    "accumulator_saturations_required": 0,
+    "scale_clamps_required": 0,
+    "alignment_underflows": "reported, not thresholded",
+    "e2m0_residual_clips": "reported as deliberate min-SSE scale clipping, not overflow"
+  },
+  "development_gate": {
+    "status": "PASS",
+    "seed": 64370,
+    "seed_hex": "0xFB72",
+    "trace_family": "high_retention",
+    "initial_state_modes": [
+      "random",
+      "zero"
+    ],
+    "tokens": 1024,
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "verified_manifests": {
+      "reports/benchmark/corrected/e2m0_encoded/development/high_retention_0000fb72_random_1024_manifest.json": "B721820DC1686EE008179E229EE65C9634550C2549837B242988574C424169B6",
+      "reports/benchmark/corrected/e2m0_encoded/development/high_retention_0000fb72_zero_1024_manifest.json": "2777E860D4FFC5C244D060872F623C6B02D905B33C9CBF27DCA77827AE051AC2"
+    },
+    "verification_sha256": {
+      "reports/benchmark/corrected/e2m0_encoded/development/high_retention_0000fb72_random_1024_verification.json": "3FA8C1673905B1E85D224B1804EF6D73B257094449313130A80EF3CA77A8B43C",
+      "reports/benchmark/corrected/e2m0_encoded/development/high_retention_0000fb72_zero_1024_verification.json": "E08A3CED6ADBFF5875BC80EBC4D3B08839D98FCAA55E968F53C03EDECBF7471A"
+    }
+  },
+  "held_out_gate": {
+    "status": "NOT_RUN",
+    "split": "encoded_held_out",
+    "seeds": [
+      2709413613,
+      3302208161,
+      115712464
+    ],
+    "seed_hex": [
+      "0xA17E5EED",
+      "0xC4D3B2A1",
+      "0x06E5A1D0"
+    ],
+    "trace_family": "high_retention",
+    "initial_state_modes": [
+      "random",
+      "zero"
+    ],
+    "tokens": 1024,
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "run_count": 6,
+    "execution_order": "seed order as registered; random then zero within each seed",
+    "aggregate_rule": "all six runs must pass the per-run quality and zero-overflow gate"
+  },
+  "extended_development_gate": {
+    "status": "NOT_RUN",
+    "seed": 64370,
+    "seed_hex": "0xFB72",
+    "trace_family": "high_retention",
+    "initial_state_modes": [
+      "random",
+      "zero"
+    ],
+    "tokens": 8192,
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "rule": "same quality and zero-overflow gate; development evidence only"
+  },
+  "frozen_source_sha256": {
+    "golden/gdn_e2m0_encoded.py": "2E5FBC997FC1222BF72F102FDEC2B3CDAF6CE52A12DCDB1F11F795AA5AC5175D",
+    "golden/gdn_e2m0_encoded_vectorized.py": "1513DA3204765EC819D9AC9856E8DFFCB338E926213C7D4D67EB2EF080A92B14",
+    "scripts/e2m0_encoded_stability.py": "63DE0F936D61F7879B08CD587935F76790FE9633FF7244F17D60EF8CAD90E1FC",
+    "scripts/verify_e2m0_encoded_stability.py": "B06B8ED6A9C19F2FF0FDC2D39E5408CA839298075F5F8EAE99B08D7B56495AF3"
+  },
+  "limitations": [
+    "synthetic layer-level traces only",
+    "held-out encoded traces are not yet run",
+    "HLS C simulation, RTL parity, physical allocation, post-route timing, board energy, and closed-loop model quality are NOT_RUN",
+    "the registered candidate is a recurrence-specific corrected MXFP4 representation, not uniform MXFP4 state"
+  ]
+}

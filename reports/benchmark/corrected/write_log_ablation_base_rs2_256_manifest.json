@@ -1,0 +1,48 @@
+{
+  "activation_stack_depth": 1,
+  "base_stack_depth": 2,
+  "capacities": [
+    8
+  ],
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 256,
+    "trace_family": "nominal",
+    "value_dim": 128
+  },
+  "input_stream_sha256": "4467ba807789ee33c6167b447abe9d3e280737cc264cc82bd034b49d9e7973bf",
+  "limitations": [
+    "synthetic inputs",
+    "floating Q/DQ candidate, not the encoded-integer oracle",
+    "logical storage bytes, not placed BRAM/URAM allocation",
+    "not closed-loop Qwen quality evidence"
+  ],
+  "log_precision": "mxfp8_e4m3",
+  "numpy": "2.3.5",
+  "outputs": {
+    "reports/benchmark/corrected/write_log_ablation_base_rs2_256_checkpoints.csv": "a2aa0326524209e593c4e3eb63c936f886950cc3182e778433181ae88f7e008a",
+    "reports/benchmark/corrected/write_log_ablation_base_rs2_256_tokens.csv": "4eb95c727e32c898c5253fab4fffd1a68e4a52598b74f2e96166985b0eb54a56"
+  },
+  "python": "3.12.10",
+  "schema": 1,
+  "source_hashes": {
+    "golden/gdn_fp32.py": "7ebc9b7a0ba400a553e9c079b2e2e98596723dcc8b1d137b0477c798e34697c5",
+    "golden/gdn_mxfp4.py": "22e9975b4a60a948a909fa0fc35630b1bc6ad68f7464b5c8e0c68f70bcaa44b8",
+    "golden/gdn_write_log.py": "bd8eeb44e518bddff9d265d2ded96f6d2e03df624c2f4507baae4c8775d37ba1",
+    "golden/mx_format.py": "b0f8bee046465f342e8049b33a91c3e424c3c2c6e69fb53e85d2d63656be269d",
+    "scripts/long_sequence_stability.py": "10c0ab85b56d8e634c0a34daef6480239092c1335a3e47a595701c19bed7a69b",
+    "scripts/write_log_stability.py": "8bb86c63d18028a01d3acefefe4012444e332f9853fe174203a8ea195014f331"
+  },
+  "status": "diagnostic_only",
+  "timestamp": "2026-08-01T23:26:14.258765+00:00"
+}

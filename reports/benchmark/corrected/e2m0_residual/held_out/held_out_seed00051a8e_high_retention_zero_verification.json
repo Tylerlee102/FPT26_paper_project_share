@@ -1,0 +1,12 @@
+{
+  "checkpoint_rows": 10,
+  "expected_logical_state_bytes": 538256,
+  "failures": [],
+  "gate_pass": true,
+  "manifest": "reports/benchmark/corrected/e2m0_residual/held_out/held_out_seed00051a8e_high_retention_zero_manifest.json",
+  "manifest_sha256": "8f9653a587aec6ac67ed10de957856247b504ae0011fa1389dd7cbbabb20ced3",
+  "schema": 1,
+  "status": "PASS",
+  "token_rows": 16384,
+  "verified_at": "2026-08-02T08:52:52.533856+00:00"
+}

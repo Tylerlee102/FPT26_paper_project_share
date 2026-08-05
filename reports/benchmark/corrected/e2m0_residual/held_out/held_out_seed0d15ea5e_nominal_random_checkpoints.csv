@@ -1,0 +1,11 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_0d15ea5e_nominal_random,held_out,219540062,nominal,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0d15ea5e_nominal_random,held_out,219540062,nominal,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,64,0.9984946827684076,0.05484859603830837,0.0011612179223448038,0.05123465395095898,0.023790791630744934,9,0,0,1,7,538256,PASS
+synthetic_0d15ea5e_nominal_random,held_out,219540062,nominal,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0d15ea5e_nominal_random,held_out,219540062,nominal,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,256,0.998758176671593,0.049831330225018934,0.0009522628970444202,0.049118908299055235,0.02361607551574707,36,0,0,4,7,538256,PASS
+synthetic_0d15ea5e_nominal_random,held_out,219540062,nominal,fp32,0,1024,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0d15ea5e_nominal_random,held_out,219540062,nominal,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,1024,0.998556166452771,0.053718898671798875,0.0010650040348991752,0.050815308288220444,0.025000691413879395,146,0,0,2,7,538256,PASS
+synthetic_0d15ea5e_nominal_random,held_out,219540062,nominal,fp32,0,4096,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0d15ea5e_nominal_random,held_out,219540062,nominal,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,4096,0.9986608956522385,0.0517640818321352,0.0011646151542663574,0.051663376606163096,0.02830885350704193,585,0,0,1,7,538256,PASS
+synthetic_0d15ea5e_nominal_random,held_out,219540062,nominal,fp32,0,8192,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0d15ea5e_nominal_random,held_out,219540062,nominal,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,8192,0.9984319800367425,0.05597889114787857,0.0011713511776179075,0.052167710708423,0.03242018073797226,1170,0,0,2,7,538256,PASS

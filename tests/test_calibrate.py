@@ -23,7 +23,8 @@ class TestCalibrate(unittest.TestCase):
                 ablation_path=tmp / "ablation.md",
                 count=2,
                 seed=0xFB72,
-                num_heads=2,
+                num_value_heads=2,
+                num_qk_heads=1,
                 head_dim=16,
                 block_size=16,
                 state_block_size=16,
@@ -38,9 +39,12 @@ class TestCalibrate(unittest.TestCase):
                 metadata = json.loads(str(data["metadata_json"].item()))
                 self.assertEqual(metadata["num_vectors"], 2)
                 self.assertIn("q_mxfp4_b16_scales", data.files)
-                self.assertIn("state_mxfp8_b16_scales", data.files)
-                self.assertEqual(data["q_mxfp4_b16_scales"].shape, (2, 2, 1))
+                self.assertIn("state_mxfp8_e4m3_b16_scales", data.files)
+                self.assertIn("alpha_q1_15_codes", data.files)
+                self.assertIn("beta_q1_15_codes", data.files)
+                self.assertEqual(data["q_mxfp4_b16_scales"].shape, (2, 1, 1))
                 self.assertEqual(data["state_mxfp4_b16_scales"].shape, (2, 2, 16, 1))
+                self.assertEqual(metadata["state_orientation"], "KxV")
 
             report = result.report_path.read_text(encoding="utf-8")
             ablation = result.ablation_path.read_text(encoding="utf-8")

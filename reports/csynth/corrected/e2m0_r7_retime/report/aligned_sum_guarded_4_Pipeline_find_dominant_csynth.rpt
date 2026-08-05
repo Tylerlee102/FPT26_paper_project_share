@@ -1,0 +1,168 @@
+
+
+================================================================
+== Vitis HLS Report for 'aligned_sum_guarded_4_Pipeline_find_dominant'
+================================================================
+* Date:           Sun Aug  2 05:06:09 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_e2m0_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.255 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval |      Pipeline     |
+    |   min   |   max   |    min    |    max    | min | max |        Type       |
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+    |        6|        6|  24.000 ns|  24.000 ns|    0|    0|  loop pipeline stp|
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                 |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |    Loop Name    |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- find_dominant  |        4|        4|         1|          1|          1|     4|       yes|
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|      101|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|        0|       40|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|       54|    -|
+|Register             |        -|     -|       22|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|       22|      195|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +---------------------------+---------------------+---------+----+---+----+-----+
+    |          Instance         |        Module       | BRAM_18K| DSP| FF| LUT| URAM|
+    +---------------------------+---------------------+---------+----+---+----+-----+
+    |sparsemux_9_2_9_1_1_U1065  |sparsemux_9_2_9_1_1  |        0|   0|  0|  20|    0|
+    |sparsemux_9_2_9_1_1_U1066  |sparsemux_9_2_9_1_1  |        0|   0|  0|  20|    0|
+    +---------------------------+---------------------+---------+----+---+----+-----+
+    |Total                      |                     |        0|   0|  0|  40|    0|
+    +---------------------------+---------------------+---------+----+---+----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +--------------------------+----------+----+---+----+------------+------------+
+    |       Variable Name      | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +--------------------------+----------+----+---+----+------------+------------+
+    |add_ln173_fu_170_p2       |         +|   0|  0|  10|           3|           1|
+    |icmp_ln173_fu_164_p2      |      icmp|   0|  0|  12|           3|           4|
+    |icmp_ln175_fu_207_p2      |      icmp|   0|  0|  16|           9|           1|
+    |icmp_ln176_fu_247_p2      |      icmp|   0|  0|  23|          16|          16|
+    |found_1_fu_281_p2         |        or|   0|  0|   2|           1|           1|
+    |or_ln176_fu_253_p2        |        or|   0|  0|   2|           1|           1|
+    |dominant_1_fu_267_p3      |    select|   0|  0|  16|           1|          16|
+    |select_ln176_fu_259_p3    |    select|   0|  0|  16|           1|          16|
+    |not_icmp_ln175_fu_275_p2  |       xor|   0|  0|   2|           1|           2|
+    |xor_ln176_fu_241_p2       |       xor|   0|  0|   2|           1|           2|
+    +--------------------------+----------+----+---+----+------------+------------+
+    |Total                     |          |   0|  0| 101|          37|          60|
+    +--------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------------------+----+-----------+-----+-----------+
+    |               Name               | LUT| Input Size| Bits| Total Bits|
+    +----------------------------------+----+-----------+-----+-----------+
+    |ap_done_int                       |   9|          2|    1|          2|
+    |ap_phi_mux_found_phi_fu_143_p4    |   9|          2|    1|          2|
+    |ap_sig_allocacmp_dominant_load_3  |   9|          2|   16|         32|
+    |ap_sig_allocacmp_index_3          |   9|          2|    3|          6|
+    |dominant_fu_70                    |   9|          2|   16|         32|
+    |index_fu_74                       |   9|          2|    3|          6|
+    +----------------------------------+----+-----------+-----+-----------+
+    |Total                             |  54|         12|   40|         80|
+    +----------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------+----+----+-----+-----------+
+    |      Name      | FF | LUT| Bits| Const Bits|
+    +----------------+----+----+-----+-----------+
+    |ap_CS_fsm       |   1|   0|    1|          0|
+    |ap_done_reg     |   1|   0|    1|          0|
+    |dominant_fu_70  |  16|   0|   16|          0|
+    |found_reg_140   |   1|   0|    1|          0|
+    |index_fu_74     |   3|   0|    3|          0|
+    +----------------+----+----+-----+-----------+
+    |Total           |  22|   0|   22|          0|
+    +----------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------+-----+-----+------------+-----------------------------------------------+--------------+
+|      RTL Ports      | Dir | Bits|  Protocol  |                 Source Object                 |    C Type    |
++---------------------+-----+-----+------------+-----------------------------------------------+--------------+
+|ap_clk               |   in|    1|  ap_ctrl_hs|  aligned_sum_guarded<4>_Pipeline_find_dominant|  return value|
+|ap_rst               |   in|    1|  ap_ctrl_hs|  aligned_sum_guarded<4>_Pipeline_find_dominant|  return value|
+|ap_start             |   in|    1|  ap_ctrl_hs|  aligned_sum_guarded<4>_Pipeline_find_dominant|  return value|
+|ap_done              |  out|    1|  ap_ctrl_hs|  aligned_sum_guarded<4>_Pipeline_find_dominant|  return value|
+|ap_idle              |  out|    1|  ap_ctrl_hs|  aligned_sum_guarded<4>_Pipeline_find_dominant|  return value|
+|ap_ready             |  out|    1|  ap_ctrl_hs|  aligned_sum_guarded<4>_Pipeline_find_dominant|  return value|
+|mantissas_0_val      |   in|    9|     ap_none|                                mantissas_0_val|        scalar|
+|mantissas_1_val      |   in|    9|     ap_none|                                mantissas_1_val|        scalar|
+|mantissas_2_val      |   in|    9|     ap_none|                                mantissas_2_val|        scalar|
+|mantissas_3_val      |   in|    9|     ap_none|                                mantissas_3_val|        scalar|
+|exponents_0_val      |   in|    9|     ap_none|                                exponents_0_val|        scalar|
+|exponents_1_val      |   in|    9|     ap_none|                                exponents_1_val|        scalar|
+|exponents_2_val      |   in|    9|     ap_none|                                exponents_2_val|        scalar|
+|exponents_3_val      |   in|    9|     ap_none|                                exponents_3_val|        scalar|
+|found_out            |  out|    1|      ap_vld|                                      found_out|       pointer|
+|found_out_ap_vld     |  out|    1|      ap_vld|                                      found_out|       pointer|
+|dominant_out         |  out|   16|      ap_vld|                                   dominant_out|       pointer|
+|dominant_out_ap_vld  |  out|    1|      ap_vld|                                   dominant_out|       pointer|
++---------------------+-----+-----+------------+-----------------------------------------------+--------------+
+

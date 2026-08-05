@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from math import ceil
 from pathlib import Path
 
@@ -87,7 +87,7 @@ def _write_report(path: Path, *, csv_path: Path, rows: list[StorageRow], num_hea
     lines = [
         "# Recurrent-State Storage Overhead",
         "",
-        f"Generated: {datetime.now(UTC).isoformat()}",
+        f"Generated: {datetime.now(timezone.utc).isoformat()}",
         f"Shape: num_heads={num_heads}, head_dim={head_dim}, elements={elements}",
         f"CSV: `{csv_path.relative_to(ROOT).as_posix()}`",
         "",

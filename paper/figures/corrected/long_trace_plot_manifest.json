@@ -1,0 +1,99 @@
+{
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "state_orientation": "KxV",
+    "tokens": 8192,
+    "trace_family": "nominal",
+    "uncertainty": "single deterministic trace; no interval",
+    "value_dim": 128,
+    "variants": [
+      "bf16_qdq_fp32_accum_state_bf16",
+      "flat_int4_qdq",
+      "fp32",
+      "mxfp4_qdq_act_b32_mxfp8_e4m3_state_b32",
+      "mxfp4_qdq_act_b32_state_b32",
+      "native_mxfp4_encoded_act_b32_state_b32"
+    ]
+  },
+  "encoded_input": {
+    "path": "reports/benchmark/corrected/native_encoded_long_trace_tokens.csv",
+    "sha256": "06f7b5c7a21a52411e0b218af3f63dd56f56a1798d74f144be58e092e9efbc9b"
+  },
+  "encoded_upstream_manifest": {
+    "path": "reports/benchmark/corrected/native_encoded_long_trace_manifest.json",
+    "sha256": "7595e7caf2b6d2d85e50d6d26e7030b3cee9cce3fd1b73868183ffbdd5c3b24f"
+  },
+  "evidence_scope": "synthetic_floating_qdq_and_native_encoded_figures",
+  "execution": {
+    "command": "python -m scripts.plot_long_sequence_stability",
+    "exit_code": 0,
+    "raw_log": "paper/figures/corrected/long_trace_plot_manifest.json"
+  },
+  "input": {
+    "path": "reports/benchmark/corrected/long_trace_tokens.csv",
+    "sha256": "c074d9709de38297ad1fd77b87f2df21aea563d72827afa9d1b1488dd6909904"
+  },
+  "limitations": [
+    "synthetic nominal inputs",
+    "native encoded MXFP4 is software-executed; HLS/RTL parity is separately bounded to 64 tokens",
+    "single deterministic development trace without an uncertainty interval",
+    "not closed-loop Qwen quality or physical-FPGA evidence"
+  ],
+  "metric_contract": {
+    "headwise_metrics": "NOT_RUN",
+    "output_cosine": "cosine similarity against FP32 recurrence output after flattening all value heads and V coordinates",
+    "state_relative_l2": "complete H,K,V tensor flattened; ||candidate-reference||2 / max(||reference||2, 1e-12)"
+  },
+  "outputs": {
+    "paper/figures/corrected/output_cosine_vs_token.pdf": "715b27f27769127b076c798c62c9cf25af8258a8a269bd95afb01ed0a6f94f65",
+    "paper/figures/corrected/state_relative_l2_vs_token.pdf": "bfe99d439384c9b88b352f2a493612cfaeeeb1b60a2140bdc2b47aa8c4a4e938"
+  },
+  "schema": 1,
+  "source": {
+    "path": "scripts/plot_long_sequence_stability.py",
+    "sha256": "9da01df904233a7f74611310dac763e70225be6afe8b02e1f7aa46821c3fe92e"
+  },
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 24509,
+      "changed_file_count": 2,
+      "sha256": "13BC2BB86BBD4F1B5328C568EB5395C4306EEAB77BBBBF7C73427784BA315B51"
+    },
+    "files": {
+      "scripts/plot_long_sequence_stability.py": {
+        "bytes": 22532,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "9DA01DF904233A7F74611310DAC763E70225BE6AFE8B02E1F7AA46821C3FE92E"
+      },
+      "scripts/reportlab_fonts.py": {
+        "bytes": 944,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "D68D3699969A05E16B49E1323BBFCB95666940DF7FCA3B6513A189A2DCE4767A"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "timestamp": "2026-08-04T11:29:05.867571+00:00",
+  "upstream_manifest": {
+    "path": "reports/benchmark/corrected/long_trace_manifest.json",
+    "sha256": "6814584cc6c073e951ea5a1732fecb76780d3ca01c532e0869b44e74c3ac657a"
+  }
+}

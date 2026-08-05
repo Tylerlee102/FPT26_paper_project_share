@@ -1,0 +1,201 @@
+
+
+================================================================
+== Vitis HLS Report for 'p_anonymous_namespace_reduce_128_Pipeline_reduce_bf16_8'
+================================================================
+* Date:           Sat Aug  1 20:22:25 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_bf16_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.571 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval |      Pipeline     |
+    |   min   |   max   |    min    |    max    | min | max |        Type       |
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+    |       14|       14|  56.000 ns|  56.000 ns|    0|    0|  loop pipeline stp|
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                 |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |    Loop Name    |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- reduce_bf16_8  |       12|       12|         6|          1|          1|     8|       yes|
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|       26|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|      244|      635|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|       36|    -|
+|Register             |        -|     -|      467|       64|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|      711|      761|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+    |                      Instance                     |                    Module                    | BRAM_18K| DSP|  FF | LUT | URAM|
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+    |floatingpoint_add_32ns_32ns_32ns_32ns_32_5_1_U730  |floatingpoint_add_32ns_32ns_32ns_32ns_32_5_1  |        0|   0|  244|  549|    0|
+    |sparsemux_17_3_32_1_1_U731                         |sparsemux_17_3_32_1_1                         |        0|   0|    0|   43|    0|
+    |sparsemux_17_3_32_1_1_U732                         |sparsemux_17_3_32_1_1                         |        0|   0|    0|   43|    0|
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+    |Total                                              |                                              |        0|   0|  244|  635|    0|
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name    | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------+----------+----+---+----+------------+------------+
+    |add_ln168_fu_310_p2   |         +|   0|  0|  12|           4|           1|
+    |icmp_ln168_fu_304_p2  |      icmp|   0|  0|  12|           4|           5|
+    |ap_enable_pp0         |       xor|   0|  0|   2|           1|           2|
+    +----------------------+----------+----+---+----+------------+------------+
+    |Total                 |          |   0|  0|  26|           9|           8|
+    +----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +--------------------------+----+-----------+-----+-----------+
+    |           Name           | LUT| Input Size| Bits| Total Bits|
+    +--------------------------+----+-----------+-----+-----------+
+    |ap_done_int               |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1   |   9|          2|    1|          2|
+    |ap_sig_allocacmp_index_1  |   9|          2|    4|          8|
+    |index_fu_100              |   9|          2|    4|          8|
+    +--------------------------+----+-----------+-----+-----------+
+    |Total                     |  36|          8|   10|         20|
+    +--------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------+----+----+-----+-----------+
+    |               Name               | FF | LUT| Bits| Const Bits|
+    +----------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                         |   1|   0|    1|          0|
+    |ap_done_reg                       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter3           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter4           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter5           |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter1_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter2_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter3_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter4_reg  |   1|   0|    1|          0|
+    |icmp_ln168_reg_550                |   1|   0|    1|          0|
+    |index_fu_100                      |   4|   0|    4|          0|
+    |level8_1_fu_108                   |  32|   0|   32|          0|
+    |level8_2_fu_112                   |  32|   0|   32|          0|
+    |level8_3_fu_116                   |  32|   0|   32|          0|
+    |level8_4_fu_120                   |  32|   0|   32|          0|
+    |level8_5_fu_124                   |  32|   0|   32|          0|
+    |level8_6_fu_128                   |  32|   0|   32|          0|
+    |level8_7_fu_132                   |  32|   0|   32|          0|
+    |level8_fu_104                     |  32|   0|   32|          0|
+    |tmp_19_reg_563                    |  32|   0|   32|          0|
+    |tmp_s_reg_558                     |  32|   0|   32|          0|
+    |trunc_ln168_reg_554               |   3|   0|    3|          0|
+    |icmp_ln168_reg_550                |  64|  32|    1|          0|
+    |trunc_ln168_reg_554               |  64|  32|    3|          0|
+    +----------------------------------+----+----+-----+-----------+
+    |Total                             | 467|  64|  343|          0|
+    +----------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------+-----+-----+------------+--------------------------------------------------------+--------------+
+|      RTL Ports      | Dir | Bits|  Protocol  |                      Source Object                     |    C Type    |
++---------------------+-----+-----+------------+--------------------------------------------------------+--------------+
+|ap_clk               |   in|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_8|  return value|
+|ap_rst               |   in|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_8|  return value|
+|ap_start             |   in|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_8|  return value|
+|ap_done              |  out|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_8|  return value|
+|ap_idle              |  out|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_8|  return value|
+|ap_ready             |  out|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_8|  return value|
+|level16_reload       |   in|   32|     ap_none|                                          level16_reload|        scalar|
+|level16_2_reload     |   in|   32|     ap_none|                                        level16_2_reload|        scalar|
+|level16_4_reload     |   in|   32|     ap_none|                                        level16_4_reload|        scalar|
+|level16_6_reload     |   in|   32|     ap_none|                                        level16_6_reload|        scalar|
+|level16_8_reload     |   in|   32|     ap_none|                                        level16_8_reload|        scalar|
+|level16_10_reload    |   in|   32|     ap_none|                                       level16_10_reload|        scalar|
+|level16_12_reload    |   in|   32|     ap_none|                                       level16_12_reload|        scalar|
+|level16_14_reload    |   in|   32|     ap_none|                                       level16_14_reload|        scalar|
+|level16_1_reload     |   in|   32|     ap_none|                                        level16_1_reload|        scalar|
+|level16_3_reload     |   in|   32|     ap_none|                                        level16_3_reload|        scalar|
+|level16_5_reload     |   in|   32|     ap_none|                                        level16_5_reload|        scalar|
+|level16_7_reload     |   in|   32|     ap_none|                                        level16_7_reload|        scalar|
+|level16_9_reload     |   in|   32|     ap_none|                                        level16_9_reload|        scalar|
+|level16_11_reload    |   in|   32|     ap_none|                                       level16_11_reload|        scalar|
+|level16_13_reload    |   in|   32|     ap_none|                                       level16_13_reload|        scalar|
+|level16_15_reload    |   in|   32|     ap_none|                                       level16_15_reload|        scalar|
+|level8_7_out         |  out|   32|      ap_vld|                                            level8_7_out|       pointer|
+|level8_7_out_ap_vld  |  out|    1|      ap_vld|                                            level8_7_out|       pointer|
+|level8_6_out         |  out|   32|      ap_vld|                                            level8_6_out|       pointer|
+|level8_6_out_ap_vld  |  out|    1|      ap_vld|                                            level8_6_out|       pointer|
+|level8_5_out         |  out|   32|      ap_vld|                                            level8_5_out|       pointer|
+|level8_5_out_ap_vld  |  out|    1|      ap_vld|                                            level8_5_out|       pointer|
+|level8_4_out         |  out|   32|      ap_vld|                                            level8_4_out|       pointer|
+|level8_4_out_ap_vld  |  out|    1|      ap_vld|                                            level8_4_out|       pointer|
+|level8_3_out         |  out|   32|      ap_vld|                                            level8_3_out|       pointer|
+|level8_3_out_ap_vld  |  out|    1|      ap_vld|                                            level8_3_out|       pointer|
+|level8_2_out         |  out|   32|      ap_vld|                                            level8_2_out|       pointer|
+|level8_2_out_ap_vld  |  out|    1|      ap_vld|                                            level8_2_out|       pointer|
+|level8_1_out         |  out|   32|      ap_vld|                                            level8_1_out|       pointer|
+|level8_1_out_ap_vld  |  out|    1|      ap_vld|                                            level8_1_out|       pointer|
+|level8_out           |  out|   32|      ap_vld|                                              level8_out|       pointer|
+|level8_out_ap_vld    |  out|    1|      ap_vld|                                              level8_out|       pointer|
++---------------------+-----+-----+------------+--------------------------------------------------------+--------------+
+

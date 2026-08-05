@@ -1,0 +1,118 @@
+{
+  "aggregate": {
+    "all_token_max_state_rel_l2": 0.10500383813335819,
+    "all_token_min_output_cosine": 0.9934072820203046,
+    "checkpoint_min_output_cosine": 0.9941629442073008,
+    "path": "reports/benchmark/corrected/write_log_held_out_plot_data.csv",
+    "sha256": "e3b4b7e81a84ee4633ef145c15fe12862d9a7c487753487a940899a6aff4fd98",
+    "token_8192_max_state_rel_l2": 0.09883354425031543
+  },
+  "closed_loop_qwen_evidence": "BLOCKED_EXTERNAL",
+  "initial_states": [
+    "random",
+    "zero"
+  ],
+  "inputs": {
+    "reports/benchmark/corrected/write_log_held_out_random/matrix_manifest.json": "8636db8aaf65663b28848e70e9fa72aa499ccac3fe208590d5817a1877621084",
+    "reports/benchmark/corrected/write_log_held_out_zero/matrix_manifest.json": "89b378613af64c7ee9f1e78cc8dd8aac53741a9e2b2090eb111914145e549c47"
+  },
+  "limitations": [
+    "synthetic nominal traces only",
+    "floating Q/DQ candidate rather than encoded-integer or RTL execution",
+    "not closed-loop Qwen quality evidence",
+    "logical state bytes are not physical BRAM/URAM allocation"
+  ],
+  "outputs": {
+    "paper/figures/corrected/write_log_held_out_output_cosine.pdf": "b337c2912cff4ca4bf11840baf534d074f9c03ce0adb2d2fd8c26b11917c8940",
+    "paper/figures/corrected/write_log_held_out_state_rel_l2.pdf": "147ba719a6e97e331d6daa800aebeab5479106b918c768a39c725e16600879dd"
+  },
+  "physical_evidence": "NOT_RUN",
+  "required_checkpoints": [
+    64,
+    256,
+    1024,
+    4096,
+    8192
+  ],
+  "schema": 1,
+  "scope": "held-out nominal synthetic Q/DQ visualization",
+  "seeds": [
+    388821,
+    659918,
+    12648430
+  ],
+  "selected_variant": "mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7",
+  "selection": {
+    "path": "reports/benchmark/corrected/write_log_selection.json",
+    "sha256": "522d3e2feae50e71ec38c80cd083383b84eea2cd9667bda5a06eb0546b391739"
+  },
+  "source_hashes": {
+    "scripts/plot_write_log_held_out.py": "8f55492f5bb276bc552a48b9fbb6f7d3ac7b1485db66ae32441cb021d34e4c23"
+  },
+  "status": "PASS",
+  "synthetic_gate": "PASS",
+  "timestamp": "2026-08-02T00:33:40.208806+00:00",
+  "trace_count": 6,
+  "traces": [
+    {
+      "initial_state": "random",
+      "input_stream_sha256": "95b0af6af3c20a4d6d09c7c241670dcece1dd3f391030c90af90f1eee2496721",
+      "run_manifest": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed000a11ce_nominal_random_manifest.json",
+      "run_manifest_sha256": "264a30e9ce17890ca2694c87afd6854accbcf57bd24b6b0c948e9ef69f1d2892",
+      "seed": 659918,
+      "stem": "held_out_seed000a11ce_nominal_random",
+      "token_csv": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed000a11ce_nominal_random_tokens.csv",
+      "token_csv_sha256": "abcc76113f3ae54d9a1a5a6f372664c2635f318ca2dd9ce6e991f9385b05a1a0"
+    },
+    {
+      "initial_state": "random",
+      "input_stream_sha256": "80db82cb7005aeb14abbf56455238e8e414babc15f6498162dc1e7bc599785e7",
+      "run_manifest": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed00c0ffee_nominal_random_manifest.json",
+      "run_manifest_sha256": "16c58f88139eea4101fb8ecd8ca8f286d3901e7baf3b45dd222f28e5ed764181",
+      "seed": 12648430,
+      "stem": "held_out_seed00c0ffee_nominal_random",
+      "token_csv": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed00c0ffee_nominal_random_tokens.csv",
+      "token_csv_sha256": "c5e3786e87186dec60a053e1ca2040b7b02d235bdc6c8c1dc769b51e55dbc8c6"
+    },
+    {
+      "initial_state": "random",
+      "input_stream_sha256": "733d151692403b4af4a7431da4d1d0fecc2ba7b3b48707d6e8f79ce90fa6a936",
+      "run_manifest": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed0005eed5_nominal_random_manifest.json",
+      "run_manifest_sha256": "3ae1f0774e2aa9437dec65249b4db150842254ea6803494fae721e3a6423715c",
+      "seed": 388821,
+      "stem": "held_out_seed0005eed5_nominal_random",
+      "token_csv": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed0005eed5_nominal_random_tokens.csv",
+      "token_csv_sha256": "f1108c5aaba1e1fb337403772fac8e5767495d50132048cfda6e57ba103f5523"
+    },
+    {
+      "initial_state": "zero",
+      "input_stream_sha256": "327a9a0de36659e237372c2344eb18712a628a0c374ce6c90892a14ba2362eff",
+      "run_manifest": "reports/benchmark/corrected/write_log_held_out_zero/held_out_seed000a11ce_nominal_zero_manifest.json",
+      "run_manifest_sha256": "67cee1d63f91f46f92f3c3988a6135ff2c96af5a61b18af6211cc2ba815f10b6",
+      "seed": 659918,
+      "stem": "held_out_seed000a11ce_nominal_zero",
+      "token_csv": "reports/benchmark/corrected/write_log_held_out_zero/held_out_seed000a11ce_nominal_zero_tokens.csv",
+      "token_csv_sha256": "76b356f8ada1dbc2c8c52c402f68ce9628e1507e18eac5f896fb1d1708753339"
+    },
+    {
+      "initial_state": "zero",
+      "input_stream_sha256": "247856de1a098c5d1623e32c40db5a1134e3729acdb11a09b0432e4ee5212a1c",
+      "run_manifest": "reports/benchmark/corrected/write_log_held_out_zero/held_out_seed00c0ffee_nominal_zero_manifest.json",
+      "run_manifest_sha256": "99ef564a449c7e5cfae889ee26a2422ee3ca053b5b59299d0bbb086bb981bc1c",
+      "seed": 12648430,
+      "stem": "held_out_seed00c0ffee_nominal_zero",
+      "token_csv": "reports/benchmark/corrected/write_log_held_out_zero/held_out_seed00c0ffee_nominal_zero_tokens.csv",
+      "token_csv_sha256": "0ca41a4a018dd3384e60dbfefdfd4314fb2c375a1814186500a55db7eadf4ee7"
+    },
+    {
+      "initial_state": "zero",
+      "input_stream_sha256": "c70f5b9f8f32f77c81924fb8918f62087ae9ff9c1d61f1378297c79ea113919d",
+      "run_manifest": "reports/benchmark/corrected/write_log_held_out_zero/held_out_seed0005eed5_nominal_zero_manifest.json",
+      "run_manifest_sha256": "7dec83d7a398cff8ea2d1aba1096e46d1c7952ae1849c99a99938f2deb2f9603",
+      "seed": 388821,
+      "stem": "held_out_seed0005eed5_nominal_zero",
+      "token_csv": "reports/benchmark/corrected/write_log_held_out_zero/held_out_seed0005eed5_nominal_zero_tokens.csv",
+      "token_csv_sha256": "d385e48d714a9ffa7b74012802fff1369c67301a30d513bc77f624b22d8d94e4"
+    }
+  ]
+}

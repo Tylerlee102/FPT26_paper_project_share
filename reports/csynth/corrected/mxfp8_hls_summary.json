@@ -1,0 +1,324 @@
+{
+  "configuration": {
+    "accumulator": "signed INT24",
+    "block_size": 32,
+    "elements": "E4M3 finite-only",
+    "key_dim": 128,
+    "num_layers": 36,
+    "num_qk_heads": 16,
+    "num_sequences": 1,
+    "num_value_heads": 32,
+    "p_k": 16,
+    "p_v": 8,
+    "shared_scale": "E8M0",
+    "state_orientation": "KxV",
+    "value_dim": 128
+  },
+  "csim": {
+    "arithmetic": {
+      "all_code_validity_and_decode_cases": 256,
+      "explicit_rne_midpoints": 2,
+      "nonzero_representable_roundtrips": 252,
+      "status": "PASS",
+      "valid_coefficient_products": 253
+    },
+    "persistent_kernel": {
+      "commands": [
+        "RESET",
+        "one exact nonzero STEP",
+        "READBACK"
+      ],
+      "final_generation": 1,
+      "status": "PASS"
+    },
+    "status": "PASS"
+  },
+  "csynth": {
+    "metrics": {
+      "available_device_resources": {
+        "BRAM_18K": 4032,
+        "DSP": 9024,
+        "FF": 2607360,
+        "LUT": 1303680,
+        "URAM": 960
+      },
+      "clock_uncertainty_ns": 1.08,
+      "device_utilization_percent": {
+        "BRAM_18K": 0.6200396825396826,
+        "DSP": 0.03324468085106383,
+        "FF": 1.714953055964654,
+        "LUT": 10.975392734413353,
+        "URAM": 6.666666666666667
+      },
+      "estimated_clock_ns": 2.92,
+      "estimated_fmax_mhz": 342.4657534246575,
+      "interval_cycles_max": 12202888,
+      "interval_cycles_min": 8239,
+      "latency_cycles_average": 287660,
+      "latency_cycles_max": 12202887,
+      "latency_cycles_min": 8238,
+      "resources": {
+        "BRAM_18K": 25,
+        "DSP": 3,
+        "FF": 44715,
+        "LUT": 143084,
+        "URAM": 64
+      },
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "tool_version": "2025.2"
+    },
+    "status": "PASS",
+    "step_loop_latency_cycles": {
+      "maximum": 6287680,
+      "minimum": 5189952
+    },
+    "targeted_loop_ii_status": "PASS",
+    "targeted_loops": [
+      {
+        "depth": 2,
+        "final_ii": 1,
+        "loop": "clear_output_mantissa_heads_clear_output_mantissa_values",
+        "target_ii": 1
+      },
+      {
+        "depth": 8,
+        "final_ii": 1,
+        "loop": "clear_output_exponent_heads_clear_output_exponent_values",
+        "target_ii": 1
+      },
+      {
+        "depth": 4,
+        "final_ii": 1,
+        "loop": "reset_heads_reset_rows_reset_blocks",
+        "target_ii": 1
+      },
+      {
+        "depth": 1,
+        "final_ii": 1,
+        "loop": "unpack_resident_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 6,
+        "final_ii": 1,
+        "loop": "decode_decay_mxfp8_rows_decode_decay_mxfp8_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 5,
+        "final_ii": 1,
+        "loop": "build_mxfp8_prediction_terms",
+        "target_ii": 1
+      },
+      {
+        "depth": 2,
+        "final_ii": 1,
+        "loop": "find_dominant",
+        "target_ii": 1
+      },
+      {
+        "depth": 5,
+        "final_ii": 1,
+        "loop": "align_and_sum",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "delta_mxfp8_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 8,
+        "final_ii": 1,
+        "loop": "update_mxfp8_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 9,
+        "final_ii": 1,
+        "loop": "requantize_mxfp8_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 6,
+        "final_ii": 1,
+        "loop": "build_mxfp8_output_terms",
+        "target_ii": 1
+      },
+      {
+        "depth": 3,
+        "final_ii": 1,
+        "loop": "store_resident_tile_pack_resident_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 8,
+        "final_ii": 1,
+        "loop": "readback_lanes",
+        "target_ii": 1
+      }
+    ],
+    "vendor_loop_constraint_status": "PASS"
+  },
+  "energy_measurement": "NOT_RUN",
+  "limitations": [
+    "persistent-kernel C-simulation covers one exact nonzero transition, not a long RTL trace",
+    "C-synthesis timing, latency, and resources are estimates until the matched OOC route is extracted",
+    "no U55C board telemetry is available on the local machine"
+  ],
+  "post_route_timing_and_drc": "NOT_RUN",
+  "raw_artifact_sha256": {
+    "reports/csim/corrected/mxfp8_arithmetic_current/scale_by_e4m3_csim.log": "3DF593B9BC4AE4DF8CDE6B59EFA70DD8405B2CB5FBA9FCB80CD2F3CEF6EF8EF9",
+    "reports/csim/corrected/mxfp8_arithmetic_current/u55c_250mhz.log": "7568964E20BC59B28BEB849429715AAD5B1B47BC899C712472E0E2BE84A61315",
+    "reports/csim/corrected/mxfp8_current/gdn_mxfp8_top_csim.log": "719AF7F7179314DE4C698F380BAA858750AAC515848E4CB1017EC5CD3D165B90",
+    "reports/csim/corrected/mxfp8_current/u55c_250mhz.log": "1160FACFB2CBB9608ABEC9FFD7F433702BF70C10F0542BF0D59F35BD4EBBCCEA",
+    "reports/csynth/corrected/mxfp8_current/report/gdn_mxfp8_top_csynth.rpt": "CCC900094BF985DA32EDC297A3E2C2485AC51DE33ECC4964CA00DA211EDBA8AB",
+    "reports/csynth/corrected/mxfp8_current/report/gdn_mxfp8_top_csynth.xml": "FBF3A9B64BB58CEF5816C4B2BCA013C10E3917DEEA1AB4F2471DFE455EEF0D96",
+    "reports/csynth/corrected/mxfp8_current/report/gdn_mxfp8_top_impl_csynth.rpt": "5FD06745739422E5BA604A4D5E3BBD7AE1476EBEE44241FAF7CAC6EF3074F6A6",
+    "reports/csynth/corrected/mxfp8_current/u55c_250mhz.log": "BBDA402065ECDF03331EAC50817E0E80AB159500AE7FEA7A33C3A368CE9FE950"
+  },
+  "rtl_cosimulation_long_trace": "NOT_RUN",
+  "schema": 1,
+  "scope": "matched native MXFP8-E4M3 persistent-state GDN HLS baseline",
+  "source_freshness": {
+    "arithmetic_csim": "PASS",
+    "csynth": "PASS",
+    "kernel_csim": "PASS"
+  },
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 90872,
+      "changed_file_count": 20,
+      "sha256": "06E953059782386AAB6316E4C502C9478E327B62F3C94BA864B7536A9010EC3B"
+    },
+    "files": {
+      "hls/include/block_exp_align.hpp": {
+        "bytes": 818,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "59CA155733E5634B37D3017BDD884C46772844C91BA0952ABED4E8D22AC9947C"
+      },
+      "hls/include/gdn_params.hpp": {
+        "bytes": 3045,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82"
+      },
+      "hls/include/mx_types.hpp": {
+        "bytes": 1112,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "AB1BD900904C946167AF0037997A81FBF8665E5543A7027097724FE9BBAC97AC"
+      },
+      "hls/mxfp8/include/e4m3_arithmetic.hpp": {
+        "bytes": 672,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "E22CB0AD5D2CA51821555F19B8C14F7B6A81D6DE87276BD5205FCF3BC9518F46"
+      },
+      "hls/mxfp8/include/gdn_mxfp8_kernel.hpp": {
+        "bytes": 7796,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "70E21DAB870F0E67AEC6185D974AF552F246C5F20461E33B85572C3F8947644F"
+      },
+      "hls/mxfp8/src/e4m3_arithmetic.cpp": {
+        "bytes": 6845,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "5B3D93E772223D9C27CC98F46A96F755BA28B037AD5055A11CC74748BDC3B399"
+      },
+      "hls/mxfp8/src/gdn_mxfp8_top.cpp": {
+        "bytes": 195,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "68348A258C8AEA289DC8D6CDCD73B2372AD89AB116E077F2513B246897052307"
+      },
+      "hls/mxfp8/src/phase1_prepare.cpp": {
+        "bytes": 3959,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "F6404B2F13D9C9741A98C1DC01AC473729B7FB9687E720B9121151D22806E7FA"
+      },
+      "hls/mxfp8/src/phase2_state_read.cpp": {
+        "bytes": 1806,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "757B53A6E91DC6AABAFBC124F2E830B1A3301F1F64E50DCE01F65784B4C24028"
+      },
+      "hls/mxfp8/src/phase3_update.cpp": {
+        "bytes": 1239,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "4EC0F3232FD961B3404E5F57570B8D3102AD24BAAF893C784292B23B4FCA4E5C"
+      },
+      "hls/mxfp8/src/phase4_state_write.cpp": {
+        "bytes": 2455,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "722DDF66FF0BEAA3D9DFE704908DEA3FB4482446B2EEB8833DECF89A3B7121AC"
+      },
+      "hls/mxfp8/src/phase5_output.cpp": {
+        "bytes": 1358,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "9A661037D944D418BDAF325B99520DF60010A9BBB838F5C5D0541BD065EA2B05"
+      },
+      "hls/mxfp8/tb/tb_e4m3_arithmetic.cpp": {
+        "bytes": 2409,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "68DB810135B6AF2C6317DE7EAFD9A81FA13E91D050466CBAB99CAF14621A65CC"
+      },
+      "hls/mxfp8/tb/tb_gdn_mxfp8_top.cpp": {
+        "bytes": 3067,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "448D721CA3A5736EA1507D2987F650459370256BB0AE71E5AAB903D3CFA5ABAC"
+      },
+      "hls/mxfp8/tcl/run_arithmetic_csim.tcl": {
+        "bytes": 456,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "D2A03B2A34554E33703EC83F40F8ABD24C644EF3E63ADAD512BCE11744FBB1D2"
+      },
+      "hls/mxfp8/tcl/run_csim.tcl": {
+        "bytes": 848,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "50B1C6B9F36C3E46FE379F0D99928C393C9C2FD1E0E1AAD8D88AFD8B181EA9C7"
+      },
+      "hls/mxfp8/tcl/run_csynth.tcl": {
+        "bytes": 807,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "405ADBF6DA3FD850D9EC2A0E7EBE6CA2E8C1A62769323775A7203DDBDA13A106"
+      },
+      "hls/src/block_exp_align.cpp": {
+        "bytes": 4450,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "94E58D52037E27E1E83EA7584511F1FA56BAE317FB30CD53338406BB92890F4B"
+      },
+      "hls/src/gdn_top.cpp": {
+        "bytes": 21691,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "A40819EAABA73DCD965F41B9B284F213897393FC3EDD8C7C7C65367B400DA8DB"
+      },
+      "scripts/mxfp8_hls_report.py": {
+        "bytes": 10471,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "D83029A4208FDCCCDC5D705A7C825220127BD3393B212700598E319E6FAB0A15"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "timestamp": "2026-08-05T06:24:49.217212+00:00"
+}

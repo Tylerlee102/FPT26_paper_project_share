@@ -1,0 +1,11 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_000a11ce_nominal_zero,held_out,659918,nominal,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_000a11ce_nominal_zero,held_out,659918,nominal,mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7,0,64,0.9951776310431354,0.09870781828547787,0.0017985762096941471,0.09592184311697573,0.042188629508018494,9,0,0,1,7,536912,PASS
+synthetic_000a11ce_nominal_zero,held_out,659918,nominal,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_000a11ce_nominal_zero,held_out,659918,nominal,mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7,0,256,0.9952202733950389,0.09773195417566129,0.0017517675878480077,0.09319377427021455,0.03659600764513016,36,0,0,4,7,536912,PASS
+synthetic_000a11ce_nominal_zero,held_out,659918,nominal,fp32,0,1024,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_000a11ce_nominal_zero,held_out,659918,nominal,mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7,0,1024,0.9949100233521142,0.1007692277598591,0.0019337022677063942,0.09752310081148251,0.041137129068374634,146,0,0,2,7,536912,PASS
+synthetic_000a11ce_nominal_zero,held_out,659918,nominal,fp32,0,4096,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_000a11ce_nominal_zero,held_out,659918,nominal,mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7,0,4096,0.9947792329157622,0.10207194816904197,0.0019863969646394253,0.09765346776115175,0.03904061019420624,585,0,0,1,7,536912,PASS
+synthetic_000a11ce_nominal_zero,held_out,659918,nominal,fp32,0,8192,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_000a11ce_nominal_zero,held_out,659918,nominal,mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7,0,8192,0.9950698590045209,0.09930847517352782,0.001985460752621293,0.09883354425031543,0.038368817418813705,1170,0,0,2,7,536912,PASS

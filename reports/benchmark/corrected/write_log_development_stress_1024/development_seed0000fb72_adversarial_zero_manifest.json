@@ -1,0 +1,54 @@
+{
+  "activation_stack_depth": 2,
+  "adaptive_min_entries": 1,
+  "base_residual_block_fraction": 0.75,
+  "base_stack_depth": 2,
+  "capacities": [
+    7
+  ],
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 1024,
+    "trace_family": "adversarial",
+    "value_dim": 128
+  },
+  "fold_decay_threshold": 0.85,
+  "fold_policy": "fixed",
+  "initial_state_mode": "zero",
+  "input_stream_sha256": "0cd633ba69b48cac9e0d3d6a153ba2329588387add8acbc5aad7c56e7750e94b",
+  "limitations": [
+    "synthetic inputs",
+    "floating Q/DQ candidate, not the encoded-integer oracle",
+    "logical storage bytes, not placed BRAM/URAM allocation",
+    "not closed-loop Qwen quality evidence"
+  ],
+  "log_precision": "mxfp8_e4m3",
+  "numpy": "2.3.5",
+  "outputs": {
+    "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_adversarial_zero_checkpoints.csv": "bb65daca494b8d63b2fa8b6b65930fcf722da631a3ea3f713751ada999c392e1",
+    "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_adversarial_zero_tokens.csv": "30ff6f30eff3a77a1196b5d66867c73f40141eebac47f473dea982d354b1b42e"
+  },
+  "python": "3.12.10",
+  "schema": 1,
+  "source_hashes": {
+    "golden/gdn_fp32.py": "7ebc9b7a0ba400a553e9c079b2e2e98596723dcc8b1d137b0477c798e34697c5",
+    "golden/gdn_mxfp4.py": "22e9975b4a60a948a909fa0fc35630b1bc6ad68f7464b5c8e0c68f70bcaa44b8",
+    "golden/gdn_write_log.py": "da5376ae0fb6b338009a87b8096615e49333cf5fe8ad497abc5a1038414399fb",
+    "golden/mx_format.py": "b0f8bee046465f342e8049b33a91c3e424c3c2c6e69fb53e85d2d63656be269d",
+    "scripts/long_sequence_stability.py": "10c0ab85b56d8e634c0a34daef6480239092c1335a3e47a595701c19bed7a69b",
+    "scripts/write_log_stability.py": "1dd4e5195fd84175ad733cea38a72b7296e8873ad35c5eee6ca514d1d8061ed3"
+  },
+  "status": "diagnostic_only",
+  "timestamp": "2026-08-02T00:15:08.121335+00:00"
+}

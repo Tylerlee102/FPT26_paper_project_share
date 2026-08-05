@@ -1,0 +1,11 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_0badc0de_nominal_random,held_out,195936478,nominal,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0badc0de_nominal_random,held_out,195936478,nominal,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,64,0.9985185299701868,0.05441487942350717,0.001057127956300974,0.051477203234416534,0.02748885750770569,9,0,0,1,7,538256,PASS
+synthetic_0badc0de_nominal_random,held_out,195936478,nominal,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0badc0de_nominal_random,held_out,195936478,nominal,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,256,0.9987127583716223,0.050743642920975766,0.0009132605046033859,0.04917822937441367,0.024346143007278442,36,0,0,4,7,538256,PASS
+synthetic_0badc0de_nominal_random,held_out,195936478,nominal,fp32,0,1024,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0badc0de_nominal_random,held_out,195936478,nominal,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,1024,0.9984580120557602,0.05556913018665635,0.0009697077330201864,0.052570574477892366,0.02732546627521515,146,0,0,2,7,538256,PASS
+synthetic_0badc0de_nominal_random,held_out,195936478,nominal,fp32,0,4096,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0badc0de_nominal_random,held_out,195936478,nominal,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,4096,0.9985121415690487,0.05456246308135708,0.0010416209697723389,0.05222010680203089,0.023865506052970886,585,0,0,1,7,538256,PASS
+synthetic_0badc0de_nominal_random,held_out,195936478,nominal,fp32,0,8192,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0badc0de_nominal_random,held_out,195936478,nominal,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,8192,0.9987489356578069,0.05002760302648064,0.0010497798211872578,0.051087950401385925,0.026231244206428528,1170,0,0,2,7,538256,PASS

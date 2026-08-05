@@ -1,0 +1,42 @@
+{
+  "checkpoints": [
+    64,
+    256,
+    1024,
+    4096,
+    8192
+  ],
+  "gate": "extended_development",
+  "registration": "reports/benchmark/corrected/e2m0_residual_preregistration.json",
+  "registration_sha256": "167CC59FB0C0245290416646DDEE536936F604B4AE3953C81707D98FE4D84FC2",
+  "runner_sha256": "8895EB46B6E727CDF7930AAF69473D13B0E92DE148F474CC325DA32555BFF412",
+  "runs": [
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "ed053c1383046c2953466d546669041e2d1125381ef136cf20a27548a507aa1a",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/extended_development/development_seed0000fb72_high_retention_random_manifest.json",
+      "manifest_sha256": "C8DD4D3327741243412284715DB6E7349AE2F483F99003690DC0D2F8FA17AC4A",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_high_retention_random",
+      "verification": "reports/benchmark/corrected/e2m0_residual/extended_development/development_seed0000fb72_high_retention_random_verification.json",
+      "verification_sha256": "AF84D2BDC6A798CFECDB9C18B058B2B89CF1575F125F47EAA7D16F6BFD702A30"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "aa148f7abab083234392a367ae6b6a93d14e916830eece40fdab1ef1b3b88a95",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/extended_development/development_seed0000fb72_high_retention_zero_manifest.json",
+      "manifest_sha256": "D876B7F24245088E49FFBC2EE69E8291277265E0D134B98067331669BBB0282A",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_high_retention_zero",
+      "verification": "reports/benchmark/corrected/e2m0_residual/extended_development/development_seed0000fb72_high_retention_zero_verification.json",
+      "verification_sha256": "79EE386E4FC720F9A129D2F283687282A0798995AC65F108F27B285A8FF92AAE"
+    }
+  ],
+  "schema": 1,
+  "split": "development",
+  "status": "PASS",
+  "summary_csv": "reports/benchmark/corrected/e2m0_residual/extended_development/summary.csv",
+  "summary_sha256": "CFA0AEC25CDC082E3A4B1DC480B6ECB006ECC3DAB42FC33945F6960C419C56BB",
+  "timestamp": "2026-08-02T08:18:09.124357+00:00",
+  "tokens": 8192
+}

@@ -1,0 +1,134 @@
+{
+  "schema": 3,
+  "status": "PASS",
+  "scope": "layer-level deterministic synthetic recurrence traces",
+  "sources": [
+    "scripts/long_sequence_stability.py",
+    "scripts/aggregate_long_trace_stress.py",
+    "scripts/write_log_stability.py",
+    "scripts/e2m0_encoded_stability.py",
+    "scripts/aggregate_e2m0_encoded_held_out.py"
+  ],
+  "rng": {
+    "library": "numpy",
+    "generator": "default_rng",
+    "bit_generator": "PCG64",
+    "construction": "one deterministic generator per token from seed, token index, and trace family"
+  },
+  "dimensions": {
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "key_dim": 128,
+    "value_dim": 128
+  },
+  "required_checkpoints": [64, 256, 1024, 4096, 8192],
+  "development_seed": 64370,
+  "encoded_correction_test_seed_blocks": [2709413613, 3302208161, 115712464],
+  "encoded_correction_initial_state_conditions": ["random", "zero"],
+  "random_initial_state": {
+    "distribution": "normal",
+    "mean": 0.0,
+    "standard_deviation": 0.05
+  },
+  "zero_initial_state": {
+    "value": 0.0
+  },
+  "token_inputs": {
+    "query": {
+      "distribution": "normal",
+      "mean": 0.0,
+      "standard_deviation": 1.0,
+      "postprocess": "L2 normalize and divide by sqrt(key_dim)"
+    },
+    "key": {
+      "distribution": "normal",
+      "mean": 0.0,
+      "standard_deviation": 1.0,
+      "postprocess": "L2 normalize"
+    },
+    "value": {
+      "distribution": "normal",
+      "mean": 0.0,
+      "standard_deviation": 0.25
+    }
+  },
+  "trace_families": {
+    "nominal": {
+      "alpha_uniform": [0.95, 1.0],
+      "beta_uniform": [0.0, 1.0]
+    },
+    "high_retention": {
+      "alpha_uniform": [0.995, 1.0],
+      "beta_uniform": [0.85, 1.0]
+    },
+    "dynamic_range": {
+      "alpha_uniform": [0.95, 1.0],
+      "beta_uniform": [0.0, 1.0],
+      "value_scale_power": {
+        "formula": "(token_zero_based // 32) % 9 - 4",
+        "minimum": -4,
+        "maximum": 4,
+        "segment_tokens": 32,
+        "period_tokens": 288
+      }
+    },
+    "cancellation": {
+      "alpha_uniform": [0.95, 1.0],
+      "beta_uniform": [0.0, 1.0],
+      "transform": "q, k, and v become abs(input) times +1 on even zero-based tokens and -1 on odd zero-based tokens"
+    }
+  },
+  "executed_supplemental_stress": {
+    "tokens_per_family": 8192,
+    "families": ["dynamic_range", "cancellation"],
+    "token_rows": 81920,
+    "checkpoint_rows": 50,
+    "summary": "reports/benchmark/corrected/stress/long_trace_stress_summary.csv",
+    "manifest": "reports/benchmark/corrected/stress/long_trace_stress_summary_manifest.json",
+    "evidence_scope": "supplemental synthetic floating Q/DQ diagnostic"
+  },
+  "metrics": {
+    "relative_l2_denominator_floor": 1e-12,
+    "cosine_denominator_floor": 1e-24,
+    "output_reduction": "flatten all value heads and V coordinates",
+    "state_reduction": "flatten all value heads, K rows, and V columns",
+    "maximum_absolute_error_reduction": "maximum over the complete flattened tensor",
+    "identical_array_convention": {
+      "cosine": 1.0,
+      "relative_l2": 0.0,
+      "maximum_absolute_error": 0.0
+    },
+    "near_zero_cosine_convention": "when the cosine denominator is at most 1e-24, return 1 only if both norms are at most 1e-12; otherwise return 0",
+    "headwise_metrics": "NOT_RUN"
+  },
+  "reference_levels": {
+    "long_horizon": "FP32",
+    "fp64": "short recurrence-oracle validation only; no FP64 long-horizon curve"
+  },
+  "statistical_unit": {
+    "token_stream": "seed block",
+    "initial_state": "paired condition within seed block",
+    "independent_test_streams": 3,
+    "paired_conditions": 6,
+    "inference": "bounded engineering acceptance only; no population-level robustness claim"
+  },
+  "event_taxonomy": {
+    "preregistered_hard_event_counters": [
+      "element_saturation",
+      "accumulator_saturation",
+      "scale_clamp"
+    ],
+    "reported_but_not_thresholded": [
+      "alignment_underflow",
+      "state_scale_change",
+      "deliberate_e2m0_residual_clip"
+    ]
+  },
+  "limitations": [
+    "The distributions are synthetic and are not fitted to Qwen3-Next activations.",
+    "The nominal baseline is one deterministic development seed.",
+    "The corrected test set has three seed blocks crossed with two paired initial-state conditions.",
+    "The original local registration was not externally timestamped and did not hash the complete execution dependency closure.",
+    "Passing these traces does not establish perplexity, downstream accuracy, a formal stability bound, or headwise stability."
+  ]
+}

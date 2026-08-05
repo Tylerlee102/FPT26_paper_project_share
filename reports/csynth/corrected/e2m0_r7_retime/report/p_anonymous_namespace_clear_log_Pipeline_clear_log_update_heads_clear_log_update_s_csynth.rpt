@@ -1,0 +1,170 @@
+
+
+================================================================
+== Vitis HLS Report for 'p_anonymous_namespace_clear_log_Pipeline_clear_log_update_heads_clear_log_update_s'
+================================================================
+* Date:           Sun Aug  2 05:05:44 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_e2m0_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.739 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+-------------------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval |      Pipeline     |
+    |   min   |   max   |    min   |    max   | min | max |        Type       |
+    +---------+---------+----------+----------+-----+-----+-------------------+
+    |      130|      130|  0.520 us|  0.520 us|    0|    0|  loop pipeline stp|
+    +---------+---------+----------+----------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                                                  |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |                     Loop Name                    |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- clear_log_update_heads_clear_log_update_blocks  |      128|      128|         2|          1|          1|   128|       yes|
+        +--------------------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|      150|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|        -|        -|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|       81|    -|
+|Register             |        -|     -|       42|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|       42|      231|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +--------------------------+----------+----+---+----+------------+------------+
+    |       Variable Name      | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +--------------------------+----------+----+---+----+------------+------------+
+    |add_ln519_1_fu_188_p2     |         +|   0|  0|  15|           8|           1|
+    |add_ln519_fu_200_p2       |         +|   0|  0|  13|           6|           1|
+    |add_ln520_1_fu_313_p2     |         +|   0|  0|  23|          16|          16|
+    |add_ln522_fu_280_p2       |         +|   0|  0|  10|           3|           1|
+    |add_ln524_1_fu_264_p2     |         +|   0|  0|  20|          20|          20|
+    |add_ln524_fu_242_p2       |         +|   0|  0|  20|          20|          20|
+    |first_iter_1_fu_228_p2    |      icmp|   0|  0|  10|           3|           1|
+    |icmp_ln519_fu_182_p2      |      icmp|   0|  0|  16|           8|           9|
+    |icmp_ln522_fu_206_p2      |      icmp|   0|  0|  12|           3|           4|
+    |select_ln519_1_fu_220_p3  |    select|   0|  0|   6|           1|           6|
+    |select_ln519_fu_212_p3    |    select|   0|  0|   3|           1|           1|
+    |ap_enable_pp0             |       xor|   0|  0|   2|           1|           2|
+    +--------------------------+----------+----+---+----+------------+------------+
+    |Total                     |          |   0|  0| 150|          90|          82|
+    +--------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +---------------------------------------+----+-----------+-----+-----------+
+    |                  Name                 | LUT| Input Size| Bits| Total Bits|
+    +---------------------------------------+----+-----------+-----+-----------+
+    |ap_done_int                            |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1                |   9|          2|    1|          2|
+    |ap_sig_allocacmp_block_load            |   9|          2|    3|          6|
+    |ap_sig_allocacmp_head_load             |   9|          2|    6|         12|
+    |ap_sig_allocacmp_indvar_flatten6_load  |   9|          2|    8|         16|
+    |block_fu_98                            |   9|          2|    3|          6|
+    |head_fu_102                            |   9|          2|    6|         12|
+    |indvar_flatten6_fu_106                 |   9|          2|    8|         16|
+    |resident_update_scales_we0_local       |   9|          2|    4|          8|
+    +---------------------------------------+----+-----------+-----+-----------+
+    |Total                                  |  81|         18|   40|         80|
+    +---------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+----+----+-----+-----------+
+    |           Name          | FF | LUT| Bits| Const Bits|
+    +-------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                |   1|   0|    1|          0|
+    |ap_done_reg              |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |   1|   0|    1|          0|
+    |block_fu_98              |   3|   0|    3|          0|
+    |first_iter_1_reg_371     |   1|   0|    1|          0|
+    |head_fu_102              |   6|   0|    6|          0|
+    |indvar_flatten6_fu_106   |   8|   0|    8|          0|
+    |lshr_ln1_reg_380         |  16|   0|   16|          0|
+    |trunc_ln520_reg_375      |   5|   0|    5|          0|
+    +-------------------------+----+----+-----+-----------+
+    |Total                    |  42|   0|   42|          0|
+    +-------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------------+-----+-----+------------+----------------------------------------------------------------------------------+--------------+
+|            RTL Ports            | Dir | Bits|  Protocol  |                                   Source Object                                  |    C Type    |
++---------------------------------+-----+-----+------------+----------------------------------------------------------------------------------+--------------+
+|ap_clk                           |   in|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_update_heads_clear_log_update_|  return value|
+|ap_rst                           |   in|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_update_heads_clear_log_update_|  return value|
+|ap_start                         |   in|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_update_heads_clear_log_update_|  return value|
+|ap_done                          |  out|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_update_heads_clear_log_update_|  return value|
+|ap_idle                          |  out|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_update_heads_clear_log_update_|  return value|
+|ap_ready                         |  out|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_update_heads_clear_log_update_|  return value|
+|zext_ln508                       |   in|   15|     ap_none|                                                                        zext_ln508|        scalar|
+|updates                          |   in|   20|     ap_none|                                                                           updates|        scalar|
+|term                             |   in|    1|     ap_none|                                                                              term|        scalar|
+|add_ln520                        |   in|   16|     ap_none|                                                                         add_ln520|        scalar|
+|resident_updates_address0        |  out|   16|   ap_memory|                                                                  resident_updates|         array|
+|resident_updates_ce0             |  out|    1|   ap_memory|                                                                  resident_updates|         array|
+|resident_updates_we0             |  out|    1|   ap_memory|                                                                  resident_updates|         array|
+|resident_updates_d0              |  out|  128|   ap_memory|                                                                  resident_updates|         array|
+|resident_update_scales_address0  |  out|   14|   ap_memory|                                                            resident_update_scales|         array|
+|resident_update_scales_ce0       |  out|    1|   ap_memory|                                                            resident_update_scales|         array|
+|resident_update_scales_we0       |  out|    4|   ap_memory|                                                            resident_update_scales|         array|
+|resident_update_scales_d0        |  out|   32|   ap_memory|                                                            resident_update_scales|         array|
++---------------------------------+-----+-----+------------+----------------------------------------------------------------------------------+--------------+
+

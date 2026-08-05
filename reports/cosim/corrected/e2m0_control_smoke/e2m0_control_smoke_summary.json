@@ -1,0 +1,128 @@
+{
+  "archived_logs": {
+    "reports/cosim/corrected/e2m0_control_smoke/raw/c_postcheck.log": {
+      "bytes": 70,
+      "sha256": "8A54732E29D62DD4D8B3FDFE4CC01848C8CF98D1C8D0AFC8AE238F0B6FFA0194"
+    },
+    "reports/cosim/corrected/e2m0_control_smoke/raw/c_precheck.log": {
+      "bytes": 70,
+      "sha256": "8A54732E29D62DD4D8B3FDFE4CC01848C8CF98D1C8D0AFC8AE238F0B6FFA0194"
+    },
+    "reports/cosim/corrected/e2m0_control_smoke/raw/gdn_e2m0_top_cosim.rpt": {
+      "bytes": 1266,
+      "sha256": "7E7166C4C45FFFE80DD2874E92807BDA045790D25D6114A95B7EDAF014D0161E"
+    },
+    "reports/cosim/corrected/e2m0_control_smoke/raw/u55c_250mhz.log": {
+      "bytes": 372174,
+      "sha256": "FE72F277A25A67DE37165F9462036DC46C8A6532C90F9AAADD8540BFE01BA8B4"
+    },
+    "reports/cosim/corrected/e2m0_control_smoke/raw/xsim.log": {
+      "bytes": 240014,
+      "sha256": "9A6548C8F2B76D2B21EBE419F486F0578E07AF43BD5DBC4E2A7811FCA020E8FC"
+    }
+  },
+  "c_postcheck": {
+    "marker": "PASS: corrected E2M0 generated-RTL control smoke, two exact commands",
+    "status": "PASS"
+  },
+  "c_precheck": {
+    "marker": "PASS: corrected E2M0 generated-RTL control smoke, two exact commands",
+    "status": "PASS"
+  },
+  "claim_boundary": {
+    "board_execution": "NOT_RUN",
+    "generated_rtl_64_token_parity": "NOT_RUN",
+    "generated_rtl_control_path_parity": "SUPPORTED",
+    "generated_rtl_recurrent_step_parity": "NOT_RUN",
+    "hls_c_sim_64_token_parity": "SUPPORTED_BY_SEPARATE_REPORT"
+  },
+  "commands": [
+    {
+      "command": "RESET",
+      "condition": "invalid layer identifier",
+      "expected_status": "STATUS_INVALID_LAYER_ID"
+    },
+    {
+      "command": "STEP",
+      "condition": "uninitialized resident state",
+      "expected_status": "STATUS_UNINITIALIZED_STATE"
+    }
+  ],
+  "generated_at": "2026-08-04T10:50:17.714126+00:00",
+  "generated_rtl": {
+    "file_count": 147,
+    "top": {
+      "gdn_e2m0_hls/u55c_250mhz/sim/verilog/gdn_e2m0_top.v": {
+        "bytes": 226260,
+        "sha256": "26D4D9F7610CD4B06C4C021581659E19AF06D73E859DF506D3660845F0040C93"
+      }
+    },
+    "tree_sha256": "99DDE628BF03342E3CCCD53C91802F812D812E064CAA16DBA0F3BC3D7E71BEA3"
+  },
+  "interpretation": "The official vendor flow establishes generated-RTL parity for two early-return control paths. It does not execute a recurrent state transition and is not the required 64-token RTL parity test.",
+  "official_hls_cosim": {
+    "interval_avg_cycles": 20081,
+    "interval_max_cycles": 20081,
+    "interval_min_cycles": 20081,
+    "latency_avg_cycles": 19971,
+    "latency_max_cycles": 19971,
+    "latency_min_cycles": 19971,
+    "status": "PASS",
+    "total_execution_cycles": 40052
+  },
+  "recurrent_transition_covered": false,
+  "required_64_token_c_sim_parity": "PASS_SEPARATE_EVIDENCE",
+  "required_64_token_rtl_parity": "NOT_RUN",
+  "rtl_simulation": {
+    "completed_transactions": 2,
+    "cpu_ms": 20140,
+    "current_memory_kb": 2755620,
+    "final_progress_time": 161182000,
+    "finish_time_ns": 161210,
+    "peak_memory_kb": 2755620,
+    "status": "PASS",
+    "total_transactions": 2
+  },
+  "runtime_staging": {
+    "classification": "host tool-runtime dependency",
+    "design_behavior_changed": false,
+    "dlls": [
+      "libstdc++-6.dll",
+      "libwinpthread-1.dll"
+    ],
+    "note": "The Vitis-generated Windows harnesses require MinGW runtime DLLs. Copies were staged beside the generated pre-check and post-check executables so the vendor launcher could resolve them."
+  },
+  "schema": 1,
+  "scope": "Official Vitis HLS 2025.2 C/RTL co-simulation of two exact early-return control commands for the corrected E2M0 candidate.",
+  "source_files": {
+    "hls/e2m0/include/gdn_e2m0_kernel.hpp": {
+      "bytes": 10237,
+      "sha256": "B9A662F2DCDFC9BDCD552CF3F90410258FA7FB72EB5A9606208A172B8072EC6A"
+    },
+    "hls/e2m0/src/e2m0_arithmetic.cpp": {
+      "bytes": 14775,
+      "sha256": "A1D6361E843B8AC60B32B5AA7CCFD2482D2B8F724D2DD58A55F1C51F17011384"
+    },
+    "hls/e2m0/src/gdn_e2m0_top.cpp": {
+      "bytes": 58224,
+      "sha256": "8408CD27675FD7759C543272A2F00404A7DD7F310D306F202F93A85D4EF6C429"
+    },
+    "hls/e2m0/tb/tb_gdn_e2m0_rtl_control.cpp": {
+      "bytes": 3774,
+      "sha256": "41C9CE84BCA5A4A602A8BCD286085A14AAE504E9835D3EE72AA8AB5E0DF0C027"
+    },
+    "hls/e2m0/tcl/run_control_cosim.tcl": {
+      "bytes": 853,
+      "sha256": "EAAEC6751562EA0F9DFE67C123DD22685376AA74C34906832A051BE96A745EB3"
+    }
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "tool": {
+    "hls": "AMD Vitis HLS 2025.2",
+    "rtl_simulator": "AMD XSIM 2025.2",
+    "target_part": "xcu55c-fsvh2892-2L-e",
+    "target_period_ns": 4.0
+  },
+  "working_tree_dirty": true
+}

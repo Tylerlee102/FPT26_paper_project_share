@@ -1,0 +1,269 @@
+
+
+================================================================
+== Vitis HLS Report for 'phase3_delta_tile'
+================================================================
+* Date:           Tue Aug  4 23:13:53 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_mxfp8_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.893 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |       46|       46|  0.184 us|  0.184 us|   46|   46|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        +---------------------------------------------------------+----------------------------------------------+---------+---------+----------+----------+-----+-----+-------------------+
+        |                                                         |                                              |  Latency (cycles) |  Latency (absolute) |  Interval |      Pipeline     |
+        |                         Instance                        |                    Module                    |   min   |   max   |    min   |    max   | min | max |        Type       |
+        +---------------------------------------------------------+----------------------------------------------+---------+---------+----------+----------+-----+-----+-------------------+
+        |grp_phase3_delta_tile_Pipeline_delta_mxfp8_lanes_fu_151  |phase3_delta_tile_Pipeline_delta_mxfp8_lanes  |       43|       43|  0.172 us|  0.172 us|    0|    0|  loop pipeline stp|
+        +---------------------------------------------------------+----------------------------------------------+---------+---------+----------+----------+-----+-----+-------------------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|       31|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     2|     2132|     3823|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|       44|    -|
+|Register             |        -|     -|       63|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     2|     2195|     3898|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|    ~0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|    ~0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +---------------------------------------------------------+----------------------------------------------+---------+----+------+------+-----+
+    |                         Instance                        |                    Module                    | BRAM_18K| DSP|  FF  |  LUT | URAM|
+    +---------------------------------------------------------+----------------------------------------------+---------+----+------+------+-----+
+    |grp_phase3_delta_tile_Pipeline_delta_mxfp8_lanes_fu_151  |phase3_delta_tile_Pipeline_delta_mxfp8_lanes  |        0|   2|  2132|  3823|    0|
+    +---------------------------------------------------------+----------------------------------------------+---------+----+------+------+-----+
+    |Total                                                    |                                              |        0|   2|  2132|  3823|    0|
+    +---------------------------------------------------------+----------------------------------------------+---------+----+------+------+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +--------------------+----------+----+---+----+------------+------------+
+    |    Variable Name   | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +--------------------+----------+----+---+----+------------+------------+
+    |add_ln30_fu_262_p2  |         +|   0|  0|  31|          24|          24|
+    +--------------------+----------+----+---+----+------------+------------+
+    |Total               |          |   0|  0|  31|          24|          24|
+    +--------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------+----+-----------+-----+-----------+
+    |     Name    | LUT| Input Size| Bits| Total Bits|
+    +-------------+----+-----------+-----+-----------+
+    |ap_NS_fsm    |  26|          5|    1|          5|
+    |ap_return_0  |   9|          2|   24|         48|
+    |ap_return_1  |   9|          2|   24|         48|
+    +-------------+----+-----------+-----+-----------+
+    |Total        |  44|          9|   49|        101|
+    +-------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------------------------------------------+----+----+-----+-----------+
+    |                                 Name                                 | FF | LUT| Bits| Const Bits|
+    +----------------------------------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                                             |   4|   0|    4|          0|
+    |ap_return_0_preg                                                      |  24|   0|   24|          0|
+    |ap_return_1_preg                                                      |  24|   0|   24|          0|
+    |grp_phase3_delta_tile_Pipeline_delta_mxfp8_lanes_fu_151_ap_start_reg  |   1|   0|    1|          0|
+    |shl_ln_reg_317                                                        |   2|   0|    7|          5|
+    |value_reg_322                                                         |   8|   0|    8|          0|
+    +----------------------------------------------------------------------+----+----+-----+-----------+
+    |Total                                                                 |  63|   0|   68|          5|
+    +----------------------------------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------------+-----+-----+------------+------------------------+--------------+
+|            RTL Ports            | Dir | Bits|  Protocol  |      Source Object     |    C Type    |
++---------------------------------+-----+-----+------------+------------------------+--------------+
+|ap_clk                           |   in|    1|  ap_ctrl_hs|       phase3_delta_tile|  return value|
+|ap_rst                           |   in|    1|  ap_ctrl_hs|       phase3_delta_tile|  return value|
+|ap_start                         |   in|    1|  ap_ctrl_hs|       phase3_delta_tile|  return value|
+|ap_done                          |  out|    1|  ap_ctrl_hs|       phase3_delta_tile|  return value|
+|ap_idle                          |  out|    1|  ap_ctrl_hs|       phase3_delta_tile|  return value|
+|ap_ready                         |  out|    1|  ap_ctrl_hs|       phase3_delta_tile|  return value|
+|ap_return_0                      |  out|   24|  ap_ctrl_hs|       phase3_delta_tile|  return value|
+|ap_return_1                      |  out|   24|  ap_ctrl_hs|       phase3_delta_tile|  return value|
+|v_address0                       |  out|   12|   ap_memory|                       v|         array|
+|v_ce0                            |  out|    1|   ap_memory|                       v|         array|
+|v_q0                             |   in|    8|   ap_memory|                       v|         array|
+|v_offset                         |   in|    5|     ap_none|                v_offset|        scalar|
+|v_scales_address0                |  out|    7|   ap_memory|                v_scales|         array|
+|v_scales_ce0                     |  out|    1|   ap_memory|                v_scales|         array|
+|v_scales_q0                      |   in|    8|   ap_memory|                v_scales|         array|
+|beta                             |   in|   16|     ap_none|                    beta|        scalar|
+|value_block                      |   in|    2|     ap_none|             value_block|        scalar|
+|prediction_mantissas_0_address0  |  out|    2|   ap_memory|  prediction_mantissas_0|         array|
+|prediction_mantissas_0_ce0       |  out|    1|   ap_memory|  prediction_mantissas_0|         array|
+|prediction_mantissas_0_q0        |   in|   32|   ap_memory|  prediction_mantissas_0|         array|
+|prediction_mantissas_1_address0  |  out|    2|   ap_memory|  prediction_mantissas_1|         array|
+|prediction_mantissas_1_ce0       |  out|    1|   ap_memory|  prediction_mantissas_1|         array|
+|prediction_mantissas_1_q0        |   in|   32|   ap_memory|  prediction_mantissas_1|         array|
+|prediction_mantissas_2_address0  |  out|    2|   ap_memory|  prediction_mantissas_2|         array|
+|prediction_mantissas_2_ce0       |  out|    1|   ap_memory|  prediction_mantissas_2|         array|
+|prediction_mantissas_2_q0        |   in|   32|   ap_memory|  prediction_mantissas_2|         array|
+|prediction_mantissas_3_address0  |  out|    2|   ap_memory|  prediction_mantissas_3|         array|
+|prediction_mantissas_3_ce0       |  out|    1|   ap_memory|  prediction_mantissas_3|         array|
+|prediction_mantissas_3_q0        |   in|   32|   ap_memory|  prediction_mantissas_3|         array|
+|prediction_mantissas_4_address0  |  out|    2|   ap_memory|  prediction_mantissas_4|         array|
+|prediction_mantissas_4_ce0       |  out|    1|   ap_memory|  prediction_mantissas_4|         array|
+|prediction_mantissas_4_q0        |   in|   32|   ap_memory|  prediction_mantissas_4|         array|
+|prediction_mantissas_5_address0  |  out|    2|   ap_memory|  prediction_mantissas_5|         array|
+|prediction_mantissas_5_ce0       |  out|    1|   ap_memory|  prediction_mantissas_5|         array|
+|prediction_mantissas_5_q0        |   in|   32|   ap_memory|  prediction_mantissas_5|         array|
+|prediction_mantissas_6_address0  |  out|    2|   ap_memory|  prediction_mantissas_6|         array|
+|prediction_mantissas_6_ce0       |  out|    1|   ap_memory|  prediction_mantissas_6|         array|
+|prediction_mantissas_6_q0        |   in|   32|   ap_memory|  prediction_mantissas_6|         array|
+|prediction_mantissas_7_address0  |  out|    2|   ap_memory|  prediction_mantissas_7|         array|
+|prediction_mantissas_7_ce0       |  out|    1|   ap_memory|  prediction_mantissas_7|         array|
+|prediction_mantissas_7_q0        |   in|   32|   ap_memory|  prediction_mantissas_7|         array|
+|prediction_exponents_0_address0  |  out|    2|   ap_memory|  prediction_exponents_0|         array|
+|prediction_exponents_0_ce0       |  out|    1|   ap_memory|  prediction_exponents_0|         array|
+|prediction_exponents_0_q0        |   in|   16|   ap_memory|  prediction_exponents_0|         array|
+|prediction_exponents_1_address0  |  out|    2|   ap_memory|  prediction_exponents_1|         array|
+|prediction_exponents_1_ce0       |  out|    1|   ap_memory|  prediction_exponents_1|         array|
+|prediction_exponents_1_q0        |   in|   16|   ap_memory|  prediction_exponents_1|         array|
+|prediction_exponents_2_address0  |  out|    2|   ap_memory|  prediction_exponents_2|         array|
+|prediction_exponents_2_ce0       |  out|    1|   ap_memory|  prediction_exponents_2|         array|
+|prediction_exponents_2_q0        |   in|   16|   ap_memory|  prediction_exponents_2|         array|
+|prediction_exponents_3_address0  |  out|    2|   ap_memory|  prediction_exponents_3|         array|
+|prediction_exponents_3_ce0       |  out|    1|   ap_memory|  prediction_exponents_3|         array|
+|prediction_exponents_3_q0        |   in|   16|   ap_memory|  prediction_exponents_3|         array|
+|prediction_exponents_4_address0  |  out|    2|   ap_memory|  prediction_exponents_4|         array|
+|prediction_exponents_4_ce0       |  out|    1|   ap_memory|  prediction_exponents_4|         array|
+|prediction_exponents_4_q0        |   in|   16|   ap_memory|  prediction_exponents_4|         array|
+|prediction_exponents_5_address0  |  out|    2|   ap_memory|  prediction_exponents_5|         array|
+|prediction_exponents_5_ce0       |  out|    1|   ap_memory|  prediction_exponents_5|         array|
+|prediction_exponents_5_q0        |   in|   16|   ap_memory|  prediction_exponents_5|         array|
+|prediction_exponents_6_address0  |  out|    2|   ap_memory|  prediction_exponents_6|         array|
+|prediction_exponents_6_ce0       |  out|    1|   ap_memory|  prediction_exponents_6|         array|
+|prediction_exponents_6_q0        |   in|   16|   ap_memory|  prediction_exponents_6|         array|
+|prediction_exponents_7_address0  |  out|    2|   ap_memory|  prediction_exponents_7|         array|
+|prediction_exponents_7_ce0       |  out|    1|   ap_memory|  prediction_exponents_7|         array|
+|prediction_exponents_7_q0        |   in|   16|   ap_memory|  prediction_exponents_7|         array|
+|delta_mantissas_0_address0       |  out|    2|   ap_memory|       delta_mantissas_0|         array|
+|delta_mantissas_0_ce0            |  out|    1|   ap_memory|       delta_mantissas_0|         array|
+|delta_mantissas_0_we0            |  out|    1|   ap_memory|       delta_mantissas_0|         array|
+|delta_mantissas_0_d0             |  out|   32|   ap_memory|       delta_mantissas_0|         array|
+|delta_mantissas_1_address0       |  out|    2|   ap_memory|       delta_mantissas_1|         array|
+|delta_mantissas_1_ce0            |  out|    1|   ap_memory|       delta_mantissas_1|         array|
+|delta_mantissas_1_we0            |  out|    1|   ap_memory|       delta_mantissas_1|         array|
+|delta_mantissas_1_d0             |  out|   32|   ap_memory|       delta_mantissas_1|         array|
+|delta_mantissas_2_address0       |  out|    2|   ap_memory|       delta_mantissas_2|         array|
+|delta_mantissas_2_ce0            |  out|    1|   ap_memory|       delta_mantissas_2|         array|
+|delta_mantissas_2_we0            |  out|    1|   ap_memory|       delta_mantissas_2|         array|
+|delta_mantissas_2_d0             |  out|   32|   ap_memory|       delta_mantissas_2|         array|
+|delta_mantissas_3_address0       |  out|    2|   ap_memory|       delta_mantissas_3|         array|
+|delta_mantissas_3_ce0            |  out|    1|   ap_memory|       delta_mantissas_3|         array|
+|delta_mantissas_3_we0            |  out|    1|   ap_memory|       delta_mantissas_3|         array|
+|delta_mantissas_3_d0             |  out|   32|   ap_memory|       delta_mantissas_3|         array|
+|delta_mantissas_4_address0       |  out|    2|   ap_memory|       delta_mantissas_4|         array|
+|delta_mantissas_4_ce0            |  out|    1|   ap_memory|       delta_mantissas_4|         array|
+|delta_mantissas_4_we0            |  out|    1|   ap_memory|       delta_mantissas_4|         array|
+|delta_mantissas_4_d0             |  out|   32|   ap_memory|       delta_mantissas_4|         array|
+|delta_mantissas_5_address0       |  out|    2|   ap_memory|       delta_mantissas_5|         array|
+|delta_mantissas_5_ce0            |  out|    1|   ap_memory|       delta_mantissas_5|         array|
+|delta_mantissas_5_we0            |  out|    1|   ap_memory|       delta_mantissas_5|         array|
+|delta_mantissas_5_d0             |  out|   32|   ap_memory|       delta_mantissas_5|         array|
+|delta_mantissas_6_address0       |  out|    2|   ap_memory|       delta_mantissas_6|         array|
+|delta_mantissas_6_ce0            |  out|    1|   ap_memory|       delta_mantissas_6|         array|
+|delta_mantissas_6_we0            |  out|    1|   ap_memory|       delta_mantissas_6|         array|
+|delta_mantissas_6_d0             |  out|   32|   ap_memory|       delta_mantissas_6|         array|
+|delta_mantissas_7_address0       |  out|    2|   ap_memory|       delta_mantissas_7|         array|
+|delta_mantissas_7_ce0            |  out|    1|   ap_memory|       delta_mantissas_7|         array|
+|delta_mantissas_7_we0            |  out|    1|   ap_memory|       delta_mantissas_7|         array|
+|delta_mantissas_7_d0             |  out|   32|   ap_memory|       delta_mantissas_7|         array|
+|delta_exponents_0_address0       |  out|    2|   ap_memory|       delta_exponents_0|         array|
+|delta_exponents_0_ce0            |  out|    1|   ap_memory|       delta_exponents_0|         array|
+|delta_exponents_0_we0            |  out|    1|   ap_memory|       delta_exponents_0|         array|
+|delta_exponents_0_d0             |  out|   16|   ap_memory|       delta_exponents_0|         array|
+|delta_exponents_1_address0       |  out|    2|   ap_memory|       delta_exponents_1|         array|
+|delta_exponents_1_ce0            |  out|    1|   ap_memory|       delta_exponents_1|         array|
+|delta_exponents_1_we0            |  out|    1|   ap_memory|       delta_exponents_1|         array|
+|delta_exponents_1_d0             |  out|   16|   ap_memory|       delta_exponents_1|         array|
+|delta_exponents_2_address0       |  out|    2|   ap_memory|       delta_exponents_2|         array|
+|delta_exponents_2_ce0            |  out|    1|   ap_memory|       delta_exponents_2|         array|
+|delta_exponents_2_we0            |  out|    1|   ap_memory|       delta_exponents_2|         array|
+|delta_exponents_2_d0             |  out|   16|   ap_memory|       delta_exponents_2|         array|
+|delta_exponents_3_address0       |  out|    2|   ap_memory|       delta_exponents_3|         array|
+|delta_exponents_3_ce0            |  out|    1|   ap_memory|       delta_exponents_3|         array|
+|delta_exponents_3_we0            |  out|    1|   ap_memory|       delta_exponents_3|         array|
+|delta_exponents_3_d0             |  out|   16|   ap_memory|       delta_exponents_3|         array|
+|delta_exponents_4_address0       |  out|    2|   ap_memory|       delta_exponents_4|         array|
+|delta_exponents_4_ce0            |  out|    1|   ap_memory|       delta_exponents_4|         array|
+|delta_exponents_4_we0            |  out|    1|   ap_memory|       delta_exponents_4|         array|
+|delta_exponents_4_d0             |  out|   16|   ap_memory|       delta_exponents_4|         array|
+|delta_exponents_5_address0       |  out|    2|   ap_memory|       delta_exponents_5|         array|
+|delta_exponents_5_ce0            |  out|    1|   ap_memory|       delta_exponents_5|         array|
+|delta_exponents_5_we0            |  out|    1|   ap_memory|       delta_exponents_5|         array|
+|delta_exponents_5_d0             |  out|   16|   ap_memory|       delta_exponents_5|         array|
+|delta_exponents_6_address0       |  out|    2|   ap_memory|       delta_exponents_6|         array|
+|delta_exponents_6_ce0            |  out|    1|   ap_memory|       delta_exponents_6|         array|
+|delta_exponents_6_we0            |  out|    1|   ap_memory|       delta_exponents_6|         array|
+|delta_exponents_6_d0             |  out|   16|   ap_memory|       delta_exponents_6|         array|
+|delta_exponents_7_address0       |  out|    2|   ap_memory|       delta_exponents_7|         array|
+|delta_exponents_7_ce0            |  out|    1|   ap_memory|       delta_exponents_7|         array|
+|delta_exponents_7_we0            |  out|    1|   ap_memory|       delta_exponents_7|         array|
+|delta_exponents_7_d0             |  out|   16|   ap_memory|       delta_exponents_7|         array|
+|counters_read                    |   in|   24|     ap_none|           counters_read|        scalar|
+|counters_read_10                 |   in|   24|     ap_none|        counters_read_10|        scalar|
++---------------------------------+-----+-----+------------+------------------------+--------------+
+

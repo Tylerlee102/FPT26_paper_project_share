@@ -1,0 +1,49 @@
+{
+  "capacities": [
+    16,
+    32,
+    64,
+    128
+  ],
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 256,
+    "trace_family": "nominal",
+    "value_dim": 128
+  },
+  "input_stream_sha256": "4467ba807789ee33c6167b447abe9d3e280737cc264cc82bd034b49d9e7973bf",
+  "limitations": [
+    "synthetic inputs",
+    "floating Q/DQ candidate, not the encoded-integer oracle",
+    "logical storage bytes, not placed BRAM/URAM allocation",
+    "not closed-loop Qwen quality evidence"
+  ],
+  "log_precision": "fp32",
+  "numpy": "2.3.5",
+  "outputs": {
+    "reports/benchmark/corrected/write_log_pilot_fp32log_256_checkpoints.csv": "e275c984ec8153ec2674fb09dd54b5a42395c615e832ff29360f4eb65eec445e",
+    "reports/benchmark/corrected/write_log_pilot_fp32log_256_tokens.csv": "47e804862924c22d1c6af9c3d47ec9ea5d69f508c769f44d7c9d4d43f7eba8f3"
+  },
+  "python": "3.12.10",
+  "schema": 1,
+  "source_hashes": {
+    "golden/gdn_fp32.py": "7ebc9b7a0ba400a553e9c079b2e2e98596723dcc8b1d137b0477c798e34697c5",
+    "golden/gdn_mxfp4.py": "22e9975b4a60a948a909fa0fc35630b1bc6ad68f7464b5c8e0c68f70bcaa44b8",
+    "golden/gdn_write_log.py": "25a018fd0d9eca5009271b4e03c88468234b118b4ce09c43005a69c5fbf6cc2c",
+    "golden/mx_format.py": "b0f8bee046465f342e8049b33a91c3e424c3c2c6e69fb53e85d2d63656be269d",
+    "scripts/long_sequence_stability.py": "10c0ab85b56d8e634c0a34daef6480239092c1335a3e47a595701c19bed7a69b",
+    "scripts/write_log_stability.py": "977ae20b055d1fa64d003851a9ab03c5555f21e21b809183a9a5eae97574e2c3"
+  },
+  "status": "diagnostic_only",
+  "timestamp": "2026-08-01T23:12:02.467558+00:00"
+}

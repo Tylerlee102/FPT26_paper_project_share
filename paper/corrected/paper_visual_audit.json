@@ -1,0 +1,96 @@
+{
+  "audit_candidate": "paper/corrected/paper_audit_candidate.pdf",
+  "audit_candidate_sha256": "8A50E5459C37D2598678895FF9923F3143C3A5FA859C87FE36D04736885869D5",
+  "auditor": "Codex page-by-page visual inspection on 2026-08-05",
+  "build_manifest": "paper/corrected/paper_audit_build_manifest.json",
+  "build_manifest_sha256": "58F41FEC89F5F839E9E3649347139368428E444E93FF026A899DE97738A568A5",
+  "checklist": "paper/corrected/paper_visual_checklist.json",
+  "checklist_sha256": "C1ACDCF772517C8F3B189EEDF9EE473C29E8476B2E7F3F8FA2789C8C489D45D3",
+  "generated_at": "2026-08-05T20:48:09.830759+00:00",
+  "page_count": 9,
+  "pages": [
+    {
+      "height": 2420,
+      "notes": "Title, anonymous author line, abstract, contributions, and opening background render cleanly in two columns; no figure or table is present on this page.",
+      "page": 1,
+      "path": "reports/rendered/corrected_paper/page-01.png",
+      "sha256": "2FDB2E1CB8276D755759EDC61EFA7EADB324E1BE312BC7861E31380E0CDE7840",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Recurrence equations and Table I are legible, aligned, and inside the margins; ownership labels and citations do not collide.",
+      "page": 2,
+      "path": "reports/rendered/corrected_paper/page-02.png",
+      "sha256": "BE24E49468C37D92E82C1386DCF1923FA5599A8DF9C7ABB5EC7B0DCC00DABE25",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Numerical method, correction, FPGA implementation, and evaluation controls flow correctly across columns with no clipping or malformed symbols.",
+      "page": 3,
+      "path": "reports/rendered/corrected_paper/page-03.png",
+      "sha256": "1DE2F85B0072A888ADB0725D6739A1157B6C7CE8A699E500EF2659F870D33BB8",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Figure 1 is nonblank and fully framed; phase labels, state/log blocks, legend, arrows, and caption remain readable without overlap.",
+      "page": 4,
+      "path": "reports/rendered/corrected_paper/page-04.png",
+      "sha256": "E1175211E2F1010858A23EAB6C421F1391310905CA21524A8CB53855C00F6407",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Uniform, stress, real-capture, HLS, correction, post-route, and power results are readable and remain within both columns.",
+      "page": 5,
+      "path": "reports/rendered/corrected_paper/page-05.png",
+      "sha256": "6565C958D4AD3D23CD8B1716C5982B42425ED36518299B79B74342C6300F4671",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Figure 2 curves, legend, log axes, thresholds, and caption are clear; Tables II-III and the surrounding discussion are aligned and unclipped.",
+      "page": 6,
+      "path": "reports/rendered/corrected_paper/page-06.png",
+      "sha256": "0821377512908AF5DC4DEC4269EA6A3E24D9AEF0D7877E118D08007AE2AC4D1E",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Figure 3 title and subtitle are separated; all bars and annotations are readable. Table IV, Tables V-VI, and equations (5)-(6) fit without overlap.",
+      "page": 7,
+      "path": "reports/rendered/corrected_paper/page-07.png",
+      "sha256": "5B80C64561A3ED3E24F55B6CCB3C73D56C1B6D1CD18EB5AF0013616D6E3DDA43",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Tables VII-IX, equations (7)-(8), limitations, and the complete conclusion fit on the eighth content page with readable type and intact margins.",
+      "page": 8,
+      "path": "reports/rendered/corrected_paper/page-08.png",
+      "sha256": "91DF68C7E8819E38C2515132B6DC9FB74A1D3DB7CB8FD33A796E3A6FA7DC3A0C",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "The ninth page contains references only; all 16 entries, venues, identifiers, and URLs are readable and remain inside the margins.",
+      "page": 9,
+      "path": "reports/rendered/corrected_paper/page-09.png",
+      "sha256": "79A3080AA68EDAD7094A306001B2711BC5F5C902463705BF5ABC169EE2EB56FC",
+      "width": 1870
+    }
+  ],
+  "required_checks": [
+    "captions_and_references",
+    "figures_and_legends",
+    "margins_and_clipping",
+    "tables",
+    "text_and_equations"
+  ],
+  "schema": 1,
+  "status": "PASS",
+  "submission_eligible": false,
+  "visual_audit_status": "PASS"
+}

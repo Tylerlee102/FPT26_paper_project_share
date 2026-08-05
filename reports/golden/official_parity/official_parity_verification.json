@@ -1,0 +1,40 @@
+{
+  "command": [
+    "/opt/gdn-parity/venv/bin/python",
+    "/mnt/c/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/scripts/verify_official_parity.py",
+    "reports/golden/official_parity"
+  ],
+  "recomputed": {
+    "fla_cache_bf16_vs_transformers_recurrent_bf16": {
+      "output_rel_l2": 0.0051318620492221065,
+      "state_rel_l2": 0.0026913490516131096
+    },
+    "fla_chunk_bf16_vs_transformers_recurrent_bf16": {
+      "output_rel_l2": 0.005808352114330801,
+      "state_rel_l2": 0.004633964834410346
+    },
+    "fla_recurrent_bf16_vs_transformers_recurrent_bf16": {
+      "output_rel_l2": 0.004190689620977262,
+      "state_rel_l2": 0.002626607243160107
+    },
+    "numpy_fp32_vs_transformers_recurrent_fp32": {
+      "output_rel_l2": 2.691755026071399e-07,
+      "state_rel_l2": 1.5057696839145016e-07
+    },
+    "transformers_cache_fp32_vs_recurrent_fp32": {
+      "output_rel_l2": 2.624692059829469e-07,
+      "state_rel_l2": 1.1465344189599651e-07
+    },
+    "transformers_chunk_fp32_vs_recurrent_fp32": {
+      "output_rel_l2": 3.28070482306517e-07,
+      "state_rel_l2": 2.5288175856004627e-07
+    }
+  },
+  "schema": 1,
+  "status": "PASS",
+  "timestamp": "2026-08-01T21:26:59.918567+00:00",
+  "verified_artifact_hashes": 3,
+  "verified_manifest_sha256": "3E520E4CBE989FE1EE7A4A73119FD7B70413986AF68A803D6535D423B6729C0F",
+  "verified_metric_rows": 6,
+  "verified_source_hashes": 6
+}

@@ -1,0 +1,173 @@
+{
+  "command": "python -m scripts.native_encoded_long_trace",
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "orientation": "KxV",
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 8192,
+    "trace_family": "nominal",
+    "value_dim": 128
+  },
+  "controlled_hardware_context": {
+    "block_size": 32,
+    "clock_ns": 4.0,
+    "note": "This software run changes arithmetic only; HLS cost is extracted separately at this fixed design point.",
+    "p_k": 16,
+    "p_v": 8,
+    "state_layout": "36 layer slots x 32 heads x 128 K x 128 V",
+    "target": "xcu55c-fsvh2892-2L-e"
+  },
+  "elapsed_seconds": 1769.0395534999989,
+  "engineering_gate": {
+    "output_cosine_at_least_0p99_all_checkpoints": "FAIL",
+    "state_relative_l2_at_most_0p10_at_final": "FAIL",
+    "status": "FAIL",
+    "zero_element_accumulator_or_scale_saturation": "PASS"
+  },
+  "exit_code": 0,
+  "finished_at": "2026-08-02T05:28:18.841209+00:00",
+  "independent_verification": "python -m scripts.verify_native_encoded_long_trace rehashes every artifact, checks row/counter invariants and shared inputs, and recomputes all checkpoint metrics from saved full-state snapshots",
+  "initial_state_sha256": "CB92F5959750AB44FBB97A8AA7C416961CDE747284B54511A47CBAEA26F13D19",
+  "input_stream_sha256": "ADB9105CE36C702EEB5D72A52145AED951C55752E9A541BAFBB549E61679DF0E",
+  "limitations": [
+    "one deterministic development seed and nominal synthetic trace",
+    "layer-boundary recurrence only; not closed-loop Qwen quality",
+    "software encoded oracle; HLS/RTL parity is separately bounded to 64 tokens",
+    "no post-route timing, physical fit, or board energy"
+  ],
+  "outputs": {
+    "reports/benchmark/corrected/native_encoded_long_trace.md": {
+      "bytes": 1129,
+      "sha256": "AE2BB752DE9E9501D93EF852D8B00990AB9BAB7F9CB382FF013DC2A2D4D7B076"
+    },
+    "reports/benchmark/corrected/native_encoded_long_trace_checkpoints.csv": {
+      "bytes": 1669,
+      "rows": 5,
+      "sha256": "CAD02382EDE3F744CB0BDE36382A4268D8C37DDD3359A196A43D56C38FB60A32"
+    },
+    "reports/benchmark/corrected/native_encoded_long_trace_tokens.csv": {
+      "bytes": 2017107,
+      "rows": 8192,
+      "sha256": "06F7B5C7A21A52411E0B218AF3F63DD56F56A1798D74F144BE58E092E9EFBC9B"
+    }
+  },
+  "runtime": {
+    "numpy": "2.3.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10"
+  },
+  "schema": 1,
+  "scope": "native encoded MXFP4 long-horizon synthetic recurrence diagnostic",
+  "shared_floating_trace": {
+    "initial_state_match": "PASS",
+    "input_match": "PASS",
+    "path": "reports/benchmark/corrected/long_trace_manifest.json",
+    "sha256": "6814584CC6C073E951EA5A1732FECB76780D3CA01C532E0869B44E74C3AC657A"
+  },
+  "snapshots": {
+    "reports/benchmark/corrected/native_encoded_long_trace_snapshots/token_00000.npz": {
+      "bytes": 2218080,
+      "sha256": "0A6F6D6A07BDC7DA31D07EF06272250A85EA86E3715B8ECF0E9F62EB1E7F99B2",
+      "token_index": 0
+    },
+    "reports/benchmark/corrected/native_encoded_long_trace_snapshots/token_00064.npz": {
+      "bytes": 2240421,
+      "sha256": "279F4C1E8BDE302DB7F133A5DC21B42BB03AA2E5ACA0BE128C5043B80E21DEBC",
+      "token_index": 64
+    },
+    "reports/benchmark/corrected/native_encoded_long_trace_snapshots/token_00256.npz": {
+      "bytes": 2234717,
+      "sha256": "FA17F8080D5701A7F7AD8884C529A8D259937F022614027775B48753F6F323CD",
+      "token_index": 256
+    },
+    "reports/benchmark/corrected/native_encoded_long_trace_snapshots/token_01024.npz": {
+      "bytes": 2234436,
+      "sha256": "DD2BBBF37C2078EA2904A6BBE208692B2BBC91228C58CED13023DF94E90CC5E2",
+      "token_index": 1024
+    },
+    "reports/benchmark/corrected/native_encoded_long_trace_snapshots/token_04096.npz": {
+      "bytes": 2232965,
+      "sha256": "CDF5576436D5288389465F80B7542A2DBB72CDDC65498FFD80ABA77402D8B2D3",
+      "token_index": 4096
+    },
+    "reports/benchmark/corrected/native_encoded_long_trace_snapshots/token_08192.npz": {
+      "bytes": 2233258,
+      "sha256": "37AB2D833DE7C029EEDAB8D792C8820F91CC8193288EC3D478CFC0AA008BD3E3",
+      "token_index": 8192
+    }
+  },
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 106408,
+      "changed_file_count": 7,
+      "sha256": "12B72E49F5361F1AB289281D0A8C318870916BAB322C1F1371EC60FFA3968796"
+    },
+    "files": {
+      "golden/gdn_fp32.py": {
+        "bytes": 8406,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "7EBC9B7A0BA400A553E9C079B2E2E98596723DCC8B1D137B0477C798E34697C5"
+      },
+      "golden/gdn_mxfp4_encoded.py": {
+        "bytes": 22670,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402"
+      },
+      "golden/gdn_mxfp4_encoded_vectorized.py": {
+        "bytes": 13109,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D"
+      },
+      "golden/mx_format.py": {
+        "bytes": 10211,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "B0F8BEE046465F342E8049B33A91C3E424C3C2C6E69FB53E85D2D63656BE269D"
+      },
+      "scripts/long_sequence_stability.py": {
+        "bytes": 20364,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "977BA478F143676388BBC78B87777330269E150ABAFC38C68B848A9647B05C14"
+      },
+      "scripts/native_encoded_long_trace.py": {
+        "bytes": 17937,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "04A0227D3E67B9869E8900436300CC26B9E0822DBCA638FE3FE133D54A6CF983"
+      },
+      "scripts/verify_vectorized_encoded_oracle.py": {
+        "bytes": 10830,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "7AFF4DFEBD3DDFDAA5CD44CC832927373714F0DF2C3E4B32FFEC7454A0A381C6"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "started_at": "2026-08-02T04:58:49.546587+00:00",
+  "status": "PASS",
+  "variant": "native_mxfp4_encoded_act_b32_state_b32",
+  "vectorized_oracle_crosscheck": {
+    "path": "reports/golden/vectorized_encoded_oracle_verification.json",
+    "sha256": "3542C7AD48EC4E4A322BBC889AE83887B14634B777ED0B46CB7B39FD12E05DAE",
+    "status": "PASS",
+    "tokens": 64
+  }
+}

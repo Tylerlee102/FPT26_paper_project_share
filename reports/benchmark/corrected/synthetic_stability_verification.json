@@ -1,0 +1,149 @@
+{
+  "artifact_integrity": {
+    "every_token_cross_check": "PASS",
+    "long_token_rows": 40960,
+    "long_trace": "PASS",
+    "scale_policy_ablation": "PASS",
+    "scale_policy_token_rows": 49152,
+    "shared_input_stream_cross_check": "PASS"
+  },
+  "bf16_software_stability": "PASS",
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 8192,
+    "trace_family": "nominal",
+    "value_dim": 128
+  },
+  "evidence_scope": "synthetic_floating_qdq_only",
+  "execution": {
+    "command": "python -m scripts.verify_synthetic_stability",
+    "exit_code": 0,
+    "raw_log": "reports/benchmark/corrected/synthetic_stability_verification.md"
+  },
+  "independent_verification": [
+    "recomputed SHA256 for every declared source and output",
+    "checked exact per-variant token sequences and checkpoint projections",
+    "cross-checked shared long-trace and scale-policy input hashes",
+    "cross-checked every-token MXFP4 metrics between independent runners"
+  ],
+  "limitations": [
+    "synthetic nominal trace only",
+    "floating quantize/dequantize arithmetic, not encoded HLS arithmetic",
+    "no realistic activation capture or closed-loop Qwen execution",
+    "this verifier does not ingest the separately reported matched BF16 HLS estimate",
+    "no matched post-route implementation, power, or board result"
+  ],
+  "long_trace_decisions": {
+    "bf16_qdq_fp32_accum_state_bf16": {
+      "minimum_checkpoint_output_cosine": 0.9999554050810446,
+      "output_cosine_threshold": 0.99,
+      "state_relative_l2_threshold": 0.1,
+      "status": "PASS",
+      "token_8192_state_relative_l2": 0.008988481694410546
+    },
+    "flat_int4_qdq": {
+      "minimum_checkpoint_output_cosine": 0.5094393365920148,
+      "output_cosine_threshold": 0.99,
+      "state_relative_l2_threshold": 0.1,
+      "status": "FAIL",
+      "token_8192_state_relative_l2": 1.8620132264927498
+    },
+    "mxfp4_qdq_act_b32_mxfp8_e4m3_state_b32": {
+      "minimum_checkpoint_output_cosine": 0.9684977032603328,
+      "output_cosine_threshold": 0.99,
+      "state_relative_l2_threshold": 0.1,
+      "status": "FAIL",
+      "token_8192_state_relative_l2": 0.23213306229485808
+    },
+    "mxfp4_qdq_act_b32_state_b32": {
+      "minimum_checkpoint_output_cosine": 0.7269445918092075,
+      "output_cosine_threshold": 0.99,
+      "state_relative_l2_threshold": 0.1,
+      "status": "FAIL",
+      "token_8192_state_relative_l2": 1.1038414562097558
+    }
+  },
+  "overall_finding": "The BF16 operand/state diagnostic passes the frozen synthetic stability thresholds, while uniform MXFP4 and every tested block-scale policy fail. Uniform native MXFP4 therefore fails the replacement question on stability for this trace, independent of the still-NOT_RUN physical cost comparison.",
+  "overall_mxfp4_for_bf16_replacement_question": "FAIL",
+  "overall_synthetic_mxfp4_for_bf16_replacement_question": "FAIL",
+  "scale_policy_decisions": {
+    "mxfp4_scale_every_token": {
+      "minimum_checkpoint_output_cosine": 0.7269445918092075,
+      "output_cosine_threshold": 0.99,
+      "state_relative_l2_threshold": 0.1,
+      "status": "FAIL",
+      "token_8192_state_relative_l2": 1.1038414562097558
+    },
+    "mxfp4_scale_fixed": {
+      "minimum_checkpoint_output_cosine": 0.8337845804508176,
+      "output_cosine_threshold": 0.99,
+      "state_relative_l2_threshold": 0.1,
+      "status": "FAIL",
+      "token_8192_state_relative_l2": 0.6766204815340255
+    },
+    "mxfp4_scale_periodic_16": {
+      "minimum_checkpoint_output_cosine": 0.7637633143720918,
+      "output_cosine_threshold": 0.99,
+      "state_relative_l2_threshold": 0.1,
+      "status": "FAIL",
+      "token_8192_state_relative_l2": 0.9390460536723583
+    },
+    "mxfp4_scale_periodic_4": {
+      "minimum_checkpoint_output_cosine": 0.7562273008256893,
+      "output_cosine_threshold": 0.99,
+      "state_relative_l2_threshold": 0.1,
+      "status": "FAIL",
+      "token_8192_state_relative_l2": 0.9853445904164966
+    },
+    "mxfp4_scale_periodic_8": {
+      "minimum_checkpoint_output_cosine": 0.7544938082927954,
+      "output_cosine_threshold": 0.99,
+      "state_relative_l2_threshold": 0.1,
+      "status": "FAIL",
+      "token_8192_state_relative_l2": 0.9517377218548476
+    },
+    "mxfp4_scale_threshold_0p75_5p5": {
+      "minimum_checkpoint_output_cosine": 0.5584097463045063,
+      "output_cosine_threshold": 0.99,
+      "state_relative_l2_threshold": 0.1,
+      "status": "FAIL",
+      "token_8192_state_relative_l2": 1.724816497639903
+    }
+  },
+  "scale_policy_rescues_uniform_mxfp4": "FAIL",
+  "schema": 1,
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 15344,
+      "changed_file_count": 1,
+      "sha256": "407EADF8BE020B2E2DCB5FC63545F4BAE153BF32B1E72E8CE44A684A41AAEAED"
+    },
+    "files": {
+      "scripts/verify_synthetic_stability.py": {
+        "bytes": 14792,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "ED67EDF7AD000C8FE0CD8A9E097CD0EB683D0873DD0249AEDC0DA6DB4D3692B4"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "uniform_mxfp4_stability": "FAIL",
+  "verified_at": "2026-08-02T04:11:55.278549+00:00"
+}

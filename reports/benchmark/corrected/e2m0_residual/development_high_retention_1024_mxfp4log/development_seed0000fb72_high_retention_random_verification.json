@@ -1,0 +1,12 @@
+{
+  "checkpoint_rows": 6,
+  "expected_logical_state_bytes": 538256,
+  "failures": [],
+  "gate_pass": true,
+  "manifest": "reports/benchmark/corrected/e2m0_residual/development_high_retention_1024_mxfp4log/development_seed0000fb72_high_retention_random_manifest.json",
+  "manifest_sha256": "4e9bd0dc93bbbd0308fc58401c6323c9d15df66a2a018f68d49e9264ca916001",
+  "schema": 1,
+  "status": "PASS",
+  "token_rows": 2048,
+  "verified_at": "2026-08-02T08:03:23.806772+00:00"
+}

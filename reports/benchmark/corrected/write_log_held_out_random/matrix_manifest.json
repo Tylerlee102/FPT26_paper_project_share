@@ -1,0 +1,66 @@
+{
+  "checkpoints": [
+    64,
+    256,
+    1024,
+    4096,
+    8192
+  ],
+  "families": [
+    "nominal"
+  ],
+  "initial_states": [
+    "random"
+  ],
+  "runs": [
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "95b0af6af3c20a4d6d09c7c241670dcece1dd3f391030c90af90f1eee2496721",
+      "manifest": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed000a11ce_nominal_random_manifest.json",
+      "manifest_sha256": "264a30e9ce17890ca2694c87afd6854accbcf57bd24b6b0c948e9ef69f1d2892",
+      "status": "PASS",
+      "stem": "held_out_seed000a11ce_nominal_random",
+      "verification": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed000a11ce_nominal_random_verification.json",
+      "verification_sha256": "0101e882704bbd0b3c45247d697bfcadcf4d87673608ed8059ae6d0694888e8d"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "80db82cb7005aeb14abbf56455238e8e414babc15f6498162dc1e7bc599785e7",
+      "manifest": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed00c0ffee_nominal_random_manifest.json",
+      "manifest_sha256": "16c58f88139eea4101fb8ecd8ca8f286d3901e7baf3b45dd222f28e5ed764181",
+      "status": "PASS",
+      "stem": "held_out_seed00c0ffee_nominal_random",
+      "verification": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed00c0ffee_nominal_random_verification.json",
+      "verification_sha256": "1ab98efa39d84acaba7f1c47848a5705569123fc6053521f590f4f7d474d96c9"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "733d151692403b4af4a7431da4d1d0fecc2ba7b3b48707d6e8f79ce90fa6a936",
+      "manifest": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed0005eed5_nominal_random_manifest.json",
+      "manifest_sha256": "3ae1f0774e2aa9437dec65249b4db150842254ea6803494fae721e3a6423715c",
+      "status": "PASS",
+      "stem": "held_out_seed0005eed5_nominal_random",
+      "verification": "reports/benchmark/corrected/write_log_held_out_random/held_out_seed0005eed5_nominal_random_verification.json",
+      "verification_sha256": "7bfd6777acb452a5e01c6e5ab8667a23d469ba11d9907aeb9f9ff590684250c0"
+    }
+  ],
+  "schema": 1,
+  "seeds": [
+    659918,
+    12648430,
+    388821
+  ],
+  "selection": "reports/benchmark/corrected/write_log_selection.json",
+  "selection_sha256": "522d3e2feae50e71ec38c80cd083383b84eea2cd9667bda5a06eb0546b391739",
+  "source_hashes": {
+    "golden/gdn_write_log.py": "da5376ae0fb6b338009a87b8096615e49333cf5fe8ad497abc5a1038414399fb",
+    "scripts/run_selected_write_log_matrix.py": "bd208ab5d8ef9fa24cb11096a7d8107959104effce32a4cca1b0741029c2f313",
+    "scripts/write_log_stability.py": "1dd4e5195fd84175ad733cea38a72b7296e8873ad35c5eee6ca514d1d8061ed3"
+  },
+  "split": "held_out",
+  "status": "PASS",
+  "summary_csv": "reports/benchmark/corrected/write_log_held_out_random/summary.csv",
+  "summary_sha256": "549fa980e9479a2ebe96968ed09f56f18c8a35b1387e23d0aac97acc55623cfb",
+  "timestamp": "2026-08-02T00:00:22.259569+00:00",
+  "tokens": 8192
+}

@@ -113,6 +113,20 @@ def find_gnuwin_bin() -> Path | None:
     return None
 
 
+def find_mingw_runtime_bin() -> Path | None:
+    for root in _roots():
+        install_root = root.parent if root.name in {"Vitis", "Vivado"} else root
+        for version in ("10.0.0", "6.2.0"):
+            candidate = install_root / "tps" / "mingw" / version / "win64.o" / "nt" / "bin"
+            if (
+                candidate.is_dir()
+                and (candidate / "libstdc++-6.dll").is_file()
+                and (candidate / "libgcc_s_seh-1.dll").is_file()
+            ):
+                return candidate
+    return None
+
+
 def find_vivado_batch() -> Path | None:
     path_hit = shutil.which("vivado.bat") or shutil.which("vivado")
     if path_hit:

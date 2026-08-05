@@ -1,0 +1,261 @@
+
+
+================================================================
+== Vitis HLS Report for 'aligned_sum_Pipeline_find_dominant'
+================================================================
+* Date:           Tue Aug  4 23:13:51 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_mxfp8_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.759 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+-------------------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval |      Pipeline     |
+    |   min   |   max   |    min   |    max   | min | max |        Type       |
+    +---------+---------+----------+----------+-----+-----+-------------------+
+    |      130|      130|  0.520 us|  0.520 us|    0|    0|  loop pipeline stp|
+    +---------+---------+----------+----------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                 |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |    Loop Name    |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- find_dominant  |      128|      128|         2|          1|          1|   128|       yes|
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|      141|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|        0|      130|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|       54|    -|
+|Register             |        -|     -|       33|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|       33|      325|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +----------------------------+-----------------------+---------+----+---+----+-----+
+    |          Instance          |         Module        | BRAM_18K| DSP| FF| LUT| URAM|
+    +----------------------------+-----------------------+---------+----+---+----+-----+
+    |sparsemux_33_4_16_1_1_U917  |sparsemux_33_4_16_1_1  |        0|   0|  0|  65|    0|
+    |sparsemux_33_4_36_1_1_U916  |sparsemux_33_4_36_1_1  |        0|   0|  0|  65|    0|
+    +----------------------------+-----------------------+---------+----+---+----+-----+
+    |Total                       |                       |        0|   0|  0| 130|    0|
+    +----------------------------+-----------------------+---------+----+---+----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-------------------------------+----------+----+---+----+------------+------------+
+    |         Variable Name         | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-------------------------------+----------+----+---+----+------------+------------+
+    |add_ln67_fu_621_p2             |         +|   0|  0|  15|           8|           1|
+    |ap_condition_729               |       and|   0|  0|   2|           1|           1|
+    |icmp_ln67_fu_615_p2            |      icmp|   0|  0|  16|           8|           9|
+    |icmp_ln70_fu_756_p2            |      icmp|   0|  0|  43|          36|           1|
+    |icmp_ln71_fu_839_p2            |      icmp|   0|  0|  23|          16|          16|
+    |found_nonzero_1_fu_873_p2      |        or|   0|  0|   2|           1|           1|
+    |or_ln71_fu_845_p2              |        or|   0|  0|   2|           1|           1|
+    |dominant_exponent_1_fu_859_p3  |    select|   0|  0|  16|           1|          16|
+    |select_ln71_fu_851_p3          |    select|   0|  0|  16|           1|          16|
+    |ap_enable_pp0                  |       xor|   0|  0|   2|           1|           2|
+    |not_icmp_ln70_fu_867_p2        |       xor|   0|  0|   2|           1|           2|
+    |xor_ln71_fu_833_p2             |       xor|   0|  0|   2|           1|           2|
+    +-------------------------------+----------+----+---+----+------------+------------+
+    |Total                          |          |   0|  0| 141|          76|          68|
+    +-------------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +--------------------------+----+-----------+-----+-----------+
+    |           Name           | LUT| Input Size| Bits| Total Bits|
+    +--------------------------+----+-----------+-----+-----------+
+    |ap_done_int               |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1   |   9|          2|    1|          2|
+    |ap_sig_allocacmp_index_1  |   9|          2|    8|         16|
+    |dominant_exponent_fu_152  |   9|          2|   16|         32|
+    |found_nonzero_reg_590     |   9|          2|    1|          2|
+    |index_fu_156              |   9|          2|    8|         16|
+    +--------------------------+----+-----------+-----+-----------+
+    |Total                     |  54|         12|   35|         70|
+    +--------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +--------------------------+----+----+-----+-----------+
+    |           Name           | FF | LUT| Bits| Const Bits|
+    +--------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                 |   1|   0|    1|          0|
+    |ap_done_reg               |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1   |   1|   0|    1|          0|
+    |dominant_exponent_fu_152  |  16|   0|   16|          0|
+    |found_nonzero_reg_590     |   1|   0|    1|          0|
+    |icmp_ln67_reg_903         |   1|   0|    1|          0|
+    |index_fu_156              |   8|   0|    8|          0|
+    |trunc_ln67_reg_907        |   4|   0|    4|          0|
+    +--------------------------+----+----+-----+-----------+
+    |Total                     |  33|   0|   33|          0|
+    +--------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++------------------------------+-----+-----+------------+------------------------------------+--------------+
+|           RTL Ports          | Dir | Bits|  Protocol  |            Source Object           |    C Type    |
++------------------------------+-----+-----+------------+------------------------------------+--------------+
+|ap_clk                        |   in|    1|  ap_ctrl_hs|  aligned_sum_Pipeline_find_dominant|  return value|
+|ap_rst                        |   in|    1|  ap_ctrl_hs|  aligned_sum_Pipeline_find_dominant|  return value|
+|ap_start                      |   in|    1|  ap_ctrl_hs|  aligned_sum_Pipeline_find_dominant|  return value|
+|ap_done                       |  out|    1|  ap_ctrl_hs|  aligned_sum_Pipeline_find_dominant|  return value|
+|ap_idle                       |  out|    1|  ap_ctrl_hs|  aligned_sum_Pipeline_find_dominant|  return value|
+|ap_ready                      |  out|    1|  ap_ctrl_hs|  aligned_sum_Pipeline_find_dominant|  return value|
+|mantissas_0_address0          |  out|    3|   ap_memory|                         mantissas_0|         array|
+|mantissas_0_ce0               |  out|    1|   ap_memory|                         mantissas_0|         array|
+|mantissas_0_q0                |   in|   36|   ap_memory|                         mantissas_0|         array|
+|mantissas_1_address0          |  out|    3|   ap_memory|                         mantissas_1|         array|
+|mantissas_1_ce0               |  out|    1|   ap_memory|                         mantissas_1|         array|
+|mantissas_1_q0                |   in|   36|   ap_memory|                         mantissas_1|         array|
+|mantissas_2_address0          |  out|    3|   ap_memory|                         mantissas_2|         array|
+|mantissas_2_ce0               |  out|    1|   ap_memory|                         mantissas_2|         array|
+|mantissas_2_q0                |   in|   36|   ap_memory|                         mantissas_2|         array|
+|mantissas_3_address0          |  out|    3|   ap_memory|                         mantissas_3|         array|
+|mantissas_3_ce0               |  out|    1|   ap_memory|                         mantissas_3|         array|
+|mantissas_3_q0                |   in|   36|   ap_memory|                         mantissas_3|         array|
+|mantissas_4_address0          |  out|    3|   ap_memory|                         mantissas_4|         array|
+|mantissas_4_ce0               |  out|    1|   ap_memory|                         mantissas_4|         array|
+|mantissas_4_q0                |   in|   36|   ap_memory|                         mantissas_4|         array|
+|mantissas_5_address0          |  out|    3|   ap_memory|                         mantissas_5|         array|
+|mantissas_5_ce0               |  out|    1|   ap_memory|                         mantissas_5|         array|
+|mantissas_5_q0                |   in|   36|   ap_memory|                         mantissas_5|         array|
+|mantissas_6_address0          |  out|    3|   ap_memory|                         mantissas_6|         array|
+|mantissas_6_ce0               |  out|    1|   ap_memory|                         mantissas_6|         array|
+|mantissas_6_q0                |   in|   36|   ap_memory|                         mantissas_6|         array|
+|mantissas_7_address0          |  out|    3|   ap_memory|                         mantissas_7|         array|
+|mantissas_7_ce0               |  out|    1|   ap_memory|                         mantissas_7|         array|
+|mantissas_7_q0                |   in|   36|   ap_memory|                         mantissas_7|         array|
+|mantissas_8_address0          |  out|    3|   ap_memory|                         mantissas_8|         array|
+|mantissas_8_ce0               |  out|    1|   ap_memory|                         mantissas_8|         array|
+|mantissas_8_q0                |   in|   36|   ap_memory|                         mantissas_8|         array|
+|mantissas_9_address0          |  out|    3|   ap_memory|                         mantissas_9|         array|
+|mantissas_9_ce0               |  out|    1|   ap_memory|                         mantissas_9|         array|
+|mantissas_9_q0                |   in|   36|   ap_memory|                         mantissas_9|         array|
+|mantissas_10_address0         |  out|    3|   ap_memory|                        mantissas_10|         array|
+|mantissas_10_ce0              |  out|    1|   ap_memory|                        mantissas_10|         array|
+|mantissas_10_q0               |   in|   36|   ap_memory|                        mantissas_10|         array|
+|mantissas_11_address0         |  out|    3|   ap_memory|                        mantissas_11|         array|
+|mantissas_11_ce0              |  out|    1|   ap_memory|                        mantissas_11|         array|
+|mantissas_11_q0               |   in|   36|   ap_memory|                        mantissas_11|         array|
+|mantissas_12_address0         |  out|    3|   ap_memory|                        mantissas_12|         array|
+|mantissas_12_ce0              |  out|    1|   ap_memory|                        mantissas_12|         array|
+|mantissas_12_q0               |   in|   36|   ap_memory|                        mantissas_12|         array|
+|mantissas_13_address0         |  out|    3|   ap_memory|                        mantissas_13|         array|
+|mantissas_13_ce0              |  out|    1|   ap_memory|                        mantissas_13|         array|
+|mantissas_13_q0               |   in|   36|   ap_memory|                        mantissas_13|         array|
+|mantissas_14_address0         |  out|    3|   ap_memory|                        mantissas_14|         array|
+|mantissas_14_ce0              |  out|    1|   ap_memory|                        mantissas_14|         array|
+|mantissas_14_q0               |   in|   36|   ap_memory|                        mantissas_14|         array|
+|mantissas_15_address0         |  out|    3|   ap_memory|                        mantissas_15|         array|
+|mantissas_15_ce0              |  out|    1|   ap_memory|                        mantissas_15|         array|
+|mantissas_15_q0               |   in|   36|   ap_memory|                        mantissas_15|         array|
+|exponents_0_address0          |  out|    3|   ap_memory|                         exponents_0|         array|
+|exponents_0_ce0               |  out|    1|   ap_memory|                         exponents_0|         array|
+|exponents_0_q0                |   in|   16|   ap_memory|                         exponents_0|         array|
+|exponents_1_address0          |  out|    3|   ap_memory|                         exponents_1|         array|
+|exponents_1_ce0               |  out|    1|   ap_memory|                         exponents_1|         array|
+|exponents_1_q0                |   in|   16|   ap_memory|                         exponents_1|         array|
+|exponents_2_address0          |  out|    3|   ap_memory|                         exponents_2|         array|
+|exponents_2_ce0               |  out|    1|   ap_memory|                         exponents_2|         array|
+|exponents_2_q0                |   in|   16|   ap_memory|                         exponents_2|         array|
+|exponents_3_address0          |  out|    3|   ap_memory|                         exponents_3|         array|
+|exponents_3_ce0               |  out|    1|   ap_memory|                         exponents_3|         array|
+|exponents_3_q0                |   in|   16|   ap_memory|                         exponents_3|         array|
+|exponents_4_address0          |  out|    3|   ap_memory|                         exponents_4|         array|
+|exponents_4_ce0               |  out|    1|   ap_memory|                         exponents_4|         array|
+|exponents_4_q0                |   in|   16|   ap_memory|                         exponents_4|         array|
+|exponents_5_address0          |  out|    3|   ap_memory|                         exponents_5|         array|
+|exponents_5_ce0               |  out|    1|   ap_memory|                         exponents_5|         array|
+|exponents_5_q0                |   in|   16|   ap_memory|                         exponents_5|         array|
+|exponents_6_address0          |  out|    3|   ap_memory|                         exponents_6|         array|
+|exponents_6_ce0               |  out|    1|   ap_memory|                         exponents_6|         array|
+|exponents_6_q0                |   in|   16|   ap_memory|                         exponents_6|         array|
+|exponents_7_address0          |  out|    3|   ap_memory|                         exponents_7|         array|
+|exponents_7_ce0               |  out|    1|   ap_memory|                         exponents_7|         array|
+|exponents_7_q0                |   in|   16|   ap_memory|                         exponents_7|         array|
+|exponents_8_address0          |  out|    3|   ap_memory|                         exponents_8|         array|
+|exponents_8_ce0               |  out|    1|   ap_memory|                         exponents_8|         array|
+|exponents_8_q0                |   in|   16|   ap_memory|                         exponents_8|         array|
+|exponents_9_address0          |  out|    3|   ap_memory|                         exponents_9|         array|
+|exponents_9_ce0               |  out|    1|   ap_memory|                         exponents_9|         array|
+|exponents_9_q0                |   in|   16|   ap_memory|                         exponents_9|         array|
+|exponents_10_address0         |  out|    3|   ap_memory|                        exponents_10|         array|
+|exponents_10_ce0              |  out|    1|   ap_memory|                        exponents_10|         array|
+|exponents_10_q0               |   in|   16|   ap_memory|                        exponents_10|         array|
+|exponents_11_address0         |  out|    3|   ap_memory|                        exponents_11|         array|
+|exponents_11_ce0              |  out|    1|   ap_memory|                        exponents_11|         array|
+|exponents_11_q0               |   in|   16|   ap_memory|                        exponents_11|         array|
+|exponents_12_address0         |  out|    3|   ap_memory|                        exponents_12|         array|
+|exponents_12_ce0              |  out|    1|   ap_memory|                        exponents_12|         array|
+|exponents_12_q0               |   in|   16|   ap_memory|                        exponents_12|         array|
+|exponents_13_address0         |  out|    3|   ap_memory|                        exponents_13|         array|
+|exponents_13_ce0              |  out|    1|   ap_memory|                        exponents_13|         array|
+|exponents_13_q0               |   in|   16|   ap_memory|                        exponents_13|         array|
+|exponents_14_address0         |  out|    3|   ap_memory|                        exponents_14|         array|
+|exponents_14_ce0              |  out|    1|   ap_memory|                        exponents_14|         array|
+|exponents_14_q0               |   in|   16|   ap_memory|                        exponents_14|         array|
+|exponents_15_address0         |  out|    3|   ap_memory|                        exponents_15|         array|
+|exponents_15_ce0              |  out|    1|   ap_memory|                        exponents_15|         array|
+|exponents_15_q0               |   in|   16|   ap_memory|                        exponents_15|         array|
+|found_nonzero_out             |  out|    1|      ap_vld|                   found_nonzero_out|       pointer|
+|found_nonzero_out_ap_vld      |  out|    1|      ap_vld|                   found_nonzero_out|       pointer|
+|dominant_exponent_out         |  out|   16|      ap_vld|               dominant_exponent_out|       pointer|
+|dominant_exponent_out_ap_vld  |  out|    1|      ap_vld|               dominant_exponent_out|       pointer|
++------------------------------+-----+-----+------------+------------------------------------+--------------+
+

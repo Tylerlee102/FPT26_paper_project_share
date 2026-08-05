@@ -1,0 +1,27 @@
+# Lazy MXFP4 Base / MXFP8 Write-Log Development Diagnostic
+
+Generated: 2026-08-02T00:13:42.075730+00:00
+Engineering gate at executed length: `FAIL`
+Split/seed/family: `development` / `0xfb72` / `high_retention`
+Initial state: `zero`
+Base residual-block fraction: 0.75
+Tokens/checkpoints: 1024 / 64, 256, 1024
+Residual-stack depths (activation/base): 2/2
+Fold policy: fixed, minimum entries=1, decay threshold=0.85
+Input-stream SHA256: `1084e695938e2e38ecfd16802a18bf8cb1d2b2431c70fd98d059fc2b70312d86`
+Token CSV: `reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_high_retention_zero_tokens.csv`
+Checkpoint CSV: `reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_high_retention_zero_checkpoints.csv`
+Manifest: `reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_high_retention_zero_manifest.json`
+
+The candidate uses paired Q/K-head key sharing, per-value-head decay coefficients, no-drop fixed-capacity logs, and atomic all-head folds. Output is evaluated before a full-log fold; resident-state metrics use the post-fold MXFP4 base, matching the output-before-state-requantization boundary.
+
+| Token | Variant | Output cosine | Output rel L2 | State rel L2 | State max abs | Folds | Dropped | Logical bytes |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|
+| 64 | fp32 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 0 | 0 | 2097152 |
+| 64 | mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7 | 0.992865 | 0.119378 | 0.116727 | 0.122560 | 9 | 0 | 536912 |
+| 256 | fp32 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 0 | 0 | 2097152 |
+| 256 | mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7 | 0.984535 | 0.175593 | 0.171427 | 0.194501 | 36 | 0 | 536912 |
+| 1024 | fp32 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 0 | 0 | 2097152 |
+| 1024 | mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7 | 0.983534 | 0.181667 | 0.185297 | 0.230164 | 146 | 0 | 536912 |
+
+This is G3 synthetic software evidence only. It is not encoded-integer, RTL, placed-memory, board-energy, or closed-loop model evidence.

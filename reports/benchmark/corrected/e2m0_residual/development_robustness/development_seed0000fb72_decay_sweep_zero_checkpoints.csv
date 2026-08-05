@@ -1,0 +1,7 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_0000fb72_decay_sweep_zero,development,64370,decay_sweep,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_decay_sweep_zero,development,64370,decay_sweep,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,64,0.9994489191173132,0.03332487589297512,0.00047164096031337976,0.0322231237937061,0.01035735011100769,9,0,0,1,7,538256,PASS
+synthetic_0000fb72_decay_sweep_zero,development,64370,decay_sweep,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_decay_sweep_zero,development,64370,decay_sweep,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,256,0.9997146486722943,0.024409555438034237,0.00032649049535393715,0.02470610641478134,0.01299874484539032,36,0,0,4,7,538256,PASS
+synthetic_0000fb72_decay_sweep_zero,development,64370,decay_sweep,fp32,0,1024,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_decay_sweep_zero,development,64370,decay_sweep,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,1024,0.9990320910187969,0.04502071973657046,0.0004621621919795871,0.028827224442853502,0.011212259531021118,146,0,0,2,7,538256,PASS

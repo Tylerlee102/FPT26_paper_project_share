@@ -1,0 +1,11 @@
+{
+  "checkpoint_rows": 6,
+  "failures": [],
+  "gate_pass": true,
+  "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_adversarial_random_manifest.json",
+  "manifest_sha256": "544d9da135c43f67db9062c7e3a72950d71f4d4510511d1885bd22ef85493fc2",
+  "schema": 1,
+  "status": "PASS",
+  "token_rows": 2048,
+  "verified_at": "2026-08-02T00:14:47.167512+00:00"
+}

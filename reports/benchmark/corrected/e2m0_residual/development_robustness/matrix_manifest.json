@@ -1,0 +1,160 @@
+{
+  "checkpoints": [
+    64,
+    256,
+    1024
+  ],
+  "gate": "development_robustness",
+  "registration": "reports/benchmark/corrected/e2m0_residual_preregistration.json",
+  "registration_sha256": "167CC59FB0C0245290416646DDEE536936F604B4AE3953C81707D98FE4D84FC2",
+  "runner_sha256": "8895EB46B6E727CDF7930AAF69473D13B0E92DE148F474CC325DA32555BFF412",
+  "runs": [
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "e9f84bde38e69e98b9aa642bfbb65c5a7f0783011dfb0c3ab4ca5fd305985e8a",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_dynamic_range_random_manifest.json",
+      "manifest_sha256": "15ED3689CCFA9374FCFF28B110AB186427938ABDE3835A4B676C9CB5F0CB86B3",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_dynamic_range_random",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_dynamic_range_random_verification.json",
+      "verification_sha256": "C89874FAAB4B4834BB731EDE714928A709307D4893EE7D3477DEE25915494C5C"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "fd07c3de1503b67b1957c50433106793c506be9d508221a4659d48322ae61cbc",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_dynamic_range_zero_manifest.json",
+      "manifest_sha256": "C51B627327C0DEB9ED52C23E41AC079EE487D63CBC0FC884F9D84F1EBD1CD9C5",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_dynamic_range_zero",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_dynamic_range_zero_verification.json",
+      "verification_sha256": "BEDE7A90F80DF5099B5CADC9D7C7C34C2200A6F7FAD4D5B6D759C77BCF211E53"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "0ca7a197a4a6bce4548243b64afc672788e376881e67aa493445c81c23d931e1",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_cancellation_random_manifest.json",
+      "manifest_sha256": "FF78D4F5678E81CF63791B47E0DF78B604B6E407AE9A4AEF8449F9DC0F8B1419",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_cancellation_random",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_cancellation_random_verification.json",
+      "verification_sha256": "FA6EC1D10E932F5BC8A1FED43E232E1318796F0D59C242A2B3766324A686CDD8"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "d8d655f0ffc7c640345b92b70a69542e1b8b4cad3765bfa87f2b70b9d92c4bc3",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_cancellation_zero_manifest.json",
+      "manifest_sha256": "238F68FCE3C2B7B647EAD776CF9693EA38950D9604A1AD017EDCB7E3C12FDE7E",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_cancellation_zero",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_cancellation_zero_verification.json",
+      "verification_sha256": "04693FFB9AFB96B683FA676F08C1D00D183FDBA2BA8BA0582B8B8990D5FCA930"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "f36cdb646f79095ebc6b2eb93f2231b7f4f3fea58cd5c1e58f51314e7552a656",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_high_retention_random_manifest.json",
+      "manifest_sha256": "24A26C7710C0E556DE008C91F05012AF6A878DDB4720608524A16E0296D34130",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_high_retention_random",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_high_retention_random_verification.json",
+      "verification_sha256": "3F7113E3595FEC540BABDD1E8A09AE451C15DD2F6DE8E87BBD6C60C4D340D7C0"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "1084e695938e2e38ecfd16802a18bf8cb1d2b2431c70fd98d059fc2b70312d86",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_high_retention_zero_manifest.json",
+      "manifest_sha256": "413A6C3CAB0BE75774CBE1BAA76AEAEE4FF57226932DF62D79AC4F6A142FAE2A",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_high_retention_zero",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_high_retention_zero_verification.json",
+      "verification_sha256": "7267EF178BD1DEBE3B67704E12543EC3897B445377B7478412C9C5974364AB5C"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "5703fd8ef6384e2509ba489ecb260df9c74a890b31daca7bba2e6cc58f9ee74a",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_decay_sweep_random_manifest.json",
+      "manifest_sha256": "999A5B23E1855D7DBFA585A73977330F57979243EE1542CEF0639A551B867EA7",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_decay_sweep_random",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_decay_sweep_random_verification.json",
+      "verification_sha256": "8411C262A8A0E992DD0ED67A022FDC4FDC1C95724A500E867D5CF4603FE15962"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "9b2ca7fe811a9e671b6dd498552febd107d201797c51db7df8d284ea54d5311f",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_decay_sweep_zero_manifest.json",
+      "manifest_sha256": "10BE16731817CE1B5443E742421AE909DFBF4BF4059ABF0AA2FEB6FD2608ED0C",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_decay_sweep_zero",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_decay_sweep_zero_verification.json",
+      "verification_sha256": "37AFC71679C189285C6CF1A71EBEA621D6572378E8D97DE6400E5BE487F215DA"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "2d5049d4ea126f51f7ed77722340189a6a14cecd43551f4bb07964f531f021f2",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_adversarial_random_manifest.json",
+      "manifest_sha256": "3C970E4B9F7FB74205528697F7017EDCB5D4F9D1BEB9B9A56D09D130148E3F05",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_adversarial_random",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_adversarial_random_verification.json",
+      "verification_sha256": "881B508417F89FB0477447C3C8633613B44A8FBD7492BAB9CEE16AD751C4A3FC"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "0cd633ba69b48cac9e0d3d6a153ba2329588387add8acbc5aad7c56e7750e94b",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_adversarial_zero_manifest.json",
+      "manifest_sha256": "E3B8B6B4AEE6D4B94518C9CE73DC504D570B63947FBFBBAB5920BF505C1ACB4E",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_adversarial_zero",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_adversarial_zero_verification.json",
+      "verification_sha256": "B5E39F03689CE88932BD773343DEC48A42E2F608C42709A9FA871467DA06EFB1"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "59176cc3333603a2f8251b2550942f4c3d957630d479153468daea4f74de4c12",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb73_high_retention_random_manifest.json",
+      "manifest_sha256": "C2A76BBF8AA593C8C514C7279EC391C1C0913447520F8F0B2B8EC86686074351",
+      "status": "PASS",
+      "stem": "development_seed0000fb73_high_retention_random",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb73_high_retention_random_verification.json",
+      "verification_sha256": "99808C18CE70C5F5C5F5D195B796F68CC84DE40B388D533AA4705A229D5BFB9F"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "ce2fce14f7ff5c05df1a1f51893b338541365b55c020a38a2c9b0daaff555fba",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb73_high_retention_zero_manifest.json",
+      "manifest_sha256": "8039D4E9BBBDFA3B2F8D782932E5689CFC574CD64AEAA1606304AF92C7B4E391",
+      "status": "PASS",
+      "stem": "development_seed0000fb73_high_retention_zero",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb73_high_retention_zero_verification.json",
+      "verification_sha256": "C372AF4B0F1AF1BAB362CC605C664E3DA0FB70405A65D18571B46BDB00F4E879"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "c06ba099f3280df40e646cffc3ef11fb976c5dd303926f7292ddd3c715379516",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb74_high_retention_random_manifest.json",
+      "manifest_sha256": "FCEE39BF0C5C16BD777849B302495DF9EC5A36E314274799F07EB205EFEF262B",
+      "status": "PASS",
+      "stem": "development_seed0000fb74_high_retention_random",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb74_high_retention_random_verification.json",
+      "verification_sha256": "B4069CBDE600F0276EB1AEEF8FF939A987423F4784AE1442905A237054339984"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "c3e901d5f0657287889dafef92318bfa5e7e4ed07faeefcb708141e9f31eda8d",
+      "manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb74_high_retention_zero_manifest.json",
+      "manifest_sha256": "DCF1DE61F6D6AC393537094C63982827EE24EFF0B1AD350EE8205068130073C7",
+      "status": "PASS",
+      "stem": "development_seed0000fb74_high_retention_zero",
+      "verification": "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb74_high_retention_zero_verification.json",
+      "verification_sha256": "0979B73D6C4000C7D7742DE4C17C2AD2A937EA89C806E57A83F1512F1348CD65"
+    }
+  ],
+  "schema": 1,
+  "split": "development",
+  "status": "PASS",
+  "summary_csv": "reports/benchmark/corrected/e2m0_residual/development_robustness/summary.csv",
+  "summary_sha256": "7454DEF67B98BD0B1EF1D95A63A2384B3FE2B3405D45487004A0C08E84970E9E",
+  "timestamp": "2026-08-02T08:12:03.042964+00:00",
+  "tokens": 1024
+}

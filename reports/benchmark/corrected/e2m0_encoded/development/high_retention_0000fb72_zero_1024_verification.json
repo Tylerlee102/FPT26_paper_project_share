@@ -1,0 +1,30 @@
+{
+  "candidate_gate": "PASS",
+  "checkpoint_rows": 6,
+  "cumulative_counters": {
+    "accumulator_saturations": 0,
+    "alignment_underflows": 69052633,
+    "e2m0_residual_clips": 1452376,
+    "element_saturations": 0,
+    "scale_clamps": 0,
+    "state_scale_changes": 1534134
+  },
+  "failures": [],
+  "independent_checks": [
+    "source and output hashes",
+    "CSV schemas and row counts",
+    "checkpoint projection",
+    "fixed fold/live-entry schedule",
+    "counter prefix sums",
+    "quality and arithmetic-event gate",
+    "full deterministic rerun and fieldwise equality",
+    "scalar/vectorized bit-exact tests are separate pytest evidence"
+  ],
+  "manifest": "reports/benchmark/corrected/e2m0_encoded/development/high_retention_0000fb72_zero_1024_manifest.json",
+  "manifest_sha256": "2777E860D4FFC5C244D060872F623C6B02D905B33C9CBF27DCA77827AE051AC2",
+  "recomputed": true,
+  "schema": 1,
+  "status": "PASS",
+  "token_rows": 2048,
+  "verified_at": "2026-08-02T10:10:03.602942+00:00"
+}

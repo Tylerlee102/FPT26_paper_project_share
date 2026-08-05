@@ -12,16 +12,42 @@ __pycache__/
 # Build and generated artifacts
 build/
 gdn_mxfp4_hls/
+gdn_bf16_hls/
+gdn_e2m0_arithmetic_hls/
+gdn_e2m0_hls/
+gdn_e2m0_trace_cosim_hls/
+gdn_e2m0_trace_hls/
+gdn_mxfp8_arithmetic_hls/
+gdn_mxfp8_csim_hls/
+gdn_mxfp8_hls/
 vitis_hls.log
 clockInfo.txt
 *.jou
 *.log
+*.pb
+hs_err_pid*.dmp
+.hls.failed
+tight_setup_hold_pins.txt
+tmp/
+reports/test_tmp/
+reports/test_results/*/
+reports/phase7_status.md
+reports/phase7_validation.md
+reports/csim/corrected/**/*.exe
 reports/cosim/*
 !reports/cosim/.gitkeep
 !reports/cosim/results.md
 !reports/cosim/gdn_top_cosim.rpt
 !reports/cosim/latency.csv
 !reports/cosim/summary.md
+!reports/cosim/corrected/
+reports/cosim/corrected/**
+!reports/cosim/corrected/**/
+!reports/cosim/corrected/**/*.csv
+!reports/cosim/corrected/**/*.json
+!reports/cosim/corrected/**/*.md
+!reports/cosim/corrected/**/*.rpt
+reports/cosim/corrected/**/*.exe
 reports/csynth/*
 !reports/csynth/.gitkeep
 !reports/csynth/handoff.md
@@ -34,16 +60,32 @@ reports/csynth/*
 !reports/csynth/gdn_top_impl_Pipeline_predict_cols_csynth.rpt
 !reports/csynth/gdn_top_impl_Pipeline_update_heads_update_rows_update_cols_csynth.rpt
 !reports/csynth/native_mac_evidence.md
+!reports/csynth/corrected/
+reports/csynth/corrected/**
+!reports/csynth/corrected/**/
+!reports/csynth/corrected/**/*.csv
+!reports/csynth/corrected/**/*.json
+!reports/csynth/corrected/**/*.md
+!reports/csynth/corrected/**/*.rpt
 reports/csynth/*.xml
 reports/vivado/*.log
 reports/vivado/*.jou
+reports/vivado/**/*.dcp
 reports/csynth_default_backup/
+reports/benchmark/corrected/**/*_tokens.csv
+reports/benchmark/corrected/**/snapshots/
+reports/benchmark/corrected/*_snapshots/
+reports/benchmark/corrected/pre_bf16_refresh_20260801/
+reports/golden/**/*.npz
+reports/rendered/
 paper/pack/*.zip
+paper/corrected/build_preview/
 iter_*_CongestedCLBsAndNets.txt
 -p/
 
 # Vendored/local tool downloads
 tools/
+.tools/
 
 # Generated vectors and calibration captures
 data/vectors/**/*.npz

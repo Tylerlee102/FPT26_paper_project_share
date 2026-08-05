@@ -1,0 +1,219 @@
+================================================================
+== Design Size Report
+================================================================
+
+* Total Instructions per Compilation Phase
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+| Phase         | Step                       | Instructions | Description                                                                            |
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+| Compile/Link  |                            |  79,537      | After all functions are compiled and linked into a single design                       |
+|               |                            |              |                                                                                        |
+| Unroll/Inline |                            |              | After user unroll and inline pragmas are applied                                       |
+|               | (1) unroll                 | 108,083 *    | user unroll pragmas are applied                                                        |
+|               | (2) simplification         |  72,258      | simplification of applied user unroll pragmas                                          |
+|               | (3) inline                 |  72,090      | user inline pragmas are applied                                                        |
+|               | (4) simplification         |  72,003      | simplification of applied user inline pragmas                                          |
+|               |                            |              |                                                                                        |
+| Array/Struct  |                            |              | After user array partition and struct aggregate/disaggregate pragmas are applied       |
+|               | (1) array partition        |  41,930      | user array partition pragmas are applied                                               |
+|               | (2) simplification         |  39,862      | simplification of applied user array partition & struct aggregate/disaggregate pragmas |
+|               | (3) aggregate/disaggregate |  39,917      | user struct aggregate/disaggregate pragmas are applied                                 |
+|               | (4) array reshape          |  39,984      | apply array reshape pragmas                                                            |
+|               | (5) access patterns        |  41,208      | array access pattern optmizations                                                      |
+|               |                            |              |                                                                                        |
+| Performance   |                            |              | After transformations are applied to meet performance pragma targets                   |
+|               | (1) loop simplification    |  38,996      | loop and instruction simplification                                                    |
+|               | (2) parallelization        |  38,559      | loops are unrolled or pipelined to meet performance targets                            |
+|               | (3) array partition        |  38,576      | arrays are partitioned to meet performance targets                                     |
+|               | (4) simplification         |  38,564      | simplification of design after performance transformations                             |
+|               |                            |              |                                                                                        |
+| HW Transforms |                            |              | After hardware transfomations                                                          |
+|               | (1) lowering               |  39,531      | initial conversion to HW specific instructions                                         |
+|               | (2) optimizations          |  39,823      | high level synthesis optimizations                                                     |
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+    * - Exceeded design size warning message threshold
+
+* Instructions per Function for each Compilation Phase
++------------------------------------+-------------------------+------------------+-----------------+-----------------+-----------------+-----------------+
+| Function                           | Location                | Compile/Link     | Unroll/Inline   | Array/Struct    | Performance     | HW Transforms   |
++------------------------------------+-------------------------+------------------+-----------------+-----------------+-----------------+-----------------+
+| + gdn_e2m0_top                     | gdn_e2m0_top.cpp:1492   | 79,537           | 72,003          | 41,208          | 38,564          | 39,823          |
+|  + gdn_e2m0_top_impl               | gdn_e2m0_top.cpp:981    | 79,493           | 71,925          | 41,095          | 38,440          | 39,690          |
+|     clear_counters                 | gdn_e2m0_top.cpp:54     |   111 (3 calls)  |                 |                 |                 |                 |
+|     payload_status                 | gdn_e2m0_top.cpp:97     |    36            |                 |                 |                 |                 |
+|   + publish_result                 | gdn_e2m0_top.cpp:81     |   440 (11 calls) |                 |                 |                 |                 |
+|      copy_counters                 | gdn_e2m0_top.cpp:63     |   352 (22 calls) |                 |                 |                 |                 |
+|   + validate_token                 | gdn_e2m0_top.cpp:185    |   694            |   147           |   214           |   192           |   234           |
+|    + validate_qk_stack             | gdn_e2m0_top.cpp:127    |   408 (2 calls)  |    82 (2 calls) |   126 (2 calls) |   112 (2 calls) |   134 (2 calls) |
+|       valid_e2m1_code              | gdn_e2m0_top.cpp:117    |    60 (2 calls)  |                 |                 |                 |                 |
+|    + validate_value_stack          | gdn_e2m0_top.cpp:156    |   204            |    41           |    63           |    56           |    67           |
+|       valid_e2m1_code              | gdn_e2m0_top.cpp:117    |    30            |                 |                 |                 |                 |
+|     multiply_coefficients          | gdn_e2m0_kernel.hpp:146 | 1,340 (2 calls)  |                 |                 |                 |                 |
+|   + dot_log_entry                  | gdn_e2m0_top.cpp:307    | 6,360 (2 calls)  |   402 (2 calls) | 1,180 (2 calls) | 1,168 (2 calls) | 1,222 (2 calls) |
+|      unpack_e2m1                   | gdn_e2m0_top.cpp:13     |   108 (2 calls)  |                 |                 |                 |                 |
+|    + product_e2m1                  | e2m0_arithmetic.cpp:209 | 1,516 (2 calls)  |                 |                 |                 |                 |
+|       decode_e2m1                  | e2m0_arithmetic.cpp:182 | 1,044 (4 calls)  |                 |                 |                 |                 |
+|      decode_scale                  | e2m0_arithmetic.cpp:204 |   112 (4 calls)  |                 |                 |                 |                 |
+|      unpack_scale                  | gdn_e2m0_top.cpp:33     |   108 (2 calls)  |                 |                 |                 |                 |
+|    + aligned_sum_guarded<512>      | gdn_e2m0_kernel.hpp:165 | 4,012 (2 calls)  |   236 (2 calls) |   478 (2 calls) |   470 (2 calls) |   490 (2 calls) |
+|       round_shift_rne              | gdn_e2m0_kernel.hpp:93  | 2,158 (2 calls)  |                 |                 |                 |                 |
+|       saturate_int32               | gdn_e2m0_kernel.hpp:119 |   396 (2 calls)  |                 |                 |                 |                 |
+|   + store_key                      | gdn_e2m0_top.cpp:753    |   251            |    40           |    59           |    55           |    66           |
+|      pack_e2m1                     | gdn_e2m0_top.cpp:18     |    65            |                 |                 |                 |                 |
+|      pack_scale                    | gdn_e2m0_top.cpp:38     |    65            |                 |                 |                 |                 |
+|   + dot_base_column                | gdn_e2m0_top.cpp:343    | 11,752 (2 calls) |   554 (2 calls) | 1,422 (2 calls) | 1,410 (2 calls) | 1,508 (2 calls) |
+|      unpack_e2m1                   | gdn_e2m0_top.cpp:13     |   108 (2 calls)  |                 |                 |                 |                 |
+|    + product_e2m1                  | e2m0_arithmetic.cpp:209 | 1,516 (2 calls)  |                 |                 |                 |                 |
+|       decode_e2m1                  | e2m0_arithmetic.cpp:182 | 1,044 (4 calls)  |                 |                 |                 |                 |
+|      decode_scale                  | e2m0_arithmetic.cpp:204 |   224 (8 calls)  |                 |                 |                 |                 |
+|      unpack_scale                  | gdn_e2m0_top.cpp:33     |   216 (4 calls)  |                 |                 |                 |                 |
+|      unpack_e2m0                   | gdn_e2m0_top.cpp:23     |   108 (2 calls)  |                 |                 |                 |                 |
+|    + product_e2m1_e2m0             | e2m0_arithmetic.cpp:215 | 1,516 (2 calls)  |                 |                 |                 |                 |
+|       decode_e2m1                  | e2m0_arithmetic.cpp:182 |   522 (2 calls)  |                 |                 |                 |                 |
+|       decode_e2m0                  | e2m0_arithmetic.cpp:193 |   522 (2 calls)  |                 |                 |                 |                 |
+|    + aligned_sum_guarded<512>      | gdn_e2m0_kernel.hpp:165 | 4,012 (2 calls)  |   236 (2 calls) |   478 (2 calls) |   470 (2 calls) |   490 (2 calls) |
+|       round_shift_rne              | gdn_e2m0_kernel.hpp:93  | 2,158 (2 calls)  |                 |                 |                 |                 |
+|       saturate_int32               | gdn_e2m0_kernel.hpp:119 |   396 (2 calls)  |                 |                 |                 |                 |
+|    + multiply_q1_15                | gdn_e2m0_kernel.hpp:134 | 3,102 (2 calls)  |                 |                 |                 |                 |
+|       round_shift_rne              | gdn_e2m0_kernel.hpp:93  | 2,158 (2 calls)  |                 |                 |                 |                 |
+|       saturate_int32               | gdn_e2m0_kernel.hpp:119 |   396 (2 calls)  |                 |                 |                 |                 |
+|   + combine_action                 | gdn_e2m0_top.cpp:397    | 8,998 (2 calls)  | 1,736 (2 calls) | 2,202 (2 calls) | 1,556 (2 calls) | 1,862 (2 calls) |
+|    + multiply_q1_15                | gdn_e2m0_kernel.hpp:134 | 3,102 (2 calls)  |                 |                 |                 |                 |
+|       round_shift_rne              | gdn_e2m0_kernel.hpp:93  | 2,158 (2 calls)  |                 |                 |                 |                 |
+|       saturate_int32               | gdn_e2m0_kernel.hpp:119 |   396 (2 calls)  |                 |                 |                 |                 |
+|      unpack_e2m1                   | gdn_e2m0_top.cpp:13     |   108 (2 calls)  |                 |                 |                 |                 |
+|      decode_e2m1                   | e2m0_arithmetic.cpp:182 |   522 (2 calls)  |                 |                 |                 |                 |
+|      unpack_scale                  | gdn_e2m0_top.cpp:33     |   108 (2 calls)  |                 |                 |                 |                 |
+|      decode_scale                  | e2m0_arithmetic.cpp:204 |    56 (2 calls)  |                 |                 |                 |                 |
+|    + aligned_sum_guarded<15>       | gdn_e2m0_kernel.hpp:165 | 4,012 (2 calls)  |   236 (2 calls) |   334 (2 calls) |   206 (2 calls) |   226 (2 calls) |
+|       round_shift_rne              | gdn_e2m0_kernel.hpp:93  | 2,158 (2 calls)  |                 |                 |                 |                 |
+|       saturate_int32               | gdn_e2m0_kernel.hpp:119 |   396 (2 calls)  |                 |                 |                 |                 |
+|     decode_e2m1                    | e2m0_arithmetic.cpp:182 |   522 (2 calls)  |                 |                 |                 |                 |
+|     decode_scale                   | e2m0_arithmetic.cpp:204 |    56 (2 calls)  |                 |                 |                 |                 |
+|   + aligned_sum_guarded<3>         | gdn_e2m0_kernel.hpp:165 | 2,006            |   118           |   119           |   103           |   113           |
+|      round_shift_rne               | gdn_e2m0_kernel.hpp:93  | 1,079            |                 |                 |                 |                 |
+|      saturate_int32                | gdn_e2m0_kernel.hpp:119 |   198            |                 |                 |                 |                 |
+|   + multiply_q1_15                 | gdn_e2m0_kernel.hpp:134 | 1,551            |                 |                 |                 |                 |
+|      round_shift_rne               | gdn_e2m0_kernel.hpp:93  | 1,079            |                 |                 |                 |                 |
+|      saturate_int32                | gdn_e2m0_kernel.hpp:119 |   198            |                 |                 |                 |                 |
+|   + quantize_update_block          | gdn_e2m0_top.cpp:442    | 11,434           | 32,025          | 14,667          | 14,483          | 14,500          |
+|    + select_e2m1_scale_power       | e2m0_arithmetic.cpp:221 | 4,760 (2 calls)  |                 |                 |                 |                 |
+|     + greater_abs_scaled           | e2m0_arithmetic.cpp:30  | 2,026 (2 calls)  |                 |                 |                 |                 |
+|        magnitude32                 | e2m0_arithmetic.cpp:7   |   972 (4 calls)  |                 |                 |                 |                 |
+|        bit_length32                | e2m0_arithmetic.cpp:14  |   304 (4 calls)  |                 |                 |                 |                 |
+|       magnitude32                  | e2m0_arithmetic.cpp:7   |   486 (2 calls)  |                 |                 |                 |                 |
+|       bit_length32                 | e2m0_arithmetic.cpp:14  |   152 (2 calls)  |                 |                 |                 |                 |
+|     + exceeds_magnitude            | e2m0_arithmetic.cpp:103 | 1,672 (2 calls)  |                 |                 |                 |                 |
+|        magnitude32                 | e2m0_arithmetic.cpp:7   |   972 (4 calls)  |                 |                 |                 |                 |
+|        bit_length32                | e2m0_arithmetic.cpp:14  |   152 (2 calls)  |                 |                 |                 |                 |
+|    + quantize_e2m1                 | e2m0_arithmetic.cpp:257 | 3,636 (2 calls)  |                 |                 |                 |                 |
+|       magnitude32                  | e2m0_arithmetic.cpp:7   |   486 (2 calls)  |                 |                 |                 |                 |
+|       compare_nonnegative_scaled   | e2m0_arithmetic.cpp:61  |   806 (2 calls)  |                 |                 |                 |                 |
+|     + exceeds_magnitude            | e2m0_arithmetic.cpp:103 | 1,672 (2 calls)  |                 |                 |                 |                 |
+|        magnitude32                 | e2m0_arithmetic.cpp:7   |   972 (4 calls)  |                 |                 |                 |                 |
+|        bit_length32                | e2m0_arithmetic.cpp:14  |   152 (2 calls)  |                 |                 |                 |                 |
+|      pack_e2m1                     | gdn_e2m0_top.cpp:18     |   130 (2 calls)  |                 |                 |                 |                 |
+|      decode_e2m1                   | e2m0_arithmetic.cpp:182 |   261            |                 |                 |                 |                 |
+|    + aligned_sum_guarded<2>        | gdn_e2m0_kernel.hpp:165 | 2,006            |   118           |   111           |   109           |   117           |
+|       round_shift_rne              | gdn_e2m0_kernel.hpp:93  | 1,079            |                 |                 |                 |                 |
+|       saturate_int32               | gdn_e2m0_kernel.hpp:119 |   198            |                 |                 |                 |                 |
+|      pack_scale                    | gdn_e2m0_top.cpp:38     |   130 (2 calls)  |                 |                 |                 |                 |
+|   + fold_log                       | gdn_e2m0_top.cpp:613    | 29,041           | 35,101          | 18,275          | 17,069          | 17,337          |
+|      unpack_e2m1                   | gdn_e2m0_top.cpp:13     |   162 (3 calls)  |                 |                 |                 |                 |
+|      decode_e2m1                   | e2m0_arithmetic.cpp:182 |   261            |                 |                 |                 |                 |
+|      unpack_scale                  | gdn_e2m0_top.cpp:33     |   216 (4 calls)  |                 |                 |                 |                 |
+|      decode_scale                  | e2m0_arithmetic.cpp:204 |   112 (4 calls)  |                 |                 |                 |                 |
+|      unpack_e2m0                   | gdn_e2m0_top.cpp:23     |    54            |                 |                 |                 |                 |
+|      decode_e2m0                   | e2m0_arithmetic.cpp:193 |   261            |                 |                 |                 |                 |
+|    + aligned_sum_guarded<2>        | gdn_e2m0_kernel.hpp:165 | 2,006            |   118           |   115           |   103           |   113           |
+|       round_shift_rne              | gdn_e2m0_kernel.hpp:93  | 1,079            |                 |                 |                 |                 |
+|       saturate_int32               | gdn_e2m0_kernel.hpp:119 |   198            |                 |                 |                 |                 |
+|    + multiply_q1_15                | gdn_e2m0_kernel.hpp:134 | 3,102 (2 calls)  |                 |                 |                 |                 |
+|       round_shift_rne              | gdn_e2m0_kernel.hpp:93  | 2,158 (2 calls)  |                 |                 |                 |                 |
+|       saturate_int32               | gdn_e2m0_kernel.hpp:119 |   396 (2 calls)  |                 |                 |                 |                 |
+|    + product_e2m1                  | e2m0_arithmetic.cpp:209 |   758            |                 |                 |                 |                 |
+|       decode_e2m1                  | e2m0_arithmetic.cpp:182 |   522 (2 calls)  |                 |                 |                 |                 |
+|    + aligned_sum_guarded<4>        | gdn_e2m0_kernel.hpp:165 | 2,006            |   826 (7 calls) |   861 (7 calls) |   721 (7 calls) |   791 (7 calls) |
+|       round_shift_rne              | gdn_e2m0_kernel.hpp:93  | 1,079            |                 |                 |                 |                 |
+|       saturate_int32               | gdn_e2m0_kernel.hpp:119 |   198            |                 |                 |                 |                 |
+|    + aligned_sum_guarded<8>        | gdn_e2m0_kernel.hpp:165 | 2,006            |   118           |   139           |   103           |   113           |
+|       round_shift_rne              | gdn_e2m0_kernel.hpp:93  | 1,079            |                 |                 |                 |                 |
+|       saturate_int32               | gdn_e2m0_kernel.hpp:119 |   198            |                 |                 |                 |                 |
+|    + quantize_fold_block           | gdn_e2m0_top.cpp:536    | 17,034           | 32,692          | 15,058          | 14,871          | 14,894          |
+|       unpack_scale                 | gdn_e2m0_top.cpp:33     |   108 (2 calls)  |                 |                 |                 |                 |
+|     + select_e2m1_scale_power      | e2m0_arithmetic.cpp:221 | 2,380            |                 |                 |                 |                 |
+|      + greater_abs_scaled          | e2m0_arithmetic.cpp:30  | 1,013            |                 |                 |                 |                 |
+|         magnitude32                | e2m0_arithmetic.cpp:7   |   486 (2 calls)  |                 |                 |                 |                 |
+|         bit_length32               | e2m0_arithmetic.cpp:14  |   152 (2 calls)  |                 |                 |                 |                 |
+|        magnitude32                 | e2m0_arithmetic.cpp:7   |   243            |                 |                 |                 |                 |
+|        bit_length32                | e2m0_arithmetic.cpp:14  |    76            |                 |                 |                 |                 |
+|      + exceeds_magnitude           | e2m0_arithmetic.cpp:103 |   836            |                 |                 |                 |                 |
+|         magnitude32                | e2m0_arithmetic.cpp:7   |   486 (2 calls)  |                 |                 |                 |                 |
+|         bit_length32               | e2m0_arithmetic.cpp:14  |    76            |                 |                 |                 |                 |
+|     + quantize_e2m1                | e2m0_arithmetic.cpp:257 | 1,818            |                 |                 |                 |                 |
+|        magnitude32                 | e2m0_arithmetic.cpp:7   |   243            |                 |                 |                 |                 |
+|        compare_nonnegative_scaled  | e2m0_arithmetic.cpp:61  |   403            |                 |                 |                 |                 |
+|      + exceeds_magnitude           | e2m0_arithmetic.cpp:103 |   836            |                 |                 |                 |                 |
+|         magnitude32                | e2m0_arithmetic.cpp:7   |   486 (2 calls)  |                 |                 |                 |                 |
+|         bit_length32               | e2m0_arithmetic.cpp:14  |    76            |                 |                 |                 |                 |
+|       pack_e2m1                    | gdn_e2m0_top.cpp:18     |    65            |                 |                 |                 |                 |
+|       decode_e2m1                  | e2m0_arithmetic.cpp:182 |   261            |                 |                 |                 |                 |
+|     + aligned_sum_guarded<2>       | gdn_e2m0_kernel.hpp:165 | 2,006            |   118           |   111           |   109           |   117           |
+|        round_shift_rne             | gdn_e2m0_kernel.hpp:93  | 1,079            |                 |                 |                 |                 |
+|        saturate_int32              | gdn_e2m0_kernel.hpp:119 |   198            |                 |                 |                 |                 |
+|     + select_e2m0_scale_power      | e2m0_arithmetic.cpp:296 | 2,380            |                 |                 |                 |                 |
+|      + greater_abs_scaled          | e2m0_arithmetic.cpp:30  | 1,013            |                 |                 |                 |                 |
+|         magnitude32                | e2m0_arithmetic.cpp:7   |   486 (2 calls)  |                 |                 |                 |                 |
+|         bit_length32               | e2m0_arithmetic.cpp:14  |   152 (2 calls)  |                 |                 |                 |                 |
+|        magnitude32                 | e2m0_arithmetic.cpp:7   |   243            |                 |                 |                 |                 |
+|        bit_length32                | e2m0_arithmetic.cpp:14  |    76            |                 |                 |                 |                 |
+|      + exceeds_magnitude           | e2m0_arithmetic.cpp:103 |   836            |                 |                 |                 |                 |
+|         magnitude32                | e2m0_arithmetic.cpp:7   |   486 (2 calls)  |                 |                 |                 |                 |
+|         bit_length32               | e2m0_arithmetic.cpp:14  |    76            |                 |                 |                 |                 |
+|     + choose_lower_e2m0_scale      | e2m0_arithmetic.cpp:374 | 5,331            |                 |                 |                 |                 |
+|      + quantize_e2m0               | e2m0_arithmetic.cpp:332 | 1,878 (2 calls)  |                 |                 |                 |                 |
+|         magnitude32                | e2m0_arithmetic.cpp:7   |   486 (2 calls)  |                 |                 |                 |                 |
+|         compare_nonnegative_scaled | e2m0_arithmetic.cpp:61  |   806 (2 calls)  |                 |                 |                 |                 |
+|      + normalized_q30              | e2m0_arithmetic.cpp:136 | 1,472            |                 |                 |                 |                 |
+|         round_shift_rne            | gdn_e2m0_kernel.hpp:93  | 1,079            |                 |                 |                 |                 |
+|        e2m0_candidate_q30          | e2m0_arithmetic.cpp:162 |   716 (2 calls)  |                 |                 |                 |                 |
+|     + quantize_e2m0                | e2m0_arithmetic.cpp:332 |   939            |                 |                 |                 |                 |
+|        magnitude32                 | e2m0_arithmetic.cpp:7   |   243            |                 |                 |                 |                 |
+|        compare_nonnegative_scaled  | e2m0_arithmetic.cpp:61  |   403            |                 |                 |                 |                 |
+|       pack_e2m0                    | gdn_e2m0_top.cpp:28     |    65            |                 |                 |                 |                 |
+|     + e2m0_exceeds_max             | e2m0_arithmetic.cpp:366 |   845            |                 |                 |                 |                 |
+|      + exceeds_magnitude           | e2m0_arithmetic.cpp:103 |   836            |                 |                 |                 |                 |
+|         magnitude32                | e2m0_arithmetic.cpp:7   |   486 (2 calls)  |                 |                 |                 |                 |
+|         bit_length32               | e2m0_arithmetic.cpp:14  |    76            |                 |                 |                 |                 |
+|       pack_scale                   | gdn_e2m0_top.cpp:38     |   130 (2 calls)  |                 |                 |                 |                 |
+|    + clear_log                     | gdn_e2m0_top.cpp:497    |   292            |    46           |    46           |    46           |    92           |
+|     + canonical_scale_word         | gdn_e2m0_top.cpp:43     |   111            |                 |                 |                 |                 |
+|        pack_scale                  | gdn_e2m0_top.cpp:38     |    65            |                 |                 |                 |                 |
+|     accumulate_counters            | gdn_e2m0_top.cpp:72     |    52 (2 calls)  |                 |                 |                 |                 |
+|   + read_snapshot                  | gdn_e2m0_top.cpp:890    |   764            |   133           |   193           |   175           |   268           |
+|      unpack_scale                  | gdn_e2m0_top.cpp:33     |   216 (4 calls)  |                 |                 |                 |                 |
+|      unpack_e2m1                   | gdn_e2m0_top.cpp:13     |   162 (3 calls)  |                 |                 |                 |                 |
+|      unpack_e2m0                   | gdn_e2m0_top.cpp:23     |    54            |                 |                 |                 |                 |
+|   + validate_snapshot              | gdn_e2m0_top.cpp:206    | 1,060            |   184           |   264           |   236           |   285           |
+|      valid_e2m1_code               | gdn_e2m0_top.cpp:117    |    90 (3 calls)  |                 |                 |                 |                 |
+|      valid_e2m0_code               | gdn_e2m0_top.cpp:122    |    30            |                 |                 |                 |                 |
+|   + load_snapshot                  | gdn_e2m0_top.cpp:784    |   988            |   141           |   209           |   191           |   274           |
+|      pack_e2m1                     | gdn_e2m0_top.cpp:18     |   195 (3 calls)  |                 |                 |                 |                 |
+|      pack_e2m0                     | gdn_e2m0_top.cpp:28     |    65            |                 |                 |                 |                 |
+|      pack_scale                    | gdn_e2m0_top.cpp:38     |   260 (4 calls)  |                 |                 |                 |                 |
+|   + reset_slot                     | gdn_e2m0_top.cpp:722    |   539            |    73           |    73           |    73           |   150           |
+|    + canonical_scale_word          | gdn_e2m0_top.cpp:43     |   111            |                 |                 |                 |                 |
+|       pack_scale                   | gdn_e2m0_top.cpp:38     |    65            |                 |                 |                 |                 |
+|    + clear_log                     | gdn_e2m0_top.cpp:497    |   292            |    46           |    46           |    46           |    92           |
+|     + canonical_scale_word         | gdn_e2m0_top.cpp:43     |   111            |                 |                 |                 |                 |
+|        pack_scale                  | gdn_e2m0_top.cpp:38     |    65            |                 |                 |                 |                 |
++------------------------------------+-------------------------+------------------+-----------------+-----------------+-----------------+-----------------+
+
+* Design Size Message Settings
++---------------------------------------------+--------+------------------------------------------------------------------+
+| Message Setting                             | Value  | Description                                                      |
++---------------------------------------------+--------+------------------------------------------------------------------+
+| config_compile -design_size_maximum_warning | 100000 | Show a warning when total design instructions exceeds this value |
++---------------------------------------------+--------+------------------------------------------------------------------+
+
+

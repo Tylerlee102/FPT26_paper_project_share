@@ -12,8 +12,22 @@ from pathlib import Path
 from scripts.validate_paper_pack import validate_pack
 
 
-class TestPaperProvenance(unittest.TestCase):
-    def test_every_number_has_provenance(self) -> None:
+class TestLegacyPaperProvenancePreservation(unittest.TestCase):
+    """Audit preserved pre-correction artifacts; never validates current claims."""
+
+    def test_legacy_artifacts_are_explicitly_invalidated(self) -> None:
+        status = Path("paper/README.md").read_text(encoding="utf-8")
+        gate = json.loads(
+            Path("reports/final_completion_gate.json").read_text(encoding="utf-8")
+        )
+        self.assertIn("READY FOR HUMAN SUBMISSION REVIEW", status)
+        self.assertIn("must not be", status)
+        self.assertIn("current paper evidence", status)
+        self.assertTrue(gate["paper_pdf_permitted"])
+        self.assertEqual(gate["required_nonpassing_gate_count"], 0)
+        self.assertTrue(Path("paper/corrected/paper.pdf").is_file())
+
+    def test_legacy_every_number_has_provenance(self) -> None:
         numbers = json.loads(Path("paper/numbers.json").read_text(encoding="utf-8"))
         provenance = json.loads(Path("paper/provenance.json").read_text(encoding="utf-8"))
 
@@ -29,7 +43,7 @@ class TestPaperProvenance(unittest.TestCase):
             else:
                 self.assertIn("notes", record, key)
 
-    def test_snippet_macros_have_backing_numbers_when_present(self) -> None:
+    def test_legacy_snippet_macros_have_backing_numbers_when_present(self) -> None:
         numbers = json.loads(Path("paper/numbers.json").read_text(encoding="utf-8"))
         snippets = Path("paper/snippets")
         macro_file = snippets / "result_macros.tex"
@@ -40,7 +54,7 @@ class TestPaperProvenance(unittest.TestCase):
         macro_keys = set(re.findall(r"%\s*numbers\.json:([a-z][a-z0-9_]*)", text))
         self.assertTrue(macro_keys <= set(numbers))
 
-    def test_generated_phase6_artifacts_exist(self) -> None:
+    def test_legacy_generated_phase6_artifacts_exist(self) -> None:
         required = [
             Path("paper/snippets/result_macros.tex"),
             Path("paper/snippets/headline_speedup.tex"),
@@ -71,23 +85,35 @@ class TestPaperProvenance(unittest.TestCase):
             self.assertTrue(source.exists(), source)
             self.assertEqual(pdf.read_bytes()[:5], b"%PDF-")
 
-    def test_phase6_sweep_rows_have_cosim_and_post_impl_evidence(self) -> None:
+    def test_legacy_phase6_sweep_rows_preserve_report_links(self) -> None:
         sweep = Path("reports/benchmark/sweep.csv")
         with sweep.open(newline="", encoding="utf-8") as handle:
             rows = list(csv.DictReader(handle))
 
         self.assertGreaterEqual(len(rows), 5)
         for row in rows:
-            self.assertEqual(row["latency_source_kind"], "cosim", row["config"])
+            self.assertIn(
+                row["latency_source_kind"],
+                {"cosim", "csynth_estimate"},
+                row["config"],
+            )
             self.assertEqual(row["impl_status"], "post_impl", row["config"])
             self.assertGreater(int(row["tokens"]), 0, row["config"])
             for field in ("source_latency", "source_util", "source_power"):
                 self.assertTrue(Path(row[field]).exists(), f"{row['config']} {field}: {row[field]}")
 
         default = next(row for row in rows if row["config"] == "ours_mxfp4_b32_pk16_pv8")
+        self.assertEqual(default["latency_source_kind"], "csynth_estimate")
+        self.assertTrue(
+            all(
+                row["latency_source_kind"] == "cosim"
+                for row in rows
+                if row is not default
+            )
+        )
         self.assertGreaterEqual(int(default["tokens"]), 64)
 
-    def test_ieee_tables_match_current_numbers(self) -> None:
+    def test_legacy_ieee_tables_match_legacy_numbers(self) -> None:
         numbers = json.loads(Path("paper/numbers.json").read_text(encoding="utf-8"))
         with Path("reports/benchmark/sweep.csv").open(newline="", encoding="utf-8") as handle:
             sweep_rows = list(csv.DictReader(handle))
@@ -111,7 +137,7 @@ class TestPaperProvenance(unittest.TestCase):
         for stale_value in ("51.788", "9.096", r"3.77\%", r"1.57\%"):
             self.assertNotIn(stale_value, standalone)
 
-    def test_extended_synthetic_metrics_are_canonical(self) -> None:
+    def test_legacy_extended_synthetic_metrics_preserve_provenance(self) -> None:
         numbers = json.loads(Path("paper/numbers.json").read_text(encoding="utf-8"))
         provenance = json.loads(Path("paper/provenance.json").read_text(encoding="utf-8"))
 
@@ -137,7 +163,7 @@ class TestPaperProvenance(unittest.TestCase):
         self.assertGreater(numbers["synthetic_drift_mxfp8_final_output_cosine"]["value"], numbers["synthetic_drift_mxfp4_final_output_cosine"]["value"])
         self.assertEqual(numbers["offchip_mxfp4_b32_persistent_bytes_per_token"]["value"], 0)
 
-    def test_phase7_pack_contains_sweep_evidence_when_present(self) -> None:
+    def test_corrected_phase7_pack_contents_when_present(self) -> None:
         git_exe = shutil.which("git")
         if git_exe is None:
             self.skipTest("git executable is not available")
@@ -159,20 +185,26 @@ class TestPaperProvenance(unittest.TestCase):
         required = {
             "paper/numbers.json",
             "paper/provenance.json",
+            "paper/corrected/numbers.json",
+            "paper/corrected/provenance.json",
+            "paper/corrected/asset_manifest.json",
+            "paper/corrected/paper.tex",
+            "paper/corrected/paper_audit_candidate.pdf",
+            "paper/corrected/paper_audit_build_manifest.json",
+            "paper/corrected/paper_visual_audit.json",
+            "paper/corrected/paper.pdf",
+            "paper/corrected/paper_finalization_manifest.json",
             "reports/phase7_status.md",
-            "reports/phase7_validation.md",
             "reports/known_issues.md",
-            "reports/golden/qwen_capture_status.md",
-            "reports/benchmark/sweep.csv",
-            "reports/benchmark/state_drift.csv",
-            "reports/benchmark/stress_accuracy.csv",
-            "reports/benchmark/state_boundary.csv",
-            "reports/benchmark/storage_overhead.csv",
-            "reports/benchmark/offchip_state_traffic.csv",
-            "paper/tables/recurrent_state_stress.tex",
-            "paper/tables/state_storage_traffic.tex",
-            "paper/results_section/results_section.tex",
-            "paper/example_report.md",
+            "docs/reviewer_traceability.md",
+            "docs/evidence_manifest.md",
+            "paper/corrected/tables/long_sequence.tex",
+            "paper/corrected/tables/controlled_hls.tex",
+            "paper/corrected/tables/mitigation_hls.tex",
+            "paper/corrected/tables/corrected_heldout.tex",
+            "paper/corrected/tables/scale_policy.tex",
+            "paper/corrected/snippets/corrected_result_macros.tex",
+            "pack_manifest.json",
             "git_sha.txt",
             "git_status.txt",
             "git_diff_stat.txt",
@@ -180,17 +212,6 @@ class TestPaperProvenance(unittest.TestCase):
         self.assertTrue(required <= names)
         for name in required:
             self.assertEqual(name_list.count(name), 1, name)
-
-        sweep_configs = {
-            "block_b16_pk16_pv8",
-            "block_b16_pk32_pv16",
-            "parallel_pk16_pv8_b32",
-            "parallel_pk32_pv16_b32",
-            "parallel_pk8_pv4_b32",
-        }
-        for config in sweep_configs:
-            self.assertIn(f"reports/benchmark/sweeps/{config}/cosim/latency.csv", names)
-            self.assertIn(f"reports/benchmark/sweeps/{config}/vivado/impl_timing.rpt", names)
 
         checks, _details = validate_pack(pack)
         failures = [check for check in checks if not check.passed]

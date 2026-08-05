@@ -7,13 +7,29 @@ import sys
 from pathlib import Path
 
 from .hls_source_check import main as source_check_main
-from .xilinx_tools import find_gnuwin_bin, find_settings64, find_vitis_hls, find_vitis_hls_batch
+from .xilinx_tools import (
+    find_gnuwin_bin,
+    find_mingw_runtime_bin,
+    find_settings64,
+    find_vitis_hls,
+    find_vitis_hls_batch,
+)
 
 
 TCL_BY_STEP = {
     "csim": Path("hls/tcl/run_csim.tcl"),
     "csynth": Path("hls/tcl/run_csynth.tcl"),
     "cosim": Path("hls/tcl/run_cosim.tcl"),
+    "e2m0-arithmetic-csim": Path("hls/e2m0/tcl/run_arithmetic_csim.tcl"),
+    "e2m0-csim": Path("hls/e2m0/tcl/run_csim.tcl"),
+    "e2m0-control-cosim": Path("hls/e2m0/tcl/run_control_cosim.tcl"),
+    "e2m0-csynth": Path("hls/e2m0/tcl/run_csynth.tcl"),
+    "e2m0-trace-csim": Path("hls/e2m0/tcl/run_trace_csim.tcl"),
+    "e2m0-trace-cosim": Path("hls/e2m0/tcl/run_trace_cosim.tcl"),
+    "bf16-csynth": Path("hls/bf16/tcl/run_csynth.tcl"),
+    "mxfp8-arithmetic-csim": Path("hls/mxfp8/tcl/run_arithmetic_csim.tcl"),
+    "mxfp8-csim": Path("hls/mxfp8/tcl/run_csim.tcl"),
+    "mxfp8-csynth": Path("hls/mxfp8/tcl/run_csynth.tcl"),
     "export": Path("hls/tcl/run_export.tcl"),
 }
 
@@ -55,6 +71,7 @@ def main(argv: list[str] | None = None) -> int:
     if os.name == "nt":
         settings = find_settings64()
         gnuwin = find_gnuwin_bin()
+        mingw_runtime = find_mingw_runtime_bin()
         hls_loader = _hls_loader_for_unwrapped_exe(vitis_hls)
         if hls_loader is not None or (settings is not None and vitis_hls.suffix.lower() in {".bat", ""}):
             drive = "X:"
@@ -62,10 +79,19 @@ def main(argv: list[str] | None = None) -> int:
             mapped_rel_tcl = TCL_BY_STEP[args.step].as_posix().replace("/", "\\")
             mapped_tcl = f"{drive_root}{mapped_rel_tcl}"
             setup_commands = [f"cd /d {drive_root}"]
-            if gnuwin is not None:
-                setup_commands.append(f'set "PATH={gnuwin};%PATH%"')
+            path_prefixes = [
+                str(path) for path in (gnuwin, mingw_runtime) if path is not None
+            ]
             if settings is not None:
                 setup_commands.append(f'call "{settings}"')
+            if path_prefixes:
+                setup_commands.append(
+                    f'set "PATH={";".join(path_prefixes)};%PATH%"'
+                )
+            if mingw_runtime is not None:
+                setup_commands.append(
+                    f'set "GDN_COSIM_MINGW={mingw_runtime}"'
+                )
             if hls_loader is not None:
                 setup_commands.append(f'call "{hls_loader}" -exec vitis_hls -f "{mapped_tcl}"')
             else:

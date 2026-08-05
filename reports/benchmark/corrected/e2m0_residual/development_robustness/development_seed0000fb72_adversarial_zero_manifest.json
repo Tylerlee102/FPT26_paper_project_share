@@ -1,0 +1,65 @@
+{
+  "activation_stack_depth": 2,
+  "base_primary_format": "E2M1/E8M0 MXFP4",
+  "base_residual_element_bits": 3,
+  "base_residual_format": "signed 3-bit [0,0.5,1,2] magnitudes with E8M0",
+  "base_residual_scale_policy": "min_sse_adjacent_e8m0",
+  "base_residual_values": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "base_stack_depth": 2,
+  "capacity": 7,
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 1024,
+    "trace_family": "adversarial",
+    "value_dim": 128
+  },
+  "fold_policy": "fixed_atomic_all_head",
+  "initial_state_mode": "zero",
+  "input_stream_sha256": "0cd633ba69b48cac9e0d3d6a153ba2329588387add8acbc5aad7c56e7750e94b",
+  "limitations": [
+    "synthetic inputs",
+    "floating quantize/dequantize mitigation, not encoded-integer or RTL",
+    "logical storage bytes, not placed BRAM/URAM allocation",
+    "E2M0-style residual is a custom correction, not an OCP MXFP4 element",
+    "not closed-loop Qwen quality evidence"
+  ],
+  "log_mode": "mxfp4_rs2",
+  "log_stack_depth": 2,
+  "logical_state_bytes": 538256,
+  "numpy": "2.3.5",
+  "outputs": {
+    "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_adversarial_zero_checkpoints.csv": "0a0246dea4de1fffa504f315e9750c514f847b9815872de9bf268a96f800c6c4",
+    "reports/benchmark/corrected/e2m0_residual/development_robustness/development_seed0000fb72_adversarial_zero_tokens.csv": "0b7188630ad9499a2c00b8c34954c2d3ea900bb3c79b1d52e9c419b51d3cb0ff"
+  },
+  "python": "3.12.10",
+  "schema": 1,
+  "source_hashes": {
+    "golden/gdn_e2m0_residual.py": "d3412e7e3ef8c7d43ab9e3e8190d5ac3c7ef7c88bd18d645a885f6a6af65f692",
+    "golden/gdn_fp32.py": "7ebc9b7a0ba400a553e9c079b2e2e98596723dcc8b1d137b0477c798e34697c5",
+    "golden/gdn_mxfp4.py": "22e9975b4a60a948a909fa0fc35630b1bc6ad68f7464b5c8e0c68f70bcaa44b8",
+    "golden/gdn_write_log.py": "955a47a7af4821fd132a56df07496777bfa1944f1ca5dd45af66124be5c4ad33",
+    "golden/mx_format.py": "b0f8bee046465f342e8049b33a91c3e424c3c2c6e69fb53e85d2d63656be269d",
+    "scripts/e2m0_residual_stability.py": "63bb5f8cf90c70115006c95ebac4022db32ba9b54e3ed2e2ebff50b72828671d",
+    "scripts/long_sequence_stability.py": "977ba478f143676388bbc78b87777330269e150abafc38c68b848a9647b05c14",
+    "scripts/write_log_stability.py": "1dd4e5195fd84175ad733cea38a72b7296e8873ad35c5eee6ca514d1d8061ed3"
+  },
+  "status": "diagnostic_only",
+  "timestamp": "2026-08-02T08:10:35.965158+00:00",
+  "variant": "mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7"
+}

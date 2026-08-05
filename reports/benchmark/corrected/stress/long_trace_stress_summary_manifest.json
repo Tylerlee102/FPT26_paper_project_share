@@ -1,0 +1,77 @@
+{
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 8192,
+    "trace_families": [
+      "dynamic_range",
+      "cancellation"
+    ],
+    "value_dim": 128,
+    "variants": [
+      "fp32",
+      "bf16_qdq_fp32_accum_state_bf16",
+      "mxfp4_qdq_act_b32_state_b32",
+      "mxfp4_qdq_act_b32_mxfp8_e4m3_state_b32",
+      "flat_int4_qdq"
+    ]
+  },
+  "evidence_scope": "supplemental_synthetic_floating_qdq_stress",
+  "execution": {
+    "command": "python -m scripts.aggregate_long_trace_stress",
+    "exit_code": 0
+  },
+  "input_sha256": {
+    "reports/benchmark/corrected/stress/cancellation_8192_checkpoints.csv": "f635fc0509c25f84710256320962bbdf11b4e1bfb0527269271976ff4b32982c",
+    "reports/benchmark/corrected/stress/cancellation_8192_manifest.json": "7f1d7f7f136df31530b23831d1cb289c2ec6163cc388f8a0e2f97ace2de746c7",
+    "reports/benchmark/corrected/stress/cancellation_8192_tokens.csv": "5e85652c3b33d4f3e333e0a86ea4b6e3562c67c5d76c6d75e12af3a4d4214fca",
+    "reports/benchmark/corrected/stress/dynamic_range_8192_checkpoints.csv": "e91f994a7565ddd1ea5006cd261ca89871599c1382b23799155559de6eddbb1a",
+    "reports/benchmark/corrected/stress/dynamic_range_8192_manifest.json": "a0daa859153443d2c0ec7577b07cd69bfc14a3c040a887ce1efc11a189521107",
+    "reports/benchmark/corrected/stress/dynamic_range_8192_tokens.csv": "501be9ca33ccc2b743531fdcda60c429fa95fd4ed6964e1c00c93e55c11aeccd"
+  },
+  "limitations": [
+    "synthetic deterministic traces",
+    "floating Q/DQ rather than native encoded arithmetic",
+    "not fitted to model-derived activation distributions",
+    "not closed-loop model-quality evidence",
+    "integer event counters are NOT_RUN"
+  ],
+  "outputs": {
+    "reports/benchmark/corrected/stress/long_trace_stress_summary.csv": "62b55a7baf51f9dea4a5f393a956e6468340bb7bd4e839bf6162f18d58869c3c",
+    "reports/benchmark/corrected/stress/long_trace_stress_summary.md": "6f565374ab445aa42ab8bb10cf19b55a23fce684742cefe203726a857e01dcdc"
+  },
+  "row_count": 10,
+  "schema": 1,
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 16343,
+      "changed_file_count": 1,
+      "sha256": "32C5BD999EC3EE13399353AFC004C81B487E7E94B15C3CDA6C8BF2B086F7EA74"
+    },
+    "files": {
+      "scripts/aggregate_long_trace_stress.py": {
+        "bytes": 15751,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "5509C873BFE432185D41C6E42679DAC9ED9BBCFC85FEBA8258F9E7449649802D"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "timestamp": "2026-08-04T00:34:09.558272+00:00"
+}

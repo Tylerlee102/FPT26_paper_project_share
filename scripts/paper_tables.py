@@ -5,6 +5,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+from .paper_pack import require_release_gate
+
 
 ROOT = Path(__file__).resolve().parents[1]
 NUMBERS = ROOT / "paper" / "numbers.json"
@@ -263,6 +265,11 @@ Persistent steady-state off-chip state traffic & {_maybe_v(numbers, 'offchip_mxf
 
 
 def main() -> int:
+    try:
+        require_release_gate()
+    except RuntimeError as exc:
+        print(str(exc))
+        return 1
     numbers = _load()
     _write_macros(numbers)
     _write_tables(numbers)

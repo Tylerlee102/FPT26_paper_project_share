@@ -1,0 +1,87 @@
+{
+  "board_energy": "BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT",
+  "capacity_drc": {
+    "ramb18_ramb36_compatible": {
+      "available": 4032,
+      "required": 18432
+    },
+    "ramb36_fifo": {
+      "available": 2016,
+      "required": 9216
+    },
+    "rule": "UTLZ-1"
+  },
+  "generated_at": "2026-08-05T06:32:03.104535+00:00",
+  "ideal_state_only_lower_bound": {
+    "available_uram": 960,
+    "ideal_min_uram": 1024,
+    "logical_state_bytes": 37748736,
+    "raw_bit_capacity_necessary_condition": "FAIL"
+  },
+  "limitations": [
+    "The all-layer BF16 state bank cannot be placed on the declared U55C; no routed timing or power value exists.",
+    "The synthesis netlist mapped the state bank to RAMB36, but the independent ideal URAM-only state lower bound also exceeds the device's 960 URAMs.",
+    "A reduced-layer BF16 route would change the controlled state layout and is therefore not substituted."
+  ],
+  "physical_fit": "FAIL",
+  "placement_completion": "FAIL_CAPACITY",
+  "raw_artifact_sha256": {
+    "build/vivado/bf16_ooc_rtl/manifest.json": "089E9433057735AD07215354F0AC2FF07B3B6856002B098B8AA21A47CE746FBE",
+    "build/vivado/gdn_bf16_vivado/bf16_post_synth.dcp": "5EA26D77FD82BE6D316793CED36C919BE3AC8D23AC171A3067A966E08DC063E7",
+    "reports/benchmark/corrected/state_capacity_lower_bound.json": "E92205E53D8FDFB2609E0822B8DD2E1473D7B004D1AE782DF4351910843144C6",
+    "reports/vivado/baselines/bf16/synth_util.rpt": "9B400CC020B290ECBA04E896C97CEF343E741A5684D4063ACFD32E6EBF9761B6",
+    "reports/vivado/vivado_bf16-impl.log": "9830449871750034B10018021A2794E0B8A428B16DB6A05BA09DC7EC8D62E5EF"
+  },
+  "route_completion": "NOT_APPLICABLE_PHYSICAL_FIT_FAILED",
+  "rtl_transformation": {
+    "integrity_status": "PASS",
+    "output": "build/vivado/bf16_ooc_rtl/gdn_bf16_top.v",
+    "output_sha256": "0E809AE3129F2F65288C921B27F49D3D77681879B3DDEE7A1B3BC7C07F30DB80",
+    "source": "gdn_bf16_hls/u55c_250mhz/syn/verilog/gdn_bf16_top.v",
+    "source_sha256": "B1CFB7638ACB136ADD6BDC19C175A7D57A2907904E02C0B2983C15826BF17021",
+    "status": "PASS",
+    "timestamp": "2026-08-05T06:01:12.683781+00:00",
+    "transformation": "insert_top_level_bufgce_and_rewire_internal_ap_clk"
+  },
+  "schema": 1,
+  "scope": "matched 36-layer BF16 persistent-state U55C out-of-context physical-fit attempt",
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "synthesis_completion": "PASS",
+  "synthesized_utilization": {
+    "block_ram_tiles": {
+      "available": 2016,
+      "used": 9216,
+      "utilization_percent": 457.14
+    },
+    "bufgce": {
+      "available": 288,
+      "used": 1,
+      "utilization_percent": 0.35
+    },
+    "clb_luts": {
+      "available": 1303680,
+      "used": 46894,
+      "utilization_percent": 3.6
+    },
+    "clb_registers": {
+      "available": 2607360,
+      "used": 38165,
+      "utilization_percent": 1.46
+    },
+    "dsps": {
+      "available": 9024,
+      "used": 15,
+      "utilization_percent": 0.17
+    },
+    "uram": {
+      "available": 960,
+      "used": 0,
+      "utilization_percent": 0.0
+    }
+  },
+  "target_device": "xcu55c-fsvh2892-2L-e",
+  "target_period_ns": 4.0,
+  "timing": "NOT_RUN_PHYSICAL_FIT_FAILED",
+  "vectorless_power": "NOT_RUN_PHYSICAL_FIT_FAILED"
+}

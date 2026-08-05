@@ -1,0 +1,62 @@
+{
+  "candidate": "mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7",
+  "candidate_software_stability": "PASS",
+  "checkpoint_row_count": 224,
+  "failures": [],
+  "limitations": [
+    "layer-level deterministic synthetic traces only",
+    "floating quantize/dequantize model, not encoded-integer or RTL",
+    "logical storage only; physical allocation and service rate are NOT_RUN",
+    "post-route timing, power, energy, and board parity are NOT_RUN or BLOCKED_EXTERNAL",
+    "closed-loop Qwen quality is BLOCKED_EXTERNAL"
+  ],
+  "logical_reduction_vs_uniform_mxfp8_percent": 0.44685132575758013,
+  "logical_state_bytes": 538256,
+  "matrices": {
+    "development_robustness": {
+      "checkpoint_count": 3,
+      "matrix_manifest": "reports/benchmark/corrected/e2m0_residual/development_robustness/matrix_manifest.json",
+      "matrix_manifest_sha256": "F59603747A42ED2E800666ADAA9505F9AC0F53346EB1824DDF1217A7CD289BD2",
+      "maximum_checkpoint_state_abs_error": 1.1345930099487305,
+      "maximum_final_state_relative_l2": 0.09567299392366402,
+      "minimum_checkpoint_output_cosine": 0.9951844823923734,
+      "runs": 14,
+      "status": "PASS",
+      "summary_sha256": "7454DEF67B98BD0B1EF1D95A63A2384B3FE2B3405D45487004A0C08E84970E9E",
+      "tokens_per_run": 1024
+    },
+    "extended_development": {
+      "checkpoint_count": 5,
+      "matrix_manifest": "reports/benchmark/corrected/e2m0_residual/extended_development/matrix_manifest.json",
+      "matrix_manifest_sha256": "DAB671C361ACA23398D0E29D1A3FBEF57289168DF51684B42462ADA924FDB25E",
+      "maximum_checkpoint_state_abs_error": 0.1904052197933197,
+      "maximum_final_state_relative_l2": 0.09576059388978997,
+      "minimum_checkpoint_output_cosine": 0.9950832966268143,
+      "runs": 2,
+      "status": "PASS",
+      "summary_sha256": "CFA0AEC25CDC082E3A4B1DC480B6ECB006ECC3DAB42FC33945F6960C419C56BB",
+      "tokens_per_run": 8192
+    },
+    "held_out": {
+      "checkpoint_count": 5,
+      "matrix_manifest": "reports/benchmark/corrected/e2m0_residual/held_out/matrix_manifest.json",
+      "matrix_manifest_sha256": "F52A4A546C7D5BD198B0FFFDDD304BA705853FCBB186FE6E2A4A857FEBA7A149",
+      "maximum_checkpoint_state_abs_error": 0.22450119256973267,
+      "maximum_final_state_relative_l2": 0.09553169225327296,
+      "minimum_checkpoint_output_cosine": 0.9948848697789567,
+      "runs": 12,
+      "status": "PASS",
+      "summary_sha256": "DC64FD872238957B4E042BCA069739ADAA0F29AA79372A8A5D61686D8E4C08D1",
+      "tokens_per_run": 8192
+    }
+  },
+  "registration": "reports/benchmark/corrected/e2m0_residual_preregistration.json",
+  "registration_sha256": "167CC59FB0C0245290416646DDEE536936F604B4AE3953C81707D98FE4D84FC2",
+  "run_count": 28,
+  "schema": 1,
+  "selected_method_hardware_pareto": "NOT_RUN",
+  "status": "PASS",
+  "token_row_count": 258048,
+  "uniform_mxfp8_state_bytes": 540672,
+  "verified_at": "2026-08-02T08:57:16.178505+00:00"
+}

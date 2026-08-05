@@ -1,0 +1,76 @@
+{
+  "evidence_levels": {
+    "quality": "one deterministic layer-level synthetic nominal trace",
+    "schedule": "Vitis HLS C-synthesis estimate",
+    "storage": "logical bits, ideal primitive-capacity lower bounds, and per-format physical-fit status"
+  },
+  "generated_at": "2026-08-05T17:04:13.008128+00:00",
+  "inputs_sha256": {
+    "reports/benchmark/corrected/hls_arithmetic_comparison.json": "F996D0968D824C981547B919729C90DA53EBCC27C0FD06D205D391584BEC3DB3",
+    "reports/benchmark/corrected/long_trace_checkpoints.csv": "BA27DD61AE09FC009C95B0E586B9E7BF8D275A9425EF014A554D6359730349AA",
+    "reports/benchmark/corrected/long_trace_manifest.json": "6814584CC6C073E951EA5A1732FECB76780D3CA01C532E0869B44E74C3AC657A",
+    "reports/benchmark/corrected/native_encoded_long_trace_checkpoints.csv": "CAD02382EDE3F744CB0BDE36382A4268D8C37DDD3359A196A43D56C38FB60A32",
+    "reports/benchmark/corrected/native_encoded_long_trace_manifest.json": "7595E7CAF2B6D2D85E50D6D26E7030B3CEE9CCE3FD1B73868183FFBDD5C3B24F",
+    "reports/benchmark/corrected/state_capacity_lower_bound.json": "BC74E5FCB62C81862C6FED1D90789561387D88E4AA3551663D7D73068F6C6044"
+  },
+  "limitations": [
+    "panels juxtapose evidence levels and do not form a measured Pareto frontier",
+    "floating Q/DQ quality points are not native hardware implementations",
+    "raw bit capacity ignores width, banking, ports, replication, placement, and routing"
+  ],
+  "not_run": [
+    "matched INT4 HLS baseline",
+    "uniform-MXFP4 and flat-INT4 physical all-layer banking and fit",
+    "board energy"
+  ],
+  "outputs": {
+    "paper/figures/corrected/tradeoff_evidence.pdf": "7E6A77638D932A719C223B33573A0C051407EB12BCE3D7D3374AE36FB2C8C067"
+  },
+  "schema": 1,
+  "scope": "cross-evidence logical-storage, synthetic-quality, and HLS-schedule figure",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 16280,
+      "changed_file_count": 2,
+      "sha256": "7AF7F35D62F87CA0A0F9123A86AF2D3AF733709477C5C01E6F651A16522DE111"
+    },
+    "files": {
+      "scripts/reportlab_fonts.py": {
+        "bytes": 944,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "D68D3699969A05E16B49E1323BBFCB95666940DF7FCA3B6513A189A2DCE4767A"
+      },
+      "scripts/tradeoff_evidence_figure.py": {
+        "bytes": 14514,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B9E6FB89F446F0CF711B1E42419C895E1C51663781A1348101639C0ED7C6F31A"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "used_values": {
+    "hls_step_max_mcycles": {
+      "BF16": 4.225728,
+      "Native MXFP4": 6.070592,
+      "Native MXFP8": 6.28768
+    },
+    "storage_mib": {
+      "BF16": 36.0,
+      "INT4": 9.0,
+      "MXFP4": 9.5625,
+      "MXFP8": 18.5625
+    },
+    "token_8192_output_cosine": {
+      "BF16": 0.9999554050810446,
+      "Flat INT4": 0.5254027904242022,
+      "MXFP4 Q/DQ": 0.7292747012489023,
+      "MXFP8-state Q/DQ": 0.9684977032603328,
+      "Native MXFP4": 0.4298338633178566
+    }
+  }
+}

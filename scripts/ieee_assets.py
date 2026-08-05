@@ -11,6 +11,8 @@ from PIL import Image, ImageDraw, ImageFont
 from reportlab.lib import colors
 from reportlab.pdfgen import canvas
 
+from .paper_pack import require_release_gate
+
 
 ROOT = Path(__file__).resolve().parents[1]
 NUMBERS = ROOT / "paper" / "numbers.json"
@@ -568,6 +570,11 @@ def write_index(paths: Iterable[Path]) -> None:
 
 
 def main() -> int:
+    try:
+        require_release_gate()
+    except RuntimeError as exc:
+        print(str(exc))
+        return 1
     numbers = _load_numbers()
     sweep_rows = _read_sweep()
     paths: list[Path] = []

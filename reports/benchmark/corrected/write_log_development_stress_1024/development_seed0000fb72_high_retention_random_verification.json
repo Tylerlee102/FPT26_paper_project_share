@@ -1,0 +1,13 @@
+{
+  "checkpoint_rows": 6,
+  "failures": [
+    "preregistered synthetic checkpoint gate failed"
+  ],
+  "gate_pass": false,
+  "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_high_retention_random_manifest.json",
+  "manifest_sha256": "a896105d986ddae6c98e1197a251400a1657c57d4d99c66ced59350a31e2f3f1",
+  "schema": 1,
+  "status": "FAIL",
+  "token_rows": 2048,
+  "verified_at": "2026-08-02T00:13:19.763232+00:00"
+}

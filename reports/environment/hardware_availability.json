@@ -1,0 +1,53 @@
+{
+  "schema": "hardware-availability-v1",
+  "generated_at": "2026-08-05T16:47:17.125136+00:00",
+  "host": "Tyler",
+  "toolchain": {
+    "vitis_hls": "C:\\AMDDesignTools\\2025.2\\Vitis\\bin\\unwrapped\\win64.o\\vitis_hls.exe",
+    "vivado": "C:\\AMDDesignTools\\2025.2\\Vivado\\bin\\vivado.bat",
+    "status": "AVAILABLE"
+  },
+  "u55c_board_experiment": {
+    "xrt_commands": {
+      "xbutil": null,
+      "xrt-smi": null,
+      "xclbinutil": "C:\\AMDDesignTools\\2025.2\\Vitis\\bin\\unwrapped\\win64.o\\xclbinutil.exe"
+    },
+    "u55c_platform_files": [],
+    "pcie_probe": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "pcie_device_present": false,
+    "ready": false,
+    "status": "BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT",
+    "required_to_unblock": [
+      "an attached Alveo U55C visible as PCI vendor 0x10ee",
+      "an installed U55C XRT platform and xbutil or xrt-smi",
+      "a generated xclbin and board telemetry access"
+    ]
+  },
+  "native_fp4_gpu_experiment": {
+    "detected": true,
+    "devices": [
+      {
+        "name": "NVIDIA GeForce RTX 3070",
+        "memory_total": "8192 MiB",
+        "compute_capability": "8.6",
+        "driver_version": "610.88"
+      }
+    ],
+    "native_fp4_baseline_available": false,
+    "status": "BLOCKED_EXTERNAL_NO_NATIVE_FP4_GPU",
+    "query": {
+      "returncode": 0,
+      "stdout": "NVIDIA GeForce RTX 3070, 8192 MiB, 8.6, 610.88",
+      "stderr": ""
+    },
+    "required_to_unblock": [
+      "a GPU with native FP4 tensor-core support",
+      "a matching software stack and synchronized benchmark harness"
+    ]
+  }
+}

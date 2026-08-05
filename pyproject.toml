@@ -12,6 +12,8 @@ dev = [
   "pytest>=8",
   "hypothesis>=6",
   "jinja2>=3",
+  "reportlab>=4",
+  "pypdf>=5",
 ]
 qwen = [
   "torch",
@@ -32,6 +34,8 @@ full = [
   "pytest>=8",
   "hypothesis>=6",
   "jinja2>=3",
+  "reportlab>=4",
+  "pypdf>=5",
 ]
 
 [tool.setuptools.packages.find]

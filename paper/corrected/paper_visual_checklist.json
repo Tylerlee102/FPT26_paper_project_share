@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "auditor": "Codex page-by-page visual inspection on 2026-08-05",
+  "pages": [
+    {
+      "page": 1,
+      "status": "PASS",
+      "checks": [
+        "text_and_equations",
+        "figures_and_legends",
+        "tables",
+        "captions_and_references",
+        "margins_and_clipping"
+      ],
+      "notes": "Title, anonymous author line, abstract, contributions, and opening background render cleanly in two columns; no figure or table is present on this page."
+    },
+    {
+      "page": 2,
+      "status": "PASS",
+      "checks": [
+        "text_and_equations",
+        "figures_and_legends",
+        "tables",
+        "captions_and_references",
+        "margins_and_clipping"
+      ],
+      "notes": "Recurrence equations and Table I are legible, aligned, and inside the margins; ownership labels and citations do not collide."
+    },
+    {
+      "page": 3,
+      "status": "PASS",
+      "checks": [
+        "text_and_equations",
+        "figures_and_legends",
+        "tables",
+        "captions_and_references",
+        "margins_and_clipping"
+      ],
+      "notes": "Numerical method, correction, FPGA implementation, and evaluation controls flow correctly across columns with no clipping or malformed symbols."
+    },
+    {
+      "page": 4,
+      "status": "PASS",
+      "checks": [
+        "text_and_equations",
+        "figures_and_legends",
+        "tables",
+        "captions_and_references",
+        "margins_and_clipping"
+      ],
+      "notes": "Figure 1 is nonblank and fully framed; phase labels, state/log blocks, legend, arrows, and caption remain readable without overlap."
+    },
+    {
+      "page": 5,
+      "status": "PASS",
+      "checks": [
+        "text_and_equations",
+        "figures_and_legends",
+        "tables",
+        "captions_and_references",
+        "margins_and_clipping"
+      ],
+      "notes": "Uniform, stress, real-capture, HLS, correction, post-route, and power results are readable and remain within both columns."
+    },
+    {
+      "page": 6,
+      "status": "PASS",
+      "checks": [
+        "text_and_equations",
+        "figures_and_legends",
+        "tables",
+        "captions_and_references",
+        "margins_and_clipping"
+      ],
+      "notes": "Figure 2 curves, legend, log axes, thresholds, and caption are clear; Tables II-III and the surrounding discussion are aligned and unclipped."
+    },
+    {
+      "page": 7,
+      "status": "PASS",
+      "checks": [
+        "text_and_equations",
+        "figures_and_legends",
+        "tables",
+        "captions_and_references",
+        "margins_and_clipping"
+      ],
+      "notes": "Figure 3 title and subtitle are separated; all bars and annotations are readable. Table IV, Tables V-VI, and equations (5)-(6) fit without overlap."
+    },
+    {
+      "page": 8,
+      "status": "PASS",
+      "checks": [
+        "text_and_equations",
+        "figures_and_legends",
+        "tables",
+        "captions_and_references",
+        "margins_and_clipping"
+      ],
+      "notes": "Tables VII-IX, equations (7)-(8), limitations, and the complete conclusion fit on the eighth content page with readable type and intact margins."
+    },
+    {
+      "page": 9,
+      "status": "PASS",
+      "checks": [
+        "text_and_equations",
+        "figures_and_legends",
+        "tables",
+        "captions_and_references",
+        "margins_and_clipping"
+      ],
+      "notes": "The ninth page contains references only; all 16 entries, venues, identifiers, and URLs are readable and remain inside the margins."
+    }
+  ]
+}

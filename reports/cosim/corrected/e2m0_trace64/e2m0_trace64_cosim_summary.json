@@ -1,0 +1,115 @@
+{
+  "direct_generated_rtl_load": {
+    "command": "LOAD",
+    "completed_transactions": 1,
+    "cycles": 4797322,
+    "elapsed_seconds": 183.45,
+    "generation": 1,
+    "maximum_resident_kb": 35492,
+    "simulator": "Verilator 5.050 2026-07-01 rev v5.050",
+    "status": "PASS",
+    "status_code": 0
+  },
+  "generated_at": "2026-08-05T20:35:41.430837+00:00",
+  "hls_c_simulation": {
+    "outputs_counters_and_final_snapshot": "PASS",
+    "status": "PASS",
+    "tokens": 64
+  },
+  "host_runtime_projection": {
+    "measured_load_cycles_per_second": 26150.56963750341,
+    "projected_64_token_hours_maximum": 27.15716636398787,
+    "projected_64_token_hours_minimum": 16.342912731331197,
+    "qualification": "Projection combines LOAD throughput with HLS steady-state cycle bounds and is not FPGA performance evidence.",
+    "status": "DIAGNOSTIC_ONLY"
+  },
+  "input_sha256": {
+    "reports/cosim/corrected/e2m0_direct_rtl_trace64/assets/manifest.json": "3C737A566837269DA903035D1E3EDB6388932828BCD91FA887C05F011B5964ED",
+    "reports/cosim/corrected/e2m0_direct_rtl_trace64/benchmark_t1_0token.json": "3D7F08C4E4CA76241752E377BDCE2344976E7626DEBFC85F42DEE53D73D3DE75",
+    "reports/cosim/corrected/e2m0_direct_rtl_trace64/raw/execution.json": "CDAFD0E5E9C035A1F46F85E7AF9ACDA87676934AD6CA6E3D58C1509B15199AA1",
+    "reports/cosim/corrected/e2m0_direct_rtl_trace64/raw/verilator_compile.log": "42824AF17C01D41AB528D4A37B0D3873D321058C923E96CE6FE714F6A6328F5E",
+    "reports/cosim/corrected/e2m0_direct_rtl_trace64/raw/verilator_compile_time.log": "CBBE364C8FCE538E30D366B3238A6E962D0492024DE0200DF83CC0B8269F8925",
+    "reports/cosim/corrected/e2m0_direct_rtl_trace64/raw/verilator_run.log": "82B5D70313714D2B964B5A266CF3EAF8D6A68EA47011A2686D81FD8214CD1023",
+    "reports/cosim/corrected/e2m0_direct_rtl_trace64/raw/verilator_run_time.log": "05F1C345B7D45CAE0AE8F8E0DE10A2E52B9459F8F88CBA869362AB4CEB16813C",
+    "reports/cosim/corrected/e2m0_trace64_attempt_oom_isolated/e2m0_trace64_cosim_summary.json": "54B02CB24A16EF870B61FE7031F384DDCA1A65BC861BA0E7521393E64FAD68B1",
+    "reports/cosim/corrected/e2m0_trace64_attempt_oom_parentless/e2m0_trace64_cosim_summary.json": "E0108C90C8D58F395EF9022D75BCA6716D23F635A63B192A5EABE55D09DDB418",
+    "reports/csynth/corrected/e2m0_hls_summary.json": "F9FFC69166F7C7C5579A7F6B8549C25AC221A5E98FF012786E6F86505897C984"
+  },
+  "limitations": [
+    "The corrected candidate has exact 64-token HLS C parity but not 64-token generated-RTL parity.",
+    "Both official XSIM attempts exhausted host memory before transaction one.",
+    "Verilator 5.050 completes exact candidate LOAD, but the scheduled recurrent STEP is too slow for a practical full trace in this study.",
+    "Uniform-MXFP4, not the corrected candidate, retains the complete 64-token sequential generated-RTL parity result."
+  ],
+  "official_hls_xsim": {
+    "completed_transactions": 0,
+    "failure": "host out of memory before transaction one",
+    "independent_attempts": 2,
+    "requested_transactions": 66,
+    "status": "FAIL"
+  },
+  "parity": {
+    "final_snapshot_compared": false,
+    "ordered_tokens": 0,
+    "output_values_compared": 0,
+    "status": "NOT_ESTABLISHED"
+  },
+  "required_64_token_rtl_parity": "NOT_ESTABLISHED",
+  "rtl_simulation": {
+    "completed_recurrent_steps": 0,
+    "completed_transactions": 1,
+    "requested_transactions": 66,
+    "status": "PARTIAL"
+  },
+  "schema": 1,
+  "scope": "corrected E2M0 candidate 64-token generated-RTL completion audit",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 65604,
+      "changed_file_count": 5,
+      "sha256": "7B27389D649426BA686D92F6FD9304A8C75C91D6E5108ECE37CF0C39B02CC5FE"
+    },
+    "files": {
+      "hls/rtl_tb/axi_memory_model.sv": {
+        "bytes": 5554,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "64BEC39EDAD6BBF85F6DB6FBC2B2B285029F411998FCB248E0D01F59B6D73030"
+      },
+      "hls/rtl_tb/tb_gdn_e2m0_top_direct.sv": {
+        "bytes": 25981,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "416E16587FBE5776B573BEDF67C9DCAE09D8898F8E0F604B214AE58DF1C7A479"
+      },
+      "scripts/e2m0_direct_rtl_flow.py": {
+        "bytes": 9297,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "8DCA9AB216D1299C7F1AC1F834012072268B47CA6C5D9053895F1602C7B83EB2"
+      },
+      "scripts/e2m0_rtl_completion_report.py": {
+        "bytes": 10531,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "F4F9A0F26E52880069D2D581491556325D74160C914F20C59D0548CF5973258C"
+      },
+      "scripts/generate_e2m0_direct_rtl_trace_assets.py": {
+        "bytes": 11630,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "DC47AC20444137642CAE0CDA11B9CA1AF17525E5763960D963A6825A12E35B55"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PARTIAL",
+  "trace": {
+    "path": "data/vectors/e2m0_resident_trace64.bin",
+    "sha256": "DCE02DB61B60AF9121D2DD597927B58597DEBF2FEA022633AEFEBF32C7862B93",
+    "tokens": 64
+  },
+  "working_tree_dirty": true
+}

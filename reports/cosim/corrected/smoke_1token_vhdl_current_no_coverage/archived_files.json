@@ -1,0 +1,47 @@
+﻿[
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current_no_coverage/raw/gdn_top.autotb.v",
+        "sha256":  "F30C783C73A5F20A1DD430256C9C9DD70F34CC97DCAD7D69642F42F20F595656",
+        "bytes":  44050
+    },
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current_no_coverage/raw/gdn_top.protoinst",
+        "sha256":  "01663B08414C441DBE723AC2777FB864DE3772A0EFA39EADDB480518512F4848",
+        "bytes":  12084
+    },
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current_no_coverage/raw/run_sim.tcl",
+        "sha256":  "6568B5D69C0B1161F6B23C155EDCA4EA0C14CCA9CAF49C26A472A5EAE13C843E",
+        "bytes":  2704
+    },
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current_no_coverage/raw/run_xsim.bat",
+        "sha256":  "6A0D629C58BF497226DEEC8AF341625E9B1E25119A6879B4F72F8FC2DF0F78D3",
+        "bytes":  857
+    },
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current_no_coverage/raw/run_xsim_no_coverage.bat",
+        "sha256":  "6A0D629C58BF497226DEEC8AF341625E9B1E25119A6879B4F72F8FC2DF0F78D3",
+        "bytes":  857
+    },
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current_no_coverage/raw/temp.log",
+        "sha256":  "41659805813D03B4E90C02F1FC9F826A3C3F04F144B1944C5F62291CC5002043",
+        "bytes":  191982
+    },
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current_no_coverage/raw/xelab.log",
+        "sha256":  "DF66D50F8A740B0453DC1A8416A299B22E4D5D784015284D43F69F461206CDF8",
+        "bytes":  78873
+    },
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current_no_coverage/raw/xsim.jou",
+        "sha256":  "299878DF5AB6E1C822872EB00BD3064A32C92CC2EC4E025DFDC32F46F05D4572",
+        "bytes":  1125
+    },
+    {
+        "path":  "reports/cosim/corrected/smoke_1token_vhdl_current_no_coverage/raw/xsim.log",
+        "sha256":  "8612C8575CCB4CAA44D4AF2DA4278052B7DF7FEA37BC840D45A564E46BD5B20E",
+        "bytes":  112684
+    }
+]

@@ -6,6 +6,9 @@ import numpy as np
 
 from golden.mx_format import (
     E2M1_VALUES,
+    E4M3_FINITE_CODES,
+    E4M3_FINITE_VALUES,
+    E4M3_POSITIVE_VALUES,
     decode_e2m1,
     decode_e4m3,
     decode_e8m0_scale,
@@ -34,11 +37,45 @@ class TestMxFormat(unittest.TestCase):
 
         np.testing.assert_allclose(decoded, np.array([0.0, 1.0, 1.0, 2.0, 4.0], dtype=np.float32))
 
+    def test_e2m1_canonicalizes_negative_zero(self) -> None:
+        codes = encode_e2m1(np.array([-0.0, 0.0], dtype=np.float32))
+
+        np.testing.assert_array_equal(codes, np.array([0, 0], dtype=np.uint8))
+
+    def test_e2m1_vectorized_encoder_matches_exhaustive_table_rounding(self) -> None:
+        midpoints = (E2M1_VALUES[:-1] + E2M1_VALUES[1:]) / 2.0
+        rng = np.random.default_rng(0xE2D1)
+        values = np.concatenate(
+            (
+                np.array([-0.0, 0.0, -10.0, 10.0], dtype=np.float32),
+                E2M1_VALUES,
+                -E2M1_VALUES,
+                midpoints,
+                -midpoints,
+                rng.uniform(-10.0, 10.0, size=1024).astype(np.float32),
+            )
+        )
+        magnitudes = np.clip(np.abs(values), 0.0, E2M1_VALUES[-1])
+        distances = np.abs(magnitudes[:, None] - E2M1_VALUES[None, :])
+        minimum = np.min(distances, axis=1, keepdims=True)
+        ties = np.isclose(distances, minimum, rtol=0.0, atol=1e-12)
+        codes = np.arange(E2M1_VALUES.size, dtype=np.uint8)
+        ranks = np.where(ties, np.where((codes & 1) == 0, 0, 1), 1000)
+        magnitude_codes = codes[np.argmin(ranks, axis=1)]
+        sign = (np.signbit(values) & (magnitude_codes != 0)).astype(np.uint8) << 3
+        expected = sign | magnitude_codes
+
+        np.testing.assert_array_equal(encode_e2m1(values), expected)
+
     def test_e8m0_scale_roundtrip(self) -> None:
         scales = np.array([0.25, 0.5, 1.0, 2.0, 16.0], dtype=np.float32)
         codes = encode_e8m0_scale(scales)
 
         np.testing.assert_allclose(decode_e8m0_scale(codes), scales, atol=0.0, rtol=0.0)
+
+    def test_e8m0_rejects_reserved_nan_code(self) -> None:
+        with self.assertRaisesRegex(ValueError, "255"):
+            decode_e8m0_scale(np.array([255], dtype=np.uint8))
 
     def test_mxfp4_block_size_16_and_32(self) -> None:
         rng = np.random.default_rng(0xFB72)
@@ -63,11 +100,43 @@ class TestMxFormat(unittest.TestCase):
         np.testing.assert_allclose(restored, x, atol=0.0, rtol=0.0)
 
     def test_e4m3_representable_values_roundtrip(self) -> None:
-        values = decode_e4m3(np.arange(256, dtype=np.uint8))
-        finite_nonzero = values[np.isfinite(values) & (values != 0.0)]
+        codes = np.array([code for code in range(256) if code not in (0x7F, 0xFF)], dtype=np.uint8)
+        values = decode_e4m3(codes)
+        finite_nonzero = values[values != 0.0]
         sample = finite_nonzero[::17]
 
         np.testing.assert_allclose(decode_e4m3(encode_e4m3(sample)), sample, atol=0.0, rtol=0.0)
+
+    def test_e4m3_maximum_and_nan_codes_follow_finite_only_format(self) -> None:
+        encoded = encode_e4m3(np.array([448.0, 480.0, -480.0], dtype=np.float32))
+        decoded = decode_e4m3(encoded)
+
+        np.testing.assert_array_equal(decoded, np.array([448.0, 448.0, -448.0], dtype=np.float32))
+        with self.assertRaisesRegex(ValueError, "NaN encoding"):
+            decode_e4m3(np.array([0x7F, 0xFF], dtype=np.uint8))
+
+    def test_e4m3_vectorized_encoder_matches_exhaustive_table_rounding(self) -> None:
+        midpoints = (E4M3_POSITIVE_VALUES[:-1] + E4M3_POSITIVE_VALUES[1:]) / 2.0
+        rng = np.random.default_rng(0xE4F3)
+        values = np.concatenate(
+            (
+                np.array([-0.0, 0.0, -500.0, 500.0], dtype=np.float32),
+                E4M3_POSITIVE_VALUES,
+                -E4M3_POSITIVE_VALUES,
+                midpoints,
+                -midpoints,
+                rng.uniform(-500.0, 500.0, size=1024).astype(np.float32),
+            )
+        )
+
+        distances = np.abs(values[:, None] - E4M3_FINITE_VALUES[None, :])
+        minimum = np.min(distances, axis=1, keepdims=True)
+        ties = np.isclose(distances, minimum, rtol=0.0, atol=1e-12)
+        even = (E4M3_FINITE_CODES.astype(np.int16) & 1) == 0
+        ranks = np.where(ties, np.where(even, 0, 1), 1000)
+        expected = E4M3_FINITE_CODES[np.argmin(ranks, axis=1)]
+
+        np.testing.assert_array_equal(encode_e4m3(values), expected)
 
     def test_mxfp8_is_more_precise_than_mxfp4_on_state_like_values(self) -> None:
         rng = np.random.default_rng(99)

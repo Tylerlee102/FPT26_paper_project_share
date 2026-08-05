@@ -1,0 +1,248 @@
+
+
+================================================================
+== Vitis HLS Report for 'p_anonymous_namespace_read_snapshot_Outline_read_snapshot_update_heads'
+================================================================
+* Date:           Sun Aug  2 05:06:32 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_e2m0_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.920 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+------+------+---------+
+    |  Latency (cycles) |   Latency (absolute)  |   Interval  | Pipeline|
+    |   min   |   max   |    min    |    max    |  min |  max |   Type  |
+    +---------+---------+-----------+-----------+------+------+---------+
+    |     6497|     6497|  25.988 us|  25.988 us|  6497|  6497|       no|
+    +---------+---------+-----------+-----------+------+------+---------+
+
+    + Detail: 
+        * Instance: 
+        +------------------------------------------------------------------------------------+-------------------------------------------------------------------------+---------+---------+----------+----------+-----+-----+-------------------+
+        |                                                                                    |                                                                         |  Latency (cycles) |  Latency (absolute) |  Interval |      Pipeline     |
+        |                                      Instance                                      |                                  Module                                 |   min   |   max   |    min   |    max   | min | max |        Type       |
+        +------------------------------------------------------------------------------------+-------------------------------------------------------------------------+---------+---------+----------+----------+-----+-----+-------------------+
+        |grp_p_anonymous_namespace_read_snapshot_Pipeline_read_snapshot_update_lanes_fu_235  |p_anonymous_namespace_read_snapshot_Pipeline_read_snapshot_update_lanes  |       40|       40|  0.160 us|  0.160 us|    0|    0|  loop pipeline stp|
+        +------------------------------------------------------------------------------------+-------------------------------------------------------------------------+---------+---------+----------+----------+-----+-----+-------------------+
+
+        * Loop: 
+        +--------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                                |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |            Loop Name           |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- read_snapshot_update_heads    |     6496|     6496|       203|          -|          -|    32|        no|
+        | + read_snapshot_update_blocks  |      200|      200|        50|          -|          -|     4|        no|
+        +--------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|      184|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|       96|      356|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|      316|    -|
+|Register             |        -|     -|      294|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|      390|      856|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +------------------------------------------------------------------------------------+-------------------------------------------------------------------------+---------+----+----+-----+-----+
+    |                                      Instance                                      |                                  Module                                 | BRAM_18K| DSP| FF | LUT | URAM|
+    +------------------------------------------------------------------------------------+-------------------------------------------------------------------------+---------+----+----+-----+-----+
+    |grp_p_anonymous_namespace_read_snapshot_Pipeline_read_snapshot_update_lanes_fu_235  |p_anonymous_namespace_read_snapshot_Pipeline_read_snapshot_update_lanes  |        0|   0|  96|  347|    0|
+    |partselect_8ns_32ns_5ns_8_1_1_U1605                                                 |partselect_8ns_32ns_5ns_8_1_1                                            |        0|   0|   0|    9|    0|
+    +------------------------------------------------------------------------------------+-------------------------------------------------------------------------+---------+----+----+-----+-----+
+    |Total                                                                               |                                                                         |        0|   0|  96|  356|    0|
+    +------------------------------------------------------------------------------------+-------------------------------------------------------------------------+---------+----+----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name     | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------------+----------+----+---+----+------------+------------+
+    |add_ln956_fu_261_p2    |         +|   0|  0|  13|           6|           1|
+    |add_ln958_fu_317_p2    |         +|   0|  0|  10|           3|           1|
+    |add_ln959_2_fu_346_p2  |         +|   0|  0|  14|           7|           7|
+    |add_ln959_fu_362_p2    |         +|   0|  0|  71|          64|          64|
+    |add_ln960_1_fu_284_p2  |         +|   0|  0|  23|          16|          16|
+    |add_ln966_1_fu_387_p2  |         +|   0|  0|  27|          20|          20|
+    |icmp_ln956_fu_255_p2   |      icmp|   0|  0|  14|           6|           7|
+    |icmp_ln958_fu_311_p2   |      icmp|   0|  0|  12|           3|           4|
+    +-----------------------+----------+----+---+----+------------+------------+
+    |Total                  |          |   0|  0| 184|         125|         120|
+    +-----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                |  65|         14|    1|         14|
+    |block_reg_224            |   9|          2|    3|          6|
+    |gmem13_blk_n_AW          |   9|          2|    1|          2|
+    |gmem13_blk_n_B           |   9|          2|    1|          2|
+    |gmem13_blk_n_W           |   9|          2|    1|          2|
+    |head_fu_132              |   9|          2|    6|         12|
+    |m_axi_gmem13_0_AWADDR    |  14|          3|   64|        192|
+    |m_axi_gmem13_0_AWBURST   |   9|          2|    2|          4|
+    |m_axi_gmem13_0_AWCACHE   |   9|          2|    4|          8|
+    |m_axi_gmem13_0_AWID      |   9|          2|    1|          2|
+    |m_axi_gmem13_0_AWLEN     |  14|          3|   32|         96|
+    |m_axi_gmem13_0_AWLOCK    |   9|          2|    2|          4|
+    |m_axi_gmem13_0_AWPROT    |   9|          2|    3|          6|
+    |m_axi_gmem13_0_AWQOS     |   9|          2|    4|          8|
+    |m_axi_gmem13_0_AWREGION  |   9|          2|    4|          8|
+    |m_axi_gmem13_0_AWSIZE    |   9|          2|    3|          6|
+    |m_axi_gmem13_0_AWUSER    |   9|          2|    1|          2|
+    |m_axi_gmem13_0_AWVALID   |  14|          3|    1|          3|
+    |m_axi_gmem13_0_BREADY    |  14|          3|    1|          3|
+    |m_axi_gmem13_0_WDATA     |  14|          3|    8|         24|
+    |m_axi_gmem13_0_WID       |   9|          2|    1|          2|
+    |m_axi_gmem13_0_WLAST     |   9|          2|    1|          2|
+    |m_axi_gmem13_0_WSTRB     |  14|          3|    1|          3|
+    |m_axi_gmem13_0_WUSER     |   9|          2|    1|          2|
+    |m_axi_gmem13_0_WVALID    |  14|          3|    1|          3|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    | 316|         69|  148|        416|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------------------------------------------------------------------------------+-----+----+-----+-----------+
+    |                                               Name                                              |  FF | LUT| Bits| Const Bits|
+    +-------------------------------------------------------------------------------------------------+-----+----+-----+-----------+
+    |add_ln956_reg_465                                                                                |    6|   0|    6|          0|
+    |add_ln958_reg_495                                                                                |    3|   0|    3|          0|
+    |ap_CS_fsm                                                                                        |   13|   0|   13|          0|
+    |block_reg_224                                                                                    |    3|   0|    3|          0|
+    |gmem13_addr_reg_510                                                                              |   64|   0|   64|          0|
+    |grp_p_anonymous_namespace_read_snapshot_Pipeline_read_snapshot_update_lanes_fu_235_ap_start_reg  |    1|   0|    1|          0|
+    |head_fu_132                                                                                      |    6|   0|    6|          0|
+    |resident_updates_load_reg_527                                                                    |  128|   0|  128|          0|
+    |shl_ln35_5_reg_532                                                                               |    2|   0|    7|          5|
+    |shl_ln_reg_482                                                                                   |    5|   0|    7|          2|
+    |tmp_16_reg_517                                                                                   |   16|   0|   16|          0|
+    |tmp_3_reg_505                                                                                    |    8|   0|    8|          0|
+    |trunc_ln35_reg_500                                                                               |    2|   0|    2|          0|
+    |trunc_ln960_reg_470                                                                              |    5|   0|    5|          0|
+    |word_reg_487                                                                                     |   32|   0|   32|          0|
+    +-------------------------------------------------------------------------------------------------+-----+----+-----+-----------+
+    |Total                                                                                            |  294|   0|  301|          7|
+    +-------------------------------------------------------------------------------------------------+-----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------------+-----+-----+------------+-----------------------------------------------------------------------+--------------+
+|            RTL Ports            | Dir | Bits|  Protocol  |                             Source Object                             |    C Type    |
++---------------------------------+-----+-----+------------+-----------------------------------------------------------------------+--------------+
+|ap_clk                           |   in|    1|  ap_ctrl_hs|  (anonymous namespace)read_snapshot_Outline_read_snapshot_update_heads|  return value|
+|ap_rst                           |   in|    1|  ap_ctrl_hs|  (anonymous namespace)read_snapshot_Outline_read_snapshot_update_heads|  return value|
+|ap_start                         |   in|    1|  ap_ctrl_hs|  (anonymous namespace)read_snapshot_Outline_read_snapshot_update_heads|  return value|
+|ap_done                          |  out|    1|  ap_ctrl_hs|  (anonymous namespace)read_snapshot_Outline_read_snapshot_update_heads|  return value|
+|ap_idle                          |  out|    1|  ap_ctrl_hs|  (anonymous namespace)read_snapshot_Outline_read_snapshot_update_heads|  return value|
+|ap_ready                         |  out|    1|  ap_ctrl_hs|  (anonymous namespace)read_snapshot_Outline_read_snapshot_update_heads|  return value|
+|empty                            |   in|    1|     ap_none|                                                                  empty|        scalar|
+|add_ln960                        |   in|   16|     ap_none|                                                              add_ln960|        scalar|
+|add_ln959_1                      |   in|   64|     ap_none|                                                            add_ln959_1|        scalar|
+|m_axi_gmem13_0_AWVALID           |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWREADY           |   in|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWADDR            |  out|   64|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWID              |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWLEN             |  out|   32|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWSIZE            |  out|    3|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWBURST           |  out|    2|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWLOCK            |  out|    2|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWCACHE           |  out|    4|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWPROT            |  out|    3|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWQOS             |  out|    4|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWREGION          |  out|    4|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_AWUSER            |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_WVALID            |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_WREADY            |   in|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_WDATA             |  out|    8|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_WSTRB             |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_WLAST             |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_WID               |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_WUSER             |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARVALID           |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARREADY           |   in|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARADDR            |  out|   64|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARID              |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARLEN             |  out|   32|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARSIZE            |  out|    3|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARBURST           |  out|    2|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARLOCK            |  out|    2|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARCACHE           |  out|    4|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARPROT            |  out|    3|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARQOS             |  out|    4|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARREGION          |  out|    4|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_ARUSER            |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_RVALID            |   in|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_RREADY            |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_RDATA             |   in|    8|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_RLAST             |   in|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_RID               |   in|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_RFIFONUM          |   in|   11|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_RUSER             |   in|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_RRESP             |   in|    2|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_BVALID            |   in|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_BREADY            |  out|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_BRESP             |   in|    2|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_BID               |   in|    1|       m_axi|                                                                 gmem13|       pointer|
+|m_axi_gmem13_0_BUSER             |   in|    1|       m_axi|                                                                 gmem13|       pointer|
+|add_ln966                        |   in|   20|     ap_none|                                                              add_ln966|        scalar|
+|zext_ln956                       |   in|   13|     ap_none|                                                             zext_ln956|        scalar|
+|updates_out                      |   in|   64|     ap_none|                                                            updates_out|        scalar|
+|zext_ln939                       |   in|   16|     ap_none|                                                             zext_ln939|        scalar|
+|resident_update_scales_address0  |  out|   14|   ap_memory|                                                 resident_update_scales|         array|
+|resident_update_scales_ce0       |  out|    1|   ap_memory|                                                 resident_update_scales|         array|
+|resident_update_scales_q0        |   in|   32|   ap_memory|                                                 resident_update_scales|         array|
+|resident_updates_address0        |  out|   16|   ap_memory|                                                       resident_updates|         array|
+|resident_updates_ce0             |  out|    1|   ap_memory|                                                       resident_updates|         array|
+|resident_updates_q0              |   in|  128|   ap_memory|                                                       resident_updates|         array|
++---------------------------------+-----+-----+------------+-----------------------------------------------------------------------+--------------+
+

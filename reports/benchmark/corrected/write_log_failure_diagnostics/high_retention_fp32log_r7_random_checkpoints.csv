@@ -1,0 +1,17 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,fp32,0,1,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,mxfp4_rs2_act_rs2_sparse75_base_b32_fp32_log_fixed_b32_r7,0,1,0.9985837174594888,0.0532049407914526,0.0011569601483643055,0.04933535022627279,0.01666259765625,0,0,0,1,1,664592,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,fp32,0,7,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,mxfp4_rs2_act_rs2_sparse75_base_b32_fp32_log_fixed_b32_r7,0,7,0.9991286457287276,0.041743818396735535,0.000931992195546627,0.0643993891166557,0.03787986934185028,1,0,0,0,7,664592,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,fp32,0,8,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,mxfp4_rs2_act_rs2_sparse75_base_b32_fp32_log_fixed_b32_r7,0,8,0.9980809905187782,0.061935492331580064,0.0015889396890997887,0.0620994394700118,0.038060352206230164,1,0,0,1,7,664592,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,fp32,0,14,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,mxfp4_rs2_act_rs2_sparse75_base_b32_fp32_log_fixed_b32_r7,0,14,0.998618276751523,0.05257723067572873,0.0017473855405114591,0.07376724455882736,0.05672672390937805,2,0,0,0,7,664592,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,fp32,0,28,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,mxfp4_rs2_act_rs2_sparse75_base_b32_fp32_log_fixed_b32_r7,0,28,0.9972000824642726,0.07489698116113803,0.002600216306746006,0.08859184657711375,0.0754154771566391,4,0,0,0,7,664592,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,mxfp4_rs2_act_rs2_sparse75_base_b32_fp32_log_fixed_b32_r7,0,64,0.9932388212359095,0.11627311353549247,0.006204955279827118,0.11224867803623888,0.11839139461517334,9,0,0,1,7,664592,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,fp32,0,128,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,mxfp4_rs2_act_rs2_sparse75_base_b32_fp32_log_fixed_b32_r7,0,128,0.9896681247867853,0.1437614037810945,0.007852240465581417,0.14121195663073025,0.1861196905374527,18,0,0,2,7,664592,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_high_retention_random,development,64370,high_retention,mxfp4_rs2_act_rs2_sparse75_base_b32_fp32_log_fixed_b32_r7,0,256,0.9860085644220676,0.16693550823625705,0.009495419217273593,0.16504037006681807,0.20272091031074524,36,0,0,4,7,664592,PASS

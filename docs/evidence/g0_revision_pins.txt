@@ -1,0 +1,34 @@
+﻿captured_at=2026-08-01T00:09:12.5450666-07:00 git_version=git version 2.54.0.windows.1
+name=Qwen3-Next-80B-A3B-Instruct
+command=git ls-remote https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct HEAD
+9c7f2fbe84465e40164a94cc16cd30b6999b0cc7	HEAD
+exit_code=0
+name=transformers-v4.57.0
+command=git ls-remote https://github.com/huggingface/transformers.git refs/tags/v4.57.0 refs/tags/v4.57.0^{}
+76d27aea82449e921e36afdc886c6e5bf34ea526	refs/tags/v4.57.0
+8ac2b916b042b1f78b75c9eb941c0f5d2cdd8e10	refs/tags/v4.57.0^{}
+exit_code=0
+name=flash-linear-attention-v0.2.1
+command=git ls-remote https://github.com/fla-org/flash-linear-attention.git refs/tags/v0.2.1
+a670dff4c2537fc1a82486584dd9569e18fba833	refs/tags/v0.2.1
+exit_code=0
+name=causal-conv1d-v1.5.3.post1
+command=git ls-remote https://github.com/Dao-AILab/causal-conv1d.git refs/tags/v1.5.3.post1
+52949d0891770c65243ed24db8abb66ef37741b7	refs/tags/v1.5.3.post1
+exit_code=0
+name=pytorch-v2.8.0
+command=git ls-remote https://github.com/pytorch/pytorch.git refs/tags/v2.8.0
+ba56102387ef21a3b04b357e5b183d48f0afefc7	refs/tags/v2.8.0
+exit_code=0
+name=triton-v3.4.0
+command=git ls-remote https://github.com/triton-lang/triton.git refs/tags/v3.4.0
+c817b9b63d40ead1ed023b7663f5ea14f676f4bc	refs/tags/v3.4.0
+exit_code=0
+name=wikitext
+command=git ls-remote https://huggingface.co/datasets/Salesforce/wikitext HEAD
+b08601e04326c79dfdd32d625aee71d232d685c3	HEAD
+exit_code=0
+name=pg19
+command=git ls-remote https://huggingface.co/datasets/deepmind/pg19 HEAD
+4d28bd77e66947ad3835cf78ed7aaeb4dd87ad8b	HEAD
+exit_code=0

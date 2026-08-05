@@ -12,15 +12,17 @@ from golden.mx_format import from_mxfp4, to_mxfp4
 class TestGdnMxfp4(unittest.TestCase):
     def test_mxfp4_vs_fp32_synthetic(self) -> None:
         rng = np.random.default_rng(7)
-        q = rng.normal(0.0, 0.1, size=(2, 16)).astype(np.float32)
-        k = rng.normal(0.0, 0.1, size=(2, 16)).astype(np.float32)
+        q = rng.normal(0.0, 0.1, size=(1, 16)).astype(np.float32)
+        k = rng.normal(0.0, 0.1, size=(1, 16)).astype(np.float32)
         v = rng.normal(0.0, 0.1, size=(2, 16)).astype(np.float32)
+        alpha = rng.uniform(0.85, 1.0, size=(2,)).astype(np.float32)
         beta = rng.uniform(0.0, 0.5, size=(2,)).astype(np.float32)
-        gate = rng.uniform(0.5, 1.0, size=(2, 16)).astype(np.float32)
         state = rng.normal(0.0, 0.02, size=(2, 16, 16)).astype(np.float32)
 
-        fp32_output, fp32_state = fp32_decode_step(q, k, v, beta, gate, state)
-        mx_output, mx_state = mxfp4_decode_step(q, k, v, beta, gate, state, block_size=16, state_block_size=16)
+        fp32_output, fp32_state = fp32_decode_step(q, k, v, alpha, beta, state)
+        mx_output, mx_state = mxfp4_decode_step(
+            q, k, v, alpha, beta, state, block_size=16, state_block_size=16
+        )
 
         self.assertEqual(mx_output.shape, fp32_output.shape)
         self.assertEqual(mx_state.shape, fp32_state.shape)
@@ -43,26 +45,26 @@ class TestGdnMxfp4(unittest.TestCase):
 
     def test_mxfp8_state_path_runs(self) -> None:
         rng = np.random.default_rng(12)
-        q = rng.normal(0.0, 0.1, size=(2, 16)).astype(np.float32)
-        k = rng.normal(0.0, 0.1, size=(2, 16)).astype(np.float32)
+        q = rng.normal(0.0, 0.1, size=(1, 16)).astype(np.float32)
+        k = rng.normal(0.0, 0.1, size=(1, 16)).astype(np.float32)
         v = rng.normal(0.0, 0.1, size=(2, 16)).astype(np.float32)
+        alpha = rng.uniform(0.85, 1.0, size=(2,)).astype(np.float32)
         beta = rng.uniform(0.0, 0.5, size=(2,)).astype(np.float32)
-        gate = rng.uniform(0.5, 1.0, size=(2, 16)).astype(np.float32)
         state = rng.normal(0.0, 0.02, size=(2, 16, 16)).astype(np.float32)
 
         out, state_out = mxfp4_decode_step(
             q,
             k,
             v,
+            alpha,
             beta,
-            gate,
             state,
             block_size=16,
             state_block_size=16,
-            state_precision="mxfp8",
+            state_precision="mxfp8_e4m3",
         )
 
-        self.assertEqual(out.shape, q.shape)
+        self.assertEqual(out.shape, v.shape)
         self.assertEqual(state_out.shape, state.shape)
 
 

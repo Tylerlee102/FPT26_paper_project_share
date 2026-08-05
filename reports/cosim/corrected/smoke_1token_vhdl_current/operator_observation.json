@@ -1,0 +1,12 @@
+{
+  "rtl_language": "vhdl",
+  "scope": "one-token current-source VHDL RTL co-simulation smoke",
+  "status": "FAIL",
+  "termination": {
+    "kind": "operator_memory_safety",
+    "minimum_observed_free_physical_memory_gib": 0.21,
+    "observation_method": "Get-Process xsimk and Get-CimInstance Win32_OperatingSystem sampled during the run",
+    "reason": "The simulator remained at 3/15 transactions while private memory grew to 26.67 GiB; the process was stopped before exhausting host memory.",
+    "xsimk_private_memory_gib": 26.67
+  }
+}

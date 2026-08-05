@@ -1,6 +1,6 @@
 open_project gdn_mxfp4_hls
 set_top gdn_top
-set config_cflags "-Ihls/include"
+set config_cflags "-Ihls/include -std=c++14"
 if {[info exists ::env(GDN_P_K)]} {
   append config_cflags " -DGDN_P_K=$::env(GDN_P_K)"
 }
@@ -22,5 +22,9 @@ add_files -tb hls/tb/tb_gdn_top.cpp -cflags $config_cflags
 open_solution -reset "u55c_250mhz"
 set_part {xcu55c-fsvh2892-2L-e}
 create_clock -period 4.0 -name default
-csim_design
+set trace_path [file normalize "data/vectors/corrected_gdn_command_trace.bin"]
+if {![file exists $trace_path]} {
+  error "missing corrected oracle trace: $trace_path"
+}
+csim_design -argv $trace_path
 exit

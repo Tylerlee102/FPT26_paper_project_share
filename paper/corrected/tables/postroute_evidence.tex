@@ -1,0 +1,26 @@
+\begin{tabular}{lrl}
+\toprule
+Evidence item & Result & Status \\
+\midrule
+\multicolumn{3}{l}{\textit{Corrected MXFP4 candidate}} \\
+Out-of-context physical fit & yes & PASS \\
+250-MHz setup WNS & -1.540 ns & FAIL \\
+First tested closing point & 180.18 MHz & PASS \\
+CLB LUT / FF & 208{,}523 / 111{,}027 & FIT \\
+BRAM tile / URAM / DSP & 353 / 624 / 44 & FIT \\
+DRC warnings / critical / errors & 38 / 0 / 0 & PASS\_WITH\_WARNINGS \\
+Vectorless power at 5.6 ns & 6.991 W & Medium estimate \\
+Generated-RTL control smoke & 2 / 2 commands & PASS \\
+Candidate 64-token HLS C parity & 64 tokens & PASS \\
+Candidate generated-RTL direct LOAD & 1 command & PASS \\
+Candidate recurrent 64-token RTL parity & 0 / 64 STEP commands & NOT\_ESTABLISHED \\
+\midrule
+\multicolumn{3}{l}{\textit{Native MXFP8 baseline}} \\
+Out-of-context physical fit & yes & PASS \\
+250-MHz setup WNS & -1.355 ns & FAIL \\
+First tested closing point & 166.67 MHz & PASS \\
+CLB LUT / FF & 58{,}582 / 39{,}807 & FIT \\
+BRAM tile / URAM / DSP & 164 / 576 / 2 & FIT \\
+Vectorless power at 6.00 ns & 4.952 W & Medium estimate \\
+\bottomrule
+\end{tabular}

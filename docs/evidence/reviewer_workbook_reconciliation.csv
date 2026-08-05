@@ -1,0 +1,574 @@
+source_index,thread_id,reply_number,reviewer,date,comment_text,highlighted_text,context,char_position,raw_workbook_rows,source_cell,legacy_topic_ids,concern,required_action,paper_section,status
+1,6a33db3e6572004fe08a8096,0,jason.blocklove,"18 June, 4:49 am",Natural language words and tokens are not equivalent,cache)~\cite{b6}.,"\section{Introduction}
+Autoregressive decoding in large language models (LLMs) introduces measurable latency at inference time because each generated token depends on previously generated tokens and their associated model state. To understand the reason for this delay, we first identify the Transformer-based framework used in many modern LLMs. Popular systems such as ChatGPT and Claude are based on the Transformer architecture~\cite{b2}, a software-based mathematical framework that represents input text as tokens rather than necessarily as whole natural-language words. These tokens may correspond to words, subwords, punctuation, or other tokenizer-defined units. Transformers process token sequences using a ``self-attention'' mechanism that determines how strongly each token relates to other tokens in the sequence, allowing the model to form context. During autoregressive decoding, when a new token is generated, the model attends to previously generated tokens. To reduce repeated computation, historical token information is stored as key and value tensors in external memory, commonly called the key-value cache (KV cache)~\cite{b6}.",5035,2,Comments!E2,Legacy-01,"Natural language words and tokens are not equivalent [highlighted: ""cache)~\cite{b6}.""]",Define tokenizer units accurately and verify final wording.,Introduction,NOT_RUN
+2,6a33ddd5dc32bf2129204dad,0,jason.blocklove,"18 June, 5:00 am",Define,MAC,"These two are defined with an algorithm complexity with respect to sequence length, $N$, as $\mathcal{O}(N)$ for a full-attention layer and $\mathcal{O}(1)$ for a linear-attention layer for one token~\cite{b3}. That means the number of MAC operations for large scale token history would be lower due to it being a constant when compared to the growing operation count of the full attention layer. It should be noted that the total algorithm complexity on an entire execution sequence has the full attention layer scale quadratically as $\mathcal{O}(N^2)$ and the linear attention layer scale to $\mathcal{O}(N)$. To keep accuracy while being efficient, the present industry’s choice to use the previously mentioned 3:1 structure doesn’t eliminate the nature of the growing complexity, but rather reduces the growth of complexity as compared to a scenario of pure full attention layers~\cite{b9}.",6116,4,Comments!E4,Legacy-02,"Define [highlighted: ""MAC""]",Expand multiply-accumulate at first use.,Introduction,NOT_RUN
+3,6a33f47fdc32bf2129205845,0,jason.blocklove,"18 June, 6:37 am","The majority of this has a level of detail that's more appropriate for the related works section, rather than the introduction. The introduction should very simply provide context and motivation for the problem, and maybe touch upon how you intend to resolve it. Getting too deep into actual numbers or efficiency metrics fits better in the related works or motivation/problem formulation sections","This linear-time sequence model compresses the history of data down into a single fixed grid known as a recurrent state matrix~$S$~\cite{b3}. The tradeoff with the linear-attention layer is that historical token details are heavily compressed. However, by combining both approaches and stacking them, researchers have made the token go through linear layers first then into a full-attention layer, known as the 3:1 structure block, to more efficiently process previous history while maintaining data integrity~\cite{b9}.
+
+These two are defined with an algorithm complexity with respect to sequence length, $N$, as $\mathcal{O}(N)$ for a full-attention layer and $\mathcal{O}(1)$ for a linear-attention layer for one token~\cite{b3}. That means the number of MAC operations for large scale token history would be lower due to it being a constant when compared to the growing operation count of the full attention layer. It should be noted that the total algorithm complexity on an entire execution sequence has the full attention layer scale quadratically as $\mathcal{O}(N^2)$ and the linear attention layer scale to $\mathcal{O}(N)$. To keep accuracy while being efficient, the present industry’s choice to use the previously mentioned 3:1 structure doesn’t eliminate the nature of the growing complexity, but rather reduces the growth of complexity as compared to a scenario of pure full attention layers~\cite{b9}.
+
+This specific replacement technique targeting the growing KV caches of each internal macro block of a whole layer structure does make the memory usage a lot more efficient than without~\cite{b10}. However, traditional implementations utilizing high-precision data formats such as FP32 will quickly saturate the limited memory on these kinds of FPGAs~\cite{b10}. When these state matrices start to exceed the local capacity, the hardware must go on to use external bandwidth memory. To break this memory wall and improve efficiency of current integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C accelerator to create an efficient connection between the local memory and external memory~\cite{b5}. This can be done by treating the URAM and BRAM as the permanent execution area for those compressed $S$ matrices and reserving the high bandwidth memory (HBM) for the growing KV caches of the full attention layers.
+
+By maximizing the efficiency of the data format itself, we can make a better case for the limited on-chip storage available. Numerical states can be packed into extremely compact 4-bit OCP microscaling formats through the specific utilization of 4-bit E2M1 elements that are bounded by a shared 8-bit E8M0 block scale~\cite{b12}. The processing elements will be able to perform continuous linear attention updates without having to request a time-consuming demand to the external memory bus. By focusing on one piece of a hybrid attention model, we can improve the performance and efficiency of the entire implementation that is being used. In a hybrid model like the previously mentioned 3:1 structure, we can look at the primary building block that makes up 75\% of the core pipeline and focus entirely on improving what makes up the bulk of the model which would naturally optimize the entire system as a whole~\cite{b9}.","Naturally, when the LLM has to process long histories of token data, then the KV cache would also be bigger, slowing down the processing time of the model~\cite{b7}. This issue has thus driven the development of another mathematical alternative called ``linear attention,'' like the Gated DeltaNet (GDN) model~\cite{b3}. This linear-time sequence model compresses the history of data down into a single fixed grid known as a recurrent state matrix~$S$~\cite{b3}. The tradeoff with the linear-attention layer is that historical token details are heavily compressed. However, by combining both approaches and stacking them, researchers have made the token go through linear layers first then into a full-attention layer, known as the 3:1 structure block, to more efficiently process previous history while maintaining data integrity~\cite{b9}.",5358,5,Comments!E5,Legacy-03,"The majority of this has a level of detail that's more appropriate for the related works section, rather than the introduction. The introduction should very simply provide context and motivation for the problem, and maybe touch upon how you intend to resolve it. Getting too deep into actual numbers or efficiency metrics fits better in the related works or motivation/problem formulation sections [highlighted: ""This linear-time sequence model compresses the history of data down into a single fixed grid known as a recurrent state matrix~$S$~\cite{b3}. The tradeoff with the linear-attention layer is that historical token details are heavily compressed. However, by combining both approaches and stacking them, researchers have made the token go through linear layers first then into a full-attention layer, known as the 3:1 structure block, to more efficiently process previous history while maintaining data integrity~\cite{b9}.
+
+These two are defined with an algorithm complexity with respect to sequence length, $N$, as $\mathcal{O}(N)$ for a full-attention layer and $\mathcal{O}(1)$ for a linear-attention layer for one token~\cite{b3}. That means the number of MAC operations for large scale token history would be lower due to it being a constant when compared to the growing operation count of the full attention layer. It should be noted that the total algorithm complexity on an entire execution sequence has the full attention layer scale quadratically as $\mathcal{O}(N^2)$ and the linear attention layer scale to $\mathcal{O}(N)$. To keep accuracy while being efficient, the present industry’s choice to use the previously mentioned 3:1 structure doesn’t eliminate the nature of the growing complexity, but rather reduces the growth of complexity as compared to a scenario of pure full attention layers~\cite{b9}.
+
+This specific replacement technique targeting the growing KV caches of each internal macro block of a whole layer structure does make the memory usage a lot more efficient than without~\cite{b10}. However, traditional implementations utilizing high-precision data formats such as FP32 will quickly saturate the limited memory on these kinds of FPGAs~\cite{b10}. When these state matrices start to exceed the local capacity, the hardware must go on to use external bandwidth memory. To break this memory wall and improve efficiency of current integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C accelerator to create an efficient connection between the local memory and external memory~\cite{b5}. This can be done by treating the URAM and BRAM as the permanent execution area for those compressed $S$ matrices and reserving the high bandwidth memory (HBM) for the growing KV caches of the full attention layers.
+
+By maximizing the efficiency of the data format itself, we can make a better case for the limited on-chip storage available. Numerical states can be packed into extremely compact 4-bit OCP microscaling formats through the specific utilization of 4-bit E2M1 elements that are bounded by a shared 8-bit E8M0 block scale~\cite{b12}. The processing elements will be able to perform continuous linear attention updates without having to request a time-consuming demand to the external memory bus. By focusing on one piece of a hybrid attention model, we can improve the performance and efficiency of the entire implementation that is being used. In a hybrid model like the previously mentioned 3:1 structure, we can look at the primary building block that makes up 75\% of the core pipeline and focus entirely on improving what makes up the bulk of the model which would naturally optimize the entire system as a whole~\cite{b9}.""]","Retain problem, motivation, and contribution; move technical background.",Introduction,NOT_RUN
+4,6a33f4b76572004fe08a8bc5,0,jason.blocklove,"18 June, 6:37 am",What is the broader implication of these metrics?,It should be noted that the total algorithm complexity on an entire execution sequence has the full attention layer scale quadratically as $\mathcal{O}(N^2)$ and the linear attention layer scale to $\mathcal{O}(N)$.,"These two are defined with an algorithm complexity with respect to sequence length, $N$, as $\mathcal{O}(N)$ for a full-attention layer and $\mathcal{O}(1)$ for a linear-attention layer for one token~\cite{b3}. That means the number of MAC operations for large scale token history would be lower due to it being a constant when compared to the growing operation count of the full attention layer. It should be noted that the total algorithm complexity on an entire execution sequence has the full attention layer scale quadratically as $\mathcal{O}(N^2)$ and the linear attention layer scale to $\mathcal{O}(N)$. To keep accuracy while being efficient, the present industry’s choice to use the previously mentioned 3:1 structure doesn’t eliminate the nature of the growing complexity, but rather reduces the growth of complexity as compared to a scenario of pure full attention layers~\cite{b9}.",6277,6,Comments!E6,Legacy-04,"What is the broader implication of these metrics? [highlighted: ""It should be noted that the total algorithm complexity on an entire execution sequence has the full attention layer scale quadratically as $\mathcal{O}(N^2)$ and the linear attention layer scale to $\mathcal{O}(N)$.""]",Explain context-length effect without overstating whole-model behavior.,Introduction,NOT_RUN
+5,6a33f510537013d3d71a2f20,0,jason.blocklove,"18 June, 6:39 am","How much is ""a lot""? Can you cite an actual data point from that paper?",a lot,"This specific replacement technique targeting the growing KV caches of each internal macro block of a whole layer structure does make the memory usage a lot more efficient than without~\cite{b10}. However, traditional implementations utilizing high-precision data formats such as FP32 will quickly saturate the limited memory on these kinds of FPGAs~\cite{b10}. When these state matrices start to exceed the local capacity, the hardware must go on to use external bandwidth memory. To break this memory wall and improve efficiency of current integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C accelerator to create an efficient connection between the local memory and external memory~\cite{b5}. This can be done by treating the URAM and BRAM as the permanent execution area for those compressed $S$ matrices and reserving the high bandwidth memory (HBM) for the growing KV caches of the full attention layers.",6928,7,Comments!E7,Legacy-05,"How much is ""a lot""? Can you cite an actual data point from that paper? [highlighted: ""a lot""]",Replace with a scoped prior-work statement.,Introduction,NOT_RUN
+6,6a33f59d87496cf05d0b1b90,0,jason.blocklove,"18 June, 6:41 am","This is your main contribution and it's kind of hidden in the middle of this paragraph. What you're doing should jump out a lot more than this. Also, it's a bit weird to cite a paper in the same sentence you're saying ""this is what we did"". Addressing what that paper did and what you've done should be fully separate thoughts","To break this memory wall and improve efficiency of current integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C accelerator to create an efficient connection between the local memory and external memory~\cite{b5}.","This specific replacement technique targeting the growing KV caches of each internal macro block of a whole layer structure does make the memory usage a lot more efficient than without~\cite{b10}. However, traditional implementations utilizing high-precision data formats such as FP32 will quickly saturate the limited memory on these kinds of FPGAs~\cite{b10}. When these state matrices start to exceed the local capacity, the hardware must go on to use external bandwidth memory. To break this memory wall and improve efficiency of current integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C accelerator to create an efficient connection between the local memory and external memory~\cite{b5}. This can be done by treating the URAM and BRAM as the permanent execution area for those compressed $S$ matrices and reserving the high bandwidth memory (HBM) for the growing KV caches of the full attention layers.",7259,8;73,Comments!E8,Legacy-06;Legacy-07,"This is your main contribution and it's kind of hidden in the middle of this paragraph. What you're doing should jump out a lot more than this. Also, it's a bit weird to cite a paper in the same sentence you're saying ""this is what we did"". Addressing what that paper did and what you've done should be fully separate thoughts [highlighted: ""To break this memory wall and improve efficiency of current integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C accelerator to create an efficient connection between the local memory and external memory~\cite{b5}.""]",State the narrow arithmetic/stability question at the recurrence-core boundary.; Separate prior-work motivation from current implementation.,Introduction,NOT_RUN
+7,6a33faa0dc32bf2129205b87,0,jason.blocklove,"18 June, 7:03 am","It can be done, or it's what you did? Too much passive-voice is being used",can be done,"This specific replacement technique targeting the growing KV caches of each internal macro block of a whole layer structure does make the memory usage a lot more efficient than without~\cite{b10}. However, traditional implementations utilizing high-precision data formats such as FP32 will quickly saturate the limited memory on these kinds of FPGAs~\cite{b10}. When these state matrices start to exceed the local capacity, the hardware must go on to use external bandwidth memory. To break this memory wall and improve efficiency of current integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C accelerator to create an efficient connection between the local memory and external memory~\cite{b5}. This can be done by treating the URAM and BRAM as the permanent execution area for those compressed $S$ matrices and reserving the high bandwidth memory (HBM) for the growing KV caches of the full attention layers.",7506,9,Comments!E9,Legacy-08,"It can be done, or it's what you did? Too much passive-voice is being used [highlighted: ""can be done""]","Use an active, evidence-supported design statement.",Introduction,NOT_RUN
+8,6a33fb05537013d3d71a3253,0,jason.blocklove,"18 June, 7:04 am",Awkward wording,we can make a better case for the limited on-chip storage available,"By maximizing the efficiency of the data format itself, we can make a better case for the limited on-chip storage available. Numerical states can be packed into extremely compact 4-bit OCP microscaling formats through the specific utilization of 4-bit E2M1 elements that are bounded by a shared 8-bit E8M0 block scale~\cite{b12}. The processing elements will be able to perform continuous linear attention updates without having to request a time-consuming demand to the external memory bus. By focusing on one piece of a hybrid attention model, we can improve the performance and efficiency of the entire implementation that is being used. In a hybrid model like the previously mentioned 3:1 structure, we can look at the primary building block that makes up 75\% of the core pipeline and focus entirely on improving what makes up the bulk of the model which would naturally optimize the entire system as a whole~\cite{b9}.",7773,10,Comments!E10,Legacy-09,"Awkward wording [highlighted: ""we can make a better case for the limited on-chip storage available""]",State the concrete storage consequence.,Introduction,NOT_RUN
+9,6a33fb116572004fe08a8f14,0,jason.blocklove,"18 June, 7:05 am",Define,OCP,"By maximizing the efficiency of the data format itself, we can make a better case for the limited on-chip storage available. Numerical states can be packed into extremely compact 4-bit OCP microscaling formats through the specific utilization of 4-bit E2M1 elements that are bounded by a shared 8-bit E8M0 block scale~\cite{b12}. The processing elements will be able to perform continuous linear attention updates without having to request a time-consuming demand to the external memory bus. By focusing on one piece of a hybrid attention model, we can improve the performance and efficiency of the entire implementation that is being used. In a hybrid model like the previously mentioned 3:1 structure, we can look at the primary building block that makes up 75\% of the core pipeline and focus entirely on improving what makes up the bulk of the model which would naturally optimize the entire system as a whole~\cite{b9}.",7902,11,Comments!E11,Legacy-10,"Define [highlighted: ""OCP""]",Expand Open Compute Project at first use.,Background,NOT_RUN
+10,6a33fb1a34ed05fee4df6674,0,jason.blocklove,"18 June, 7:05 am",Define or explain,E2M1,"By maximizing the efficiency of the data format itself, we can make a better case for the limited on-chip storage available. Numerical states can be packed into extremely compact 4-bit OCP microscaling formats through the specific utilization of 4-bit E2M1 elements that are bounded by a shared 8-bit E8M0 block scale~\cite{b12}. The processing elements will be able to perform continuous linear attention updates without having to request a time-consuming demand to the external memory bus. By focusing on one piece of a hybrid attention model, we can improve the performance and efficiency of the entire implementation that is being used. In a hybrid model like the previously mentioned 3:1 structure, we can look at the primary building block that makes up 75\% of the core pipeline and focus entirely on improving what makes up the bulk of the model which would naturally optimize the entire system as a whole~\cite{b9}.",7969,12,Comments!E12,Legacy-12,"Define or explain [highlighted: ""E2M1""]","Define sign, exponent, mantissa, finite values, and exceptional behavior.",Numerical Method,NOT_RUN
+11,6a33fb2234ed05fee4df667a,0,jason.blocklove,"18 June, 7:05 am",Define or explain,E8M0,"By maximizing the efficiency of the data format itself, we can make a better case for the limited on-chip storage available. Numerical states can be packed into extremely compact 4-bit OCP microscaling formats through the specific utilization of 4-bit E2M1 elements that are bounded by a shared 8-bit E8M0 block scale~\cite{b12}. The processing elements will be able to perform continuous linear attention updates without having to request a time-consuming demand to the external memory bus. By focusing on one piece of a hybrid attention model, we can improve the performance and efficiency of the entire implementation that is being used. In a hybrid model like the previously mentioned 3:1 structure, we can look at the primary building block that makes up 75\% of the core pipeline and focus entirely on improving what makes up the bulk of the model which would naturally optimize the entire system as a whole~\cite{b9}.",8018,13,Comments!E13,Legacy-13,"Define or explain [highlighted: ""E8M0""]",Define exponent-only block scale and invalid encoding policy.,Numerical Method,NOT_RUN
+12,6a33fb366572004fe08a8f26,0,jason.blocklove,"18 June, 7:05 am",Will be implies that you've not actually done it,will be,"By maximizing the efficiency of the data format itself, we can make a better case for the limited on-chip storage available. Numerical states can be packed into extremely compact 4-bit OCP microscaling formats through the specific utilization of 4-bit E2M1 elements that are bounded by a shared 8-bit E8M0 block scale~\cite{b12}. The processing elements will be able to perform continuous linear attention updates without having to request a time-consuming demand to the external memory bus. By focusing on one piece of a hybrid attention model, we can improve the performance and efficiency of the entire implementation that is being used. In a hybrid model like the previously mentioned 3:1 structure, we can look at the primary building block that makes up 75\% of the core pipeline and focus entirely on improving what makes up the bulk of the model which would naturally optimize the entire system as a whole~\cite{b9}.",8071,14,Comments!E14,Legacy-14,"Will be implies that you've not actually done it [highlighted: ""will be""]",Use present or past tense only for passed evidence.,Architecture,NOT_RUN
+13,6a33fb6cdc32bf2129205be9,0,jason.blocklove,"18 June, 7:06 am","You can get rid of this and just start with ""The primary objective...""","To recap the main discussion points made before, ","To recap the main discussion points made before, the primary objective of this research is to maximize the use of low-latency on-chip memory resources that maintains the precision needed for long context models. By mapping 4-bit MXFP4 multipliers directly onto the LUT resources of the FPGAs, parallel computation is achieved~\cite{b12}. This paper introduces a new data packaging optimization method that can break through the modern memory wall and unlock higher potential of hybrid linear attention architectures on high-end FPGA fabric~\cite{b5}.",8643,15,Comments!E15,Legacy-15,"You can get rid of this and just start with ""The primary objective..."" [highlighted: ""To recap the main discussion points made before, ""]",Remove recap and state the objective once.,Introduction,NOT_RUN
+14,6a33fb6cdc32bf2129205be9,1,jason.blocklove,"18 June, 7:06 am",There's a lot of fluff in this writing that you guys should trim out,,,,16,Comments!E16,Legacy-16,There's a lot of fluff in this writing that you guys should trim out,"Keep one motivation, one format definition, and one contribution paragraph.",Introduction,NOT_RUN
+15,6a33fbbb34ed05fee4df66c5,0,jason.blocklove,"18 June, 7:07 am",You need to define this extremely clearly since it's a main factor of your work. You address it like knowing about MXFP4 should be common knowledge,MXFP4,"This specific replacement technique targeting the growing KV caches of each internal macro block of a whole layer structure does make the memory usage a lot more efficient than without~\cite{b10}. However, traditional implementations utilizing high-precision data formats such as FP32 will quickly saturate the limited memory on these kinds of FPGAs~\cite{b10}. When these state matrices start to exceed the local capacity, the hardware must go on to use external bandwidth memory. To break this memory wall and improve efficiency of current integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C accelerator to create an efficient connection between the local memory and external memory~\cite{b5}. This can be done by treating the URAM and BRAM as the permanent execution area for those compressed $S$ matrices and reserving the high bandwidth memory (HBM) for the growing KV caches of the full attention layers.",7359,17;74,Comments!E17,Legacy-11,"You need to define this extremely clearly since it's a main factor of your work. You address it like knowing about MXFP4 should be common knowledge [highlighted: ""MXFP4""]","Define E2M1 elements, E8M0 scale, and B32 metadata overhead.",Numerical Method,NOT_RUN
+16,6a33fbfedc32bf2129205c3a,0,jason.blocklove,"18 June, 7:09 am",Define,LUT,"To recap the main discussion points made before, the primary objective of this research is to maximize the use of low-latency on-chip memory resources that maintains the precision needed for long context models. By mapping 4-bit MXFP4 multipliers directly onto the LUT resources of the FPGAs, parallel computation is achieved~\cite{b12}. This paper introduces a new data packaging optimization method that can break through the modern memory wall and unlock higher potential of hybrid linear attention architectures on high-end FPGA fabric~\cite{b5}.",8908,18,Comments!E18,Legacy-17,"Define [highlighted: ""LUT""]",Expand lookup table at first use and scope the LUT-based claim to element multiply.,Introduction,NOT_RUN
+17,6a33fc1887496cf05d0b1ed2,0,jason.blocklove,"18 June, 7:09 am",Define,FPGA,"This specific replacement technique targeting the growing KV caches of each internal macro block of a whole layer structure does make the memory usage a lot more efficient than without~\cite{b10}. However, traditional implementations utilizing high-precision data formats such as FP32 will quickly saturate the limited memory on these kinds of FPGAs~\cite{b10}. When these state matrices start to exceed the local capacity, the hardware must go on to use external bandwidth memory. To break this memory wall and improve efficiency of current integer standards, we implement a 4-bit MXFP4 datapath onto a Xilinx Alveo U55C accelerator to create an efficient connection between the local memory and external memory~\cite{b5}. This can be done by treating the URAM and BRAM as the permanent execution area for those compressed $S$ matrices and reserving the high bandwidth memory (HBM) for the growing KV caches of the full attention layers.",7121,19,Comments!E19,Legacy-18,"Define [highlighted: ""FPGA""]",Expand field-programmable gate array at first use.,Introduction,NOT_RUN
+18,6a33fc586572004fe08a8fb7,0,jason.blocklove,"18 June, 7:10 am",This is a really good way to end the introduction. It explains your contribution concisely and clearly,This paper introduces a new data packaging optimization method that can break through the modern memory wall and unlock higher potential of hybrid linear attention architectures on high-end FPGA fabric~\cite{b5}.,"To recap the main discussion points made before, the primary objective of this research is to maximize the use of low-latency on-chip memory resources that maintains the precision needed for long context models. By mapping 4-bit MXFP4 multipliers directly onto the LUT resources of the FPGAs, parallel computation is achieved~\cite{b12}. This paper introduces a new data packaging optimization method that can break through the modern memory wall and unlock higher potential of hybrid linear attention architectures on high-end FPGA fabric~\cite{b5}.",8981,20;75,Comments!E20,Legacy-19,"This is a really good way to end the introduction. It explains your contribution concisely and clearly [highlighted: ""This paper introduces a new data packaging optimization method that can break through the modern memory wall and unlock higher potential of hybrid linear attention architectures on high-end FPGA fabric~\cite{b5}.""]","End with the supported arithmetic/stability question, not broad novelty.",Introduction,NOT_RUN
+19,6a33fcab87496cf05d0b1f19,0,jason.blocklove,"18 June, 7:11 am","You don't need to duplicate citations here. You can eliminate the sentence ""A number of previous studies..."" and jump straight to talking about those studies.","\subsection{Linear Attention and Gated DeltaNet}
+The use of linear or",,9788,21;76,Comments!E21,Legacy-20,"You don't need to duplicate citations here. You can eliminate the sentence ""A number of previous studies..."" and jump straight to talking about those studies. [highlighted: ""\subsection{Linear Attention and Gated DeltaNet}
+The use of linear or""]",Verify duplicate is absent in the final source.,Related Work,NOT_RUN
+20,6a33fd0287496cf05d0b1f47,0,jason.blocklove,"18 June, 7:13 am",Move this definition up to where they're discussed in the intro,field-programmable gate arrays (FPGAs),"\subsection{FPGA Acceleration for Attention Models}
+This work uses field-programmable gate arrays (FPGAs) as a basis for implementing application-specific architectures, specifically in terms of dataflow architecture. These devices provide flexibility to map memory banks based upon the specific requirements of the workload or application and enable pipelined operation and custom mapping of arithmetic units.",10710,23,Comments!E23,Legacy-21,"Move this definition up to where they're discussed in the intro [highlighted: ""field-programmable gate arrays (FPGAs)""]",Define once in the introduction and use the acronym thereafter.,Introduction,NOT_RUN
+21,6a33fd9fdc32bf2129205d0f,0,jason.blocklove,"18 June, 7:15 am","I would reword this to be a bit more active. ""Building upon this approach, we focus on ...""","Building upon this general approach, the current research focuses on the native MXFP4 datapath rather than a BF16-style high-precision datapath.","Prior work on using FPGAs for persistent-state architectures demonstrated that storing linear attention states on-chip improves memory efficiency when performing decode-related workloads \cite{b10}. Building upon this general approach, the current research focuses on the native MXFP4 datapath rather than a BF16-style high-precision datapath.",11254,24,Comments!E24,Legacy-22,"I would reword this to be a bit more active. ""Building upon this approach, we focus on ..."" [highlighted: ""Building upon this general approach, the current research focuses on the native MXFP4 datapath rather than a BF16-style high-precision datapath.""]","State that the numeric datapath, not persistent dataflow, is under study.",Related Work,NOT_RUN
+22,6a33fdcb34ed05fee4df67c1,0,jason.blocklove,"18 June, 7:16 am","""This research"" is a bit vague on whether you're referring to the paper you just referenced or your own work. Try to keep too much of what y'all did out of the related works and more in the following sections",this research,"A key distinction of this research is the integration of persistent-state dataflow with microscaled 4-bit floating-point (MXFP4) arithmetic. The intent of the overall design is not to accelerate all layers of a large language model (LLM), but rather to isolate the memory and arithmetic behavior related to updating the recurrent state within a single Gated DeltaNet decode layer.",11421,25;78,Comments!E25,Legacy-23,"""This research"" is a bit vague on whether you're referring to the paper you just referenced or your own work. Try to keep too much of what y'all did out of the related works and more in the following sections [highlighted: ""this research""]",Name the proposed design or experiment directly.,Related Work,NOT_RUN
+23,6a33fdea87496cf05d0b1fb9,0,jason.blocklove,"18 June, 7:17 am",You only need to define things once in the body of the paper,large language model (LLM),"A key distinction of this research is the integration of persistent-state dataflow with microscaled 4-bit floating-point (MXFP4) arithmetic. The intent of the overall design is not to accelerate all layers of a large language model (LLM), but rather to isolate the memory and arithmetic behavior related to updating the recurrent state within a single Gated DeltaNet decode layer.",11611,26,Comments!E26,Legacy-24,"You only need to define things once in the body of the paper [highlighted: ""large language model (LLM)""]",Define large language model once.,Introduction,NOT_RUN
+24,6a33fe146572004fe08a9093,0,jason.blocklove,"18 June, 7:17 am",How? Why? A claim like this must be cited.,Reduced-precision data formats reduce memory usage and arithmetic cost.,"\subsection{Low-Precision and Microscaling Formats}
+Reduced-precision data formats reduce memory usage and arithmetic cost. However, a fixed low-bit-width representation may limit the ability to represent large ranges in individual elements. To improve upon fixed-format representations, microscaling provides a method of using a single exponent value that is common to multiple elements \cite{b12}. MXFP4 utilizes 4-bit E2M1 values with a common scale applied to a small group of values, or block. This results in compact storage for each individual element and allows the entire block to store a larger local dynamic range. Due to these characteristics, MXFP4 represents a strong candidate for hardware-based implementations on FPGAs.",11834,27,Comments!E27,Legacy-25,"How? Why? A claim like this must be cited. [highlighted: ""Reduced-precision data formats reduce memory usage and arithmetic cost.""]",Cite the OCP format source and separate representation facts from measured hardware effects.,Background,NOT_RUN
+25,6a33fe26537013d3d71a3406,0,jason.blocklove,"18 June, 7:18 am",Cite this claim,"However, a fixed low-bit-width representation may limit the ability to represent large ranges in individual elements.","\subsection{Low-Precision and Microscaling Formats}
+Reduced-precision data formats reduce memory usage and arithmetic cost. However, a fixed low-bit-width representation may limit the ability to represent large ranges in individual elements. To improve upon fixed-format representations, microscaling provides a method of using a single exponent value that is common to multiple elements \cite{b12}. MXFP4 utilizes 4-bit E2M1 values with a common scale applied to a small group of values, or block. This results in compact storage for each individual element and allows the entire block to store a larger local dynamic range. Due to these characteristics, MXFP4 represents a strong candidate for hardware-based implementations on FPGAs.",11906,28,Comments!E28,Legacy-26,"Cite this claim [highlighted: ""However, a fixed low-bit-width representation may limit the ability to represent large ranges in individual elements.""]",Cite primary format literature and explain shared-scale tradeoffs.,Background,NOT_RUN
+26,6a33feb7537013d3d71a3455,0,jason.blocklove,"18 June, 7:20 am",Expand this whole section a bit. Talk about how you came up with this and why its the focus. What led you to formulate the problem particularly like this? Did you consider any other formulations?,"\section{Problem Formulation and Workload Definition}
+This study focuses on processing one batch-one Gated DeltaNet decode layer during autoregressive inference. The accelerator processes one token at a time and updates a static recurrent state after each token. The default model configuration uses 32 attention heads with a head size of 128. For each generated token, the kernel receives a query vector, key vector, value vector, beta parameter, and output gate. These input vectors are used to access the prior recurrent state, compute the delta-rule update, store the updated state back into on-chip memory, and generate the gated output vector.","\section{Problem Formulation and Workload Definition}
+This study focuses on processing one batch-one Gated DeltaNet decode layer during autoregressive inference. The accelerator processes one token at a time and updates a static recurrent state after each token. The default model configuration uses 32 attention heads with a head size of 128. For each generated token, the kernel receives a query vector, key vector, value vector, beta parameter, and output gate. These input vectors are used to access the prior recurrent state, compute the delta-rule update, store the updated state back into on-chip memory, and generate the gated output vector.",12867,29;79,Comments!E29,Legacy-27;Legacy-28,"Expand this whole section a bit. Talk about how you came up with this and why its the focus. What led you to formulate the problem particularly like this? Did you consider any other formulations? [highlighted: ""\section{Problem Formulation and Workload Definition}
+This study focuses on processing one batch-one Gated DeltaNet decode layer during autoregressive inference. The accelerator processes one token at a time and updates a static recurrent state after each token. The default model configuration uses 32 attention heads with a head size of 128. For each generated token, the kernel receives a query vector, key vector, value vector, beta parameter, and output gate. These input vectors are used to access the prior recurrent state, compute the delta-rule update, store the updated state back into on-chip memory, and generate the gated output vector.""]",Explain why the recurrence-core boundary isolates the research question.; Describe excluded boundaries and why they would confound the comparison.,Problem Formulation,NOT_RUN
+27,6a33fef334ed05fee4df6848,0,jason.blocklove,"18 June, 7:21 am","I appreciate you trying to make the figure physically smaller, but now the text is a bit too small. It's fine for it to be a 2-column figure, there's just a lot of whitespace in the figure itself that should be compressed.","\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{mxfp4_gdn_datapath_paper_fit.png}
+\caption{Overview of the proposed native MXFP4 persistent-state Gated DeltaNet decode datapath. Token inputs are packed into MXFP4 blocks, the recurrent state remains resident in on-chip BRAM/URAM, and native E2M1 LUT multiplication with block-scale alignment and fixed-point accumulation is reused across prediction, state update, and output generation.}
+\label{fig:mxfp4_gdn_datapath}
+\end{figure}","\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{mxfp4_gdn_datapath_paper_fit.png}
+\caption{Overview of the proposed native MXFP4 persistent-state Gated DeltaNet decode datapath. Token inputs are packed into MXFP4 blocks, the recurrent state remains resident in on-chip BRAM/URAM, and native E2M1 LUT multiplication with block-scale alignment and fixed-point accumulation is reused across prediction, state update, and output generation.}
+\label{fig:mxfp4_gdn_datapath}
+\end{figure}",13859,30;80,Comments!E30,Legacy-29,"I appreciate you trying to make the figure physically smaller, but now the text is a bit too small. It's fine for it to be a 2-column figure, there's just a lot of whitespace in the figure itself that should be compressed. [highlighted: ""\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{mxfp4_gdn_datapath_paper_fit.png}
+\caption{Overview of the proposed native MXFP4 persistent-state Gated DeltaNet decode datapath. Token inputs are packed into MXFP4 blocks, the recurrent state remains resident in on-chip BRAM/URAM, and native E2M1 LUT multiplication with block-scale alignment and fixed-point accumulation is reused across prediction, state update, and output generation.}
+\label{fig:mxfp4_gdn_datapath}
+\end{figure}""]",Redesign and visually inspect a legible two-column datapath figure.,Architecture,NOT_RUN
+28,6a33ff3a537013d3d71a349a,0,jason.blocklove,"18 June, 7:22 am",But why? Why is it architected this way? What benefit does this datapath provide? Did you consider alternative architectures?,"Figure~\ref{fig:mxfp4_gdn_datapath} summarizes the proposed native MXFP4 persistent-state Gated DeltaNet decode datapath. The upper portion shows the token-level recurrent-state path, while the lower portion isolates the native MXFP4 arithmetic reused during prediction, state update, and output generation.","\section{Hardware Architecture}
+Figure~\ref{fig:mxfp4_gdn_datapath} summarizes the proposed native MXFP4 persistent-state Gated DeltaNet decode datapath. The upper portion shows the token-level recurrent-state path, while the lower portion isolates the native MXFP4 arithmetic reused during prediction, state update, and output generation.",13550,31;81,Comments!E31,Legacy-30,"But why? Why is it architected this way? What benefit does this datapath provide? Did you consider alternative architectures? [highlighted: ""Figure~\ref{fig:mxfp4_gdn_datapath} summarizes the proposed native MXFP4 persistent-state Gated DeltaNet decode datapath. The upper portion shows the token-level recurrent-state path, while the lower portion isolates the native MXFP4 arithmetic reused during prediction, state update, and output generation.""]",Explain the matched persistent-state baseline and native arithmetic objective.,Architecture,NOT_RUN
+29,6a33ff6b537013d3d71a34b1,0,jason.blocklove,"18 June, 7:23 am",What do these papers tell us? Why are they being cited here?,"\cite{b1,b4,b7}","\subsection{Persistent Recurrent State}
+As opposed to an existing KV cache that expands in size as sequence length increases, the recurrent state of Gated DeltaNet consists of a fixed-size recurrent-state matrix \cite{b3}. The recurrent-state matrix stores the compressed information of previous tokens, functioning as a compact associative memory that addresses the standard LLM memory wall \cite{b1,b4,b7}. The recurrent-state is updated after every decode cycle.",14750,32,Comments!E32,Legacy-31,"What do these papers tell us? Why are they being cited here? [highlighted: ""\cite{b1,b4,b7}""]",Tie each citation to a specific serving or bandwidth result.,Background,NOT_RUN
+30,6a33ffd2dc32bf2129205e28,0,jason.blocklove,"18 June, 7:25 am",This table isn't referenced anywhere? What does it relate to?,"\begin{table}[t]
+\centering
+\caption{Recurrent-state storage comparison by numeric format.}
+\label{tab:memory_footprint}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xcc}
+\toprule
+Format & Bits per Element & Storage Relative to MXFP4 \\
+\midrule
+MXFP4 & 4 + block-scale metadata & 1x \\
+INT8 & 8 & 2x \\
+BF16 / FP16 & 16 & 4x \\
+FP32 & 32 & 8x \\
+\bottomrule
+\end{tabularx}
+\end{table}","\begin{table}[t]
+\centering
+\caption{Recurrent-state storage comparison by numeric format.}
+\label{tab:memory_footprint}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xcc}
+\toprule
+Format & Bits per Element & Storage Relative to MXFP4 \\
+\midrule
+MXFP4 & 4 + block-scale metadata & 1x \\
+INT8 & 8 & 2x \\
+BF16 / FP16 & 16 & 4x \\
+FP32 & 32 & 8x \\
+\bottomrule
+\end{tabularx}
+\end{table}",14825,33,Comments!E33,Legacy-32,"This table isn't referenced anywhere? What does it relate to? [highlighted: ""\begin{table}[t]
+\centering
+\caption{Recurrent-state storage comparison by numeric format.}
+\label{tab:memory_footprint}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xcc}
+\toprule
+Format & Bits per Element & Storage Relative to MXFP4 \\
+\midrule
+MXFP4 & 4 + block-scale metadata & 1x \\
+INT8 & 8 & 2x \\
+BF16 / FP16 & 16 & 4x \\
+FP32 & 32 & 8x \\
+\bottomrule
+\end{tabularx}
+\end{table}""]",Reference it in prose after regenerating it from valid evidence.,Architecture,NOT_RUN
+31,6a33ffd2dc32bf2129205e28,1,jason.blocklove,"18 June, 7:26 am","Also, you can't throw ""block-scale metadata"" into this table without explaining the size overhead. You say it's a ""small overhead"" further down, but that needs to be addressed somewhere around the table itself, like in the caption",,,,34,Comments!E34,Legacy-33,"Also, you can't throw ""block-scale metadata"" into this table without explaining the size overhead. You say it's a ""small overhead"" further down, but that needs to be addressed somewhere around the table itself, like in the caption",State one E8M0 byte per B32 and resulting 4.25 bits/value.,Numerical Method,NOT_RUN
+32,6a34002987496cf05d0b20d7,0,jason.blocklove,"18 June, 7:26 am","Again, at this point you're discussing what you guys did, why is this work being cited here?",\cite{b10},"The recurrent state $S_t$ is stored within partitions of on-chip FPGA memory banks \cite{b10}. With respect to the stored recurrent state $S_t$, it allows access to different parts of the state matrix in parallel. On-chip storage of the recurrent state results in reduced latency and energy consumption since each decode step will need to load the prior state; modify it; and save the modified version. However, accessing the full state matrix repeatedly off-chip and back to on-chip will become a resource-consumptive task, worsening the memory-bound limits of standard decode paths \cite{b7}.",15355,35,Comments!E35,Legacy-34,"Again, at this point you're discussing what you guys did, why is this work being cited here? [highlighted: ""\cite{b10}""]","Attribute persistent placement to prior work, then state modifications separately.",Architecture,NOT_RUN
+33,6a340079537013d3d71a3524,0,jason.blocklove,"18 June, 7:28 am",These sentences are repetitive in a way that makes them hard to follow,"The recurrent state $S_t$ is stored within partitions of on-chip FPGA memory banks \cite{b10}. With respect to the stored recurrent state $S_t$, it allows access to different parts of the state matrix in parallel.","The recurrent state $S_t$ is stored within partitions of on-chip FPGA memory banks \cite{b10}. With respect to the stored recurrent state $S_t$, it allows access to different parts of the state matrix in parallel. On-chip storage of the recurrent state results in reduced latency and energy consumption since each decode step will need to load the prior state; modify it; and save the modified version. However, accessing the full state matrix repeatedly off-chip and back to on-chip will become a resource-consumptive task, worsening the memory-bound limits of standard decode paths \cite{b7}.",15272,36,Comments!E36,Legacy-35,"These sentences are repetitive in a way that makes them hard to follow [highlighted: ""The recurrent state $S_t$ is stored within partitions of on-chip FPGA memory banks \cite{b10}. With respect to the stored recurrent state $S_t$, it allows access to different parts of the state matrix in parallel.""]",Replace with one precise banking/layout description.,Architecture,NOT_RUN
+34,6a3400db6572004fe08a91ed,0,jason.blocklove,"18 June, 7:29 am",Reference Table 1 or make a graph for this,"In comparison, BF16 requires 16 bits per element, while FP32 requires 32 bits per element. Consequently, MXFP4 reduces the storage requirements for recurrent-state elements by nearly 4 times compared with BF16 and 8 times compared with FP32, before accounting for the small overhead associated with block-scale metadata.","The recurrent state is the primary persistent storage entity in the Gated DeltaNet decode layer. By using MXFP4, the amount of storage required for each element is reduced to 4 bits per element plus a small amount of shared block-scale metadata. In comparison, BF16 requires 16 bits per element, while FP32 requires 32 bits per element. Consequently, MXFP4 reduces the storage requirements for recurrent-state elements by nearly 4 times compared with BF16 and 8 times compared with FP32, before accounting for the small overhead associated with block-scale metadata.",16114,37,Comments!E37,Legacy-36,"Reference Table 1 or make a graph for this [highlighted: ""In comparison, BF16 requires 16 bits per element, while FP32 requires 32 bits per element. Consequently, MXFP4 reduces the storage requirements for recurrent-state elements by nearly 4 times compared with BF16 and 8 times compared with FP32, before accounting for the small overhead associated with block-scale metadata.""]",Reference regenerated physical and logical storage results.,Architecture,NOT_RUN
+35,6a34013034ed05fee4df6970,0,jason.blocklove,"18 June, 7:31 am","This is really good! You might want to consider putting this whole thing into a algorithm rather than a series of one-line equations, but either way I think it reads well and is quite clear","Every decode step uses the current key and value to update the recurrent-state. First, the prior state is multiplied by the key vector to create a prediction based on delta-rule dynamics \cite{b3}:
+\begin{equation}
+r_t = S_{t-1} k_t
+\end{equation}
+
+The prediction is what the prior state already holds for the upcoming key. The hardware performs a comparison between the prediction and the new value vector:
+\begin{equation}
+e_t = r_t - v_t
+\end{equation}
+
+The error ($e_t$) is created due to a difference between what was stored by the prior state and what information is presented by the new token. This error is scaled by the beta input and is used to update the state:
+\begin{equation}
+S_t = S_{t-1} - \beta_t e_t k_t^T
+\end{equation}
+
+This state update is a rank-one update. It changes the state by applying both the direction of the key and the error against the value.
+
+Following the recurrent state update, the design utilizes the query vector and the recurrent state to produce the intermediate output vector:
+\begin{equation}
+o_t = S_t q_t","\subsection{Gated DeltaNet Update Path}
+Every decode step uses the current key and value to update the recurrent-state. First, the prior state is multiplied by the key vector to create a prediction based on delta-rule dynamics \cite{b3}:
+\begin{equation}
+r_t = S_{t-1} k_t
+\end{equation}",16476,38;82,Comments!E38,Legacy-37,"This is really good! You might want to consider putting this whole thing into a algorithm rather than a series of one-line equations, but either way I think it reads well and is quite clear [highlighted: ""Every decode step uses the current key and value to update the recurrent-state. First, the prior state is multiplied by the key vector to create a prediction based on delta-rule dynamics \cite{b3}:
+\begin{equation}
+r_t = S_{t-1} k_t
+\end{equation}
+
+The prediction is what the prior state already holds for the upcoming key. The hardware performs a comparison between the prediction and the new value vector:
+\begin{equation}
+e_t = r_t - v_t
+\end{equation}
+
+The error ($e_t$) is created due to a difference between what was stored by the prior state and what information is presented by the new token. This error is scaled by the beta input and is used to update the state:
+\begin{equation}
+S_t = S_{t-1} - \beta_t e_t k_t^T
+\end{equation}
+
+This state update is a rank-one update. It changes the state by applying both the direction of the key and the error against the value.
+
+Following the recurrent state update, the design utilizes the query vector and the recurrent state to produce the intermediate output vector:
+\begin{equation}
+o_t = S_t q_t""]",Retain only after replacing them with the exact official alpha-decayed recurrence.,Method,NOT_RUN
+36,6a3401ee537013d3d71a35d2,0,jason.blocklove,"18 June, 7:34 am",This table is also not referenced anywhere,"\begin{table}[t]
+\centering
+\caption{Arithmetic formats used in the proposed datapath.}
+\label{tab:data_formats}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{llX}
+\toprule
+Tensor / Value & Format & Notes \\
+\midrule
+Weights & MXFP4 & Block size 32 \\
+Activations & MXFP4 & Dynamic per token \\
+Recurrent state & MXFP4 & Stored on chip \\
+Beta & INT8 & Scaling parameter \\
+Partial products & Q4.3 & From E2M1 multiply \\
+Accumulator & INT24 & Block-aligned accumulation \\
+Final output & FP16 & Output format \\
+\bottomrule
+\end{tabularx}
+\end{table}","\begin{table}[t]
+\centering
+\caption{Arithmetic formats used in the proposed datapath.}
+\label{tab:data_formats}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{llX}
+\toprule
+Tensor / Value & Format & Notes \\
+\midrule
+Weights & MXFP4 & Block size 32 \\
+Activations & MXFP4 & Dynamic per token \\
+Recurrent state & MXFP4 & Stored on chip \\
+Beta & INT8 & Scaling parameter \\
+Partial products & Q4.3 & From E2M1 multiply \\
+Accumulator & INT24 & Block-aligned accumulation \\
+Final output & FP16 & Output format \\
+\bottomrule
+\end{tabularx}
+\end{table}",22086,39,Comments!E39,Legacy-38,"This table is also not referenced anywhere [highlighted: ""\begin{table}[t]
+\centering
+\caption{Arithmetic formats used in the proposed datapath.}
+\label{tab:data_formats}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{llX}
+\toprule
+Tensor / Value & Format & Notes \\
+\midrule
+Weights & MXFP4 & Block size 32 \\
+Activations & MXFP4 & Dynamic per token \\
+Recurrent state & MXFP4 & Stored on chip \\
+Beta & INT8 & Scaling parameter \\
+Partial products & Q4.3 & From E2M1 multiply \\
+Accumulator & INT24 & Block-aligned accumulation \\
+Final output & FP16 & Output format \\
+\bottomrule
+\end{tabularx}
+\end{table}""]",Reference a regenerated table tied to the numerical contract.,Numerical Method,NOT_RUN
+37,6a34029534ed05fee4df6a1c,0,jason.blocklove,"18 June, 7:37 am",This could really benefit from a figure or two comparing the naive implementation with your design,\cite{b10}.,"Overall, our optimization reduces total-state-traversal work from approximately three full passes to less than two by collapsing these passes into a tighter, five-phase pipelined datapath design \cite{b10}.",20740,40,Comments!E40,Legacy-39,"This could really benefit from a figure or two comparing the naive implementation with your design [highlighted: ""\cite{b10}.""]",Attribute the five-stage baseline and use one diagram/table without repetition.,Architecture,NOT_RUN
+38,6a34029534ed05fee4df6a1c,1,jason.blocklove,"18 June, 7:37 am","Or a set of algorithms comparing them, since they're both step-by-step processes",,,,41,Comments!E41,Legacy-39,"Or a set of algorithms comparing them, since they're both step-by-step processes",Attribute the five-stage baseline and use one diagram/table without repetition.,Architecture,NOT_RUN
+39,6a34032fdc32bf2129205fb8,0,jason.blocklove,"18 June, 7:39 am",This requires more explanation, The evaluation of the quantization of the recurrent-state was performed via a synthetic software reference and remains part of the numerical fidelity boundary until realistic Qwen3-Next activation capture is available.,"The default hardware datapath operates with an MXFP4 block size of 32. The evaluation of the quantization of the recurrent-state was performed via a synthetic software reference and remains part of the numerical fidelity boundary until realistic Qwen3-Next activation capture is available. Maintaining the recurrent-state on chip is important since each token requires both access to its prior state, updating of that state, and generating the output vector.",21696,43,Comments!E43,Legacy-40,"This requires more explanation [highlighted: "" The evaluation of the quantization of the recurrent-state was performed via a synthetic software reference and remains part of the numerical fidelity boundary until realistic Qwen3-Next activation capture is available.""]",Distinguish synthetic diagnostics from closed-loop model quality.,Evaluation,NOT_RUN
+40,6a3403836572004fe08a9332,0,jason.blocklove,"18 June, 7:41 am",Another thing where a figure could help aid visualization of your architecutre,"The multiply path consists of: sign XOR on the sign bits, exponent addition with bias adjustment, mantissa multiplication, normalization; the normalized result of the element multiply is then aligned based upon the shared block exponents, before being accumulated.","\subsection{FP4 Element Multiply}
+The FP4 element multiply is implemented as a native E2M1 operation, rather than by converting operands into BF16 or FP32. The multiply path consists of: sign XOR on the sign bits, exponent addition with bias adjustment, mantissa multiplication, normalization; the normalized result of the element multiply is then aligned based upon the shared block exponents, before being accumulated.",22854,44,Comments!E44,Legacy-41,"Another thing where a figure could help aid visualization of your architecutre [highlighted: ""The multiply path consists of: sign XOR on the sign bits, exponent addition with bias adjustment, mantissa multiplication, normalization; the normalized result of the element multiply is then aligned based upon the shared block exponents, before being accumulated.""]","Describe encoded product, alignment, rounding, and saturation from the contract.",Numerical Method,NOT_RUN
+41,6a340541537013d3d71a3780,0,jason.blocklove,"18 June, 7:48 am",This says more-or-less the same thing as the subsection above it,"LUT-based E2M1 multipliers are utilized in the FPGA LUT logic as they avoid conversion of operands from BF16 (or FP32) format and provide a direct path to E2M1 multiplications. Each E2M1 is split into three parts: Sign, Exponent, and Mantissa. An XOR operation is performed on the Sign field. A biased sum of Exponents is calculated. The Mantissas are multiplied together and then normalized. The resulting fixed point partial-product is prepared for accumulation. Additionally, this process minimizes the physical area of the inner Multiplier Block and eliminates the requirement for large floating-point DSP Blocks that would be necessary to process four-bit inputs.","\subsection{LUT-Based E2M1 Multiplication}
+LUT-based E2M1 multipliers are utilized in the FPGA LUT logic as they avoid conversion of operands from BF16 (or FP32) format and provide a direct path to E2M1 multiplications. Each E2M1 is split into three parts: Sign, Exponent, and Mantissa. An XOR operation is performed on the Sign field. A biased sum of Exponents is calculated. The Mantissas are multiplied together and then normalized. The resulting fixed point partial-product is prepared for accumulation. Additionally, this process minimizes the physical area of the inner Multiplier Block and eliminates the requirement for large floating-point DSP Blocks that would be necessary to process four-bit inputs.",23631,45,Comments!E45,Legacy-42,"This says more-or-less the same thing as the subsection above it [highlighted: ""LUT-based E2M1 multipliers are utilized in the FPGA LUT logic as they avoid conversion of operands from BF16 (or FP32) format and provide a direct path to E2M1 multiplications. Each E2M1 is split into three parts: Sign, Exponent, and Mantissa. An XOR operation is performed on the Sign field. A biased sum of Exponents is calculated. The Mantissas are multiplied together and then normalized. The resulting fixed point partial-product is prepared for accumulation. Additionally, this process minimizes the physical area of the inner Multiplier Block and eliminates the requirement for large floating-point DSP Blocks that would be necessary to process four-bit inputs.""]",Merge into one arithmetic subsection.,Numerical Method,NOT_RUN
+42,6a34059134ed05fee4df6b80,0,jason.blocklove,"18 June, 7:49 am","This doesn't need to be a subsection, it can be fit earlier in your architecture discussion","Three design parameters determine the behavior of the overall design architecture: Block Size ($B$), Key Parallelism ($P_K$) and Value Parallelism ($P_V$).","\subsection{Design Parameters}
+Three design parameters determine the behavior of the overall design architecture: Block Size ($B$), Key Parallelism ($P_K$) and Value Parallelism ($P_V$).",24944,46,Comments!E46,Legacy-43,"This doesn't need to be a subsection, it can be fit earlier in your architecture discussion [highlighted: ""Three design parameters determine the behavior of the overall design architecture: Block Size ($B$), Key Parallelism ($P_K$) and Value Parallelism ($P_V$).""]","Fold B, P_K, and P_V into architecture/evaluation setup.",Architecture,NOT_RUN
+43,6a3405b56572004fe08a944f,0,jason.blocklove,"18 June, 7:50 am","Pick AMD, Xilinx, or AMD Xilinx and stick with it everywhere you refer to this",AMD Alveo U55C,"\subsection{Experimental Setup}
+The proposed accelerator is evaluated as a simulation-only FPGA design targeting the AMD Alveo U55C platform. The target device is the Xilinx \texttt{xcu55c-fsvh2892-2L-e}, and the design is synthesized using Vitis HLS with a target clock period of 4 ns, corresponding to 250 MHz. Post-synthesis and post-implementation reports are generated through the Xilinx FPGA tool flow to estimate timing, resource utilization, and power.",25254,47,Comments!E47,Legacy-44,"Pick AMD, Xilinx, or AMD Xilinx and stick with it everywhere you refer to this [highlighted: ""AMD Alveo U55C""]",Use a single historically and technically accurate device/tool naming convention.,All,NOT_RUN
+44,6a3406c3dc32bf2129206182,0,jason.blocklove,"18 June, 7:54 am",Since you wrote this with HLS you need to address any sort of HLS-specific design choices you made. Did you have to/choose to use any pragmas to impact the synthesis results?,Vitis HLS,"\subsection{Experimental Setup}
+The proposed accelerator is evaluated as a simulation-only FPGA design targeting the AMD Alveo U55C platform. The target device is the Xilinx \texttt{xcu55c-fsvh2892-2L-e}, and the design is synthesized using Vitis HLS with a target clock period of 4 ns, corresponding to 250 MHz. Post-synthesis and post-implementation reports are generated through the Xilinx FPGA tool flow to estimate timing, resource utilization, and power.",25378,48;83,Comments!E48,Legacy-45,"Since you wrote this with HLS you need to address any sort of HLS-specific design choices you made. Did you have to/choose to use any pragmas to impact the synthesis results? [highlighted: ""Vitis HLS""]",Report actual directives and their verified effect after correction.,Implementation,NOT_RUN
+45,6a34070b87496cf05d0b2470,0,jason.blocklove,"18 June, 7:56 am",This is redundant to your hardware architecture section,"In order to optimize the FPGA datapath for four-bit floating-point arithmetic, the FP4 element multiply is implemented using LUT-based E2M1 logic rather than DSP-based floating-point multiplication.","In order to optimize the FPGA datapath for four-bit floating-point arithmetic, the FP4 element multiply is implemented using LUT-based E2M1 logic rather than DSP-based floating-point multiplication. The multiplier performs sign XOR, exponent addition with bias adjustment, mantissa multiplication, normalization, and subnormal handling before producing a Q4.3 fixed-point partial product. Block-exponent alignment then shifts and accumulates these partial products using the shared MXFP4 block scales.",27742,49,Comments!E49,Legacy-42,"This is redundant to your hardware architecture section [highlighted: ""In order to optimize the FPGA datapath for four-bit floating-point arithmetic, the FP4 element multiply is implemented using LUT-based E2M1 logic rather than DSP-based floating-point multiplication.""]",Merge into one arithmetic subsection.,Numerical Method,NOT_RUN
+46,6a340744dc32bf21292061c0,0,jason.blocklove,"18 June, 7:57 am",This would actually probably be the right place to address your HLS design choices and pragama selection,"HLS C synthesis estimates latency, initiation interval, and initial resource mapping. The synthesis reports are analyzed to confirm that the native E2M1 multiply primitive maps to LUT logic rather than DSP blocks.","\subsection{Simulation and Synthesis Flow}
+The evaluation uses a hierarchical verification flow based on the Xilinx Vitis HLS toolchain. First, HLS C simulation verifies functional correctness against the quantized MXFP4 software reference. Second, HLS C synthesis estimates latency, initiation interval, and initial resource mapping. The synthesis reports are analyzed to confirm that the native E2M1 multiply primitive maps to LUT logic rather than DSP blocks.",28494,50;84,Comments!E50,Legacy-46,"This would actually probably be the right place to address your HLS design choices and pragama selection [highlighted: ""HLS C synthesis estimates latency, initiation interval, and initial resource mapping. The synthesis reports are analyzed to confirm that the native E2M1 multiply primitive maps to LUT logic rather than DSP blocks.""]",Put implementation directives in the implementation/evaluation flow.,Implementation,NOT_RUN
+47,6a3407b9537013d3d71a38a7,0,jason.blocklove,"18 June, 7:59 am","Did you guys do anything to estimate dynamic power consumption during runtime, or just use the total value that Vivado reports?",total power consumption,"Third, RTL cosimulation verifies the generated RTL behavior over multiple autoregressive decode steps, confirming that the persistent recurrent state updates in place without requiring repeated off-chip recurrent-state traffic. Finally, post-implementation Vivado reports provide the authoritative estimates for timing closure, total power consumption, and resource utilization. The final utilization metrics report LUTs, BRAM, URAM where applicable, and DSP usage.",29037,51;85,Comments!E51,Legacy-47,"Did you guys do anything to estimate dynamic power consumption during runtime, or just use the total value that Vivado reports? [highlighted: ""total power consumption""]",Separate Vivado estimate from integrated board energy and report static/dynamic breakdown.,Evaluation,NOT_RUN
+48,6a340841537013d3d71a38cf,0,jason.blocklove,"18 June, 8:01 am",Since this is simulation-only is there a reason you didn't try multiple parts and compare them?,simulation-only FPGA design targeting the AMD Alveo U55C,"\subsection{Experimental Setup}
+The proposed accelerator is evaluated as a simulation-only FPGA design targeting the AMD Alveo U55C platform. The target device is the Xilinx \texttt{xcu55c-fsvh2892-2L-e}, and the design is synthesized using Vitis HLS with a target clock period of 4 ns, corresponding to 250 MHz. Post-synthesis and post-implementation reports are generated through the Xilinx FPGA tool flow to estimate timing, resource utilization, and power.",25212,52,Comments!E52,Legacy-48,"Since this is simulation-only is there a reason you didn't try multiple parts and compare them? [highlighted: ""simulation-only FPGA design targeting the AMD Alveo U55C""]",State why U55C is the target and scope portability as untested.,Evaluation/Limitations,NOT_RUN
+49,6a3408d6537013d3d71a3904,0,jason.blocklove,"18 June, 8:03 am",Is there a reason you're not open-sourcing your code and data? I *highly* recommend doing so,\subsection{Provenance and Reproducibility},"\subsection{Provenance and Reproducibility}
+To ensure scientific rigor and reduce transcription errors, reported performance metrics are extracted automatically from generated toolchain reports rather than entered manually. Latency values are extracted from HLS and RTL cosimulation logs, while resource utilization and power estimates are parsed directly from Vivado post-implementation reports.",31352,53,Comments!E53,Legacy-49,"Is there a reason you're not open-sourcing your code and data? I *highly* recommend doing so [highlighted: ""\subsection{Provenance and Reproducibility}""]",Obtain an author decision consistent with anonymity and venue policy.,Reproducibility,BLOCKED_EXTERNAL
+50,6a340d9a6572004fe08a97e9,0,jason.blocklove,"18 June, 8:24 am",Table isn't referenced,"\begin{table}[h]
+\centering
+\caption{Latency comparison for batch-one Gated DeltaNet decode.}
+\label{tab:latency_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xcc}
+\toprule
+Design & Latency ($\mu$s/token) & Speedup vs. H100 \\
+\midrule
+H100 baseline & 285.0 & 1.00$\times$ \\
+FPGA baseline & 63.2 & 4.51$\times$ \\
+Ours MXFP4 & 51.472 & 5.54$\times$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Energy per token comparison for the cited baselines and the proposed MXFP4 design.}
+\label{tab:energy_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xcc}
+\toprule
+Design & Energy (mJ/token) & Efficiency vs. H100 \\
+\midrule
+H100 baseline & 99.8 & 1.00$\times$ \\
+FPGA baseline & 9.5 & 10.51$\times$ \\
+Ours MXFP4 & 0.462 & 216.01$\times$ \\","\begin{table}[h]
+\centering
+\caption{Latency comparison for batch-one Gated DeltaNet decode.}
+\label{tab:latency_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xcc}
+\toprule
+Design & Latency ($\mu$s/token) & Speedup vs. H100 \\
+\midrule
+H100 baseline & 285.0 & 1.00$\times$ \\
+FPGA baseline & 63.2 & 4.51$\times$ \\
+Ours MXFP4 & 51.472 & 5.54$\times$ \\
+\bottomrule
+\end{tabularx}
+\end{table}",33633,54,Comments!E54,Legacy-50,"Table isn't referenced [highlighted: ""\begin{table}[h]
+\centering
+\caption{Latency comparison for batch-one Gated DeltaNet decode.}
+\label{tab:latency_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xcc}
+\toprule
+Design & Latency ($\mu$s/token) & Speedup vs. H100 \\
+\midrule
+H100 baseline & 285.0 & 1.00$\times$ \\
+FPGA baseline & 63.2 & 4.51$\times$ \\
+Ours MXFP4 & 51.472 & 5.54$\times$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Energy per token comparison for the cited baselines and the proposed MXFP4 design.}
+\label{tab:energy_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xcc}
+\toprule
+Design & Energy (mJ/token) & Efficiency vs. H100 \\
+\midrule
+H100 baseline & 99.8 & 1.00$\times$ \\
+FPGA baseline & 9.5 & 10.51$\times$ \\
+Ours MXFP4 & 0.462 & 216.01$\times$ \\""]",Reference only a corrected matched-boundary latency table.,Results,NOT_RUN
+51,6a340e24537013d3d71a3b4a,0,jason.blocklove,"18 June, 8:26 am","I was recommending last night that you replace a lot of this prose with the table, not add the table to repeat the same data. The table contains the numbers, the prose should highlight particularly important ones and offer explanations for those values, not just say the same thing in a different format","The base MXFP4 persistent-state design achieved an RTL cosimulated latency of 51.472 microseconds per token and used 8.976 W of Vivado-estimated post-implementation on-chip power. Comparing it with the referenced H100 baseline, the MXFP4 design provided a 5.537$\times$ increase in performance and a 216.011$\times$ gain in terms of energy efficiency compared to the referenced H100 baseline \cite{b1,b4}. Comparing it with the referenced FPGA baseline, the design had a 1.228$\times$ increase in performance and a 20.562$\times$ gain in energy efficiency relative to the referenced FPGA energy upper bound.","\subsection{Latency and Energy}
+The base MXFP4 persistent-state design achieved an RTL cosimulated latency of 51.472 microseconds per token and used 8.976 W of Vivado-estimated post-implementation on-chip power. Comparing it with the referenced H100 baseline, the MXFP4 design provided a 5.537$\times$ increase in performance and a 216.011$\times$ gain in terms of energy efficiency compared to the referenced H100 baseline \cite{b1,b4}. Comparing it with the referenced FPGA baseline, the design had a 1.228$\times$ increase in performance and a 20.562$\times$ gain in energy efficiency relative to the referenced FPGA energy upper bound.",32132,55;86,Comments!E55,Legacy-51,"I was recommending last night that you replace a lot of this prose with the table, not add the table to repeat the same data. The table contains the numbers, the prose should highlight particularly important ones and offer explanations for those values, not just say the same thing in a different format [highlighted: ""The base MXFP4 persistent-state design achieved an RTL cosimulated latency of 51.472 microseconds per token and used 8.976 W of Vivado-estimated post-implementation on-chip power. Comparing it with the referenced H100 baseline, the MXFP4 design provided a 5.537$\times$ increase in performance and a 216.011$\times$ gain in terms of energy efficiency compared to the referenced H100 baseline \cite{b1,b4}. Comparing it with the referenced FPGA baseline, the design had a 1.228$\times$ increase in performance and a 20.562$\times$ gain in energy efficiency relative to the referenced FPGA energy upper bound.""]",Interpret causes and uncertainty without duplicating cells.,Results,NOT_RUN
+52,6a340e956572004fe08a985e,0,jason.blocklove,"18 June, 8:28 am","Same as what I said above. The table shows the data, the prose around it should explain those data and provide context for the numbers","The design met the timing target on the Alveo U55C FPGA. HLS C-synthesis estimated a maximum clock frequency of 342.47 MHz, and Vivado reported that the implementation had 0.065 nanoseconds (ns) of positive timing slack. Resource usage remained relatively low; LUT utilization was at 6.64\%, BRAM utilization was at 3.67\%, and DSP utilization was at 7.27\%. The reported DSP usage is top-level/non-MAC logic; the E2M1 primitive evidence reports no DSP pragma in the MAC source. All C-simulation passes were completed for all 64 vectors, and C/RTL cosimulation ran for 128 tokens with a total number of RTL cosimulated cycles equal to 12,868 cycles.","\subsection{Timing and Resource Utilization}
+The design met the timing target on the Alveo U55C FPGA. HLS C-synthesis estimated a maximum clock frequency of 342.47 MHz, and Vivado reported that the implementation had 0.065 nanoseconds (ns) of positive timing slack. Resource usage remained relatively low; LUT utilization was at 6.64\%, BRAM utilization was at 3.67\%, and DSP utilization was at 7.27\%. The reported DSP usage is top-level/non-MAC logic; the E2M1 primitive evidence reports no DSP pragma in the MAC source. All C-simulation passes were completed for all 64 vectors, and C/RTL cosimulation ran for 128 tokens with a total number of RTL cosimulated cycles equal to 12,868 cycles.",34624,56;87,Comments!E56,Legacy-52,"Same as what I said above. The table shows the data, the prose around it should explain those data and provide context for the numbers [highlighted: ""The design met the timing target on the Alveo U55C FPGA. HLS C-synthesis estimated a maximum clock frequency of 342.47 MHz, and Vivado reported that the implementation had 0.065 nanoseconds (ns) of positive timing slack. Resource usage remained relatively low; LUT utilization was at 6.64\%, BRAM utilization was at 3.67\%, and DSP utilization was at 7.27\%. The reported DSP usage is top-level/non-MAC logic; the E2M1 primitive evidence reports no DSP pragma in the MAC source. All C-simulation passes were completed for all 64 vectors, and C/RTL cosimulation ran for 128 tokens with a total number of RTL cosimulated cycles equal to 12,868 cycles.""]",Discuss only the important tradeoffs and caveats.,Results,NOT_RUN
+53,6a340e9e537013d3d71a3b86,0,jason.blocklove,"18 June, 8:28 am",Not referenced anywhere,"\begin{table}[h]
+\centering
+\caption{Post-implementation timing and resource utilization on the Alveo U55C.}
+\label{tab:resource_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xc}
+\toprule
+Metric & Result \\
+\midrule
+HLS estimated Fmax & 342.47 MHz \\
+Post-implementation slack & 0.065 ns \\
+LUT utilization & 6.64\% \\
+DSP utilization & 7.27\% \\
+BRAM utilization & 3.67\% \\","\begin{table}[h]
+\centering
+\caption{Post-implementation timing and resource utilization on the Alveo U55C.}
+\label{tab:resource_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xc}
+\toprule
+Metric & Result \\
+\midrule
+HLS estimated Fmax & 342.47 MHz \\
+Post-implementation slack & 0.065 ns \\
+LUT utilization & 6.64\% \\
+DSP utilization & 7.27\% \\
+BRAM utilization & 3.67\% \\
+\bottomrule
+\end{tabularx}
+\end{table}",35275,57,Comments!E57,Legacy-53,"Not referenced anywhere [highlighted: ""\begin{table}[h]
+\centering
+\caption{Post-implementation timing and resource utilization on the Alveo U55C.}
+\label{tab:resource_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xc}
+\toprule
+Metric & Result \\
+\midrule
+HLS estimated Fmax & 342.47 MHz \\
+Post-implementation slack & 0.065 ns \\
+LUT utilization & 6.64\% \\
+DSP utilization & 7.27\% \\
+BRAM utilization & 3.67\% \\""]",Reference regenerated post-route physical resource data.,Results,NOT_RUN
+54,6a340ec5dc32bf21292064cf,0,jason.blocklove,"18 June, 8:29 am","This should go in your limitations/threats to validity, not your results","Given that realistic Qwen3-Next activation capture is still blocked by dependencies, this version of the manuscript cannot claim final Qwen3-Next perplexity or overall model quality \cite{b3,b6,b8,b9,b11}.","\subsection{Synthetic Numerical Fidelity}
+Current numerical-quality results must be viewed as only being used as evidence. Given that realistic Qwen3-Next activation capture is still blocked by dependencies, this version of the manuscript cannot claim final Qwen3-Next perplexity or overall model quality \cite{b3,b6,b8,b9,b11}. Based upon the deterministic synthetic test harness, MXFP4 performs better than the INT4 fallback in preserving the direction of outputs. Specifically, INT4 reached an output cosine similarity of 0.967, whereas MXFP4 reached an output cosine similarity of 0.982 for block size = 32 and an output cosine similarity of 0.982 for block size = 16 \cite{b10,b12}.",35882,58,Comments!E58,Legacy-54,"This should go in your limitations/threats to validity, not your results [highlighted: ""Given that realistic Qwen3-Next activation capture is still blocked by dependencies, this version of the manuscript cannot claim final Qwen3-Next perplexity or overall model quality \cite{b3,b6,b8,b9,b11}.""]",Keep offline-capture limits separate from actual results.,Limitations,NOT_RUN
+55,6a340ef1537013d3d71a3ba5,0,jason.blocklove,"18 June, 8:29 am",Not referenced,"\begin{table}[h]
+\centering
+\caption{Synthetic output cosine similarity for INT4 and MXFP4 configurations.}
+\label{tab:accuracy_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xc}
+\toprule
+Configuration & Output cosine similarity \\
+\midrule
+INT4 fallback & 0.966696 \\
+MXFP4, $B=32$ & 0.981823 \\
+MXFP4, $B=16$ & 0.982292 \\
+\bottomrule
+\end{tabularx}
+\end{table}","\begin{table}[h]
+\centering
+\caption{Synthetic output cosine similarity for INT4 and MXFP4 configurations.}
+\label{tab:accuracy_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xc}
+\toprule
+Configuration & Output cosine similarity \\
+\midrule
+INT4 fallback & 0.966696 \\
+MXFP4, $B=32$ & 0.981823 \\
+MXFP4, $B=16$ & 0.982292 \\
+\bottomrule
+\end{tabularx}
+\end{table}",36448,59,Comments!E59,Legacy-55,"Not referenced [highlighted: ""\begin{table}[h]
+\centering
+\caption{Synthetic output cosine similarity for INT4 and MXFP4 configurations.}
+\label{tab:accuracy_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xc}
+\toprule
+Configuration & Output cosine similarity \\
+\midrule
+INT4 fallback & 0.966696 \\
+MXFP4, $B=32$ & 0.981823 \\
+MXFP4, $B=16$ & 0.982292 \\
+\bottomrule
+\end{tabularx}
+\end{table}""]",Reference only validated synthetic and closed-loop quality tables.,Results,NOT_RUN
+56,6a340f28dc32bf2129206501,0,jason.blocklove,"18 June, 8:30 am","I'm confused what citations you need here to report your results. Maybe one for a reference to what cosine similarity is, but your results don't come from these papers so why are they here?","Current numerical-quality results must be viewed as only being used as evidence. Given that realistic Qwen3-Next activation capture is still blocked by dependencies, this version of the manuscript cannot claim final Qwen3-Next perplexity or overall model quality \cite{b3,b6,b8,b9,b11}. Based upon the deterministic synthetic test harness, MXFP4 performs better than the INT4 fallback in preserving the direction of outputs. Specifically, INT4 reached an output cosine similarity of 0.967, whereas MXFP4 reached an output cosine similarity of 0.982 for block size = 32 and an output cosine similarity of 0.982 for block size = 16 \cite{b10,b12}.","\subsection{Synthetic Numerical Fidelity}
+Current numerical-quality results must be viewed as only being used as evidence. Given that realistic Qwen3-Next activation capture is still blocked by dependencies, this version of the manuscript cannot claim final Qwen3-Next perplexity or overall model quality \cite{b3,b6,b8,b9,b11}. Based upon the deterministic synthetic test harness, MXFP4 performs better than the INT4 fallback in preserving the direction of outputs. Specifically, INT4 reached an output cosine similarity of 0.967, whereas MXFP4 reached an output cosine similarity of 0.982 for block size = 32 and an output cosine similarity of 0.982 for block size = 16 \cite{b10,b12}.",35801,60;88,Comments!E60,Legacy-56,"I'm confused what citations you need here to report your results. Maybe one for a reference to what cosine similarity is, but your results don't come from these papers so why are they here? [highlighted: ""Current numerical-quality results must be viewed as only being used as evidence. Given that realistic Qwen3-Next activation capture is still blocked by dependencies, this version of the manuscript cannot claim final Qwen3-Next perplexity or overall model quality \cite{b3,b6,b8,b9,b11}. Based upon the deterministic synthetic test harness, MXFP4 performs better than the INT4 fallback in preserving the direction of outputs. Specifically, INT4 reached an output cosine similarity of 0.967, whereas MXFP4 reached an output cosine similarity of 0.982 for block size = 32 and an output cosine similarity of 0.982 for block size = 16 \cite{b10,b12}.""]","Cite methods/background, not locally generated numeric values.",Results,NOT_RUN
+57,6a34143d34ed05fee4df720b,0,jason.blocklove,"18 June, 8:52 am",Not referenced,"\begin{table}[h]
+\centering
+\caption{Synthetic recurrent-state stress evidence.}
+\label{tab:state_stress_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xcc}
+\toprule
+Synthetic test & MXFP4 state & MXFP8 state \\
+\midrule
+1024-token final output cosine & 0.643 & 0.933 \\
+1024-token final state rel. L2 & 0.865 & 0.344 \\
+256-token boundary output cosine & 0.747 & 0.945 \\
+Combined-stress worst output cosine & 0.928 & 0.935 \\
+Outlier-stress worst output cosine & 0.968 & 0.973 \\
+\bottomrule
+\end{tabularx}
+\end{table}","\begin{table}[h]
+\centering
+\caption{Synthetic recurrent-state stress evidence.}
+\label{tab:state_stress_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xcc}
+\toprule
+Synthetic test & MXFP4 state & MXFP8 state \\
+\midrule
+1024-token final output cosine & 0.643 & 0.933 \\
+1024-token final state rel. L2 & 0.865 & 0.344 \\
+256-token boundary output cosine & 0.747 & 0.945 \\
+Combined-stress worst output cosine & 0.928 & 0.935 \\
+Outlier-stress worst output cosine & 0.968 & 0.973 \\
+\bottomrule
+\end{tabularx}
+\end{table}",37589,61,Comments!E61,Legacy-57,"Not referenced [highlighted: ""\begin{table}[h]
+\centering
+\caption{Synthetic recurrent-state stress evidence.}
+\label{tab:state_stress_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xcc}
+\toprule
+Synthetic test & MXFP4 state & MXFP8 state \\
+\midrule
+1024-token final output cosine & 0.643 & 0.933 \\
+1024-token final state rel. L2 & 0.865 & 0.344 \\
+256-token boundary output cosine & 0.747 & 0.945 \\
+Combined-stress worst output cosine & 0.928 & 0.935 \\
+Outlier-stress worst output cosine & 0.968 & 0.973 \\
+\bottomrule
+\end{tabularx}
+\end{table}""]",Reference regenerated 64-8192 token results with uncertainty.,Results,NOT_RUN
+58,6a34146987496cf05d0b2a61,0,jason.blocklove,"18 June, 8:53 am","This is good, but what does it ultimately mean? What do these data tell us about your design compared to others?","The two results demonstrate that MXFP4 is always the native four-bit arithmetic path and MXFP8 recurrent state will always be a safer fallback when accumulation of recurrent-state drift becomes the limiting factor in terms of accuracy \cite{b3,b10,b12}.","\subsection{Recurrent-State Stress}
+In addition, the new recurrent-state stress data provides clarity on the limitations of the current synthetic data. For a synthetic stress test on 1024 tokens, MXFP4 recurrent state produced an output cosine similarity of 0.643 and a final state relative L2 error of 0.865. In comparison, MXFP8 recurrent state produced an output cosine similarity of 0.933 and a final state relative L2 error of 0.344 \cite{b10,b12}. The two results demonstrate that MXFP4 is always the native four-bit arithmetic path and MXFP8 recurrent state will always be a safer fallback when accumulation of recurrent-state drift becomes the limiting factor in terms of accuracy \cite{b3,b10,b12}.",37334,62;89,Comments!E62,Legacy-58,"This is good, but what does it ultimately mean? What do these data tell us about your design compared to others? [highlighted: ""The two results demonstrate that MXFP4 is always the native four-bit arithmetic path and MXFP8 recurrent state will always be a safer fallback when accumulation of recurrent-state drift becomes the limiting factor in terms of accuracy \cite{b3,b10,b12}.""]",Explain observed drift and fallback tradeoff without universal claims.,Results,NOT_RUN
+59,6a34152087496cf05d0b2aa7,0,jason.blocklove,"18 June, 8:56 am",Not referenced,"\begin{table}[h]
+\centering
+\caption{Recurrent-state storage and off-chip traffic accounting for MXFP4 $B=32$.}
+\label{tab:state_traffic_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xr}
+\toprule
+Metric & Value \\
+\midrule
+MXFP4 $B=32$ recurrent-state storage & 278528 bytes \\
+Reduction vs FP32 & 86.719\% \\
+Reduction vs BF16 & 73.438\% \\
+Naive three-pass off-chip state traffic & 835584 bytes/token \\
+Persistent steady-state off-chip state traffic & 0 bytes/token \\
+\bottomrule
+\end{tabularx}
+\end{table}","\begin{table}[h]
+\centering
+\caption{Recurrent-state storage and off-chip traffic accounting for MXFP4 $B=32$.}
+\label{tab:state_traffic_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xr}
+\toprule
+Metric & Value \\
+\midrule
+MXFP4 $B=32$ recurrent-state storage & 278528 bytes \\
+Reduction vs FP32 & 86.719\% \\
+Reduction vs BF16 & 73.438\% \\
+Naive three-pass off-chip state traffic & 835584 bytes/token \\
+Persistent steady-state off-chip state traffic & 0 bytes/token \\
+\bottomrule
+\end{tabularx}
+\end{table}",38757,63,Comments!E63,Legacy-59,"Not referenced [highlighted: ""\begin{table}[h]
+\centering
+\caption{Recurrent-state storage and off-chip traffic accounting for MXFP4 $B=32$.}
+\label{tab:state_traffic_results}
+\footnotesize
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{6pt}
+\begin{tabularx}{\linewidth}{Xr}
+\toprule
+Metric & Value \\
+\midrule
+MXFP4 $B=32$ recurrent-state storage & 278528 bytes \\
+Reduction vs FP32 & 86.719\% \\
+Reduction vs BF16 & 73.438\% \\
+Naive three-pass off-chip state traffic & 835584 bytes/token \\
+Persistent steady-state off-chip state traffic & 0 bytes/token \\
+\bottomrule
+\end{tabularx}
+\end{table}""]",Reference matched physical storage and measured traffic.,Results,NOT_RUN
+60,6a34155687496cf05d0b2abd,0,jason.blocklove,"18 June, 8:57 am",Consistency,Xilinx ,"\subsection{Scalability and BRAM Capacity Ceiling}
+The current existing architecture has been created to be optimal for processing tasks in the single-layer single-token inference batch size one configuration. This approach can help maximize on-chip data locality and reduce repeated recurrent-state movement through external memory. Although this configuration works for the evaluated design point, the main scaling restriction is connected with the limited on-chip memory capacity of the Xilinx Alveo U55C FPGA. For larger recurrent state tensors, larger batch sizes, or expanded model configurations, the amount of memory required by the algorithm may become greater than the on-chip SRAM capacity, making off-chip HBM use necessary. Consequently, DRAM bandwidth limitations may appear again, a bottleneck extensively documented in large-batch LLM serving systems \cite{b1,b4,b7}. The memory-bound nature of autoregressive decode, in which each generated token requires access to model state, makes bandwidth a dominant constraint at increasing batch sizes \cite{b5}. Further research may evaluate tiling and buffer hierarchies across BRAM, URAM, and HBM, a direction also identified in persistent-state FPGA dataflow designs for linear attention \cite{b10}.",40516,64,Comments!E64,Legacy-44,"Consistency [highlighted: ""Xilinx ""]",Use a single historically and technically accurate device/tool naming convention.,All,NOT_RUN
+61,6a3415786572004fe08a9b69,0,jason.blocklove,"18 June, 8:57 am",Define,HBM,"\subsection{Scalability and BRAM Capacity Ceiling}
+The current existing architecture has been created to be optimal for processing tasks in the single-layer single-token inference batch size one configuration. This approach can help maximize on-chip data locality and reduce repeated recurrent-state movement through external memory. Although this configuration works for the evaluated design point, the main scaling restriction is connected with the limited on-chip memory capacity of the Xilinx Alveo U55C FPGA. For larger recurrent state tensors, larger batch sizes, or expanded model configurations, the amount of memory required by the algorithm may become greater than the on-chip SRAM capacity, making off-chip HBM use necessary. Consequently, DRAM bandwidth limitations may appear again, a bottleneck extensively documented in large-batch LLM serving systems \cite{b1,b4,b7}. The memory-bound nature of autoregressive decode, in which each generated token requires access to model state, makes bandwidth a dominant constraint at increasing batch sizes \cite{b5}. Further research may evaluate tiling and buffer hierarchies across BRAM, URAM, and HBM, a direction also identified in persistent-state FPGA dataflow designs for linear attention \cite{b10}.",40744,65,Comments!E65,Legacy-60,"Define [highlighted: ""HBM""]",Expand high-bandwidth memory at first use.,Limitations,NOT_RUN
+62,6a3415976572004fe08a9b77,0,jason.blocklove,"18 June, 8:58 am",Move this to future work,"Further research may evaluate tiling and buffer hierarchies across BRAM, URAM, and HBM, a direction also identified in persistent-state FPGA dataflow designs for linear attention \cite{b10}.","\subsection{Scalability and BRAM Capacity Ceiling}
+The current existing architecture has been created to be optimal for processing tasks in the single-layer single-token inference batch size one configuration. This approach can help maximize on-chip data locality and reduce repeated recurrent-state movement through external memory. Although this configuration works for the evaluated design point, the main scaling restriction is connected with the limited on-chip memory capacity of the Xilinx Alveo U55C FPGA. For larger recurrent state tensors, larger batch sizes, or expanded model configurations, the amount of memory required by the algorithm may become greater than the on-chip SRAM capacity, making off-chip HBM use necessary. Consequently, DRAM bandwidth limitations may appear again, a bottleneck extensively documented in large-batch LLM serving systems \cite{b1,b4,b7}. The memory-bound nature of autoregressive decode, in which each generated token requires access to model state, makes bandwidth a dominant constraint at increasing batch sizes \cite{b5}. Further research may evaluate tiling and buffer hierarchies across BRAM, URAM, and HBM, a direction also identified in persistent-state FPGA dataflow designs for linear attention \cite{b10}.",41097,66,Comments!E66,Legacy-61,"Move this to future work [highlighted: ""Further research may evaluate tiling and buffer hierarchies across BRAM, URAM, and HBM, a direction also identified in persistent-state FPGA dataflow designs for linear attention \cite{b10}.""]",Keep unimplemented hierarchy experiments out of results.,Future Work,NOT_RUN
+63,6a3415b76572004fe08a9b80,0,jason.blocklove,"18 June, 8:58 am",What bounds would cause this to happen? What in the data suggests this will occur and when?,"Consequently, DRAM bandwidth limitations may appear again,","\subsection{Scalability and BRAM Capacity Ceiling}
+The current existing architecture has been created to be optimal for processing tasks in the single-layer single-token inference batch size one configuration. This approach can help maximize on-chip data locality and reduce repeated recurrent-state movement through external memory. Although this configuration works for the evaluated design point, the main scaling restriction is connected with the limited on-chip memory capacity of the Xilinx Alveo U55C FPGA. For larger recurrent state tensors, larger batch sizes, or expanded model configurations, the amount of memory required by the algorithm may become greater than the on-chip SRAM capacity, making off-chip HBM use necessary. Consequently, DRAM bandwidth limitations may appear again, a bottleneck extensively documented in large-batch LLM serving systems \cite{b1,b4,b7}. The memory-bound nature of autoregressive decode, in which each generated token requires access to model state, makes bandwidth a dominant constraint at increasing batch sizes \cite{b5}. Further research may evaluate tiling and buffer hierarchies across BRAM, URAM, and HBM, a direction also identified in persistent-state FPGA dataflow designs for linear attention \cite{b10}.",40763,67,Comments!E67,Legacy-62,"What bounds would cause this to happen? What in the data suggests this will occur and when? [highlighted: ""Consequently, DRAM bandwidth limitations may appear again,""]","State which state, batch, beam, and cache growth exceeds physical allocation.",Scalability,NOT_RUN
+64,6a3415f634ed05fee4df72cd,0,jason.blocklove,"18 June, 8:59 am",Is there a reason you didn't do your tests with larger parallelism values? Address this shortcoming here.,"Such logic architecture can place pressure on FPGA interconnect as the design scales, increasing wire length and potentially reducing timing margin. Possible ways to address this problem include floorplanning related logic into pblocks, retiming, and reevaluating the parallelism ratio relative to throughput \cite{b10}.","\subsection{LUT Routing Congestion}
+The LUT-based E2M1 multiply primitive is compact in area, but a full neural layer can instantiate many parallel multiply paths. The evaluated parallelism point uses $P_K=16$ and $P_V=8$, which creates many routes from 6-input lookup tables into the surrounding accumulation and alignment logic. Such logic architecture can place pressure on FPGA interconnect as the design scales, increasing wire length and potentially reducing timing margin. Possible ways to address this problem include floorplanning related logic into pblocks, retiming, and reevaluating the parallelism ratio relative to throughput \cite{b10}.",41620,68;90,Comments!E68,Legacy-63,"Is there a reason you didn't do your tests with larger parallelism values? Address this shortcoming here. [highlighted: ""Such logic architecture can place pressure on FPGA interconnect as the design scales, increasing wire length and potentially reducing timing margin. Possible ways to address this problem include floorplanning related logic into pblocks, retiming, and reevaluating the parallelism ratio relative to throughput \cite{b10}.""]",Regenerate the sweep for the corrected design before reporting it.,Results,NOT_RUN
+65,6a341638537013d3d71a3ec2,0,jason.blocklove,"18 June, 9:00 am",Could you not have added pragmas or compiler directives to prevent this? you need to address why your work didn't do things that you've already identified as issues,Future revisions can further constrain adders and accumulators to fabric implementations using HLS binding directives and compare those resource results against the current implementation.,"\subsection{The ``Stubborn Compiler'' Threat (HLS DSP Inference)}
+The MXFP4 datapath code is written in C++ and implemented through Vitis HLS. The intended architectural point is that the FP4 element multiply primitive is implemented using lookup tables rather than DSP48E2 blocks. The current post-implementation results show that the full design still uses some DSP resources because wider fixed-point operations outside the native E2M1 multiply primitive can be inferred by HLS. Therefore, the correct claim is not that the entire implementation is DSP-free, but that the FP4 element multiply itself is LUT-based. Future revisions can further constrain adders and accumulators to fabric implementations using HLS binding directives and compare those resource results against the current implementation.",42559,69;91,Comments!E69,Legacy-64,"Could you not have added pragmas or compiler directives to prevent this? you need to address why your work didn't do things that you've already identified as issues [highlighted: ""Future revisions can further constrain adders and accumulators to fabric implementations using HLS binding directives and compare those resource results against the current implementation.""]",Claim LUT mapping only for proven FP4 element multiply and report all DSP use.,Implementation,NOT_RUN
+66,6a34179f6572004fe08a9c24,0,jason.blocklove,"18 June, 9:06 am",Shorten this up. Give some ideas of where this can be continued without so explicitly laying out potential next steps. Should be at most 3-4 sentences.,"A number of enhancements are necessary before using this design to make strong full-model assertions. First, an accurate Qwen3-Next layer activation-capture mechanism is required. The current fidelity results are based on deterministic synthetic vectors that do not fully represent the layer activation distribution of a real model. Once accurate Qwen3-Next activation captures are available, the MXFP4 datapath can be evaluated against realistic tensor distributions.
+
+Second, a full perplexity evaluation is needed to relate numerical similarity to model quality. Output cosine similarity is useful for debugging and early quantization analysis, but it does not replace perplexity or downstream task evaluation. A future version of this work should therefore report perplexity on a standard benchmark dataset.
+
+Third, future work should further constrain non-FP4 arithmetic mapping. Although the FP4 element multiply is LUT-based, wider fixed-point operations can still be mapped onto DSP blocks by HLS. A follow-up implementation should test stricter HLS binding directives for adders and accumulators and compare timing, area, and power against the current implementation.
+
+Finally, the design should be evaluated on physical FPGA hardware. Board-level measurements would allow comparison between Vivado-estimated power and actual power consumption. They would also expose runtime overheads that are not captured by the current simulation flow.","\section{Future Work}
+A number of enhancements are necessary before using this design to make strong full-model assertions. First, an accurate Qwen3-Next layer activation-capture mechanism is required. The current fidelity results are based on deterministic synthetic vectors that do not fully represent the layer activation distribution of a real model. Once accurate Qwen3-Next activation captures are available, the MXFP4 datapath can be evaluated against realistic tensor distributions.",43714,70;92,Comments!E70,Legacy-65,"Shorten this up. Give some ideas of where this can be continued without so explicitly laying out potential next steps. Should be at most 3-4 sentences. [highlighted: ""A number of enhancements are necessary before using this design to make strong full-model assertions. First, an accurate Qwen3-Next layer activation-capture mechanism is required. The current fidelity results are based on deterministic synthetic vectors that do not fully represent the layer activation distribution of a real model. Once accurate Qwen3-Next activation captures are available, the MXFP4 datapath can be evaluated against realistic tensor distributions.
+
+Second, a full perplexity evaluation is needed to relate numerical similarity to model quality. Output cosine similarity is useful for debugging and early quantization analysis, but it does not replace perplexity or downstream task evaluation. A future version of this work should therefore report perplexity on a standard benchmark dataset.
+
+Third, future work should further constrain non-FP4 arithmetic mapping. Although the FP4 element multiply is LUT-based, wider fixed-point operations can still be mapped onto DSP blocks by HLS. A follow-up implementation should test stricter HLS binding directives for adders and accumulators and compare timing, area, and power against the current implementation.
+
+Finally, the design should be evaluated on physical FPGA hardware. Board-level measurements would allow comparison between Vivado-estimated power and actual power consumption. They would also expose runtime overheads that are not captured by the current simulation flow.""]",Keep a short list of genuinely unexecuted extensions.,Future Work,NOT_RUN
+67,6a33db0434ed05fee4df5807,0,jason.blocklove,"18 June, 4:48 am","In IEEE papers, citations are done based on the order they're used. So in the paper you currently use b2 before b1, which means the first citation to show up in your work is [2]. I'd recommend making a bibtex file with your references and then the citations will just magically sort themselves properly",,,-1,72;94,Comments!E72,Legacy-67,"In IEEE papers, citations are done based on the order they're used. So in the paper you currently use b2 before b1, which means the first citation to show up in your work is [2]. I'd recommend making a bibtex file with your references and then the citations will just magically sort themselves properly",Use a validated bibliography and first-use order.,References,NOT_RUN
+68,6a3417b734ed05fee4df7361,0,jason.blocklove,"18 June, 9:07 am",Consistency,,,-1,93,Comments!E93,Legacy-66,Consistency,"Standardize ""recurrent state"" and hyphenate only compound adjectives.",All,NOT_RUN

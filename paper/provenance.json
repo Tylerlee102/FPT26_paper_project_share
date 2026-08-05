@@ -1,770 +1,770 @@
 {
   "ablation_gate_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization_ablation.md",
     "source_line": 10,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ablation_k_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization_ablation.md",
     "source_line": 8,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ablation_q_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization_ablation.md",
     "source_line": 7,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ablation_state_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization_ablation.md",
     "source_line": 11,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ablation_v_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization_ablation.md",
     "source_line": 9,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "h100_baseline_energy_mj": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Cited from Gupta et al., arXiv:2603.05931v1, Tables IV-V.",
     "source": "external",
     "source_line": null,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "h100_baseline_latency_us": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Cited from Gupta et al., arXiv:2603.05931v1, Tables IV-V.",
     "source": "external",
     "source_line": null,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "h100_baseline_power_w": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Cited from Gupta et al., arXiv:2603.05931v1, Tables IV-V.",
     "source": "external",
     "source_line": null,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "headline_energy_efficiency_vs_h100": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Derived from h100_baseline_energy_mj and ours_mxfp4_b32_energy_mj.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 2,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "headline_energy_efficiency_vs_usc": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Derived from usc_baseline_energy_mj upper bound and ours_mxfp4_b32_energy_mj.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 2,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "headline_speedup_vs_h100": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Derived from h100_baseline_latency_us and ours_mxfp4_b32_latency_us.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 2,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "headline_speedup_vs_usc": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Derived from usc_baseline_latency_us and ours_mxfp4_b32_latency_us.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 2,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "hls_csim_freshness_status": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/csim/results.md",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "hls_csim_vectors_passed": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/csim/results.md",
     "source_line": 8,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "hls_csim_vectors_total": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/csim/results.md",
     "source_line": 8,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "offchip_mxfp4_b32_naive_three_pass_bytes_per_token": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/offchip_state_traffic.csv",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "offchip_mxfp4_b32_persistent_bytes_per_token": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/offchip_state_traffic.csv",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "offchip_mxfp4_b32_state_bytes": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/offchip_state_traffic.csv",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b16_pk16_pv8_bram_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 3,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b16_pk16_pv8_dsp_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 3,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b16_pk16_pv8_latency_us": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "RTL cosim latency for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 3,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b16_pk16_pv8_lut_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 3,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b16_pk16_pv8_power_w": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado implementation power for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 3,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b16_pk32_pv16_bram_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 4,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b16_pk32_pv16_dsp_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 4,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b16_pk32_pv16_latency_us": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "RTL cosim latency for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 4,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b16_pk32_pv16_lut_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 4,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b16_pk32_pv16_power_w": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado implementation power for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 4,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_bram_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/vivado/impl_util.rpt",
     "source_line": 113,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_csynth_fmax_mhz": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/csynth/util.md",
     "source_line": 4,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_csynth_latency_cycles": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/csynth/util.md",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_dsp_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/vivado/impl_util.rpt",
     "source_line": 128,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_energy_mj": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 2,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_impl_wns_ns": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/vivado/impl_timing.rpt",
     "source_line": 196,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_latency_cycles": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
-    "notes": "",
-    "source": "reports/cosim/latency.csv",
-    "source_line": 2,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "notes": "Current RTL cosim is unavailable or stale; using HLS csynth latency until cosim is rerun.",
+    "source": "reports/csynth/util.md",
+    "source_line": 6,
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_latency_source_kind": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
-    "notes": "",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "notes": "Current RTL cosim is unavailable or stale; using HLS csynth latency until cosim is rerun.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 2,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_latency_us": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
-    "notes": "",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "notes": "Current RTL cosim is unavailable or stale; using HLS csynth latency until cosim is rerun.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 2,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_lut_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/vivado/impl_util.rpt",
     "source_line": 40,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_power_w": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/vivado/impl_power.rpt",
     "source_line": 33,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_synth_wns_ns": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/vivado/synth_timing.rpt",
     "source_line": 196,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_b32_tokens_cosim": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/cosim/latency.csv",
     "source_line": 2,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_pk32_pv16_b32_bram_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 5,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_pk32_pv16_b32_dsp_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 5,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_pk32_pv16_b32_latency_us": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "RTL cosim latency for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 5,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_pk32_pv16_b32_lut_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 5,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_pk32_pv16_b32_power_w": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado implementation power for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 5,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_pk8_pv4_b32_bram_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_pk8_pv4_b32_dsp_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_pk8_pv4_b32_latency_us": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "RTL cosim latency for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_pk8_pv4_b32_lut_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado post-implementation area for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "ours_mxfp4_pk8_pv4_b32_power_w": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Vivado implementation power for this sweep point.",
     "source": "reports/benchmark/sweep.csv",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "qwen_capture_status": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Realistic Qwen accuracy/PPL is paper-ready only when this value is `available`.",
     "source": "reports/golden/qwen_capture_status.md",
     "source_line": 5,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "state_storage_mxfp4_b32_bytes": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/storage_overhead.csv",
     "source_line": 7,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "state_storage_mxfp4_b32_reduction_vs_bf16_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/storage_overhead.csv",
     "source_line": 7,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "state_storage_mxfp4_b32_reduction_vs_fp32_pct": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/storage_overhead.csv",
     "source_line": 7,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp4_b16_checkpoint_token": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp4_b16_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp4_b16_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 6,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp4_b32_checkpoint_token": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 7,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp4_b32_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 7,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp4_b32_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 7,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp8_b16_checkpoint_token": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 8,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp8_b16_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 8,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp8_b16_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 8,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp8_b32_checkpoint_token": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 9,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp8_b32_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 9,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_boundary_state_mxfp8_b32_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_boundary.csv",
     "source_line": 9,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_drift_mxfp4_final_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_drift.csv",
     "source_line": 1025,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_drift_mxfp4_final_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_drift.csv",
     "source_line": 1025,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_drift_mxfp8_final_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_drift.csv",
     "source_line": 1025,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_drift_mxfp8_final_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_drift.csv",
     "source_line": 1025,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_drift_tokens": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/benchmark/state_drift.csv",
     "source_line": 1025,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_int4_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization.md",
     "source_line": 14,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_mxfp4_b16_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization_b16.md",
     "source_line": 12,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_mxfp4_b16_output_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization_b16.md",
     "source_line": 12,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_mxfp4_b16_state_mxfp8_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization_b16.md",
     "source_line": 13,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_mxfp4_b16_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization_b16.md",
     "source_line": 12,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_mxfp4_b32_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization.md",
     "source_line": 12,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_mxfp4_b32_output_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization.md",
     "source_line": 12,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_mxfp4_b32_state_mxfp8_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization.md",
     "source_line": 13,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_mxfp4_b32_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "",
     "source": "reports/golden/quantization.md",
     "source_line": 12,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_combined_stress_state_mxfp4_b16_mean_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 102,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_combined_stress_state_mxfp4_b16_worst_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 102,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_combined_stress_state_mxfp4_b16_worst_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 102,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_combined_stress_state_mxfp8_b16_mean_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 104,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_combined_stress_state_mxfp8_b16_worst_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 104,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_combined_stress_state_mxfp8_b16_worst_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 104,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_outlier_state_mxfp4_b16_mean_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 42,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_outlier_state_mxfp4_b16_worst_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 42,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_outlier_state_mxfp4_b16_worst_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 42,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_outlier_state_mxfp8_b16_mean_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 44,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_outlier_state_mxfp8_b16_worst_output_cosine": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 44,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "synthetic_stress_outlier_state_mxfp8_b16_worst_state_rel_l2": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Aggregated across all matching rows for this distribution/state configuration in stress_accuracy.csv; see the CSV for per-seed inputs.",
     "source": "reports/benchmark/stress_accuracy.csv",
     "source_line": 44,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "usc_baseline_energy_mj": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Cited from Gupta et al., arXiv:2603.05931v1, Table V, Hiter=8 board-TDP upper bound.",
     "source": "external",
     "source_line": null,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "usc_baseline_latency_us": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Cited from Gupta et al., arXiv:2603.05931v1, Table IV, Hiter=8 @300 MHz.",
     "source": "external",
     "source_line": null,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   },
   "usc_baseline_power_w": {
     "extractor": "scripts/benchmark.py",
-    "git_sha": "53fb512503281ce837b1d6b7b8336a82933eec2c",
+    "git_sha": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
     "notes": "Cited from Gupta et al., arXiv:2603.05931v1, Table V board-level TDP upper bound.",
     "source": "external",
     "source_line": null,
-    "timestamp": "2026-06-18T02:15:16.379458+00:00"
+    "timestamp": "2026-08-04T11:39:35.583550+00:00"
   }
 }

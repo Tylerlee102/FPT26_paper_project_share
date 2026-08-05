@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 import re
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -37,7 +37,7 @@ def write_report(path: Path) -> None:
     lines = [
         "# Native E2M1 MAC Evidence",
         "",
-        f"Generated: {datetime.now(UTC).isoformat()}",
+        f"Generated: {datetime.now(timezone.utc).isoformat()}",
         f"Source: `{mac_source.relative_to(ROOT).as_posix()}`",
         f"Testbench: `{mac_testbench.relative_to(ROOT).as_posix()}`",
         "",

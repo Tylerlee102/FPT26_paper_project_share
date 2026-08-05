@@ -1,0 +1,163 @@
+{
+  "corrected_candidate": {
+    "board_energy": "NOT_RUN",
+    "candidate": "mxfp4_rs2_act_e2m1_e2m0_state_mxfp4rs2_log_r7_q1_15_int32_guard5",
+    "extended_8192_quality": "PASS",
+    "full_deterministic_recompute": "PASS",
+    "heldout_1024_quality": "PASS",
+    "hls_200mhz_timing": "PASS",
+    "hls_configured_timing_margin": "FAIL",
+    "hls_explicit_ii1_constraints": "FAIL",
+    "hls_lut_and_step_cost_vs_bf16": "FAIL",
+    "metrics": {
+      "extended_8192": {
+        "maximum_all_token_state_abs_error": 0.26763495802879333,
+        "maximum_all_token_state_relative_l2": 0.09905746554783806,
+        "minimum_all_token_output_cosine": 0.9943889824984768,
+        "run_count": 2,
+        "total_accumulator_saturations": 0,
+        "total_alignment_underflows": 1049355823,
+        "total_e2m0_residual_clips": 23296266,
+        "total_element_saturations": 0,
+        "total_folds": 2340,
+        "total_scale_clamps": 0
+      },
+      "heldout_max_all_token_state_relative_l2": 0.0986533704002908,
+      "heldout_min_all_token_output_cosine": 0.9944303940072069,
+      "hls_ratios_vs_bf16": {
+        "candidate_to_bf16_amortized_cycles_max": 9.453368643563563,
+        "candidate_to_bf16_bram_18k": 6.384615384615385,
+        "candidate_to_bf16_ff": 3.1753268350090824,
+        "candidate_to_bf16_lut": 5.1235765847454635,
+        "candidate_to_bf16_nonfold_step_cycles_max": 4.2487694428037015,
+        "candidate_to_bf16_uram_reported": 0.875
+      },
+      "logical_state_bytes": 537744,
+      "paired_initial_state_conditions": 6,
+      "rtl_64_token": {
+        "direct_generated_rtl_load": {
+          "command": "LOAD",
+          "completed_transactions": 1,
+          "cycles": 4797322,
+          "elapsed_seconds": 183.45,
+          "generation": 1,
+          "maximum_resident_kb": 35492,
+          "simulator": "Verilator 5.050 2026-07-01 rev v5.050",
+          "status": "PASS",
+          "status_code": 0
+        },
+        "hls_c_simulation": {
+          "outputs_counters_and_final_snapshot": "PASS",
+          "status": "PASS",
+          "tokens": 64
+        },
+        "official_hls_xsim": {
+          "completed_transactions": 0,
+          "failure": "host out of memory before transaction one",
+          "independent_attempts": 2,
+          "requested_transactions": 66,
+          "status": "FAIL"
+        },
+        "required_64_token_rtl_parity": "NOT_ESTABLISHED",
+        "rtl_simulation": {
+          "completed_recurrent_steps": 0,
+          "completed_transactions": 1,
+          "requested_transactions": 66,
+          "status": "PARTIAL"
+        }
+      },
+      "test_seed_blocks": 3
+    },
+    "physical_fit": "NOT_RUN",
+    "post_route_timing_and_drc": "NOT_RUN",
+    "rtl_64_token": "FAIL",
+    "selected_method_pareto": "FAIL"
+  },
+  "current_answer": "No for the current uniform-MXFP4 implementation. It reduces logical state storage, but native encoded and floating-Q/DQ diagnostics fail the frozen synthetic drift gate, and the fixed-geometry HLS implementation fails the LUT-and-STEP cost gate. Energy and physical fit remain unmeasured, so no energy or physical advantage is claimed.",
+  "current_answer_status": "FAIL",
+  "decisions": {
+    "bf16_synthetic_stability": "PASS",
+    "native_encoded_mxfp4_synthetic_stability": "FAIL",
+    "scale_policy_rescues_uniform_mxfp4": "FAIL",
+    "uniform_mxfp4_energy_advantage": "BLOCKED_EXTERNAL",
+    "uniform_mxfp4_hls_lut_and_step_cost_advantage": "FAIL",
+    "uniform_mxfp4_logical_state_reduction": "PASS",
+    "uniform_mxfp4_physical_fit": "NOT_RUN",
+    "uniform_mxfp4_synthetic_stability": "FAIL"
+  },
+  "hls_ratios": {
+    "mxfp4_to_bf16_bram_18k": 1.8461538461538463,
+    "mxfp4_to_bf16_estimated_clock_ns": 1.0,
+    "mxfp4_to_bf16_ff": 1.1247217745030318,
+    "mxfp4_to_bf16_lut": 1.6364888894122636,
+    "mxfp4_to_bf16_step_cycles_max": 1.4365789752676936,
+    "mxfp4_to_bf16_uram_reported": 0.25,
+    "mxfp8_to_bf16_lut": 1.684946831686666,
+    "mxfp8_to_bf16_step_cycles_max": 1.4879518984657791
+  },
+  "inputs": {
+    "reports/benchmark/corrected/e2m0_encoded/extended_development/extended_summary.json": "D876B11E3C43C008D34176196AE0B3BA1DA238260BE8922C42F06FD86D915051",
+    "reports/benchmark/corrected/e2m0_encoded/held_out/held_out_summary.json": "AE5E344B840DF8801178B402682CD0B1E003E0CB2F3894B8B7C3F8881ADD9920",
+    "reports/benchmark/corrected/hls_arithmetic_comparison.json": "F996D0968D824C981547B919729C90DA53EBCC27C0FD06D205D391584BEC3DB3",
+    "reports/benchmark/corrected/native_encoded_long_trace_checkpoints.csv": "CAD02382EDE3F744CB0BDE36382A4268D8C37DDD3359A196A43D56C38FB60A32",
+    "reports/benchmark/corrected/native_encoded_long_trace_manifest.json": "7595E7CAF2B6D2D85E50D6D26E7030B3CEE9CCE3FD1B73868183FFBDD5C3B24F",
+    "reports/benchmark/corrected/native_encoded_long_trace_verification.json": "D3399B314A7B6887A9E6ED61D86A42C3EBF137F0D2373A64459887A6DB521A7B",
+    "reports/benchmark/corrected/state_capacity_lower_bound.json": "BC74E5FCB62C81862C6FED1D90789561387D88E4AA3551663D7D73068F6C6044",
+    "reports/benchmark/corrected/synthetic_stability_verification.json": "ECE6BBC33FE35C38DAED8286B10EF07D8B626E7A229AF5776CB70D42195D1317",
+    "reports/cosim/corrected/e2m0_trace64/e2m0_trace64_cosim_summary.json": "538E7A615A3DCA00D2705D4C63D06B6CF6148F794C3E751F364B1AE4BCE5E20D",
+    "reports/csynth/corrected/e2m0_hls_summary.json": "F9FFC69166F7C7C5579A7F6B8549C25AC221A5E98FF012786E6F86505897C984"
+  },
+  "limitations": [
+    "the controlled uniform comparison uses one deterministic synthetic nominal trace",
+    "native encoded arithmetic is software-executed and cross-checked against the 64-token scalar/HLS trace",
+    "the BF16 hardware baseline has bounded C-sim but no 64-token RTL parity",
+    "the corrected candidate has 64-token HLS C parity and an exact generated-RTL LOAD, but no recurrent candidate STEP parity",
+    "the corrected candidate test set has three seed blocks crossed with two paired initial-state conditions",
+    "the local candidate registration was not externally timestamped and omitted part of the execution dependency closure",
+    "corrected-candidate test-set quality and HLS cost are reported separately from the controlled uniform replacement",
+    "uniform-MXFP4 HLS estimates are not post-route measurements",
+    "closed-loop model quality and board energy are not available for this evidence synthesis"
+  ],
+  "logical_state": {
+    "bf16_bytes_per_layer": 1048576,
+    "uniform_mxfp4_bytes_per_layer": 278528,
+    "uniform_mxfp4_reduction_fraction": 0.734375,
+    "uniform_mxfp4_reduction_percent": 73.4375
+  },
+  "native_encoded_token_8192": {
+    "cumulative_accumulator_saturations": 0,
+    "cumulative_alignment_underflows": 2685620693,
+    "cumulative_element_saturations": 0,
+    "cumulative_scale_clamps": 0,
+    "output_cosine_fp32": 0.4298338633178566,
+    "output_rel_l2": 2.5895962684705416,
+    "state_max_abs": 1.110176332294941,
+    "state_rel_l2": 2.580730497327795,
+    "token_index": 8192
+  },
+  "research_question": "Can native encoded MXFP4 replace BF16 in a fixed-geometry persistent-state GDN recurrence-core kernel while reducing FPGA logic/schedule cost and limiting empirical recurrent-state drift on long synthetic traces?",
+  "schema": 1,
+  "scope": "controlled evidence synthesis for the uniform native-MXFP4 replacement question",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 26343,
+      "changed_file_count": 1,
+      "sha256": "D1842200B1E57B45E31F32BA6B4DD46D21BCB423CB105EFFADB7FA80CC9F287A"
+    },
+    "files": {
+      "scripts/replacement_question_summary.py": {
+        "bytes": 25565,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "BED343451803CEE0C7617D1DB1E870B995938B81CF8DAE7E13CA2D21F4D9E701"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "summary_validation": "The summary requires PASS extraction manifests, validates exact status vocabulary, recomputes per-layer storage reduction, and hashes every input; this is evidence aggregation, not an independent arithmetic implementation.",
+  "synthetic_finding": "The BF16 operand/state diagnostic passes the frozen synthetic stability thresholds, while uniform MXFP4 and every tested block-scale policy fail. Uniform native MXFP4 therefore fails the replacement question on stability for this trace, independent of the still-NOT_RUN physical cost comparison.",
+  "timestamp": "2026-08-05T20:36:09.248740+00:00"
+}

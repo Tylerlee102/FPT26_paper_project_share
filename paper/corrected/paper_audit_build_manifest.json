@@ -1,0 +1,93 @@
+{
+  "artifact_kind": "internal_audit_candidate",
+  "asset_manifest_sha256": "527DB234B6CB1F4C7FF277C75DFA5D83C2ABD0373C4E3C55AEB9DEE166AEC6FF",
+  "asset_source_identity": {
+    "dirty_patch": {
+      "bytes": 195367,
+      "changed_file_count": 3,
+      "sha256": "B68931F1FCCE54C85807C356C9D02FCA3EB524FD83F89AAC0604F0707170591A"
+    },
+    "files": {
+      "docs/numerical_contract.md": {
+        "bytes": 24217,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "7899AC6E050844D63C74E95627200C3224E8A07416C926D798C7E23C51B6794A"
+      },
+      "paper/corrected/paper.tex": {
+        "bytes": 48876,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "8CAE95610F46961BCF5573DA267F1164745E36B345B4BCD94B047FBDCBBA0F42"
+      },
+      "scripts/corrected_paper_assets.py": {
+        "bytes": 117153,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "DE8FE99716D5A0DED376EF4CE19DB58A97A0A068629638AE35AFF99A010DD380"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "build_log": "paper/corrected/build/paper_build.log",
+  "build_log_sha256": "0BEB6AD5897683DD8B8192E8FCADAB9F22CB2E106AF780A3454D7F3700B148FE",
+  "build_source_identity": {
+    "dirty_patch": {
+      "bytes": 178427,
+      "changed_file_count": 3,
+      "sha256": "E2740E6227871E91B706686E156A65DEEA707B6A9F1EBAE9878F8C69EDD14F05"
+    },
+    "files": {
+      "paper/corrected/paper.tex": {
+        "bytes": 48876,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "8CAE95610F46961BCF5573DA267F1164745E36B345B4BCD94B047FBDCBBA0F42"
+      },
+      "scripts/build_corrected_paper.py": {
+        "bytes": 7470,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B32ABB0EDF20AF70850A6068B69A4A4E2CFB6EEB014F396C4E52D0327AC692E5"
+      },
+      "scripts/corrected_paper_assets.py": {
+        "bytes": 117153,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "DE8FE99716D5A0DED376EF4CE19DB58A97A0A068629638AE35AFF99A010DD380"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "build_status": "PASS",
+  "command": [
+    "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\.tools\\tectonic\\tectonic.exe",
+    "--color",
+    "never",
+    "-Z",
+    "search-path=C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review",
+    "--keep-logs",
+    "--outdir",
+    "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\paper\\corrected\\build",
+    "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\paper\\corrected\\paper.tex"
+  ],
+  "exit_code": 0,
+  "generated_at": "2026-08-05T20:47:28.688211+00:00",
+  "limitations": [
+    "this audit candidate is not the final submission PDF",
+    "successful compilation is not a page-by-page visual audit",
+    "exact-byte finalization remains blocked until every final gate passes"
+  ],
+  "output": "paper/corrected/paper_audit_candidate.pdf",
+  "output_sha256": "8A50E5459C37D2598678895FF9923F3143C3A5FA859C87FE36D04736885869D5",
+  "page_count": 9,
+  "schema": 1,
+  "status": "PASS",
+  "submission_eligible": false,
+  "tool_version": "Tectonic 0.17.0",
+  "upstream_gate_sha256": "8F8878405EC1919625FB8274B77ACB07F7DF7B76E6C351FC9C59850CE5C81D45",
+  "upstream_release_state": "READY FOR HUMAN SUBMISSION REVIEW",
+  "visual_audit_status": "NOT_RUN"
+}

@@ -1,0 +1,97 @@
+{
+  "command": "python -m scripts.verify_vectorized_encoded_oracle",
+  "comparisons": {
+    "command_counters": 512,
+    "cumulative_counters": 512,
+    "final_state_elements": 524288,
+    "final_state_scales": 16384,
+    "output_exponents": 262144,
+    "output_mantissas": 262144
+  },
+  "configuration": {
+    "block_size": 32,
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "orientation": "KxV",
+    "tokens": 64,
+    "value_dim": 128
+  },
+  "elapsed_seconds": 13.68346859999292,
+  "exit_code": 0,
+  "final_cumulative_counters": {
+    "accumulator_saturations": 0,
+    "alignment_underflows": 16054881,
+    "committed_state_generations": 64,
+    "element_saturations": 0,
+    "invalid_encodings": 0,
+    "rejected_commands": 0,
+    "scale_clamps": 0,
+    "state_scale_changes": 112565
+  },
+  "frozen_trace": {
+    "path": "data/vectors/corrected_gdn_command_trace.bin",
+    "sha256": "677A4C1673754AD7603EC05FBA4FFC7B5417B5763B293F69B5E798C1769659C0",
+    "verification": {
+      "bytes": 2671281,
+      "final_cumulative_counters": {
+        "accumulator_saturations": 0,
+        "alignment_underflows": 16054881,
+        "committed_state_generations": 64,
+        "element_saturations": 0,
+        "invalid_encodings": 0,
+        "rejected_commands": 0,
+        "scale_clamps": 0,
+        "state_scale_changes": 112565
+      },
+      "final_generation": 64,
+      "input_stream_sha256": "617F8F961DABA23CC7F161527F2AB60E3B09017BD2019EFA4A0C698222782BDA",
+      "manifest_sha256": "CE6B3EA04B16BD074B8BB9DC10738C31F0A028A16309CDC32AA1BF1E57EF5EC8",
+      "source_hashes_verified": 5,
+      "status": "PASS",
+      "summary_sha256": "8A5F5D8045A30583DED33165A7DE802D541A75619B54B654C9BAEE84E5B7A4F5",
+      "tokens": 64,
+      "trace_sha256": "677A4C1673754AD7603EC05FBA4FFC7B5417B5763B293F69B5E798C1769659C0",
+      "verified_at": "2026-08-02T04:40:44.081033+00:00"
+    }
+  },
+  "independent_verification": "The vectorized implementation is structurally separate from the scalar oracle and is compared against every frozen per-token output and counter plus the complete final encoded state.",
+  "runtime": {
+    "numpy": "2.3.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10"
+  },
+  "schema": 1,
+  "scope": "Exact 64-token full-dimension cross-check of the vectorized encoded oracle against the frozen scalar-oracle HLS trace.",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 48518,
+      "changed_file_count": 3,
+      "sha256": "3FEBD71E0487100BA7B55FC35B1CDD84946B4013B25FE12045875F0344F74EDD"
+    },
+    "files": {
+      "golden/gdn_mxfp4_encoded.py": {
+        "bytes": 22670,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402"
+      },
+      "golden/gdn_mxfp4_encoded_vectorized.py": {
+        "bytes": 13109,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D"
+      },
+      "scripts/verify_vectorized_encoded_oracle.py": {
+        "bytes": 10830,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "7AFF4DFEBD3DDFDAA5CD44CC832927373714F0DF2C3E4B32FFEC7454A0A381C6"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "status": "PASS",
+  "verified_at": "2026-08-02T04:40:57.765783+00:00"
+}

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="940" viewBox="0 0 720 940">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .section { font: 700 24px Arial, sans-serif; fill: #111827; }
+      .label { font: 700 25px Arial, sans-serif; fill: #111827; }
+      .tiny { font: 400 18px Arial, sans-serif; fill: #334155; }
+      .box { rx: 14; ry: 14; stroke-width: 4; }
+      .input { fill: #eaf3ff; stroke: #1d4e89; }
+      .compute { fill: #ffffff; stroke: #475569; }
+      .state { fill: #fff4d6; stroke: #a16207; }
+      .math { fill: #ecfdf3; stroke: #15803d; }
+      .result { fill: #f1f5f9; stroke: #334155; }
+      .rule { stroke: #cbd5e1; stroke-width: 3; }
+      .arrow { stroke: #475569; stroke-width: 5; fill: none; marker-end: url(#arrow); stroke-linecap: round; }
+    </style>
+    <marker id="arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="720" height="940"/>
+  <text class="section" x="360" y="32" text-anchor="middle">Token-level datapath</text>
+  <rect class="box input" x="80" y="54" width="560" height="66"/>
+  <text class="label" x="360" y="82" text-anchor="middle">Token inputs</text>
+  <text class="tiny" x="360" y="108" text-anchor="middle">q, k, v, beta, gate</text>
+  <path class="arrow" d="M 360 126 L 360 152"/>
+
+  <rect class="box input" x="80" y="158" width="560" height="66"/>
+  <text class="label" x="360" y="186" text-anchor="middle">MXFP4 pack</text>
+  <text class="tiny" x="360" y="212" text-anchor="middle">E2M1 elements + E8M0 block scales</text>
+  <path class="arrow" d="M 360 230 L 360 256"/>
+
+  <rect class="box compute" x="80" y="262" width="560" height="122"/>
+  <text class="label" x="360" y="291" text-anchor="middle">Stateful GDN compute</text>
+  <text class="tiny" x="360" y="323" text-anchor="middle">predict r = S k</text>
+  <text class="tiny" x="360" y="347" text-anchor="middle">update S with beta e k^T</text>
+  <text class="tiny" x="360" y="371" text-anchor="middle">gate output</text>
+  <path class="arrow" d="M 360 390 L 360 414"/>
+
+  <rect class="box state" x="132" y="420" width="456" height="58"/>
+  <text class="label" x="360" y="444" text-anchor="middle">On-chip state</text>
+  <text class="tiny" x="360" y="469" text-anchor="middle">MXFP4 state in BRAM/URAM</text>
+  <path class="arrow" d="M 226 419 L 226 394"/>
+  <path class="arrow" d="M 494 394 L 494 419"/>
+  <path class="arrow" d="M 360 484 L 360 510"/>
+
+  <rect class="box result" x="80" y="516" width="560" height="66"/>
+  <text class="label" x="360" y="544" text-anchor="middle">Packed output</text>
+  <text class="tiny" x="360" y="570" text-anchor="middle">FP16 boundary value</text>
+
+  <line class="rule" x1="58" y1="620" x2="662" y2="620"/>
+  <text class="section" x="360" y="658" text-anchor="middle">Native MXFP4 arithmetic path</text>
+  <rect class="box math" x="80" y="686" width="560" height="58"/>
+  <text class="label" x="360" y="709" text-anchor="middle">E2M1 LUT multiply</text>
+  <text class="tiny" x="360" y="733" text-anchor="middle">sign XOR, exponent add, mantissa multiply</text>
+  <path class="arrow" d="M 360 750 L 360 772"/>
+
+  <rect class="box math" x="80" y="778" width="560" height="58"/>
+  <text class="label" x="360" y="801" text-anchor="middle">Block-scale alignment</text>
+  <text class="tiny" x="360" y="825" text-anchor="middle">combine E8M0 scales, shift partials</text>
+  <path class="arrow" d="M 360 842 L 360 864"/>
+
+  <rect class="box math" x="80" y="870" width="560" height="58"/>
+  <text class="label" x="360" y="893" text-anchor="middle">Fixed-point accumulation</text>
+  <text class="tiny" x="360" y="917" text-anchor="middle">Q4.3 partials into INT24</text>
+</svg>

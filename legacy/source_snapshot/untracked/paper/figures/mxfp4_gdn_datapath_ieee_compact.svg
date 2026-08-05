@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="560" viewBox="0 0 720 560">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .section { font: 700 22px Arial, sans-serif; fill: #111827; }
+      .label { font: 700 22px Arial, sans-serif; fill: #111827; }
+      .tiny { font: 400 16px Arial, sans-serif; fill: #334155; }
+      .box { rx: 11; ry: 11; stroke-width: 3; }
+      .input { fill: #eaf3ff; stroke: #1d4e89; }
+      .compute { fill: #ffffff; stroke: #475569; }
+      .state { fill: #fff4d6; stroke: #a16207; }
+      .math { fill: #ecfdf3; stroke: #15803d; }
+      .result { fill: #f1f5f9; stroke: #334155; }
+      .rule { stroke: #cbd5e1; stroke-width: 2; }
+      .arrow { stroke: #475569; stroke-width: 4; fill: none; marker-end: url(#arrow); stroke-linecap: round; }
+    </style>
+    <marker id="arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="720" height="560"/>
+  <text class="section" x="198" y="32" text-anchor="middle">Token datapath</text>
+  <text class="section" x="536" y="32" text-anchor="middle">MXFP4 arithmetic</text>
+  <line class="rule" x1="374" y1="56" x2="374" y2="520"/>
+
+  <rect class="box input" x="42" y="58" width="312" height="58"/>
+  <text class="label" x="198" y="82" text-anchor="middle">Token inputs</text>
+  <text class="tiny" x="198" y="104" text-anchor="middle">q, k, v, beta, gate</text>
+  <path class="arrow" d="M 198 122 L 198 146"/>
+  <rect class="box input" x="42" y="152" width="312" height="58"/>
+  <text class="label" x="198" y="176" text-anchor="middle">MXFP4 pack</text>
+  <text class="tiny" x="198" y="198" text-anchor="middle">E2M1 + E8M0 blocks</text>
+  <path class="arrow" d="M 198 216 L 198 240"/>
+  <rect class="box compute" x="42" y="246" width="312" height="84"/>
+  <text class="label" x="198" y="270" text-anchor="middle">GDN compute</text>
+  <text class="tiny" x="198" y="294" text-anchor="middle">predict, update state</text>
+  <text class="tiny" x="198" y="316" text-anchor="middle">gate output</text>
+  <path class="arrow" d="M 296 336 L 296 452"/>
+  <rect class="box state" x="42" y="366" width="210" height="56"/>
+  <text class="label" x="147" y="389" text-anchor="middle">On-chip state</text>
+  <text class="tiny" x="147" y="411" text-anchor="middle">MXFP4 BRAM/URAM</text>
+  <rect class="box result" x="42" y="458" width="312" height="58"/>
+  <text class="label" x="198" y="482" text-anchor="middle">Packed output</text>
+  <text class="tiny" x="198" y="504" text-anchor="middle">FP16 boundary value</text>
+  <path class="arrow" d="M 112 365 L 112 334"/>
+  <path class="arrow" d="M 197 334 L 197 365"/>
+
+  <rect class="box math" x="394" y="92" width="284" height="64"/>
+  <text class="label" x="536" y="117" text-anchor="middle">E2M1 LUT</text>
+  <text class="tiny" x="536" y="141" text-anchor="middle">sign XOR, exp add, mantissa</text>
+  <path class="arrow" d="M 536 164 L 536 206"/>
+  <rect class="box math" x="394" y="214" width="284" height="64"/>
+  <text class="label" x="536" y="239" text-anchor="middle">Block scale</text>
+  <text class="tiny" x="536" y="263" text-anchor="middle">align E8M0 partials</text>
+  <path class="arrow" d="M 536 286 L 536 328"/>
+  <rect class="box math" x="394" y="336" width="284" height="64"/>
+  <text class="label" x="536" y="361" text-anchor="middle">INT24 accum.</text>
+  <text class="tiny" x="536" y="385" text-anchor="middle">Q4.3 fixed partials</text>
+  <path class="arrow" d="M 536 408 L 536 450"/>
+  <rect class="box result" x="394" y="458" width="284" height="58"/>
+  <text class="label" x="536" y="482" text-anchor="middle">FP16 output</text>
+  <text class="tiny" x="536" y="504" text-anchor="middle">FP16 boundary</text>
+</svg>

@@ -1,0 +1,504 @@
+{
+  "archived_logs": {
+    "reports/cosim/corrected/direct_rtl_smoke/raw/direct_rtl.prj": {
+      "bytes": 9770,
+      "sha256": "B092A7ED9154ADADACDFC52C2BDB48C376ED90F5A1E84B3BA0F854669724F24B"
+    },
+    "reports/cosim/corrected/direct_rtl_smoke/raw/xelab.log": {
+      "bytes": 16893,
+      "sha256": "36D029D1CDEE3392028E338E807EAD1AC5EC75ADBA4379AC9BF906A893ACF6C8"
+    },
+    "reports/cosim/corrected/direct_rtl_smoke/raw/xsim.jou": {
+      "bytes": 1167,
+      "sha256": "C441984FA070998671FFB0B24F984762DE8332E5092B49A6ECA712F896455CF5"
+    },
+    "reports/cosim/corrected/direct_rtl_smoke/raw/xsim.log": {
+      "bytes": 2313,
+      "sha256": "FACF3907ABD528E5212843FDA64EF95B06DCE60C12BE81014DCFFCF64B5E6FCD"
+    },
+    "reports/cosim/corrected/direct_rtl_smoke/raw/xvlog.log": {
+      "bytes": 170,
+      "sha256": "6236701A030FEB48A3215C601896925189A6789D27EF761896869A13D89FCB3D"
+    }
+  },
+  "checks": {
+    "readback_state_scales": "PASS",
+    "readback_updated_and_untouched_state": "PASS",
+    "reset_status_and_generation": "PASS",
+    "step_committed_generation_counter": "PASS",
+    "step_first_and_last_output": "PASS",
+    "step_status_and_generation": "PASS"
+  },
+  "command_results": [
+    {
+      "command": 0,
+      "cycles": 33386,
+      "generation": 0,
+      "latched": 0,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 5597299,
+      "generation": 1,
+      "latched": 2,
+      "status": 0
+    },
+    {
+      "command": 3,
+      "cycles": 2192044,
+      "generation": 1,
+      "latched": 3,
+      "status": 0
+    }
+  ],
+  "configuration": {
+    "block_size": 32,
+    "key_dim": 128,
+    "layer_id": 0,
+    "num_value_heads": 32,
+    "p_k": 16,
+    "p_v": 8,
+    "tokens": 1,
+    "value_dim": 128
+  },
+  "generated_at": "2026-08-02T02:29:02.247570+00:00",
+  "generated_rtl": {
+    "file_count": 86,
+    "files": {
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top.v": {
+        "bytes": 114409,
+        "sha256": "78D22C27A6B34E2797048CA464D262B6A4D88FF258E7C8110162890951EDF818"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_aligned_sum.v": {
+        "bytes": 71237,
+        "sha256": "373C1C9399F97779F6C0E2B9F7CBB030CFEE85203890338BD4786CD2C0423090"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_aligned_sum_Pipeline_align_and_sum.v": {
+        "bytes": 44836,
+        "sha256": "259A6C94CE5DCBCE92594B1F643F848538CA73ABDFB892933978B49B5B9D7227"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_aligned_sum_Pipeline_find_dominant.v": {
+        "bytes": 32254,
+        "sha256": "EF06C852CA6A79B8EB20E129E94847A84C3A1418D7EB1A532E6906CF02E6608C"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_control_r_s_axi.v": {
+        "bytes": 29682,
+        "sha256": "7774CC3934CCBBDD300FDB1064E734131CB1566DFAD82892F851DA81823D7BA5"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_control_s_axi.v": {
+        "bytes": 14740,
+        "sha256": "F44276C20CB2D6B2C418B157CF95A8FD53C39AE9A1948687D2F5B78B3E65BB57"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_flow_control_loop_pipe_sequential_init.v": {
+        "bytes": 2925,
+        "sha256": "DFE6EF76E6D44D00108F9F453D32D47304B06CFDD2E08C6879CDD316DE5829B9"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl.v": {
+        "bytes": 5055041,
+        "sha256": "37EA49FF86C5506AE23222987533A01C8BD19555ED60E66575182A56C2BF9899"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_Outline_output_lanes.v": {
+        "bytes": 641142,
+        "sha256": "F5F2B40B1FF21A408D29593586605ED224DEF696CD02F66CBEE55DF41E3A70E6"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_Outline_output_lanes_term_exponents_30_RAM_AUTO_1R1W.v": {
+        "bytes": 1004,
+        "sha256": "46823537187F58D70C338C3AD0A271C24D67593DD6924816CA87DBCBC6E74058"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_Outline_output_lanes_terms_30_RAM_AUTO_1R1W.v": {
+        "bytes": 995,
+        "sha256": "A1A4BACD431837C12427E1E32E5298BC7D1212A7F56E3A8133F5497959F3B2C6"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_Pipeline_build_output_terms.v": {
+        "bytes": 482553,
+        "sha256": "665DE5CD9E6AEE46271D84DBD93BBBCED028629B1046FD7FF4E4053FCFF955A0"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_Pipeline_clear_output_exponent_heads_clear_output_exponent_values.v": {
+        "bytes": 23124,
+        "sha256": "9E2D28EBF94C614DF342587BFF355E4F72ECBCA23F3F40FF34EFE94525131718"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_Pipeline_clear_output_mantissa_heads_clear_output_mantissa_values.v": {
+        "bytes": 11371,
+        "sha256": "77A81044E126290930B3D0CF3CCF9241F0311FB81799204026FBAD9CC8EDA796"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_Pipeline_readback_lanes.v": {
+        "bytes": 20920,
+        "sha256": "FECA69C853F7C2D77D82FF1B42A57686A0FFBCD18802BA8B36712BD05B7EB59F"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_Pipeline_reset_heads_reset_rows_reset_blocks.v": {
+        "bytes": 13890,
+        "sha256": "453C71359DA64AE64055AF7527193A0A4E40F945DA54C24E9C9172A22270A1FA"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_Pipeline_store_resident_tile_pack_resident_lanes.v": {
+        "bytes": 259387,
+        "sha256": "C882C4413AD61CB07C582B4F6CECF2E47FEA0991218D8F784AFBAA265E55B85E"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_Pipeline_unpack_resident_lanes.v": {
+        "bytes": 326333,
+        "sha256": "54816DA9213F202A7C83C029A524A638B6A2FA07161FDAF41A05361DF0E1643B"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_alpha_local_RAM_AUTO_1R1W.v": {
+        "bytes": 1075,
+        "sha256": "7EBA3C6C95494BB26CC39A76C447001EC3B49A608D031D557D272A09C215B652"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_gdn_top_impl_unsigned_char_unsigned_short_unsigned_char_unsignedbkb.v": {
+        "bytes": 1159,
+        "sha256": "6C9733C80FB0D5E900D835EC0708A9741A0618218214DC154391FFDB49899594"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_gdn_top_impl_unsigned_char_unsigned_short_unsigned_char_unsignedkbM.v": {
+        "bytes": 1158,
+        "sha256": "B02054C6C862E248DAA555DF8441EA61A1E28D365C37CF2435D623CA5173EE38"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_gdn_top_impl_unsigned_char_unsigned_short_unsigned_char_unsignedlbW.v": {
+        "bytes": 1157,
+        "sha256": "854BA3155E031665383CAB5444B38995816EDDE84A3E3293FA2FE01C4C794699"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_p_ZZN3gdn12gdn_top_implEhthhPA128_K7ap_uintILi4EEPA4_KS0_ILi8EESBew.v": {
+        "bytes": 1158,
+        "sha256": "2F9217FD0E9D5451E6A9287E552EF3CD35D9BDD606826ABAFC1BC640978918BD"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_p_ZZN3gdn12gdn_top_implEhthhPA128_K7ap_uintILi4EEPA4_KS0_ILi8EEScFz.v": {
+        "bytes": 1158,
+        "sha256": "280C991D86FCA607539B2EE5D4C463A33488D04EB722E12AD85BA546B42AAE89"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_p_ZZN3gdn12gdn_top_implEhthhPA128_K7ap_uintILi4EEPA4_KS0_ILi8EEScGz.v": {
+        "bytes": 1158,
+        "sha256": "5C1BD8A0AB5F08E82219AF328E41CC1F7667A82008367C4843FA2D478759AF3A"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_p_ZZN3gdn12gdn_top_implEhthhPA128_K7ap_uintILi4EEPA4_KS0_ILi8EESgNb_x.v": {
+        "bytes": 1163,
+        "sha256": "2FAEA1942045294047D61F9F6E04D9681C3E3619086168C50B189D4C181A0BB8"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_prediction_exponents_RAM_AUTO_1R1W.v": {
+        "bytes": 986,
+        "sha256": "EDF9CF93C6490E90FBF42FD1BAADDEEABC2D74EFD78D671B7FA58A24EAB4AB71"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_prediction_mantissas_RAM_AUTO_1R1W.v": {
+        "bytes": 986,
+        "sha256": "C99EC6D9FC1D95AD6C000FF13D5E90ABC1D0B9BD2BD69B6315D017F290043CAD"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_q_local_RAM_AUTO_1R1W.v": {
+        "bytes": 1069,
+        "sha256": "5BA44B6010427F0612203B0E97D22707E7202EAFA96AD7D0666CCE80BD402A98"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_q_scales_local_RAM_AUTO_1R1W.v": {
+        "bytes": 1080,
+        "sha256": "6F49E894CDE2B264AA029655DFF06B1302485CC34DFED7141E0ED10DAAA33BB9"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_resident_scales_RAM_T2P_BRAM_1R1W.v": {
+        "bytes": 1307,
+        "sha256": "3E94F8ADD6ED1051ED126A198AD4321989BB090F719E772CE0C54959F76E0362"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_resident_state_RAM_T2P_URAM_1R1W.v": {
+        "bytes": 1120,
+        "sha256": "D140F6114595E364C70A8AB742B8357A2280603357112B3F3F5D163A6FD553A3"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_v_local_RAM_AUTO_1R1W.v": {
+        "bytes": 1069,
+        "sha256": "F8A1624BA65BFB875A1C92D9A9BD825954A55D1D30A93CF84E4E818D9DF49756"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gdn_top_impl_v_scales_local_RAM_AUTO_1R1W.v": {
+        "bytes": 1081,
+        "sha256": "33A562204328D3041E2E06C399309EE82CF214001F20DE0B8EF10466044E6E27"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gmem0_m_axi.v": {
+        "bytes": 92641,
+        "sha256": "954610E450430407151E4595D1224D09BA27C3543D24861444F78A5229762B51"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gmem1_m_axi.v": {
+        "bytes": 92641,
+        "sha256": "2822B36A9FD496397C9E69C6FA00BBA5B368E71CD972D5DBC74F6A5F159B2700"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gmem2_m_axi.v": {
+        "bytes": 92641,
+        "sha256": "778DE06162D495296CC465A1CFEF8CBC3A47D3D562CF15CC4770D72289C253A4"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gmem3_m_axi.v": {
+        "bytes": 92641,
+        "sha256": "1CD46A75ACE9FF6407EA30CD522817FAEB0937CB94000114724F4FAEDD91B4F9"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gmem4_m_axi.v": {
+        "bytes": 92641,
+        "sha256": "47EA1C0422D4B590BB928C3591CFD4690FA14E710749155042BAAA6883E58ACD"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gmem5_m_axi.v": {
+        "bytes": 119585,
+        "sha256": "CFA6B612131480C6D9ED2F5F47E34848DCBD6B7C5104FAB36643048B56705BE4"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gmem6_m_axi.v": {
+        "bytes": 119585,
+        "sha256": "FA198BA3FBEE0ECBCC9962B0A06DBBAB47DF46F69479EC25D09F3AE39E64F78C"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_gmem7_m_axi.v": {
+        "bytes": 119585,
+        "sha256": "E04BB82B31F423B526EE7BEE663703C6B7B6C1652912D286B7AB216B7DBC9DAA"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_mul_32s_16ns_48_2_1.v": {
+        "bytes": 914,
+        "sha256": "38980B78C81D568EBE2A731EFBA509BB360488567AC43E21062757230E590FC0"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_mul_5s_16ns_21_1_1.v": {
+        "bytes": 691,
+        "sha256": "19198F19DA581971BEC81E3FCE74BE10577EDB8CAA3DCB7ACE23EBB25DDECE6D"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_partselect_4ns_128ns_7ns_4_1_1.v": {
+        "bytes": 820,
+        "sha256": "0BB53F4E6E5129B41E3E24C478D19D4C282367944B71EC2628B4B149B017CBC3"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_partselect_8ns_32ns_5ns_8_1_1.v": {
+        "bytes": 822,
+        "sha256": "D00BEA286C0D2EABE2A8865B7080307BA960CFDEDBAC5E6C320D30AA41F8CFEE"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_partset_128ns_128ns_4ns_7ns_128_1_1.v": {
+        "bytes": 940,
+        "sha256": "A8AACE7C689087F220FCF2BA96B76BD0E8D1881B62604A30C9D9575AB06BCC05"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_partset_32ns_32ns_8ns_5ns_32_1_1.v": {
+        "bytes": 940,
+        "sha256": "9D43EFA93B50C33E4F68B236A5F9A77BB37FAFB70E9EE5E27F0CEFC319586D7C"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase1_validate_token.v": {
+        "bytes": 95269,
+        "sha256": "0B9A14AC079F1245C241B3A22B4EAE6C4527F6056AE8BA2C6A973B32B85EAFF5"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase2_decay_predict_tile.v": {
+        "bytes": 2158724,
+        "sha256": "935BEE7B81C8AA6AEE89F2EE2610E893008BEF74DDBC694A800546D207D45093"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase2_decay_predict_tile_Pipeline_build_prediction_terms.v": {
+        "bytes": 481434,
+        "sha256": "D4D6DFC2A1CE7DA1C101B8B52612C03269689801BEFDC13008495FE96550BAAE"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase2_decay_predict_tile_Pipeline_decode_and_decay_rows_decode_and_decay_lanes.v": {
+        "bytes": 924697,
+        "sha256": "F5161AA0B7755D8E842A27C86DB06388AB3E906644821E8B141C6EA6B5CD3FC5"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase2_decay_predict_tile_term_exponents_RAM_AUTO_1R1W.v": {
+        "bytes": 993,
+        "sha256": "02165D5088C97BDB35E2A5E786DC917C3BC33E680FB4751B3E7BF8F8AECDEEA9"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase2_decay_predict_tile_terms_RAM_AUTO_1R1W.v": {
+        "bytes": 984,
+        "sha256": "F9009FD81FE56E4B0F0CB2041162B8DCC3B91E36EE5890EB4E58B8AC1D8E16E5"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase3_delta_tile.v": {
+        "bytes": 48810,
+        "sha256": "0FC74414D6BA5C979DE3502769C883B995DBB59E84872B25D8D8791FB7BE3B82"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase3_delta_tile_Pipeline_delta_lanes.v": {
+        "bytes": 97423,
+        "sha256": "3698D6BE1DAF04AD884661423D8A2E54E85DEED176FDB388A6FD953DAE76F8D0"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase4_update_state_tile.v": {
+        "bytes": 2395953,
+        "sha256": "BD7C8668B9A6C23AB637915D36F87F5E38F4632B8EA9C6DBD1678C0ED36A78DC"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase4_update_state_tile_Pipeline_requantize_lanes.v": {
+        "bytes": 387643,
+        "sha256": "A4EF141462B8B2F2F39B14A10DE76A5EB4D1B537E7E9DA8C229DA3BE403AC3A5"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase4_update_state_tile_Pipeline_update_lanes.v": {
+        "bytes": 1192671,
+        "sha256": "8E7291C34C6DC00D081B5EAB802D1C9A2AC329774C2ACD3AC737B5769BA8DE99"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase4_update_state_tile_row_exponents_RAM_AUTO_1R1W.v": {
+        "bytes": 1201,
+        "sha256": "BB96D3CAAD04EBD27EBDE406979229EB7C3F9E4F2D507622433AD8736C505742"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_phase4_update_state_tile_row_mantissas_RAM_AUTO_1R1W.v": {
+        "bytes": 1201,
+        "sha256": "3FCB1E1F38ADD8AB856684792F6CBA5BD845124112C514357738271116701F74"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_11_4_32_1_1.v": {
+        "bytes": 1545,
+        "sha256": "31471C7F67D2058572C1386C2CB84E339D81693397D90A8F65A0089771641A5B"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_17_3_16_1_1.v": {
+        "bytes": 1971,
+        "sha256": "0F7DBC6E05D5D80F249B2DC53D08E65642430D555C9D04849E349F94F52150CE"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_17_3_32_1_1.v": {
+        "bytes": 1971,
+        "sha256": "469B8373288D73CA8BE81FEC695253E2EBB091E66E943A0744C03CECF0AFCD8F"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_17_3_4_1_1.v": {
+        "bytes": 1970,
+        "sha256": "F1269AB1C9E5BE15A88CAB37687A5C2E1B7FC21A8D3DDA6E40D666100DB7FA53"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_17_3_6_1_1.v": {
+        "bytes": 1970,
+        "sha256": "96E6B260E92A529F3575B5832E182423E42116FC4DEEDE39CE54FE5FC8520CE3"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_17_3_8_1_1.v": {
+        "bytes": 1970,
+        "sha256": "C90A6E1F28EDC2F19DA6E706E7F3B6DFBA739604D4DD7BE3E5F337F8A00C63B4"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_33_4_16_1_1.v": {
+        "bytes": 3149,
+        "sha256": "96364B7EBA2F78F37F45A4F9AF68678BA17F44060D0675ABC8C10DAD6F2B8C1E"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_33_4_32_1_1.v": {
+        "bytes": 3149,
+        "sha256": "A3DB3D97B539EAEE6F7C6FFFF086FFE5CAAC26EC37AAF28306F1D4AC38E92605"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_33_4_36_1_1.v": {
+        "bytes": 3149,
+        "sha256": "3AAEEBC143BCCF2C97385C0506F75A00726F0F40D20B88E2F349F34618E9DCD7"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_33_4_4_1_1.v": {
+        "bytes": 3148,
+        "sha256": "CAD312F25C76D411B8A478A95037639E666AA88563A83FAB197E3FD9D9F83134"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_33_4_6_1_1.v": {
+        "bytes": 3148,
+        "sha256": "8BF0A55D2462E4B452607CDE7E8F64C7727472FB519659D9371E40525BFCA7E2"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_33_4_8_1_1.v": {
+        "bytes": 3148,
+        "sha256": "20A701BC5EDAF3E8A2EAE820DA2A90FCF08C513158C4F3DDF3A956C46729F2BA"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_7_2_16_1_1.v": {
+        "bytes": 1260,
+        "sha256": "474A5E1FF7E965A4E137AF330CE985E7D2C2EE2B0B1E0EFBBF65768CE45F5FA6"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_7_2_17_1_1.v": {
+        "bytes": 1260,
+        "sha256": "91F2AD2715A0B4FF563CE5967E82DFD5796AA8997476868BDE782891F3272F1D"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_7_2_1_1_1.v": {
+        "bytes": 1259,
+        "sha256": "AFBA8C41EC7DF8FB9B2BC7DE6C3C85BB0F5878AF3BE69FB7C24769FF8E2BA94E"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_7_2_24_1_1.v": {
+        "bytes": 1260,
+        "sha256": "C85741D7E63A3294E5B0738CB3E0163011E9C735EFE09AF1D7E6D2A6CD04758F"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_7_2_32_1_1.v": {
+        "bytes": 1260,
+        "sha256": "33A7A0944F1227EE460E24D68ED4BC791FB0BE947A30A1500513D6EBA6F313B7"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_7_2_33_1_1.v": {
+        "bytes": 1260,
+        "sha256": "35B4961C9B82313AB73703CBAFA5DE94EE69E73134AAE35C4BAEABB8C600468C"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_7_2_36_1_1.v": {
+        "bytes": 1260,
+        "sha256": "E64DF5B421870D1FE805EE5C6706FB6EC3BE3675942C7BEC6B076CB0DFF8B417"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_7_2_37_1_1.v": {
+        "bytes": 1260,
+        "sha256": "6A3D68FC35303AB9B7AD5C513A0A1BC4439EF1D4EE62594BFA4D68A264D3E925"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_7_2_4_1_1.v": {
+        "bytes": 1259,
+        "sha256": "15F765697CE889054903E7F1B9B688E11733A30D182B262979673A5095A8D8C0"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_7_2_5_1_1.v": {
+        "bytes": 1259,
+        "sha256": "315C89A244F681AE3C7876DB0047AD284DCD3DD38ECD56F9C060BBC687BC1472"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_7_2_7_1_1.v": {
+        "bytes": 1259,
+        "sha256": "5942E861230279FE826F1446DBD76E8A4A5285CF1DC3B9A075CFD56AEB91499B"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_9_3_24_1_1.v": {
+        "bytes": 1402,
+        "sha256": "D71D6E397BA8540CBB2D34756D83911C573AF64672E5114E58CB4969825D0F66"
+      },
+      "gdn_mxfp4_hls/u55c_250mhz/syn/verilog/gdn_top_sparsemux_9_3_32_1_1.v": {
+        "bytes": 1402,
+        "sha256": "6B60681A6C78CABE45C7F644D5FD4968D7B0CF3EE6CA9D2A0F5ABDEC551384FC"
+      }
+    }
+  },
+  "initialization_data": {
+    "file_count": 14,
+    "files": {
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_alpha_local_RAM_AUTO_1R1W.dat": {
+        "bytes": 96,
+        "sha256": "D43B03DB7655B0AE369BC9A8D59B72630224AA3DADA968BCB0221CAF37E15FC7"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_gdn_top_impl_unsigned_char_unsigned_short_unsigned_char_unsignedbkb.dat": {
+        "bytes": 108,
+        "sha256": "FB46E9B4CE7B890B3D00F220821743E2856A40155BD2078DB0BBC5B03417CDCB"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_gdn_top_impl_unsigned_char_unsigned_short_unsigned_char_unsignedkbM.dat": {
+        "bytes": 108,
+        "sha256": "FB46E9B4CE7B890B3D00F220821743E2856A40155BD2078DB0BBC5B03417CDCB"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_gdn_top_impl_unsigned_char_unsigned_short_unsigned_char_unsignedlbW.dat": {
+        "bytes": 24,
+        "sha256": "147080B1BCEBA1CB05FEAB4F44E818D78C9AFB422FC5E6150D347234B3AD7B3F"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_p_ZZN3gdn12gdn_top_implEhthhPA128_K7ap_uintILi4EEPA4_KS0_ILi8EESBew.dat": {
+        "bytes": 96,
+        "sha256": "D43B03DB7655B0AE369BC9A8D59B72630224AA3DADA968BCB0221CAF37E15FC7"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_p_ZZN3gdn12gdn_top_implEhthhPA128_K7ap_uintILi4EEPA4_KS0_ILi8EEScFz.dat": {
+        "bytes": 96,
+        "sha256": "D43B03DB7655B0AE369BC9A8D59B72630224AA3DADA968BCB0221CAF37E15FC7"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_p_ZZN3gdn12gdn_top_implEhthhPA128_K7ap_uintILi4EEPA4_KS0_ILi8EEScGz.dat": {
+        "bytes": 96,
+        "sha256": "D43B03DB7655B0AE369BC9A8D59B72630224AA3DADA968BCB0221CAF37E15FC7"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_p_ZZN3gdn12gdn_top_implEhthhPA128_K7ap_uintILi4EEPA4_KS0_ILi8EESgNb_x.dat": {
+        "bytes": 96,
+        "sha256": "D43B03DB7655B0AE369BC9A8D59B72630224AA3DADA968BCB0221CAF37E15FC7"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_q_local_RAM_AUTO_1R1W.dat": {
+        "bytes": 6144,
+        "sha256": "FF3BF9F7DC7FCFF6353CB3C2203AC7E6C4701AB12C3826FF66A33FD9CAD51802"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_q_scales_local_RAM_AUTO_1R1W.dat": {
+        "bytes": 192,
+        "sha256": "B04501064652715342346791AF9527096DB2BFD12466920167A63C3855A95E68"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_resident_scales_RAM_T2P_BRAM_1R1W.dat": {
+        "bytes": 442368,
+        "sha256": "537F60700BB1A8AD4B26AD5B48A46A5EF42A9D2C1278FF84993A75C315DDDC43"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_resident_state_RAM_T2P_URAM_1R1W.dat": {
+        "bytes": 1769472,
+        "sha256": "F9774473D0F15B6FE0409F1B84BE32373E0EEFFF3C618E816438DA45EB9E1B9B"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_v_local_RAM_AUTO_1R1W.dat": {
+        "bytes": 12288,
+        "sha256": "02CB8DB67C1E95AFF7F09C5152EFA7F148A6C29AE4782D9EB18E4E3B3E354BBA"
+      },
+      "reports/cosim/corrected/direct_rtl_smoke/work/gdn_top_gdn_top_impl_v_scales_local_RAM_AUTO_1R1W.dat": {
+        "bytes": 384,
+        "sha256": "47543633E8A986D8FF8196E77287900359DD70C66C52ED530299526894AA4ECB"
+      }
+    }
+  },
+  "interpretation": "The direct harness establishes a bounded-memory one-token RTL smoke for the generated snapshot. It is not the required 64-token HLS C/RTL parity result and does not establish implementation timing, power, energy, or selected recurrent-correction hardware.",
+  "required_64_token_rtl_parity": "NOT_RUN",
+  "schema": 1,
+  "scope": "One current-source HLS-generated Verilog RESET/STEP/READBACK smoke using a custom direct AXI-Lite and AXI memory-model testbench.",
+  "simulator": {
+    "assertions": "ignored",
+    "coverage": "ignored",
+    "cpu_ms": 155374,
+    "current_memory_kb": 83580,
+    "multithreading": "off",
+    "peak_memory_kb": 83580,
+    "rtl_language": "verilog",
+    "tool": "AMD XSIM",
+    "version": "2025.2"
+  },
+  "source_files": {
+    "hls/rtl_tb/axi_memory_model.sv": {
+      "bytes": 5554,
+      "sha256": "64BEC39EDAD6BBF85F6DB6FBC2B2B285029F411998FCB248E0D01F59B6D73030"
+    },
+    "hls/rtl_tb/tb_gdn_top_direct.sv": {
+      "bytes": 12777,
+      "sha256": "196FE4BD7F289E9B8BD2BCBF6D4099E46D642A44BAEC71497F2BF18B3912509B"
+    }
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "working_tree_dirty": true
+}

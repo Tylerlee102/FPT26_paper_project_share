@@ -1,0 +1,95 @@
+G1 existing-runtime inventory
+Timestamp: 2026-08-01T20:45:00Z
+Repository revision: bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe
+
+Scope
+-----
+Read-only package/runtime inventory. Docker containers used --rm and
+--network none. No package installation, image pull, model download, or
+dataset download was performed.
+
+Windows runtimes checked previously
+-----------------------------------
+System Python, bundled artifact Python, and two discovered virtual
+environments contained none of torch, transformers, fla,
+flash_linear_attention, causal_conv1d, or triton. See
+docs/evidence/g0_g1_local_dependency_recheck.txt.
+
+WSL inventory
+-------------
+WSL version: 2.7.10.0
+Kernel version: 6.18.33.2-2
+
+Command: wsl.exe --list --quiet
+Exit code: 0
+Distributions:
+  docker-desktop
+  Ubuntu-24.04
+
+Command: Python importlib.util.find_spec probe through stdin in Ubuntu-24.04
+Exit code: 0
+User: root
+Python: /usr/bin/python3, version 3.12.3
+Modules:
+  torch: absent
+  transformers: absent
+  fla: absent
+  flash_linear_attention: absent
+  causal_conv1d: absent
+  triton: absent
+  numpy: absent
+  pytest: absent
+
+Command: find /home /opt -maxdepth 6 -name pyvenv.cfg -type f
+Exit code: 0
+Result: no virtual environments found.
+
+Command: find /home /opt -maxdepth 5 -type d -name site-packages
+Exit code: 0
+Result: no alternate site-packages directories found.
+
+Conda: absent
+Mamba: absent
+GPU visible to WSL: NVIDIA GeForce RTX 3070, 8192 MiB, driver 610.88
+
+Two preliminary WSL probes exited 1 because Windows-to-Bash quoting removed
+Python string quotes. They did not complete a package probe. The stdin-based
+probe above superseded them.
+
+Docker inventory
+----------------
+Docker Desktop was already installed and was started only to inspect existing
+local images. Docker client/server version: 29.6.1.
+
+Command pattern for each local image:
+  docker run -i --rm --network none --entrypoint python3 IMAGE -
+The stdin program queried importlib.util.find_spec for torch, transformers,
+fla, flash_linear_attention, causal_conv1d, triton, numpy, and pytest.
+
+Image                                      Python    torch transformers fla causal_conv1d triton
+pipesense-arm-ibex-v2:latest               3.12.3    no    no           no  no            no
+pipesense-arm-ibex:latest                  3.12.3    no    no           no  no            no
+pipesense-arm:latest                       3.12.3    no    no           no  no            no
+presettle-orfs-activity:iverilog            3.10.12   no    no           no  no            no
+openroad/orfs:latest                       3.10.12   no    no           no  no            no
+powermesh-ihp-magic:8.3.673                3.10.12   no    no           no  no            no
+powermesh-ihp-sim:ngspice46-openvaf20260623 absent    -     -            -   -             -
+pipesense-paper:latest                     3.12.3    no    no           no  no            no
+pipesense-arm-readiness:latest             3.12.3    no    no           no  no            no
+pipesense-arm-results:latest               3.12.3    no    no           no  no            no
+copper-docs:latest                         3.12.3    no    no           no  no            no
+python:3.12-slim                           3.12.13   no    no           no  no            no
+ubuntu:24.04                               absent    -     -            -   -             -
+alpine:3.20                                absent    -     -            -   -             -
+
+The eleven Python probes returned exit code 0. The three images without
+python3 returned exit code 127, as expected. No existing image contains the
+official parity stack.
+
+Conclusion
+----------
+No existing Windows, WSL, or Docker runtime can run pinned
+Transformers/flash-linear-attention recurrence and chunk parity. G1 official
+runtime parity remains NOT_RUN. Installing the pinned stack or obtaining an
+existing compatible runtime requires user approval under the project safety
+rules.

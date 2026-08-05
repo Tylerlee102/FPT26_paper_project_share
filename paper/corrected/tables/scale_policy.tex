@@ -1,0 +1,12 @@
+\begin{tabular}{lrrrr}
+\toprule
+Scale policy & Output cosine & State rel. $L_2$ & Clips & Scale changes \\
+\midrule
+Fixed & 0.847089 & 0.676620 & 67{,}980{,}414 & 0 \\
+Every token & 0.729275 & 1.103841 & 73 & 26{,}504{,}191 \\
+Periodic, $N=4$ & 0.773418 & 0.985345 & 16{,}091{,}670 & 8{,}345{,}806 \\
+Periodic, $N=8$ & 0.785090 & 0.951738 & 20{,}026{,}426 & 4{,}448{,}732 \\
+Periodic, $N=16$ & 0.785347 & 0.939046 & 22{,}646{,}994 & 2{,}354{,}947 \\
+Threshold triggered & 0.558410 & 1.724816 & 0 & 35{,}057 \\
+\bottomrule
+\end{tabular}

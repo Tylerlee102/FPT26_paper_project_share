@@ -1,0 +1,167 @@
+
+
+================================================================
+== Vitis HLS Report for 'p_anonymous_namespace_clear_log_Pipeline_clear_log_key_heads_clear_log_key_blocks'
+================================================================
+* Date:           Sun Aug  2 05:05:44 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_e2m0_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.902 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+-------------------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval |      Pipeline     |
+    |   min   |   max   |    min   |    max   | min | max |        Type       |
+    +---------+---------+----------+----------+-----+-----+-------------------+
+    |       66|       66|  0.264 us|  0.264 us|    0|    0|  loop pipeline stp|
+    +---------+---------+----------+----------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                                            |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |                  Loop Name                 |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- clear_log_key_heads_clear_log_key_blocks  |       64|       64|         2|          1|          1|    64|       yes|
+        +--------------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|      145|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|        -|        -|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|       72|    -|
+|Register             |        -|     -|       47|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|       47|      217|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +--------------------------+----------+----+---+----+------------+------------+
+    |       Variable Name      | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +--------------------------+----------+----+---+----+------------+------------+
+    |add_ln510_1_fu_141_p2     |         +|   0|  0|  14|           7|           1|
+    |add_ln510_fu_153_p2       |         +|   0|  0|  12|           5|           1|
+    |add_ln511_fu_205_p2       |         +|   0|  0|  20|          13|          13|
+    |add_ln513_fu_226_p2       |         +|   0|  0|  10|           3|           1|
+    |add_ln515_1_fu_220_p2     |         +|   0|  0|  22|          15|          15|
+    |add_ln515_fu_191_p2       |         +|   0|  0|  20|          13|          13|
+    |first_iter_0_fu_181_p2    |      icmp|   0|  0|  10|           3|           1|
+    |icmp_ln510_fu_135_p2      |      icmp|   0|  0|  15|           7|           8|
+    |icmp_ln513_fu_159_p2      |      icmp|   0|  0|  12|           3|           4|
+    |select_ln510_1_fu_173_p3  |    select|   0|  0|   5|           1|           5|
+    |select_ln510_fu_165_p3    |    select|   0|  0|   3|           1|           1|
+    |ap_enable_pp0             |       xor|   0|  0|   2|           1|           2|
+    +--------------------------+----------+----+---+----+------------+------------+
+    |Total                     |          |   0|  0| 145|          72|          65|
+    +--------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +--------------------------------------+----+-----------+-----+-----------+
+    |                 Name                 | LUT| Input Size| Bits| Total Bits|
+    +--------------------------------------+----+-----------+-----+-----------+
+    |ap_done_int                           |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1               |   9|          2|    1|          2|
+    |ap_sig_allocacmp_block_load           |   9|          2|    3|          6|
+    |ap_sig_allocacmp_head_13_load         |   9|          2|    5|         10|
+    |ap_sig_allocacmp_indvar_flatten_load  |   9|          2|    7|         14|
+    |block_fu_66                           |   9|          2|    3|          6|
+    |head_13_fu_70                         |   9|          2|    5|         10|
+    |indvar_flatten_fu_74                  |   9|          2|    7|         14|
+    +--------------------------------------+----+-----------+-----+-----------+
+    |Total                                 |  72|         16|   32|         64|
+    +--------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+----+----+-----+-----------+
+    |           Name          | FF | LUT| Bits| Const Bits|
+    +-------------------------+----+----+-----+-----------+
+    |add_ln515_1_reg_284      |  15|   0|   15|          0|
+    |ap_CS_fsm                |   1|   0|    1|          0|
+    |ap_done_reg              |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |   1|   0|    1|          0|
+    |block_fu_66              |   3|   0|    3|          0|
+    |first_iter_0_reg_275     |   1|   0|    1|          0|
+    |head_13_fu_70            |   5|   0|    5|          0|
+    |indvar_flatten_fu_74     |   7|   0|    7|          0|
+    |key_scales_addr_reg_279  |  13|   0|   13|          0|
+    +-------------------------+----+----+-----+-----------+
+    |Total                    |  47|   0|   47|          0|
+    +-------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------+-----+-----+------------+----------------------------------------------------------------------------------+--------------+
+|      RTL Ports      | Dir | Bits|  Protocol  |                                   Source Object                                  |    C Type    |
++---------------------+-----+-----+------------+----------------------------------------------------------------------------------+--------------+
+|ap_clk               |   in|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_key_heads_clear_log_key_blocks|  return value|
+|ap_rst               |   in|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_key_heads_clear_log_key_blocks|  return value|
+|ap_start             |   in|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_key_heads_clear_log_key_blocks|  return value|
+|ap_done              |  out|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_key_heads_clear_log_key_blocks|  return value|
+|ap_idle              |  out|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_key_heads_clear_log_key_blocks|  return value|
+|ap_ready             |  out|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_key_heads_clear_log_key_blocks|  return value|
+|keys_address0        |  out|   15|   ap_memory|                                                                              keys|         array|
+|keys_ce0             |  out|    1|   ap_memory|                                                                              keys|         array|
+|keys_we0             |  out|    1|   ap_memory|                                                                              keys|         array|
+|keys_d0              |  out|  128|   ap_memory|                                                                              keys|         array|
+|empty_205            |   in|   13|     ap_none|                                                                         empty_205|        scalar|
+|empty                |   in|   13|     ap_none|                                                                             empty|        scalar|
+|key_scales_address0  |  out|   13|   ap_memory|                                                                        key_scales|         array|
+|key_scales_ce0       |  out|    1|   ap_memory|                                                                        key_scales|         array|
+|key_scales_we0       |  out|    1|   ap_memory|                                                                        key_scales|         array|
+|key_scales_d0        |  out|   32|   ap_memory|                                                                        key_scales|         array|
++---------------------+-----+-----+------------+----------------------------------------------------------------------------------+--------------+
+

@@ -1,0 +1,553 @@
+{
+  "answer_at_hls_estimate_stage": "FAIL: the corrected drift-mitigation candidate meets the nominal 200 MHz reciprocal-path check but misses the configured target-minus-uncertainty timing margin and does not reduce LUT or estimated STEP cost versus BF16",
+  "board_energy_measurement": "NOT_RUN",
+  "candidate_name": "mxfp4_rs2_act_e2m1_e2m0_state_mxfp4rs2_log_r7_q1_15_int32_guard5",
+  "comparison_control": {
+    "classification": "mitigation candidate, not the uniform arithmetic-replacement comparison",
+    "same_fpga_target": "PASS",
+    "same_gdn_layer_dimensions": "PASS",
+    "same_logical_k_by_v_state_shape": "PASS",
+    "same_p_k_p_v_and_block_size": "PASS",
+    "same_physical_state_representation": "FAIL",
+    "same_target_clock": "PASS"
+  },
+  "comparison_rows": [
+    {
+      "amortized_cycles_max": 4225728.0,
+      "amortized_cycles_min": 4225728.0,
+      "bram_18k": 13,
+      "dsp": 0,
+      "estimated_clock_ns": 2.92,
+      "estimated_fmax_mhz": 342.4657534246575,
+      "ff": 39087,
+      "fold_overhead_cycles_max": 0,
+      "fold_overhead_cycles_min": 0,
+      "logical_state_bytes_per_layer": 1048576,
+      "lut": 84919,
+      "nonfold_step_cycles_max": 4225728,
+      "nonfold_step_cycles_min": 4225728,
+      "state_representation": "BF16",
+      "uram_reported": 128,
+      "variant": "BF16"
+    },
+    {
+      "amortized_cycles_max": 6070592.0,
+      "amortized_cycles_min": 4972864.0,
+      "bram_18k": 24,
+      "dsp": 3,
+      "estimated_clock_ns": 2.92,
+      "estimated_fmax_mhz": 342.4657534246575,
+      "ff": 43962,
+      "fold_overhead_cycles_max": 0,
+      "fold_overhead_cycles_min": 0,
+      "logical_state_bytes_per_layer": 278528,
+      "lut": 138969,
+      "nonfold_step_cycles_max": 6070592,
+      "nonfold_step_cycles_min": 4972864,
+      "state_representation": "E2M1/E8M0 B32",
+      "uram_reported": 32,
+      "variant": "uniform_mxfp4"
+    },
+    {
+      "amortized_cycles_max": 39947364.57142857,
+      "amortized_cycles_min": 24039926.85714286,
+      "bram_18k": 83,
+      "dsp": 78,
+      "estimated_clock_ns": 3.108,
+      "estimated_fmax_mhz": 321.75032175032175,
+      "ff": 124114,
+      "fold_overhead_cycles_max": 153952544,
+      "fold_overhead_cycles_min": 75342112,
+      "logical_state_bytes_per_layer": 537744,
+      "lut": 435089,
+      "nonfold_step_cycles_max": 17954144,
+      "nonfold_step_cycles_min": 13276768,
+      "state_representation": "E2M1 base + signed E2M0 residual + R7 update log",
+      "uram_reported": 112,
+      "variant": "mxfp4_rs2_act_e2m1_e2m0_state_mxfp4rs2_log_r7_q1_15_int32_guard5"
+    }
+  ],
+  "controlled_configuration": {
+    "accumulator_bits": 32,
+    "activation_block_size": 32,
+    "alignment_guard_bits": 5,
+    "capacity": 7,
+    "coefficient_format": "Q1.15",
+    "fold_policy": "fixed all-head atomic at capacity",
+    "key_dim": 128,
+    "logical_state_bytes": 537744,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "state_block_size": 32,
+    "target": "AMD Alveo U55C xcu55c-fsvh2892-2L-e",
+    "value_dim": 128
+  },
+  "csim": {
+    "arithmetic_267_case_status": "PASS",
+    "exact_random_state_trace_status": "PASS",
+    "exact_random_state_trace_tokens": 64,
+    "required_64_token_csim": "PASS",
+    "required_64_token_rtl_cosimulation": "NOT_RUN",
+    "resident_command_smoke_status": "PASS",
+    "trace_sha256": "DCE02DB61B60AF9121D2DD597927B58597DEBF2FEA022633AEFEBF32C7862B93"
+  },
+  "csynth": {
+    "command_completion": "PASS",
+    "configured_timing_budget_ns": 2.92,
+    "configured_timing_margin_status": "FAIL",
+    "configured_timing_shortfall_ns": 0.18800000000000017,
+    "failed_targeted_loops": [
+      {
+        "depth": 10,
+        "final_ii": 2,
+        "loop": "clear_e2m0_output_heads_clear_e2m0_output_values",
+        "target_ii": 1
+      },
+      {
+        "depth": 13,
+        "final_ii": 2,
+        "loop": "dot_log_vector_terms_dot_log_key_terms_dot_log_rows",
+        "target_ii": 1
+      },
+      {
+        "depth": 13,
+        "final_ii": 2,
+        "loop": "dot_base_vector_terms_dot_base_state_terms_dot_base_rows",
+        "target_ii": 1
+      }
+    ],
+    "fold_latency_cycles": {
+      "maximum": 153952544,
+      "minimum": 75342112
+    },
+    "fold_period_tokens": 7,
+    "metrics": {
+      "available_device_resources": {
+        "BRAM_18K": 4032,
+        "DSP": 9024,
+        "FF": 2607360,
+        "LUT": 1303680,
+        "URAM": 960
+      },
+      "clock_uncertainty_ns": 1.08,
+      "device_utilization_percent": {
+        "BRAM_18K": 2.058531746031746,
+        "DSP": 0.8643617021276596,
+        "FF": 4.760140525282278,
+        "LUT": 33.373910775650465,
+        "URAM": 11.666666666666666
+      },
+      "estimated_clock_ns": 3.108,
+      "estimated_fmax_mhz": 321.75032175032175,
+      "interval_cycles_max": 172418718,
+      "interval_cycles_min": 8229,
+      "latency_cycles_average": 934693,
+      "latency_cycles_max": 172418717,
+      "latency_cycles_min": 8228,
+      "resources": {
+        "BRAM_18K": 83,
+        "DSP": 78,
+        "FF": 124114,
+        "LUT": 435089,
+        "URAM": 112
+      },
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "tool_version": "2025.2"
+    },
+    "slr_utilization_percent_reported": {
+      "BRAM_18K": 6.0,
+      "DSP": 2.0,
+      "FF": 14.0,
+      "LUT": 100.0,
+      "URAM": 35.0
+    },
+    "steady_state_amortized_cycles_per_token": {
+      "maximum": 39947364.57142857,
+      "minimum": 24039926.85714286
+    },
+    "step_loop_latency_cycles": {
+      "maximum": 17954144,
+      "minimum": 13276768
+    },
+    "targeted_loop_ii_status": "FAIL",
+    "targeted_loops": [
+      {
+        "depth": 10,
+        "final_ii": 2,
+        "loop": "clear_e2m0_output_heads_clear_e2m0_output_values",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "validate_snapshot_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "validate_snapshot_key_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "validate_snapshot_update_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "load_snapshot_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "load_snapshot_key_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "load_snapshot_update_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 3,
+        "final_ii": 1,
+        "loop": "load_snapshot_lambda",
+        "target_ii": 1
+      },
+      {
+        "depth": 2,
+        "final_ii": 1,
+        "loop": "clear_log_key_heads_clear_log_key_blocks",
+        "target_ii": 1
+      },
+      {
+        "depth": 2,
+        "final_ii": 1,
+        "loop": "clear_log_update_heads_clear_log_update_blocks",
+        "target_ii": 1
+      },
+      {
+        "depth": 1,
+        "final_ii": 1,
+        "loop": "clear_log_lambda",
+        "target_ii": 1
+      },
+      {
+        "depth": 2,
+        "final_ii": 1,
+        "loop": "reset_e2m0_heads_reset_e2m0_rows_reset_e2m0_blocks",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "validate_qk_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "validate_value_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 13,
+        "final_ii": 2,
+        "loop": "dot_log_vector_terms_dot_log_key_terms_dot_log_rows",
+        "target_ii": 1
+      },
+      {
+        "depth": 2,
+        "final_ii": 1,
+        "loop": "find_dominant",
+        "target_ii": 1
+      },
+      {
+        "depth": 6,
+        "final_ii": 1,
+        "loop": "align_terms",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "store_key_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 1,
+        "final_ii": 1,
+        "loop": "VITIS_LOOP_1336_1",
+        "target_ii": 1
+      },
+      {
+        "depth": 13,
+        "final_ii": 2,
+        "loop": "dot_base_vector_terms_dot_base_state_terms_dot_base_rows",
+        "target_ii": 1
+      },
+      {
+        "depth": 1,
+        "final_ii": 1,
+        "loop": "find_dominant",
+        "target_ii": 1
+      },
+      {
+        "depth": 5,
+        "final_ii": 1,
+        "loop": "align_terms",
+        "target_ii": 1
+      },
+      {
+        "depth": 1,
+        "final_ii": 1,
+        "loop": "find_dominant",
+        "target_ii": 1
+      },
+      {
+        "depth": 5,
+        "final_ii": 1,
+        "loop": "align_terms",
+        "target_ii": 1
+      },
+      {
+        "depth": 1,
+        "final_ii": 1,
+        "loop": "find_dominant",
+        "target_ii": 1
+      },
+      {
+        "depth": 5,
+        "final_ii": 1,
+        "loop": "align_terms",
+        "target_ii": 1
+      },
+      {
+        "depth": 23,
+        "final_ii": 1,
+        "loop": "quantize_update_second",
+        "target_ii": 1
+      },
+      {
+        "depth": 1,
+        "final_ii": 1,
+        "loop": "find_dominant",
+        "target_ii": 1
+      },
+      {
+        "depth": 5,
+        "final_ii": 1,
+        "loop": "align_terms",
+        "target_ii": 1
+      },
+      {
+        "depth": 1,
+        "final_ii": 1,
+        "loop": "find_dominant",
+        "target_ii": 1
+      },
+      {
+        "depth": 5,
+        "final_ii": 1,
+        "loop": "align_terms",
+        "target_ii": 1
+      },
+      {
+        "depth": 1,
+        "final_ii": 1,
+        "loop": "find_dominant",
+        "target_ii": 1
+      },
+      {
+        "depth": 5,
+        "final_ii": 1,
+        "loop": "align_terms",
+        "target_ii": 1
+      },
+      {
+        "depth": 19,
+        "final_ii": 1,
+        "loop": "compare_scale_sse",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "quantize_fold_residual",
+        "target_ii": 1
+      },
+      {
+        "depth": 8,
+        "final_ii": 1,
+        "loop": "read_snapshot_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 8,
+        "final_ii": 1,
+        "loop": "read_snapshot_key_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 8,
+        "final_ii": 1,
+        "loop": "read_snapshot_update_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 3,
+        "final_ii": 1,
+        "loop": "read_snapshot_lambda",
+        "target_ii": 1
+      }
+    ],
+    "vendor_loop_constraint_status": "FAIL"
+  },
+  "hls_lut_and_nonfold_step_cost_advantage_vs_bf16": "FAIL",
+  "limitations": [
+    "the exact resident-state trace covers 64 C-simulation tokens, not a 64-token RTL run",
+    "HLS estimates are not post-route resources, timing, or power measurements",
+    "the corrected candidate adds a residual and seven-entry log, so it is a mitigation rather than the controlled uniform-replacement comparison",
+    "reported HLS BRAM and URAM counts are not accepted as proof that all declared state bits physically fit",
+    "DSPs implement coefficient arithmetic; E2M1 element products remain integer LUT logic",
+    "board energy remains NOT_RUN"
+  ],
+  "phase4_decision_gate": {
+    "criteria": {
+      "all_explicit_ii1_constraints_met": "FAIL",
+      "bit_exact_csim_vectors": "PASS",
+      "configured_target_minus_uncertainty_timing_margin": "FAIL",
+      "device_lut_and_bram_below_80_percent_hls_estimate": "PASS",
+      "estimated_fmax_at_least_200_mhz": "PASS",
+      "remaining_work_no_more_than_three_person_days": "NOT_RUN",
+      "single_slr_lut_and_bram_below_80_percent_hls_estimate": "FAIL",
+      "vendor_loop_constraint_summary": "FAIL"
+    },
+    "status": "FAIL"
+  },
+  "physical_fit": "NOT_RUN",
+  "post_route_timing_and_drc": "NOT_RUN",
+  "ratios": {
+    "candidate_to_bf16_amortized_cycles_max": 9.453368643563563,
+    "candidate_to_bf16_bram_18k": 6.384615384615385,
+    "candidate_to_bf16_ff": 3.1753268350090824,
+    "candidate_to_bf16_lut": 5.1235765847454635,
+    "candidate_to_bf16_nonfold_step_cycles_max": 4.2487694428037015,
+    "candidate_to_bf16_uram_reported": 0.875
+  },
+  "raw_artifact_sha256": {
+    "data/vectors/e2m0_resident_trace64_manifest.json": "CEBA0700681B672B372998FAFB0E1DE8806E03C8B15BB039717FFBAC315BCF14",
+    "reports/benchmark/corrected/e2m0_encoded_preregistration.json": "1C325E244A26F78598D8160B76104D3A8EDC75561742458CABE63FA43ACEAF5A",
+    "reports/csynth/corrected/baseline_csynth_summary.json": "E41A7D78948384082C447C09A04679BC013457E8440F541E773126C3916A0CD3",
+    "reports/csynth/corrected/bf16_hls_summary.json": "010349D332F8843CF6E3B6511B486116BF5FF6033744CE672BF1552C558F2F95",
+    "reports/csynth/corrected/e2m0_r7_retime/e2m0_csynth_retime_20260802.log": "C493B697D5305D6902B47B6A7BC7C545F183BE476B8EBD255BA9BF76678954D1",
+    "reports/csynth/corrected/e2m0_r7_retime/report/gdn_e2m0_top_csynth.rpt": "A6BFC153BA59D06802C89236B1A75CA14611C9CF1EEAAB2259016D6B63BBDDD7",
+    "reports/csynth/corrected/e2m0_r7_retime/report/gdn_e2m0_top_csynth.xml": "0B21170794243607CDD3EBA880E65E8A05870ADBE90632EC8B40B44F3A435B3F",
+    "reports/csynth/corrected/e2m0_r7_retime/report/gdn_e2m0_top_impl_csynth.rpt": "AFEB6AA42C3870E98A8F5DD7817244B36A87CBC699F22611F6E868F7E012D29A",
+    "reports/csynth/corrected/e2m0_r7_retime/report/p_anonymous_namespace_fold_log_csynth.rpt": "58D8AA7A9983A7A3A8B55106573FBD1167DCE01C78A6FD79D878C3F174F60470",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_csynth.rpt": "8BDC9291800EB9EEC02E8DC7798A74F8F917997585006C6B146A49FAB04F4A63",
+    "reports/test_results/e2m0_arithmetic_csim_retime_20260802.log": "5562180A323A8EB5ACA54FF4494B97A3F2D97D0C2E9CA31843D2A9B9F38E91D0",
+    "reports/test_results/e2m0_resident_csim_retime_20260802.log": "CB3A669492C0F702175592EA0D2A556BBF827A2C7442F043EA92A5CEEAC2A65F",
+    "reports/test_results/e2m0_resident_trace64_csim_20260802.log": "FE6EC1008AB11CE078437673D7F2BA3ADDFEE3F04AA7B50835DB7C8AC3D68C88"
+  },
+  "schema": 1,
+  "scope": "source-locked HLS evidence for the corrected encoded MXFP4 recurrent-state candidate",
+  "source_freshness": {
+    "arithmetic_csim": "PASS",
+    "csynth": "PASS",
+    "resident_smoke_csim": "PASS",
+    "resident_trace_csim": "PASS"
+  },
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 148196,
+      "changed_file_count": 12,
+      "sha256": "286B3D1692F20F7CEB648EB9056A5836C2EDF95AFC88463F81366603A7D427CD"
+    },
+    "files": {
+      "hls/e2m0/include/gdn_e2m0_kernel.hpp": {
+        "bytes": 10237,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B9A662F2DCDFC9BDCD552CF3F90410258FA7FB72EB5A9606208A172B8072EC6A"
+      },
+      "hls/e2m0/src/e2m0_arithmetic.cpp": {
+        "bytes": 14775,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "A1D6361E843B8AC60B32B5AA7CCFD2482D2B8F724D2DD58A55F1C51F17011384"
+      },
+      "hls/e2m0/src/gdn_e2m0_top.cpp": {
+        "bytes": 58224,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "8408CD27675FD7759C543272A2F00404A7DD7F310D306F202F93A85D4EF6C429"
+      },
+      "hls/e2m0/tb/tb_e2m0_arithmetic.cpp": {
+        "bytes": 6661,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "D3DAFE7C611AAD5B0681A00A9B5079375A2BE40F788283A1BDB3391EF91F6DF1"
+      },
+      "hls/e2m0/tb/tb_gdn_e2m0_smoke.cpp": {
+        "bytes": 7390,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "2489168E7D1385FC9D24F75A546539569370A7BC8DB496BD5777E6B3F7AF7656"
+      },
+      "hls/e2m0/tb/tb_gdn_e2m0_trace.cpp": {
+        "bytes": 14740,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "C8DDB95104A0D95361ACBB9C01DD107E37A11CC9B0E13E6859F0B7B328526616"
+      },
+      "hls/e2m0/tcl/run_arithmetic_csim.tcl": {
+        "bytes": 587,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "4A69AC15E5BCCEE83CBFAF596F36D1658398FF4A4DA46FE949B93F15A57EA05B"
+      },
+      "hls/e2m0/tcl/run_csim.tcl": {
+        "bytes": 448,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "ED099402548A9ACC230A10194CD758F1CE3780D5F76AD4EA95B5CE3C747D703F"
+      },
+      "hls/e2m0/tcl/run_csynth.tcl": {
+        "bytes": 405,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "9A1685BAD39C73F47B7D3DE60E4C439F74DC181C51AB28D1E22B95606930D2A4"
+      },
+      "hls/e2m0/tcl/run_trace_csim.tcl": {
+        "bytes": 779,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "FCE897C396CC0C6E481F84C13C9619A98891DEBE49A2997638E994DB11952444"
+      },
+      "hls/include/gdn_params.hpp": {
+        "bytes": 3045,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82"
+      },
+      "scripts/e2m0_hls_report.py": {
+        "bytes": 23697,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "9432EE7DA90ADA7A06AD3CB055488C101178A13B548ED72A4EF738211C8A240A"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "timestamp": "2026-08-02T17:51:40.561013+00:00"
+}

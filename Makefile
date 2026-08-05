@@ -1,6 +1,6 @@
 PYTHON ?= python
 
-.PHONY: setup golden calibrate qwen-capture qwen-status vectors hls-csim hls-csynth decision-gate hls-cosim vivado-synth vivado-impl phase5 sweep-plan vivado-sweep cosim-sweep benchmark paper-tables paper-figures table-previews graph-previews ieee-assets paper-previews phase6 paper-pack ci clean
+.PHONY: setup golden calibrate qwen-capture qwen-status hardware-availability vectors hls-csim hls-csynth decision-gate hls-cosim hls-e2m0-control-cosim hls-e2m0-trace-cosim vivado-synth vivado-impl vivado-e2m0-synth vivado-e2m0-impl vivado-e2m0-postroute-sweep vivado-e2m0-report vivado-bf16-impl vivado-mxfp8-impl vivado-mxfp8-postroute-sweep vivado-mxfp8-report phase5 sweep-plan vivado-sweep cosim-sweep benchmark paper-tables paper-figures corrected-paper-assets corrected-paper-audit corrected-paper-visual-audit corrected-paper-finalize corrected-paper-pdf table-previews graph-previews ieee-assets paper-previews phase6 paper-pack ci clean
 
 setup:
 	$(PYTHON) -m pip install -e ".[dev]"
@@ -16,6 +16,9 @@ qwen-capture:
 
 qwen-status:
 	$(PYTHON) -m scripts.qwen_status
+
+hardware-availability:
+	$(PYTHON) -m scripts.hardware_availability
 
 vectors:
 	$(PYTHON) -m golden.vectors --kind synthetic --count 16 --output-dir data/vectors
@@ -35,12 +38,48 @@ hls-cosim:
 	$(PYTHON) -m scripts.hls_flow cosim
 	$(PYTHON) -m scripts.cosim_report
 
+hls-e2m0-control-cosim:
+	$(PYTHON) -m scripts.hls_flow e2m0-control-cosim
+	$(PYTHON) -m scripts.e2m0_control_cosim_report
+
+hls-e2m0-trace-cosim:
+	$(PYTHON) -m scripts.hls_flow e2m0-trace-cosim
+	$(PYTHON) -m scripts.e2m0_trace_cosim_report
+
 vivado-synth:
 	$(PYTHON) -m scripts.vivado_flow synth
 
 vivado-impl:
 	$(PYTHON) -m scripts.vivado_flow impl
 	$(PYTHON) -m scripts.vivado_report
+
+vivado-e2m0-synth:
+	$(PYTHON) -m scripts.vivado_flow e2m0-synth
+
+vivado-e2m0-impl:
+	$(PYTHON) -m scripts.vivado_flow e2m0-impl
+
+vivado-e2m0-postroute-sweep:
+	$(PYTHON) -m scripts.vivado_flow e2m0-postroute-sweep
+	$(PYTHON) -m scripts.e2m0_vivado_report
+
+vivado-e2m0-report:
+	$(PYTHON) -m scripts.e2m0_vivado_report
+
+vivado-bf16-impl:
+	$(PYTHON) -m scripts.vivado_flow bf16-impl
+
+vivado-mxfp8-impl:
+	$(PYTHON) -m scripts.vivado_flow mxfp8-impl
+	$(PYTHON) -m scripts.vivado_flow mxfp8-postroute-sweep
+	$(PYTHON) -m scripts.mxfp8_vivado_report
+
+vivado-mxfp8-postroute-sweep:
+	$(PYTHON) -m scripts.vivado_flow mxfp8-postroute-sweep
+	$(PYTHON) -m scripts.mxfp8_vivado_report
+
+vivado-mxfp8-report:
+	$(PYTHON) -m scripts.mxfp8_vivado_report
 
 phase5: golden calibrate vectors hls-csim hls-csynth hls-cosim vivado-synth vivado-impl
 
@@ -62,6 +101,22 @@ paper-tables:
 paper-figures:
 	$(PYTHON) -m scripts.paper_figures
 
+corrected-paper-assets:
+	$(PYTHON) -m scripts.corrected_datapath_figure
+	$(PYTHON) -m scripts.corrected_long_trace_panel
+	$(PYTHON) -m scripts.corrected_paper_assets
+
+corrected-paper-audit: corrected-paper-assets
+	$(PYTHON) -m scripts.build_corrected_paper
+
+corrected-paper-visual-audit:
+	$(PYTHON) -m scripts.record_paper_visual_audit
+
+corrected-paper-finalize:
+	$(PYTHON) -m scripts.finalize_corrected_paper
+
+corrected-paper-pdf: corrected-paper-finalize
+
 table-previews:
 	$(PYTHON) -m scripts.paper_table_previews
 
@@ -78,7 +133,9 @@ phase6: sweep-plan benchmark paper-tables paper-figures
 paper-pack:
 	$(PYTHON) -m scripts.paper_pack
 
-ci: phase5 phase6
+ci:
+	$(PYTHON) -m pytest
+	$(PYTHON) -m scripts.final_completion_gate
 
 clean:
-	$(PYTHON) -c "import shutil, pathlib; [shutil.rmtree(p, ignore_errors=True) for p in map(pathlib.Path, ['build', '.pytest_cache', 'reports/cosim', 'reports/csynth'])]"
+	$(PYTHON) -c "import shutil, pathlib; [shutil.rmtree(p, ignore_errors=True) for p in map(pathlib.Path, ['build', '.pytest_cache', 'reports/test_tmp', 'tmp/pdfs'])]"

@@ -1,0 +1,186 @@
+
+
+================================================================
+== Vitis HLS Report for 'aligned_sum_guarded_8_s'
+================================================================
+* Date:           Sun Aug  2 05:06:10 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_e2m0_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  3.106 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max   | min | max |   Type  |
+    +---------+---------+-----------+----------+-----+-----+---------+
+    |       13|       28|  52.000 ns|  0.112 us|   13|   28|       no|
+    +---------+---------+-----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        +---------------------------------------------------------+----------------------------------------------+---------+---------+-----------+-----------+-----+-----+-------------------+
+        |                                                         |                                              |  Latency (cycles) |   Latency (absolute)  |  Interval |      Pipeline     |
+        |                         Instance                        |                    Module                    |   min   |   max   |    min    |    max    | min | max |        Type       |
+        +---------------------------------------------------------+----------------------------------------------+---------+---------+-----------+-----------+-----+-----+-------------------+
+        |grp_aligned_sum_guarded_8_Pipeline_find_dominant_fu_224  |aligned_sum_guarded_8_Pipeline_find_dominant  |       10|       10|  40.000 ns|  40.000 ns|    0|    0|  loop pipeline stp|
+        |grp_aligned_sum_guarded_8_Pipeline_align_terms_fu_262    |aligned_sum_guarded_8_Pipeline_align_terms    |       13|       13|  52.000 ns|  52.000 ns|    0|    0|  loop pipeline stp|
+        +---------------------------------------------------------+----------------------------------------------+---------+---------+-----------+-----------+-----+-----+-------------------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|       23|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|      578|     2399|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|      145|    -|
+|Register             |        -|     -|      378|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|      956|     2567|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +---------------------------------------------------------+----------------------------------------------+---------+----+-----+------+-----+
+    |                         Instance                        |                    Module                    | BRAM_18K| DSP|  FF |  LUT | URAM|
+    +---------------------------------------------------------+----------------------------------------------+---------+----+-----+------+-----+
+    |grp_aligned_sum_guarded_8_Pipeline_align_terms_fu_262    |aligned_sum_guarded_8_Pipeline_align_terms    |        0|   0|  555|  2133|    0|
+    |grp_aligned_sum_guarded_8_Pipeline_find_dominant_fu_224  |aligned_sum_guarded_8_Pipeline_find_dominant  |        0|   0|   23|   266|    0|
+    +---------------------------------------------------------+----------------------------------------------+---------+----+-----+------+-----+
+    |Total                                                    |                                              |        0|   0|  578|  2399|    0|
+    +---------------------------------------------------------+----------------------------------------------+---------+----+-----+------+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +------------------+----------+----+---+----+------------+------------+
+    |   Variable Name  | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +------------------+----------+----+---+----+------------+------------+
+    |target_fu_294_p2  |         +|   0|  0|  23|          16|           4|
+    +------------------+----------+----+---+----+------------+------------+
+    |Total             |          |   0|  0|  23|          16|           4|
+    +------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-----------------------------------------+----+-----------+-----+-----------+
+    |                   Name                  | LUT| Input Size| Bits| Total Bits|
+    +-----------------------------------------+----+-----------+-----+-----------+
+    |agg_result_0_0_reg_202                   |   9|          2|   32|         64|
+    |agg_result_1_0_reg_213                   |   9|          2|   16|         32|
+    |ap_NS_fsm                                |  37|          7|    1|          7|
+    |ap_phi_mux_agg_result_0_0_phi_fu_206_p4  |   9|          2|   32|         64|
+    |ap_phi_mux_agg_result_1_0_phi_fu_217_p4  |   9|          2|   16|         32|
+    |ap_phi_mux_counters_1_2_phi_fu_187_p4    |   9|          2|   64|        128|
+    |ap_phi_mux_counters_3_3_phi_fu_196_p4    |   9|          2|   64|        128|
+    |ap_return_0                              |   9|          2|   32|         64|
+    |ap_return_1                              |   9|          2|   16|         32|
+    |ap_return_2                              |   9|          2|   64|        128|
+    |ap_return_3                              |   9|          2|   64|        128|
+    |counters_1_2_reg_184                     |   9|          2|   64|        128|
+    |counters_3_3_reg_193                     |   9|          2|   64|        128|
+    +-----------------------------------------+----+-----------+-----+-----------+
+    |Total                                    | 145|         31|  529|       1063|
+    +-----------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------------------------------------------+----+----+-----+-----------+
+    |                                 Name                                 | FF | LUT| Bits| Const Bits|
+    +----------------------------------------------------------------------+----+----+-----+-----------+
+    |agg_result_0_0_reg_202                                                |  32|   0|   32|          0|
+    |agg_result_1_0_reg_213                                                |  16|   0|   16|          0|
+    |ap_CS_fsm                                                             |   6|   0|    6|          0|
+    |ap_return_0_preg                                                      |  32|   0|   32|          0|
+    |ap_return_1_preg                                                      |  16|   0|   16|          0|
+    |ap_return_2_preg                                                      |  64|   0|   64|          0|
+    |ap_return_3_preg                                                      |  64|   0|   64|          0|
+    |counters_1_2_reg_184                                                  |  64|   0|   64|          0|
+    |counters_3_3_reg_193                                                  |  64|   0|   64|          0|
+    |found_loc_fu_72                                                       |   1|   0|    1|          0|
+    |found_loc_load_reg_474                                                |   1|   0|    1|          0|
+    |grp_aligned_sum_guarded_8_Pipeline_align_terms_fu_262_ap_start_reg    |   1|   0|    1|          0|
+    |grp_aligned_sum_guarded_8_Pipeline_find_dominant_fu_224_ap_start_reg  |   1|   0|    1|          0|
+    |target_reg_478                                                        |  16|   0|   16|          0|
+    +----------------------------------------------------------------------+----+----+-----+-----------+
+    |Total                                                                 | 378|   0|  378|          0|
+    +----------------------------------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-----------------+-----+-----+------------+------------------------+--------------+
+|    RTL Ports    | Dir | Bits|  Protocol  |      Source Object     |    C Type    |
++-----------------+-----+-----+------------+------------------------+--------------+
+|ap_clk           |   in|    1|  ap_ctrl_hs|  aligned_sum_guarded<8>|  return value|
+|ap_rst           |   in|    1|  ap_ctrl_hs|  aligned_sum_guarded<8>|  return value|
+|ap_start         |   in|    1|  ap_ctrl_hs|  aligned_sum_guarded<8>|  return value|
+|ap_done          |  out|    1|  ap_ctrl_hs|  aligned_sum_guarded<8>|  return value|
+|ap_idle          |  out|    1|  ap_ctrl_hs|  aligned_sum_guarded<8>|  return value|
+|ap_ready         |  out|    1|  ap_ctrl_hs|  aligned_sum_guarded<8>|  return value|
+|ap_return_0      |  out|   32|  ap_ctrl_hs|  aligned_sum_guarded<8>|  return value|
+|ap_return_1      |  out|   16|  ap_ctrl_hs|  aligned_sum_guarded<8>|  return value|
+|ap_return_2      |  out|   64|  ap_ctrl_hs|  aligned_sum_guarded<8>|  return value|
+|ap_return_3      |  out|   64|  ap_ctrl_hs|  aligned_sum_guarded<8>|  return value|
+|mantissas_0_val  |   in|   32|     ap_none|         mantissas_0_val|        scalar|
+|mantissas_1_val  |   in|   32|     ap_none|         mantissas_1_val|        scalar|
+|mantissas_2_val  |   in|   32|     ap_none|         mantissas_2_val|        scalar|
+|mantissas_3_val  |   in|   32|     ap_none|         mantissas_3_val|        scalar|
+|mantissas_4_val  |   in|   32|     ap_none|         mantissas_4_val|        scalar|
+|mantissas_5_val  |   in|   32|     ap_none|         mantissas_5_val|        scalar|
+|mantissas_6_val  |   in|   32|     ap_none|         mantissas_6_val|        scalar|
+|mantissas_7_val  |   in|   32|     ap_none|         mantissas_7_val|        scalar|
+|exponents_0_val  |   in|   16|     ap_none|         exponents_0_val|        scalar|
+|exponents_1_val  |   in|   16|     ap_none|         exponents_1_val|        scalar|
+|exponents_2_val  |   in|   16|     ap_none|         exponents_2_val|        scalar|
+|exponents_3_val  |   in|   16|     ap_none|         exponents_3_val|        scalar|
+|exponents_4_val  |   in|   16|     ap_none|         exponents_4_val|        scalar|
+|exponents_5_val  |   in|   16|     ap_none|         exponents_5_val|        scalar|
+|exponents_6_val  |   in|   16|     ap_none|         exponents_6_val|        scalar|
+|exponents_7_val  |   in|   16|     ap_none|         exponents_7_val|        scalar|
+|p_read2          |   in|   64|     ap_none|                 p_read2|        scalar|
+|p_read3          |   in|   64|     ap_none|                 p_read3|        scalar|
++-----------------+-----+-----+------------+------------------------+--------------+
+

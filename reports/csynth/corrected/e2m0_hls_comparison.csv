@@ -1,0 +1,4 @@
+variant,state_representation,logical_state_bytes_per_layer,estimated_clock_ns,estimated_fmax_mhz,nonfold_step_cycles_min,nonfold_step_cycles_max,fold_overhead_cycles_min,fold_overhead_cycles_max,amortized_cycles_min,amortized_cycles_max,lut,ff,bram_18k,uram_reported,dsp
+BF16,BF16,1048576,2.92,342.4657534246575,4225728,4225728,0,0,4225728.0,4225728.0,84919,39087,13,128,0
+uniform_mxfp4,E2M1/E8M0 B32,278528,2.92,342.4657534246575,4972864,6070592,0,0,4972864.0,6070592.0,138969,43962,24,32,3
+mxfp4_rs2_act_e2m1_e2m0_state_mxfp4rs2_log_r7_q1_15_int32_guard5,E2M1 base + signed E2M0 residual + R7 update log,537744,3.108,321.75032175032175,13276768,17954144,75342112,153952544,24039926.85714286,39947364.57142857,435089,124114,83,112,78

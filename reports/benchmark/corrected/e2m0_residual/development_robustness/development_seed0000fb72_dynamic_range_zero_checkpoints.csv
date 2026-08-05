@@ -1,0 +1,7 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_0000fb72_dynamic_range_zero,development,64370,dynamic_range,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_dynamic_range_zero,development,64370,dynamic_range,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,64,0.9989388988074667,0.04605536359606817,0.00010394945275038481,0.04710722713804539,0.003190036863088608,9,0,0,1,7,538256,PASS
+synthetic_0000fb72_dynamic_range_zero,development,64370,dynamic_range,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_dynamic_range_zero,development,64370,dynamic_range,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,256,0.9990272744594021,0.044111756116152596,0.00643862783908844,0.042669053897540644,0.16714495420455933,36,0,0,4,7,538256,PASS
+synthetic_0000fb72_dynamic_range_zero,development,64370,dynamic_range,fp32,0,1024,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_dynamic_range_zero,development,64370,dynamic_range,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,1024,0.9986946627833831,0.051089456064809094,0.001105628558434546,0.05094406543972533,0.021400317549705505,146,0,0,2,7,538256,PASS

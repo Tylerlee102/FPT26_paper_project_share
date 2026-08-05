@@ -1,0 +1,144 @@
+
+
+================================================================
+== Vitis HLS Report for 'p_anonymous_namespace_clear_log_Pipeline_clear_log_lambda'
+================================================================
+* Date:           Sun Aug  2 05:05:44 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_e2m0_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.351 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+-------------------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval |      Pipeline     |
+    |   min   |   max   |    min   |    max   | min | max |        Type       |
+    +---------+---------+----------+----------+-----+-----+-------------------+
+    |       34|       34|  0.136 us|  0.136 us|    0|    0|  loop pipeline stp|
+    +---------+---------+----------+----------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                    |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |      Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- clear_log_lambda  |       32|       32|         1|          1|          1|    32|       yes|
+        +--------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|       59|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|        -|        -|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|       27|    -|
+|Register             |        -|     -|        8|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|        8|       86|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name     | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------------+----------+----+---+----+------------+------------+
+    |add_ln529_fu_90_p2     |         +|   0|  0|  13|           6|           1|
+    |add_ln531_1_fu_112_p2  |         +|   0|  0|  16|          14|          14|
+    |add_ln531_fu_106_p2    |         +|   0|  0|  16|          14|          14|
+    |icmp_ln529_fu_84_p2    |      icmp|   0|  0|  14|           6|           7|
+    +-----------------------+----------+----+---+----+------------+------------+
+    |Total                  |          |   0|  0|  59|          40|          36|
+    +-----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +--------------------------+----+-----------+-----+-----------+
+    |           Name           | LUT| Input Size| Bits| Total Bits|
+    +--------------------------+----+-----------+-----+-----------+
+    |ap_done_int               |   9|          2|    1|          2|
+    |ap_sig_allocacmp_head_14  |   9|          2|    6|         12|
+    |head_fu_42                |   9|          2|    6|         12|
+    +--------------------------+----+-----------+-----+-----------+
+    |Total                     |  27|          6|   13|         26|
+    +--------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------+---+----+-----+-----------+
+    |     Name    | FF| LUT| Bits| Const Bits|
+    +-------------+---+----+-----+-----------+
+    |ap_CS_fsm    |  1|   0|    1|          0|
+    |ap_done_reg  |  1|   0|    1|          0|
+    |head_fu_42   |  6|   0|    6|          0|
+    +-------------+---+----+-----+-----------+
+    |Total        |  8|   0|    8|          0|
+    +-------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++--------------------------+-----+-----+------------+----------------------------------------------------------+--------------+
+|         RTL Ports        | Dir | Bits|  Protocol  |                       Source Object                      |    C Type    |
++--------------------------+-----+-----+------------+----------------------------------------------------------+--------------+
+|ap_clk                    |   in|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_lambda|  return value|
+|ap_rst                    |   in|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_lambda|  return value|
+|ap_start                  |   in|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_lambda|  return value|
+|ap_done                   |  out|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_lambda|  return value|
+|ap_idle                   |  out|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_lambda|  return value|
+|ap_ready                  |  out|    1|  ap_ctrl_hs|  (anonymous namespace)clear_log_Pipeline_clear_log_lambda|  return value|
+|lambda                    |   in|   14|     ap_none|                                                    lambda|        scalar|
+|zext_ln529                |   in|    9|     ap_none|                                                zext_ln529|        scalar|
+|resident_lambda_address0  |  out|   13|   ap_memory|                                           resident_lambda|         array|
+|resident_lambda_ce0       |  out|    1|   ap_memory|                                           resident_lambda|         array|
+|resident_lambda_we0       |  out|    1|   ap_memory|                                           resident_lambda|         array|
+|resident_lambda_d0        |  out|   16|   ap_memory|                                           resident_lambda|         array|
++--------------------------+-----+-----+------------+----------------------------------------------------------+--------------+
+

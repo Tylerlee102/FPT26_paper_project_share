@@ -1,0 +1,119 @@
+{
+  "arithmetic_contract": {
+    "accumulator_bits": 32,
+    "alignment_guard_bits": 5,
+    "capacity": 7,
+    "coefficient_format": "Q1.15",
+    "fold_policy": "fixed all-head atomic at capacity",
+    "state_primary": "E2M1/E8M0 B32",
+    "state_residual": "signed E2M0-style 3-bit/E8M0 B32 min-SSE adjacent scale",
+    "token_and_log": "two residual-stacked E2M1/E8M0 B32 terms"
+  },
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 115712464,
+    "split": "encoded_held_out",
+    "state_block_size": 32,
+    "tokens": 1024,
+    "trace_family": "high_retention",
+    "value_dim": 128
+  },
+  "evidence_scope": "encoded_integer_synthetic_stability",
+  "execution": {
+    "command": "C:\\Users\\tyboy\\AppData\\Local\\Programs\\Python\\Python312\\python.exe -m scripts.e2m0_encoded_stability --tokens 1024 --checkpoint 64 --checkpoint 256 --checkpoint 1024 --seed 0x06E5A1D0 --split encoded_held_out --trace-family high_retention --initial-state zero --output-dir reports/benchmark/corrected/e2m0_encoded/held_out",
+    "exit_code": 0
+  },
+  "gate": {
+    "accumulator_saturations_required": 0,
+    "checkpoint_output_cosine_minimum": 0.99,
+    "element_saturations_required": 0,
+    "final_state_relative_l2_maximum": 0.1,
+    "gate_pass": true,
+    "scale_clamps_required": 0
+  },
+  "independent_verification": "python -m scripts.verify_e2m0_encoded_stability",
+  "initial_state_mode": "zero",
+  "input_stream_sha256": "D80A37B38DD9BC2FDB65D2332D9EABA8CB1136F73B3C68145A09942C1FBEC752",
+  "limitations": [
+    "layer-level deterministic synthetic traces only",
+    "vectorized executor is software, not HLS C simulation or RTL",
+    "E2M0 residual clips are deliberate min-SSE scale choices and are reported separately",
+    "closed-loop Qwen quality, placement, routing, board parity, and energy are NOT_RUN"
+  ],
+  "logical_state_bytes": 537744,
+  "numpy": "2.3.5",
+  "outputs": {
+    "reports/benchmark/corrected/e2m0_encoded/held_out/high_retention_06e5a1d0_zero_1024.log": "C26AF21CF200751DC1F7A94F54DC0B06F00F6AE8E8AB06B282CF219769E32A26",
+    "reports/benchmark/corrected/e2m0_encoded/held_out/high_retention_06e5a1d0_zero_1024_checkpoints.csv": "E136BE76106C468E99AA54F1B6191BC3BFAD7F50EC276B427C86C5309BE925E6",
+    "reports/benchmark/corrected/e2m0_encoded/held_out/high_retention_06e5a1d0_zero_1024_tokens.csv": "8F7D3955DEFEF5B4294DA6D69D466A5FB86F95C1CA566E1B1AED8939B019655A"
+  },
+  "python": "3.12.10",
+  "schema": 1,
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 127450,
+      "changed_file_count": 6,
+      "sha256": "1897C14E872C6BBE4FBFE23AF16C9F8A0695EFB18EF75AFB45E685B83F5E5789"
+    },
+    "files": {
+      "golden/gdn_e2m0_encoded.py": {
+        "bytes": 40292,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "2E5FBC997FC1222BF72F102FDEC2B3CDAF6CE52A12DCDB1F11F795AA5AC5175D"
+      },
+      "golden/gdn_e2m0_encoded_vectorized.py": {
+        "bytes": 19455,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "1513DA3204765EC819D9AC9856E8DFFCB338E926213C7D4D67EB2EF080A92B14"
+      },
+      "golden/gdn_fp32.py": {
+        "bytes": 8406,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "7EBC9B7A0BA400A553E9C079B2E2E98596723DCC8B1D137B0477C798E34697C5"
+      },
+      "golden/gdn_mxfp4_encoded.py": {
+        "bytes": 22670,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402"
+      },
+      "golden/gdn_mxfp4_encoded_vectorized.py": {
+        "bytes": 13109,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D"
+      },
+      "scripts/e2m0_encoded_stability.py": {
+        "bytes": 16228,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "63DE0F936D61F7879B08CD587935F76790FE9633FF7244F17D60EF8CAD90E1FC"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "source_sha256": {
+    "golden/gdn_e2m0_encoded.py": "2E5FBC997FC1222BF72F102FDEC2B3CDAF6CE52A12DCDB1F11F795AA5AC5175D",
+    "golden/gdn_e2m0_encoded_vectorized.py": "1513DA3204765EC819D9AC9856E8DFFCB338E926213C7D4D67EB2EF080A92B14",
+    "golden/gdn_fp32.py": "7EBC9B7A0BA400A553E9C079B2E2E98596723DCC8B1D137B0477C798E34697C5",
+    "golden/gdn_mxfp4_encoded.py": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402",
+    "golden/gdn_mxfp4_encoded_vectorized.py": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D",
+    "scripts/e2m0_encoded_stability.py": "63DE0F936D61F7879B08CD587935F76790FE9633FF7244F17D60EF8CAD90E1FC"
+  },
+  "status": "PASS",
+  "timestamp": "2026-08-02T11:09:40.245276+00:00",
+  "variant": "mxfp4_rs2_act_e2m1_e2m0_state_mxfp4rs2_log_r7_q1_15_int32_guard5"
+}

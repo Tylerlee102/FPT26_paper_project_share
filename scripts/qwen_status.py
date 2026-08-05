@@ -71,6 +71,11 @@ def main() -> int:
                 f"- Layer index: {metadata['layer_index']}",
                 f"- SHA256: `{_sha256(path)}`",
                 f"- Size: {path.stat().st_size} bytes",
+                "",
+                "Interpretation:",
+                "",
+                "- A valid Qwen3-Next activation capture is present for calibration and range analysis.",
+                "- This status is not a GDN recurrence, perplexity, or model-quality result; those claims require a separate extraction containing the recurrent tensors.",
             ]
         )
     elif available:
@@ -115,7 +120,17 @@ def main() -> int:
             "",
         ]
     )
-    if missing_deps:
+    if valid and missing_deps:
+        lines.extend(
+            [
+                "Recapture note:",
+                "",
+                "- The local capture can be inspected without the full Qwen runtime dependencies.",
+                "- Install the `full` optional dependency set only when refreshing or recollecting the activation capture.",
+                "",
+            ]
+        )
+    elif missing_deps:
         lines.extend(
             [
                 "Resolution:",

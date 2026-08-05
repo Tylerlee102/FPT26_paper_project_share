@@ -1,0 +1,56 @@
+{
+  "activation_stack_depth": 2,
+  "adaptive_min_entries": 1,
+  "base_residual_block_fraction": 0.75,
+  "base_stack_depth": 2,
+  "capacities": [
+    7
+  ],
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 388821,
+    "split": "held_out",
+    "state_block_size": 32,
+    "tokens": 8192,
+    "trace_family": "nominal",
+    "value_dim": 128
+  },
+  "fold_decay_threshold": 0.85,
+  "fold_policy": "fixed",
+  "initial_state_mode": "zero",
+  "input_stream_sha256": "c70f5b9f8f32f77c81924fb8918f62087ae9ff9c1d61f1378297c79ea113919d",
+  "limitations": [
+    "synthetic inputs",
+    "floating Q/DQ candidate, not the encoded-integer oracle",
+    "logical storage bytes, not placed BRAM/URAM allocation",
+    "not closed-loop Qwen quality evidence"
+  ],
+  "log_precision": "mxfp8_e4m3",
+  "numpy": "2.3.5",
+  "outputs": {
+    "reports/benchmark/corrected/write_log_held_out_zero/held_out_seed0005eed5_nominal_zero_checkpoints.csv": "2557c3e28be35ed0072a3c4ccc3925b0f78285bbdea24d6409677582dc0fbdbd",
+    "reports/benchmark/corrected/write_log_held_out_zero/held_out_seed0005eed5_nominal_zero_tokens.csv": "d385e48d714a9ffa7b74012802fff1369c67301a30d513bc77f624b22d8d94e4"
+  },
+  "python": "3.12.10",
+  "schema": 1,
+  "source_hashes": {
+    "golden/gdn_fp32.py": "7ebc9b7a0ba400a553e9c079b2e2e98596723dcc8b1d137b0477c798e34697c5",
+    "golden/gdn_mxfp4.py": "22e9975b4a60a948a909fa0fc35630b1bc6ad68f7464b5c8e0c68f70bcaa44b8",
+    "golden/gdn_write_log.py": "da5376ae0fb6b338009a87b8096615e49333cf5fe8ad497abc5a1038414399fb",
+    "golden/mx_format.py": "b0f8bee046465f342e8049b33a91c3e424c3c2c6e69fb53e85d2d63656be269d",
+    "scripts/long_sequence_stability.py": "10c0ab85b56d8e634c0a34daef6480239092c1335a3e47a595701c19bed7a69b",
+    "scripts/write_log_stability.py": "1dd4e5195fd84175ad733cea38a72b7296e8873ad35c5eee6ca514d1d8061ed3"
+  },
+  "status": "diagnostic_only",
+  "timestamp": "2026-08-02T00:09:30.330741+00:00"
+}

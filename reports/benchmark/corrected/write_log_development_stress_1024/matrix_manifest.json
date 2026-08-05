@@ -1,0 +1,137 @@
+{
+  "checkpoints": [
+    64,
+    256,
+    1024
+  ],
+  "families": [
+    "dynamic_range",
+    "cancellation",
+    "high_retention",
+    "decay_sweep",
+    "adversarial"
+  ],
+  "initial_states": [
+    "random",
+    "zero"
+  ],
+  "runs": [
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "e9f84bde38e69e98b9aa642bfbb65c5a7f0783011dfb0c3ab4ca5fd305985e8a",
+      "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_dynamic_range_random_manifest.json",
+      "manifest_sha256": "a3b97f16571243013a4ab3fd8997d1a9def2c96252f5e90216a46aeba1194b3d",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_dynamic_range_random",
+      "verification": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_dynamic_range_random_verification.json",
+      "verification_sha256": "ce844f1cc0d7b4c984c43320d482be32b12fe5519fed5f4782c162286360cabc"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "fd07c3de1503b67b1957c50433106793c506be9d508221a4659d48322ae61cbc",
+      "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_dynamic_range_zero_manifest.json",
+      "manifest_sha256": "2e2f09147e6d0aa4e07d33d56b2faabf8f06ab1435d51a99416ea52758276d21",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_dynamic_range_zero",
+      "verification": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_dynamic_range_zero_verification.json",
+      "verification_sha256": "98147862c196724f4020006222bcd2d300f018443dde1d2bbce517f5cae75f25"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "0ca7a197a4a6bce4548243b64afc672788e376881e67aa493445c81c23d931e1",
+      "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_cancellation_random_manifest.json",
+      "manifest_sha256": "6cc93a861fd9244f0fef212face957e1cf26a0723abb68e5d657e7f865101072",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_cancellation_random",
+      "verification": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_cancellation_random_verification.json",
+      "verification_sha256": "812462236ac82d8d42f3709ec836ae39741d57126b9f51e7e56c1b5fe33ddd39"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "d8d655f0ffc7c640345b92b70a69542e1b8b4cad3765bfa87f2b70b9d92c4bc3",
+      "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_cancellation_zero_manifest.json",
+      "manifest_sha256": "df35471aebae4b2369fd60430c72a99ad5287989a2fd729fa6c96e0a9a3a409c",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_cancellation_zero",
+      "verification": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_cancellation_zero_verification.json",
+      "verification_sha256": "740ff4063283845c1177e6448335ef3fb23e5cd0f4592284bf5a69511e48b3d9"
+    },
+    {
+      "gate_pass": false,
+      "input_stream_sha256": "f36cdb646f79095ebc6b2eb93f2231b7f4f3fea58cd5c1e58f51314e7552a656",
+      "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_high_retention_random_manifest.json",
+      "manifest_sha256": "a896105d986ddae6c98e1197a251400a1657c57d4d99c66ced59350a31e2f3f1",
+      "status": "FAIL",
+      "stem": "development_seed0000fb72_high_retention_random",
+      "verification": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_high_retention_random_verification.json",
+      "verification_sha256": "4810712a77eb5dd8b53f1cd0b28306bd32de574d5c94395463dc8dbcc325d962"
+    },
+    {
+      "gate_pass": false,
+      "input_stream_sha256": "1084e695938e2e38ecfd16802a18bf8cb1d2b2431c70fd98d059fc2b70312d86",
+      "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_high_retention_zero_manifest.json",
+      "manifest_sha256": "18908c98c904c5f8bc1bf8f3c1e00f07c626fe71bc3486acc0c15ebb8a13046c",
+      "status": "FAIL",
+      "stem": "development_seed0000fb72_high_retention_zero",
+      "verification": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_high_retention_zero_verification.json",
+      "verification_sha256": "0182fbce5f88a3537fb375f3ca723cc0609b2ef4068e32de8db55d37c565b135"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "5703fd8ef6384e2509ba489ecb260df9c74a890b31daca7bba2e6cc58f9ee74a",
+      "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_decay_sweep_random_manifest.json",
+      "manifest_sha256": "33ba68b6226017bc45ec20077c2a9a5b4442b7f7d3effbdecb7d9ff5f0afbc76",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_decay_sweep_random",
+      "verification": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_decay_sweep_random_verification.json",
+      "verification_sha256": "4aec3a97110c5244e9e12fba471fb349fe0489c9f1af44f57cec342d353c4091"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "9b2ca7fe811a9e671b6dd498552febd107d201797c51db7df8d284ea54d5311f",
+      "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_decay_sweep_zero_manifest.json",
+      "manifest_sha256": "83f70215de502eb1830089e2170193719e9ad403d64707b632a158e20c3e6447",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_decay_sweep_zero",
+      "verification": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_decay_sweep_zero_verification.json",
+      "verification_sha256": "bdd6b7ca4e939e6972085d34b19e3ab9107282abd745b4026257fdefdb6ed8fe"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "2d5049d4ea126f51f7ed77722340189a6a14cecd43551f4bb07964f531f021f2",
+      "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_adversarial_random_manifest.json",
+      "manifest_sha256": "544d9da135c43f67db9062c7e3a72950d71f4d4510511d1885bd22ef85493fc2",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_adversarial_random",
+      "verification": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_adversarial_random_verification.json",
+      "verification_sha256": "96ae72c83a39b4527f5f04bb9fe6c1d2b0d67eec97a328d95820fee7870e1447"
+    },
+    {
+      "gate_pass": true,
+      "input_stream_sha256": "0cd633ba69b48cac9e0d3d6a153ba2329588387add8acbc5aad7c56e7750e94b",
+      "manifest": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_adversarial_zero_manifest.json",
+      "manifest_sha256": "3e13d9e7aad6831ff602d6513e98ec5ff2076dd9c3eaaed467db3598e0d5e715",
+      "status": "PASS",
+      "stem": "development_seed0000fb72_adversarial_zero",
+      "verification": "reports/benchmark/corrected/write_log_development_stress_1024/development_seed0000fb72_adversarial_zero_verification.json",
+      "verification_sha256": "dcf09e2f74b6665df2a387eea7575135d20011d674fba66a1966ab8556853935"
+    }
+  ],
+  "schema": 1,
+  "seeds": [
+    64370
+  ],
+  "selection": "reports/benchmark/corrected/write_log_selection.json",
+  "selection_sha256": "522d3e2feae50e71ec38c80cd083383b84eea2cd9667bda5a06eb0546b391739",
+  "source_hashes": {
+    "golden/gdn_write_log.py": "da5376ae0fb6b338009a87b8096615e49333cf5fe8ad497abc5a1038414399fb",
+    "scripts/run_selected_write_log_matrix.py": "bd208ab5d8ef9fa24cb11096a7d8107959104effce32a4cca1b0741029c2f313",
+    "scripts/write_log_stability.py": "1dd4e5195fd84175ad733cea38a72b7296e8873ad35c5eee6ca514d1d8061ed3"
+  },
+  "split": "development",
+  "status": "FAIL",
+  "summary_csv": "reports/benchmark/corrected/write_log_development_stress_1024/summary.csv",
+  "summary_sha256": "9d0875bf17919b40cc8901c8119010f3d59dea183ba85fd2416c94d060815a47",
+  "timestamp": "2026-08-02T00:15:08.159041+00:00",
+  "tokens": 1024
+}

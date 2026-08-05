@@ -1,0 +1,22 @@
+{
+  "bytes": 2671281,
+  "final_cumulative_counters": {
+    "accumulator_saturations": 0,
+    "alignment_underflows": 16054881,
+    "committed_state_generations": 64,
+    "element_saturations": 0,
+    "invalid_encodings": 0,
+    "rejected_commands": 0,
+    "scale_clamps": 0,
+    "state_scale_changes": 112565
+  },
+  "final_generation": 64,
+  "input_stream_sha256": "617F8F961DABA23CC7F161527F2AB60E3B09017BD2019EFA4A0C698222782BDA",
+  "manifest_sha256": "CE6B3EA04B16BD074B8BB9DC10738C31F0A028A16309CDC32AA1BF1E57EF5EC8",
+  "source_hashes_verified": 5,
+  "status": "PASS",
+  "summary_sha256": "8A5F5D8045A30583DED33165A7DE802D541A75619B54B654C9BAEE84E5B7A4F5",
+  "tokens": 64,
+  "trace_sha256": "677A4C1673754AD7603EC05FBA4FFC7B5417B5763B293F69B5E798C1769659C0",
+  "verified_at": "2026-08-01T22:19:51.195981+00:00"
+}

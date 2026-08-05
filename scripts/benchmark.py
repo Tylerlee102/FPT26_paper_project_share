@@ -5,11 +5,12 @@ import json
 import re
 import subprocess
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 from reports.report_parsers import parse_total_power, parse_utilization, parse_wns
+from .paper_pack import require_release_gate
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -228,7 +229,12 @@ def _write_block_size_accuracy_csv(rows: list[dict[str, float | int | str]]) -> 
 
 
 def main() -> int:
-    timestamp = datetime.now(UTC).isoformat()
+    try:
+        require_release_gate()
+    except RuntimeError as exc:
+        print(str(exc))
+        return 1
+    timestamp = datetime.now(timezone.utc).isoformat()
     git_sha, git_note = _git_sha()
     numbers: dict[str, dict[str, Any]] = {}
     provenance: dict[str, dict[str, Any]] = {}

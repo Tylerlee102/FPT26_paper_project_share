@@ -1,0 +1,181 @@
+
+
+================================================================
+== Vitis HLS Report for 'p_anonymous_namespace_reduce_128_Pipeline_reduce_bf16_4'
+================================================================
+* Date:           Sat Aug  1 20:26:14 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_bf16_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.571 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval |      Pipeline     |
+    |   min   |   max   |    min    |    max    | min | max |        Type       |
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+    |       10|       10|  40.000 ns|  40.000 ns|    0|    0|  loop pipeline stp|
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                 |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |    Loop Name    |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- reduce_bf16_4  |        8|        8|         6|          1|          1|     4|       yes|
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|       24|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|      244|      589|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|       36|    -|
+|Register             |        -|     -|      337|       64|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|      581|      713|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+    |                      Instance                     |                    Module                    | BRAM_18K| DSP|  FF | LUT | URAM|
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+    |floatingpoint_add_32ns_32ns_32ns_32ns_32_5_1_U757  |floatingpoint_add_32ns_32ns_32ns_32ns_32_5_1  |        0|   0|  244|  549|    0|
+    |sparsemux_9_2_32_1_1_U758                          |sparsemux_9_2_32_1_1                          |        0|   0|    0|   20|    0|
+    |sparsemux_9_2_32_1_1_U759                          |sparsemux_9_2_32_1_1                          |        0|   0|    0|   20|    0|
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+    |Total                                              |                                              |        0|   0|  244|  589|    0|
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name    | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------+----------+----+---+----+------------+------------+
+    |add_ln173_fu_186_p2   |         +|   0|  0|  10|           3|           1|
+    |icmp_ln173_fu_180_p2  |      icmp|   0|  0|  12|           3|           4|
+    |ap_enable_pp0         |       xor|   0|  0|   2|           1|           2|
+    +----------------------+----------+----+---+----+------------+------------+
+    |Total                 |          |   0|  0|  24|           7|           7|
+    +----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +--------------------------+----+-----------+-----+-----------+
+    |           Name           | LUT| Input Size| Bits| Total Bits|
+    +--------------------------+----+-----------+-----+-----------+
+    |ap_done_int               |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1   |   9|          2|    1|          2|
+    |ap_sig_allocacmp_index_3  |   9|          2|    3|          6|
+    |index_fu_68               |   9|          2|    3|          6|
+    +--------------------------+----+-----------+-----+-----------+
+    |Total                     |  36|          8|    8|         16|
+    +--------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------+----+----+-----+-----------+
+    |               Name               | FF | LUT| Bits| Const Bits|
+    +----------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                         |   1|   0|    1|          0|
+    |ap_done_reg                       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter3           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter4           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter5           |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter1_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter2_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter3_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter4_reg  |   1|   0|    1|          0|
+    |icmp_ln173_reg_326                |   1|   0|    1|          0|
+    |index_fu_68                       |   3|   0|    3|          0|
+    |level4_1_fu_76                    |  32|   0|   32|          0|
+    |level4_2_fu_80                    |  32|   0|   32|          0|
+    |level4_3_fu_84                    |  32|   0|   32|          0|
+    |level4_fu_72                      |  32|   0|   32|          0|
+    |tmp_20_reg_339                    |  32|   0|   32|          0|
+    |tmp_s_reg_334                     |  32|   0|   32|          0|
+    |trunc_ln173_reg_330               |   2|   0|    2|          0|
+    |icmp_ln173_reg_326                |  64|  32|    1|          0|
+    |trunc_ln173_reg_330               |  64|  32|    2|          0|
+    +----------------------------------+----+----+-----+-----------+
+    |Total                             | 337|  64|  212|          0|
+    +----------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------+-----+-----+------------+--------------------------------------------------------+--------------+
+|      RTL Ports      | Dir | Bits|  Protocol  |                      Source Object                     |    C Type    |
++---------------------+-----+-----+------------+--------------------------------------------------------+--------------+
+|ap_clk               |   in|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_4|  return value|
+|ap_rst               |   in|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_4|  return value|
+|ap_start             |   in|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_4|  return value|
+|ap_done              |  out|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_4|  return value|
+|ap_idle              |  out|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_4|  return value|
+|ap_ready             |  out|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_4|  return value|
+|level8_reload        |   in|   32|     ap_none|                                           level8_reload|        scalar|
+|level8_2_reload      |   in|   32|     ap_none|                                         level8_2_reload|        scalar|
+|level8_4_reload      |   in|   32|     ap_none|                                         level8_4_reload|        scalar|
+|level8_6_reload      |   in|   32|     ap_none|                                         level8_6_reload|        scalar|
+|level8_1_reload      |   in|   32|     ap_none|                                         level8_1_reload|        scalar|
+|level8_3_reload      |   in|   32|     ap_none|                                         level8_3_reload|        scalar|
+|level8_5_reload      |   in|   32|     ap_none|                                         level8_5_reload|        scalar|
+|level8_7_reload      |   in|   32|     ap_none|                                         level8_7_reload|        scalar|
+|level4_3_out         |  out|   32|      ap_vld|                                            level4_3_out|       pointer|
+|level4_3_out_ap_vld  |  out|    1|      ap_vld|                                            level4_3_out|       pointer|
+|level4_2_out         |  out|   32|      ap_vld|                                            level4_2_out|       pointer|
+|level4_2_out_ap_vld  |  out|    1|      ap_vld|                                            level4_2_out|       pointer|
+|level4_1_out         |  out|   32|      ap_vld|                                            level4_1_out|       pointer|
+|level4_1_out_ap_vld  |  out|    1|      ap_vld|                                            level4_1_out|       pointer|
+|level4_out           |  out|   32|      ap_vld|                                              level4_out|       pointer|
+|level4_out_ap_vld    |  out|    1|      ap_vld|                                              level4_out|       pointer|
++---------------------+-----+-----+------------+--------------------------------------------------------+--------------+
+

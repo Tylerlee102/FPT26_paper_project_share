@@ -1,0 +1,71 @@
+{
+  "generated_at": "2026-08-04T11:45:15.266997+00:00",
+  "limitations": [
+    "logical architecture figure, not placement or routing evidence",
+    "the five-phase schedule is inherited; only the arithmetic and corrected state representation are modified"
+  ],
+  "numbers": "paper/corrected/numbers.json",
+  "outputs": {
+    "paper/figures/corrected/corrected_candidate_datapath.pdf": "8AFB2147ACEE9D6E63DC9921F2F6AFB6E4043B1AA53CA311B75D3C3D279C455E"
+  },
+  "schema": 1,
+  "scope": "corrected-candidate recurrence-core datapath figure",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 87156,
+      "changed_file_count": 4,
+      "sha256": "CB24F86D61688223772275E7E7513EDDBF63658AD964057EC06DA72E62A18C83"
+    },
+    "files": {
+      "hls/e2m0/include/gdn_e2m0_kernel.hpp": {
+        "bytes": 10237,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B9A662F2DCDFC9BDCD552CF3F90410258FA7FB72EB5A9606208A172B8072EC6A"
+      },
+      "hls/e2m0/src/gdn_e2m0_top.cpp": {
+        "bytes": 58224,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "8408CD27675FD7759C543272A2F00404A7DD7F310D306F202F93A85D4EF6C429"
+      },
+      "scripts/corrected_datapath_figure.py": {
+        "bytes": 14551,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "172B94DCBF1212352CF84801F2D4CB16D03F0849885D78DA247C6AAE3B2BF4C3"
+      },
+      "scripts/reportlab_fonts.py": {
+        "bytes": 944,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "D68D3699969A05E16B49E1323BBFCB95666940DF7FCA3B6513A189A2DCE4767A"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "status": "PASS",
+  "used_number_values": {
+    "controlled_block_size": 32,
+    "controlled_key_dim": 128,
+    "controlled_num_layers": 36,
+    "controlled_num_qk_heads": 16,
+    "controlled_num_value_heads": 32,
+    "controlled_p_k": 16,
+    "controlled_p_v": 8,
+    "controlled_target_clock_ns": 4.0,
+    "controlled_value_dim": 128,
+    "corrected_accumulator_bits": 32,
+    "corrected_alignment_guard_bits": 5,
+    "corrected_candidate_step_input_logical_bytes": 8832,
+    "corrected_log_capacity": 7,
+    "corrected_logical_state_bytes": 537744,
+    "native_expanded_integer_output_logical_bytes": 24576
+  },
+  "verification": [
+    "all displayed numeric widths, rates, dimensions, and capacities are read from corrected paper numbers",
+    "phase ordering and fold timing are cross-checked against the frozen corrected HLS source",
+    "PDF rendering and visual inspection are separate evidence"
+  ]
+}

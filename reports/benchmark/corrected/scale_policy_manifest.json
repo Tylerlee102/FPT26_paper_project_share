@@ -1,0 +1,136 @@
+{
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 8192,
+    "trace_family": "nominal",
+    "value_dim": 128
+  },
+  "event_scope": "floating_qdq_state_requantization_only",
+  "evidence_scope": "synthetic_floating_qdq_scale_policy_diagnostic",
+  "execution": {
+    "command": "python -m scripts.scale_policy_ablation",
+    "exit_code": 0,
+    "raw_log": "reports/benchmark/corrected/scale_policy_ablation.md"
+  },
+  "independent_verification": "python -m scripts.verify_synthetic_stability cross-checks hashes, row sequences, checkpoint projections, and every-token parity",
+  "initial_scale_blocks": 16384,
+  "initial_state_sha256": "cb92f5959750ab44fbb97a8aa7c416961cde747284b54511a47cbaea26f13d19",
+  "input_sha256": "adb9105ce36c702eeb5d72a52145aed951c55752e9a541bafbb549e61679df0e",
+  "limitations": [
+    "synthetic inputs",
+    "floating Q/DQ arithmetic, not encoded-integer arithmetic",
+    "state requantization counters only",
+    "not closed-loop Qwen quality evidence"
+  ],
+  "numpy": "2.3.5",
+  "outputs": {
+    "reports/benchmark/corrected/scale_policy_ablation.md": "c7b0cdab2c53eef71d1fa8eadd84001d192ed9c1bb81d6d10bb35aeb071a44ee",
+    "reports/benchmark/corrected/scale_policy_checkpoints.csv": "6c2ff3f714f856ac0d4471ec3c0cec6e95cf8a13dc4154f7e847b0b8e65c96f0",
+    "reports/benchmark/corrected/scale_policy_tokens.csv": "519e36fa962721e6931e3672f3fa5903014eb10eca83ac4176286c49c5ed623c"
+  },
+  "policies": [
+    {
+      "policy": "fixed",
+      "refresh_interval": null,
+      "variant": "mxfp4_scale_fixed"
+    },
+    {
+      "policy": "every_token",
+      "refresh_interval": null,
+      "variant": "mxfp4_scale_every_token"
+    },
+    {
+      "policy": "periodic",
+      "refresh_interval": 4,
+      "variant": "mxfp4_scale_periodic_4"
+    },
+    {
+      "policy": "periodic",
+      "refresh_interval": 8,
+      "variant": "mxfp4_scale_periodic_8"
+    },
+    {
+      "policy": "periodic",
+      "refresh_interval": 16,
+      "variant": "mxfp4_scale_periodic_16"
+    },
+    {
+      "policy": "threshold",
+      "refresh_interval": null,
+      "variant": "mxfp4_scale_threshold_0p75_5p5"
+    }
+  ],
+  "python": "3.12.10",
+  "schema": 1,
+  "source_hashes": {
+    "golden/gdn_fp32.py": "7ebc9b7a0ba400a553e9c079b2e2e98596723dcc8b1d137b0477c798e34697c5",
+    "golden/gdn_mxfp4.py": "22e9975b4a60a948a909fa0fc35630b1bc6ad68f7464b5c8e0c68f70bcaa44b8",
+    "golden/mx_format.py": "b0f8bee046465f342e8049b33a91c3e424c3c2c6e69fb53e85d2d63656be269d",
+    "golden/mxfp4_scale_policy.py": "2e966021a48e02dfb8e7b1a39b0884f4105095dc1d5219fdbf7f5b7a29ae8596",
+    "scripts/long_sequence_stability.py": "977ba478f143676388bbc78b87777330269e150abafc38c68b848a9647b05c14",
+    "scripts/scale_policy_ablation.py": "329d88d1bf6527eb95a6121752574401bc0ddab16a5668ff1a801a93783c7d5f"
+  },
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 67000,
+      "changed_file_count": 6,
+      "sha256": "84EFD72607FAE237C07B7BCD957DC917B044783AD8CD15D9984165505A9B38C0"
+    },
+    "files": {
+      "golden/gdn_fp32.py": {
+        "bytes": 8406,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "7EBC9B7A0BA400A553E9C079B2E2E98596723DCC8B1D137B0477C798E34697C5"
+      },
+      "golden/gdn_mxfp4.py": {
+        "bytes": 4313,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "22E9975B4A60A948A909FA0FC35630B1BC6AD68F7464B5C8E0C68F70BCAA44B8"
+      },
+      "golden/mx_format.py": {
+        "bytes": 10211,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "B0F8BEE046465F342E8049B33A91C3E424C3C2C6E69FB53E85D2D63656BE269D"
+      },
+      "golden/mxfp4_scale_policy.py": {
+        "bytes": 4930,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "2E966021A48E02DFB8E7B1A39B0884F4105095DC1D5219FDBF7F5B7A29AE8596"
+      },
+      "scripts/long_sequence_stability.py": {
+        "bytes": 20364,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "977BA478F143676388BBC78B87777330269E150ABAFC38C68B848A9647B05C14"
+      },
+      "scripts/scale_policy_ablation.py": {
+        "bytes": 15836,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "329D88D1BF6527EB95A6121752574401BC0DDAB16A5668FF1A801A93783C7D5F"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "timestamp": "2026-08-02T04:10:58.004273+00:00"
+}

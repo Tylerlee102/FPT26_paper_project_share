@@ -5,15 +5,10 @@
 
 namespace {
 
-int expected_decode_q3(unsigned code) {
-  static const int mag_q3[8] = {0, 4, 8, 12, 16, 24, 32, 48};
-  const int mag = mag_q3[code & 0x07u];
-  return (code & 0x08u) ? -mag : mag;
-}
-
-int expected_product_q3(unsigned a, unsigned b) {
-  const int product_q6 = expected_decode_q3(a) * expected_decode_q3(b);
-  return product_q6 / 8;
+int expected_mantissa(unsigned code) {
+  static const int magnitude[8] = {0, 1, 2, 3, 4, 6, 8, 12};
+  const int value = magnitude[code & 0x07u];
+  return ((code & 0x08u) != 0u && value != 0) ? -value : value;
 }
 
 }  // namespace
@@ -21,30 +16,25 @@ int expected_product_q3(unsigned a, unsigned b) {
 int main() {
   for (unsigned a = 0; a < 16; ++a) {
     for (unsigned b = 0; b < 16; ++b) {
-      const int got = static_cast<int>(gdn::e2m1_mul_q4_3(a, b));
-      const int expected = expected_product_q3(a, b);
+      const std::int64_t got = gdn::e2m1_product_mantissa(a, b);
+      const std::int64_t expected =
+          static_cast<std::int64_t>(expected_mantissa(a)) *
+          static_cast<std::int64_t>(expected_mantissa(b));
       if (got != expected) {
-        std::cerr << "E2M1 product mismatch a=" << a << " b=" << b
-                  << " got=" << got << " expected=" << expected << "\n";
+        std::cerr << "E2M1 product mismatch a=" << a << " b=" << b << "\n";
         return 1;
       }
     }
   }
-
-  std::uint32_t lfsr = 0x00fb72u;
-  for (int i = 0; i < 100000; ++i) {
-    lfsr = (lfsr >> 1) ^ (-(static_cast<int>(lfsr) & 1) & 0xd0000001u);
-    const unsigned a = lfsr & 0x0fu;
-    const unsigned b = (lfsr >> 8) & 0x0fu;
-    const int got = static_cast<int>(gdn::e2m1_mul_q4_3(a, b));
-    const int expected = expected_product_q3(a, b);
+  for (unsigned code = 0; code < 16; ++code) {
+    const std::int64_t got = gdn::scale_by_e2m1(code, -17);
+    const std::int64_t expected =
+        static_cast<std::int64_t>(expected_mantissa(code)) * -17;
     if (got != expected) {
-      std::cerr << "Random E2M1 product mismatch at " << i << "\n";
+      std::cerr << "E2M1 scale mismatch code=" << code << "\n";
       return 1;
     }
   }
-
   std::cout << "tb_mac_e2m1 PASS\n";
   return 0;
 }
-

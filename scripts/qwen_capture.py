@@ -4,7 +4,7 @@ import argparse
 import hashlib
 import json
 import os
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -301,7 +301,7 @@ def capture_qwen_activations(
         "model_path": str(model_path) if model_path is not None else None,
         "experts_implementation": experts_implementation or "default",
         "revision": revision or "default",
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "layer_index": layer_index,
         "num_prompts": len(prompts),
         "max_length": max_length,

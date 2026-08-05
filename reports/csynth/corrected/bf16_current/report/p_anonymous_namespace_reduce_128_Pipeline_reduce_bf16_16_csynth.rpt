@@ -1,0 +1,260 @@
+
+
+================================================================
+== Vitis HLS Report for 'p_anonymous_namespace_reduce_128_Pipeline_reduce_bf16_16'
+================================================================
+* Date:           Sat Aug  1 20:26:13 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_bf16_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.571 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval |      Pipeline     |
+    |   min   |   max   |    min    |    max    | min | max |        Type       |
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+    |       23|       23|  92.000 ns|  92.000 ns|    0|    0|  loop pipeline stp|
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                  |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |     Loop Name    |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- reduce_bf16_16  |       21|       21|         7|          1|          1|    16|       yes|
+        +------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|       27|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|      244|      635|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|       36|    -|
+|Register             |        -|     -|      730|       64|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|      974|      762|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+    |                      Instance                     |                    Module                    | BRAM_18K| DSP|  FF | LUT | URAM|
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+    |floatingpoint_add_32ns_32ns_32ns_32ns_32_5_1_U695  |floatingpoint_add_32ns_32ns_32ns_32ns_32_5_1  |        0|   0|  244|  549|    0|
+    |sparsemux_17_3_32_1_1_U696                         |sparsemux_17_3_32_1_1                         |        0|   0|    0|   43|    0|
+    |sparsemux_17_3_32_1_1_U697                         |sparsemux_17_3_32_1_1                         |        0|   0|    0|   43|    0|
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+    |Total                                              |                                              |        0|   0|  244|  635|    0|
+    +---------------------------------------------------+----------------------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name    | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------+----------+----+---+----+------------+------------+
+    |add_ln163_fu_560_p2   |         +|   0|  0|  12|           5|           1|
+    |icmp_ln163_fu_554_p2  |      icmp|   0|  0|  13|           5|           6|
+    |ap_enable_pp0         |       xor|   0|  0|   2|           1|           2|
+    +----------------------+----------+----+---+----+------------+------------+
+    |Total                 |          |   0|  0|  27|          11|           9|
+    +----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |ap_done_int              |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1  |   9|          2|    1|          2|
+    |ap_sig_allocacmp_index   |   9|          2|    5|         10|
+    |index_2_fu_150           |   9|          2|    5|         10|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  36|          8|   12|         24|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------+----+----+-----+-----------+
+    |               Name               | FF | LUT| Bits| Const Bits|
+    +----------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                         |   1|   0|    1|          0|
+    |ap_done_reg                       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter3           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter4           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter5           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter6           |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter1_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter2_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter3_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter4_reg  |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter5_reg  |   1|   0|    1|          0|
+    |icmp_ln163_reg_966                |   1|   0|    1|          0|
+    |index_2_fu_150                    |   5|   0|    5|          0|
+    |level16_10_fu_194                 |  32|   0|   32|          0|
+    |level16_11_fu_198                 |  32|   0|   32|          0|
+    |level16_12_fu_202                 |  32|   0|   32|          0|
+    |level16_13_fu_206                 |  32|   0|   32|          0|
+    |level16_14_fu_210                 |  32|   0|   32|          0|
+    |level16_15_fu_214                 |  32|   0|   32|          0|
+    |level16_1_fu_158                  |  32|   0|   32|          0|
+    |level16_2_fu_162                  |  32|   0|   32|          0|
+    |level16_3_fu_166                  |  32|   0|   32|          0|
+    |level16_4_fu_170                  |  32|   0|   32|          0|
+    |level16_5_fu_174                  |  32|   0|   32|          0|
+    |level16_6_fu_178                  |  32|   0|   32|          0|
+    |level16_7_fu_182                  |  32|   0|   32|          0|
+    |level16_8_fu_186                  |  32|   0|   32|          0|
+    |level16_9_fu_190                  |  32|   0|   32|          0|
+    |level16_fu_154                    |  32|   0|   32|          0|
+    |tmp_22_reg_1065                   |  32|   0|   32|          0|
+    |tmp_s_reg_1060                    |  32|   0|   32|          0|
+    |trunc_ln163_1_reg_976             |   4|   0|    4|          0|
+    |trunc_ln163_reg_970               |   3|   0|    3|          0|
+    |icmp_ln163_reg_966                |  64|  32|    1|          0|
+    |trunc_ln163_1_reg_976             |  64|  32|    4|          0|
+    +----------------------------------+----+----+-----+-----------+
+    |Total                             | 730|  64|  607|          0|
+    +----------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-----------------------+-----+-----+------------+---------------------------------------------------------+--------------+
+|       RTL Ports       | Dir | Bits|  Protocol  |                      Source Object                      |    C Type    |
++-----------------------+-----+-----+------------+---------------------------------------------------------+--------------+
+|ap_clk                 |   in|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_16|  return value|
+|ap_rst                 |   in|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_16|  return value|
+|ap_start               |   in|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_16|  return value|
+|ap_done                |  out|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_16|  return value|
+|ap_idle                |  out|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_16|  return value|
+|ap_ready               |  out|    1|  ap_ctrl_hs|  (anonymous namespace)reduce_128_Pipeline_reduce_bf16_16|  return value|
+|level32_address0       |  out|    1|   ap_memory|                                                  level32|         array|
+|level32_ce0            |  out|    1|   ap_memory|                                                  level32|         array|
+|level32_q0             |   in|   32|   ap_memory|                                                  level32|         array|
+|level32_2_address0     |  out|    1|   ap_memory|                                                level32_2|         array|
+|level32_2_ce0          |  out|    1|   ap_memory|                                                level32_2|         array|
+|level32_2_q0           |   in|   32|   ap_memory|                                                level32_2|         array|
+|level32_4_address0     |  out|    1|   ap_memory|                                                level32_4|         array|
+|level32_4_ce0          |  out|    1|   ap_memory|                                                level32_4|         array|
+|level32_4_q0           |   in|   32|   ap_memory|                                                level32_4|         array|
+|level32_6_address0     |  out|    1|   ap_memory|                                                level32_6|         array|
+|level32_6_ce0          |  out|    1|   ap_memory|                                                level32_6|         array|
+|level32_6_q0           |   in|   32|   ap_memory|                                                level32_6|         array|
+|level32_8_address0     |  out|    1|   ap_memory|                                                level32_8|         array|
+|level32_8_ce0          |  out|    1|   ap_memory|                                                level32_8|         array|
+|level32_8_q0           |   in|   32|   ap_memory|                                                level32_8|         array|
+|level32_10_address0    |  out|    1|   ap_memory|                                               level32_10|         array|
+|level32_10_ce0         |  out|    1|   ap_memory|                                               level32_10|         array|
+|level32_10_q0          |   in|   32|   ap_memory|                                               level32_10|         array|
+|level32_12_address0    |  out|    1|   ap_memory|                                               level32_12|         array|
+|level32_12_ce0         |  out|    1|   ap_memory|                                               level32_12|         array|
+|level32_12_q0          |   in|   32|   ap_memory|                                               level32_12|         array|
+|level32_14_address0    |  out|    1|   ap_memory|                                               level32_14|         array|
+|level32_14_ce0         |  out|    1|   ap_memory|                                               level32_14|         array|
+|level32_14_q0          |   in|   32|   ap_memory|                                               level32_14|         array|
+|level32_1_address0     |  out|    1|   ap_memory|                                                level32_1|         array|
+|level32_1_ce0          |  out|    1|   ap_memory|                                                level32_1|         array|
+|level32_1_q0           |   in|   32|   ap_memory|                                                level32_1|         array|
+|level32_3_address0     |  out|    1|   ap_memory|                                                level32_3|         array|
+|level32_3_ce0          |  out|    1|   ap_memory|                                                level32_3|         array|
+|level32_3_q0           |   in|   32|   ap_memory|                                                level32_3|         array|
+|level32_5_address0     |  out|    1|   ap_memory|                                                level32_5|         array|
+|level32_5_ce0          |  out|    1|   ap_memory|                                                level32_5|         array|
+|level32_5_q0           |   in|   32|   ap_memory|                                                level32_5|         array|
+|level32_7_address0     |  out|    1|   ap_memory|                                                level32_7|         array|
+|level32_7_ce0          |  out|    1|   ap_memory|                                                level32_7|         array|
+|level32_7_q0           |   in|   32|   ap_memory|                                                level32_7|         array|
+|level32_9_address0     |  out|    1|   ap_memory|                                                level32_9|         array|
+|level32_9_ce0          |  out|    1|   ap_memory|                                                level32_9|         array|
+|level32_9_q0           |   in|   32|   ap_memory|                                                level32_9|         array|
+|level32_11_address0    |  out|    1|   ap_memory|                                               level32_11|         array|
+|level32_11_ce0         |  out|    1|   ap_memory|                                               level32_11|         array|
+|level32_11_q0          |   in|   32|   ap_memory|                                               level32_11|         array|
+|level32_13_address0    |  out|    1|   ap_memory|                                               level32_13|         array|
+|level32_13_ce0         |  out|    1|   ap_memory|                                               level32_13|         array|
+|level32_13_q0          |   in|   32|   ap_memory|                                               level32_13|         array|
+|level32_15_address0    |  out|    1|   ap_memory|                                               level32_15|         array|
+|level32_15_ce0         |  out|    1|   ap_memory|                                               level32_15|         array|
+|level32_15_q0          |   in|   32|   ap_memory|                                               level32_15|         array|
+|level16_15_out         |  out|   32|      ap_vld|                                           level16_15_out|       pointer|
+|level16_15_out_ap_vld  |  out|    1|      ap_vld|                                           level16_15_out|       pointer|
+|level16_14_out         |  out|   32|      ap_vld|                                           level16_14_out|       pointer|
+|level16_14_out_ap_vld  |  out|    1|      ap_vld|                                           level16_14_out|       pointer|
+|level16_13_out         |  out|   32|      ap_vld|                                           level16_13_out|       pointer|
+|level16_13_out_ap_vld  |  out|    1|      ap_vld|                                           level16_13_out|       pointer|
+|level16_12_out         |  out|   32|      ap_vld|                                           level16_12_out|       pointer|
+|level16_12_out_ap_vld  |  out|    1|      ap_vld|                                           level16_12_out|       pointer|
+|level16_11_out         |  out|   32|      ap_vld|                                           level16_11_out|       pointer|
+|level16_11_out_ap_vld  |  out|    1|      ap_vld|                                           level16_11_out|       pointer|
+|level16_10_out         |  out|   32|      ap_vld|                                           level16_10_out|       pointer|
+|level16_10_out_ap_vld  |  out|    1|      ap_vld|                                           level16_10_out|       pointer|
+|level16_9_out          |  out|   32|      ap_vld|                                            level16_9_out|       pointer|
+|level16_9_out_ap_vld   |  out|    1|      ap_vld|                                            level16_9_out|       pointer|
+|level16_8_out          |  out|   32|      ap_vld|                                            level16_8_out|       pointer|
+|level16_8_out_ap_vld   |  out|    1|      ap_vld|                                            level16_8_out|       pointer|
+|level16_7_out          |  out|   32|      ap_vld|                                            level16_7_out|       pointer|
+|level16_7_out_ap_vld   |  out|    1|      ap_vld|                                            level16_7_out|       pointer|
+|level16_6_out          |  out|   32|      ap_vld|                                            level16_6_out|       pointer|
+|level16_6_out_ap_vld   |  out|    1|      ap_vld|                                            level16_6_out|       pointer|
+|level16_5_out          |  out|   32|      ap_vld|                                            level16_5_out|       pointer|
+|level16_5_out_ap_vld   |  out|    1|      ap_vld|                                            level16_5_out|       pointer|
+|level16_4_out          |  out|   32|      ap_vld|                                            level16_4_out|       pointer|
+|level16_4_out_ap_vld   |  out|    1|      ap_vld|                                            level16_4_out|       pointer|
+|level16_3_out          |  out|   32|      ap_vld|                                            level16_3_out|       pointer|
+|level16_3_out_ap_vld   |  out|    1|      ap_vld|                                            level16_3_out|       pointer|
+|level16_2_out          |  out|   32|      ap_vld|                                            level16_2_out|       pointer|
+|level16_2_out_ap_vld   |  out|    1|      ap_vld|                                            level16_2_out|       pointer|
+|level16_1_out          |  out|   32|      ap_vld|                                            level16_1_out|       pointer|
+|level16_1_out_ap_vld   |  out|    1|      ap_vld|                                            level16_1_out|       pointer|
+|level16_out            |  out|   32|      ap_vld|                                              level16_out|       pointer|
+|level16_out_ap_vld     |  out|    1|      ap_vld|                                              level16_out|       pointer|
++-----------------------+-----+-----+------------+---------------------------------------------------------+--------------+
+

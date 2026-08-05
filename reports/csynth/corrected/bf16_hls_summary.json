@@ -1,0 +1,286 @@
+{
+  "configuration": {
+    "accumulation": "FP32",
+    "block_size": 32,
+    "key_dim": 128,
+    "multiply_operands": "BF16",
+    "num_layers": 36,
+    "num_qk_heads": 16,
+    "num_sequences": 1,
+    "num_value_heads": 32,
+    "p_k": 16,
+    "p_v": 8,
+    "state_orientation": "KxV",
+    "state_storage": "BF16",
+    "value_dim": 128
+  },
+  "csim": {
+    "commands_checked": 4,
+    "coverage": [
+      "RESET",
+      "one sparse rank-one STEP",
+      "one beta-zero persistence STEP",
+      "complete 524288-element state READBACK",
+      "status, generation, and command counters"
+    ],
+    "final_generation": 2,
+    "required_64_token_rtl_parity": "NOT_RUN",
+    "status": "PASS"
+  },
+  "csynth": {
+    "metrics": {
+      "available_device_resources": {
+        "BRAM_18K": 4032,
+        "DSP": 9024,
+        "FF": 2607360,
+        "LUT": 1303680,
+        "URAM": 960
+      },
+      "clock_uncertainty_ns": 1.08,
+      "device_utilization_percent": {
+        "BRAM_18K": 0.32242063492063494,
+        "DSP": 0.0,
+        "FF": 1.4991025405007363,
+        "LUT": 6.513791728031419,
+        "URAM": 13.333333333333334
+      },
+      "estimated_clock_ns": 2.92,
+      "estimated_fmax_mhz": 342.4657534246575,
+      "interval_cycles_max": 4236566,
+      "interval_cycles_min": 4133,
+      "latency_cycles_average": 180515,
+      "latency_cycles_max": 4236565,
+      "latency_cycles_min": 4132,
+      "resources": {
+        "BRAM_18K": 13,
+        "DSP": 0,
+        "FF": 39087,
+        "LUT": 84919,
+        "URAM": 128
+      },
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "tool_version": "2025.2"
+    },
+    "status": "PASS",
+    "step_loop_latency_cycles": {
+      "maximum": 4225728,
+      "minimum": 4225728
+    },
+    "targeted_loop_ii_status": "PASS",
+    "targeted_loops": [
+      {
+        "depth": 2,
+        "final_ii": 1,
+        "loop": "clear_bf16_output_heads_clear_bf16_output_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 4,
+        "final_ii": 1,
+        "loop": "load_bf16_heads_load_bf16_rows_load_bf16_blocks_load_bf16_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 3,
+        "final_ii": 1,
+        "loop": "reset_bf16_heads_reset_bf16_rows_reset_bf16_blocks",
+        "target_ii": 1
+      },
+      {
+        "depth": 3,
+        "final_ii": 1,
+        "loop": "phase1_bf16_qk_heads_phase1_bf16_qk_values",
+        "target_ii": 1
+      },
+      {
+        "depth": 3,
+        "final_ii": 1,
+        "loop": "phase1_bf16_value_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 4,
+        "final_ii": 1,
+        "loop": "load_bf16_resident_rows_unpack_bf16_resident_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 7,
+        "final_ii": 1,
+        "loop": "phase2_bf16_decay_rows_phase2_bf16_decay_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 6,
+        "final_ii": 1,
+        "loop": "phase2_bf16_prediction_terms",
+        "target_ii": 1
+      },
+      {
+        "depth": 8,
+        "final_ii": 1,
+        "loop": "reduce_bf16_64",
+        "target_ii": 1
+      },
+      {
+        "depth": 8,
+        "final_ii": 1,
+        "loop": "reduce_bf16_32",
+        "target_ii": 1
+      },
+      {
+        "depth": 7,
+        "final_ii": 1,
+        "loop": "reduce_bf16_16",
+        "target_ii": 1
+      },
+      {
+        "depth": 6,
+        "final_ii": 1,
+        "loop": "reduce_bf16_8",
+        "target_ii": 1
+      },
+      {
+        "depth": 6,
+        "final_ii": 1,
+        "loop": "reduce_bf16_4",
+        "target_ii": 1
+      },
+      {
+        "depth": 6,
+        "final_ii": 1,
+        "loop": "reduce_bf16_2",
+        "target_ii": 1
+      },
+      {
+        "depth": 11,
+        "final_ii": 1,
+        "loop": "phase3_bf16_delta_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 12,
+        "final_ii": 1,
+        "loop": "phase4_bf16_update_rows_phase4_bf16_update_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 6,
+        "final_ii": 1,
+        "loop": "phase5_bf16_output_terms",
+        "target_ii": 1
+      },
+      {
+        "depth": 3,
+        "final_ii": 1,
+        "loop": "store_bf16_resident_rows_pack_bf16_resident_lanes",
+        "target_ii": 1
+      },
+      {
+        "depth": 7,
+        "final_ii": 1,
+        "loop": "readback_bf16_heads_readback_bf16_rows_readback_bf16_blocks_readback_bf16_lanes",
+        "target_ii": 1
+      }
+    ],
+    "vendor_loop_constraint_status": "PASS"
+  },
+  "energy_measurement": "NOT_RUN",
+  "execution": {
+    "csim": {
+      "command": "vitis_hls -f X:/hls/bf16/tcl/run_csim.tcl",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "csynth": {
+      "command": "vitis_hls -f X:/hls/bf16/tcl/run_csynth.tcl",
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  },
+  "limitations": [
+    "C-simulation uses a bounded hand-computable sparse test, not random-vector or 64-token RTL parity",
+    "C-synthesis resources, timing, and latency are HLS estimates, not placed-and-routed measurements",
+    "the reported URAM estimate is not accepted as proof that the declared all-layer state capacity fits",
+    "no board power or energy measurement exists"
+  ],
+  "post_route_timing_and_drc": "NOT_RUN",
+  "raw_artifact_sha256": {
+    "reports/csim/corrected/bf16_current/gdn_bf16_top_csim.log": "E80588EC4E145D7A056364331A35EA18009A6967D23E327E0B00CFE526DF5CB5",
+    "reports/csim/corrected/bf16_current/u55c_250mhz.log": "2385D7249758D85EDC164B1F97A9A8E946F2F9B4EF638C72749BA5DF967D447B",
+    "reports/csynth/corrected/bf16_current/report/gdn_bf16_top_csynth.rpt": "F64A185661CF835826904BDE02224015C4EBE6D366337AAE9BAEEB3DD8920E73",
+    "reports/csynth/corrected/bf16_current/report/gdn_bf16_top_csynth.xml": "9EA0EDD568ACCEFA3CC81E467F18383B4D840A7E2386E82CE5499C50512F0378",
+    "reports/csynth/corrected/bf16_current/report/gdn_bf16_top_impl_csynth.rpt": "5B98EA56982AE9FCAB1EA34D208A08B661788042682E38983F405CFA34FF540F",
+    "reports/csynth/corrected/bf16_current/u55c_250mhz.log": "C85E087ACAB48F977EA4F596D8377E50908B6882305A812BE63BEA21C5AB4F30"
+  },
+  "rtl_cosimulation_64_token": "NOT_RUN",
+  "schema": 1,
+  "scope": "matched BF16 persistent-state GDN HLS baseline",
+  "source_freshness": {
+    "csim": "PASS",
+    "csynth": "PASS"
+  },
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 50517,
+      "changed_file_count": 8,
+      "sha256": "8886E76675F7018F4FF8331758FEB0F36FDD2B24652E406DEFE9F6BD79A4A4A0"
+    },
+    "files": {
+      "hls/bf16/include/gdn_bf16_kernel.hpp": {
+        "bytes": 2208,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "7B89B4E23292430AA6C7387DE724CE6C18FB3A18FF9A76591505C6A9FE1358A7"
+      },
+      "hls/bf16/src/gdn_bf16_top.cpp": {
+        "bytes": 22726,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "BC8E26B0980E8FF43785D9DD33B81202517E9E16DD79C19F6F5B12B603B40847"
+      },
+      "hls/bf16/tb/tb_gdn_bf16_top.cpp": {
+        "bytes": 3419,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "8405CD12BB546A943E3DCDD2EFC37926589CBCA4C842BA1F85D4DE6BEB598D41"
+      },
+      "hls/bf16/tcl/run_csim.tcl": {
+        "bytes": 380,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "BD62C2041026DF2E7D25BB01CBE14E6444E3D927E9A10272026FF79DACBB2CB6"
+      },
+      "hls/bf16/tcl/run_csynth.tcl": {
+        "bytes": 339,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "2E2BD0E68C7ADB62304481C5CC4EFD617D19698281A9C999E63887DCD2ED3F10"
+      },
+      "hls/include/gdn_params.hpp": {
+        "bytes": 3045,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82"
+      },
+      "hls/include/mx_types.hpp": {
+        "bytes": 1112,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "AB1BD900904C946167AF0037997A81FBF8665E5543A7027097724FE9BBAC97AC"
+      },
+      "scripts/bf16_hls_report.py": {
+        "bytes": 12862,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "A13257843A302F42183A3AFB28849D67FC2232187E143E9C74B9FA186FD061D9"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "timestamp": "2026-08-02T03:40:41.656335+00:00"
+}

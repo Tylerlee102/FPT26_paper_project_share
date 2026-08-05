@@ -1,0 +1,59 @@
+{
+  "checkpoint_csv_sha256": "CAD02382EDE3F744CB0BDE36382A4268D8C37DDD3359A196A43D56C38FB60A32",
+  "checkpoint_metric_recomputation": "PASS",
+  "checkpoint_rows_verified": 5,
+  "command": "python -m scripts.verify_native_encoded_long_trace",
+  "counter_recurrence": "PASS",
+  "engineering_gate": "FAIL",
+  "exit_code": 0,
+  "initial_state_match": "PASS",
+  "input_stream_match": "PASS",
+  "limitations": [
+    "one deterministic development seed and nominal synthetic trace",
+    "layer-boundary recurrence only; not closed-loop Qwen quality",
+    "software encoded oracle; HLS/RTL parity is separately bounded to 64 tokens",
+    "no post-route timing, physical fit, or board energy"
+  ],
+  "manifest_sha256": "7595E7CAF2B6D2D85E50D6D26E7030B3CEE9CCE3FD1B73868183FFBDD5C3B24F",
+  "rows_verified": 8192,
+  "runtime": {
+    "numpy": "2.3.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10"
+  },
+  "schema": 1,
+  "snapshots_verified": 6,
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 43060,
+      "changed_file_count": 3,
+      "sha256": "1C4DFAB92A0BC3412651426BBA8BDD94AE8E4046538B2CB1FDBDC13642708EA3"
+    },
+    "files": {
+      "golden/gdn_mxfp4_encoded_vectorized.py": {
+        "bytes": 13109,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D"
+      },
+      "scripts/native_encoded_long_trace.py": {
+        "bytes": 17937,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "04A0227D3E67B9869E8900436300CC26B9E0822DBCA638FE3FE133D54A6CF983"
+      },
+      "scripts/verify_native_encoded_long_trace.py": {
+        "bytes": 10292,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "0089DFEF28DFB113ABE725BB33B1FC116A846E56AB52FD9B882098181322102B"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "token_csv_sha256": "06F7B5C7A21A52411E0B218AF3F63DD56F56A1798D74F144BE58E092E9EFBC9B",
+  "verified_at": "2026-08-02T05:28:31.507448+00:00"
+}

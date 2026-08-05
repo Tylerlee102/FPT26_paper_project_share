@@ -1,26 +1,44 @@
 #include "gdn_kernel.hpp"
 
+#include <cstdint>
+
+#include "block_exp_align.hpp"
+#include "mac_e2m1.hpp"
+
 namespace gdn {
 
-q4_3_t phase3_delta_update(
-    q4_3_t state_q3,
-    q4_3_t predicted_q3,
-    q4_3_t value_q3,
-    q4_3_t key_q3,
-    std::uint8_t beta_u8) {
-#pragma HLS INLINE
-  const acc32_t residual_q3 = static_cast<acc32_t>(predicted_q3) - static_cast<acc32_t>(value_q3);
-  const acc32_t beta = static_cast<acc32_t>(beta_u8);
-  const acc32_t delta_q3 = (residual_q3 * static_cast<acc32_t>(key_q3) * beta) / (127 * 8);
-  const acc32_t updated = static_cast<acc32_t>(state_q3) - delta_q3;
-  if (updated > 32767) {
-    return static_cast<q4_3_t>(32767);
+void phase3_delta_tile(
+    const value_head_t v,
+    const value_head_scales_t v_scales,
+    q1_15_t beta,
+    int value_block,
+    const block_mantissa_t prediction_mantissas,
+    const block_exponent_t prediction_exponents,
+    block_mantissa_t delta_mantissas,
+    block_exponent_t delta_exponents,
+    command_counter_array_t counters) {
+  const exponent_t value_exponent =
+      decode_e2m1_exponent(v_scales[value_block]);
+  std::uint8_t alignment_underflows = 0;
+delta_lanes:
+  for (int lane = 0; lane < BLOCK_SIZE; ++lane) {
+#pragma HLS PIPELINE II=1
+    const int column = value_block * BLOCK_SIZE + lane;
+    const mantissa_t value_mantissa = decode_e2m1_mantissa(v[column]);
+    bool alignment_underflow = false;
+    const aligned_value_t residual = aligned_pair(
+        value_mantissa,
+        value_exponent,
+        -static_cast<wide_mantissa_t>(prediction_mantissas[lane]),
+        prediction_exponents[lane],
+        alignment_underflow,
+        counters);
+    alignment_underflows += static_cast<std::uint8_t>(alignment_underflow);
+    delta_mantissas[lane] =
+        multiply_q1_15(residual.mantissa, beta, counters);
+    delta_exponents[lane] = residual.exponent;
   }
-  if (updated < -32768) {
-    return static_cast<q4_3_t>(-32768);
-  }
-  return static_cast<q4_3_t>(updated);
+  counters[COUNTER_ALIGNMENT_UNDERFLOWS] += alignment_underflows;
 }
 
 }  // namespace gdn
-

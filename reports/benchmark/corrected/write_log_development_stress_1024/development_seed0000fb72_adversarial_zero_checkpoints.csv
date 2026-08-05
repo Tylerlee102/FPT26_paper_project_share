@@ -1,0 +1,7 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_0000fb72_adversarial_zero,development,64370,adversarial,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_adversarial_zero,development,64370,adversarial,mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7,0,64,1.0,0.005630149928282855,0.00018661469221115112,0.008148795463615764,0.0055373311042785645,9,0,0,1,7,536912,PASS
+synthetic_0000fb72_adversarial_zero,development,64370,adversarial,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_adversarial_zero,development,64370,adversarial,mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7,0,256,0.9989832286132201,0.05248553274629398,0.022512882947921753,0.08739181085043557,1.3835868835449219,36,0,0,4,7,536912,PASS
+synthetic_0000fb72_adversarial_zero,development,64370,adversarial,fp32,0,1024,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_adversarial_zero,development,64370,adversarial,mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7,0,1024,0.9989304528834491,0.046337045614858734,0.0006919954903423786,0.041390299333491684,0.7625327110290527,146,0,0,2,7,536912,PASS

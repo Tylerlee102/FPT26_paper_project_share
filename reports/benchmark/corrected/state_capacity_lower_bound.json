@@ -1,0 +1,155 @@
+{
+  "available_device_resources": {
+    "BRAM_18K": 4032,
+    "URAM": 960
+  },
+  "bf16_all_layer_raw_capacity": "FAIL",
+  "configuration": {
+    "block_size": 32,
+    "key_dim": 128,
+    "num_layers": 36,
+    "num_sequences": 1,
+    "num_value_heads": 32,
+    "value_dim": 128
+  },
+  "limitations": [
+    "lower bounds ignore memory width, banking, ports, cascade overhead, floorplanning, and routing",
+    "a raw-capacity PASS is necessary but not sufficient for physical fit",
+    "HLS totals include non-state memories and therefore cannot be smaller than a valid state-only lower bound",
+    "uniform-MXFP4 and flat-INT4 all-layer physical banking remain NOT_RUN",
+    "the BF16 physical attempt fails capacity and is not replaced by a reduced-layer design"
+  ],
+  "physical_all_layer_state_bank_fit": "NOT_RUN",
+  "physical_fit_by_variant": {
+    "BF16": "FAIL",
+    "flat_int4": "NOT_RUN",
+    "mxfp8_e4m3_e8m0_b32": "NOT_RUN",
+    "uniform_mxfp4_e2m1_e8m0_b32": "NOT_RUN"
+  },
+  "primitive_capacity_assumptions": {
+    "bram18k_bits": 18432,
+    "method": "ceil(logical bits / nominal primitive bit capacity), before width, banking, port, cascade, placement, and routing overhead",
+    "uram_bits": 294912
+  },
+  "raw_input_sha256": {
+    "hls/include/gdn_params.hpp": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82",
+    "reports/csynth/corrected/baseline_csynth_summary.json": "E41A7D78948384082C447C09A04679BC013457E8440F541E773126C3916A0CD3",
+    "reports/csynth/corrected/bf16_current/report/gdn_bf16_top_csynth.xml": "9EA0EDD568ACCEFA3CC81E467F18383B4D840A7E2386E82CE5499C50512F0378",
+    "reports/csynth/corrected/bf16_hls_summary.json": "010349D332F8843CF6E3B6511B486116BF5FF6033744CE672BF1552C558F2F95",
+    "reports/csynth/corrected/mxfp8_hls_summary.json": "1EF6CB422542513C70838B5B9332073F9192B9498630E3FD6C55F70D9CE17657",
+    "reports/vivado/baselines/bf16/bf16_vivado_summary.json": "E477E43465AC3EB695BB8D7545B3525506173E958C8323CFE5F69A3ECB5A58E5"
+  },
+  "rows": [
+    {
+      "block_scale_bits": 0,
+      "block_scale_state_bits": 0,
+      "device_bram18k": 4032,
+      "device_uram": 960,
+      "element_bits": 16,
+      "ideal_min_bram18k_for_scales": 0,
+      "ideal_min_uram_for_mantissas": 1024,
+      "logical_state_bits": 301989888,
+      "logical_state_bytes": 37748736,
+      "mantissa_state_bits": 301989888,
+      "per_layer_logical_state_bits": 8388608,
+      "per_layer_logical_state_bytes": 1048576,
+      "physical_banked_fit": "FAIL",
+      "raw_bit_capacity_necessary_condition": "FAIL",
+      "reported_hls_bram18k": 13,
+      "reported_hls_counts_cover_ideal_lower_bound": "FAIL",
+      "reported_hls_uram": 128,
+      "variant": "BF16"
+    },
+    {
+      "block_scale_bits": 8,
+      "block_scale_state_bits": 4718592,
+      "device_bram18k": 4032,
+      "device_uram": 960,
+      "element_bits": 4,
+      "ideal_min_bram18k_for_scales": 256,
+      "ideal_min_uram_for_mantissas": 256,
+      "logical_state_bits": 80216064,
+      "logical_state_bytes": 10027008,
+      "mantissa_state_bits": 75497472,
+      "per_layer_logical_state_bits": 2228224,
+      "per_layer_logical_state_bytes": 278528,
+      "physical_banked_fit": "NOT_RUN",
+      "raw_bit_capacity_necessary_condition": "PASS",
+      "reported_hls_bram18k": 24,
+      "reported_hls_counts_cover_ideal_lower_bound": "FAIL",
+      "reported_hls_uram": 32,
+      "variant": "uniform_mxfp4_e2m1_e8m0_b32"
+    },
+    {
+      "block_scale_bits": 8,
+      "block_scale_state_bits": 4718592,
+      "device_bram18k": 4032,
+      "device_uram": 960,
+      "element_bits": 8,
+      "ideal_min_bram18k_for_scales": 256,
+      "ideal_min_uram_for_mantissas": 512,
+      "logical_state_bits": 155713536,
+      "logical_state_bytes": 19464192,
+      "mantissa_state_bits": 150994944,
+      "per_layer_logical_state_bits": 4325376,
+      "per_layer_logical_state_bytes": 540672,
+      "physical_banked_fit": "NOT_RUN",
+      "raw_bit_capacity_necessary_condition": "PASS",
+      "reported_hls_bram18k": 25,
+      "reported_hls_counts_cover_ideal_lower_bound": "FAIL",
+      "reported_hls_uram": 64,
+      "variant": "mxfp8_e4m3_e8m0_b32"
+    },
+    {
+      "block_scale_bits": 0,
+      "block_scale_state_bits": 0,
+      "device_bram18k": 4032,
+      "device_uram": 960,
+      "element_bits": 4,
+      "ideal_min_bram18k_for_scales": 0,
+      "ideal_min_uram_for_mantissas": 256,
+      "logical_state_bits": 75497472,
+      "logical_state_bytes": 9437184,
+      "mantissa_state_bits": 75497472,
+      "per_layer_logical_state_bits": 2097152,
+      "per_layer_logical_state_bytes": 262144,
+      "physical_banked_fit": "NOT_RUN",
+      "raw_bit_capacity_necessary_condition": "PASS",
+      "reported_hls_bram18k": null,
+      "reported_hls_counts_cover_ideal_lower_bound": "NOT_RUN",
+      "reported_hls_uram": null,
+      "variant": "flat_int4"
+    }
+  ],
+  "schema": 1,
+  "scope": "logical state capacity and ideal primitive-count lower bounds",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 17446,
+      "changed_file_count": 2,
+      "sha256": "07E7FAD3DAC961C08C63814A7D071FB9A256D634A86159414347EDB2866A78D0"
+    },
+    "files": {
+      "hls/include/gdn_params.hpp": {
+        "bytes": 3045,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82"
+      },
+      "scripts/state_capacity_lower_bound.py": {
+        "bytes": 12567,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "AD876405628BAE0D19D256403A0B1A9D2C7BFC63447D3A4067DCE17068D7E3C0"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "state_elements": 18874368,
+  "state_scale_blocks": 589824,
+  "status": "PASS",
+  "timestamp": "2026-08-05T17:01:15.008727+00:00",
+  "uniform_mxfp4_all_layer_raw_capacity": "PASS"
+}

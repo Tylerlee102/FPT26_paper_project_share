@@ -1,0 +1,122 @@
+{
+  "capture": {
+    "bytes": 566285,
+    "metadata": {
+      "captured_arrays": [
+        "attention_mask",
+        "input_ids",
+        "layer_input",
+        "layer_output",
+        "mlp_gate",
+        "mlp_shared_expert_gate",
+        "mlp_shared_expert_gate_proj"
+      ],
+      "experts_implementation": "eager",
+      "layer_index": 12,
+      "max_capture_tokens": 32,
+      "max_length": 128,
+      "model_id": "Qwen/Qwen3-Next-80B-A3B-Instruct",
+      "model_path": "/workspace/models/Qwen3-Next-80B-A3B-Instruct",
+      "num_prompts": 4,
+      "prompt_sha256": "fdffbe80ff20aac8e0a8b074fc0f4b958e05bf0445fe20bcb04266e3b4d966d2",
+      "revision": "default",
+      "schema": 1,
+      "source": "huggingface_qwen3_next",
+      "timestamp": "2026-06-18T04:06:18.882559+00:00",
+      "torch_version": "2.8.0+cu128",
+      "transformers_version": "5.12.1"
+    },
+    "path": "data/calibration/qwen3_next_80b_a3b_layer12.npz",
+    "sha256": "91FED973063039CE4519EF0276AC0F59BFEC372ADA0F80033047DF368370F9B1"
+  },
+  "floating_tensors": {
+    "layer_input": {
+      "abs_max": 51.25,
+      "abs_p50": 0.0830078125,
+      "abs_p90": 0.25390625,
+      "abs_p99": 0.68359375,
+      "abs_p999": 2.578125,
+      "elements": 147456,
+      "maximum": 5.125,
+      "mean": -0.007681616038704912,
+      "minimum": -51.25,
+      "standard_deviation": 0.37698387227492286,
+      "zero_fraction": 0.00054931640625
+    },
+    "layer_output": {
+      "abs_max": 51.25,
+      "abs_p50": 0.0859375,
+      "abs_p90": 0.259765625,
+      "abs_p99": 0.69921875,
+      "abs_p999": 2.71875,
+      "elements": 147456,
+      "maximum": 6.09375,
+      "mean": -0.0073205950514723854,
+      "minimum": -51.25,
+      "standard_deviation": 0.3776311581441079,
+      "zero_fraction": 0.0004679361979166667
+    },
+    "mlp_gate": {
+      "abs_max": 14.25,
+      "abs_p50": 7.53125,
+      "abs_p90": 9.543750000000017,
+      "abs_p99": 11.625,
+      "abs_p999": 13.073875000000044,
+      "elements": 2304,
+      "maximum": -2.9375,
+      "mean": -7.604973687065972,
+      "minimum": -14.25,
+      "standard_deviation": 1.5110001828875683,
+      "zero_fraction": 0.0
+    },
+    "mlp_shared_expert_gate": {
+      "abs_max": 3.375,
+      "abs_p50": 2.78125,
+      "abs_p90": 3.2453125,
+      "abs_p99": 3.3528125,
+      "abs_p999": 3.37278125,
+      "elements": 72,
+      "maximum": -2.328125,
+      "mean": -2.8292100694444446,
+      "minimum": -3.375,
+      "standard_deviation": 0.2848954332922153,
+      "zero_fraction": 0.0
+    },
+    "mlp_shared_expert_gate_proj": {
+      "abs_max": 2.78125,
+      "abs_p50": 0.546875,
+      "abs_p90": 1.375,
+      "abs_p99": 2.187031249999997,
+      "abs_p999": 2.6107968750000055,
+      "elements": 2304,
+      "maximum": 2.5,
+      "mean": -0.1210451409763967,
+      "minimum": -2.78125,
+      "standard_deviation": 0.8102865897701051,
+      "zero_fraction": 0.0
+    }
+  },
+  "generated_at": "2026-08-04T02:33:42.889103+00:00",
+  "interpretation": "Real Qwen activation-range evidence only; this capture cannot measure GDN recurrent-state error or end-to-end model quality.",
+  "recurrence_coverage": {
+    "closed_loop_quality_supported": false,
+    "complete": false,
+    "missing_tensors": [
+      "alpha",
+      "beta",
+      "k",
+      "q",
+      "v"
+    ],
+    "required_tensors": [
+      "alpha",
+      "beta",
+      "k",
+      "q",
+      "v"
+    ]
+  },
+  "schema": 1,
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS"
+}

@@ -1,0 +1,190 @@
+
+
+================================================================
+== Vitis HLS Report for 'aligned_sum_guarded_15_Pipeline_find_dominant'
+================================================================
+* Date:           Sun Aug  2 05:05:48 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        gdn_e2m0_hls
+* Solution:       u55c_250mhz (Vivado IP Flow Target)
+* Product family: virtexuplusHBM
+* Target device:  xcu55c-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.463 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval |      Pipeline     |
+    |   min   |   max   |    min    |    max    | min | max |        Type       |
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+    |       17|       17|  68.000 ns|  68.000 ns|    0|    0|  loop pipeline stp|
+    +---------+---------+-----------+-----------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                 |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |    Loop Name    |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- find_dominant  |       15|       15|         1|          1|          1|    15|       yes|
+        +-----------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|      130|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|        0|      130|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        0|       54|    -|
+|Register             |        -|     -|       23|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|       23|      314|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +----------------------------+-----------------------+---------+----+---+----+-----+
+    |          Instance          |         Module        | BRAM_18K| DSP| FF| LUT| URAM|
+    +----------------------------+-----------------------+---------+----+---+----+-----+
+    |sparsemux_31_4_16_1_1_U619  |sparsemux_31_4_16_1_1  |        0|   0|  0|  65|    0|
+    |sparsemux_31_4_36_1_1_U618  |sparsemux_31_4_36_1_1  |        0|   0|  0|  65|    0|
+    +----------------------------+-----------------------+---------+----+---+----+-----+
+    |Total                       |                       |        0|   0|  0| 130|    0|
+    +----------------------------+-----------------------+---------+----+---+----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +--------------------------+----------+----+---+----+------------+------------+
+    |       Variable Name      | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +--------------------------+----------+----+---+----+------------+------------+
+    |add_ln173_fu_376_p2       |         +|   0|  0|  12|           4|           1|
+    |icmp_ln173_fu_370_p2      |      icmp|   0|  0|  12|           4|           2|
+    |icmp_ln175_fu_453_p2      |      icmp|   0|  0|  43|          36|           1|
+    |icmp_ln176_fu_533_p2      |      icmp|   0|  0|  23|          16|          16|
+    |found_1_fu_567_p2         |        or|   0|  0|   2|           1|           1|
+    |or_ln176_fu_539_p2        |        or|   0|  0|   2|           1|           1|
+    |dominant_1_fu_553_p3      |    select|   0|  0|  16|           1|          16|
+    |select_ln176_fu_545_p3    |    select|   0|  0|  16|           1|          16|
+    |not_icmp_ln175_fu_561_p2  |       xor|   0|  0|   2|           1|           2|
+    |xor_ln176_fu_527_p2       |       xor|   0|  0|   2|           1|           2|
+    +--------------------------+----------+----+---+----+------------+------------+
+    |Total                     |          |   0|  0| 130|          66|          58|
+    +--------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------------------+----+-----------+-----+-----------+
+    |               Name               | LUT| Input Size| Bits| Total Bits|
+    +----------------------------------+----+-----------+-----+-----------+
+    |ap_done_int                       |   9|          2|    1|          2|
+    |ap_phi_mux_found_phi_fu_345_p4    |   9|          2|    1|          2|
+    |ap_sig_allocacmp_dominant_load32  |   9|          2|   16|         32|
+    |ap_sig_allocacmp_index_8          |   9|          2|    4|          8|
+    |dominant_fu_140                   |   9|          2|   16|         32|
+    |index_fu_144                      |   9|          2|    4|          8|
+    +----------------------------------+----+-----------+-----+-----------+
+    |Total                             |  54|         12|   42|         84|
+    +----------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-----------------+----+----+-----+-----------+
+    |       Name      | FF | LUT| Bits| Const Bits|
+    +-----------------+----+----+-----+-----------+
+    |ap_CS_fsm        |   1|   0|    1|          0|
+    |ap_done_reg      |   1|   0|    1|          0|
+    |dominant_fu_140  |  16|   0|   16|          0|
+    |found_reg_342    |   1|   0|    1|          0|
+    |index_fu_144     |   4|   0|    4|          0|
+    +-----------------+----+----+-----+-----------+
+    |Total            |  23|   0|   23|          0|
+    +-----------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------+-----+-----+------------+------------------------------------------------+--------------+
+|      RTL Ports      | Dir | Bits|  Protocol  |                  Source Object                 |    C Type    |
++---------------------+-----+-----+------------+------------------------------------------------+--------------+
+|ap_clk               |   in|    1|  ap_ctrl_hs|  aligned_sum_guarded<15>_Pipeline_find_dominant|  return value|
+|ap_rst               |   in|    1|  ap_ctrl_hs|  aligned_sum_guarded<15>_Pipeline_find_dominant|  return value|
+|ap_start             |   in|    1|  ap_ctrl_hs|  aligned_sum_guarded<15>_Pipeline_find_dominant|  return value|
+|ap_done              |  out|    1|  ap_ctrl_hs|  aligned_sum_guarded<15>_Pipeline_find_dominant|  return value|
+|ap_idle              |  out|    1|  ap_ctrl_hs|  aligned_sum_guarded<15>_Pipeline_find_dominant|  return value|
+|ap_ready             |  out|    1|  ap_ctrl_hs|  aligned_sum_guarded<15>_Pipeline_find_dominant|  return value|
+|sext_ln169           |   in|   32|     ap_none|                                      sext_ln169|        scalar|
+|mantissas_1_val      |   in|   36|     ap_none|                                 mantissas_1_val|        scalar|
+|mantissas_2_val      |   in|   36|     ap_none|                                 mantissas_2_val|        scalar|
+|mantissas_3_val      |   in|   36|     ap_none|                                 mantissas_3_val|        scalar|
+|mantissas_4_val      |   in|   36|     ap_none|                                 mantissas_4_val|        scalar|
+|mantissas_5_val      |   in|   36|     ap_none|                                 mantissas_5_val|        scalar|
+|mantissas_6_val      |   in|   36|     ap_none|                                 mantissas_6_val|        scalar|
+|mantissas_7_val      |   in|   36|     ap_none|                                 mantissas_7_val|        scalar|
+|mantissas_8_val      |   in|   36|     ap_none|                                 mantissas_8_val|        scalar|
+|mantissas_9_val      |   in|   36|     ap_none|                                 mantissas_9_val|        scalar|
+|mantissas_10_val     |   in|   36|     ap_none|                                mantissas_10_val|        scalar|
+|mantissas_11_val     |   in|   36|     ap_none|                                mantissas_11_val|        scalar|
+|mantissas_12_val     |   in|   36|     ap_none|                                mantissas_12_val|        scalar|
+|mantissas_13_val     |   in|   36|     ap_none|                                mantissas_13_val|        scalar|
+|mantissas_14_val     |   in|   36|     ap_none|                                mantissas_14_val|        scalar|
+|exponents_0_val      |   in|   16|     ap_none|                                 exponents_0_val|        scalar|
+|exponents_1_val      |   in|   16|     ap_none|                                 exponents_1_val|        scalar|
+|exponents_2_val      |   in|   16|     ap_none|                                 exponents_2_val|        scalar|
+|exponents_3_val      |   in|   16|     ap_none|                                 exponents_3_val|        scalar|
+|exponents_4_val      |   in|   16|     ap_none|                                 exponents_4_val|        scalar|
+|exponents_5_val      |   in|   16|     ap_none|                                 exponents_5_val|        scalar|
+|exponents_6_val      |   in|   16|     ap_none|                                 exponents_6_val|        scalar|
+|exponents_7_val      |   in|   16|     ap_none|                                 exponents_7_val|        scalar|
+|exponents_8_val      |   in|   16|     ap_none|                                 exponents_8_val|        scalar|
+|exponents_9_val      |   in|   16|     ap_none|                                 exponents_9_val|        scalar|
+|exponents_10_val     |   in|   16|     ap_none|                                exponents_10_val|        scalar|
+|exponents_11_val     |   in|   16|     ap_none|                                exponents_11_val|        scalar|
+|exponents_12_val     |   in|   16|     ap_none|                                exponents_12_val|        scalar|
+|exponents_13_val     |   in|   16|     ap_none|                                exponents_13_val|        scalar|
+|exponents_14_val     |   in|   16|     ap_none|                                exponents_14_val|        scalar|
+|found_out            |  out|    1|      ap_vld|                                       found_out|       pointer|
+|found_out_ap_vld     |  out|    1|      ap_vld|                                       found_out|       pointer|
+|dominant_out         |  out|   16|      ap_vld|                                    dominant_out|       pointer|
+|dominant_out_ap_vld  |  out|    1|      ap_vld|                                    dominant_out|       pointer|
++---------------------+-----+-----+------------+------------------------------------------------+--------------+
+

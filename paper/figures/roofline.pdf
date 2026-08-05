@@ -42,7 +42,7 @@ BT /F1 8 Tf 9.00 110.00 Td (perf.) Tj ET
 0.050 0.060 0.070 rg
 BT /F2 8 Tf 211.00 110.00 Td (Ours MXFP4) Tj ET
 0.420 0.450 0.480 rg
-BT /F1 7 Tf 211.00 97.00 Td (51.47 us/token, 8.98 W) Tj ET
+BT /F1 7 Tf 211.00 97.00 Td (51.41 us/token, 8.98 W) Tj ET
 0.050 0.480 0.450 rg
 BT /F1 7 Tf 188.00 146.00 Td (compute roof) Tj ET
 0.050 0.480 0.450 rg

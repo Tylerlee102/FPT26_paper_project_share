@@ -1,0 +1,118 @@
+{
+  "candidate_evidence_status": "NOT_RUN",
+  "candidate_name": "mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7",
+  "candidate_selection_inputs": {
+    "initial_states": [
+      "random",
+      "zero"
+    ],
+    "seed": 64370,
+    "tokens": 1024,
+    "trace_family": "high_retention"
+  },
+  "configuration": {
+    "activation_block_size": 32,
+    "activation_stack_depth": 2,
+    "base_primary_format": "E2M1/E8M0 MXFP4",
+    "base_residual_element_bits": 3,
+    "base_residual_format": "signed magnitudes [0,0.5,1,2] with E8M0",
+    "base_residual_scale_policy": "minimum SSE over overflow-free E8M0 scale and one adjacent lower scale",
+    "base_stack_depth": 2,
+    "fold_policy": "fixed atomic all-head fold after seven writes",
+    "key_dim": 128,
+    "log_capacity": 7,
+    "log_format": "two residual-stacked E2M1/E8M0 MXFP4 terms",
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "state_block_size": 32,
+    "value_dim": 128
+  },
+  "development_robustness_gate": {
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "families_for_seed_0xfb72": [
+      "dynamic_range",
+      "cancellation",
+      "high_retention",
+      "decay_sweep",
+      "adversarial"
+    ],
+    "high_retention_seeds": [
+      64370,
+      64371,
+      64372
+    ],
+    "initial_states": [
+      "random",
+      "zero"
+    ],
+    "maximum_final_state_relative_l2": 0.1,
+    "minimum_checkpoint_output_cosine": 0.99,
+    "required_dropped_entries": 0,
+    "required_logical_bytes_below_uniform_mxfp8": true,
+    "tokens": 1024
+  },
+  "extended_development_gate": {
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "initial_states": [
+      "random",
+      "zero"
+    ],
+    "maximum_final_state_relative_l2": 0.1,
+    "minimum_checkpoint_output_cosine": 0.99,
+    "seed": 64370,
+    "tokens": 8192,
+    "trace_family": "high_retention"
+  },
+  "held_out_gate": {
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "families": [
+      "nominal",
+      "high_retention"
+    ],
+    "initial_states": [
+      "random",
+      "zero"
+    ],
+    "maximum_final_state_relative_l2": 0.1,
+    "minimum_checkpoint_output_cosine": 0.99,
+    "seeds": [
+      219540062,
+      195936478,
+      334478
+    ],
+    "tokens": 8192
+  },
+  "logical_state_bytes": {
+    "candidate": 538256,
+    "reduction_vs_bf16_percent": 48.675537109375,
+    "reduction_vs_uniform_mxfp8_percent": 0.4466759002770082,
+    "uniform_bf16": 1048576,
+    "uniform_mxfp8_e4m3_b32": 540672
+  },
+  "preregistered_at": "2026-08-02T08:04:24.5013195+00:00",
+  "registration_status": "PASS",
+  "schema": 1,
+  "source_hashes": {
+    "golden/gdn_e2m0_residual.py": "D3412E7E3EF8C7D43AB9E3E8190D5AC3C7EF7C88BD18D645A885F6A6AF65F692",
+    "scripts/e2m0_residual_stability.py": "63BB5F8CF90C70115006C95EBAC4022DB32BA9B54E3ED2E2EBFF50B72828671D",
+    "scripts/verify_e2m0_residual_stability.py": "6DDCF5D845FC2D74672047CDC614D4B13F03A208B9E90A5FEECF705589A382B8"
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "stopping_rule": "Do not alter the candidate after any preregistered held-out run. If either development gate fails, retain the failure and do not open held-out results."
+}

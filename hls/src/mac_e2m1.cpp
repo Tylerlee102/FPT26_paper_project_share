@@ -2,74 +2,67 @@
 
 namespace gdn {
 
-q4_3_t decode_e2m1_q3(mx_e2m1_t x) {
+mantissa_t decode_e2m1_mantissa(mx_e2m1_t value) {
 #pragma HLS INLINE
-  const unsigned code = to_u4(x);
-  const unsigned mag = code & 0x07u;
-  q4_3_t mag_q3 = 0;
-  switch (mag) {
-    case 0: mag_q3 = 0; break;   // 0.0
-    case 1: mag_q3 = 4; break;   // 0.5
-    case 2: mag_q3 = 8; break;   // 1.0
-    case 3: mag_q3 = 12; break;  // 1.5
-    case 4: mag_q3 = 16; break;  // 2.0
-    case 5: mag_q3 = 24; break;  // 3.0
-    case 6: mag_q3 = 32; break;  // 4.0
-    default: mag_q3 = 48; break; // 6.0
-  }
-  return (code & 0x08u) ? static_cast<q4_3_t>(-mag_q3) : mag_q3;
+  static const mantissa_t magnitude[8] = {0, 1, 2, 3, 4, 6, 8, 12};
+#pragma HLS ARRAY_PARTITION variable=magnitude complete dim=1
+  const unsigned code = to_u4(value);
+  const mantissa_t decoded = magnitude[code & 0x07u];
+  return ((code & 0x08u) != 0u && decoded != 0) ? -decoded : decoded;
 }
 
-mx_e2m1_t encode_e2m1_q3(q4_3_t x_q3) {
+exponent_t decode_e2m1_exponent(mx_scale_t scale) {
 #pragma HLS INLINE
-  const bool neg = x_q3 < 0;
-  const q4_3_t abs_q3 = neg ? static_cast<q4_3_t>(-x_q3) : x_q3;
-  static const q4_3_t mag_q3[8] = {0, 4, 8, 12, 16, 24, 32, 48};
-#pragma HLS ARRAY_PARTITION variable=mag_q3 complete dim=0
-
-  unsigned best = 0;
-  q4_3_t best_dist = 32767;
-  for (unsigned i = 0; i < 8; ++i) {
-#pragma HLS UNROLL
-    q4_3_t dist = static_cast<q4_3_t>(abs_q3 - mag_q3[i]);
-    if (dist < 0) {
-      dist = static_cast<q4_3_t>(-dist);
-    }
-    const bool closer = dist < best_dist;
-    const bool tie_even = (dist == best_dist) && ((i & 1u) == 0u) && ((best & 1u) != 0u);
-    if (closer || tie_even) {
-      best = i;
-      best_dist = dist;
-    }
-  }
-  return static_cast<mx_e2m1_t>((neg ? 0x08u : 0x00u) | best);
+  // Integer magnitude r represents r/2, so E8M0 code 127 maps to power -1.
+  return static_cast<exponent_t>(static_cast<int>(to_u8(scale)) - 128);
 }
 
-q4_3_t e2m1_mul_q4_3(mx_e2m1_t a, mx_e2m1_t b) {
+wide_mantissa_t e2m1_product_mantissa(mx_e2m1_t a, mx_e2m1_t b) {
 #pragma HLS INLINE
   const unsigned a_code = to_u4(a);
   const unsigned b_code = to_u4(b);
   const unsigned a_mag = a_code & 0x07u;
   const unsigned b_mag = b_code & 0x07u;
-  const bool neg = ((a_code ^ b_code) & 0x08u) != 0u;
+  const bool negative = ((a_code ^ b_code) & 0x08u) != 0u;
 
-  static const q4_3_t product_mag_q3[8][8] = {
+  static const std::uint8_t product_mag[8][8] = {
       {0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 1, 2, 3, 4, 6, 8, 12},
       {0, 2, 4, 6, 8, 12, 16, 24},
+      {0, 3, 6, 9, 12, 18, 24, 36},
       {0, 4, 8, 12, 16, 24, 32, 48},
       {0, 6, 12, 18, 24, 36, 48, 72},
       {0, 8, 16, 24, 32, 48, 64, 96},
       {0, 12, 24, 36, 48, 72, 96, 144},
-      {0, 16, 32, 48, 64, 96, 128, 192},
-      {0, 24, 48, 72, 96, 144, 192, 288},
   };
-#pragma HLS ARRAY_PARTITION variable=product_mag_q3 complete dim=0
+#pragma HLS ARRAY_PARTITION variable=product_mag complete dim=0
 
-  const q4_3_t mag_q3 = product_mag_q3[a_mag][b_mag];
-  if (mag_q3 == 0) {
+  const wide_mantissa_t magnitude = product_mag[a_mag][b_mag];
+  if (magnitude == 0) {
     return 0;
   }
-  return neg ? static_cast<q4_3_t>(-mag_q3) : mag_q3;
+  return negative ? -magnitude : magnitude;
+}
+
+wide_mantissa_t scale_by_e2m1(mx_e2m1_t coefficient, mantissa_t value) {
+#pragma HLS INLINE
+  const unsigned code = to_u4(coefficient);
+  const unsigned magnitude_code = code & 0x07u;
+  const wide_mantissa_t x = static_cast<wide_mantissa_t>(value);
+  wide_mantissa_t magnitude = 0;
+  switch (magnitude_code) {
+    case 0: magnitude = 0; break;
+    case 1: magnitude = x; break;
+    case 2: magnitude = x + x; break;
+    case 3: magnitude = x + x + x; break;
+    case 4: magnitude = x + x + x + x; break;
+    case 5: magnitude = x + x + x + x + x + x; break;
+    case 6: magnitude = x + x + x + x + x + x + x + x; break;
+    default:
+      magnitude = x + x + x + x + x + x + x + x + x + x + x + x;
+      break;
+  }
+  return ((code & 0x08u) != 0u) ? -magnitude : magnitude;
 }
 
 }  // namespace gdn

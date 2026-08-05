@@ -1,0 +1,6 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,element_saturations,accumulator_saturations,scale_clamps,alignment_underflows,state_scale_changes,event_metrics_status
+synthetic_0000fb72_dynamic_range,development,64370,dynamic_range,bf16_qdq_fp32_accum_state_bf16,0,64,0.9999063313850917,0.013688885588488454,6.671436131000519e-05,0.013926372003043013,0.0014510750770568848,,,,,,NOT_RUN
+synthetic_0000fb72_dynamic_range,development,64370,dynamic_range,flat_int4_qdq,0,64,0.7387615804581463,2.0413307920604624,0.007519639475503936,2.131725549783769,0.10766308195888996,,,,,,NOT_RUN
+synthetic_0000fb72_dynamic_range,development,64370,dynamic_range,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,PASS
+synthetic_0000fb72_dynamic_range,development,64370,dynamic_range,mxfp4_qdq_act_b32_mxfp8_e4m3_state_b32,0,64,0.935043583741897,0.6103576033002399,0.00271874968893826,0.6291951271671018,0.12115143612027168,,,,,,NOT_RUN
+synthetic_0000fb72_dynamic_range,development,64370,dynamic_range,mxfp4_qdq_act_b32_state_b32,0,64,0.7758355077588609,3.3131584530076874,0.012399779865518212,3.46500603682662,0.21605005115270615,,,,,,NOT_RUN

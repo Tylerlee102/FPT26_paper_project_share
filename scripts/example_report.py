@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import csv
 import json
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+from .paper_pack import require_release_gate
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,10 +67,15 @@ def _section_from_file(title: str, path: Path) -> list[str]:
 
 
 def main() -> int:
+    try:
+        require_release_gate()
+    except RuntimeError as exc:
+        print(str(exc))
+        return 1
     numbers = _load_numbers()
     sweep_rows = _load_sweep()
     default = next(row for row in sweep_rows if row["config"] == "ours_mxfp4_b32_pk16_pv8")
-    generated = datetime.now(UTC).isoformat()
+    generated = datetime.now(timezone.utc).isoformat()
     git_sha = str(_value(numbers, "ours_mxfp4_b32_latency_us") and numbers["ours_mxfp4_b32_latency_us"]["git_sha"])
 
     lines: list[str] = [

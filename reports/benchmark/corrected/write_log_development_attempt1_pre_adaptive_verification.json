@@ -1,0 +1,11 @@
+{
+  "checkpoint_rows": 20,
+  "failures": [],
+  "gate_pass": true,
+  "manifest": "reports/benchmark/corrected/write_log_development_manifest.json",
+  "manifest_sha256": "412e3e813d3672b4ad3ce7e0dd93c971e6d547066d4f9256018c5dba4dbfd420",
+  "schema": 1,
+  "status": "PASS",
+  "token_rows": 32768,
+  "verified_at": "2026-08-01T23:24:42.743749+00:00"
+}

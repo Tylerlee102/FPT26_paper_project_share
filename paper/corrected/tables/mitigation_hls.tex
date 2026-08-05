@@ -1,0 +1,11 @@
+\begin{tabular}{lrrr}
+\toprule
+Metric & BF16 & Encoded MXFP4 & Corrected candidate \\
+\midrule
+Logical bytes/layer & 1{,}048{,}576 & 278{,}528 & 537{,}744 \\
+LUT & 84{,}919 & 138{,}969 & 435{,}089 \\
+Non-fold STEP max & 4{,}225{,}728 & 6{,}070{,}592 & 17{,}954{,}144 \\
+Amortized per-layer HLS cycles/STEP & 4{,}225{,}728 & 6{,}070{,}592 & 39{,}947{,}365 \\
+Fold-command burst max & -- & -- & 153{,}952{,}544 \\
+\bottomrule
+\end{tabular}

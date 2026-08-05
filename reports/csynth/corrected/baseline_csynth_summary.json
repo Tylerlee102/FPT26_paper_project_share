@@ -1,0 +1,234 @@
+{
+  "archive": "reports/csynth/corrected_attempt9_transport_pipeline_cleanup",
+  "archive_tree_sha256": "8FE9BEF86E9A92E46F79D96C536C1E12DDA6E6587280D53B70DD9FD1A0ECE60E",
+  "available_slr_resources": {
+    "BRAM_18K": 1344,
+    "DSP": 3008,
+    "FF": 869120,
+    "LUT": 434560,
+    "URAM": 320
+  },
+  "command_completion": "PASS",
+  "freshness": {
+    "latest_source": "hls/src/phase1_prepare.cpp",
+    "latest_source_mtime_utc": "2026-08-02T01:03:22.951515+00:00",
+    "raw_log_mtime_utc": "2026-08-02T01:06:05.733432+00:00",
+    "status": "PASS"
+  },
+  "limitations": [
+    "HLS estimate only; not post-route utilization, timing, or power",
+    "uniform MXFP4 baseline, not the selected residual-stack/write-log candidate",
+    "top-level latency spans multiple command paths and is not measured token throughput",
+    "one-token XSIM smoke failed on memory; required 64-token RTL parity is not run"
+  ],
+  "metrics": {
+    "available_device_resources": {
+      "BRAM_18K": 4032,
+      "DSP": 9024,
+      "FF": 2607360,
+      "LUT": 1303680,
+      "URAM": 960
+    },
+    "clock_uncertainty_ns": 1.08,
+    "device_utilization_percent": {
+      "BRAM_18K": 0.5952380952380952,
+      "DSP": 0.03324468085106383,
+      "FF": 1.686073269513991,
+      "LUT": 10.659747790868925,
+      "URAM": 3.3333333333333335
+    },
+    "estimated_clock_ns": 2.92,
+    "estimated_fmax_mhz": 342.4657534246575,
+    "interval_cycles_max": 12202888,
+    "interval_cycles_min": 8239,
+    "latency_cycles_average": 282733,
+    "latency_cycles_max": 12202887,
+    "latency_cycles_min": 8238,
+    "resources": {
+      "BRAM_18K": 24,
+      "DSP": 3,
+      "FF": 43962,
+      "LUT": 138969,
+      "URAM": 32
+    },
+    "target_clock_ns": 4.0,
+    "target_device": "xcu55c-fsvh2892-2L-e",
+    "tool_version": "2025.2"
+  },
+  "post_route_timing_and_drc": "NOT_RUN",
+  "raw_artifact_sha256": {
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/inferred_directives.ini": "512B3493356F62FF03AD0190AE800897F32AC25A6D4D03E97558D079CE4F95FD",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/aligned_sum_Pipeline_align_and_sum_csynth.rpt": "2B24E13C4F167F5AF12CD3C106DB7117EC64B83430A96D0C98D8427A89D18C43",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/aligned_sum_Pipeline_align_and_sum_csynth.xml": "90524F7FE470E9E15AC54996141E80120D210F75E2741624186AA1E12A4991E8",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/aligned_sum_Pipeline_find_dominant_csynth.rpt": "CE49E099910770C4243DEDB49C47697356A9F21CA87C127F66A38D0526A2B199",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/aligned_sum_Pipeline_find_dominant_csynth.xml": "4938B327BA9F53CFA33CA9CFB4AADFF608B376A31BE7DDFEF1FDC037F2FA522B",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/aligned_sum_csynth.rpt": "2148042FD8F75640C2A4FF2C9C86DA55BA1DAAE8CB72C8AFD5A356080939716E",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/aligned_sum_csynth.xml": "5851DEC72DFC6400D5FFA6C33CA2128447C2C031C5E01057BBC5D9D8D57A4FD0",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/csynth.rpt": "1472BEAB12CF5F2B6DF08EBB13B1A3C2FCD7E7E02C60A5B502D6628E21D6A29D",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/csynth.xml": "C5BAA582911C9C899BF6FD515DA6DE4423FC8CC88F0A1E24C6AB46E74DDD2861",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/csynth_design_size.rpt": "351C2A7FEA131F870FF173037D2F3C41D4EF848782E09C54A075323CDE7FBE24",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/csynth_design_size.xml": "A7E37893D8C483C27B0FF722D69CF091DE9D6A70B70075F504AD2B10F1AA1718",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_csynth.rpt": "8A454FC37A26E551CAF9304539FE648698BBC0709C168B9EC05827A01D4B9F88",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_csynth.xml": "77A607DEC1E4AF82EA165FEF5DB144B0C1175E88CD682E9B6B404A7BC6802103",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Outline_output_lanes_csynth.rpt": "45CB4DB474305AA503CB3D4AD48FAF41BF8708FB6DCCD7AA87AAE614C34AC590",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Outline_output_lanes_csynth.xml": "1DC2266C4ADC7C00DA0AFF3D323365CAC5DC4B09677E7487B2045D9EA7762A84",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_build_output_terms_csynth.rpt": "04915B6C57A29EAB791F702CA8F72344B80E479F5400FF83EB0EEFF5D02F16F3",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_build_output_terms_csynth.xml": "C19E650FECBB62F9267D11EAB13A004EF406D45697EAB23E87D61CBADBA6BA80",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_clear_output_exponent_heads_clear_output_exponent_values_csynth.rpt": "BCEE4A5689B03C9E421463C5E06BB59A59B1149D85D76635190EB4D3D2C64666",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_clear_output_exponent_heads_clear_output_exponent_values_csynth.xml": "4E54E3BBA93569BE662CB1BA5E5F28A06D0A012696AB291ABCFD6B3008074F39",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_clear_output_mantissa_heads_clear_output_mantissa_values_csynth.rpt": "EA9FF71BE48A4D7CCBADB814830BD0C43D0C4AFF542D7C6082F25633F9A60D67",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_clear_output_mantissa_heads_clear_output_mantissa_values_csynth.xml": "935FA947059592086F51BCD9A3F4339A6B72638A06C64DACF7591E50402E5FDD",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_readback_lanes_csynth.rpt": "2CB8A317B2897F0C8FF9849997581A0630E82C54F3CFC6A64C5826E94FFFA274",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_readback_lanes_csynth.xml": "C36E4022C3D10F19E40B41AD1CC5C53AFB4853F63B6B68F4C7B4E98AEDA390CD",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_reset_heads_reset_rows_reset_blocks_csynth.rpt": "1D4B326A108C7C7AACDCC300F22F9831EB5601AA6C3051C2236F4E59322AD942",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_reset_heads_reset_rows_reset_blocks_csynth.xml": "9CF45A25FAA8A4FEAD1857E89FECB28517C5445D204218F301673917EDB160BD",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_store_resident_tile_pack_resident_lanes_csynth.rpt": "AA58007C789AD08D6FC201279AB1F41E4752A2F8A57B1CCCDABEA857F7EF9B19",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_store_resident_tile_pack_resident_lanes_csynth.xml": "28510EB7FC061897220154147097F37A0A57677858B59213DC20EF01E7E6CBF2",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_unpack_resident_lanes_csynth.rpt": "841F58EAC23333C19EF2B4E7F5FA4192A33E8564A6558D44747DD4FC7258243E",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_Pipeline_unpack_resident_lanes_csynth.xml": "BBA3CE7A0DD36E7A8D9FAD7E038E4AA6F89CAB9F7D6AC6F80A13763A02ABF9C2",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_csynth.rpt": "8BDC9291800EB9EEC02E8DC7798A74F8F917997585006C6B146A49FAB04F4A63",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_csynth.xml": "D4756035FB3CC5AA854F9281954D7BE2A13BDDEF261E5B79E7E533D83A39D2ED",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase1_validate_token_csynth.rpt": "CA7DBDCBB109FD37C0AABA1E9C50F25B8CB67EE50304188FFD5DCCE3C05E9B88",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase1_validate_token_csynth.xml": "E8884F44D0313ACE8BB4FCA9BF65BCE1E5E40021F07EDE12E865C8747D33CD9D",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase2_decay_predict_tile_Pipeline_build_prediction_terms_csynth.rpt": "85798250D6D4323FABA9A317CEFD0AA6F2549B3CAF9EADE0ACCAF6F02A0ACED6",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase2_decay_predict_tile_Pipeline_build_prediction_terms_csynth.xml": "93A39F6AE3E0875C3C97EC9DFCF6471B81D99480CB52F57031985EC587F061E8",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase2_decay_predict_tile_Pipeline_decode_and_decay_rows_decode_and_decay_lanes_csynth.rpt": "23BFF12EB8378B33BF199EE3B8E71EB506ADCD5177EB56097B38FD15D618BC63",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase2_decay_predict_tile_Pipeline_decode_and_decay_rows_decode_and_decay_lanes_csynth.xml": "4A1A8FE9C657E42574A978BD41750E4275C47BC9F21E9141457EB55DF2B069E7",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase2_decay_predict_tile_csynth.rpt": "8FD8E47856CA46CFD6AB9A40B23A7570F2B25D8DF5F4B9CA30396AB2188FA270",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase2_decay_predict_tile_csynth.xml": "C123868A5B366BFA0A49DC7736DB3B0E4E38FC3993229EDC9F630B046F667DB6",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase3_delta_tile_Pipeline_delta_lanes_csynth.rpt": "FDB65921B5643AD4E6216BE7DE9BE852EFC9939A2ADE3F6834D81D8435F55CF0",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase3_delta_tile_Pipeline_delta_lanes_csynth.xml": "88B581F1A7203AE10C1BAC2D9CDEE83E6422C636230FC75EFF11447F40134F4D",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase3_delta_tile_csynth.rpt": "F79A8404D0B167F1F356A40AA02751BB1DAA56F2E42776564EAD30349E5A36B9",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase3_delta_tile_csynth.xml": "D19863D4BB4D00167AAEF9E17E1573CEFBE324222E8B73F43DEC0CC757BFA4A7",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase4_update_state_tile_Pipeline_requantize_lanes_csynth.rpt": "B5340D1E6EF4D28FCF0E6C09248F2038A377F78CF4562B93BEF1B165326F086B",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase4_update_state_tile_Pipeline_requantize_lanes_csynth.xml": "9DBD5F6A381282B3E430221E4AEE338162824A0F45A0DEC4CC6F6A6763E7F69E",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase4_update_state_tile_Pipeline_update_lanes_csynth.rpt": "01283080928DF8F237C3BFF4F453B10EC119E944369FCA54A48CFAB1B8893935",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase4_update_state_tile_Pipeline_update_lanes_csynth.xml": "2213077E7B2A7C8ED1016BA379D9BA21CCA5F47138B7B538B2717450DB53EBD4",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase4_update_state_tile_csynth.rpt": "10A9227CC6696730E867A5A8E02113D81DA5EEADBF7A82BB3AD4845C38582CDE",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/phase4_update_state_tile_csynth.xml": "BD51E09248183ED6839CB173EB0D21F1A8B1918DD5C9CB0CED1828548AEFF5A8",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/u55c_250mhz.log": "B331ABB1E3094BAFCFE017F0D2EBCA71F6108CBF0CC9D86884BEC023D191423B"
+  },
+  "required_64_token_rtl_cosimulation": "NOT_RUN",
+  "rtl_cosimulation_smoke": "FAIL",
+  "schema": 1,
+  "scope": "corrected uniform-MXFP4 baseline HLS C-synthesis estimate",
+  "selected_write_log_candidate_physical_evidence": "NOT_RUN",
+  "slr_utilization_percent_reported": {
+    "BRAM_18K": 1.0,
+    "DSP": 0.0,
+    "FF": 5.0,
+    "LUT": 31.0,
+    "URAM": 10.0
+  },
+  "source_matches_preceding_csim": true,
+  "source_mismatches": {},
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "source_sha256": {
+    "hls/include/block_exp_align.hpp": "59CA155733E5634B37D3017BDD884C46772844C91BA0952ABED4E8D22AC9947C",
+    "hls/include/gdn_kernel.hpp": "D1DE2A9CB607D3F0CE11A7E9C459CD63A5EC6A5A1248E26E0555C412CA896F9E",
+    "hls/include/gdn_params.hpp": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82",
+    "hls/include/mac_e2m1.hpp": "8EE518BFDBA121D5EF3C30CAF97142CA0E42BE31234F9ECD476113F66FA9D150",
+    "hls/include/mx_types.hpp": "AB1BD900904C946167AF0037997A81FBF8665E5543A7027097724FE9BBAC97AC",
+    "hls/src/block_exp_align.cpp": "94E58D52037E27E1E83EA7584511F1FA56BAE317FB30CD53338406BB92890F4B",
+    "hls/src/gdn_top.cpp": "BEC4EDFC88441C0CF4F1B084E6EFE6590D76704201FE6FBB5BA7260D7366BB76",
+    "hls/src/mac_e2m1.cpp": "02641D16AF280EAD3DD885171688FC1E523F026D4EA3A1A7B0A5DAEA74E37B80",
+    "hls/src/phase1_prepare.cpp": "F9154842A1EFEFB211636A1B4C358F682812CB62EFF460F0189DBDB0338BD736",
+    "hls/src/phase2_state_read.cpp": "0C034D0484759BF49A44A32FDB12B4A42D8D460E0845BA2B75F7174B9AF29B67",
+    "hls/src/phase3_update.cpp": "6AA56A83F6BCBFAD26DFA3587A34F74135163B0BCD65E6ABA9B4B2722952A86E",
+    "hls/src/phase4_state_write.cpp": "09BBE3CA09E5668757BA302BA5F7CD9C58302EFF2AE03AA5A3E6D02AF799F806",
+    "hls/src/phase5_output.cpp": "1EC39F69B61687A802801CB5CE4C9880AD74BC7EB54E83586F05C941B0053C37",
+    "hls/tcl/run_csynth.tcl": "D6A0032C855980F590D53839DE0932D6FE09BD79D90DFDEF27D7573ECCAA248C"
+  },
+  "status": "PASS",
+  "targeted_loop_ii_status": "PASS",
+  "targeted_loops": [
+    {
+      "depth": 2,
+      "final_ii": 1,
+      "loop": "clear_output_mantissa_heads_clear_output_mantissa_values",
+      "target_ii": 1
+    },
+    {
+      "depth": 8,
+      "final_ii": 1,
+      "loop": "clear_output_exponent_heads_clear_output_exponent_values",
+      "target_ii": 1
+    },
+    {
+      "depth": 4,
+      "final_ii": 1,
+      "loop": "reset_heads_reset_rows_reset_blocks",
+      "target_ii": 1
+    },
+    {
+      "depth": 1,
+      "final_ii": 1,
+      "loop": "unpack_resident_lanes",
+      "target_ii": 1
+    },
+    {
+      "depth": 6,
+      "final_ii": 1,
+      "loop": "decode_and_decay_rows_decode_and_decay_lanes",
+      "target_ii": 1
+    },
+    {
+      "depth": 3,
+      "final_ii": 1,
+      "loop": "build_prediction_terms",
+      "target_ii": 1
+    },
+    {
+      "depth": 2,
+      "final_ii": 1,
+      "loop": "find_dominant",
+      "target_ii": 1
+    },
+    {
+      "depth": 5,
+      "final_ii": 1,
+      "loop": "align_and_sum",
+      "target_ii": 1
+    },
+    {
+      "depth": 11,
+      "final_ii": 1,
+      "loop": "delta_lanes",
+      "target_ii": 1
+    },
+    {
+      "depth": 7,
+      "final_ii": 1,
+      "loop": "update_lanes",
+      "target_ii": 1
+    },
+    {
+      "depth": 9,
+      "final_ii": 1,
+      "loop": "requantize_lanes",
+      "target_ii": 1
+    },
+    {
+      "depth": 3,
+      "final_ii": 1,
+      "loop": "build_output_terms",
+      "target_ii": 1
+    },
+    {
+      "depth": 3,
+      "final_ii": 1,
+      "loop": "store_resident_tile_pack_resident_lanes",
+      "target_ii": 1
+    },
+    {
+      "depth": 8,
+      "final_ii": 1,
+      "loop": "readback_lanes",
+      "target_ii": 1
+    }
+  ],
+  "timestamp": "2026-08-02T01:06:54.063596+00:00",
+  "untargeted_loops": [],
+  "vendor_loop_constraint_summary": "PASS",
+  "vendor_loop_constraint_text": "All loop constraints were satisfied"
+}

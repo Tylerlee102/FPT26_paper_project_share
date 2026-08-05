@@ -1,0 +1,51 @@
+{
+  "activation_stack_depth": 2,
+  "adaptive_min_entries": 4,
+  "base_stack_depth": 2,
+  "capacities": [
+    8
+  ],
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 256,
+    "trace_family": "nominal",
+    "value_dim": 128
+  },
+  "fold_decay_threshold": 0.85,
+  "fold_policy": "decay_threshold",
+  "input_stream_sha256": "4467ba807789ee33c6167b447abe9d3e280737cc264cc82bd034b49d9e7973bf",
+  "limitations": [
+    "synthetic inputs",
+    "floating Q/DQ candidate, not the encoded-integer oracle",
+    "logical storage bytes, not placed BRAM/URAM allocation",
+    "not closed-loop Qwen quality evidence"
+  ],
+  "log_precision": "mxfp8_e4m3",
+  "numpy": "2.3.5",
+  "outputs": {
+    "reports/benchmark/corrected/write_log_adaptive_d850_256_checkpoints.csv": "403a2315b09a6a83f902c25985a97f249f3fb829090a4edd1d8872c8fd0410d8",
+    "reports/benchmark/corrected/write_log_adaptive_d850_256_tokens.csv": "5f3ff7df3ecf7bb832a91c307a9c18fa8266387f59af276169dc119450af1f06"
+  },
+  "python": "3.12.10",
+  "schema": 1,
+  "source_hashes": {
+    "golden/gdn_fp32.py": "7ebc9b7a0ba400a553e9c079b2e2e98596723dcc8b1d137b0477c798e34697c5",
+    "golden/gdn_mxfp4.py": "22e9975b4a60a948a909fa0fc35630b1bc6ad68f7464b5c8e0c68f70bcaa44b8",
+    "golden/gdn_write_log.py": "23b9a53b11cea0d915795aae1d0f1311f23980149fd70e2c892f197b15508a23",
+    "golden/mx_format.py": "b0f8bee046465f342e8049b33a91c3e424c3c2c6e69fb53e85d2d63656be269d",
+    "scripts/long_sequence_stability.py": "10c0ab85b56d8e634c0a34daef6480239092c1335a3e47a595701c19bed7a69b",
+    "scripts/write_log_stability.py": "fc90ca74549785fd4078687c50cb8a0d07b24ad7ad561a655da908ac5a251661"
+  },
+  "status": "diagnostic_only",
+  "timestamp": "2026-08-01T23:28:11.896793+00:00"
+}

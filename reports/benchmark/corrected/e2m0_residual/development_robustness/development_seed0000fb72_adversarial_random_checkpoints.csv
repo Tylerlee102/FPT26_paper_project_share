@@ -1,0 +1,7 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_0000fb72_adversarial_random,development,64370,adversarial,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_adversarial_random,development,64370,adversarial,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,64,0.9999468210045862,0.011723073135810428,0.0008698180317878723,0.018493034026851877,0.022991135716438293,9,0,0,1,7,538256,PASS
+synthetic_0000fb72_adversarial_random,development,64370,adversarial,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_adversarial_random,development,64370,adversarial,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,256,0.9999125624636637,0.029083724358606382,0.01040235161781311,0.09466755567229523,1.1345930099487305,36,0,0,4,7,538256,PASS
+synthetic_0000fb72_adversarial_random,development,64370,adversarial,fp32,0,1024,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_adversarial_random,development,64370,adversarial,mxfp4_rs2_act_mxfp4_e2m0rs2_base_b32_mxfp4rs2_log_fixed_b32_r7,0,1024,0.999851212110127,0.03151324923039831,0.00017874641343951225,0.011287852270028974,0.13877248764038086,146,0,0,2,7,538256,PASS

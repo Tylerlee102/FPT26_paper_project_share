@@ -1,0 +1,95 @@
+{
+  "extended_8192_replay_status": "PASS",
+  "extended_8192_status": "PASS",
+  "generated_at": "2026-08-05T20:47:22.878473+00:00",
+  "inputs_sha256": {
+    "docs/numerical_contract.md": "7899AC6E050844D63C74E95627200C3224E8A07416C926D798C7E23C51B6794A",
+    "docs/synthetic_trace_protocol.json": "7D485020F522054CCEE8D3129A682E20E865D78FF17E22E7DB486E63DAD88BBA",
+    "paper/corrected/paper.tex": "8CAE95610F46961BCF5573DA267F1164745E36B345B4BCD94B047FBDCBBA0F42",
+    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "9A482C2C75CCE4EAF38518D935975179D1A6868C852820A86A421BF1C9AE8AC1",
+    "paper/figures/corrected/long_sequence_stability_panel_manifest.json": "D4C67D9054186C27DB5C4AF4997DC296B7FA279C98E0A6D849A15F69B2253616",
+    "paper/figures/corrected/long_trace_plot_manifest.json": "348A9BDFFB44200A5FDD255912E807FD0BB66C2C767934FA881A8C431A472E99",
+    "paper/figures/corrected/tradeoff_evidence_manifest.json": "9ACBFEAAFBA585F8CFE30C930DCA77F9AE874E7DA52D706464F6B1C6FDB0CCF5",
+    "reports/benchmark/corrected/e2m0_encoded/extended_development/extended_summary.json": "D876B11E3C43C008D34176196AE0B3BA1DA238260BE8922C42F06FD86D915051",
+    "reports/benchmark/corrected/e2m0_encoded/held_out/held_out_summary.json": "AE5E344B840DF8801178B402682CD0B1E003E0CB2F3894B8B7C3F8881ADD9920",
+    "reports/benchmark/corrected/e2m0_encoded_preregistration.json": "1C325E244A26F78598D8160B76104D3A8EDC75561742458CABE63FA43ACEAF5A",
+    "reports/benchmark/corrected/hls_arithmetic_comparison.json": "F996D0968D824C981547B919729C90DA53EBCC27C0FD06D205D391584BEC3DB3",
+    "reports/benchmark/corrected/long_trace_checkpoints.csv": "BA27DD61AE09FC009C95B0E586B9E7BF8D275A9425EF014A554D6359730349AA",
+    "reports/benchmark/corrected/native_encoded_long_trace_checkpoints.csv": "CAD02382EDE3F744CB0BDE36382A4268D8C37DDD3359A196A43D56C38FB60A32",
+    "reports/benchmark/corrected/scale_policy_checkpoints.csv": "6C2FF3F714F856AC0D4471EC3C0CEC6E95CF8A13DC4154F7E847B0B8E65C96F0",
+    "reports/benchmark/corrected/state_capacity_lower_bound.json": "BC74E5FCB62C81862C6FED1D90789561387D88E4AA3551663D7D73068F6C6044",
+    "reports/benchmark/corrected/stress/long_trace_stress_summary.csv": "62B55A7BAF51F9DEA4A5F393A956E6468340BB7BD4E839BF6162F18D58869C3C",
+    "reports/benchmark/corrected/stress/long_trace_stress_summary_manifest.json": "1F0315E79A237775889DB4D3617A98F038F1CF4C5853F5F8379F281B48416521",
+    "reports/benchmark/corrected/synthetic_stability_verification.json": "ECE6BBC33FE35C38DAED8286B10EF07D8B626E7A229AF5776CB70D42195D1317",
+    "reports/benchmark/qwen_recurrent_stability_manifest.json": "CA39E60BCE92D72C80D2772E63C23730D95C02816D9DF93E7A183ACC01CED117",
+    "reports/cosim/corrected/e2m0_control_smoke/e2m0_control_smoke_summary.json": "33970D4BABA496B722274859987390A52F34E5B094369748DF9CE79DA4A58B22",
+    "reports/cosim/corrected/e2m0_trace64/e2m0_trace64_cosim_summary.json": "538E7A615A3DCA00D2705D4C63D06B6CF6148F794C3E751F364B1AE4BCE5E20D",
+    "reports/csynth/corrected/bf16_current/report/gdn_bf16_top_impl_csynth.rpt": "5B98EA56982AE9FCAB1EA34D208A08B661788042682E38983F405CFA34FF540F",
+    "reports/csynth/corrected/e2m0_hls_summary.json": "F9FFC69166F7C7C5579A7F6B8549C25AC221A5E98FF012786E6F86505897C984",
+    "reports/csynth/corrected/e2m0_r7_retime/report/gdn_e2m0_top_impl_csynth.rpt": "AFEB6AA42C3870E98A8F5DD7817244B36A87CBC699F22611F6E868F7E012D29A",
+    "reports/csynth/corrected_attempt9_transport_pipeline_cleanup/report/gdn_top_impl_csynth.rpt": "8BDC9291800EB9EEC02E8DC7798A74F8F917997585006C6B146A49FAB04F4A63",
+    "reports/golden/qwen_capture_characterization.json": "499505DC5D24F4AD3B61156446F96DEFE8A96CF90BF69A5AD9CC90B00D9DC51E",
+    "reports/vivado/baselines/bf16/bf16_vivado_summary.json": "E477E43465AC3EB695BB8D7545B3525506173E958C8323CFE5F69A3ECB5A58E5",
+    "reports/vivado/baselines/mxfp8/mxfp8_vivado_summary.json": "7BC8C936DC03D75BEB810AC61F30C7F58FDCBB6CDEE75CD3CA0B95384D93FD0D",
+    "reports/vivado/corrected/e2m0/e2m0_postroute_summary.json": "E757DD4356ADF20F60E24AB6BF380E17640DF389472D587E4D29D2288E6AEF04"
+  },
+  "limitations": [
+    "asset generation does not authorize PDF generation or submission",
+    "audit-PDF, visual-review, finalization, and release gates are separate"
+  ],
+  "outputs_sha256": {
+    "paper/corrected/numbers.json": "70CD57C72B08A8961A4670C378B543E29977B15D3BF56B58EB88FE2E6386685C",
+    "paper/corrected/provenance.json": "70CD57C72B08A8961A4670C378B543E29977B15D3BF56B58EB88FE2E6386685C",
+    "paper/corrected/snippets/corrected_result_macros.tex": "385616751E7CA5AA0E72F3BB3D2ACA23A157C29B4A79DA160BA792666B664AE0",
+    "paper/corrected/tables/controlled_hls.tex": "D9E524B3F1895E05D5B52D1FA361C5C92A6752F908E49CEA09AEF9F6BB6D334F",
+    "paper/corrected/tables/corrected_extended.tex": "894F804599CDE5B4C9CF5D08FD0CD4FDE849E1CF0FC4949816DEC665B094BCD2",
+    "paper/corrected/tables/corrected_heldout.tex": "445EBEC67A7D322CF5F371DF6C055F3F185362A8155CC9D11F861131E291C201",
+    "paper/corrected/tables/corrected_quality.tex": "96A41D79CF2507B6F38291F99176703EC4D96403E47C9CD5D7B22FA1F16F74A3",
+    "paper/corrected/tables/long_sequence.tex": "139C96863FC825093C10D5B150D5B7C39FBB54B843E3C55383F8E5D71D2B342A",
+    "paper/corrected/tables/mitigation_hls.tex": "A0799DD0BB0F77B652B020AEDE5FF66D971A0BBA225E55EC8C78EEC833C93B14",
+    "paper/corrected/tables/postroute_evidence.tex": "39D22AA714B17C491CC0CF076CA35FF3A4DB7195782645453020687F6A9E34E8",
+    "paper/corrected/tables/qwen_recurrent_stability.tex": "C896771CAE22E41E8E777FD13B11B920C37B50390D687B356AC814716AC6C1DB",
+    "paper/corrected/tables/resource_ablation.tex": "B740AD529781D3218FA8E8676BA29DF7F8FB07C8191B8FD605CD241E8EAD41AB",
+    "paper/corrected/tables/scale_policy.tex": "1E5C313544E3969ADCD75B228DE15A323069A7576E819B6AE7AA08443BF356E8"
+  },
+  "schema": 1,
+  "scope": "corrected manuscript assets generated from verified evidence",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 195367,
+      "changed_file_count": 3,
+      "sha256": "B68931F1FCCE54C85807C356C9D02FCA3EB524FD83F89AAC0604F0707170591A"
+    },
+    "files": {
+      "docs/numerical_contract.md": {
+        "bytes": 24217,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "7899AC6E050844D63C74E95627200C3224E8A07416C926D798C7E23C51B6794A"
+      },
+      "paper/corrected/paper.tex": {
+        "bytes": 48876,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "8CAE95610F46961BCF5573DA267F1164745E36B345B4BCD94B047FBDCBBA0F42"
+      },
+      "scripts/corrected_paper_assets.py": {
+        "bytes": 117153,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "DE8FE99716D5A0DED376EF4CE19DB58A97A0A068629638AE35AFF99A010DD380"
+      }
+    },
+    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "status": "PASS",
+  "verified_figure_sha256": {
+    "paper/figures/corrected/corrected_candidate_datapath.pdf": "8AFB2147ACEE9D6E63DC9921F2F6AFB6E4043B1AA53CA311B75D3C3D279C455E",
+    "paper/figures/corrected/long_sequence_stability_panel.pdf": "54D38A75A6503DC748A61B240D8DC6B9AA19492FF3D1B31F707532389182CBE3",
+    "paper/figures/corrected/output_cosine_vs_token.pdf": "715B27F27769127B076C798C62C9CF25AF8258A8A269BD95AFB01ED0A6F94F65",
+    "paper/figures/corrected/state_relative_l2_vs_token.pdf": "BFE99D439384C9B88B352F2A493612CFAEEEB1B60A2140BDC2B47AA8C4A4E938",
+    "paper/figures/corrected/tradeoff_evidence.pdf": "7E6A77638D932A719C223B33573A0C051407EB12BCE3D7D3374AE36FB2C8C067"
+  }
+}

@@ -1,0 +1,7 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_0000fb72_dynamic_range_random,development,64370,dynamic_range,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_dynamic_range_random,development,64370,dynamic_range,mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7,0,64,0.9902996286960475,0.1396799954701692,0.0005434334743767977,0.14329661436759017,0.0111363735049963,9,0,0,1,7,536912,PASS
+synthetic_0000fb72_dynamic_range_random,development,64370,dynamic_range,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_dynamic_range_random,development,64370,dynamic_range,mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7,0,256,0.9966720557463687,0.08151595425402265,0.011566004250198603,0.08110370235847468,0.2776610553264618,36,0,0,4,7,536912,PASS
+synthetic_0000fb72_dynamic_range_random,development,64370,dynamic_range,fp32,0,1024,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_0000fb72_dynamic_range_random,development,64370,dynamic_range,mxfp4_rs2_act_rs2_sparse75_base_b32_mxfp8_log_fixed_b32_r7,0,1024,0.9954139195717246,0.09567636562616845,0.0017268802039325237,0.09700094676843837,0.04700559377670288,146,0,0,2,7,536912,PASS

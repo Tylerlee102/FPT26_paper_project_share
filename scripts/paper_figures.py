@@ -6,6 +6,8 @@ import math
 from pathlib import Path
 from typing import Iterable
 
+from .paper_pack import require_release_gate
+
 
 ROOT = Path(__file__).resolve().parents[1]
 NUMBERS = ROOT / "paper" / "numbers.json"
@@ -278,7 +280,16 @@ def _roofline(path: Path, numbers: dict[str, dict[str, object]]) -> None:
 def _dataflow(path: Path) -> None:
     canvas = PdfCanvas(360, 235)
     canvas.text(16, 214, "Persistent-State GDN Decode Dataflow", size=12, bold=True, color=BLUE)
-    canvas.box_label(16, 154, 72, 40, "Token inputs", "q, k, v, beta, gate", fill=(0.94, 0.98, 1.0), stroke=BLUE)
+    canvas.box_label(
+        16,
+        154,
+        72,
+        40,
+        "Core inputs",
+        "q_scaled, k_norm, v, alpha, beta",
+        fill=(0.94, 0.98, 1.0),
+        stroke=BLUE,
+    )
     canvas.box_label(108, 154, 72, 40, "MX prepare", "pack + block scales", fill=LIGHT, stroke=TEAL)
     canvas.box_label(200, 154, 72, 40, "MAC fabric", "native E2M1", fill=(0.96, 0.95, 1.0), stroke=PURPLE)
     canvas.box_label(288, 154, 54, 40, "Output", "packed lanes", fill=(0.96, 1.0, 0.95), stroke=GREEN)
@@ -430,6 +441,11 @@ def _write_stub(filename: str) -> None:
 
 
 def main() -> int:
+    try:
+        require_release_gate()
+    except RuntimeError as exc:
+        print(str(exc))
+        return 1
     numbers = json.loads(NUMBERS.read_text(encoding="utf-8"))
     FIGURES.mkdir(parents=True, exist_ok=True)
 

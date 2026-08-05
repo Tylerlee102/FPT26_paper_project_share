@@ -1,0 +1,38 @@
+{
+  "checkpoint_count_per_trace": 5,
+  "initial_states": [
+    "random",
+    "zero"
+  ],
+  "limitations": [
+    "synthetic nominal inputs only",
+    "floating Q/DQ candidate, not encoded-integer or RTL evidence",
+    "no saturation/overflow telemetry from the encoded datapath",
+    "not closed-loop Qwen quality evidence",
+    "logical storage only; physical allocation remains NOT_RUN"
+  ],
+  "matrix_manifests": {
+    "reports/benchmark/corrected/write_log_held_out_random/matrix_manifest.json": "8636db8aaf65663b28848e70e9fa72aa499ccac3fe208590d5817a1877621084",
+    "reports/benchmark/corrected/write_log_held_out_zero/matrix_manifest.json": "89b378613af64c7ee9f1e78cc8dd8aac53741a9e2b2090eb111914145e549c47"
+  },
+  "maximum_dropped_entries": 0,
+  "outputs": {
+    "reports/benchmark/corrected/write_log_held_out_checkpoint_stats.csv": "e0043515ba0cd98db7b4fbc508b770128176e680bca18b3388ad72eecb407e2c",
+    "reports/benchmark/corrected/write_log_held_out_summary.csv": "aa6f38da8df39c8e89c1f647f9476bb2fae37bfa9bab61e44eaec86c04848961"
+  },
+  "schema": 1,
+  "scope": "held-out nominal synthetic engineering gate",
+  "seeds": [
+    659918,
+    12648430,
+    388821
+  ],
+  "selection_sha256": "522d3e2feae50e71ec38c80cd083383b84eea2cd9667bda5a06eb0546b391739",
+  "status": "PASS",
+  "timestamp": "2026-08-02T00:11:07.309807+00:00",
+  "tokens": 8192,
+  "trace_count": 6,
+  "trace_family": "nominal",
+  "worst_checkpoint_output_cosine_fp32": 0.9941629442073008,
+  "worst_final_state_rel_l2": 0.09883354425031543
+}

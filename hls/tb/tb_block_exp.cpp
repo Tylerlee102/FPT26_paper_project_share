@@ -3,40 +3,33 @@
 #include "block_exp_align.hpp"
 
 int main() {
-  {
-    gdn::block_accum_t got = gdn::block_exp_align_accumulate(nullptr, 0);
-    if (static_cast<int>(got.accum_q3) != 0 || got.exponent != 0) {
-      std::cerr << "empty block mismatch\n";
-      return 1;
-    }
+  gdn::command_counter_t counters[gdn::COUNTER_COUNT]{};
+  if (gdn::round_shift_rne(5, 1) != 2 ||
+      gdn::round_shift_rne(7, 1) != 4 ||
+      gdn::round_shift_rne(-5, 1) != -2 ||
+      gdn::round_shift_rne(-7, 1) != -4) {
+    std::cerr << "RNE mismatch\n";
+    return 1;
   }
-
-  {
-    gdn::mx_partial_t partials[2] = {
-        {16, 127, 127, false},
-        {8, 127, 127, true},
-    };
-    gdn::block_accum_t got = gdn::block_exp_align_accumulate(partials, 2);
-    if (static_cast<int>(got.accum_q3) != 24 || got.exponent != 0) {
-      std::cerr << "same exponent accumulation mismatch\n";
-      return 1;
-    }
+  bool alignment_underflow = false;
+  const gdn::aligned_value_t pair = gdn::aligned_pair(
+      16, 0, 16, -1, alignment_underflow, counters);
+  if (pair.mantissa != 24 || pair.exponent != 0) {
+    std::cerr << "aligned pair mismatch\n";
+    return 1;
   }
-
-  {
-    gdn::mx_partial_t partials[2] = {
-        {16, 127, 127, false},
-        {16, 127, 126, true},
-    };
-    gdn::block_accum_t got = gdn::block_exp_align_accumulate(partials, 2);
-    if (static_cast<int>(got.accum_q3) != 24 || got.exponent != 0) {
-      std::cerr << "shifted exponent accumulation mismatch got="
-                << static_cast<int>(got.accum_q3) << " exp=" << got.exponent << "\n";
-      return 1;
-    }
+  gdn::wide_mantissa_t mantissas[gdn::KEY_DIM]{};
+  gdn::exponent_t exponents[gdn::KEY_DIM]{};
+  mantissas[0] = 16;
+  mantissas[1] = 16;
+  exponents[0] = 0;
+  exponents[1] = -1;
+  const gdn::aligned_value_t sum =
+      gdn::aligned_sum(mantissas, exponents, 2, counters);
+  if (sum.mantissa != 24 || sum.exponent != 0) {
+    std::cerr << "aligned sum mismatch\n";
+    return 1;
   }
-
   std::cout << "tb_block_exp PASS\n";
   return 0;
 }
-

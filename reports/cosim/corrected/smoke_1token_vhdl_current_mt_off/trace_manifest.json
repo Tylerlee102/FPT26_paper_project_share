@@ -1,0 +1,68 @@
+{
+  "binary": {
+    "bytes": 574074,
+    "path": "reports/cosim/corrected/smoke_1token/trace.bin",
+    "sha256": "67D2D2A1A0345D8844F20F292414BD65D0D81FEBAAB29D34C2A8DADF1A5B6175"
+  },
+  "configuration": {
+    "block_size": 32,
+    "key_dim": 128,
+    "layer_id": 0,
+    "num_layers": 36,
+    "num_qk_heads": 16,
+    "num_sequences": 1,
+    "num_value_heads": 32,
+    "sequence_id": 0,
+    "value_dim": 128
+  },
+  "counter_order": [
+    "element_saturations",
+    "accumulator_saturations",
+    "scale_clamps",
+    "alignment_underflows",
+    "state_scale_changes",
+    "invalid_encodings",
+    "rejected_commands",
+    "committed_state_generations"
+  ],
+  "elapsed_seconds": 4.708336200012127,
+  "final_cumulative_counters": {
+    "accumulator_saturations": 0,
+    "alignment_underflows": 3539,
+    "committed_state_generations": 1,
+    "element_saturations": 0,
+    "invalid_encodings": 0,
+    "rejected_commands": 0,
+    "scale_clamps": 0,
+    "state_scale_changes": 13960
+  },
+  "final_generation": 1,
+  "finished_at": "2026-08-02T00:41:23.521674+00:00",
+  "format": "GDNTRC01",
+  "format_version": 1,
+  "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "input_stream_sha256": "1A71E2F0F39AFD64CB9250B97727183949FEFCD106438E4712F2120B2F860DD5",
+  "runtime": {
+    "numpy": "2.3.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "seed": 64370,
+  "source_sha256": {
+    "golden/gdn_fp32.py": "7EBC9B7A0BA400A553E9C079B2E2E98596723DCC8B1D137B0477C798E34697C5",
+    "golden/gdn_mxfp4_encoded.py": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402",
+    "golden/gdn_resident_state.py": "CA7DF6CDF24E0D05D57F547AC83ECB7492219DB5EE271D6B13BB5D67C86FB282",
+    "golden/mx_format.py": "B0F8BEE046465F342E8049B33A91C3E424C3C2C6E69FB53E85D2D63656BE269D",
+    "scripts/generate_hls_command_trace.py": "84FB674239115389824F8F53F91DAB33B5522F066FE0E0FFFA41C92D6E0CA56C"
+  },
+  "split": "development",
+  "started_at": "2026-08-02T00:41:18.896675+00:00",
+  "status": "PASS",
+  "summary_csv": {
+    "path": "reports/cosim/corrected/smoke_1token/trace.csv",
+    "rows": 1,
+    "sha256": "4D8C74D8983E674DE1519D018C0EFD7766969E893B50738D4A52C15EAC81292C"
+  },
+  "tokens": 1,
+  "trace_family": "nominal"
+}

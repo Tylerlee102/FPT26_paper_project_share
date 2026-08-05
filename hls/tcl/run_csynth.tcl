@@ -1,6 +1,6 @@
 open_project gdn_mxfp4_hls
 set_top gdn_top
-set config_cflags "-Ihls/include"
+set config_cflags "-Ihls/include -std=c++14"
 if {[info exists ::env(GDN_P_K)]} {
   append config_cflags " -DGDN_P_K=$::env(GDN_P_K)"
 }
@@ -21,5 +21,6 @@ add_files -cflags $config_cflags hls/src/phase5_output.cpp
 open_solution -reset "u55c_250mhz"
 set_part {xcu55c-fsvh2892-2L-e}
 create_clock -period 4.0 -name default
+config_compile -pipeline_loops 0
 csynth_design
 exit

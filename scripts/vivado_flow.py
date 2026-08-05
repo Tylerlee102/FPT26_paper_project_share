@@ -6,12 +6,23 @@ import subprocess
 import sys
 from pathlib import Path
 
+from .prepare_e2m0_ooc_rtl import generate as prepare_e2m0_ooc_rtl
+from .prepare_bf16_ooc_rtl import generate as prepare_bf16_ooc_rtl
+from .prepare_mxfp8_ooc_rtl import generate as prepare_mxfp8_ooc_rtl
 from .xilinx_tools import find_vivado_batch
 
 
 TCL_BY_STEP = {
     "synth": Path("vivado/tcl/run_synth.tcl"),
     "impl": Path("vivado/tcl/run_impl.tcl"),
+    "e2m0-synth": Path("vivado/tcl/run_e2m0_synth.tcl"),
+    "e2m0-impl": Path("vivado/tcl/run_e2m0_impl.tcl"),
+    "e2m0-postroute-sweep": Path("vivado/tcl/run_e2m0_postroute_sweep.tcl"),
+    "bf16-synth": Path("vivado/tcl/run_bf16_synth.tcl"),
+    "bf16-impl": Path("vivado/tcl/run_bf16_impl.tcl"),
+    "mxfp8-synth": Path("vivado/tcl/run_mxfp8_synth.tcl"),
+    "mxfp8-impl": Path("vivado/tcl/run_mxfp8_impl.tcl"),
+    "mxfp8-postroute-sweep": Path("vivado/tcl/run_mxfp8_postroute_sweep.tcl"),
 }
 
 
@@ -26,10 +37,19 @@ def main(argv: list[str] | None = None) -> int:
 
     vivado = find_vivado_batch()
     if vivado is None:
-        print("Vivado was not found on PATH or under C:/Xilinx.", file=sys.stderr)
+        print(
+            "Vivado was not found on PATH or under C:/AMDDesignTools or C:/Xilinx.",
+            file=sys.stderr,
+        )
         return 2
 
     root = Path(__file__).resolve().parents[1]
+    if args.step.startswith("e2m0-"):
+        prepare_e2m0_ooc_rtl()
+    elif args.step.startswith("bf16-"):
+        prepare_bf16_ooc_rtl()
+    elif args.step.startswith("mxfp8-") and args.step != "mxfp8-postroute-sweep":
+        prepare_mxfp8_ooc_rtl()
     tcl = TCL_BY_STEP[args.step]
     log = Path("reports/vivado") / f"vivado_{args.step}.log"
     journal = Path("reports/vivado") / f"vivado_{args.step}.jou"
