@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 
@@ -12,8 +13,11 @@ def test_corrected_paper_assets_are_evidence_backed_and_release_neutral(
     assert manifest["status"] == "PASS"
     assert "paper_pdf_permitted" not in manifest
     assert manifest["source_identity"]["git_revision"] == manifest["source_revision"]
-    assert len(manifest["source_identity"]["dirty_patch"]["sha256"]) == 64
-    assert manifest["source_identity"]["dirty_patch"]["bytes"] > 0
+    dirty_patch = manifest["source_identity"]["dirty_patch"]
+    assert len(dirty_patch["sha256"]) == 64
+    assert dirty_patch["bytes"] >= 0
+    if dirty_patch["bytes"] == 0:
+        assert dirty_patch["sha256"] == hashlib.sha256(b"").hexdigest().upper()
     numbers = json.loads((tmp_path / "numbers.json").read_text())
     provenance = json.loads((tmp_path / "provenance.json").read_text())
     assert set(numbers) == set(provenance)
