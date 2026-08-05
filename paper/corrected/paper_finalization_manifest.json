@@ -1,0 +1,18 @@
+{
+  "audit_candidate": "paper/corrected/paper_audit_candidate.pdf",
+  "audit_candidate_sha256": "8A50E5459C37D2598678895FF9923F3143C3A5FA859C87FE36D04736885869D5",
+  "copy_identity": "PASS",
+  "generated_at": "2026-08-05T21:12:34.146909+00:00",
+  "output": "paper/corrected/paper.pdf",
+  "output_sha256": "8A50E5459C37D2598678895FF9923F3143C3A5FA859C87FE36D04736885869D5",
+  "page_count": 9,
+  "release_gate": "reports/final_completion_gate.json",
+  "release_gate_sha256": "3C7D53372BFF496EB13F8ADBCB868D9983AC5874B8B9E08D4A452F3D17EDD25B",
+  "release_state": "READY FOR HUMAN SUBMISSION REVIEW",
+  "schema": 1,
+  "source_revision": "2231e42661a6e4cd8321ad7eed8317ee9bffc1a3",
+  "status": "PASS",
+  "submission_eligible": true,
+  "visual_audit": "paper/corrected/paper_visual_audit.json",
+  "visual_audit_sha256": "5FAD8C83C9D4A068FEDB39CF1A6448AC1D33009A73CD4913DF77C88B6DAC4228"
+}
