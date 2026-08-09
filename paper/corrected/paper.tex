@@ -601,8 +601,9 @@ critical warning or error, but physical fit does not imply target timing: WNS
 is \RsTwoRouteTargetWns{} ns at \RsTwoRouteTargetMhz{} MHz, and the first
 passing point in the fixed-route sweep is \RsTwoRouteClosingMhz{} MHz. A
 post-route aggressive-fanout pass improves slack slightly; subsequent
-retiming, SLR-crossing, and general Explore passes also fail the declared
-target. We retain the original routed checkpoint for the matched table.
+retiming, SLR-crossing, general Explore, and AggressiveExplore passes also fail
+the declared target. We retain the original routed checkpoint for the matched
+table.
 
 \begin{table}[t]
 \centering

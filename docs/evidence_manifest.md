@@ -1949,15 +1949,16 @@ remain historical evidence and are not silently rewritten.
 ### E-G7-011 - Current Physical Evidence
 
 - Evidence: `reports/vivado/corrected/rs2_current/rs2_vivado_summary.json`,
-  SHA256 `FF0CEFADF8B0C9ADC017AE55A1E3CB105FD352AA77744E29A8D50DC6CB5F653E`.
+  SHA256 `CFAEE3EF46C4A635A7D6ADB3BCB7C84B1E290120348BBC2B187938BB94AED256`.
 - Result: all 36 logical state slots fit in the U55C out-of-context kernel. DRC
   has 26 warnings, zero critical warnings, and zero errors. The first passing
   tested fixed-route point is 166.67 MHz with 0.264 ns WNS; 250 MHz remains
   `FAIL`.
-- Four post-route repair attempts are recorded. The newest general Explore run
-  improves the original -1.736 ns WNS to -1.690 ns but does not close timing;
-  raw timing SHA256 is
-  `CE22435066CA0F0BB4FF5C59986445C11F418AE001D0A8F94B83BDCF0542E619`.
+- Five post-route repair attempts are recorded. General Explore and
+  AggressiveExplore both improve the original -1.736 ns WNS to -1.690 ns but
+  do not close timing; the best remains -1.656 ns from the fanout/retiming
+  attempts. The AggressiveExplore raw timing SHA256 is
+  `550814185D22B2757CCBE3785E8B54BA0BA8F613379D6A1A1A3C0641C3DE37E9`.
 - The 5.242 W result is a vectorless estimate at 6.0 ns, not measured board
   power or energy per token.
 
@@ -1980,23 +1981,23 @@ remain historical evidence and are not silently rewritten.
 ### E-G7-013 - Working Draft, Regression, and Release Guard
 
 - Working draft PDF: `paper/corrected/mxfp4_gdn_working_draft.pdf`, SHA256
-  `050D3F30A1E07E16E78D738E30AAFBA7F5FCB3223752D08FF217837A33C72186`.
+  `BA4A00C42B78F3C15A90349D3D1A1D2215CF9E54C80588D03C7E5945577316C0`.
   Build-manifest SHA256 is
-  `46BB58A7791E4FA090FD85C6659FE1D38E318283374B54D24E2BA0993D75FE99`;
+  `8D21613C34D6E2028E1BC443688D9A9BF67B02728A605ECF308B0FCC67BE61C7`;
   page-by-page visual-audit SHA256 is
-  `5A3782FB7039D07776BEEF04C49AADD2CA4B5CFA194838D9DCB9321781C9D7DB`.
+  `7500F8AD8350C89C0FC889E0D6596E0D03C2F818B9129CDBC99E4CEBF1C9D4EB`.
   All nine 220-DPI page renders pass checks for text, equations, figures,
   legends, tables, captions, references, margins, and clipping. The PDF is
   visibly watermarked and not submission eligible.
 - Full regression: 359 passed, two intentional skips, zero failures; JUnit
   `reports/test_results/final_pytest_20260809.xml`, SHA256
-  `0DCFAEE02FFA9249A1F4902B473A51CAB939D6F1B049A4EF6F54D747FB616586`.
+  `8A1487EAB084BF1393802560FEB41C40CE4A82CBD45DCEAF39E6BD7106A56E50`.
   The skips preserve the stale legacy HLS-cosim boundary and prohibit a Phase-7
   pack while the release gate is nonpassing.
 - Final gate: `reports/final_completion_gate.json`, SHA256
-  `F0B40092EEDA7CFD1E7172D27DDD7B9F90BF1E63F22A747E0C6AFE191C3C34AC`;
+  `591E5F8E3FF16E787E1491DD510128EA9F080B6F7ABE1652DAC22E99D1164A52`;
   Markdown SHA256
-  `A0C608C210A2FFB3B0003AAE11DA6DFFCF633385007CF095AED04BAD857F0995`.
+  `6507527F05649AEE24AB9C49EE3B9E59F84B83B88835E4657CCDE7E755AF72B8`.
   Four of eleven release gates pass. Official full-trace XSim is `NOT_RUN`;
   closed-loop model quality and board measurements are `BLOCKED_EXTERNAL`;
   selected-method Pareto advantage and 250 MHz timing are `FAIL`. Reviewer

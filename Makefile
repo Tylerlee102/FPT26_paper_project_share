@@ -1,6 +1,6 @@
 PYTHON ?= python
 
-.PHONY: setup golden calibrate qwen-capture qwen-status qwen-public-asset-audit hardware-availability vectors hls-csim hls-csynth decision-gate hls-cosim hls-e2m0-control-cosim hls-e2m0-trace-cosim hls-rs2-arithmetic-csim hls-rs2-csim hls-rs2-csynth hls-rs2-trace-csim hls-rs2-control-cosim hls-rs2-reset-trace-cosim hls-rs2-trace-cosim hls-rs2-direct-rtl hls-rs2-fast-direct-rtl hls-rs2-xsim-diagnostic hls-rs2-xsim-runtime-report hls-rs2-report vivado-synth vivado-impl vivado-e2m0-synth vivado-e2m0-impl vivado-e2m0-postroute-sweep vivado-e2m0-report vivado-rs2-synth vivado-rs2-impl vivado-rs2-postroute-sweep vivado-rs2-postroute-explore-opt vivado-rs2-report vivado-bf16-impl vivado-bf16-postroute-sweep vivado-mxfp8-impl vivado-mxfp8-postroute-sweep vivado-mxfp8-report phase5 sweep-plan vivado-sweep cosim-sweep benchmark benchmark-rs2-controlled paper-tables paper-figures corrected-paper-assets corrected-paper-audit corrected-paper-visual-audit corrected-paper-finalize corrected-paper-pdf working-draft working-draft-visual-audit table-previews graph-previews ieee-assets paper-previews phase6 paper-pack ci clean
+.PHONY: setup golden calibrate qwen-capture qwen-status qwen-public-asset-audit hardware-availability vectors hls-csim hls-csynth decision-gate hls-cosim hls-e2m0-control-cosim hls-e2m0-trace-cosim hls-rs2-arithmetic-csim hls-rs2-csim hls-rs2-csynth hls-rs2-trace-csim hls-rs2-control-cosim hls-rs2-reset-trace-cosim hls-rs2-trace-cosim hls-rs2-direct-rtl hls-rs2-fast-direct-rtl hls-rs2-xsim-diagnostic hls-rs2-xsim-runtime-report hls-rs2-report vivado-synth vivado-impl vivado-e2m0-synth vivado-e2m0-impl vivado-e2m0-postroute-sweep vivado-e2m0-report vivado-rs2-synth vivado-rs2-impl vivado-rs2-postroute-sweep vivado-rs2-postroute-explore-opt vivado-rs2-postroute-aggressive-explore-opt vivado-rs2-report vivado-bf16-impl vivado-bf16-postroute-sweep vivado-mxfp8-impl vivado-mxfp8-postroute-sweep vivado-mxfp8-report phase5 sweep-plan vivado-sweep cosim-sweep benchmark benchmark-rs2-controlled paper-tables paper-figures corrected-paper-assets corrected-paper-audit corrected-paper-visual-audit corrected-paper-finalize corrected-paper-pdf working-draft working-draft-visual-audit table-previews graph-previews ieee-assets paper-previews phase6 paper-pack ci clean
 
 setup:
 	$(PYTHON) -m pip install -e ".[dev]"
@@ -118,6 +118,10 @@ vivado-rs2-postroute-sweep:
 
 vivado-rs2-postroute-explore-opt:
 	$(PYTHON) -m scripts.vivado_flow rs2-postroute-explore-opt
+	$(PYTHON) -m scripts.rs2_vivado_report
+
+vivado-rs2-postroute-aggressive-explore-opt:
+	$(PYTHON) -m scripts.vivado_flow rs2-postroute-aggressive-explore-opt
 	$(PYTHON) -m scripts.rs2_vivado_report
 
 vivado-rs2-report:

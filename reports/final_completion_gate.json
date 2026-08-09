@@ -155,13 +155,13 @@
       "status": "FAIL"
     }
   ],
-  "generated_at": "2026-08-09T19:36:12.985834+00:00",
+  "generated_at": "2026-08-09T22:27:55.041734+00:00",
   "nonpassing_gate_count": 7,
   "paper_pdf_permitted": false,
   "release_state": "NOT PAPER READY",
   "required_gate_count": 11,
   "required_nonpassing_gate_count": 7,
   "schema": 2,
-  "source_revision": "691d75d1762a7b0e75b2e1862c48f84218487a5e",
+  "source_revision": "9157adb4f9d72880b93a42de84dbfb8510a40bf9",
   "status": "FAIL"
 }
