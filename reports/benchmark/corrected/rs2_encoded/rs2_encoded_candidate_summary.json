@@ -29,7 +29,7 @@
       "status": "PASS"
     }
   },
-  "generated_at": "2026-08-09T01:15:09.718850+00:00",
+  "generated_at": "2026-08-09T19:37:27.309834+00:00",
   "limitations": [
     "synthetic layer-level encoded-integer evidence",
     "not closed-loop model quality or board energy evidence"

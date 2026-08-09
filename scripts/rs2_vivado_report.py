@@ -189,6 +189,7 @@ def generate_report(report_dir: Path, output: Path) -> dict[str, object]:
         ("aggressive_fanout", "postroute_fanout_opt", "post-route aggressive fanout optimization"),
         ("retiming", "postroute_retime_opt", "post-route retiming optimization"),
         ("slr_crossing", "postroute_slr_opt", "post-route SLR-crossing optimization"),
+        ("explore", "postroute_explore_opt", "post-route general Explore physical optimization"),
     ):
         directory = report_dir / directory_name
         timing_path = directory / "timing_4p000ns.rpt"
@@ -241,6 +242,7 @@ def generate_report(report_dir: Path, output: Path) -> dict[str, object]:
             ROOT / "vivado" / "tcl" / "run_rs2_postroute_fanout_opt.tcl",
             ROOT / "vivado" / "tcl" / "run_rs2_postroute_retime_opt.tcl",
             ROOT / "vivado" / "tcl" / "run_rs2_postroute_slr_opt.tcl",
+            ROOT / "vivado" / "tcl" / "run_rs2_postroute_explore_opt.tcl",
         ]
     )
     report: dict[str, object] = {

@@ -601,8 +601,8 @@ critical warning or error, but physical fit does not imply target timing: WNS
 is \RsTwoRouteTargetWns{} ns at \RsTwoRouteTargetMhz{} MHz, and the first
 passing point in the fixed-route sweep is \RsTwoRouteClosingMhz{} MHz. A
 post-route aggressive-fanout pass improves slack slightly; subsequent
-retiming and SLR-crossing passes also fail the declared target. We retain the
-original routed checkpoint for the matched table.
+retiming, SLR-crossing, and general Explore passes also fail the declared
+target. We retain the original routed checkpoint for the matched table.
 
 \begin{table}[t]
 \centering
@@ -715,6 +715,12 @@ tokens per prompt. It is not closed-loop execution and supports neither
 perplexity nor downstream-task claims. The kernel excludes projections,
 normalization, full-attention layers, and their key-value cache.
 
+The official Qwen3-Next artifacts remain 80B-class models
+\cite{qwen3nextmodel}. A bounded public Hugging Face API audit found no released
+Qwen3-Next recurrent activation capture and no smaller official trained
+checkpoint suitable for this host. Tiny-random and undocumented development
+checkpoints are not substitutes for real-model quality evidence.
+
 The synthetic protocol covers a small registered seed set, two initial-state
 conditions, and one high-retention trace family. Metrics flatten heads, do not
 provide a trace-population confidence interval, and are not calibrated to
@@ -732,9 +738,10 @@ and measured energy are absent. Vectorless power cannot substitute for any of
 them.
 
 Generated-RTL parity covers one registered synthetic trace. Full official XSIM
-recurrent cosimulation remains incomplete and is reported as such independently
-from the direct Verilator run; neither path is used to fill missing board
-evidence. Results cover one U55C target,
+recurrent cosimulation remains incomplete and is reported independently from
+the direct Verilator run. A completed official-XSim LOAD benchmark bounds the
+full trace at multiple days on this host, but is not parity evidence; neither
+path is used to fill missing board evidence. Results cover one U55C target,
 one $P_K/P_V$ point, one block size, and batch one; multi-sequence occupancy,
 cross-device behavior, and service-level tail latency remain open.
 

@@ -1,6 +1,6 @@
 # Native MXFP4 RS2/R3 HLS Gate
 
-Generated: `2026-08-06T15:38:25.589986+00:00`
+Generated: `2026-08-09T19:26:47.352094+00:00`
 Status: `PASS`
 
 - Exact C simulation: `PASS` (64-token trace)

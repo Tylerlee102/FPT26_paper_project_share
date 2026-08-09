@@ -57,9 +57,14 @@ RS2_RTL_OFFICIAL_RESET = (
 RS2_RTL_CONTROL = (
     ROOT / "reports/cosim/corrected/rs2_current/control/gdn_rs2_top_cosim.rpt"
 )
+RS2_XSIM_RUNTIME = (
+    ROOT
+    / "reports/cosim/corrected/rs2_current/xsim_runtime/rs2_xsim_runtime.json"
+)
 RS2_PHYSICAL = ROOT / "reports/vivado/corrected/rs2_current/rs2_vivado_summary.json"
 QWEN_DIAGNOSTIC = ROOT / "reports/benchmark/qwen_recurrent_stability_manifest.json"
 QWEN_CLOSED_LOOP = ROOT / "reports/benchmark/qwen_closed_loop_manifest.json"
+QWEN_PUBLIC_ASSETS = ROOT / "reports/environment/qwen_public_asset_audit.json"
 HARDWARE_AVAILABILITY = ROOT / "reports/environment/hardware_availability.json"
 BOARD_VALIDATION = ROOT / "reports/board/u55c/board_validation.json"
 TRACEABILITY_STATUS = ROOT / "docs/reviewer_traceability_status.json"
@@ -212,6 +217,7 @@ def _cosim_report_pass(path: Path) -> bool:
 def _rtl_gate() -> dict[str, object]:
     hls = _load_json(RS2_HLS)
     direct = _load_json(RS2_RTL_DIRECT)
+    runtime = _load_json(RS2_XSIM_RUNTIME)
     csim = bool(
         hls
         and hls.get("csim", {}).get("exact_trace64_status") == "PASS"
@@ -235,6 +241,9 @@ def _rtl_gate() -> dict[str, object]:
         "official_xsim_64_token_random_or_reset_state": (
             "PASS" if official_pass else "NOT_RUN"
         ),
+        "official_xsim_runtime_benchmark": (
+            "PASS" if runtime and runtime.get("status") == "PASS" else "NOT_RUN"
+        ),
     }
     # The direct harness checks every generated-RTL value and snapshot.  The
     # official full-trace XSim run remains an explicit requirement because the
@@ -246,7 +255,7 @@ def _rtl_gate() -> dict[str, object]:
         (
             "Both the direct generated-Verilog harness and official Vitis XSim reproduce the frozen 64-token encoded oracle exactly."
             if status == "PASS"
-            else "Exact HLS C simulation passes, but one or both required 64-token RTL parity paths remain incomplete or failing."
+            else "Exact HLS C simulation and direct generated-RTL parity pass, but the required official 64-token XSim path remains incomplete; a measured XSim runtime benchmark bounds its cost."
         ),
         (
             RS2_HLS,
@@ -254,6 +263,7 @@ def _rtl_gate() -> dict[str, object]:
             RS2_RTL_DIRECT,
             RS2_RTL_OFFICIAL,
             RS2_RTL_OFFICIAL_RESET,
+            RS2_XSIM_RUNTIME,
         ),
         substatus,
     )
@@ -262,6 +272,7 @@ def _rtl_gate() -> dict[str, object]:
 def _closed_loop_gate() -> dict[str, object]:
     closed = _load_json(QWEN_CLOSED_LOOP)
     diagnostic = _load_json(QWEN_DIAGNOSTIC)
+    public_assets = _load_json(QWEN_PUBLIC_ASSETS)
     closed_pass = bool(
         closed
         and closed.get("status") == "PASS"
@@ -281,15 +292,29 @@ def _closed_loop_gate() -> dict[str, object]:
         finding = "A closed-loop Qwen report exists but does not pass its preregistered quality gate."
     else:
         status = "BLOCKED_EXTERNAL"
-        finding = "Short model-derived recurrence diagnostics pass, but the 80B checkpoint and adequate execution memory are absent; no closed-loop perplexity or downstream result exists."
+        finding = "Short model-derived recurrence diagnostics pass, but the 80B checkpoint and adequate execution memory are absent; a bounded public-asset audit found no recurrent activation capture, so no closed-loop perplexity or downstream result exists."
     return _gate(
         "closed_loop_real_model_quality",
         status,
         finding,
-        (QWEN_DIAGNOSTIC, QWEN_CLOSED_LOOP, ROOT / "reports/golden/qwen_capture_status.md"),
+        (
+            QWEN_DIAGNOSTIC,
+            QWEN_CLOSED_LOOP,
+            QWEN_PUBLIC_ASSETS,
+            ROOT / "reports/golden/qwen_capture_status.md",
+        ),
         {
             "short_model_derived_recurrence": "PASS" if diagnostic_pass else "FAIL" if diagnostic else "NOT_RUN",
             "cache_faithful_closed_loop_quality": "PASS" if closed_pass else "FAIL" if closed else "BLOCKED_EXTERNAL",
+            "public_recurrent_activation_capture": (
+                "BLOCKED_EXTERNAL"
+                if public_assets
+                and public_assets.get("classification", {}).get(
+                    "usable_public_activation_capture"
+                )
+                == "NOT_FOUND"
+                else "NOT_RUN"
+            ),
         },
     )
 

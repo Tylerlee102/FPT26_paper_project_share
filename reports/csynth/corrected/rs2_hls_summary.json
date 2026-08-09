@@ -449,22 +449,22 @@
   "physical_fit_timing_power": "NOT_RUN",
   "raw_artifact_sha256": {
     "data/vectors/rs2_resident_trace64_manifest.json": "E254020E97DE52B22D796C52A24925E3536E6192474449D9229D57AA26EE16C1",
-    "reports/benchmark/corrected/rs2_encoded/rs2_encoded_candidate_summary.json": "CC34DF5FFF43BC9EACEFCB28C43E4622E698000D7D218603B89F6523C86C9C08",
+    "reports/benchmark/corrected/rs2_encoded/rs2_encoded_candidate_summary.json": "1C432018639DAC754F3FAFFD4B54E0A132B63425C511CC1C23BD0B856EB59FEA",
     "reports/benchmark/corrected/rs2_encoded_candidate_preregistration.json": "273F648DA72077C0FB013A3C1AE0D6FDC50673F9CB725FB3F59A01BA8B42691D",
     "reports/csim/corrected/rs2_current/arithmetic/rs2_arithmetic_top_csim.log": "5CF2E7B1364D3914474CADEB2E85CE5847E70E1D06548BB49FEF2406E2942830",
-    "reports/csim/corrected/rs2_current/arithmetic/u55c_250mhz.log": "1A947A2DDC1BBEAB7C270F4D336CDD8CA9D2B988C0A7A9DB1E41331BD2CC7276",
+    "reports/csim/corrected/rs2_current/arithmetic/u55c_250mhz.log": "65B908D0C4102C4C81CCCE65B5B68BC68CD7CFF2340AE1D72143DC40D6AB9998",
     "reports/csim/corrected/rs2_current/smoke/gdn_rs2_top_csim.log": "11AC34C5F7DC6308190BAD882A0FF20C90452F76127D91E187EAFC793C862C1C",
-    "reports/csim/corrected/rs2_current/smoke/u55c_250mhz.log": "7940AEE69B527E623A961ABBA0E3DDC40FC49FFA82E6FAEC0163BC898E9F5A24",
+    "reports/csim/corrected/rs2_current/smoke/u55c_250mhz.log": "CFA55C43DF26FA719F01E69530DC0515F771081A0CBFC283E40BD2B3D04B9869",
     "reports/csim/corrected/rs2_current/trace64/gdn_rs2_top_csim.log": "3670217B8AB81EAAE37A7FBD301C2AB193968B41716CEBA0D78888879AC05096",
-    "reports/csim/corrected/rs2_current/trace64/u55c_250mhz.log": "4FD1F839D72FC5BE1D139A6405644432047A1924754976733452E2624AE9B5AC",
+    "reports/csim/corrected/rs2_current/trace64/u55c_250mhz.log": "5C818D1DA193C552DAAEA7F87B7D999046739CA2DE57CA1B1889FC53F9A2E08B",
     "reports/csynth/corrected/bf16_hls_summary.json": "151D590E03125ABF31E25D50923511479EBEA0FF3F24B50C307933AB4AF232AB",
-    "reports/csynth/corrected/rs2_current/report/gdn_rs2_top_csynth.rpt": "37B737B4F0C8D480C6ED6E88BACFADE3E7355B2C2CDE14E9E496759060B5397B",
+    "reports/csynth/corrected/rs2_current/report/gdn_rs2_top_csynth.rpt": "82D4BC71D398582673BFBD220AB1957A12E348F608CAB0D519802EBA5FCE42A1",
     "reports/csynth/corrected/rs2_current/report/gdn_rs2_top_csynth.xml": "A2E6AF83C1707625B74741EB0D3FD08AE724F42F6F30E9BC89E8C22EF30DB027",
-    "reports/csynth/corrected/rs2_current/report/gdn_rs2_top_impl_csynth.rpt": "CD95C4E97A2452254AEC951D8B70F5C6120A7AB041554A04310FFD5FD40EDA8A",
-    "reports/csynth/corrected/rs2_current/report/p_anonymous_namespace_fold_log_csynth.rpt": "358F4E7372F1A93808832D2FD068F62F51A3D2AD890A78AA3C019B462C06FBB6",
-    "reports/csynth/corrected/rs2_current/report/select_e2m1_scale_power_Pipeline_select_e2m1_max_csynth.rpt": "CFD0E4C6CAA4561FAB727FF67E9F12D003AE9DA3EC87BC39B7F88C15F635D13E",
-    "reports/csynth/corrected/rs2_current/report/select_e2m1_scale_power_Pipeline_select_e2m1_normalize_csynth.rpt": "CD8B48C11370D57ACAB88D1F08B9C9A05321FAC1D0A836C5FDE8134FBF3C62A2",
-    "reports/csynth/corrected/rs2_current/u55c_250mhz.log": "C5259E484FCBD958349A6974B0F5878A23406D47B62A8B4B5B2FE209C4876AD9"
+    "reports/csynth/corrected/rs2_current/report/gdn_rs2_top_impl_csynth.rpt": "B0A6EDA3EEF4E12E218070E1F1C5C18E46A787A740ED5671EFCCE63813BAAA35",
+    "reports/csynth/corrected/rs2_current/report/p_anonymous_namespace_fold_log_csynth.rpt": "FB52EE425CA398C84C40091DA684941420B789CABCBCE7ADBE5BF4CC108DE92D",
+    "reports/csynth/corrected/rs2_current/report/select_e2m1_scale_power_Pipeline_select_e2m1_max_csynth.rpt": "19F586AB91FC2C7BA3EBB1BB4730FFB6DCD88652BEB2A01B1BE6F153238CADAB",
+    "reports/csynth/corrected/rs2_current/report/select_e2m1_scale_power_Pipeline_select_e2m1_normalize_csynth.rpt": "64A841B92D7B4AD887277EDC58A37CEEE4073CBEA9EA9D5A93313AD68BA16FE8",
+    "reports/csynth/corrected/rs2_current/u55c_250mhz.log": "90DCD8FCAA260E61340C25C2B54DAF0724080F48CD867434445E0D4AB8D160E7"
   },
   "rtl_cosimulation_64_token": "NOT_RUN",
   "schema": 1,
@@ -477,9 +477,9 @@
   },
   "source_identity": {
     "dirty_patch": {
-      "bytes": 130180,
-      "changed_file_count": 11,
-      "sha256": "48717A4B7D8ADA29EC1C750DA214E12C63301521107A53DEE24F5EB58E3F2CF7"
+      "bytes": 0,
+      "changed_file_count": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
     },
     "files": {
       "hls/include/gdn_params.hpp": {
@@ -490,75 +490,75 @@
       },
       "hls/rs2/include/gdn_rs2_kernel.hpp": {
         "bytes": 9508,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "15B937C959C3E88729EBD658CF60CC1FE58E72CD2BB402BAC53C2189DD1F5132"
       },
       "hls/rs2/src/gdn_rs2_top.cpp": {
         "bytes": 57674,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E"
       },
       "hls/rs2/src/rs2_arithmetic.cpp": {
         "bytes": 9857,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "34AE95CD5E2F48ABC53C3FFDC2477179093FE83DFA6787597F41FFD994A3B03F"
       },
       "hls/rs2/tb/tb_gdn_rs2_smoke.cpp": {
         "bytes": 7331,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "F24931E9A5107BE0EE626484CA2320755A8FD1FB9866B8362D1EBF43551A978C"
       },
       "hls/rs2/tb/tb_gdn_rs2_trace.cpp": {
         "bytes": 15097,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "1A75E3E416BD31630FF325CCCF45CC8D2BC7C99CB048D8293AA9EED1136CF28B"
       },
       "hls/rs2/tb/tb_rs2_arithmetic.cpp": {
         "bytes": 2916,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "6032D0EDC9975A6E411F3473D3F3183076815451E2CF949CDA2CCE816795662D"
       },
       "hls/rs2/tcl/run_arithmetic_csim.tcl": {
         "bytes": 397,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "EF136B8AF3DD386F1976F8E811874091481CDF9100E907815CB9A110FFF024EC"
       },
       "hls/rs2/tcl/run_csim.tcl": {
         "bytes": 439,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "B8C69874BE8DF3A05766F1EF03E52AAE2922549F8C7D84A6546BDADE7FF6C5BB"
       },
       "hls/rs2/tcl/run_csynth.tcl": {
         "bytes": 398,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "652E81CDABFF3003B2149BE657EFBD360011B6C5F702FE0B7A85E0B36365F8C2"
       },
       "hls/rs2/tcl/run_trace_csim.tcl": {
         "bytes": 809,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "857C7D3B96DDB5690384ADF7A9EC5C5409C92A1E7CEAF86476CD78A3E95C4F34"
       },
       "scripts/rs2_hls_report.py": {
         "bytes": 20252,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "338594BCEBD55F36A91C0339589DFC2BD817F9802DE9D8AAE193F992CD244DA5"
       }
     },
-    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "git_revision": "691d75d1762a7b0e75b2e1862c48f84218487a5e",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
-  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+  "source_revision": "691d75d1762a7b0e75b2e1862c48f84218487a5e",
   "status": "PASS",
-  "timestamp": "2026-08-06T15:38:25.589986+00:00"
+  "timestamp": "2026-08-09T19:26:47.352094+00:00"
 }

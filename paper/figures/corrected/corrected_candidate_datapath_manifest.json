@@ -1,37 +1,37 @@
 {
-  "generated_at": "2026-08-09T01:13:39.854416+00:00",
+  "generated_at": "2026-08-09T19:31:00.185051+00:00",
   "limitations": [
     "logical architecture figure, not placement or routing evidence",
     "the five-phase schedule is inherited; only the arithmetic and RS2/R3 state representation are modified"
   ],
   "numbers": "paper/corrected/numbers.json",
   "outputs": {
-    "paper/figures/corrected/corrected_candidate_datapath.pdf": "4ECA7EA992FB18EE133E298D41345EE0BB24B0D1418E5A6A8B221F097FB77FFD"
+    "paper/figures/corrected/corrected_candidate_datapath.pdf": "7FAB7929A4EE3B7118CFDE269552EC716CBC56A2AEF1F3CB3AAEC5B4315941C2"
   },
   "schema": 1,
   "scope": "selected RS2/R3 recurrence-core datapath figure",
   "source_identity": {
     "dirty_patch": {
-      "bytes": 73102,
-      "changed_file_count": 3,
-      "sha256": "ED90A5BFF044009D1C72C7A614A11523ECFA6EB697BCB4773935BADBB0004458"
+      "bytes": 0,
+      "changed_file_count": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
     },
     "files": {
       "hls/rs2/include/gdn_rs2_kernel.hpp": {
         "bytes": 9508,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "15B937C959C3E88729EBD658CF60CC1FE58E72CD2BB402BAC53C2189DD1F5132"
       },
       "hls/rs2/src/gdn_rs2_top.cpp": {
         "bytes": 57674,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E"
       },
       "scripts/corrected_datapath_figure.py": {
         "bytes": 14523,
-        "changed_from_revision": true,
+        "changed_from_revision": false,
         "git_state": "tracked",
         "sha256": "1C789D0590E704443A458EBAF448C99FC5F77D49E39D211BF53B279B9A31459C"
       },
@@ -42,7 +42,7 @@
         "sha256": "08B078C9B5D80ED4FEB1028E78C6C53979A4B522271A3537D26EBACC1B00DDA0"
       }
     },
-    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "git_revision": "691d75d1762a7b0e75b2e1862c48f84218487a5e",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "status": "PASS",

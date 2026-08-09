@@ -31,6 +31,9 @@ TCL_BY_STEP = {
     "rs2-postroute-slr-opt": Path(
         "vivado/tcl/run_rs2_postroute_slr_opt.tcl"
     ),
+    "rs2-postroute-explore-opt": Path(
+        "vivado/tcl/run_rs2_postroute_explore_opt.tcl"
+    ),
     "rs2-timing-analysis": Path("vivado/tcl/analyze_rs2_timing.tcl"),
     "bf16-synth": Path("vivado/tcl/run_bf16_synth.tcl"),
     "bf16-impl": Path("vivado/tcl/run_bf16_impl.tcl"),
@@ -66,6 +69,7 @@ def main(argv: list[str] | None = None) -> int:
         "rs2-postroute-fanout-opt",
         "rs2-postroute-retime-opt",
         "rs2-postroute-slr-opt",
+        "rs2-postroute-explore-opt",
         "rs2-timing-analysis",
     }:
         prepare_rs2_ooc_rtl()

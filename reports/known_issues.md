@@ -21,59 +21,68 @@ hypotheses remain visible; none is silently promoted to a positive claim.
 
 - The corrected candidate physically fits out of context, but fails setup at
   250 MHz and 200 MHz. The first passing point in the tested fixed-route sweep
-  is 180.18 MHz; this is not a binary-searched maximum frequency.
+  is 166.67 MHz; this is not a binary-searched maximum frequency.
 - The critical path is dominated by routing into resident-state URAM control,
   not the E2M1 multiplier.
-- The implementation has 38 DRC warnings. It has no critical warnings or
+- The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
   commands. Two isolated 64-token recurrent XSIM attempts exhaust host memory
-  before transaction 1. Verilator 5.050 compiles the same 151 generated modules
-  and completes one exact snapshot LOAD in 4,797,322 cycles, but no candidate
-  recurrent STEP completes; candidate 64-token RTL parity is not established.
+  before transaction 1. A lean official XSIM LOAD benchmark completes
+  4,447,475 cycles in 502 seconds and projects 90.16 hours for the known
+  2,875,491,178-cycle 64-token command sequence. The direct Verilator harness
+  compiles the same generated RTL and passes all 66 commands, 262,144 output
+  values, counters, and the final recurrent state exactly. Official 64-token
+  XSIM parity remains `NOT_RUN`; direct generated-RTL parity is established.
 - BF16, uniform MXFP4, and native MXFP8 have matched HLS comparisons. The
-  all-layer BF16 physical attempt fails capacity before placement, so there is
-  no matched routed BF16 timing or power result.
+  all-layer BF16 implementation physically fits, first closes at the tested
+  140.35 MHz point, and has a 5.648 W vectorless estimate.
 - Native MXFP8 physically fits out of context at 58,582 LUTs and 576 URAMs,
   fails 250 MHz, and first closes at the tested 166.67 MHz point. Its 4.952 W
   vectorless result is not measured energy.
 - Vitis and Vivado are installed, but no attached U55C, U55C XRT platform,
   xbutil/xrt-smi, shell/xclbin, or board telemetry is available. The host GPU is
   an RTX 3070 without native FP4 tensor-core support.
-- The 6.991 W post-route value is a Medium-confidence vectorless Vivado
-  estimate at 5.6 ns. It is not measured power and is not converted to energy
+- The 5.242 W post-route value is a Medium-confidence vectorless Vivado
+  estimate at 6.0 ns. It is not measured power and is not converted to energy
   per token.
 
 ## Method Outcome
 
-- Native encoded MXFP4 fails the synthetic stability gate and is larger/slower
+- Uniform native MXFP4 fails the synthetic stability gate and is larger/slower
   than BF16 in the matched HLS comparison.
-- The corrected candidate restores bounded synthetic fidelity but uses 5.124x
-  the BF16 LUT estimate, 4.249x the maximum non-fold STEP cycles, and 9.453x the
-  amortized per-layer cycles. Three targeted II=1 constraints finish at II=2.
+- The corrected candidate restores bounded synthetic fidelity but uses 1.958x
+  the BF16 LUT estimate, 3.200x the maximum non-fold STEP cycles, and 10.191x
+  the amortized per-layer cycles. Every explicitly targeted loop reaches II=1.
 - Consequently, the selected-method Pareto hypothesis is `FAIL`. This is the
   paper's result, not a release-system error.
 
 ## Release Verification
 
-- Reviewer traceability passes for all 93 rows against the exact audited PDF.
-- The US-Letter PDF uses eight content pages plus one reference-only page and
-  passes compilation, embedded-font, metadata, unresolved-reference,
-  page-render, and page-by-page visual checks. The final PDF is byte-identical
-  to that audited candidate.
-- The final regression records 303 passed, 1 skipped, and 0 failed tests in
-  `reports/test_results/final_pytest_20260805.log` and
-  `final_pytest_20260805.xml`.
-- The one skip,
+- All 93 reviewer/comment and remediation-directive rows are mapped to source
+  evidence. The canonical unwatermarked audit remains guarded: its builder
+  correctly refuses to run while official XSim parity, closed-loop model
+  quality, Pareto advantage, 250 MHz closure, or board evidence is nonpassing.
+- The nine-page US-Letter working draft passes compilation, embedded-font,
+  unresolved-reference, page-render, and page-by-page visual checks. It is
+  watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
+  final submission PDF.
+- The latest full regression records 359 passed, 2 skipped, and 0 failed tests.
+- One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current
   HLS sources and is not accepted as current evidence.
+- The second skip,
+  `tests.test_paper_provenance.test_current_paper_pack_validates`, is
+  intentional: no Phase-7 submission pack may be generated for the current
+  revision while the final completion gate is nonpassing.
 - Corrected evidence includes exact 64-token HLS C simulation, the two-command
-  generated-RTL control smoke, and one direct generated-RTL LOAD; no corrected
-  recurrent RTL parity is inferred.
-- The Phase-7 submission pack and every pack-integrity check pass. The scoped
-  research outcomes that remain `FAIL` or `NOT_RUN` are preserved as
-  limitations and do not become positive claims.
+  generated-RTL control smoke, full direct generated-RTL 64-token parity, and
+  the bounded official-XSim runtime benchmark. Official full-trace XSim parity
+  remains distinct and incomplete.
+- The scoped research outcomes that remain `FAIL`, `NOT_RUN`, or
+  `BLOCKED_EXTERNAL` are preserved as limitations and do not become positive
+  claims or a submission-ready release.
 
 Legacy HLS, RTL, Vivado, benchmark, power, and paper PDFs remain preserved for
 historical reproducibility. They do not support current claims unless a

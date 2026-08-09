@@ -28,7 +28,7 @@
     "whs_ns": 0.01,
     "wns_ns": 0.264
   },
-  "generated_at": "2026-08-06T15:06:23.820285+00:00",
+  "generated_at": "2026-08-09T19:26:47.999167+00:00",
   "limitations": [
     "Out-of-context kernel implementation; no U55C shell integration or xclbin was built.",
     "Vivado power is a vectorless estimate, not board telemetry or energy per token.",
@@ -141,14 +141,51 @@
         "wpws_ns": 1.3
       },
       "timing_source": "reports/vivado/corrected/rs2_current/postroute_slr_opt/timing_4p000ns.rpt"
+    },
+    {
+      "drc": {
+        "by_rule": {
+          "DPIP-2": 6,
+          "DPOP-3": 7,
+          "DPOP-4": 12,
+          "RTSTAT-10": 1
+        },
+        "critical_warning_count": 0,
+        "error_count": 0,
+        "signoff_status": "PASS_WITH_WARNINGS",
+        "violation_count": 26,
+        "warning_count": 26
+      },
+      "drc_source": "reports/vivado/corrected/rs2_current/postroute_explore_opt/drc.rpt",
+      "name": "explore",
+      "operation": "post-route general Explore physical optimization",
+      "status": "PASS",
+      "target_timing_status": "FAIL",
+      "timing": {
+        "hold_failing_endpoints": 0,
+        "hold_total_endpoints": 221457,
+        "pulse_width_failing_endpoints": 0,
+        "pulse_width_total_endpoints": 75648,
+        "setup_failing_endpoints": 43534,
+        "setup_total_endpoints": 221870,
+        "ths_ns": 0.0,
+        "tns_ns": -24254.969,
+        "tpws_ns": 0.0,
+        "whs_ns": 0.01,
+        "wns_ns": -1.69,
+        "wpws_ns": 1.3
+      },
+      "timing_source": "reports/vivado/corrected/rs2_current/postroute_explore_opt/timing_4p000ns.rpt"
     }
   ],
   "raw_artifact_sha256": {
     "build/vivado/gdn_rs2_vivado/rs2_post_impl.dcp": "886EB989B0FB48907090F5EB676D3FE7646FA6BA5065BA1C1DCE272C93B99006",
-    "build/vivado/rs2_ooc_rtl/manifest.json": "FCEBE8B414FC431152DB8067C85FCBC91AEBFA656EE77E5ADBCE8C03B076EC34",
+    "build/vivado/rs2_ooc_rtl/manifest.json": "B21227BA21AD12576DE98A18E2A946FCF42D8DA2EC117A2FC20810028020B31C",
     "reports/vivado/corrected/rs2_current/impl_drc.rpt": "11D58B47F7EB165F5D4F8AD358681D59D461D701CAB79E483320B3AD4686B51E",
     "reports/vivado/corrected/rs2_current/impl_timing.rpt": "05AC0AF44B73ABE59B750AA4D95E0B73824C574C6D1BF3B95F33947DBACB088F",
     "reports/vivado/corrected/rs2_current/impl_util.rpt": "6B6AF67E62D6723E6E18AC51695E26B76B5918DF216363B9E56C504C14E44183",
+    "reports/vivado/corrected/rs2_current/postroute_explore_opt/drc.rpt": "CA42EB1E2BC0FE654927AE87A409F5BD09F767553DE816312CB74EE4EAEF60FA",
+    "reports/vivado/corrected/rs2_current/postroute_explore_opt/timing_4p000ns.rpt": "CE22435066CA0F0BB4FF5C59986445C11F418AE001D0A8F94B83BDCF0542E619",
     "reports/vivado/corrected/rs2_current/postroute_fanout_opt/drc.rpt": "96C7681395908B99CA353D80CF13CE4E8B0F5748D77A149C17C6E9BE8C284530",
     "reports/vivado/corrected/rs2_current/postroute_fanout_opt/timing_4p000ns.rpt": "09E99B31419B0765B72FA8348374E3137E3B2A0DD299FA7D5F5D3AB709A68D88",
     "reports/vivado/corrected/rs2_current/postroute_retime_opt/drc.rpt": "4ACBB9C37B1E1851103537B1050383D7A6E088CD5453A0E2D60C17C8ED447783",
@@ -176,89 +213,95 @@
     "source": "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top.v",
     "source_sha256": "BE4C2C13B3B2E59A30453AA1F6092A68476EB123268ECF711D61081100183EC2",
     "status": "PASS",
-    "timestamp": "2026-08-06T12:32:36.803455+00:00",
+    "timestamp": "2026-08-09T19:26:41.674302+00:00",
     "transformation": "insert_top_level_bufgce_and_rewire_internal_ap_clk"
   },
   "schema": 1,
   "scope": "selected native-MXFP4 RS2/R3 all-layer persistent-state kernel, out-of-context post-route on U55C",
   "source_identity": {
     "dirty_patch": {
-      "bytes": 108154,
-      "changed_file_count": 11,
-      "sha256": "D9BD0178E18BD7567A1B45CF72A16C938D3296D02F64F8C108C40A4E1E8C5072"
+      "bytes": 2300,
+      "changed_file_count": 2,
+      "sha256": "9793BCC4B0B5B50EBDC4A9EE7C0CC1854B8F86B4250FEF5B8E4EF1DD2543FF03"
     },
     "files": {
       "hls/rs2/include/gdn_rs2_kernel.hpp": {
         "bytes": 9508,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "15B937C959C3E88729EBD658CF60CC1FE58E72CD2BB402BAC53C2189DD1F5132"
       },
       "hls/rs2/src/gdn_rs2_top.cpp": {
         "bytes": 57674,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E"
       },
       "hls/rs2/src/rs2_arithmetic.cpp": {
         "bytes": 9857,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "34AE95CD5E2F48ABC53C3FFDC2477179093FE83DFA6787597F41FFD994A3B03F"
       },
       "scripts/prepare_rs2_ooc_rtl.py": {
         "bytes": 3314,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "8148F76908990178BA2187AD51C0E2ADB35D8D85FF8D4EB51F331F8841661B88"
       },
       "scripts/rs2_vivado_report.py": {
-        "bytes": 15935,
+        "bytes": 16108,
         "changed_from_revision": true,
-        "git_state": "untracked",
-        "sha256": "E15AAC3E6F8D072DA83C7436191391A40C476FC94EECA255F69DD4BB2AE495D7"
+        "git_state": "tracked",
+        "sha256": "EE1126AE58DB309269DE658C8A6D1970CE3150086DEFDEFB0740261CEAA44FB4"
       },
       "vivado/tcl/create_rs2_project.tcl": {
         "bytes": 1406,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "3CF605F14C5DA7EC7E7FCBBDC1423400103E92A40BA6BD31C9E9A3393A660C1E"
       },
       "vivado/tcl/run_rs2_impl.tcl": {
         "bytes": 1467,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "6CD30F06B944F36A50AFC8D130A80520DB0CF8FCD9E4E3B643118B9F6A9BEF9C"
+      },
+      "vivado/tcl/run_rs2_postroute_explore_opt.tcl": {
+        "bytes": 853,
         "changed_from_revision": true,
         "git_state": "untracked",
-        "sha256": "6CD30F06B944F36A50AFC8D130A80520DB0CF8FCD9E4E3B643118B9F6A9BEF9C"
+        "sha256": "115F265D9418C2CEAB1860A6688B3757B3BB5656753C847FF8B22CD34CAE29D5"
       },
       "vivado/tcl/run_rs2_postroute_fanout_opt.tcl": {
         "bytes": 863,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "51A24C08E04BFA4CD0CCBDD83CEB45690F4C2A09EB5B15A31B1B83FCBFFE6957"
       },
       "vivado/tcl/run_rs2_postroute_retime_opt.tcl": {
         "bytes": 888,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "B9DC3A90D8BB269F74CF8A27816DD071F3D92E93BB2B47C7FD534EB0A8436C8F"
       },
       "vivado/tcl/run_rs2_postroute_slr_opt.tcl": {
         "bytes": 844,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "14AFD8B8A57868EBC9AB93CA74DBA86492E220FDD5F85E871BDA361BB42D7AAB"
       },
       "vivado/tcl/run_rs2_postroute_sweep.tcl": {
         "bytes": 1343,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "E4DD10E6E121D9A25B40E7AE43016E5BACAAF15D66D3059BAD252490B2E137AF"
       }
     },
-    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "git_revision": "691d75d1762a7b0e75b2e1862c48f84218487a5e",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
-  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+  "source_revision": "691d75d1762a7b0e75b2e1862c48f84218487a5e",
   "status": "PASS",
   "target_clock": {
     "frequency_mhz": 250.0,

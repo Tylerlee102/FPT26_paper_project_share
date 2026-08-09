@@ -1,0 +1,45 @@
+{
+  "benchmark": {
+    "command": "LOAD",
+    "cpu_milliseconds": 500609,
+    "cycles": 4447475,
+    "cycles_per_second": 8859.511952191235,
+    "elapsed_seconds": 502,
+    "generation": 1,
+    "status_code": 0,
+    "tokens": 0
+  },
+  "claim_boundary": [
+    "The random-state LOAD completed successfully in official XSim.",
+    "The projection applies the measured LOAD throughput to the known full-trace cycle count.",
+    "This benchmark is runtime evidence, not 64-token official-XSim parity evidence."
+  ],
+  "full_trace_projection": {
+    "commands": 66,
+    "cycles": 2875491178,
+    "official_xsim_64_token_status": "NOT_RUN",
+    "projected_hours": 90.15705986455485,
+    "projected_seconds": 324565.4155123975,
+    "tokens": 64
+  },
+  "generated_at": "2026-08-09T18:48:54.044700+00:00",
+  "raw_artifacts": {
+    "verilator_trace64": {
+      "bytes": 8445,
+      "path": "reports/cosim/corrected/rs2_current/xsim_runtime/raw/verilator_trace64.log",
+      "sha256": "FEE058CAF5A4DDC8A16F8DBD4889AF9D62E2F41675B5187794DACF0B6FB578C8",
+      "source": "reports/cosim/corrected/rs2_fast_direct_rtl_trace64/raw/verilator_run.log",
+      "source_sha256": "FEE058CAF5A4DDC8A16F8DBD4889AF9D62E2F41675B5187794DACF0B6FB578C8"
+    },
+    "xsim_token0": {
+      "bytes": 1958,
+      "path": "reports/cosim/corrected/rs2_current/xsim_runtime/raw/xsim_token0.log",
+      "sha256": "49EECB6CEF3682162DE76FA9085025A9D5D1061BBFB48A7A200083FA76498208",
+      "source": "reports/test_tmp/rs2_direct_xsim_bench/xsim.log",
+      "source_sha256": "49EECB6CEF3682162DE76FA9085025A9D5D1061BBFB48A7A200083FA76498208"
+    }
+  },
+  "schema": 1,
+  "scope": "official XSim random-state LOAD throughput benchmark",
+  "status": "PASS"
+}

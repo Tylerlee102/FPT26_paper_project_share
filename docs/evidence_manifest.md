@@ -1896,3 +1896,109 @@ energy claims.
 | U55C board parity and energy | BLOCKED_EXTERNAL | Board/XRT logs, bitstream hash, telemetry time series, and parity trace required. |
 | Corrected paper source provenance | PASS | Generated numbers, provenance, tables, macros, and hash-checked plot references exist. |
 | Final paper PDF audit | NOT_RUN | PDF generation, build log, page renders, and visual audit are prohibited until every upstream gate passes. |
+
+## Current RS2/R3 Addendum (2026-08-09)
+
+This addendum supersedes earlier current-status statements about the corrected
+candidate, test totals, tool availability, and release state. Earlier entries
+remain historical evidence and are not silently rewritten.
+
+### E-G7-009 - Frozen Long-Trace RS2/R3 Stability
+
+- Status: `PASS` for the preregistered layer-level synthetic gate.
+- Evidence: `reports/benchmark/corrected/rs2_encoded/rs2_encoded_candidate_summary.json`,
+  SHA256 `DE2E8A7873E21CC2DF31B1104115A6A8167C07B6A3979F7561520C12FC80A3A3`.
+- Result: six held-out 1,024-token runs and two development 8,192-token runs
+  pass the registered cosine, state-relative-L2, max-error, and hard-event
+  criteria. The worst all-token state relative L2 is `0.082666` held out and
+  `0.082737` extended; minimum all-token output cosine is `0.996099` and
+  `0.995974`, respectively. Accumulator, element, and scale-clamp events are
+  zero.
+- Boundary: synthetic one-layer encoded-integer evidence only; it is not
+  perplexity, downstream-task, or closed-loop model evidence.
+
+### E-G7-010 - Current HLS and Generated-RTL Evidence
+
+- HLS summary: `reports/csynth/corrected/rs2_hls_summary.json`, SHA256
+  `9E780192929DFD2A8947AED9C0081BA93F4BC672C36BA8E7318271B0FD42CA5B`.
+  Exact 64-token C simulation, arithmetic C simulation, resident smoke, and all
+  explicitly targeted `II=1` loops pass. The selected HLS result is 167,082
+  LUTs, 73,831 FFs, 74 BRAM18Ks, 88 URAMs, 26 DSPs, 13,522,144 maximum STEP
+  cycles, and 43,065,280 amortized cycles.
+- Matched result: the corrected candidate uses `1.958x` BF16 LUTs, `3.200x`
+  BF16 maximum non-fold STEP cycles, and `10.191x` BF16 amortized cycles.
+  Therefore the HLS cost/latency advantage is `FAIL`, despite a `0.550x`
+  logical-state-byte ratio.
+- Full direct generated-RTL trace: `reports/cosim/corrected/rs2_current/trace64_direct/rs2_trace64_direct_summary.json`,
+  SHA256 `BA6B553B612A0BBD941DD14E22E45191318F7384C7B296E19BF9914970087926`.
+  The same generated Verilog passes 66 commands, 262,144 output values,
+  counters, and final recurrent state exactly.
+- Official XSim runtime bound: `reports/cosim/corrected/rs2_current/xsim_runtime/rs2_xsim_runtime.json`,
+  SHA256 `26222F4605E5CA788E3A18BD165271C332888CA4C0E697B9759D0ADBAC9F22A0`;
+  generator SHA256 `C80B8F9BC62E2CE7A8B48A4249C4B4EC5FF301BB0EBECC1D75A7AB1C860214F4`.
+  A random-state LOAD completes 4,447,475 cycles in 502 seconds. Applying that
+  measured rate to the known 2,875,491,178-cycle trace projects 90.157 hours.
+  This is runtime evidence, not official 64-token XSim parity; that item remains
+  `NOT_RUN`.
+- Rejected optimization: the packed-register experiment is archived under
+  `reports/csynth/experiments/rs2_pack_registers_20260809/` with README SHA256
+  `F29E182F154E70814944CB129BF9239E0118A2130C6BA09D48CEEE3E12290962`.
+  It saved only 370 LUTs (`0.22%`) while adding 28 FFs and changing neither
+  latency nor estimated Fmax, so the selected source was restored unchanged.
+
+### E-G7-011 - Current Physical Evidence
+
+- Evidence: `reports/vivado/corrected/rs2_current/rs2_vivado_summary.json`,
+  SHA256 `FF0CEFADF8B0C9ADC017AE55A1E3CB105FD352AA77744E29A8D50DC6CB5F653E`.
+- Result: all 36 logical state slots fit in the U55C out-of-context kernel. DRC
+  has 26 warnings, zero critical warnings, and zero errors. The first passing
+  tested fixed-route point is 166.67 MHz with 0.264 ns WNS; 250 MHz remains
+  `FAIL`.
+- Four post-route repair attempts are recorded. The newest general Explore run
+  improves the original -1.736 ns WNS to -1.690 ns but does not close timing;
+  raw timing SHA256 is
+  `CE22435066CA0F0BB4FF5C59986445C11F418AE001D0A8F94B83BDCF0542E619`.
+- The 5.242 W result is a vectorless estimate at 6.0 ns, not measured board
+  power or energy per token.
+
+### E-G7-012 - External Asset and Hardware Audit
+
+- Local hardware/tool audit:
+  `reports/environment/hardware_availability.json`, SHA256
+  `23C34ACFE928318315A93E75AD5DA3C68107ED713B6C44BA662DF220BEA83325`.
+  Vitis HLS, Vivado, Vitis compiler, platforminfo, and XSim are installed. No
+  attached U55C, U55C XRT platform, `xbutil`/`xrt-smi`, xclbin, or telemetry
+  interface is present. The detected RTX 3070 lacks native FP4 support.
+- Public model/data audit:
+  `reports/environment/qwen_public_asset_audit.json`, SHA256
+  `FCBF7E8FC1435D77FE037FAE7C08CE1742077D5D60BA6D9C6375C4429167A6D1`;
+  generator SHA256 `A197A18060889E2735D3DDFFB8D37D0EE8FD2F7FDB6F753524AB0CFF034FB6EB`.
+  Four bounded Hugging Face API searches return 100 dataset records, no usable
+  Qwen3-Next recurrent activation capture, and only 80B-class official
+  Qwen3-Next models. Closed-loop quality remains `BLOCKED_EXTERNAL`.
+
+### E-G7-013 - Working Draft, Regression, and Release Guard
+
+- Working draft PDF: `paper/corrected/mxfp4_gdn_working_draft.pdf`, SHA256
+  `050D3F30A1E07E16E78D738E30AAFBA7F5FCB3223752D08FF217837A33C72186`.
+  Build-manifest SHA256 is
+  `46BB58A7791E4FA090FD85C6659FE1D38E318283374B54D24E2BA0993D75FE99`;
+  page-by-page visual-audit SHA256 is
+  `5A3782FB7039D07776BEEF04C49AADD2CA4B5CFA194838D9DCB9321781C9D7DB`.
+  All nine 220-DPI page renders pass checks for text, equations, figures,
+  legends, tables, captions, references, margins, and clipping. The PDF is
+  visibly watermarked and not submission eligible.
+- Full regression: 359 passed, two intentional skips, zero failures; JUnit
+  `reports/test_results/final_pytest_20260809.xml`, SHA256
+  `0DCFAEE02FFA9249A1F4902B473A51CAB939D6F1B049A4EF6F54D747FB616586`.
+  The skips preserve the stale legacy HLS-cosim boundary and prohibit a Phase-7
+  pack while the release gate is nonpassing.
+- Final gate: `reports/final_completion_gate.json`, SHA256
+  `F0B40092EEDA7CFD1E7172D27DDD7B9F90BF1E63F22A747E0C6AFE191C3C34AC`;
+  Markdown SHA256
+  `A0C608C210A2FFB3B0003AAE11DA6DFFCF633385007CF095AED04BAD857F0995`.
+  Four of eleven release gates pass. Official full-trace XSim is `NOT_RUN`;
+  closed-loop model quality and board measurements are `BLOCKED_EXTERNAL`;
+  selected-method Pareto advantage and 250 MHz timing are `FAIL`. Reviewer
+  rows are source-mapped, but the unwatermarked audit and submission pack remain
+  intentionally prohibited until all upstream gates pass.

@@ -42,7 +42,7 @@
     "rs2_step_input": "q+k+v two-term E2M1 payloads + one E8M0 byte per B32 term block + alpha/beta Q1.15",
     "rs2_step_output": "VALUE_HEADS*VALUE_DIM*(INT32 mantissa + INT16 exponent)"
   },
-  "generated_at": "2026-08-06T13:31:14.671483+00:00",
+  "generated_at": "2026-08-09T19:30:47.675428+00:00",
   "limitations": [
     "logical type-layout accounting before AXI beat padding, host packing, or protocol overhead",
     "not measured PCIe, HBM, or board traffic",
@@ -52,9 +52,9 @@
   "scope": "logical command payloads before AXI packing for matched BF16 and selected RS2/R3 recurrence-core kernels",
   "source_identity": {
     "dirty_patch": {
-      "bytes": 75094,
-      "changed_file_count": 3,
-      "sha256": "CBA885CBCC3E63A512203694ED8C4B1C112093649FCC7786BA43118934CD9F02"
+      "bytes": 0,
+      "changed_file_count": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
     },
     "files": {
       "hls/bf16/include/gdn_bf16_kernel.hpp": {
@@ -65,24 +65,24 @@
       },
       "hls/rs2/include/gdn_rs2_kernel.hpp": {
         "bytes": 9508,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "15B937C959C3E88729EBD658CF60CC1FE58E72CD2BB402BAC53C2189DD1F5132"
       },
       "hls/rs2/src/gdn_rs2_top.cpp": {
         "bytes": 57674,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E"
       },
       "scripts/rs2_interface_accounting.py": {
         "bytes": 5305,
-        "changed_from_revision": true,
-        "git_state": "untracked",
+        "changed_from_revision": false,
+        "git_state": "tracked",
         "sha256": "2FD2F76E2D5DB3BDEC4BE9E0D55E69E08594985106319C6269594977933D33A4"
       }
     },
-    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "git_revision": "691d75d1762a7b0e75b2e1862c48f84218487a5e",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "source_sha256": {

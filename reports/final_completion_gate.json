@@ -41,9 +41,10 @@
       "evidence": [
         "reports/csynth/corrected/rs2_hls_summary.json",
         "reports/cosim/corrected/rs2_current/control/gdn_rs2_top_cosim.rpt",
-        "reports/cosim/corrected/rs2_current/trace64_direct/rs2_trace64_direct_summary.json"
+        "reports/cosim/corrected/rs2_current/trace64_direct/rs2_trace64_direct_summary.json",
+        "reports/cosim/corrected/rs2_current/xsim_runtime/rs2_xsim_runtime.json"
       ],
-      "finding": "Exact HLS C simulation passes, but one or both required 64-token RTL parity paths remain incomplete or failing.",
+      "finding": "Exact HLS C simulation and direct generated-RTL parity pass, but the required official 64-token XSim path remains incomplete; a measured XSim runtime benchmark bounds its cost.",
       "gate": "c_sim_and_rtl_parity",
       "release_required": true,
       "status": "NOT_RUN",
@@ -51,20 +52,23 @@
         "direct_generated_rtl_64_token": "PASS",
         "exact_64_token_hls_c_simulation": "PASS",
         "official_xsim_64_token_random_or_reset_state": "NOT_RUN",
-        "official_xsim_control": "PASS"
+        "official_xsim_control": "PASS",
+        "official_xsim_runtime_benchmark": "PASS"
       }
     },
     {
       "evidence": [
         "reports/benchmark/qwen_recurrent_stability_manifest.json",
+        "reports/environment/qwen_public_asset_audit.json",
         "reports/golden/qwen_capture_status.md"
       ],
-      "finding": "Short model-derived recurrence diagnostics pass, but the 80B checkpoint and adequate execution memory are absent; no closed-loop perplexity or downstream result exists.",
+      "finding": "Short model-derived recurrence diagnostics pass, but the 80B checkpoint and adequate execution memory are absent; a bounded public-asset audit found no recurrent activation capture, so no closed-loop perplexity or downstream result exists.",
       "gate": "closed_loop_real_model_quality",
       "release_required": true,
       "status": "BLOCKED_EXTERNAL",
       "substatus": {
         "cache_faithful_closed_loop_quality": "BLOCKED_EXTERNAL",
+        "public_recurrent_activation_capture": "BLOCKED_EXTERNAL",
         "short_model_derived_recurrence": "PASS"
       }
     },
@@ -151,13 +155,13 @@
       "status": "FAIL"
     }
   ],
-  "generated_at": "2026-08-09T01:13:40.799752+00:00",
+  "generated_at": "2026-08-09T19:36:12.985834+00:00",
   "nonpassing_gate_count": 7,
   "paper_pdf_permitted": false,
   "release_state": "NOT PAPER READY",
   "required_gate_count": 11,
   "required_nonpassing_gate_count": 7,
   "schema": 2,
-  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+  "source_revision": "691d75d1762a7b0e75b2e1862c48f84218487a5e",
   "status": "FAIL"
 }

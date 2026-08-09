@@ -121,6 +121,9 @@ def test_rs2_vivado_flows_use_selected_generated_rtl_and_u55c() -> None:
     sweep = (ROOT / "vivado/tcl/run_rs2_postroute_sweep.tcl").read_text(
         encoding="utf-8"
     )
+    explore = (
+        ROOT / "vivado/tcl/run_rs2_postroute_explore_opt.tcl"
+    ).read_text(encoding="utf-8")
     flow = (ROOT / "scripts/vivado_flow.py").read_text(encoding="utf-8")
     assert "gdn_rs2_hls/u55c_250mhz/syn/verilog" in create
     assert "build/vivado/rs2_ooc_rtl/gdn_rs2_top.v" in create
@@ -128,6 +131,7 @@ def test_rs2_vivado_flows_use_selected_generated_rtl_and_u55c() -> None:
     assert "set_property top gdn_rs2_top" in create
     assert "synth_design -top gdn_rs2_top" in synth
     assert "route_design" in impl
+    assert "phys_opt_design -directive Explore" in explore
     assert "report_timing_summary" in impl
     assert "report_power" in impl
     assert "rs2_post_impl.dcp" in sweep

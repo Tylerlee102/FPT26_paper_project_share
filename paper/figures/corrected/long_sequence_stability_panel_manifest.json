@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T15:39:14.911123+00:00",
+  "generated_at": "2026-08-09T19:30:54.166750+00:00",
   "limitations": [
     "single deterministic layer-level synthetic trace",
     "thresholds are engineering criteria, not model-quality guarantees",
@@ -12,20 +12,20 @@
   "scope": "paper-scale combined long-sequence synthetic drift panel",
   "source_identity": {
     "dirty_patch": {
-      "bytes": 4975,
-      "changed_file_count": 2,
-      "sha256": "80A82147C9A080C676B649C9C5E5353BD84C56229FBEF3C9998391604A253880"
+      "bytes": 0,
+      "changed_file_count": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
     },
     "files": {
       "scripts/corrected_long_trace_panel.py": {
         "bytes": 10920,
-        "changed_from_revision": true,
+        "changed_from_revision": false,
         "git_state": "tracked",
         "sha256": "5BFEB37AF7E6E73B71777A5619CC7D07BEE805B095114347E9D83D84940ACEF3"
       },
       "scripts/plot_long_sequence_stability.py": {
         "bytes": 23043,
-        "changed_from_revision": true,
+        "changed_from_revision": false,
         "git_state": "tracked",
         "sha256": "B9126CB6F99F831CEB014F43DDAAAD93E5F0CEC8E343128E5C4C19AD6ACD738F"
       },
@@ -36,7 +36,7 @@
         "sha256": "08B078C9B5D80ED4FEB1028E78C6C53979A4B522271A3537D26EBACC1B00DDA0"
       }
     },
-    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "git_revision": "691d75d1762a7b0e75b2e1862c48f84218487a5e",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "status": "PASS",

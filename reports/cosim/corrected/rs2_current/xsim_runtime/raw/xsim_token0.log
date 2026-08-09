@@ -1,0 +1,34 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sun Aug  9 14:33:54 2026
+# Process ID         : 13256
+# Current directory  : C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/reports/test_tmp/rs2_direct_xsim_bench
+# Command line       : xsim.exe -mode tcl -source {xsim.dir/rs2_direct_xsim/xsim_script.tcl}
+# Log file           : C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/reports/test_tmp/rs2_direct_xsim_bench/xsim.log
+# Journal file       : C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/reports/test_tmp/rs2_direct_xsim_bench\xsim.jou
+# Running On         : Tyler
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : AMD Ryzen 7 7700X 8-Core Processor             
+# CPU Frequency      : 4491 MHz
+# CPU Physical cores : 8
+# CPU Logical cores  : 16
+# Host memory        : 33456 MB
+# Swap memory        : 4563 MB
+# Total Virtual      : 38019 MB
+# Available Virtual  : 19092 MB
+#-----------------------------------------------------------
+source xsim.dir/rs2_direct_xsim/xsim_script.tcl
+# xsim {rs2_direct_xsim} -testplusarg TOKEN_LIMIT=0 -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+RS2_DIRECT_RTL command=1 cycles=4447475 status=0 generation=1
+RS2_DIRECT_RTL_BENCHMARK PASS tokens=0
+$finish called at time : 17791160 ns : File "C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/hls/rtl_tb/tb_gdn_rs2_top_direct.sv" Line 576
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:08:22 . Memory (MB): peak = 254.031 ; gain = 0.000
+exit
+INFO: xsimkernel Simulation Memory Usage: 145940 KB (Peak: 145940 KB), Simulation CPU Usage: 500609 ms
+INFO: [Common 17-206] Exiting xsim at Sun Aug  9 14:42:20 2026...

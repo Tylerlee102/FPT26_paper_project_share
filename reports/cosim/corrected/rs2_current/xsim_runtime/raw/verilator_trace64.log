@@ -1,0 +1,131 @@
+RS2_DIRECT_RTL command=1 cycles=4447475 status=0 generation=1
+RS2_DIRECT_RTL command=2 cycles=21884935 status=0 generation=2
+RS2_DIRECT_RTL_TOKEN token=1 status=0 generation=2 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21966006 status=0 generation=3
+RS2_DIRECT_RTL_TOKEN token=2 status=0 generation=3 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91684149 status=0 generation=4
+RS2_DIRECT_RTL_TOKEN token=3 status=0 generation=4 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21883985 status=0 generation=5
+RS2_DIRECT_RTL_TOKEN token=4 status=0 generation=5 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21967050 status=0 generation=6
+RS2_DIRECT_RTL_TOKEN token=5 status=0 generation=6 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91727641 status=0 generation=7
+RS2_DIRECT_RTL_TOKEN token=6 status=0 generation=7 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21885285 status=0 generation=8
+RS2_DIRECT_RTL_TOKEN token=7 status=0 generation=8 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21966622 status=0 generation=9
+RS2_DIRECT_RTL_TOKEN token=8 status=0 generation=9 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91752881 status=0 generation=10
+RS2_DIRECT_RTL_TOKEN token=9 status=0 generation=10 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21884532 status=0 generation=11
+RS2_DIRECT_RTL_TOKEN token=10 status=0 generation=11 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21967944 status=0 generation=12
+RS2_DIRECT_RTL_TOKEN token=11 status=0 generation=12 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91742096 status=0 generation=13
+RS2_DIRECT_RTL_TOKEN token=12 status=0 generation=13 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21885166 status=0 generation=14
+RS2_DIRECT_RTL_TOKEN token=13 status=0 generation=14 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21967725 status=0 generation=15
+RS2_DIRECT_RTL_TOKEN token=14 status=0 generation=15 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91714223 status=0 generation=16
+RS2_DIRECT_RTL_TOKEN token=15 status=0 generation=16 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21884799 status=0 generation=17
+RS2_DIRECT_RTL_TOKEN token=16 status=0 generation=17 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21966858 status=0 generation=18
+RS2_DIRECT_RTL_TOKEN token=17 status=0 generation=18 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91633302 status=0 generation=19
+RS2_DIRECT_RTL_TOKEN token=18 status=0 generation=19 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21884619 status=0 generation=20
+RS2_DIRECT_RTL_TOKEN token=19 status=0 generation=20 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21967229 status=0 generation=21
+RS2_DIRECT_RTL_TOKEN token=20 status=0 generation=21 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91551703 status=0 generation=22
+RS2_DIRECT_RTL_TOKEN token=21 status=0 generation=22 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21885202 status=0 generation=23
+RS2_DIRECT_RTL_TOKEN token=22 status=0 generation=23 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21967441 status=0 generation=24
+RS2_DIRECT_RTL_TOKEN token=23 status=0 generation=24 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91592560 status=0 generation=25
+RS2_DIRECT_RTL_TOKEN token=24 status=0 generation=25 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21884649 status=0 generation=26
+RS2_DIRECT_RTL_TOKEN token=25 status=0 generation=26 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21966202 status=0 generation=27
+RS2_DIRECT_RTL_TOKEN token=26 status=0 generation=27 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91569181 status=0 generation=28
+RS2_DIRECT_RTL_TOKEN token=27 status=0 generation=28 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21885667 status=0 generation=29
+RS2_DIRECT_RTL_TOKEN token=28 status=0 generation=29 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21968386 status=0 generation=30
+RS2_DIRECT_RTL_TOKEN token=29 status=0 generation=30 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91638092 status=0 generation=31
+RS2_DIRECT_RTL_TOKEN token=30 status=0 generation=31 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21885917 status=0 generation=32
+RS2_DIRECT_RTL_TOKEN token=31 status=0 generation=32 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21967348 status=0 generation=33
+RS2_DIRECT_RTL_TOKEN token=32 status=0 generation=33 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91658672 status=0 generation=34
+RS2_DIRECT_RTL_TOKEN token=33 status=0 generation=34 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21884774 status=0 generation=35
+RS2_DIRECT_RTL_TOKEN token=34 status=0 generation=35 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21967266 status=0 generation=36
+RS2_DIRECT_RTL_TOKEN token=35 status=0 generation=36 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91689214 status=0 generation=37
+RS2_DIRECT_RTL_TOKEN token=36 status=0 generation=37 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21884817 status=0 generation=38
+RS2_DIRECT_RTL_TOKEN token=37 status=0 generation=38 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21967942 status=0 generation=39
+RS2_DIRECT_RTL_TOKEN token=38 status=0 generation=39 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91732774 status=0 generation=40
+RS2_DIRECT_RTL_TOKEN token=39 status=0 generation=40 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21885239 status=0 generation=41
+RS2_DIRECT_RTL_TOKEN token=40 status=0 generation=41 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21967435 status=0 generation=42
+RS2_DIRECT_RTL_TOKEN token=41 status=0 generation=42 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91775583 status=0 generation=43
+RS2_DIRECT_RTL_TOKEN token=42 status=0 generation=43 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21885737 status=0 generation=44
+RS2_DIRECT_RTL_TOKEN token=43 status=0 generation=44 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21968583 status=0 generation=45
+RS2_DIRECT_RTL_TOKEN token=44 status=0 generation=45 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91741325 status=0 generation=46
+RS2_DIRECT_RTL_TOKEN token=45 status=0 generation=46 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21885364 status=0 generation=47
+RS2_DIRECT_RTL_TOKEN token=46 status=0 generation=47 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21966986 status=0 generation=48
+RS2_DIRECT_RTL_TOKEN token=47 status=0 generation=48 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91806769 status=0 generation=49
+RS2_DIRECT_RTL_TOKEN token=48 status=0 generation=49 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21885959 status=0 generation=50
+RS2_DIRECT_RTL_TOKEN token=49 status=0 generation=50 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21968892 status=0 generation=51
+RS2_DIRECT_RTL_TOKEN token=50 status=0 generation=51 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91831996 status=0 generation=52
+RS2_DIRECT_RTL_TOKEN token=51 status=0 generation=52 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21885450 status=0 generation=53
+RS2_DIRECT_RTL_TOKEN token=52 status=0 generation=53 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21967372 status=0 generation=54
+RS2_DIRECT_RTL_TOKEN token=53 status=0 generation=54 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91754016 status=0 generation=55
+RS2_DIRECT_RTL_TOKEN token=54 status=0 generation=55 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21884531 status=0 generation=56
+RS2_DIRECT_RTL_TOKEN token=55 status=0 generation=56 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21968504 status=0 generation=57
+RS2_DIRECT_RTL_TOKEN token=56 status=0 generation=57 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91753333 status=0 generation=58
+RS2_DIRECT_RTL_TOKEN token=57 status=0 generation=58 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21884252 status=0 generation=59
+RS2_DIRECT_RTL_TOKEN token=58 status=0 generation=59 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21967571 status=0 generation=60
+RS2_DIRECT_RTL_TOKEN token=59 status=0 generation=60 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91782443 status=0 generation=61
+RS2_DIRECT_RTL_TOKEN token=60 status=0 generation=61 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21884401 status=0 generation=62
+RS2_DIRECT_RTL_TOKEN token=61 status=0 generation=62 live=1 PASS
+RS2_DIRECT_RTL command=2 cycles=21968198 status=0 generation=63
+RS2_DIRECT_RTL_TOKEN token=62 status=0 generation=63 live=2 PASS
+RS2_DIRECT_RTL command=2 cycles=91842379 status=0 generation=64
+RS2_DIRECT_RTL_TOKEN token=63 status=0 generation=64 live=0 PASS
+RS2_DIRECT_RTL command=2 cycles=21884740 status=0 generation=65
+RS2_DIRECT_RTL_TOKEN token=64 status=0 generation=65 live=1 PASS
+RS2_DIRECT_RTL command=3 cycles=2281791 status=0 generation=65
+RS2_DIRECT_RTL_TRACE64 PASS tokens=64 transactions=66 outputs=262144 final_snapshot=PASS

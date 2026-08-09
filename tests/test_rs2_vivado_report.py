@@ -38,7 +38,12 @@ def test_real_rs2_route_when_available(tmp_path: Path) -> None:
     attempts = {
         row["name"]: row for row in report["postroute_optimization_attempts"]
     }
-    assert set(attempts) == {"aggressive_fanout", "retiming", "slr_crossing"}
+    assert set(attempts) == {
+        "aggressive_fanout",
+        "retiming",
+        "slr_crossing",
+        "explore",
+    }
     assert all(row["status"] == "PASS" for row in attempts.values())
     assert all(row["target_timing_status"] == "FAIL" for row in attempts.values())
     assert (tmp_path / "rs2_vivado_summary.json").is_file()
