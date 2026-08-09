@@ -44,6 +44,7 @@ def test_real_rs2_route_when_available(tmp_path: Path) -> None:
         "slr_crossing",
         "explore",
         "aggressive_explore",
+        "fanout_then_aggressive",
     }
     assert all(row["status"] == "PASS" for row in attempts.values())
     assert all(row["target_timing_status"] == "FAIL" for row in attempts.values())

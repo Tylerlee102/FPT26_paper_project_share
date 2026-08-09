@@ -22,11 +22,12 @@ hypotheses remain visible; none is silently promoted to a positive claim.
 - The corrected candidate physically fits out of context, but fails setup at
   250 MHz and 200 MHz. The first passing point in the tested fixed-route sweep
   is 166.67 MHz; this is not a binary-searched maximum frequency.
-- Five post-route repair attempts fail 250 MHz. Fanout and retiming are best at
-  -1.656 ns WNS; both Explore variants reach -1.690 ns, and Vivado reports that
-  the violation is too large for likely post-route repair.
+- Six post-route repair attempts fail 250 MHz. Chaining AggressiveExplore after
+  fanout is best at -1.655 ns WNS, only 0.001 ns better than fanout alone;
+  Vivado reports that the violation is too large for likely post-route repair.
 - The critical path is dominated by routing into resident-state URAM control,
-  not the E2M1 multiplier.
+  not the E2M1 multiplier. Further timing work requires an architecture-level
+  control-path or floorplanning change and complete revalidation.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return

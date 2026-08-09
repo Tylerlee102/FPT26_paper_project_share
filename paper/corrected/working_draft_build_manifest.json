@@ -1,18 +1,18 @@
 {
   "artifact_kind": "watermarked_working_draft",
-  "asset_manifest_sha256": "20C313978F1DCCA50A5BDF7191DA360CB942BD90EA15AC3D65DD7818E844D74F",
+  "asset_manifest_sha256": "0B4432C80A2D35A7391862DE3A6274A7ACBA6508E57CD4B4F0F04ED939901C2B",
   "asset_source_identity": {
     "dirty_patch": {
-      "bytes": 827,
+      "bytes": 1047,
       "changed_file_count": 1,
-      "sha256": "9358246B3C17988AD0BD16B7B0CE39AE008D209A8F9DAA2EB6F641BCD64013A6"
+      "sha256": "49072F2BFB96C39EF813DAC5862C729A7286FFDADD53D295143E90A709BD2BEE"
     },
     "files": {
       "paper/corrected/paper.tex": {
-        "bytes": 44423,
+        "bytes": 44620,
         "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "4D87FC7B2F5BFFA7D0FCEDB82F657FE20A1E84288D6EB7EF2CF7B73DB4A0B5A9"
+        "sha256": "FF7756A96A49A42B1106BB7D2AB6EE454F52CF4A0854DE5B240CEA03E97D371F"
       },
       "scripts/corrected_paper_assets.py": {
         "bytes": 122130,
@@ -33,7 +33,7 @@
         "sha256": "C45C7D08671460B5A530D77B28E75E1899E84B8063140D07B000B6EE431CD6B7"
       }
     },
-    "git_revision": "9157adb4f9d72880b93a42de84dbfb8510a40bf9",
+    "git_revision": "1c7d2ea5181c43f846846688822f2a227ca7925a",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "blocking_gates": [
@@ -67,19 +67,19 @@
     }
   ],
   "build_log": "paper/corrected/build_working_draft/working_draft_build.log",
-  "build_log_sha256": "DA3496BBD93C046DE5725CD6AEF0FA946F7D43F74BEEA95922F59477A4454B25",
+  "build_log_sha256": "DE10E397AB709D836962AF5D193A507B093E1748C49E0952C04D36AA771D21AF",
   "build_source_identity": {
     "dirty_patch": {
-      "bytes": 827,
+      "bytes": 1047,
       "changed_file_count": 1,
-      "sha256": "9358246B3C17988AD0BD16B7B0CE39AE008D209A8F9DAA2EB6F641BCD64013A6"
+      "sha256": "49072F2BFB96C39EF813DAC5862C729A7286FFDADD53D295143E90A709BD2BEE"
     },
     "files": {
       "paper/corrected/paper.tex": {
-        "bytes": 44423,
+        "bytes": 44620,
         "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "4D87FC7B2F5BFFA7D0FCEDB82F657FE20A1E84288D6EB7EF2CF7B73DB4A0B5A9"
+        "sha256": "FF7756A96A49A42B1106BB7D2AB6EE454F52CF4A0854DE5B240CEA03E97D371F"
       },
       "paper/corrected/working_draft.tex": {
         "bytes": 55,
@@ -94,7 +94,7 @@
         "sha256": "1539C7C836F82FD81145C129B89C0664C2927C539B90A1513519BCA8F74ACFFE"
       }
     },
-    "git_revision": "9157adb4f9d72880b93a42de84dbfb8510a40bf9",
+    "git_revision": "1c7d2ea5181c43f846846688822f2a227ca7925a",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "command": [
@@ -108,9 +108,9 @@
     "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\paper\\corrected\\build_working_draft",
     "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\paper\\corrected\\working_draft.tex"
   ],
-  "generated_at": "2026-08-09T22:27:49.029244+00:00",
+  "generated_at": "2026-08-09T22:34:51.482000+00:00",
   "output": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "output_sha256": "BA4A00C42B78F3C15A90349D3D1A1D2215CF9E54C80588D03C7E5945577316C0",
+  "output_sha256": "53534E359C63263B024515EE172A37D75296C129F1BCACE5053FE60DF48DD9FD",
   "page_count": 9,
   "release_state": "NOT PAPER READY",
   "schema": 1,

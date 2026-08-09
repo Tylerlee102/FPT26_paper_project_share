@@ -32,10 +32,10 @@
     }
   ],
   "build_manifest": "paper/corrected/working_draft_build_manifest.json",
-  "build_manifest_sha256": "8D21613C34D6E2028E1BC443688D9A9BF67B02728A605ECF308B0FCC67BE61C7",
+  "build_manifest_sha256": "70D6F958A1C71077B490E5A551C09E88904C3ABE941494DC46B49DB11690F143",
   "checklist": "paper/corrected/working_draft_visual_checklist.json",
   "checklist_sha256": "8F3D44A73795A5284D5D348FE36B4DF43CCEE77F8DD7790BA639233382549D19",
-  "generated_at": "2026-08-09T22:27:54.920734+00:00",
+  "generated_at": "2026-08-09T22:34:57.321825+00:00",
   "page_count": 9,
   "pages": [
     {
@@ -83,7 +83,7 @@
       "notes": "All six result tables are legible; Table IV max-absolute and nonfinite columns are visibly separated after repair.",
       "page": 6,
       "path": "reports/rendered/working_draft/page-06.png",
-      "sha256": "3A50041E4BED7E76C24B6F302C3958D403A12A50FCBA816F57B4FD072AEFC279",
+      "sha256": "98F132ABEC4BF407F710AA212227573D3F84B00531714B1E73C956E7F563E086",
       "width": 1870
     },
     {
@@ -91,7 +91,7 @@
       "notes": "Trade-off figure and power table are readable; bar labels, caption, and discussion equations stay inside margins.",
       "page": 7,
       "path": "reports/rendered/working_draft/page-07.png",
-      "sha256": "5BF498088C90084A97B807463AE4408BAA9E1AB06572947EC017CBAF8FDFF7BB",
+      "sha256": "A4F837D0B5E92DC298A4788B713D61DA9C9CF0AECB7E7EDC6AAE2B0518FFCE84",
       "width": 1870
     },
     {
@@ -124,5 +124,5 @@
   "submission_eligible": false,
   "visual_audit_status": "PASS",
   "working_draft": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "working_draft_sha256": "BA4A00C42B78F3C15A90349D3D1A1D2215CF9E54C80588D03C7E5945577316C0"
+  "working_draft_sha256": "53534E359C63263B024515EE172A37D75296C129F1BCACE5053FE60DF48DD9FD"
 }

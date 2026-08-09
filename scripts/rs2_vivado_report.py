@@ -191,6 +191,7 @@ def generate_report(report_dir: Path, output: Path) -> dict[str, object]:
         ("slr_crossing", "postroute_slr_opt", "post-route SLR-crossing optimization"),
         ("explore", "postroute_explore_opt", "post-route general Explore physical optimization"),
         ("aggressive_explore", "postroute_aggressive_explore_opt", "post-route AggressiveExplore physical optimization"),
+        ("fanout_then_aggressive", "postroute_fanout_aggressive_opt", "post-route AggressiveExplore after AggressiveFanoutOpt"),
     ):
         directory = report_dir / directory_name
         timing_path = directory / "timing_4p000ns.rpt"
@@ -245,6 +246,7 @@ def generate_report(report_dir: Path, output: Path) -> dict[str, object]:
             ROOT / "vivado" / "tcl" / "run_rs2_postroute_slr_opt.tcl",
             ROOT / "vivado" / "tcl" / "run_rs2_postroute_explore_opt.tcl",
             ROOT / "vivado" / "tcl" / "run_rs2_postroute_aggressive_explore_opt.tcl",
+            ROOT / "vivado" / "tcl" / "run_rs2_postroute_fanout_aggressive_opt.tcl",
         ]
     )
     report: dict[str, object] = {
