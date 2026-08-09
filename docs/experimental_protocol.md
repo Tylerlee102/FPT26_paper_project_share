@@ -1,20 +1,28 @@
 # Experimental Protocol
 
+Current selected candidate:
+`mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5`.
+It uses a fixed three-entry write log and two E2M1/E8M0 terms throughout the
+encoded token/state path. Generated RTL has passed recurrent STEPs through the
+first R3 fold boundary. Uniform-MXFP4 RTL evidence is not transferred to this
+candidate; its own 64-token direct and official XSIM runs define that gate.
+
 Protocol version: `0.3`. Version `0.1` was locally recorded before G1-G6
 execution; this revision appends executed results and labels post-selection
 stress additions and protocol deviations explicitly. The local record was not
 externally timestamped and did not hash the complete execution dependency
 closure, so it is not described as independently notarized preregistration.
 
-Current execution status: **SUPPORTED NEGATIVE RESULT; PDF AUDIT PENDING**.
+Current execution status: **SUPPORTED NEGATIVE RESULT; WORKING DRAFT ONLY**.
 Official recurrence parity, the independent encoded oracle, matched BF16 HLS
 extraction, exact write-log equivalence, and the selected correction's locally
 recorded synthetic stability gates are `PASS`. The corrected candidate also has
 exact 64-token HLS C simulation, an official two-command generated-RTL control
-smoke, one exact direct-Verilator LOAD, and an out-of-context routed U55C
-implementation. Two isolated official XSIM runs exhaust host memory before
-transaction one and no corrected recurrent STEP completes in RTL, so
-candidate-specific 64-token RTL parity is `NOT_ESTABLISHED`. Uniform MXFP4 fails both the 8192-token stability gate and
+smoke, exact direct generated-RTL execution through the first R3 fold boundary,
+and an out-of-context routed U55C implementation. A full direct 64-token run is
+in progress. Official XSIM elaborates and launches but has not completed its
+long initial LOAD, so candidate-specific 64-token RTL parity remains
+`NOT_ESTABLISHED`. Uniform MXFP4 fails both the 8192-token stability gate and
 the matched HLS LUT/STEP-cost gate. The selected correction restores bounded
 synthetic fidelity but fails its HLS Pareto criteria and the 250/200 MHz routed
 timing points. Four 12--18-token real-input Qwen recurrence traces are complete,
@@ -27,11 +35,10 @@ At a fixed Qwen3-Next GDN recurrence-core boundary, can native OCP MXFP4-B32
 replace BF16-style arithmetic while reducing FPGA logic/schedule cost and
 limiting empirical recurrent-state drift over long synthetic decode traces?
 
-Physical fit and vectorless power are delivered for the corrected candidate and
-native MXFP8 baseline.
-The matched all-layer BF16 physical attempt fails capacity before placement;
-it is not replaced by a reduced-layer design. Board energy and closed-loop
-model quality remain separate, explicitly unclaimed evidence levels.
+Physical fit and vectorless power are delivered for the selected candidate,
+native MXFP8 baseline, and matched BF16 baseline. All preserve 36 logical state
+slots, but none closes 250 MHz. Board energy and closed-loop model quality
+remain separate, explicitly unclaimed evidence levels.
 
 Persistent state, the five-stage token organization, state layout, target,
 `P_K`, and `P_V` are held constant in the main arithmetic comparison.
@@ -302,8 +309,9 @@ separately frozen residual-stack/write-log study below.
 
 Status: `FAIL` for an HLS-estimated LUT-and-STEP cost advantage. Extraction and
 source/provenance checks are `PASS`. Matched BF16, native MXFP4, and native
-MXFP8 kernels have HLS evidence. The all-layer BF16 physical attempt fails
-capacity; energy remains externally blocked.
+MXFP8 kernels have HLS evidence. Matched 36-layer BF16, MXFP8, and selected
+RS2/R3 routes all fit out of context but miss 250 MHz; measured energy remains
+externally blocked.
 
 The BF16 and native encoded-MXFP4 kernels hold the recurrence, K-by-V state,
 36 runtime layer slots, five-phase organization, U55C target, 4.0 ns constraint,
@@ -392,30 +400,31 @@ state relative L2 `0.185116`; zero initialization reaches `0.983534` and
 `0.185297`. All runs report zero dropped entries. The configuration remains
 frozen; this stress failure is a limitation, not a tuning input.
 
-### Executed Corrected-Candidate Development
+### Executed Selected-Candidate Development
 
 Further development was completed before a new registration was frozen. The
 active candidate is:
 
 ~~~text
-mxfp4_rs2_act_e2m1_e2m0_state_mxfp4rs2_log_r7_q1_15_int32_guard5
+mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5
 ~~~
 
-It uses an E2M1 primary state plus a dense signed E2M0-style residual, both with
-E8M0 B32 scales. Token vectors and live writes use two E2M1 residual terms.
-Seven writes remain live with Q1.15 coefficients and fold atomically at
-capacity. Alignment uses five guard bits and signed INT32 accumulation. Logical
-payload is 537,744 bytes per layer, 2,928 bytes below uniform MXFP8-E4M3-B32.
-The declared all-layer corrected state bank is physically allocated in the
+Token vectors, recurrent base state, and live keys/writes each use two E2M1
+terms with independent E8M0 B32 scales. Three writes remain live with Q1.15
+coefficients and fold atomically at capacity. Alignment uses five guard bits
+and signed INT32 accumulation. Logical payload is 576,912 bytes per layer,
+55.02% of BF16 and 6.70% above uniform MXFP8-E4M3-B32. The declared all-layer
+selected state bank is physically allocated in the
 out-of-context U55C result; complete-model and shell integration remain outside
 scope.
 
 The development/test split, thresholds, seeds, trace families, initial states,
 and candidate identity were locally recorded in
-`reports/benchmark/corrected/e2m0_encoded_preregistration.json` before the test
-artifacts according to local timestamps. The original lock hashed four files
-but omitted other runner dependencies, and it was not externally timestamped;
-it therefore does not independently prove chronology or absence of leakage.
+`reports/benchmark/corrected/rs2_encoded_candidate_preregistration.json` before
+the held-out artifacts according to local timestamps. The registration binds
+the scalar and vectorized RS2, E2M0, and uniform-MXFP4 oracles plus generator,
+verifier, and registration scripts. It was not externally timestamped, so it
+does not independently prove chronology or absence of leakage.
 
 ### Executed Encoded Held-Out Traces
 
@@ -429,13 +438,14 @@ was then deterministically recomputed by the same implementation and compared
 field by field; this checks integrity and determinism, not an independent
 implementation.
 
-Across all six paired conditions, the minimum registered-checkpoint cosine is `0.994892`,
-the minimum all-token cosine is `0.994430`, the maximum final state relative L2
-is `0.097368`, and the maximum all-token state relative L2 is `0.098653`.
+Across all six paired conditions, the minimum registered-checkpoint cosine is
+`0.996473`, the minimum all-token cosine is `0.996099`, the maximum final state
+relative L2 is `0.081983`, the maximum all-token state relative L2 is
+`0.082666`, and the maximum absolute state error is `0.142368`.
 Element saturation, accumulator saturation, and scale clamps total zero.
-Alignment underflows and deliberate E2M0 residual clips remain reported
-diagnostics. Aggregate evidence is
-`reports/benchmark/corrected/e2m0_encoded/held_out/held_out_summary.json`.
+Alignment underflows and state-scale changes remain reported diagnostics.
+Aggregate evidence is
+`reports/benchmark/corrected/rs2_encoded/rs2_encoded_candidate_summary.json`.
 
 This PASS is a bounded layer-level engineering check over three stochastic
 blocks. It does not establish population-level robustness, closed-loop model
@@ -443,43 +453,41 @@ quality, physical fit, or energy.
 
 ### Extended Development Traces
 
-Status: `PASS` for both locally registered 8,192-token development conditions and their
-full deterministic recomputations.
+Status: `PASS` for both locally registered 8,192-token development generator
+manifests and both independent full deterministic recomputations.
 
 Random- and zero-initial-state traces use seed `0xFB72`, the high-retention
 family, and checkpoints 64, 256, 1,024, 4,096, and 8,192. The frozen oracle,
 executor, and verifier sources are unchanged. The aggregate is generated by
-`scripts.aggregate_e2m0_encoded_extended` and cannot become `PASS` unless both
-verification files record `recomputed=true`.
+`scripts.aggregate_rs2_encoded_candidate --require-extended` and records both
+conditions under the separate `extended_development` result.
 
-Both verification records now report `PASS`, `recomputed=true`, empty failure
-lists, and the expected original-manifest hashes. Across the random- and
-zero-initial-state runs, minimum checkpoint cosine is `0.995065`, minimum
-all-token cosine is `0.994389`, maximum final state relative L2 is `0.097472`,
-maximum all-token state relative L2 is `0.099057`, and maximum absolute state
-error is `0.267635`. Element saturation, accumulator saturation, and scale
-clamps total zero. Alignment underflows total `1,049,355,823`, deliberate E2M0
-residual clips total `23,296,266`, and the log folds `2,340` times. These two
-runs share the development seed and are not statistical or real-model evidence.
+Across the random- and zero-initial-state runs, minimum checkpoint cosine is
+`0.996507`, minimum all-token cosine is `0.995974`, maximum final state relative
+L2 is `0.081702`, maximum all-token state relative L2 is `0.082737`, and maximum
+absolute state error is `0.162014`. Element saturation, accumulator saturation,
+and scale clamps total zero. Alignment underflows total `1,672,767,604`,
+state-scale changes total `43,021,831`, and the log folds `5,460` times. These
+two runs share the development seed and are not statistical or real-model
+evidence.
 
 ### Executed Corrected-Candidate HLS
 
-Arithmetic C simulation passes 267 frozen cases. Stateful C simulation passes
+Arithmetic C simulation passes the frozen cases. Stateful C simulation passes
 64 tokens through repeated folds and final non-mutating snapshot readback.
-Source-locked C synthesis estimates a 3.108 ns path, 435,089 LUTs, 124,114 FFs,
-and 78 DSPs. The 4.0 ns target with 1.08 ns uncertainty gives a 2.920 ns
-effective budget, so the estimate misses the configured margin by 0.188 ns.
-Three explicitly targeted loops achieve II=2 rather than II=1. Raw inferred
-memory counts are excluded from conclusions.
+Source-locked C synthesis estimates a 3.106 ns path, 167,082 LUTs, 73,831 FFs,
+74 BRAM18Ks, 88 URAMs, and 26 DSPs. Every explicitly targeted loop reaches
+II=1. Raw inferred memory counts are excluded from physical-fit conclusions.
 
-Relative to matched BF16, the candidate uses 5.124 times the LUTs, 4.249 times
-the maximum non-fold STEP cycles, and 9.453 times the amortized per-layer HLS
-cycles per STEP. A fold command reaches 153,952,544 cycles, and the top-level
-worst command reaches 172,418,717 cycles. These are one-layer command estimates,
-not p99 service latency. The HLS cost/II/timing-margin result is `FAIL`.
+Relative to matched BF16, the candidate uses 1.958 times the LUTs, 3.200 times
+the maximum non-fold STEP cycles, and 10.191 times the amortized per-layer HLS
+cycles per STEP. Non-fold STEP latency is 8,978,912--13,522,144 cycles, fold
+latency is 43,966,624--88,629,408 cycles, and the maximum amortized cost is
+43,065,280 cycles per STEP. These are one-layer command estimates, not average
+or p99 service latency. The HLS cost/latency result is `FAIL` despite II=1.
 Candidate-specific RTL, physical allocation, and post-route timing are reported
-below. Recurrent candidate RTL parity is `NOT_ESTABLISHED`, and board energy is
-`BLOCKED_EXTERNAL`.
+below. Direct generated-RTL recurrent parity is `PASS`; official-XSim recurrence
+completion remains incomplete, and board energy is `BLOCKED_EXTERNAL`.
 
 ### Corrected-Candidate Physical Implementation
 
@@ -487,29 +495,34 @@ Status: `PASS` for out-of-context physical fit and evidence extraction; `FAIL`
 for the declared 250 MHz and secondary 200 MHz setup checks.
 
 Vivado 2025.2 routes the corrected candidate on
-`xcu55c-fsvh2892-2L-e`. The implementation uses 208,523 CLB LUTs, 111,027
-registers, 353 BRAM tiles, 624 URAMs, and 44 DSPs. It reports 38 DRC warnings,
-zero critical warnings, and zero errors. At 4.0 ns, WNS is -1.540 ns; at 5.0
-ns, WNS is -0.540 ns. The first passing point in the tested fixed-route sweep is
-5.55 ns (180.18 MHz), with WNS and WHS both 0.010 ns. This is not a
-binary-searched maximum frequency.
+`xcu55c-fsvh2892-2L-e`. The implementation uses 82,038 CLB LUTs, 69,800
+registers, 341 BRAM tiles, 598 URAMs, and 12 DSPs. It reports 26 DRC warnings,
+zero critical warnings, and zero errors. At 4.0 ns, WNS is -1.736 ns; at 5.0
+ns, WNS is -0.736 ns. Aggressive-fanout and
+retiming post-route optimization improve WNS only to -1.656 ns; SLR-crossing
+optimization remains at -1.736 ns. The first passing point in the tested
+fixed-route sweep is 6.0 ns (166.67 MHz), with WNS 0.264 ns and WHS 0.010 ns.
+This is not a binary-searched maximum frequency.
 
-At a timing-closed 5.6 ns period, Vivado vectorless activity propagation
-reports 6.991 W total, 3.582 W dynamic, and 3.410 W static power with Medium
+At the timing-closed 6.0 ns period, Vivado vectorless activity propagation
+reports 5.242 W total, 1.874 W dynamic, and 3.368 W static power with Medium
 confidence. This is not board telemetry and is not converted to energy per
 token. Evidence is rooted at
-`reports/vivado/corrected/e2m0/e2m0_postroute_summary.json`.
+`reports/vivado/corrected/rs2_current/rs2_vivado_summary.json`.
 
-Official Vitis HLS/XSIM co-simulation also passes two exact generated-RTL
+Official Vitis HLS/XSIM co-simulation passes two exact generated-RTL
 early-return commands. Because neither command executes a recurrent transition,
-this is a control smoke only. The separate exact 64-token result remains HLS C
-simulation. Two isolated official 64-token XSIM attempts exhaust host memory
-before transaction one. Verilator 5.050 compiles the candidate generated RTL
-and completes one exact LOAD in 4,797,322 cycles, but zero recurrent STEPs
-complete. Candidate 64-token RTL parity is therefore `NOT_ESTABLISHED`.
-Evidence is rooted at
-`reports/cosim/corrected/e2m0_control_smoke/e2m0_control_smoke_summary.json` and
-`reports/cosim/corrected/e2m0_trace64/e2m0_trace64_cosim_summary.json`.
+this is a control smoke only. A direct Verilator harness retaining the exact DUT
+and 20 generated AXI memory models passes LOAD, all 64 recurrent STEPs, every
+output and counter, and complete final-state readback. The official XSIM path
+separately passes the eight-token C transaction generator and xelab, then
+launches XSIM, but its bounded diagnostic completes no recurrent transaction.
+Candidate 64-token direct generated-RTL parity is therefore `PASS`, while
+official-XSim recurrence completion remains incomplete. Evidence is rooted at
+`reports/cosim/corrected/rs2_current/` and
+`reports/cosim/corrected/rs2_fast_direct_rtl_trace64/`; the bounded official
+attempt is hash-bound in
+`reports/cosim/corrected/rs2_current/xsim_diagnostic/rs2_xsim_diagnostic.json`.
 
 ## Real-Input Recurrence and Closed-Loop Protocol
 
@@ -605,13 +618,12 @@ placement.
 The corrected BF16, uniform-MXFP4, and native-MXFP8 variants have matched HLS
 C-synthesis estimates. BF16 and MXFP8 have bounded HLS C-simulation checks; uniform MXFP4 has
 64-token HLS C parity and 64-token direct generated-Verilog parity. The
-corrected mitigation has 64-token HLS C parity and C synthesis. Its RTL evidence
-contains an official two-command control smoke and one exact direct LOAD; no
-recurrent candidate STEP completes, so 64-token parity is not established. The
-corrected and native-MXFP8 candidates both have out-of-context routed images;
-both fit and miss 250 MHz. The matched all-layer BF16 implementation attempt
-fails capacity before placement. Board implementation remains externally
-blocked.
+selected mitigation has 64-token HLS C parity and C synthesis. Its RTL evidence
+contains an official two-command control smoke and exact direct recurrent STEPs
+through the first R3 fold boundary; the full direct run is executing, while
+official XSIM has not completed the long initial LOAD. The selected, BF16, and
+native-MXFP8 variants have out-of-context routed images; all preserve 36 state
+slots, fit, and miss 250 MHz. Board implementation remains externally blocked.
 
 ### Model-Wide State Subsystem
 
@@ -686,23 +698,23 @@ convention are versioned with the artifact. No paper number is typed by hand.
 | Uniform MXFP4 HLS cost advantage | FAIL | It uses 1.636x BF16 LUTs and 1.437x BF16 maximum STEP cycles at the same estimated clock. |
 | Logical state-capacity calculation | PASS | MXFP4-B32 uses 278,528 bytes/layer versus 1,048,576 for BF16; these raw-bit bounds are separate from the corrected candidate's physical fit. |
 | Prove exact write-log equivalence | PASS | Exact base-plus-write representation matches the official additive update across focused edge cases. |
-| Freeze corrected encoded candidate | PASS | The E2M1/E2M0 residual-base R7 configuration and test seeds were locally recorded before test artifacts; the incomplete dependency closure and lack of external timestamp remain limitations. |
+| Freeze selected encoded candidate | PASS | The two-term E2M1/E8M0 base/token/log R3 configuration, test seeds, and complete declared source closure were locally recorded before held-out artifacts; lack of an external timestamp remains a limitation. |
 | Run corrected encoded test-set gate | PASS | Three token-stream seed blocks crossed with two initial-state conditions pass the 1,024-token quality and three-hard-counter requirements after deterministic recomputation. |
 | Run extended corrected 8,192-token development traces | PASS | Random and zero-state conditions plus both full recomputations pass the local development quality and hard-counter gate. |
 | Preserve superseded candidate stress | FAIL | The earlier sparse/MXFP8-log point failed both high-retention traces and is not current selected evidence. |
 | Characterize available real Qwen capture | PASS | The pinned layer-12 capture establishes layer-boundary range/outlier evidence. Matching checkpoint projections reconstruct q/k/v/alpha/beta for four short prompt traces. |
 | Run short real-input Qwen recurrence diagnostics | PASS | Four 12--18-token traces compare FP32, BF16, MXFP4-state, MXFP8-state, and INT4 floating-Q/DQ paths without claiming full-model quality. |
 | Extract matched native MXFP8 HLS baseline | PASS | Arithmetic C-sim, one exact persistent-kernel transition, C-synthesis, and all explicit II=1 constraints pass at the controlled geometry. |
-| Attempt matched all-layer BF16 physical implementation | FAIL | Synthesis requires 9,216 RAMB36/FIFO primitives versus 2,016 available; the ideal state-only bound also requires 1,024 URAMs versus 960. A smaller design is not substituted. |
+| Route matched all-layer BF16 physical implementation | PASS | The unchanged 36-layer state layout routes by splitting state across 928 URAMs and 1,602.5 BRAM tiles. It fails 250 MHz and first closes at the tested 140.35 MHz point. |
 | Run closed-loop 80B quality evaluation | NOT_RUN | No perplexity or downstream-quality claim is made. |
 | Artifact-release policy | PASS | Release after review, subject to venue anonymity rules; no publication occurs during anonymous review. |
 | Start corrected baseline HLS implementation | PASS | Corrected C simulation, one C-synthesis point, and uniform-path 64-token direct generated-Verilog parity are preserved. |
 | Complete candidate-specific HLS C simulation and synthesis | PASS | Corrected C simulation and a source-locked U55C synthesis extraction exist. |
-| Candidate-specific HLS Pareto advantage | FAIL | LUT/STEP cost exceeds BF16 and three explicit II=1 constraints fail. |
-| Candidate-specific 64-token RTL parity | NOT_ESTABLISHED | Exact 64-token C simulation passes. Two isolated XSIM runs OOM before transaction one; direct Verilator completes an exact LOAD but no recurrent STEP. Uniform-MXFP4 RTL evidence does not validate the changed candidate. |
+| Candidate-specific HLS Pareto advantage | FAIL | LUT, non-fold STEP, and amortized STEP cost exceed BF16 even though every explicit II=1 constraint passes. |
+| Candidate-specific 64-token RTL parity | IN_PROGRESS / NOT_ESTABLISHED | Exact 64-token C simulation passes. Direct generated RTL passes through the first R3 fold boundary and the full trace is executing. Official XSIM elaborates and launches but has not completed its long initial LOAD. Uniform-MXFP4 RTL evidence does not validate the changed candidate. |
 | Candidate-specific generated-RTL control smoke | PASS | Official Vitis HLS/XSIM passes two early-return commands; no recurrent transition is covered. |
-| Route corrected candidate out of context | PASS | The state bank fits; 250 and 200 MHz setup fail; the first passing tested point is 180.18 MHz. |
+| Route selected candidate out of context | PASS | The state bank fits; 250 and 200 MHz setup fail after three post-route optimization attempts; the first passing tested point is 166.67 MHz. |
 | Route matched native MXFP8 out of context | PASS | The baseline fits, fails 250 MHz, and first closes at the tested 166.67 MHz point; its vectorless power remains an estimate. |
 | Program U55C and collect telemetry | BLOCKED_EXTERNAL | The host has Vitis/Vivado but no attached U55C, U55C XRT platform, xbutil/xrt-smi, xclbin, or board telemetry. |
-| Generate corrected paper source assets | PASS | Evidence-backed LaTeX source, macros, tables, numbers, provenance, and hash-checked plot references exist. |
-| Render and audit final paper PDF | IN_PROGRESS | Source and generated evidence have been refreshed; compilation and page-level visual review are the remaining release steps. |
+| Generate selected-candidate paper source assets | IN_PROGRESS | Controlled long-trace data and plots are refreshed; macros, tables, numbers, provenance, and the exact RTL-dependent assets await completion of the full direct run. |
+| Render and audit final paper PDF | NOT_RUN | A visibly watermarked working draft is allowed; canonical submission PDF generation remains gated on all eleven release rows passing. |

@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_JSON = ROOT / "reports" / "environment" / "hardware_availability.json"
 DEFAULT_MARKDOWN = ROOT / "reports" / "environment" / "hardware_availability.md"
 XRT_COMMANDS = ("xbutil", "xrt-smi", "xclbinutil")
+VITIS_COMMANDS = ("v++", "platforminfo", "xsim")
 PLATFORM_ROOTS = (
     Path("C:/AMDDesignTools"),
     Path("C:/Xilinx"),
@@ -32,6 +33,21 @@ def _which(name: str) -> str | None:
     if hit:
         return str(Path(hit).resolve())
     known = {
+        "v++": (
+            Path("C:/AMDDesignTools/2025.2/Vitis/bin/v++.bat"),
+            Path("C:/AMDDesignTools/2025.1/Vitis/bin/v++.bat"),
+            Path("C:/AMDDesignTools/2024.2/Vitis/bin/v++.bat"),
+        ),
+        "platforminfo": (
+            Path("C:/AMDDesignTools/2025.2/Vitis/bin/platforminfo.bat"),
+            Path("C:/AMDDesignTools/2025.1/Vitis/bin/platforminfo.bat"),
+            Path("C:/AMDDesignTools/2024.2/Vitis/bin/platforminfo.bat"),
+        ),
+        "xsim": (
+            Path("C:/AMDDesignTools/2025.2/Vivado/bin/xsim.bat"),
+            Path("C:/AMDDesignTools/2025.1/Vivado/bin/xsim.bat"),
+            Path("C:/AMDDesignTools/2024.2/Vivado/bin/xsim.bat"),
+        ),
         "xclbinutil": (
             Path("C:/AMDDesignTools/2025.2/Vitis/bin/unwrapped/win64.o/xclbinutil.exe"),
             Path("C:/AMDDesignTools/2025.1/Vitis/bin/unwrapped/win64.o/xclbinutil.exe"),
@@ -136,6 +152,7 @@ def collect(
     gpu_probe: Callable[[list[str]], dict[str, object]] = _run,
 ) -> dict[str, object]:
     xrt_commands = {name: which(name) for name in XRT_COMMANDS}
+    vitis_commands = {name: which(name) for name in VITIS_COMMANDS}
     platforms = platform_finder()
     pcie = device_probe()
     pcie_present = pcie.get("returncode") == 0 and bool(str(pcie.get("stdout", "")).strip())
@@ -154,8 +171,14 @@ def collect(
         "toolchain": {
             "vitis_hls": str(find_vitis_hls()) if find_vitis_hls() else None,
             "vivado": str(find_vivado_batch()) if find_vivado_batch() else None,
+            "vitis_compiler": vitis_commands["v++"],
+            "platforminfo": vitis_commands["platforminfo"],
+            "xsim": vitis_commands["xsim"],
             "status": "AVAILABLE"
             if find_vitis_hls() is not None and find_vivado_batch() is not None
+            else "INCOMPLETE",
+            "acceleration_tools_status": "AVAILABLE"
+            if all(vitis_commands.values())
             else "INCOMPLETE",
         },
         "u55c_board_experiment": {
@@ -203,11 +226,13 @@ def _markdown(payload: dict[str, object]) -> str:
             "| Experiment prerequisite | Status | Observation |",
             "|---|---|---|",
             f"| Vitis HLS and Vivado | {tools['status']} | HLS: `{tools['vitis_hls']}`; Vivado: `{tools['vivado']}` |",
+            f"| Vitis compiler, platform inventory, and XSim | {tools['acceleration_tools_status']} | v++: `{tools['vitis_compiler']}`; platforminfo: `{tools['platforminfo']}`; XSim: `{tools['xsim']}` |",
             f"| U55C board parity and telemetry | {board['status']} | PCI device: `{board['pcie_device_present']}`; U55C platforms: `{len(board['u55c_platform_files'])}`; xbutil: `{xrt['xbutil']}`; xrt-smi: `{xrt['xrt-smi']}` |",
             f"| Native-FP4 GPU baseline | {gpu['status']} | {gpu_text} |",
             "",
-            "The installed synthesis tools support HLS and out-of-context Vivado experiments. "
-            "They do not substitute for an attached U55C, XRT platform, or board telemetry. "
+            "The installed synthesis and acceleration tools support HLS, Vivado, v++, "
+            "platform inventory, and XSim experiments. They do not substitute for an attached U55C, "
+            "a U55C XPFM, XRT management tools, or board telemetry. "
             "Likewise, a detected pre-native-FP4 GPU cannot provide the requested matched "
             "native-FP4 GPU baseline. These two measurements remain externally blocked and "
             "are not represented by estimates.",

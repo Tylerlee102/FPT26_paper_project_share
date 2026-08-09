@@ -27,7 +27,7 @@ def test_corrected_datapath_figure_is_pdf_and_value_bound(tmp_path: Path) -> Non
     extracted = reader.pages[0].extract_text()
     for phrase in (
         "One-token recurrence-core STEP",
-        "Persistent base state",
+        "Persistent RS2 base state",
         "Recent-write log",
         "atomic fold after output",
         "logical STEP in: 8,832 B",

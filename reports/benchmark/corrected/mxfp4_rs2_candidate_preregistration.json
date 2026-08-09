@@ -1,0 +1,146 @@
+{
+  "candidate_evidence_status": "NOT_RUN",
+  "candidate_name": "mxfp4_rs2_act_rs2_dense_base_b32_mxfp4_rs2_log_fixed_b32_r2",
+  "controlled_configuration": {
+    "accumulator_bits": 32,
+    "activation_block_size": 32,
+    "activation_stack_depth": 2,
+    "alignment_guard_bits": 5,
+    "base_stack_depth": 2,
+    "coefficient_format": "Q1.15",
+    "element_format": "E2M1",
+    "fold_policy": "fixed atomic all-head fold after two writes",
+    "key_dim": 128,
+    "log_capacity": 2,
+    "log_stack_depth": 2,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "shared_scale_format": "E8M0",
+    "state_block_size": 32,
+    "target": "AMD Alveo U55C xcu55c-fsvh2892-2L-e",
+    "value_dim": 128
+  },
+  "development_gate": {
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "initial_state_modes": [
+      "random",
+      "zero"
+    ],
+    "results": {
+      "random": {
+        "dropped_entries": 0,
+        "evidence_sha256": {
+          "reports/benchmark/corrected/mxfp4_rs2_base_capacity_sweep/high_retention_random_mxfp4_log_checkpoints.csv": "AFCDA944F51C759EB5A61419EABC927C98F51E8893AF0C32D36F69A4C2477811",
+          "reports/benchmark/corrected/mxfp4_rs2_base_capacity_sweep/high_retention_random_mxfp4_log_manifest.json": "E79A418C0710A2877F1786F70427FBD8479BFA0AABEE959579189F5DA5595200",
+          "reports/benchmark/corrected/mxfp4_rs2_base_capacity_sweep/high_retention_random_mxfp4_log_tokens.csv": "29027FE2010ADCD94C54C237AC496ED6FDBA44B6F94BC20CF212863FC120847A"
+        },
+        "final_state_relative_l2": 0.09122696175676417,
+        "input_stream_sha256": "F36CDB646F79095EBC6B2EB93F2231B7F4F3FEA58CD5C1E58F51314E7552A656",
+        "maximum_all_token_state_relative_l2": 0.0913675523174801,
+        "minimum_all_token_output_cosine": 0.9952103507435294,
+        "minimum_checkpoint_output_cosine": 0.9959129936920866
+      },
+      "zero": {
+        "dropped_entries": 0,
+        "evidence_sha256": {
+          "reports/benchmark/corrected/mxfp4_rs2_base_capacity_sweep/high_retention_zero_mxfp4_log_checkpoints.csv": "B5D9BDBAFF190984EDCFDBE87C403444457CCF0E070665F2B47B5C591ED658C3",
+          "reports/benchmark/corrected/mxfp4_rs2_base_capacity_sweep/high_retention_zero_mxfp4_log_manifest.json": "29A93B49EB934C43642A10A877CC19E5EF39B879D0EFCC6444F882F6D42CE7D7",
+          "reports/benchmark/corrected/mxfp4_rs2_base_capacity_sweep/high_retention_zero_mxfp4_log_tokens.csv": "48928D9C508EF2E564695F0E44A0A53B1F3C10B5BCC4AD727332148384EFDAAF"
+        },
+        "final_state_relative_l2": 0.09113483829655189,
+        "input_stream_sha256": "1084E695938E2E38ECFD16802A18BF8CB1D2B2431C70FD98D059FC2B70312D86",
+        "maximum_all_token_state_relative_l2": 0.09143392696465025,
+        "minimum_all_token_output_cosine": 0.9952939581960225,
+        "minimum_checkpoint_output_cosine": 0.9959550837247669
+      }
+    },
+    "seed": 64370,
+    "seed_hex": "0xFB72",
+    "status": "PASS",
+    "tokens": 1024,
+    "trace_family": "high_retention"
+  },
+  "extended_development_gate": {
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "initial_state_modes": [
+      "random",
+      "zero"
+    ],
+    "rule": "both runs must pass every registered quality threshold",
+    "seed": 64370,
+    "seed_hex": "0xFB72",
+    "status": "NOT_RUN",
+    "tokens": 8192,
+    "trace_family": "high_retention"
+  },
+  "frozen_source_sha256": {
+    "golden/gdn_write_log.py": "01C069228BCF9FD202780E07ACDF766860263DFE60CE5E1C02D0E10362F88BA1",
+    "scripts/register_rs2_candidate.py": "9739D306411FFECEDB6C709581FC259E0CB2A064EDFC5A658125141BBFFAC6E9",
+    "scripts/write_log_stability.py": "BE7584A2D9DB7D9739DCF6F8612DE9C006F0456AC18E6CBBBDB0CA196D43C0A1"
+  },
+  "held_out_gate": {
+    "aggregate_rule": "all six runs must pass every registered quality threshold",
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "execution_order": "seed order as registered; random then zero within each seed",
+    "initial_state_modes": [
+      "random",
+      "zero"
+    ],
+    "run_count": 6,
+    "seed_hex": [
+      "0xA17E5EED",
+      "0xC4D3B2A1",
+      "0x06E5A1D0"
+    ],
+    "seeds": [
+      2709413613,
+      3302208161,
+      115712464
+    ],
+    "split": "rs2_held_out",
+    "status": "NOT_RUN",
+    "tokens": 1024,
+    "trace_family": "high_retention"
+  },
+  "limitations": [
+    "synthetic layer-level development evidence only at registration",
+    "encoded-integer, HLS, RTL, routed, board-energy, and closed-loop model evidence remain NOT_RUN",
+    "the registered payload is smaller than BF16 but slightly larger than uniform MXFP8"
+  ],
+  "logical_state_bytes": {
+    "floating_diagnostic": 570512,
+    "planned_q1_15_hardware": 570320,
+    "uniform_bf16": 1048576,
+    "uniform_mxfp8_e4m3_b32": 540672
+  },
+  "quality_gate": {
+    "encoded_accumulator_saturations_required": 0,
+    "encoded_element_saturations_required": 0,
+    "encoded_scale_clamps_required": 0,
+    "maximum_all_token_state_relative_l2": 0.1,
+    "maximum_final_state_relative_l2": 0.1,
+    "minimum_all_token_output_cosine": 0.99,
+    "minimum_checkpoint_output_cosine": 0.99,
+    "required_dropped_entries": 0
+  },
+  "registered_at": "2026-08-06T08:36:25.303205+00:00",
+  "registration_status": "PASS",
+  "schema": 1,
+  "scope": "residual-stack native-MXFP4 layer-level synthetic recurrent stability",
+  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+  "stopping_rule": "Do not alter the registered candidate after test-set execution. Retain every failed run and report the aggregate failure."
+}

@@ -20,6 +20,11 @@ gdn_e2m0_trace_hls/
 gdn_mxfp8_arithmetic_hls/
 gdn_mxfp8_csim_hls/
 gdn_mxfp8_hls/
+gdn_rs2_arithmetic_hls/
+gdn_rs2_hls/
+gdn_rs2_reset_trace_cosim_hls/
+gdn_rs2_trace_cosim_hls/
+gdn_rs2_trace_hls/
 vitis_hls.log
 clockInfo.txt
 *.jou
@@ -47,6 +52,8 @@ reports/cosim/corrected/**
 !reports/cosim/corrected/**/*.json
 !reports/cosim/corrected/**/*.md
 !reports/cosim/corrected/**/*.rpt
+!reports/cosim/corrected/rs2_current/xsim_diagnostic/raw/*.log
+!reports/cosim/corrected/rs2_fast_direct_rtl_trace64/raw/*.log
 reports/cosim/corrected/**/*.exe
 reports/csynth/*
 !reports/csynth/.gitkeep

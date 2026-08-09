@@ -1,0 +1,31 @@
+# Lazy MXFP4 Base / MXFP8 Write-Log Development Diagnostic
+
+Generated: 2026-08-06T08:53:08.993424+00:00
+Engineering gate at executed length: `PASS`
+Split/seed/family: `development` / `0xfb72` / `high_retention`
+Initial state: `zero`
+Base residual-block fraction: 1.0
+Tokens/checkpoints: 8192 / 64, 256, 1024, 4096, 8192
+Residual-stack depths (activation/base): 2/2
+Fold policy: fixed, minimum entries=1, decay threshold=0.85
+Input-stream SHA256: `aa148f7abab083234392a367ae6b6a93d14e916830eece40fdab1ef1b3b88a95`
+Token CSV: `reports/benchmark/corrected/mxfp4_rs2_candidate/extended_development/seed_0000fb72_zero_tokens.csv`
+Checkpoint CSV: `reports/benchmark/corrected/mxfp4_rs2_candidate/extended_development/seed_0000fb72_zero_checkpoints.csv`
+Manifest: `reports/benchmark/corrected/mxfp4_rs2_candidate/extended_development/seed_0000fb72_zero_manifest.json`
+
+The candidate uses paired Q/K-head key sharing, per-value-head decay coefficients, no-drop fixed-capacity logs, and atomic all-head folds. Output is evaluated before a full-log fold; resident-state metrics use the post-fold MXFP4 base, matching the output-before-state-requantization boundary.
+
+| Token | Variant | Output cosine | Output rel L2 | State rel L2 | State max abs | Folds | Dropped | Logical bytes |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|
+| 64 | fp32 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 0 | 0 | 2097152 |
+| 64 | mxfp4_rs2_act_rs2_dense_base_b32_mxfp4_rs2_log_fixed_b32_r2 | 0.998206 | 0.059938 | 0.058824 | 0.069677 | 32 | 0 | 570512 |
+| 256 | fp32 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 0 | 0 | 2097152 |
+| 256 | mxfp4_rs2_act_rs2_dense_base_b32_mxfp4_rs2_log_fixed_b32_r2 | 0.996120 | 0.088298 | 0.086091 | 0.130991 | 128 | 0 | 570512 |
+| 1024 | fp32 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 0 | 0 | 2097152 |
+| 1024 | mxfp4_rs2_act_rs2_dense_base_b32_mxfp4_rs2_log_fixed_b32_r2 | 0.995955 | 0.089950 | 0.091135 | 0.123981 | 512 | 0 | 570512 |
+| 4096 | fp32 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 0 | 0 | 2097152 |
+| 4096 | mxfp4_rs2_act_rs2_dense_base_b32_mxfp4_rs2_log_fixed_b32_r2 | 0.995921 | 0.090645 | 0.091243 | 0.108011 | 2048 | 0 | 570512 |
+| 8192 | fp32 | 1.000000 | 0.000000 | 0.000000 | 0.000000 | 0 | 0 | 2097152 |
+| 8192 | mxfp4_rs2_act_rs2_dense_base_b32_mxfp4_rs2_log_fixed_b32_r2 | 0.995988 | 0.089677 | 0.091539 | 0.103124 | 4096 | 0 | 570512 |
+
+This is G3 synthetic software evidence only. It is not encoded-integer, RTL, placed-memory, board-energy, or closed-loop model evidence.

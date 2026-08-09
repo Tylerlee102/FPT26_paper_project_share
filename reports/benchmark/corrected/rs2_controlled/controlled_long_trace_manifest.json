@@ -1,0 +1,101 @@
+{
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "initial_state_mode": "random",
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 8192,
+    "trace_family": "high_retention",
+    "value_dim": 128,
+    "variants": [
+      "bf16_qdq_fp32_accum_state_bf16",
+      "flat_int4_qdq",
+      "fp32",
+      "mxfp4_qdq_act_b32_mxfp8_e4m3_state_b32",
+      "mxfp4_qdq_act_b32_state_b32",
+      "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5"
+    ]
+  },
+  "evidence_scope": "controlled_synthetic_fp32_bf16_mxfp4_mxfp8_int4_comparison",
+  "execution": {
+    "command": "C:\\Users\\tyboy\\AppData\\Local\\Programs\\Python\\Python312\\python.exe -m scripts.build_rs2_controlled_comparison",
+    "exit_code": 0
+  },
+  "limitations": [
+    "single deterministic layer-level high-retention synthetic trace",
+    "floating Q/DQ baselines do not expose encoded arithmetic event counters",
+    "not closed-loop model quality, board telemetry, or measured board energy"
+  ],
+  "outputs": {
+    "reports/benchmark/corrected/rs2_controlled/controlled_long_trace.md": "51d00451a72b4ffc0350655520872c3939d599350ab8b379a36b89ef5fe39d33",
+    "reports/benchmark/corrected/rs2_controlled/controlled_long_trace_checkpoints.csv": "afb91df409292821482c77fa6f8d1eb2ae6f5edbf9d11dc978ecccc00ac803c2",
+    "reports/benchmark/corrected/rs2_controlled/controlled_long_trace_tokens.csv": "a28e0a1f507f50aef939ae118a6c5dfd3a7aca22f7bd26fd4e18110a9a2b2734"
+  },
+  "schema": 1,
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 36008,
+      "changed_file_count": 3,
+      "sha256": "8734B28A8CC66FDF0A420B3600DBD8ECA77B2A500BFA704ABAA2DDFEFF99325C"
+    },
+    "files": {
+      "scripts/build_rs2_controlled_comparison.py": {
+        "bytes": 16690,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "5D6F499712A9FBC3B2C45B2421D3C254969172B8A9332C974DBAAA43D0BE5891"
+      },
+      "scripts/long_sequence_stability.py": {
+        "bytes": 20364,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "977BA478F143676388BBC78B87777330269E150ABAFC38C68B848A9647B05C14"
+      },
+      "scripts/rs2_encoded_stability.py": {
+        "bytes": 16542,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B6A6F63AC7A12852772535F315EB4F89DD778B15FF5E04B6B8D4022671658C53"
+      },
+      "scripts/write_log_stability.py": {
+        "bytes": 24944,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "BE7584A2D9DB7D9739DCF6F8612DE9C006F0456AC18E6CBBBDB0CA196D43C0A1"
+      }
+    },
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+  "status": "PASS",
+  "timestamp": "2026-08-06T15:39:11.969756+00:00",
+  "trace_identity": {
+    "initial_state_sha256": "70f50a948f2c61c683bdf2c648e3737b8259c84a01868430aff70034bc432856",
+    "labelled_input_sha256": "c657289c3e1498a60d6b7219395766b112aeba40a0c6c0928e458a46c6a0e078",
+    "method": "Regenerated every initial-state and token tensor through both input entry points; asserted bitwise equality and matched each upstream manifest's native digest convention.",
+    "raw_input_sha256": "ed053c1383046c2953466d546669041e2d1125381ef136cf20a27548a507aa1a",
+    "status": "PASS"
+  },
+  "upstream": {
+    "floating_baseline_manifest": {
+      "path": "reports/benchmark/corrected/rs2_controlled/high_retention_random_baselines_manifest.json",
+      "sha256": "d4c8dd858504dc7ecc6d85d6879b71b16d004c99c31cee92b00befd661efd1e8"
+    },
+    "rs2_encoded_manifest": {
+      "path": "reports/benchmark/corrected/rs2_encoded/extended_development/high_retention_0000fb72_random_8192_manifest.json",
+      "sha256": "a5c0d3d8299cf090879788cdda7c335534425082206823819a9eb76b158e1a79"
+    }
+  }
+}

@@ -1,0 +1,1568 @@
+{
+  "archived_logs": {
+    "reports/cosim/corrected/rs2_fast_direct_rtl_trace64/raw/execution.json": {
+      "bytes": 2719,
+      "sha256": "3700703DA0388CD59700C1A3875A3D4FFD4583955AB14D4B395BC00F8DA2CCFE"
+    },
+    "reports/cosim/corrected/rs2_fast_direct_rtl_trace64/raw/verilator_compile.log": {
+      "bytes": 75493,
+      "sha256": "420079BDA646B09E8680DBB65F2BD48A9C8F08C0347C4DCFA47393C1428A0427"
+    },
+    "reports/cosim/corrected/rs2_fast_direct_rtl_trace64/raw/verilator_compile_time.log": {
+      "bytes": 15890,
+      "sha256": "B53E506190460009671C75DFC64B6562E1EF852F2F8A1768C88B711666F1582D"
+    },
+    "reports/cosim/corrected/rs2_fast_direct_rtl_trace64/raw/verilator_run.log": {
+      "bytes": 8445,
+      "sha256": "FEE058CAF5A4DDC8A16F8DBD4889AF9D62E2F41675B5187794DACF0B6FB578C8"
+    },
+    "reports/cosim/corrected/rs2_fast_direct_rtl_trace64/raw/verilator_run_time.log": {
+      "bytes": 819,
+      "sha256": "42D0AAEC4E26DFDA196C0AEB151AA676FAFF151E46657D6FE82601C343A159EF"
+    }
+  },
+  "asset_manifest": {
+    "dimensions": {
+      "block_size": 32,
+      "counter_count": 7,
+      "gamma_elements": 32,
+      "gate_elements": 32,
+      "key_dim": 128,
+      "lambda_elements": 96,
+      "log_capacity": 3,
+      "log_key_elements": 12288,
+      "log_key_scales": 384,
+      "log_update_elements": 24576,
+      "log_update_scales": 768,
+      "num_qk_heads": 16,
+      "num_value_heads": 32,
+      "output_elements": 4096,
+      "q_elements": 4096,
+      "q_scales": 128,
+      "stack_depth": 2,
+      "state_elements": 524288,
+      "state_scales": 16384,
+      "tokens": 64,
+      "v_elements": 8192,
+      "v_scales": 256,
+      "value_dim": 128
+    },
+    "files": {
+      "alpha.hex": {
+        "bytes": 10240,
+        "digits": 4,
+        "elements": 2048,
+        "sha256": "2DD71FCE3F531CE2D9E637EAAC15807DADCFCDC9161B4ACC829C51437C2DF107"
+      },
+      "beta.hex": {
+        "bytes": 10240,
+        "digits": 4,
+        "elements": 2048,
+        "sha256": "B4CA5AB232C40AEEC37097DB4C99F4F14CB2DF325E939A0E6284501C7EE828F0"
+      },
+      "command_counters.hex": {
+        "bytes": 7616,
+        "digits": 16,
+        "elements": 448,
+        "sha256": "F9555A0BBB4CDA357F4283AFCC2090AFDE7AC788FC5AC1D6BE0EE2CE6D376D7D"
+      },
+      "cumulative_counters.hex": {
+        "bytes": 7616,
+        "digits": 16,
+        "elements": 448,
+        "sha256": "35A753DFECC1B6A4DD288F3D6DE52F027804BC2CFC00983C431CC08E6E2EAD2C"
+      },
+      "final_cumulative_counters.hex": {
+        "bytes": 119,
+        "digits": 16,
+        "elements": 7,
+        "sha256": "6CEA43DCA2DFC5931C4969C4875652518A4454ED0A30420D1C626590D3676E8B"
+      },
+      "final_gamma.hex": {
+        "bytes": 160,
+        "digits": 4,
+        "elements": 32,
+        "sha256": "E784778DDD48E2787F3B187BAB226550EA6A622D83781E68076B2C96AD6C5A71"
+      },
+      "final_generation.hex": {
+        "bytes": 17,
+        "digits": 16,
+        "elements": 1,
+        "sha256": "25453F5A03D456F8A0A73B14FFD7F90465716B8AC6B6F7BB0191AAD564104F84"
+      },
+      "final_lambda.hex": {
+        "bytes": 480,
+        "digits": 4,
+        "elements": 96,
+        "sha256": "FBAEDD4BD76FF1EE1C7BAAFE04BAB65B1F206FD97A59643860BF90F92A14BCF8"
+      },
+      "final_live.hex": {
+        "bytes": 3,
+        "digits": 2,
+        "elements": 1,
+        "sha256": "43FD56F56BB9BB18BC9C33966325732B2D7E58BFE2504A2C5C164B071C1B8653"
+      },
+      "final_log_key_scales.hex": {
+        "bytes": 1152,
+        "digits": 2,
+        "elements": 384,
+        "sha256": "F778683CEA3D8BBB5A9CF386EC5F195F8D657359EA6DFEF1A61768416EEBCE91"
+      },
+      "final_log_keys.hex": {
+        "bytes": 36864,
+        "digits": 2,
+        "elements": 12288,
+        "sha256": "5D69355C5C3323BC8DB45D8E310CD5AA2755AC4E35BA060D34B256E7DC18A20B"
+      },
+      "final_log_update_scales.hex": {
+        "bytes": 2304,
+        "digits": 2,
+        "elements": 768,
+        "sha256": "006FE94FC2E63681D5ED873D25E5B089CC5EA6BCDEF156AEE773C2E345D8D9C8"
+      },
+      "final_log_updates.hex": {
+        "bytes": 73728,
+        "digits": 2,
+        "elements": 24576,
+        "sha256": "30F13B31A7C0A764718EDF1279E1E37150968D2CC245B455DC10B4199D294644"
+      },
+      "final_primary.hex": {
+        "bytes": 1572864,
+        "digits": 2,
+        "elements": 524288,
+        "sha256": "D03B82114E3417A39998DC756B0E30B6D2AD83B919370A87D16B402AC74B4174"
+      },
+      "final_primary_scales.hex": {
+        "bytes": 49152,
+        "digits": 2,
+        "elements": 16384,
+        "sha256": "FDF1BDEA2DB1824F80CDDED4018D680CD990D40B56F816A531A0A55B25A93897"
+      },
+      "final_residual.hex": {
+        "bytes": 1572864,
+        "digits": 2,
+        "elements": 524288,
+        "sha256": "82D492E90CA17948C58119B8BAF0AEEFAB08A7D6863275BAF0FFDDAED1BCD8EA"
+      },
+      "final_residual_scales.hex": {
+        "bytes": 49152,
+        "digits": 2,
+        "elements": 16384,
+        "sha256": "0BBBE132A2FF279A73AC5D83C58B26CA3C1997661537838D533DDFFFA8A9AC3B"
+      },
+      "final_status.hex": {
+        "bytes": 3,
+        "digits": 2,
+        "elements": 1,
+        "sha256": "D9B2AEFB1FEBE2DD6E403F634E18917A8C0DD1A440C976E9FE126B465AE9FC8D"
+      },
+      "generation.hex": {
+        "bytes": 1088,
+        "digits": 16,
+        "elements": 64,
+        "sha256": "2217888EA1A9BF14D3E2C5FFC0CC9407F028B3E5C5B924BCB61B8755E0693D84"
+      },
+      "initial_gamma.hex": {
+        "bytes": 160,
+        "digits": 4,
+        "elements": 32,
+        "sha256": "5A5813CAD1AF44901EA23A53462DE5C17FFE05EAF37F392E3B27175FAA1E3CA1"
+      },
+      "initial_lambda.hex": {
+        "bytes": 480,
+        "digits": 4,
+        "elements": 96,
+        "sha256": "834826BD5589268203CAA83D168FE85FFCED862F37FAD27C0D9DAC91B92F79D6"
+      },
+      "initial_live.hex": {
+        "bytes": 3,
+        "digits": 2,
+        "elements": 1,
+        "sha256": "D9B2AEFB1FEBE2DD6E403F634E18917A8C0DD1A440C976E9FE126B465AE9FC8D"
+      },
+      "initial_log_key_scales.hex": {
+        "bytes": 1152,
+        "digits": 2,
+        "elements": 384,
+        "sha256": "9BAB25BB629D3A6D84D07186142F21D1F3B35CF07094616056A7FAD34F5208AB"
+      },
+      "initial_log_keys.hex": {
+        "bytes": 36864,
+        "digits": 2,
+        "elements": 12288,
+        "sha256": "D33604406E2A3A837434B60254294281E2BDB614C16536AE497B1206B04F7EE4"
+      },
+      "initial_log_update_scales.hex": {
+        "bytes": 2304,
+        "digits": 2,
+        "elements": 768,
+        "sha256": "200494115389EBD3A16833B6365F125B37CB020985E190D3ABC3508514907606"
+      },
+      "initial_log_updates.hex": {
+        "bytes": 73728,
+        "digits": 2,
+        "elements": 24576,
+        "sha256": "AD140B0C1DA9E191299B798378815EE21B752348C04609F36901E5E692E08DDE"
+      },
+      "initial_primary.hex": {
+        "bytes": 1572864,
+        "digits": 2,
+        "elements": 524288,
+        "sha256": "F2ACDC20CC31213261DB98EB6712084656AA86D1A4CC3D75FF8AAD532DA7DC9D"
+      },
+      "initial_primary_scales.hex": {
+        "bytes": 49152,
+        "digits": 2,
+        "elements": 16384,
+        "sha256": "04010F6DD640ECA206989E756A9BC7D21493C920F174A2F67089EB2D05D8AC60"
+      },
+      "initial_residual.hex": {
+        "bytes": 1572864,
+        "digits": 2,
+        "elements": 524288,
+        "sha256": "76EF57FA0A838C178EC8DEB87D67257ECF8DA14926C0351B6537BFE8969947A5"
+      },
+      "initial_residual_scales.hex": {
+        "bytes": 49152,
+        "digits": 2,
+        "elements": 16384,
+        "sha256": "81285D570305746848FC49E8A418E6C880DD23BF74DF2384EF4E2E81BE082E01"
+      },
+      "k.hex": {
+        "bytes": 786432,
+        "digits": 2,
+        "elements": 262144,
+        "sha256": "834CEC8B71AC40D2AF1AF5DD587494025C64D16BA24C45FB3FA4E2A247A9E982"
+      },
+      "k_scales.hex": {
+        "bytes": 24576,
+        "digits": 2,
+        "elements": 8192,
+        "sha256": "868EFB9655DB7F1AC981F2EDD4D480E4365C1C568D05803B2B9CAE3447FB82BB"
+      },
+      "live.hex": {
+        "bytes": 192,
+        "digits": 2,
+        "elements": 64,
+        "sha256": "E4181F2E91125C467B5DDB7C976A5D0ADED03DC1BBE60EE319423FF4DE7339CB"
+      },
+      "output_exponents.hex": {
+        "bytes": 1310720,
+        "digits": 4,
+        "elements": 262144,
+        "sha256": "AE65EF13B5F17BB6C6D387DF2FBCCAF7AF54CE9179AB971577BAA35DA217DBB5"
+      },
+      "output_mantissas.hex": {
+        "bytes": 2359296,
+        "digits": 8,
+        "elements": 262144,
+        "sha256": "F428B56272C21EA76270EDF70D84AAFB72EB5EE06169B502029942C1469B0462"
+      },
+      "q.hex": {
+        "bytes": 786432,
+        "digits": 2,
+        "elements": 262144,
+        "sha256": "5A26BB8E993AA65916A198267A25871759860645A9C50B0A722A8ACB4C97E70E"
+      },
+      "q_scales.hex": {
+        "bytes": 24576,
+        "digits": 2,
+        "elements": 8192,
+        "sha256": "2D510C24E439A9CB4FE009CBC3FC850000318034CBC410BAA45001E010DDFC64"
+      },
+      "status.hex": {
+        "bytes": 192,
+        "digits": 2,
+        "elements": 64,
+        "sha256": "C50718F4F11455951654FA9F73972527BAA9AB61E411A89E381185D116C4D6F0"
+      },
+      "v.hex": {
+        "bytes": 1572864,
+        "digits": 2,
+        "elements": 524288,
+        "sha256": "6F9AADE91E0B0710984A9B6F0940B608B604B8706A2BD5737F3F7AEDD61E6950"
+      },
+      "v_scales.hex": {
+        "bytes": 49152,
+        "digits": 2,
+        "elements": 16384,
+        "sha256": "051BF7A361E9FE5E828EB44C99A1E679CEEB125899E80A3E11E0B5968F079FA5"
+      }
+    },
+    "generated_at": "2026-08-06T15:35:57.703059+00:00",
+    "initial": {
+      "live": 0
+    },
+    "readback": {
+      "generation": 65,
+      "live": 1,
+      "status": 0
+    },
+    "schema": 1,
+    "source_trace": {
+      "bytes": 4909555,
+      "manifest": "data/vectors/rs2_resident_trace64_manifest.json",
+      "manifest_sha256": "E254020E97DE52B22D796C52A24925E3536E6192474449D9229D57AA26EE16C1",
+      "path": "data/vectors/rs2_resident_trace64.bin",
+      "sha256": "168D99100EE6B961BCC7EBFAE0311CDCD7209A2CBE04FE6C62A77EE26B88E265"
+    },
+    "status": "PASS"
+  },
+  "command_results": [
+    {
+      "command": 1,
+      "cycles": 4447475,
+      "generation": 1,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21884935,
+      "generation": 2,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21966006,
+      "generation": 3,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91684149,
+      "generation": 4,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21883985,
+      "generation": 5,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21967050,
+      "generation": 6,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91727641,
+      "generation": 7,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21885285,
+      "generation": 8,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21966622,
+      "generation": 9,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91752881,
+      "generation": 10,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21884532,
+      "generation": 11,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21967944,
+      "generation": 12,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91742096,
+      "generation": 13,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21885166,
+      "generation": 14,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21967725,
+      "generation": 15,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91714223,
+      "generation": 16,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21884799,
+      "generation": 17,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21966858,
+      "generation": 18,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91633302,
+      "generation": 19,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21884619,
+      "generation": 20,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21967229,
+      "generation": 21,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91551703,
+      "generation": 22,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21885202,
+      "generation": 23,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21967441,
+      "generation": 24,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91592560,
+      "generation": 25,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21884649,
+      "generation": 26,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21966202,
+      "generation": 27,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91569181,
+      "generation": 28,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21885667,
+      "generation": 29,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21968386,
+      "generation": 30,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91638092,
+      "generation": 31,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21885917,
+      "generation": 32,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21967348,
+      "generation": 33,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91658672,
+      "generation": 34,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21884774,
+      "generation": 35,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21967266,
+      "generation": 36,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91689214,
+      "generation": 37,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21884817,
+      "generation": 38,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21967942,
+      "generation": 39,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91732774,
+      "generation": 40,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21885239,
+      "generation": 41,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21967435,
+      "generation": 42,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91775583,
+      "generation": 43,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21885737,
+      "generation": 44,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21968583,
+      "generation": 45,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91741325,
+      "generation": 46,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21885364,
+      "generation": 47,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21966986,
+      "generation": 48,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91806769,
+      "generation": 49,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21885959,
+      "generation": 50,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21968892,
+      "generation": 51,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91831996,
+      "generation": 52,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21885450,
+      "generation": 53,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21967372,
+      "generation": 54,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91754016,
+      "generation": 55,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21884531,
+      "generation": 56,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21968504,
+      "generation": 57,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91753333,
+      "generation": 58,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21884252,
+      "generation": 59,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21967571,
+      "generation": 60,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91782443,
+      "generation": 61,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21884401,
+      "generation": 62,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21968198,
+      "generation": 63,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 91842379,
+      "generation": 64,
+      "status": 0
+    },
+    {
+      "command": 2,
+      "cycles": 21884740,
+      "generation": 65,
+      "status": 0
+    },
+    {
+      "command": 3,
+      "cycles": 2281791,
+      "generation": 65,
+      "status": 0
+    }
+  ],
+  "configuration": {
+    "block_size": 32,
+    "key_dim": 128,
+    "layer_id": 4,
+    "log_capacity": 3,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "p_k": 16,
+    "p_v": 8,
+    "stack_depth": 2,
+    "tokens": 64,
+    "value_dim": 128
+  },
+  "generated_at": "2026-08-06T19:26:59.013348+00:00",
+  "generated_rtl": {
+    "file_count": 140,
+    "files": {
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top.v": {
+        "bytes": 277708,
+        "sha256": "BE4C2C13B3B2E59A30453AA1F6092A68476EB123268ECF711D61081100183EC2"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_2_1.v": {
+        "bytes": 16519,
+        "sha256": "AB5F03A05188877CFAC803144BB57242FB2BBDD6D832E107ACE400F0BEAD5679"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_2_1_Pipeline_align_terms.v": {
+        "bytes": 23991,
+        "sha256": "787E0387E276AA80160C7BFADFF916870840FBAA3ACAAA14E3F88F1A2AC19886"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_2_1_Pipeline_find_dominant.v": {
+        "bytes": 8763,
+        "sha256": "64A93702766F0B33647C13A808206D75A946A4A2FBAE3C319FE0AA9CD37BC325"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_2_Pipeline_align_terms.v": {
+        "bytes": 24095,
+        "sha256": "29132E7A2EE0D1219F84AED7220BBA9C7D9626C08BFCE239BECE9E41A7FC10DA"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_2_Pipeline_find_dominant.v": {
+        "bytes": 8823,
+        "sha256": "A5E8A6C23E9A68803F1B9E2EA43BED60711F38D375D78A5541B0DF399A99D572"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_2_s.v": {
+        "bytes": 16564,
+        "sha256": "D9E5406FD0A863B577E1BF7B96BEB8B8F3C315B546E8FB5DCCDD52CD7392CE18"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_3_Pipeline_align_terms.v": {
+        "bytes": 25557,
+        "sha256": "3A2A33E27D09B350F8A595AC8C338350D2BEFFA964573680E7852B019B2E3942"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_3_Pipeline_find_dominant.v": {
+        "bytes": 10130,
+        "sha256": "2151240D59D6E27B88520BBED9FC5398A09521FC5BEE2822DE0AB1ACAA3FC161"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_3_s.v": {
+        "bytes": 17055,
+        "sha256": "73179778EF0E437FBC625B20FE8917A4294195623AF98F32DDDE51A2C3F02DF5"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_4_Pipeline_align_terms.v": {
+        "bytes": 25500,
+        "sha256": "E5A2630B6552D5E429A6F663B4EA283102AF3E58737198F1D732D29B0266371F"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_4_Pipeline_find_dominant.v": {
+        "bytes": 10261,
+        "sha256": "847905A0B3E86047DAF95C745310C3C9A272B8D1B8DCCB76DB526CB985E4DC9D"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_4_s.v": {
+        "bytes": 17363,
+        "sha256": "8079A483A2A5BC1B13A311C29305BF79B536EA1F8CCEFDBCD65F5812214B97CF"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_512_Pipeline_align_terms.v": {
+        "bytes": 46742,
+        "sha256": "BC84866964F2634A7668F68478D9CF1FEAB9D2DE052416E8BD22A3A49890AA48"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_512_Pipeline_find_dominant.v": {
+        "bytes": 32125,
+        "sha256": "299F62A21D41E268A17C21DF1FDB7EDD84946CB3A275C9154CD0132B1DA9B4F8"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_512_s.v": {
+        "bytes": 75959,
+        "sha256": "96F489C2780778FA15195F064544AA5B32754BF9FF12C55D3B8C6676568B76DE"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_7_Pipeline_align_terms.v": {
+        "bytes": 26681,
+        "sha256": "315399BC4934D3A19F6B1F7F6908951CAAA2173FB3235004873077B3402D3769"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_7_Pipeline_find_dominant.v": {
+        "bytes": 11232,
+        "sha256": "E0167A9C394C5D3DAEFE880D4AAD8D965705ECD8C22AE0C37847105E8318309F"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_aligned_sum_guarded_7_s.v": {
+        "bytes": 18181,
+        "sha256": "80E8D107631246C02BABF8A9926F4C496D3467D645A71DB63B8E40568A43113E"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_control_r_s_axi.v": {
+        "bytes": 56546,
+        "sha256": "309BEC23B9A34910AA87F151D3091A45E84EF912FAB950B6DC83C77D513991B7"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_control_s_axi.v": {
+        "bytes": 14744,
+        "sha256": "7BCEFDFEB942E640F4C53BE387930EFCF14D4A2F6659C9A08E4628EF1E9E8917"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_flow_control_loop_pipe_sequential_init.v": {
+        "bytes": 2929,
+        "sha256": "89636F7481F209AB8701BD0346D699591BCD0CB9F48B21AD4320E61D031F5B3A"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl.v": {
+        "bytes": 1310434,
+        "sha256": "9211F3FF844FBC046D96D7D0D0D69289DE0DAEFC8941569C4A094495C9A064EC"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_Outline_3.v": {
+        "bytes": 8304,
+        "sha256": "D81F37D98736C6C25F38EBBF4F335047B599B42EB4D5E7D194927E62EEC0345C"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_Outline_4.v": {
+        "bytes": 8361,
+        "sha256": "ED3AC42A67220365627950FA2D8ED497BB5B2820DF071DF6E191C5343A015451"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_Outline_5.v": {
+        "bytes": 8121,
+        "sha256": "C8965CFFC9E452935FBE9F10B1780EE7F642247FC392C2BD92D3481E5476BAA8"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_Outline_6.v": {
+        "bytes": 8121,
+        "sha256": "90BAB9A934CEEB5A97160A340BE293D2B5D81450171A950FFDD860244139BC21"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_Outline_decay_coefficients_heads.v": {
+        "bytes": 31648,
+        "sha256": "D9F186A0316050578E47E70A061104BF6C0C3E51A57DF9725176A9C761C330C9"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_Outline_output_log_entries.v": {
+        "bytes": 43009,
+        "sha256": "C460259D16D5D5198161D67952481A113E41D79E85BBD009388CAD83B3A67BA3"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_Outline_prediction_log_entries.v": {
+        "bytes": 43474,
+        "sha256": "B72EE1F226919477541DB27BA9DA33296F36DC1900E3C8D6858F6830F8BE1017"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_Pipeline_VITIS_LOOP_1317_1.v": {
+        "bytes": 6695,
+        "sha256": "FC8E244FE435ABAEF2A8514C7D1E180086C2D1EC2D6D53775460FC49B01B73F0"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_Pipeline_clear_rs2_output_heads_clear_rs2_output_values.v": {
+        "bytes": 18905,
+        "sha256": "FF7BB7AF344EB42FC002F055BD163F4D3205A153B4E82292F26FF05C623F86A9"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_bkb.v": {
+        "bytes": 1167,
+        "sha256": "99778323517365F25AEBD2092368DF18A13EC490C5C97ED76682FDC49F844577"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_jbC.v": {
+        "bytes": 1166,
+        "sha256": "32D79D407CCB62EC91798C43E3998A19F19A45AD24D8C393DC1F33E0B2E130C6"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_kbM.v": {
+        "bytes": 1166,
+        "sha256": "EAE88795BF75E2A5C54CA3B4E65B6694C90A1AFEFE135E145DCC9C29DD6FD7FE"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_prediction_log_m_RAM_AUTO_1R1W.v": {
+        "bytes": 991,
+        "sha256": "B090985E073DFEAA14336D0A40D0FE4ADD71C97EEA7DEC0977B5B6AC546D50B6"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_prediction_log_x_RAM_AUTO_1R1W.v": {
+        "bytes": 991,
+        "sha256": "AB339DC232CD0916E0452A8080AFE5A79B9C9D1BCD59AD40FA542CF05D61E8B8"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_gamma_RAM_AUTO_1R1W.v": {
+        "bytes": 1100,
+        "sha256": "2E75C089964E565459E3C0E99B410641707636166060AD63BE5DD4B1A519F3CB"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_key_scales_RAM_T2P_BRAM_1R1W.v": {
+        "bytes": 1329,
+        "sha256": "BF222529CD576DAC7F0D8894FB4777E5E9C638A4A04A598914121E651FABA7E3"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_keys_RAM_T2P_URAM_1R1W.v": {
+        "bytes": 1360,
+        "sha256": "608541C1AEEAC9EA557FAF892F871559A8FD53BDBE529BE576CD94702DCE5E48"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_lambda_RAM_AUTO_1R1W.v": {
+        "bytes": 1312,
+        "sha256": "07D389E5388C18BB830F3F92620E8E9329FA5E660C3C0E4D37C5A14B71647AC9"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_primary_RAM_T2P_URAM_1R1W.v": {
+        "bytes": 1140,
+        "sha256": "39BDD4FE8FA124BEFFC2E3903B2D87DA089A7F304E968F40B5C8F3F539304D54"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_primary_scales_RAM_T2P_BRAM_1R1W.v": {
+        "bytes": 1129,
+        "sha256": "F11D5CC9E7AB99DD158A779CB42C5DF84AB97E67A7FDEC293D243C8D52103DB0"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_update_scales_RAM_T2P_BRAM_1R1W.v": {
+        "bytes": 1649,
+        "sha256": "CBFC6264A302F01D5E031611ED48A7ABD4DCCFF8E499D6F9DDABB4E07921D2F6"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_updates_RAM_T2P_URAM_1R1W.v": {
+        "bytes": 1366,
+        "sha256": "FEFD29F5E117DD9FA4B4AF847F0F99308345154D92334DA9E6B604007DC9636D"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem0_m_axi.v": {
+        "bytes": 92757,
+        "sha256": "2ABF7DA67269FD622EC56C2FD819BAB2158D153BFD29DD415E276494A97EE07A"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem10_m_axi.v": {
+        "bytes": 119780,
+        "sha256": "646B0D0AF06629347C1A39C8E1F602513DC0AD7FDD134FE52596C0BA056E84B3"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem11_m_axi.v": {
+        "bytes": 119780,
+        "sha256": "8CD14E338185D1A08E49470FC06711222D4A314E489EE2BA01BD1A828616F9C7"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem12_m_axi.v": {
+        "bytes": 119780,
+        "sha256": "4A7373405F7FABF8FB02692693782BB13781FB70123FD330E38FED90D4CD76C2"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem13_m_axi.v": {
+        "bytes": 119780,
+        "sha256": "DB0690BAD6F991806FC032312941C4E044195833A075A32E9A8A468781BE73A2"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem14_m_axi.v": {
+        "bytes": 119780,
+        "sha256": "8B137800B67672CA99ED9FB133007061E83181B106EE8CCB78C9E1DD80F7E1A1"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem15_m_axi.v": {
+        "bytes": 119780,
+        "sha256": "481A211575B4E774D4491C56263404A034AFE0FB79D676AAF1725B158F3AF989"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem16_m_axi.v": {
+        "bytes": 92786,
+        "sha256": "71D72CD1F373975C256D58BD2684E1312E17190B1DFDE60D336810FCB02AB46F"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem17_m_axi.v": {
+        "bytes": 92786,
+        "sha256": "CF09BABC205289347EE971632D4B5B52D7BB55D3B7CEEEAAE436E2B38E37836A"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem18_m_axi.v": {
+        "bytes": 92786,
+        "sha256": "8C9E1954060F89E33FE7FD8ECAB9336F21CE9C0FDE7427CB7735A1A5AACFB24E"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem19_m_axi.v": {
+        "bytes": 119780,
+        "sha256": "98419D430802020A623A0802E26C77D6E3E65F1213B16AD79404266F9FAB5303"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem1_m_axi.v": {
+        "bytes": 92757,
+        "sha256": "386532CA29A6C60BF5B4A97E0BCCBA6E177ABA109D4B0F72127D253A6BCE40C5"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem2_m_axi.v": {
+        "bytes": 92757,
+        "sha256": "BF74181DC6BCA865E8EC9EF2728F0841F2FB557E31B753CBCEC5915D2A89CAA0"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem3_m_axi.v": {
+        "bytes": 92757,
+        "sha256": "4F299AB2EAF8BCF364FB41791361F92F7BAA21DBD28BC95791E3870BF25AF4CE"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem4_m_axi.v": {
+        "bytes": 92757,
+        "sha256": "802E5A4B2ADF01BAD4C483A0757BA3F8DD795A34027478FF578A4271A19B1A26"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem5_m_axi.v": {
+        "bytes": 92757,
+        "sha256": "9FEAB270F734E9BDA58B61BF5AAFFD3B62807433FDAAA74EBA3F4786100A4D34"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem6_m_axi.v": {
+        "bytes": 92757,
+        "sha256": "893176A4B910CD16BAA673BB5BAD333E93FCFF9517A5F828E35262488C591D6F"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem7_m_axi.v": {
+        "bytes": 92757,
+        "sha256": "6CB33BEAF7B3566CB9EAB591FBC00E188EFDC9E6F547A17CB3E861B27BCD457C"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem8_m_axi.v": {
+        "bytes": 92757,
+        "sha256": "82C4E2BDB894BFB453A6CB9A7A5BA7A6D791BCB95A0F30197E1A2589349058DB"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gmem9_m_axi.v": {
+        "bytes": 119741,
+        "sha256": "21C30AB31A5D70DA5D15B5CD7DDCAD4B6F6170546AB303E033EE53D13BAB2AAF"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_mul_16ns_16ns_32_1_1.v": {
+        "bytes": 705,
+        "sha256": "04472A2C600D1DC0DF96C3925AC8BDA60B75EF2855E901194FF7A412CA648BFA"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_mul_32s_16ns_48_2_1.v": {
+        "bytes": 918,
+        "sha256": "8930BEDD1DCA2C7172E925F1B6BD4BB8D6F2128AEE45D80A5EF55C22C244688C"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_mul_5s_32s_36_2_1.v": {
+        "bytes": 908,
+        "sha256": "2DB5CF845732F7D9580E3381BC3F1841705E0C3F4BE77D5E1C89B988BA248E97"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_mul_5s_5s_10_1_1.v": {
+        "bytes": 685,
+        "sha256": "837F808C1DA330992A66057480DAF9A00E9872DD165313A2E06F8EBB76BF42DE"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_clear_log.v": {
+        "bytes": 19209,
+        "sha256": "3D2A89A2A6206B4A5D8429F9F2AF4654BE3B463B5A8501E45C59509F97599EAF"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_clear_log_Outline_clear_log_terms.v": {
+        "bytes": 18021,
+        "sha256": "78CD44980BBB78B5EDE3B2428E50A1D1607CCA289EB4E8C6B0B2646BC9A51C45"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_clear_log_Pipeline_clear_log_key_heads_clear_log_key_blocks.v": {
+        "bytes": 11451,
+        "sha256": "C2BC5648D30A1AB924CDAABCD1F05526E635819CC1EC02CBB17C1ADB1E84007D"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_clear_log_Pipeline_clear_log_lambda.v": {
+        "bytes": 6704,
+        "sha256": "8E2FF07155BA770A16BB81126F2B84643250029593D28B4D6F46960EF8E6AD7E"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_clear_log_Pipeline_clear_log_update_heads_clear_log_update_s.v": {
+        "bytes": 12526,
+        "sha256": "6A80E537D81AA01E4FE5F7649F6914BA5809ABA226CFEDEBE644C825EAC029EB"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_combine_action.v": {
+        "bytes": 73891,
+        "sha256": "4FA0B4E4E508A244924C532B0829CA64EC3DD8C4A9354B8AEAC69C3EF6CAC090"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_dot_base_column.v": {
+        "bytes": 148327,
+        "sha256": "99913F8DDB8934B4A619B5E654DAC4CEA6DDF1129F9C01B900F6879CCEE5D3BC"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta.v": {
+        "bytes": 114789,
+        "sha256": "1E8C864AFC187BB8F974EAE7D57EFADFDB8216C7B6A5601CE52A21C9022A7756"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_dot_base_column_exponents_RAM_AUTO_1R1W.v": {
+        "bytes": 1004,
+        "sha256": "702037D3DD266C883D16D723C9166F7751CB0E1C88DF4D48213BE336B6705836"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_dot_base_column_terms_RAM_AUTO_1R1W.v": {
+        "bytes": 1001,
+        "sha256": "71191A3EE46759C424AA87852EC892D94F36B80C14F66E87D46DC38C94A0747A"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_dot_log_entry.v": {
+        "bytes": 140931,
+        "sha256": "ACC67BFCB653EB81F6D2EE37BF6D95A99CE2B589D50CA6C57AA44E5EEF4740A9"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_dot_log_entry_Pipeline_dot_log_vector_terms_dot_log_key_ter.v": {
+        "bytes": 88048,
+        "sha256": "002C9ABB9C48EF008106597CFB7839D3C5815007E2BB1CF3455E18E0A7AA5D0C"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_dot_log_entry_exponents_RAM_AUTO_1R1W.v": {
+        "bytes": 1002,
+        "sha256": "E4D3769B6FAA6F18002D5E7A0B948E2CBE1B737B817C9044809C0DE555A959DA"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_dot_log_entry_terms_RAM_AUTO_1R1W.v": {
+        "bytes": 999,
+        "sha256": "BCBB2FF8F1B2F172A86DC01E9C723B64884AC1F00B4BCF225DEBFC38218C1847"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_fold_log.v": {
+        "bytes": 418386,
+        "sha256": "ED29E1FB4745F7A0907229D21CC3E80CCB9EFDD4BD60D4AAE9629E541C42135D"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_load_snapshot.v": {
+        "bytes": 127869,
+        "sha256": "5721653EE9BCC5FB53E7B5F589F900D1A9F89257B607D7F957B28C842957465C"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_load_snapshot_Outline_load_snapshot_key_heads.v": {
+        "bytes": 33858,
+        "sha256": "4ABD8C8F0465021631B62C2C126C68EF226A5E4E769D10EA9066E1B1C3AF90A5"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_load_snapshot_Outline_load_snapshot_terms.v": {
+        "bytes": 45510,
+        "sha256": "696EEAB93045980F49563B5C6BB35772559054206D5E0530B19945DD0C6499E5"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_load_snapshot_Outline_load_snapshot_update_heads.v": {
+        "bytes": 34697,
+        "sha256": "13C46E34C77CB6FEB53D719340DC2ECEF7CB61FCC8D6239EEDE96734C5EB8E08"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_load_snapshot_Pipeline_load_snapshot_key_lanes.v": {
+        "bytes": 24984,
+        "sha256": "77DEDD505E33A7F9BA6AF3B166F50B70D7AD312DF004B11B3DBC64016D15D2E8"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_load_snapshot_Pipeline_load_snapshot_lambda.v": {
+        "bytes": 14911,
+        "sha256": "2B73AF3F1CCB476F3BA2A461B0E9E27A33830EE3A3496494EE7CFA9B7E9AA690"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_load_snapshot_Pipeline_load_snapshot_lanes.v": {
+        "bytes": 34905,
+        "sha256": "C11E4F40D43ADFDFC46E191D8B040B6DE365C874D1D6C3595306C6AE2DED0401"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_load_snapshot_Pipeline_load_snapshot_update_lanes.v": {
+        "bytes": 25016,
+        "sha256": "72A383318F3E8E50C8A023D2C27D9042736857F9FBD7E1809B66A15A1D3FDFD0"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_quantize_fold_block.v": {
+        "bytes": 242456,
+        "sha256": "0D4B3E5A5DDF7CE20C0FF671CB8993A66670661427000C364D3A0EE331B97E0C"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_quantize_fold_block_Pipeline_quantize_fold_residual.v": {
+        "bytes": 451664,
+        "sha256": "CB03BD1531670CCA133B8DA7DA6EEA25CCBD97808C06D103F7E6F98F94FDAACB"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_quantize_update_block.v": {
+        "bytes": 237777,
+        "sha256": "68AB7AF33322209EC87731B311648640158A8197A2A55D19A8EF80520E5065A9"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_quantize_update_block_Pipeline_quantize_update_second.v": {
+        "bytes": 450757,
+        "sha256": "DD25A72168C6B257EEC4826C8D1DF9374ADD2CD6C448C98D88355EFAF74BBF2C"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_read_snapshot.v": {
+        "bytes": 129331,
+        "sha256": "5003349960D0335EE816F579CA83300A1BE5EB113812D694C8F81B89232B2B8D"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_read_snapshot_Outline_read_snapshot_key_heads.v": {
+        "bytes": 35575,
+        "sha256": "BF02693F5E0925CC0868542347EF9130D348839EE05E0C9CA3E1CE82A7BC2EDB"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_read_snapshot_Outline_read_snapshot_terms.v": {
+        "bytes": 44179,
+        "sha256": "74504FA9F9BFD24FCBA7126AAFFE2E982775F9F75996DFAE2C1825A083A21F53"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_read_snapshot_Outline_read_snapshot_update_heads.v": {
+        "bytes": 36251,
+        "sha256": "270E1EF441229DC3B7BE1B909AECEC3BD41CDBEA91FB9504CF9B1314D390A6E3"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_read_snapshot_Pipeline_read_snapshot_key_lanes.v": {
+        "bytes": 21418,
+        "sha256": "1A4C8BA0738799C8E8568FECAA37BB46337A177E78563561A3BCB40C75DAB9B0"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_read_snapshot_Pipeline_read_snapshot_lambda.v": {
+        "bytes": 13491,
+        "sha256": "B3B52C65FDE3E1FBF84A4F9FE0BC7556ADD62BE0E955A0FA3BECEE7E1233764C"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_read_snapshot_Pipeline_read_snapshot_lanes.v": {
+        "bytes": 31947,
+        "sha256": "A516FB69B5E1152D819F1F79D6CA1C6C315B8EDAAD85F3A2C1B943DCC7C1D9BA"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_read_snapshot_Pipeline_read_snapshot_update_lanes.v": {
+        "bytes": 21409,
+        "sha256": "FB20F6487DB89431F01DA5E3056D13E1221E2896556C0385B330BA91382706CA"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_reset_slot.v": {
+        "bytes": 27963,
+        "sha256": "FC99BEBC0C438ECF469406AF37D855ABDAD9D4AF52C7EBBB76AF2AC6F3F9B1DA"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_store_key.v": {
+        "bytes": 48856,
+        "sha256": "F3081562F63482BC78E46BF51179F663184EAB9D33744B471DA7698B329599FE"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_store_key_Pipeline_store_key_terms_store_key_heads_store_ke.v": {
+        "bytes": 36516,
+        "sha256": "5979E36EFB161FDFA87C0C92DB57591E4C1FE74A3CCEDBE64AAC4D5C773F652C"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_validate_qk_stack.v": {
+        "bytes": 45140,
+        "sha256": "E9D44863243894CADA342800F31CBB1B8D4899E2D8C706AD005EC00B738C003D"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_validate_qk_stack_Pipeline_validate_qk_terms_validate_qk_he.v": {
+        "bytes": 29181,
+        "sha256": "C0C791BC808212677DD58DDC39BD622EA4A5905457534AF9C58B37145EC5D6DD"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_validate_snapshot.v": {
+        "bytes": 143694,
+        "sha256": "A26D2AD27C0C879D98D0D8397DD9ED3C9536D58EE18A152132BA894C71ACCFB7"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_validate_snapshot_Pipeline_validate_snapshot_key_lanes.v": {
+        "bytes": 23612,
+        "sha256": "7A8304695F6867620A1834A6557B48EE83FD12078ACC47E5875E18EA4495C67F"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_validate_snapshot_Pipeline_validate_snapshot_lanes.v": {
+        "bytes": 32019,
+        "sha256": "DFC99F20E5550188B2F320F6EA79BDA689F53D696B17EE21B07405D8BD7189BA"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_validate_snapshot_Pipeline_validate_snapshot_update_lanes.v": {
+        "bytes": 23630,
+        "sha256": "259DA57F715CA0572226FB745E41B1832F23D72FC8FE96335D5595DCADEE0152"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_validate_token.v": {
+        "bytes": 87157,
+        "sha256": "618CB22D9D20AE17F696965353824685100A647E6D62CE3D8F06DAC47AC6F5ED"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_validate_value_stack.v": {
+        "bytes": 45139,
+        "sha256": "2F361B3CAB52E8021C1D14A7AD3C1C3FC3EBD6B22BBDA3300D02A9F649245966"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_p_anonymous_namespace_validate_value_stack_Pipeline_validate_value_terms_validate.v": {
+        "bytes": 29139,
+        "sha256": "C1A005FBA639C65069DE02C5BDC970B1A19903490CDF5F0AA4F7DE0FAD5FFBAB"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_partselect_4ns_128ns_7ns_4_1_1.v": {
+        "bytes": 824,
+        "sha256": "990536754BA83F441BB8678AF4363B115989C3F8B774C502867BBAB857233DAD"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_partselect_8ns_32ns_5ns_8_1_1.v": {
+        "bytes": 826,
+        "sha256": "45C33FDC4AD198DEA34DCAE883C01B233D46E491EB2C1FA64773E540D25CA533"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_partset_128ns_128ns_4ns_7ns_128_1_1.v": {
+        "bytes": 944,
+        "sha256": "FE6CB8AD5EE9FF2A53916546B3B918C78CF5C2D13D2B19224870295E315A8B0B"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_partset_32ns_32ns_8ns_5ns_32_1_1.v": {
+        "bytes": 944,
+        "sha256": "CFF0559F9A678E6CD217E7F443A9F75C0954711006F03DABD4697B50E5EE2257"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_select_e2m1_scale_power.v": {
+        "bytes": 90566,
+        "sha256": "BFD7534880FD78E836416CA4823DEA77DA7BAC9B7FB1A4B6B3C361268C8A1ED1"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_select_e2m1_scale_power_Pipeline_select_e2m1_max.v": {
+        "bytes": 26723,
+        "sha256": "D5AAA751BAB1A217AE4093018F506BAC65A90D934E1BCECBAF16413F3F0C4219"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_select_e2m1_scale_power_Pipeline_select_e2m1_normalize.v": {
+        "bytes": 69869,
+        "sha256": "726838A9F9256B47C3B02E76DF3F4D821B10B8A4DD176E0E8F6D570080AF2216"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_select_e2m1_scale_power_normalized_magnitudes_RAM_AUTO_1R1W.v": {
+        "bytes": 1003,
+        "sha256": "02F3D8FBBE64E42A30A7BF15B8735AABB88E44F0352435939DEE49A9552BFC31"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_select_e2m1_scale_power_top_exponents_RAM_AUTO_1R1W.v": {
+        "bytes": 995,
+        "sha256": "28C657926FB98461E267E59F3C1C908F36B114A9E4CC2E3407ED9E9D5F0EEC95"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_15_3_16_1_1.v": {
+        "bytes": 1833,
+        "sha256": "9740098B73A02B529A1E91A97C6B7685872341B42BED4C1DE0EEA166A6F36F77"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_15_3_36_1_1.v": {
+        "bytes": 1833,
+        "sha256": "D4289A373979E1F6C2A1E4838651AEE53861BA953044D3AEBA739BF180A89E2B"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_17_3_4_1_1.v": {
+        "bytes": 1974,
+        "sha256": "38C9E957D1D995BD98B3F32FDE3EC7F23202986EB38A345A267A33CA16A8E03C"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_33_4_10_1_1.v": {
+        "bytes": 3153,
+        "sha256": "8409B7A07B10AB36419F97CA56F6F4253B2C835B3E49B59C774C6BD52D7FAE7D"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_33_4_9_1_1.v": {
+        "bytes": 3152,
+        "sha256": "06C246CF2DC36D28466D86D2FAD774DD112912579F8E21F797E50791C66E0EDC"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_65_5_16_1_1.v": {
+        "bytes": 5537,
+        "sha256": "174F405D611A95F13DC390DA391A0765F6356DE98FDE18AD68EC4198D8F91402"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_65_5_32_1_1.v": {
+        "bytes": 5537,
+        "sha256": "B8C6447CF939AFC74AB4083D00ED4BFE2FF66C43D70024B67540C899F3493AB7"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_7_2_16_1_1.v": {
+        "bytes": 1264,
+        "sha256": "6943A6B7E13B24721E562CB76C2FF4E6BFA988E0ED520F9967778D09D01C6FB5"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_7_2_32_1_1.v": {
+        "bytes": 1264,
+        "sha256": "0B33DFB890F4D3BADDBE4049F5186439A66A59A97E5F2AAABD642F529C401F53"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_7_2_33_1_1.v": {
+        "bytes": 1264,
+        "sha256": "9547C6C37EE86A10D110DA72552EB598B219BC2DF7BB96EA038DDDA1E1523953"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_7_2_64_1_1.v": {
+        "bytes": 1264,
+        "sha256": "6108CF099ECDF539C15A37243A17788B2FDAE14EDD309BEEAA6E246752EB6EC1"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_9_2_16_1_1.v": {
+        "bytes": 1406,
+        "sha256": "1095A454A3CCF24E000054B3939F4C25232B54964460D614D1E0AA293CFABBB6"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_9_2_32_1_1.v": {
+        "bytes": 1406,
+        "sha256": "CD9E14C397ECA8A6486C290A2E3B89F88DCBB756931A9DE9FB3659631A958B0A"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_9_3_32_1_1.v": {
+        "bytes": 1406,
+        "sha256": "38DD1B12F8A18A986CA47CB1C2570D7CC565C084F484E2BA4D8C7AE59A74FD88"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_sparsemux_9_3_64_1_1.v": {
+        "bytes": 1406,
+        "sha256": "23B6711E46E7F1F34F1C65FB28D42C58DB13727AEFC5781108022AE62E993DFA"
+      }
+    }
+  },
+  "independent_verification": [
+    "The asset generator rechecks the frozen trace SHA256 and consumes every byte.",
+    "The asset manifest hashes all 40 readmemh files consumed by the harness.",
+    "The harness compares every token output, counter, write-log occupancy, and final resident snapshot before PASS.",
+    "This report independently enforces all 66 commands and all 64 ordered token PASS markers."
+  ],
+  "initialization_data": {
+    "file_count": 11,
+    "files": {
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_bkb.dat": {
+        "bytes": 108,
+        "sha256": "FB46E9B4CE7B890B3D00F220821743E2856A40155BD2078DB0BBC5B03417CDCB"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_jbC.dat": {
+        "bytes": 108,
+        "sha256": "FB46E9B4CE7B890B3D00F220821743E2856A40155BD2078DB0BBC5B03417CDCB"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_kbM.dat": {
+        "bytes": 108,
+        "sha256": "FB46E9B4CE7B890B3D00F220821743E2856A40155BD2078DB0BBC5B03417CDCB"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_gamma_RAM_AUTO_1R1W.dat": {
+        "bytes": 3456,
+        "sha256": "9ACC82299DA8AC0B147198B6CF61571EDC5718A64B9F27ECADB8CC4CAEF10037"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_key_scales_RAM_T2P_BRAM_1R1W.dat": {
+        "bytes": 10368,
+        "sha256": "E1C3E18239A13784B64C6A2B124D29FA7A88180F7AF754F2685683A7A27CA6BB"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_keys_RAM_T2P_URAM_1R1W.dat": {
+        "bytes": 41472,
+        "sha256": "0DE9D58F67F06F2B70F24952D10ECC40D98AD7E8B0F5BC70178EE4955BF21ED5"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_lambda_RAM_AUTO_1R1W.dat": {
+        "bytes": 10368,
+        "sha256": "E1C3E18239A13784B64C6A2B124D29FA7A88180F7AF754F2685683A7A27CA6BB"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_primary_RAM_T2P_URAM_1R1W.dat": {
+        "bytes": 1769472,
+        "sha256": "F9774473D0F15B6FE0409F1B84BE32373E0EEFFF3C618E816438DA45EB9E1B9B"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_primary_scales_RAM_T2P_BRAM_1R1W.dat": {
+        "bytes": 442368,
+        "sha256": "537F60700BB1A8AD4B26AD5B48A46A5EF42A9D2C1278FF84993A75C315DDDC43"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_update_scales_RAM_T2P_BRAM_1R1W.dat": {
+        "bytes": 20736,
+        "sha256": "0F1D899418F32C0EBA45E0833157888A20D6B6D17BB17FE0CE34C13D921B8560"
+      },
+      "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top_gdn_rs2_top_impl_resident_updates_RAM_T2P_URAM_1R1W.dat": {
+        "bytes": 82944,
+        "sha256": "4A9B48BC3B1D89DAF5A02F49DC9540EF6D683C1644E42A47571D3E18704602EE"
+      }
+    }
+  },
+  "limitations": [
+    "This is pre-synthesis HLS-generated Verilog, not post-route netlist or board execution.",
+    "The scheduler-free wrapper removes only the timed clock generator and procedural test sequence; it retains the identical generated DUT and AXI memory models.",
+    "The custom direct harness is not the official Vitis UVM full-trace cosimulation; a separate two-command XSim control cosim passed.",
+    "The trace is deterministic and synthetic; this result does not establish full-model accuracy or perplexity."
+  ],
+  "parity": {
+    "command_counters_compared": 448,
+    "cumulative_counters_compared": 448,
+    "final_gamma_values_compared": 32,
+    "final_generation": 65,
+    "final_lambda_values_compared": 96,
+    "final_log_key_elements_compared": 12288,
+    "final_log_key_scales_compared": 384,
+    "final_log_update_elements_compared": 24576,
+    "final_log_update_scales_compared": 768,
+    "final_primary_state_elements_compared": 524288,
+    "final_primary_state_scales_compared": 16384,
+    "final_residual_state_elements_compared": 524288,
+    "final_residual_state_scales_compared": 16384,
+    "ordered_tokens": 64,
+    "output_exponents_compared": 262144,
+    "output_mantissas_compared": 262144,
+    "output_values_compared": 262144,
+    "status": "PASS"
+  },
+  "required_64_token_rtl_parity": "PASS",
+  "rtl_compilation": {
+    "generated_verilog_files": 140,
+    "initialization_data_files": 11,
+    "status": "PASS",
+    "time_and_memory": {
+      "elapsed": "0:27.81",
+      "major_page_faults": 0,
+      "maximum_resident_kb": 403928,
+      "minor_page_faults": 1366298,
+      "system_seconds": 6.49,
+      "user_seconds": 118.56
+    }
+  },
+  "rtl_simulation": {
+    "completed_transactions": 66,
+    "load_transactions": 1,
+    "readback_transactions": 1,
+    "status": "PASS",
+    "step_transactions": 64,
+    "time_and_memory": {
+      "elapsed": "3:50:29",
+      "major_page_faults": 0,
+      "maximum_resident_kb": 62328,
+      "minor_page_faults": 15610,
+      "system_seconds": 0.64,
+      "user_seconds": 55313.63
+    }
+  },
+  "schema": 1,
+  "scope": "Bit-exact 64-token generated-Verilog parity for the selected native MXFP4 RS2/R3 residual-stack/write-log candidate through a direct AXI harness.",
+  "source_files": {
+    "build/verilator_fast/axi_memory_model_fast.sv": {
+      "bytes": 5585,
+      "sha256": "982F12405DAB7FC78674C6DD3A856DB79565FE17A81AA9B3C5EB346A35754575"
+    },
+    "build/verilator_fast/rs2_fast_wrapper.json": {
+      "bytes": 781,
+      "sha256": "680407E8412E940DCAF4F8172EE5DD5CFBF727A4DF1405CD40488AE9C8CD6C4E"
+    },
+    "build/verilator_fast/rs2_fast_wrapper.sv": {
+      "bytes": 7513,
+      "sha256": "B5203C770BD68B2A4C93A113D2AE3F98ED153CE97BA98CBB7FEBD902398FADA7"
+    },
+    "hls/rs2/include/gdn_rs2_kernel.hpp": {
+      "bytes": 9508,
+      "sha256": "15B937C959C3E88729EBD658CF60CC1FE58E72CD2BB402BAC53C2189DD1F5132"
+    },
+    "hls/rs2/src/gdn_rs2_top.cpp": {
+      "bytes": 57674,
+      "sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E"
+    },
+    "hls/rs2/src/rs2_arithmetic.cpp": {
+      "bytes": 9857,
+      "sha256": "34AE95CD5E2F48ABC53C3FFDC2477179093FE83DFA6787597F41FFD994A3B03F"
+    },
+    "hls/rtl_tb/axi_memory_model.sv": {
+      "bytes": 5554,
+      "sha256": "64BEC39EDAD6BBF85F6DB6FBC2B2B285029F411998FCB248E0D01F59B6D73030"
+    },
+    "hls/rtl_tb/rs2_fast_harness.cpp": {
+      "bytes": 18501,
+      "sha256": "437D1ED7ECB5ED8C905ED3DC26B88F5D223252A3E7907E3212D97F94C1BA439E"
+    },
+    "hls/rtl_tb/tb_gdn_rs2_top_direct.sv": {
+      "bytes": 26140,
+      "sha256": "D6AE5D27853E56A8880E88CCD992DCE6E3B203F52872A4654EA3EB06A4C2221A"
+    },
+    "scripts/generate_rs2_direct_rtl_trace_assets.py": {
+      "bytes": 11622,
+      "sha256": "7E822BFB6EC43D572D2B0EB7A1DE8B3FB8CDA3099F89F58F3C0424662D4C3613"
+    },
+    "scripts/generate_rs2_fast_wrapper.py": {
+      "bytes": 5210,
+      "sha256": "EE5DFD858B21A1876C32F2BA87DDADF2DF64E3E40D63585E52758B34364FEBD8"
+    },
+    "scripts/rs2_direct_rtl_trace_report.py": {
+      "bytes": 16509,
+      "sha256": "630201DFA7DB5F7977C8142798C76F603050052D3401B81AAA86874407E55D8A"
+    },
+    "scripts/rs2_fast_rtl_flow.py": {
+      "bytes": 10605,
+      "sha256": "2ED918370E286400396210828724D80EA3205B03D518796AAB3150B1A7BDAFD0"
+    }
+  },
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 186654,
+      "changed_file_count": 12,
+      "sha256": "681BC148174D64F521EE910D2876B48E29DD69A2FDE1944BE101E10E55E9D857"
+    },
+    "files": {
+      "build/verilator_fast/axi_memory_model_fast.sv": {
+        "bytes": 5585,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "982F12405DAB7FC78674C6DD3A856DB79565FE17A81AA9B3C5EB346A35754575"
+      },
+      "build/verilator_fast/rs2_fast_wrapper.json": {
+        "bytes": 781,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "680407E8412E940DCAF4F8172EE5DD5CFBF727A4DF1405CD40488AE9C8CD6C4E"
+      },
+      "build/verilator_fast/rs2_fast_wrapper.sv": {
+        "bytes": 7513,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B5203C770BD68B2A4C93A113D2AE3F98ED153CE97BA98CBB7FEBD902398FADA7"
+      },
+      "hls/rs2/include/gdn_rs2_kernel.hpp": {
+        "bytes": 9508,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "15B937C959C3E88729EBD658CF60CC1FE58E72CD2BB402BAC53C2189DD1F5132"
+      },
+      "hls/rs2/src/gdn_rs2_top.cpp": {
+        "bytes": 57674,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E"
+      },
+      "hls/rs2/src/rs2_arithmetic.cpp": {
+        "bytes": 9857,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "34AE95CD5E2F48ABC53C3FFDC2477179093FE83DFA6787597F41FFD994A3B03F"
+      },
+      "hls/rtl_tb/axi_memory_model.sv": {
+        "bytes": 5554,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "64BEC39EDAD6BBF85F6DB6FBC2B2B285029F411998FCB248E0D01F59B6D73030"
+      },
+      "hls/rtl_tb/rs2_fast_harness.cpp": {
+        "bytes": 18501,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "437D1ED7ECB5ED8C905ED3DC26B88F5D223252A3E7907E3212D97F94C1BA439E"
+      },
+      "hls/rtl_tb/tb_gdn_rs2_top_direct.sv": {
+        "bytes": 26140,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "D6AE5D27853E56A8880E88CCD992DCE6E3B203F52872A4654EA3EB06A4C2221A"
+      },
+      "scripts/generate_rs2_direct_rtl_trace_assets.py": {
+        "bytes": 11622,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "7E822BFB6EC43D572D2B0EB7A1DE8B3FB8CDA3099F89F58F3C0424662D4C3613"
+      },
+      "scripts/generate_rs2_fast_wrapper.py": {
+        "bytes": 5210,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "EE5DFD858B21A1876C32F2BA87DDADF2DF64E3E40D63585E52758B34364FEBD8"
+      },
+      "scripts/rs2_direct_rtl_trace_report.py": {
+        "bytes": 16509,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "630201DFA7DB5F7977C8142798C76F603050052D3401B81AAA86874407E55D8A"
+      },
+      "scripts/rs2_fast_rtl_flow.py": {
+        "bytes": 10605,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "2ED918370E286400396210828724D80EA3205B03D518796AAB3150B1A7BDAFD0"
+      }
+    },
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+  "status": "PASS",
+  "step_latency_cycles": {
+    "count": 64,
+    "maximum": 91842379,
+    "mean": 44824404.875,
+    "median": 21967403.5,
+    "minimum": 21883985
+  },
+  "tool": {
+    "harness": "scheduler-free C++ clock driver over the same AXI memory models",
+    "harness_mode": "scheduler_free_cpp",
+    "hls_rtl_generator": "AMD Vitis HLS 2025.2",
+    "host": "WSL Ubuntu-24.04",
+    "official_vitis_uvm_cosim": false,
+    "rtl_simulator": "Verilator 5.050 2026-07-01 rev v5.050"
+  },
+  "trace": {
+    "input_stream_sha256": "C7FB4E674E628396DE7977395A13AC0319DC55CE26609F8007DB9BD72F359AF1",
+    "manifest": "data/vectors/rs2_resident_trace64_manifest.json",
+    "path": "data/vectors/rs2_resident_trace64.bin",
+    "sha256": "168D99100EE6B961BCC7EBFAE0311CDCD7209A2CBE04FE6C62A77EE26B88E265",
+    "tokens": 64
+  },
+  "working_tree_dirty": true
+}

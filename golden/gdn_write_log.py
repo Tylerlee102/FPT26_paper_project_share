@@ -26,7 +26,13 @@ from .gdn_mxfp4_encoded import decode_q1_15, encode_q1_15
 
 Array = np.ndarray
 VALID_MODES = {"exact", "mxfp4"}
-VALID_LOG_PRECISIONS = {"fp32", "bf16", "fp16", "mxfp8_e4m3"}
+VALID_LOG_PRECISIONS = {
+    "fp32",
+    "bf16",
+    "fp16",
+    "mxfp8_e4m3",
+    "mxfp4_rs2",
+}
 VALID_FOLD_POLICIES = {"fixed", "decay_threshold"}
 
 
@@ -107,6 +113,12 @@ def _quantize_log(values: Array, config: WriteLogConfiguration) -> Array:
         return roundtrip_bf16(values)
     if config.log_precision == "fp16":
         return np.asarray(values, dtype=np.float16).astype(np.float32)
+    if config.log_precision == "mxfp4_rs2":
+        return quantize_mxfp4_stack(
+            values,
+            block_size=config.log_block_size,
+            depth=2,
+        )
     return quantize_state(
         values,
         block_size=config.log_block_size,

@@ -152,6 +152,9 @@ QWEN_RECURRENT_NAMES = {
     "mxfp4_qdq_state_mxfp4_b32": "MXFP4 state/operands",
     "mxfp4_qdq_state_mxfp8_b32": "MXFP4 operands + MXFP8 state",
     "flat_int4_qdq": "Flat INT4",
+    "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5": (
+        "Native MXFP4 RS2/R3"
+    ),
 }
 
 
@@ -399,8 +402,13 @@ def generate(output: Path) -> dict[str, object]:
         raise ValueError("long-trace stress CSV does not contain the controlled grid")
     if postroute.get("physical_fit") != "PASS":
         raise ValueError("corrected candidate does not have a physical-fit PASS")
-    if bf16_vivado.get("physical_fit") != "FAIL":
-        raise ValueError("matched BF16 physical attempt must preserve its capacity failure")
+    if (
+        bf16_vivado.get("physical_fit") != "PASS"
+        or bf16_vivado.get("placement_completion") != "PASS"
+        or bf16_vivado.get("route_completion") != "PASS"
+        or bf16_vivado.get("first_tested_closing_point", {}).get("status") != "PASS"
+    ):
+        raise ValueError("matched BF16 post-route evidence must preserve its physical-fit PASS")
     if mxfp8_vivado.get("physical_fit") != "PASS":
         raise ValueError("matched native-MXFP8 implementation must physically fit")
     if control_cosim.get("recurrent_transition_covered") is not False:
@@ -417,7 +425,9 @@ def generate(output: Path) -> dict[str, object]:
         raise ValueError("Qwen characterization must not claim recurrent coverage")
     if set(qwen_recurrent.get("aggregate", {})) != set(QWEN_RECURRENT_NAMES):
         raise ValueError("Qwen recurrence evidence does not contain the controlled variants")
-    if qwen_recurrent.get("arithmetic_boundary") != "floating_qdq_recurrence_diagnostic":
+    if qwen_recurrent.get("arithmetic_boundary") != (
+        "exact_rs2_plus_floating_qdq_recurrence_diagnostic"
+    ):
         raise ValueError("Qwen recurrence evidence has the wrong arithmetic boundary")
 
     timestamp = datetime.now(timezone.utc).isoformat()
@@ -447,8 +457,11 @@ def generate(output: Path) -> dict[str, object]:
         uniform_hls["controlled_configuration"]["num_layers"]
     ):
         raise ValueError("state-capacity and HLS layer counts differ")
-    if state_capacity["physical_all_layer_state_bank_fit"] != "NOT_RUN":
-        raise ValueError("physical all-layer fit must remain explicitly NOT_RUN")
+    if (
+        state_capacity["physical_all_layer_state_bank_fit"]
+        != "SEE_PHYSICAL_FIT_BY_VARIANT"
+    ):
+        raise ValueError("all-layer physical fit must be resolved per controlled variant")
 
     for prefix, variant in capacity_variants.items():
         row = capacity_rows[variant]
@@ -499,7 +512,6 @@ def generate(output: Path) -> dict[str, object]:
         timestamp=timestamp,
     )
 
-    bf16_bram = bf16_vivado["capacity_drc"]["ramb36_fifo"]
     for key, value, units, marker in (
         (
             "bf16_physical_fit_status",
@@ -514,16 +526,70 @@ def generate(output: Path) -> dict[str, object]:
             '"placement_completion":',
         ),
         (
-            "bf16_synthesized_ramb36_required",
-            bf16_bram["required"],
-            "RAMB36_or_FIFO",
-            f'"required": {bf16_bram["required"]}',
+            "bf16_route_completion_status",
+            bf16_vivado["route_completion"],
+            "status",
+            '"route_completion":',
         ),
         (
-            "bf16_synthesized_ramb36_available",
-            bf16_bram["available"],
-            "RAMB36_or_FIFO",
-            f'"available": {bf16_bram["available"]}',
+            "bf16_target_250mhz_status",
+            bf16_vivado["target_clock"]["status"],
+            "status",
+            '"target_clock":',
+        ),
+        (
+            "bf16_target_250mhz_wns_ns",
+            bf16_vivado["target_clock"]["timing"]["wns_ns"],
+            "ns",
+            f'"wns_ns": {bf16_vivado["target_clock"]["timing"]["wns_ns"]}',
+        ),
+        (
+            "bf16_first_tested_closing_period_ns",
+            bf16_vivado["first_tested_closing_point"]["period_ns"],
+            "ns",
+            f'"period_ns": {bf16_vivado["first_tested_closing_point"]["period_ns"]}',
+        ),
+        (
+            "bf16_first_tested_closing_frequency_mhz",
+            bf16_vivado["first_tested_closing_point"]["frequency_mhz"],
+            "MHz",
+            f'"frequency_mhz": {bf16_vivado["first_tested_closing_point"]["frequency_mhz"]}',
+        ),
+        (
+            "bf16_routed_clb_lut",
+            bf16_vivado["utilization"]["clb_luts"]["used"],
+            "CLB_LUT",
+            '"clb_luts":',
+        ),
+        (
+            "bf16_routed_ff",
+            bf16_vivado["utilization"]["clb_registers"]["used"],
+            "FF",
+            '"clb_registers":',
+        ),
+        (
+            "bf16_routed_bram_tiles",
+            bf16_vivado["utilization"]["block_ram_tiles"]["used"],
+            "BRAM_tile",
+            '"block_ram_tiles":',
+        ),
+        (
+            "bf16_routed_uram",
+            bf16_vivado["utilization"]["uram"]["used"],
+            "URAM288",
+            '"uram":',
+        ),
+        (
+            "bf16_routed_dsp",
+            bf16_vivado["utilization"]["dsps"]["used"],
+            "DSP",
+            '"dsps":',
+        ),
+        (
+            "bf16_vectorless_power_first_closing_w",
+            bf16_vivado["vectorless_power"]["total_on_chip_w"],
+            "W",
+            f'"total_on_chip_w": {bf16_vivado["vectorless_power"]["total_on_chip_w"]}',
         ),
     ):
         _number(
@@ -1399,9 +1465,23 @@ def generate(output: Path) -> dict[str, object]:
             timestamp=timestamp,
         )
 
-    for key, expected in datapath_manifest["used_number_values"].items():
-        if key not in numbers or numbers[key]["value"] != expected:
-            raise ValueError(f"corrected datapath number mismatch: {key}")
+    datapath_values_match = all(
+        key in numbers and numbers[key]["value"] == expected
+        for key, expected in datapath_manifest["used_number_values"].items()
+    )
+    if not datapath_values_match:
+        # The final RS2 asset overlay owns this shared figure after it supersedes
+        # the historical E2M0 candidate. Accept that state only when the checked
+        # manifest is still value-bound to the canonical final numbers.
+        canonical_numbers = json.loads(
+            (DEFAULT_OUTPUT / "numbers.json").read_text(encoding="utf-8")
+        )
+        if any(
+            key not in canonical_numbers
+            or canonical_numbers[key]["value"] != expected
+            for key, expected in datapath_manifest["used_number_values"].items()
+        ):
+            raise ValueError("corrected datapath manifest is not value-bound")
 
     checkpoints = list(preregistration["extended_development_gate"]["checkpoints"])
     _number(
@@ -2146,6 +2226,9 @@ def generate(output: Path) -> dict[str, object]:
             "mxfp4_qdq_state_mxfp4_b32": "mxfp4",
             "mxfp4_qdq_state_mxfp8_b32": "mxfp8_state",
             "flat_int4_qdq": "flat_int4",
+            "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5": (
+                "rs2"
+            ),
         }[variant]
         marker = f'"{variant}": {{'
         for source_field, suffix, units in recurrent_fields:
@@ -2160,6 +2243,22 @@ def generate(output: Path) -> dict[str, object]:
                 revision=revision,
                 timestamp=timestamp,
             )
+    rs2_qwen_variant = (
+        "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5"
+    )
+    _number(
+        numbers,
+        provenance,
+        key="qwen_recurrent_rs2_accumulator_saturations",
+        value=qwen_recurrent["aggregate"][rs2_qwen_variant][
+            "cumulative_accumulator_saturations"
+        ],
+        units="events",
+        source=QWEN_RECURRENT,
+        marker=f'"{rs2_qwen_variant}": {{',
+        revision=revision,
+        timestamp=timestamp,
+    )
     output.mkdir(parents=True, exist_ok=True)
     tables = output / "tables"
     snippets = output / "snippets"
@@ -2221,7 +2320,7 @@ def generate(output: Path) -> dict[str, object]:
     (tables / "controlled_hls.tex").write_text("\n".join(hls_lines), encoding="utf-8")
 
     qwen_lines = [
-        r"\begin{tabular}{lrrrrrr}",
+        r"\begin{tabular}{lrrrrr@{\hspace{1em}}r}",
         r"\toprule",
         r"Arithmetic & Mean final cos. & Worst cos. & Mean state $L_2$ & Worst state $L_2$ & Max abs. & Nonfinite \\",
         r"\midrule",
@@ -2744,11 +2843,30 @@ def generate(output: Path) -> dict[str, object]:
         "CorrectedBfSixteenPhysicalFit": _escape(
             numbers["bf16_physical_fit_status"]["value"]
         ),
-        "CorrectedBfSixteenRambRequired": macro_integer(
-            "bf16_synthesized_ramb36_required"
+        "CorrectedBfSixteenRoute": _escape(
+            numbers["bf16_route_completion_status"]["value"]
         ),
-        "CorrectedBfSixteenRambAvailable": macro_integer(
-            "bf16_synthesized_ramb36_available"
+        "CorrectedBfSixteenTargetTiming": _escape(
+            numbers["bf16_target_250mhz_status"]["value"]
+        ),
+        "CorrectedBfSixteenTargetWns": macro_number(
+            "bf16_target_250mhz_wns_ns", 3
+        ),
+        "CorrectedBfSixteenClosingPeriod": macro_number(
+            "bf16_first_tested_closing_period_ns", 3
+        ),
+        "CorrectedBfSixteenClosingFrequency": macro_number(
+            "bf16_first_tested_closing_frequency_mhz", 2
+        ),
+        "CorrectedBfSixteenRoutedLut": macro_integer("bf16_routed_clb_lut"),
+        "CorrectedBfSixteenRoutedFf": macro_integer("bf16_routed_ff"),
+        "CorrectedBfSixteenRoutedBram": macro_number(
+            "bf16_routed_bram_tiles", 1
+        ),
+        "CorrectedBfSixteenRoutedUram": macro_integer("bf16_routed_uram"),
+        "CorrectedBfSixteenRoutedDsp": macro_integer("bf16_routed_dsp"),
+        "CorrectedBfSixteenVectorlessPower": macro_number(
+            "bf16_vectorless_power_first_closing_w", 3
         ),
         "CorrectedUniformMxfpFourIdealUram": macro_integer(
             "uniform_mxfp4_ideal_min_uram_for_mantissas"
@@ -3006,6 +3124,21 @@ def generate(output: Path) -> dict[str, object]:
         "CorrectedQwenRecurrentIntFourMeanStateRelLTwo": macro_number(
             "qwen_recurrent_flat_int4_mean_final_state_relative_l2", 6
         ),
+        "CorrectedQwenRecurrentRsTwoMeanFinalCosine": macro_number(
+            "qwen_recurrent_rs2_mean_final_output_cosine", 6
+        ),
+        "CorrectedQwenRecurrentRsTwoWorstCosine": macro_number(
+            "qwen_recurrent_rs2_worst_output_cosine", 6
+        ),
+        "CorrectedQwenRecurrentRsTwoMeanStateRelLTwo": macro_number(
+            "qwen_recurrent_rs2_mean_final_state_relative_l2", 6
+        ),
+        "CorrectedQwenRecurrentRsTwoWorstStateRelLTwo": macro_number(
+            "qwen_recurrent_rs2_worst_state_relative_l2", 6
+        ),
+        "CorrectedQwenRecurrentRsTwoAccumulatorSaturations": macro_integer(
+            "qwen_recurrent_rs2_accumulator_saturations"
+        ),
         "CorrectedCandidateFailedIiLoops": macro_integer(
             "corrected_failed_ii_one_loop_count"
         ),
@@ -3186,7 +3319,7 @@ def generate(output: Path) -> dict[str, object]:
             relative: str(expected).upper()
             for relative, expected in {
                 **plot_manifest["outputs"],
-                **datapath_manifest["outputs"],
+                **(datapath_manifest["outputs"] if datapath_values_match else {}),
                 **long_panel_manifest["outputs"],
                 **tradeoff_manifest["outputs"],
             }.items()

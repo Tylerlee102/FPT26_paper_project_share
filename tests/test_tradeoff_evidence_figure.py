@@ -47,7 +47,7 @@ def test_tradeoff_figure_preserves_evidence_levels_and_missing_points(
         "Native MXFP4",
         "matched HLS not run",
         "Raw capacity is necessary",
-        "phys FAIL",
+        "phys PASS",
     ):
         assert phrase in extracted
     output_key = (

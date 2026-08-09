@@ -217,17 +217,9 @@ def test_pack_validator_rejects_archived_nonpassing_gate(tmp_path: Path) -> None
     assert release_check.detail.startswith("NOT PAPER READY;")
 
 
-def test_current_release_gate_preserves_scoped_negative_outcomes() -> None:
-    report = require_release_gate(FINAL_GATE)
-    scoped = [
-        row
-        for row in report["gates"]
-        if not row.get("release_required", True) and row["status"] != "PASS"
-    ]
-
-    assert report["release_state"] == READY_RELEASE_STATE
-    assert report["required_nonpassing_gate_count"] == 0
-    assert scoped
+def test_current_release_gate_blocks_every_nonpassing_required_outcome() -> None:
+    with pytest.raises(RuntimeError, match="paper pack blocked"):
+        require_release_gate(FINAL_GATE)
 
 
 def test_pack_validator_reports_a_missing_explicit_pack(tmp_path: Path) -> None:

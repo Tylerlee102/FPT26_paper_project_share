@@ -1,0 +1,31 @@
+{
+  "all_token_output_cosine_min": 0.9962303934231436,
+  "all_token_state_relative_l2_max": 0.08266586675860106,
+  "candidate_gate": "PASS",
+  "checkpoint_rows": 6,
+  "cumulative_counters": {
+    "accumulator_saturations": 0,
+    "alignment_underflows": 108513406,
+    "element_saturations": 0,
+    "scale_clamps": 0,
+    "state_scale_changes": 2734778
+  },
+  "failures": [],
+  "independent_checks": [
+    "source and output hashes",
+    "CSV schemas and row counts",
+    "checkpoint projection",
+    "fixed fold/live-entry schedule",
+    "counter prefix sums",
+    "all-token quality and arithmetic-event gate",
+    "rerun NOT_RUN",
+    "scalar/vectorized bit-exact tests are separate pytest evidence"
+  ],
+  "manifest": "reports/benchmark/corrected/rs2_encoded/held_out/high_retention_a17e5eed_random_1024_manifest.json",
+  "manifest_sha256": "B9B15C4488A11059BBEF310C64C188AFBE492E7E8BBD2E8A61A5B7191B176184",
+  "recomputed": false,
+  "schema": 1,
+  "status": "PASS",
+  "token_rows": 2048,
+  "verified_at": "2026-08-06T09:56:19.986933+00:00"
+}

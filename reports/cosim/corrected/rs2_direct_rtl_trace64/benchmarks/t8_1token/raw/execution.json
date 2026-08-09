@@ -1,0 +1,20 @@
+{
+  "asset_files": 40,
+  "build_cache_hit": false,
+  "build_cache_key": "2bb2d48c8d4c528b734a",
+  "compile_command": "/usr/bin/time -v -o /tmp/gdn_rs2_direct_cache_2bb2d48c8d4c528b734a/compile_time.log verilator --binary --timing --top-module tb_gdn_rs2_top_direct -j 8 -O3 --threads 8 -CFLAGS -O3 --output-split 20000 --output-split-cfuncs 20000 -Wno-fatal -Wno-WIDTHEXPAND -Wno-WIDTHTRUNC -Wno-UNOPTFLAT -Wno-LATCH -Wno-CMPCONST -Wno-UNSIGNED -Wno-CASEINCOMPLETE -Wno-TIMESCALEMOD -Wno-INITIALDLY --Mdir /tmp/gdn_rs2_direct_cache_2bb2d48c8d4c528b734a/obj /tmp/gdn_rs2_direct_cache_2bb2d48c8d4c528b734a/src/axi_memory_model.sv /tmp/gdn_rs2_direct_cache_2bb2d48c8d4c528b734a/src/tb_gdn_rs2_top_direct.sv /tmp/gdn_rs2_direct_cache_2bb2d48c8d4c528b734a/src/*.v",
+  "compile_exit_code": 0,
+  "distro": "Ubuntu-24.04",
+  "generated_at": "2026-08-06T14:16:53.127536+00:00",
+  "jobs": 8,
+  "model_threads": 8,
+  "schema": 1,
+  "simulation_command": "set -o pipefail; cd /tmp/gdn_rs2_direct_cache_2bb2d48c8d4c528b734a/run && /usr/bin/time -v -o /tmp/gdn_rs2_direct_cache_2bb2d48c8d4c528b734a/run_time.log stdbuf -oL -eL /tmp/gdn_rs2_direct_cache_2bb2d48c8d4c528b734a/obj/Vtb_gdn_rs2_top_direct +TOKEN_LIMIT=1 2>&1 | tee '/mnt/c/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/reports/cosim/corrected/rs2_direct_rtl_trace64/benchmarks/t8_1token/raw/verilator_run.log'",
+  "simulation_exit_code": 15,
+  "simulation_timeout_seconds": 7200,
+  "source_initialization_files": 11,
+  "source_verilog_files": 140,
+  "temporary_build_directory": "/tmp/gdn_rs2_direct_cache_2bb2d48c8d4c528b734a",
+  "token_limit": 1,
+  "verilator_version": "Verilator 5.050 2026-07-01 rev v5.050"
+}

@@ -114,11 +114,16 @@ def parse_targeted_loops(log: str) -> list[dict[str, object]]:
 
 def parse_csim(log: str) -> dict[str, int]:
     marker = re.search(
-        r"BF16_HLS_CSIM PASS reset_steps_readback=(\d+) generation=(\d+)", log
+        r"BF16_HLS_CSIM PASS commands=(\d+) bank_classes=(\d+) generation=(\d+)",
+        log,
     )
     if marker is None or "CSim done with 0 errors" not in log:
         raise ValueError("BF16 C-simulation PASS markers are absent")
-    return {"commands": int(marker.group(1)), "generation": int(marker.group(2))}
+    return {
+        "commands": int(marker.group(1)),
+        "bank_classes": int(marker.group(2)),
+        "generation": int(marker.group(3)),
+    }
 
 
 def generate_report(csim_dir: Path, csynth_dir: Path, output: Path) -> dict[str, object]:
@@ -153,7 +158,7 @@ def generate_report(csim_dir: Path, csynth_dir: Path, output: Path) -> dict[str,
     targeted_loops = parse_targeted_loops(csynth_text)
 
     csim_pass = (
-        csim_result == {"commands": 4, "generation": 2}
+        csim_result == {"commands": 6, "bank_classes": 2, "generation": 2}
         and "Finished Command csim_design" in csim_solution_text
     )
     targeted_ii_pass = all(
@@ -222,12 +227,14 @@ def generate_report(csim_dir: Path, csynth_dir: Path, output: Path) -> dict[str,
         "csim": {
             "status": "PASS" if csim_pass else "FAIL",
             "commands_checked": csim_result["commands"],
+            "physical_bank_classes_checked": csim_result["bank_classes"],
             "final_generation": csim_result["generation"],
             "coverage": [
                 "RESET",
                 "one sparse rank-one STEP",
                 "one beta-zero persistence STEP",
                 "complete 524288-element state READBACK",
+                "URAM-backed layer and BRAM-backed layer LOAD/READBACK",
                 "status, generation, and command counters",
             ],
             "required_64_token_rtl_parity": "NOT_RUN",
@@ -250,12 +257,12 @@ def generate_report(csim_dir: Path, csynth_dir: Path, output: Path) -> dict[str,
             path.relative_to(ROOT).as_posix(): _sha256(path) for path in raw_paths
         },
         "rtl_cosimulation_64_token": "NOT_RUN",
-        "post_route_timing_and_drc": "NOT_RUN",
-        "energy_measurement": "NOT_RUN",
+        "post_route_timing_and_drc": "SEE_REPORTS_VIVADO_BASELINES_BF16",
+        "energy_measurement": "BLOCKED_EXTERNAL",
         "limitations": [
             "C-simulation uses a bounded hand-computable sparse test, not random-vector or 64-token RTL parity",
-            "C-synthesis resources, timing, and latency are HLS estimates, not placed-and-routed measurements",
-            "the reported URAM estimate is not accepted as proof that the declared all-layer state capacity fits",
+            "C-synthesis resources, timing, and latency are HLS estimates; the separate BF16 Vivado summary contains placed-and-routed measurements",
+            "the HLS memory estimate is not used as proof that the declared all-layer state capacity fits",
             "no board power or energy measurement exists",
         ],
     }
@@ -275,14 +282,15 @@ def generate_report(csim_dir: Path, csynth_dir: Path, output: Path) -> dict[str,
                 f"Generated: `{manifest['timestamp']}`",
                 f"Status: `{status}` for source-locked HLS C-sim and C-synthesis extraction",
                 "",
-                f"- C-simulation: `{'PASS' if csim_pass else 'FAIL'}` ({csim_result['commands']} commands, generation {csim_result['generation']})",
+                f"- C-simulation: `{'PASS' if csim_pass else 'FAIL'}` ({csim_result['commands']} commands, {csim_result['bank_classes']} physical bank classes, generation {csim_result['generation']})",
                 f"- Target: `{metrics['target_device']}`, `{metrics['target_clock_ns']:.3f}` ns",
                 f"- Estimated clock: `{metrics['estimated_clock_ns']:.3f}` ns (`{metrics['estimated_fmax_mhz']:.2f}` MHz)",
                 f"- Estimated STEP loop: `{step_cycles['minimum']}` to `{step_cycles['maximum']}` cycles",
                 f"- Estimated resources: `{resources['LUT']}` LUT, `{resources['FF']}` FF, `{resources['BRAM_18K']}` BRAM18K, `{resources['URAM']}` URAM, `{resources['DSP']}` DSP",
                 f"- Explicit II=1 loop constraints: `{'PASS' if targeted_ii_pass else 'FAIL'}` ({len(targeted_loops)} loops)",
                 "- 64-token BF16 RTL parity: `NOT_RUN`",
-                "- Post-route timing/DRC and energy: `NOT_RUN`",
+                "- Post-route timing/DRC: see `reports/vivado/baselines/bf16/bf16_vivado_summary.json`",
+                "- Measured board energy: `BLOCKED_EXTERNAL`",
                 "",
                 "The baseline keeps the same recurrent boundary, KxV state layout, 36 layer slots,",
                 "P_K=16, P_V=8, block size 32, U55C target, and 4 ns constraint as the",
@@ -290,7 +298,7 @@ def generate_report(csim_dir: Path, csynth_dir: Path, output: Path) -> dict[str,
                 "BF16 at the persistent-state and output boundaries.",
                 "",
                 "These are HLS estimates. The bounded C-simulation and inferred memory counts",
-                "do not establish RTL parity, physical fit, routed timing, or energy.",
+                "do not establish RTL parity, physical fit, routed timing, or energy on their own.",
                 "",
             ]
         ),

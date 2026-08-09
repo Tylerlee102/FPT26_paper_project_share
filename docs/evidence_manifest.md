@@ -1,5 +1,29 @@
 # Evidence Manifest
 
+> **Historical manifest with a current-status overlay.** The detailed entries
+> below preserve the evidence sequence through earlier correction milestones;
+> some intermediate candidate labels are intentionally historical. Current
+> release status is controlled by `reports/final_completion_gate.json`, current
+> candidate selection by
+> `reports/benchmark/corrected/rs2_encoded_candidate_preregistration.json`, and
+> manuscript numbers by `paper/corrected/numbers.json` plus
+> `paper/corrected/provenance.json`. No earlier `selected` label overrides those
+> files.
+
+Current candidate (2026-08-06):
+`mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5` (RS2/R3).
+Its held-out and extended synthetic gates, exact HLS C simulation, matched HLS
+reports, and all-layer out-of-context routes are recorded under the current
+`reports/*/corrected/rs2_*` trees. The completion gate remains authoritative
+for every nonpassing or externally blocked release requirement.
+
+Current local tool status is recorded in
+`reports/environment/hardware_availability.json`: Vitis HLS, Vivado, `v++`,
+`platforminfo`, and XSim are available. The installed platform inventory has no
+U55C XPFM, Windows and WSL have no `xbutil` or `xrt-smi`, and no PCI vendor
+`0x10ee` device is present. Thus synthesis, routing, C simulation, and RTL
+simulation are local capabilities; U55C execution and telemetry are not.
+
 Manifest version: `0.9`
 
 Audit host date/time zone: `2026-08-03`, America/Los_Angeles.
@@ -55,7 +79,7 @@ while its adequacy for the corrected recurrence is `FAIL`. Legacy numerical and
 hardware reports never inherit validity after the recurrence, boundary, or
 arithmetic contract changes.
 
-## Environment Snapshot
+## Historical Environment Snapshot
 
 | Item | Observed value | Status |
 |---|---|---|

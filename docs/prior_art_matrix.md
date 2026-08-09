@@ -5,7 +5,7 @@ Audit date: `2026-08-02`
 The 2026-08-02 archival-metadata refresh is preserved at
 `docs/evidence/prior_art_archival_refresh_2026_08_02.csv`. The corrected
 manuscript-reference audit is
-`docs/evidence/citation_archival_audit_2026_08_03_v3.csv`. The expanded focused
+`docs/evidence/citation_archival_audit_2026_08_06_v4.csv`. The expanded focused
 query recheck is preserved at
 `docs/evidence/prior_art_gap_recheck_2026_08_02_v2.md`; it leaves the earlier
 same-day recheck intact as superseded evidence.
@@ -93,7 +93,7 @@ the unrun closed-loop and physical gates.
 | [State Rank Dynamics in Linear Attention LLMs, arXiv:2602.02195](https://arxiv.org/abs/2602.02195) | Long-running recurrent-state diagnostics and rank structure | Studies state dynamics/reduction, not MXFP4 arithmetic or FPGA realization | PASS |
 | [The Key to State Reduction in Linear Attention, OpenReview](https://openreview.net/forum?id=GfjoMXfaXq) | Rank-based recurrent-state reduction | Changes state representation structurally rather than replacing arithmetic at a matched baseline | PASS |
 | [MXAttention, arXiv:2607.24377](https://arxiv.org/abs/2607.24377) | MXFP4 attention quantization and scale selection | Targets softmax attention, not a recurrent GDN state | PASS |
-| [Benchmarking PTQ under MXFP, arXiv:2601.09555](https://arxiv.org/abs/2601.09555) | MXFP4 post-training quantization and scale sensitivity | Model-level benchmark without the recurrent FPGA kernel boundary | PASS |
+| [Benchmarking PTQ under MXFP, ACL 2026](https://aclanthology.org/2026.acl-long.1854/) | MXFP4 post-training quantization and scale sensitivity | Model-level benchmark without the recurrent FPGA kernel boundary | PASS |
 
 ## Pinned Research Inputs
 
@@ -137,7 +137,7 @@ hardware `PASS`.
 | MXFP4 exponent-aligned compute | MXFormer, arXiv:2602.12480 | MXFP4 compute-in-memory with block-exponent alignment. | Block alignment is not unique to this project. | FPGA recurrence integration at the matched boundary. | PASS |
 | Mixed MXFP precision | [MicroMix, ICLR 2026](https://openreview.net/forum?id=P5OKoZdwlB) | Mixed MXFP4/6/8 execution and kernels. | Mixed-format fallback and policy ideas have broad precedent. | Recurrent state placement, drift, and U55C physical behavior. | PASS |
 | MXFP4 softmax attention | [MXAttention, arXiv:2607.24377](https://arxiv.org/abs/2607.24377) | Data-free scaling and pre-normalization quantization for MXFP4 attention. | Establishes attention-specific MXFP4 scaling work. | Recurrent GDN state evolution rather than softmax attention. | PASS |
-| MXFP post-training benchmark | [Benchmarking PTQ under MXFP, arXiv:2601.09555](https://arxiv.org/abs/2601.09555) | Benchmarks MXFP formats and reports that MXFP4 is sensitive to scale selection. | Reinforces that scale policy and quality must be measured rather than assumed. | Long-horizon recurrence and matched FPGA cost. | PASS |
+| MXFP post-training benchmark | [Benchmarking PTQ under MXFP, ACL 2026](https://aclanthology.org/2026.acl-long.1854/) | Benchmarks MXFP formats and reports that MXFP4 is sensitive to scale selection. | Reinforces that scale policy and quality must be measured rather than assumed. | Long-horizon recurrence and matched FPGA cost. | PASS |
 | OCP MXFP4 representation | [OCP MX v1.0](https://www.opencompute.org/documents/ocp-microscaling-formats-mx-v1-0-spec-final-pdf) | E2M1 elements with E8M0 shared scale in B32 blocks. | The data format is standardized, not a contribution. | A fully specified recurrence arithmetic contract and state-update policy. | PASS |
 | Stochastic rounding | [Gupta et al., ICML 2015](https://proceedings.mlr.press/v37/gupta15.html) | Stochastic rounding for low-precision training arithmetic. | Stochastic MXFP4 is an ablation, not a new mechanism by itself. | Its utility for inference-time GDN state drift. | PASS |
 | Error-feedback quantization | Quantized Adam with Error Feedback, arXiv:2004.14180, plus later error-feedback literature | Feeds quantization residuals into later updates. | Error-feedback language or controllers require careful attribution. | A conservative GDN state-error mechanism and hardware cost. | PASS |

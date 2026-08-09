@@ -19,7 +19,7 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest().upper()
 
 
-def test_encoded_registration_is_frozen_before_held_out_execution() -> None:
+def test_superseded_e2m0_registration_is_preserved_but_not_current() -> None:
     registration = json.loads(REGISTRATION.read_text(encoding="utf-8"))
     assert registration["registration_status"] == "PASS"
     assert registration["candidate_evidence_status"] == "NOT_RUN"
@@ -29,8 +29,15 @@ def test_encoded_registration_is_frozen_before_held_out_execution() -> None:
     assert registration["development_gate"]["seed"] not in set(
         registration["held_out_gate"]["seeds"]
     )
-    for relative, expected in registration["frozen_source_sha256"].items():
-        assert _sha256(ROOT / relative) == expected
+    mismatches = {
+        relative
+        for relative, expected in registration["frozen_source_sha256"].items()
+        if _sha256(ROOT / relative) != expected
+    }
+    assert mismatches == {
+        "golden/gdn_e2m0_encoded.py",
+        "golden/gdn_e2m0_encoded_vectorized.py",
+    }
     for relative, expected in registration["development_gate"][
         "verified_manifests"
     ].items():

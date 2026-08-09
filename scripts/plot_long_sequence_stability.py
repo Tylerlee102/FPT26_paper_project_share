@@ -58,10 +58,13 @@ COLORS = (
     (0.20, 0.38, 0.70),
     (0.55, 0.32, 0.62),
     (0.78, 0.20, 0.18),
+    (0.05, 0.52, 0.27),
 )
+RS2_VARIANT = "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5"
 VARIANT_ORDER = (
     "fp32",
     "bf16_qdq_fp32_accum_state_bf16",
+    RS2_VARIANT,
     "native_mxfp4_encoded_act_b32_state_b32",
     "mxfp4_qdq_act_b32_state_b32",
     "mxfp4_qdq_act_b32_mxfp8_e4m3_state_b32",
@@ -74,6 +77,7 @@ VARIANT_COLORS = {
     "mxfp4_qdq_act_b32_mxfp8_e4m3_state_b32": COLORS[3],
     "flat_int4_qdq": COLORS[4],
     "native_mxfp4_encoded_act_b32_state_b32": COLORS[5],
+    RS2_VARIANT: COLORS[6],
 }
 VARIANT_DASHES = {
     "fp32": (),
@@ -82,6 +86,7 @@ VARIANT_DASHES = {
     "mxfp4_qdq_act_b32_mxfp8_e4m3_state_b32": (5, 2),
     "flat_int4_qdq": (1, 2),
     "native_mxfp4_encoded_act_b32_state_b32": (9, 2),
+    RS2_VARIANT: (9, 2, 2, 2),
 }
 
 
@@ -142,6 +147,7 @@ def _display_name(name: str) -> str:
         "bf16_qdq_fp32_accum_state_bf16": "BF16 operands/state (FP32 accum)",
         "flat_int4_qdq": "Flat INT4 Q/DQ",
         "native_mxfp4_encoded_act_b32_state_b32": "Native encoded MXFP4",
+        RS2_VARIANT: "Native MXFP4 RS2/R3",
     }
     if name in replacements:
         return replacements[name]
@@ -404,10 +410,12 @@ def generate_plots(
             raise ValueError("native encoded evidence manifest status is not PASS")
         relative_encoded = encoded_input_csv.relative_to(ROOT).as_posix()
         encoded_meta = encoded_manifest["outputs"].get(relative_encoded)
-        if not isinstance(encoded_meta, dict):
+        if isinstance(encoded_meta, dict):
+            encoded_meta = encoded_meta.get("sha256")
+        if not isinstance(encoded_meta, str):
             raise ValueError("native encoded CSV metadata is absent")
         encoded_hash = hashlib.sha256(encoded_input_csv.read_bytes()).hexdigest()
-        if encoded_meta.get("sha256", "").lower() != encoded_hash:
+        if encoded_meta.lower() != encoded_hash:
             raise ValueError("native encoded CSV does not match its evidence manifest")
         encoded_configuration = encoded_manifest["configuration"]
         for field in (
@@ -432,6 +440,11 @@ def generate_plots(
         rows.extend(encoded_rows)
 
     variants = sorted({row["variant"] for row in rows})
+    native_variants = {
+        "native_mxfp4_encoded_act_b32_state_b32",
+        RS2_VARIANT,
+    }
+    has_native_encoded = bool(native_variants.intersection(variants))
     configuration["variants"] = variants
 
     shape = "recurrence core; KxV state"
@@ -445,7 +458,7 @@ def generate_plots(
         )
     arithmetic_scope = (
         "Floating Q/DQ baselines plus native encoded MXFP4"
-        if encoded_rows
+        if has_native_encoded
         else "Floating Q/DQ only"
     )
     footer_lines = (
@@ -483,7 +496,7 @@ def generate_plots(
         "status": "PASS",
         "evidence_scope": (
             "synthetic_floating_qdq_and_native_encoded_figures"
-            if encoded_rows
+            if has_native_encoded
             else "synthetic_floating_qdq_figures"
         ),
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -547,10 +560,10 @@ def generate_plots(
             "sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         },
         "limitations": [
-            "synthetic nominal inputs",
+            f"synthetic {configuration['trace_family']} inputs",
             (
                 "native encoded MXFP4 is software-executed; HLS/RTL parity is separately bounded to 64 tokens"
-                if encoded_rows
+                if has_native_encoded
                 else "floating quantize/dequantize arithmetic rather than encoded HLS arithmetic"
             ),
             "single deterministic development trace without an uncertainty interval",

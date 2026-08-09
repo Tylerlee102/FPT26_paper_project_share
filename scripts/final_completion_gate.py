@@ -1,666 +1,521 @@
-"""Generate the authoritative final paper-completion gate."""
+"""Generate the authoritative eleven-item paper-completion gate.
+
+Every row is release-required.  This deliberately mirrors the reviewer
+directive and AGENTS.md: a negative research result, an unrun experiment, or
+an external blocker keeps the project ``NOT PAPER READY``.
+"""
 
 from __future__ import annotations
 
 import argparse
-import copy
 import hashlib
 import json
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED_STATUSES = {"PASS", "FAIL", "NOT_RUN", "BLOCKED_EXTERNAL"}
-AUDIT_PDF = ROOT / "paper" / "corrected" / "paper_audit_candidate.pdf"
-ASSET_MANIFEST = ROOT / "paper" / "corrected" / "asset_manifest.json"
-AUDIT_BUILD_MANIFEST = (
-    ROOT / "paper" / "corrected" / "paper_audit_build_manifest.json"
+GATE_NAMES = (
+    "prior_art_gap",
+    "exact_official_recurrence_parity",
+    "independent_bit_exact_mx_reference",
+    "c_sim_and_rtl_parity",
+    "closed_loop_real_model_quality",
+    "selected_method_pareto_advantage",
+    "physical_all_layer_state_bank_fit",
+    "post_route_timing_and_drc",
+    "real_board_parity_and_energy",
+    "reviewer_traceability",
+    "paper_provenance_and_final_pdf_audit",
 )
-VISUAL_AUDIT_MANIFEST = ROOT / "paper" / "corrected" / "paper_visual_audit.json"
-TRACEABILITY_STATUS = ROOT / "docs" / "reviewer_traceability_status.json"
-E2M0_CONTROL_COSIM = (
+
+OFFICIAL_PARITY = ROOT / "reports/golden/official_parity/official_parity_verification.json"
+RS2_REGISTRATION = (
+    ROOT / "reports/benchmark/corrected/rs2_encoded_candidate_preregistration.json"
+)
+RS2_STABILITY = (
+    ROOT / "reports/benchmark/corrected/rs2_encoded/rs2_encoded_candidate_summary.json"
+)
+RS2_HLS = ROOT / "reports/csynth/corrected/rs2_hls_summary.json"
+MXFP8_HLS = ROOT / "reports/csynth/corrected/mxfp8_hls_summary.json"
+BF16_PHYSICAL = ROOT / "reports/vivado/baselines/bf16/bf16_vivado_summary.json"
+MXFP8_PHYSICAL = ROOT / "reports/vivado/baselines/mxfp8/mxfp8_vivado_summary.json"
+RS2_RTL_DIRECT = (
     ROOT
-    / "reports"
-    / "cosim"
-    / "corrected"
-    / "e2m0_control_smoke"
-    / "e2m0_control_smoke_summary.json"
+    / "reports/cosim/corrected/rs2_current/trace64_direct/rs2_trace64_direct_summary.json"
 )
-E2M0_TRACE_COSIM = (
+RS2_RTL_OFFICIAL = (
+    ROOT / "reports/cosim/corrected/rs2_current/trace64/gdn_rs2_top_cosim.rpt"
+)
+RS2_RTL_OFFICIAL_RESET = (
     ROOT
-    / "reports"
-    / "cosim"
-    / "corrected"
-    / "e2m0_trace64"
-    / "e2m0_trace64_cosim_summary.json"
+    / "reports/cosim/corrected/rs2_current/trace64_reset/gdn_rs2_top_cosim.rpt"
 )
-E2M0_POSTROUTE = (
-    ROOT
-    / "reports"
-    / "vivado"
-    / "corrected"
-    / "e2m0"
-    / "e2m0_postroute_summary.json"
+RS2_RTL_CONTROL = (
+    ROOT / "reports/cosim/corrected/rs2_current/control/gdn_rs2_top_cosim.rpt"
 )
-MXFP8_HLS = ROOT / "reports" / "csynth" / "corrected" / "mxfp8_hls_summary.json"
-MXFP8_POSTROUTE = (
-    ROOT / "reports" / "vivado" / "baselines" / "mxfp8" / "mxfp8_vivado_summary.json"
-)
-BF16_PHYSICAL = (
-    ROOT / "reports" / "vivado" / "baselines" / "bf16" / "bf16_vivado_summary.json"
-)
-QWEN_RECURRENT = (
-    ROOT / "reports" / "benchmark" / "qwen_recurrent_stability_manifest.json"
-)
-HARDWARE_AVAILABILITY = ROOT / "reports" / "environment" / "hardware_availability.json"
-_BASE_FINAL_GATES: tuple[dict[str, object], ...] = (
-    {
-        "gate": "prior_art_gap",
-        "release_required": True,
-        "status": "PASS",
-        "finding": "A bounded primary-source search found no exact synthetic recurrence-core and matched-HLS study; overlapping arithmetic, state, and dataflow constituents are attributed and no architectural-first claim is made.",
-        "evidence": [
-            "docs/prior_art_matrix.md",
-            "docs/evidence/g0_focused_gap_resolution_2026_08_01.md",
-            "docs/evidence/prior_art_gap_recheck_2026_08_02.md",
-            "docs/evidence/prior_art_gap_recheck_2026_08_02_v2.md",
-        ],
-    },
-    {
-        "gate": "exact_official_recurrence_parity",
-        "release_required": True,
-        "status": "PASS",
-        "finding": "FP64/FP32 and pinned recurrent/chunk/cache comparisons pass at the controlled layer boundary.",
-        "evidence": ["reports/golden/official_parity/official_parity_verification.json"],
-    },
-    {
-        "gate": "independent_bit_exact_mx_reference",
-        "release_required": True,
-        "status": "PASS",
-        "finding": "Independent encoded arithmetic and resident-command oracles pass bounded exhaustive, adversarial, and corrected E2M0 checks.",
-        "evidence": [
-            "golden/gdn_mxfp4_encoded.py",
-            "golden/gdn_e2m0_encoded.py",
-            "reports/csynth/corrected/e2m0_hls_summary.json",
-        ],
-    },
-    {
-        "gate": "matched_native_mxfp8_baseline",
-        "release_required": True,
-        "status": "NOT_RUN",
-        "finding": "The reviewer-requested native MXFP8 wider low-precision baseline has not been validated.",
-        "evidence": [],
-    },
-    {
-        "gate": "c_sim_and_rtl_parity",
-        "release_required": False,
-        "status": "FAIL",
-        "finding": "The corrected E2M0 candidate has exact 64-token HLS C parity but its 64-token generated-RTL parity is not established.",
-        "evidence": [
-            "reports/csynth/corrected/e2m0_hls_summary.json",
-            "reports/test_results/e2m0_resident_trace64_csim_20260802.log",
-        ],
-        "substatus": {
-            "corrected_candidate_hls_c_sim_64_token": "PASS",
-            "corrected_candidate_rtl_control_smoke": "PASS",
-            "corrected_candidate_rtl_64_token": "FAIL",
-            "uniform_mxfp4_rtl_64_token": "PASS",
-        },
-    },
-    {
-        "gate": "closed_loop_real_model_quality",
-        "release_required": False,
-        "status": "BLOCKED_EXTERNAL",
-        "finding": "Four short model-derived Qwen recurrence traces are complete, but full-model closed-loop quality, perplexity, and downstream accuracy require external 80B model execution assets.",
-        "evidence": [
-            "reports/golden/qwen_capture_characterization.json",
-            "reports/benchmark/qwen_recurrent_stability_manifest.json",
-            "docs/experimental_protocol.md",
-        ],
-    },
-    {
-        "gate": "selected_method_pareto_advantage",
-        "release_required": False,
-        "status": "FAIL",
-        "finding": "The corrected candidate passes three high-retention test seed blocks under two paired initial-state conditions, but its HLS LUT and STEP costs exceed BF16 and its configured timing margin and explicit II=1 constraints fail.",
-        "evidence": [
-            "reports/benchmark/corrected/e2m0_encoded/held_out/held_out_summary.json",
-            "reports/csynth/corrected/e2m0_hls_summary.json",
-        ],
-        "substatus": {
-            "high_retention_1024_quality": "PASS",
-            "full_deterministic_recompute": "PASS",
-            "extended_8192_quality": "NOT_RUN",
-            "logical_payload_below_uniform_mxfp8": "PASS",
-            "hls_200mhz_timing": "PASS",
-            "hls_configured_timing_margin": "FAIL",
-            "hls_explicit_ii1_constraints": "FAIL",
-            "hls_lut_and_step_cost_vs_bf16": "FAIL",
-            "allocated_physical_memory": "NOT_RUN",
-            "average_and_p99_service_latency": "NOT_RUN",
-            "energy": "BLOCKED_EXTERNAL",
-        },
-    },
-    {
-        "gate": "controlled_wider_physical_baselines",
-        "release_required": False,
-        "status": "NOT_RUN",
-        "finding": "Controlled wider-arithmetic physical implementation results have not been reconciled.",
-        "evidence": [],
-    },
-    {
-        "gate": "physical_all_layer_state_bank_fit",
-        "release_required": True,
-        "status": "NOT_RUN",
-        "finding": "No selected-candidate all-layer physical allocation, banking, or service-rate result exists.",
-        "evidence": ["docs/experimental_protocol.md"],
-    },
-    {
-        "gate": "post_route_timing_and_drc",
-        "release_required": True,
-        "status": "NOT_RUN",
-        "finding": "Corrected selected-candidate post-route timing and DRC reports do not exist.",
-        "evidence": ["docs/implementation_status.md"],
-    },
-    {
-        "gate": "real_board_parity_and_energy",
-        "release_required": False,
-        "status": "BLOCKED_EXTERNAL",
-        "finding": "Vitis/Vivado are installed, but no attached U55C, U55C XRT platform, xclbin, or board telemetry is available; vectorless power is not measured energy.",
-        "evidence": [
-            "reports/environment/hardware_availability.json",
-            "docs/experimental_protocol.md",
-        ],
-    },
-    {
-        "gate": "reviewer_traceability",
-        "release_required": True,
-        "status": "NOT_RUN",
-        "finding": "All reviewer sources are ingested, but remediation cannot be checked against a final evidence-supported PDF.",
-        "evidence": ["docs/reviewer_traceability.md"],
-    },
-    {
-        "gate": "paper_provenance_and_final_pdf_audit",
-        "release_required": True,
-        "status": "NOT_RUN",
-        "finding": "Corrected source numbers and provenance exist, but final PDF generation and page-by-page audit are prohibited until upstream gates pass.",
-        "evidence": [
-            "docs/evidence_manifest.md",
-            "docs/implementation_status.md",
-            "docs/venue_requirements_2026_08_02.md",
-        ],
-    },
-)
+RS2_PHYSICAL = ROOT / "reports/vivado/corrected/rs2_current/rs2_vivado_summary.json"
+QWEN_DIAGNOSTIC = ROOT / "reports/benchmark/qwen_recurrent_stability_manifest.json"
+QWEN_CLOSED_LOOP = ROOT / "reports/benchmark/qwen_closed_loop_manifest.json"
+HARDWARE_AVAILABILITY = ROOT / "reports/environment/hardware_availability.json"
+BOARD_VALIDATION = ROOT / "reports/board/u55c/board_validation.json"
+TRACEABILITY_STATUS = ROOT / "docs/reviewer_traceability_status.json"
+TRACEABILITY_SOURCE = ROOT / "docs/reviewer_traceability.md"
+ASSET_MANIFEST = ROOT / "paper/corrected/asset_manifest.json"
+AUDIT_BUILD_MANIFEST = ROOT / "paper/corrected/paper_audit_build_manifest.json"
+VISUAL_AUDIT_MANIFEST = ROOT / "paper/corrected/paper_visual_audit.json"
+AUDIT_PDF = ROOT / "paper/corrected/paper_audit_candidate.pdf"
 
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest().upper()
 
 
-def _load_json(path: Path) -> dict[str, object]:
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ValueError(f"{path} is not a JSON object")
-    return value
+def _relative(path: Path) -> str:
+    return path.relative_to(ROOT).as_posix()
 
 
-def _apply_traceability_evidence(gate: dict[str, object]) -> None:
-    if not TRACEABILITY_STATUS.exists():
-        return
+def _load_json(path: Path) -> dict[str, Any] | None:
     try:
-        report = _load_json(TRACEABILITY_STATUS)
-        source = ROOT / str(report.get("traceability_source", ""))
-        visual = ROOT / str(report.get("visual_audit", ""))
-        status = str(report.get("status", "NOT_RUN"))
-        valid = (
-            status in ALLOWED_STATUSES
-            and source.is_file()
-            and _sha256(source)
-            == str(report.get("traceability_source_sha256", "")).upper()
-            and int(report.get("comment_row_count", -1)) == 68
-            and int(report.get("directive_row_count", -1)) == 25
-        )
-        if status == "PASS":
-            valid = (
-                valid
-                and visual.is_file()
-                and _sha256(visual)
-                == str(report.get("visual_audit_sha256", "")).upper()
-                and report.get("visual_audit_status") == "PASS"
-                and all(
-                    isinstance(row, dict) and row.get("status") == "PASS"
-                    for row in report.get("rows", [])
-                )
-            )
-        gate["status"] = status if valid else "FAIL"
-        if valid and status == "PASS":
-            gate["finding"] = (
-                "All 68 reviewer-comment rows and 25 reviewer directives are "
-                "traceable to the page-audited paper candidate."
-            )
-        elif valid and status == "NOT_RUN":
-            gate["finding"] = (
-                "All reviewer sources are ingested, but the source ledger has "
-                "not been checked against a page-audited paper candidate."
-            )
-        elif valid:
-            gate["finding"] = (
-                "The reviewer traceability summary is current but contains "
-                "non-passing remediation rows."
-            )
-        else:
-            gate["finding"] = "The reviewer-traceability summary is malformed or stale."
-        gate["evidence"].append(TRACEABILITY_STATUS.relative_to(ROOT).as_posix())
-    except (OSError, ValueError, json.JSONDecodeError, TypeError):
-        gate["status"] = "FAIL"
-        gate["finding"] = "The reviewer-traceability status artifact is malformed or stale."
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    return value if isinstance(value, dict) else None
 
 
-def _apply_paper_audit_evidence(gate: dict[str, object]) -> None:
-    paths = (
-        ASSET_MANIFEST,
-        AUDIT_BUILD_MANIFEST,
-        VISUAL_AUDIT_MANIFEST,
-        AUDIT_PDF,
+def _gate(
+    name: str,
+    status: str,
+    finding: str,
+    evidence: list[Path] | tuple[Path, ...] = (),
+    substatus: dict[str, str] | None = None,
+) -> dict[str, object]:
+    return {
+        "gate": name,
+        "release_required": True,
+        "status": status,
+        "finding": finding,
+        "evidence": [_relative(path) for path in evidence if path.exists()],
+        **({"substatus": substatus} if substatus is not None else {}),
+    }
+
+
+def _combined_status(statuses: list[str]) -> str:
+    if any(status == "FAIL" for status in statuses):
+        return "FAIL"
+    if any(status == "NOT_RUN" for status in statuses):
+        return "NOT_RUN"
+    if any(status == "BLOCKED_EXTERNAL" for status in statuses):
+        return "BLOCKED_EXTERNAL"
+    return "PASS"
+
+
+def _frozen_sources_pass(registration: dict[str, Any] | None) -> bool:
+    if not registration or registration.get("registration_status") != "PASS":
+        return False
+    hashes = registration.get("frozen_source_sha256")
+    if not isinstance(hashes, dict) or not hashes:
+        return False
+    return all(
+        (ROOT / relative).is_file()
+        and _sha256(ROOT / relative) == str(expected).upper()
+        for relative, expected in hashes.items()
     )
-    if not (
-        ASSET_MANIFEST.is_file()
-        and AUDIT_BUILD_MANIFEST.is_file()
-        and VISUAL_AUDIT_MANIFEST.is_file()
+
+
+def _prior_art_gate() -> dict[str, object]:
+    evidence = (
+        ROOT / "docs/prior_art_matrix.md",
+        ROOT / "docs/evidence/g0_focused_gap_resolution_2026_08_01.md",
+        ROOT / "docs/evidence/prior_art_gap_recheck_2026_08_02_v2.md",
+    )
+    passed = all(path.is_file() and path.stat().st_size > 0 for path in evidence)
+    return _gate(
+        "prior_art_gap",
+        "PASS" if passed else "FAIL",
+        (
+            "The bounded primary-source audit attributes persistent state and the five-phase schedule to Gupta et al.; the remaining claim is limited to the recurrence-aware native-MX arithmetic study."
+            if passed
+            else "The prior-art matrix or focused gap audit is missing."
+        ),
+        evidence,
+    )
+
+
+def _official_parity_gate() -> dict[str, object]:
+    report = _load_json(OFFICIAL_PARITY)
+    passed = bool(
+        report
+        and report.get("status") == "PASS"
+        and report.get("verified_metric_rows") == 6
+        and report.get("verified_source_hashes") == 6
+    )
+    return _gate(
+        "exact_official_recurrence_parity",
+        "PASS" if passed else ("FAIL" if report else "NOT_RUN"),
+        (
+            "The independent FP32/FP64 recurrence agrees with pinned Transformers and FLA recurrent, chunked, and cache paths at the declared recurrence-core boundary."
+            if passed
+            else "Pinned official recurrence parity is missing or invalid."
+        ),
+        (OFFICIAL_PARITY,),
+    )
+
+
+def _independent_reference_gate() -> dict[str, object]:
+    registration = _load_json(RS2_REGISTRATION)
+    hls = _load_json(RS2_HLS)
+    mxfp8 = _load_json(MXFP8_HLS)
+    frozen = _frozen_sources_pass(registration)
+    arithmetic = bool(
+        hls
+        and hls.get("status") == "PASS"
+        and hls.get("csim", {}).get("arithmetic_status") == "PASS"
+        and hls.get("csim", {}).get("exact_trace64_status") == "PASS"
+    )
+    wider = bool(
+        mxfp8
+        and mxfp8.get("status") == "PASS"
+        and mxfp8.get("csim", {}).get("arithmetic", {}).get("status") == "PASS"
+        and mxfp8.get("csim", {}).get("persistent_kernel", {}).get("status")
+        == "PASS"
+    )
+    statuses = {
+        "registered_source_hashes": "PASS" if frozen else "FAIL",
+        "rs2_encoded_arithmetic_csim": "PASS" if arithmetic else "NOT_RUN" if not hls else "FAIL",
+        "matched_native_mxfp8_reference": "PASS" if wider else "NOT_RUN" if not mxfp8 else "FAIL",
+    }
+    status = _combined_status(list(statuses.values()))
+    return _gate(
+        "independent_bit_exact_mx_reference",
+        status,
+        (
+            "The frozen encoded-integer RS2 oracle, native E2M1/E8M0 arithmetic C simulation, exact 64-token C trace, and matched E4M3/E8M0 reference all pass."
+            if status == "PASS"
+            else "The frozen encoded MX oracle or its matched low-precision cross-check is incomplete or stale."
+        ),
+        (RS2_REGISTRATION, RS2_HLS, MXFP8_HLS),
+        statuses,
+    )
+
+
+def _cosim_report_pass(path: Path) -> bool:
+    if not path.is_file():
+        return False
+    text = path.read_text(encoding="utf-8", errors="replace")
+    return "|   Verilog|      Pass|" in text
+
+
+def _rtl_gate() -> dict[str, object]:
+    hls = _load_json(RS2_HLS)
+    direct = _load_json(RS2_RTL_DIRECT)
+    csim = bool(
+        hls
+        and hls.get("csim", {}).get("exact_trace64_status") == "PASS"
+        and hls.get("csim", {}).get("exact_trace_tokens") == 64
+    )
+    direct_pass = bool(
+        direct
+        and direct.get("status") == "PASS"
+        and direct.get("required_64_token_rtl_parity") == "PASS"
+        and direct.get("parity", {}).get("ordered_tokens") == 64
+        and direct.get("rtl_simulation", {}).get("completed_transactions") == 66
+    )
+    control_pass = _cosim_report_pass(RS2_RTL_CONTROL)
+    official_pass = _cosim_report_pass(RS2_RTL_OFFICIAL) or _cosim_report_pass(
+        RS2_RTL_OFFICIAL_RESET
+    )
+    substatus = {
+        "exact_64_token_hls_c_simulation": "PASS" if csim else "NOT_RUN" if not hls else "FAIL",
+        "official_xsim_control": "PASS" if control_pass else "NOT_RUN",
+        "direct_generated_rtl_64_token": "PASS" if direct_pass else "NOT_RUN" if not direct else "FAIL",
+        "official_xsim_64_token_random_or_reset_state": (
+            "PASS" if official_pass else "NOT_RUN"
+        ),
+    }
+    # The direct harness checks every generated-RTL value and snapshot.  The
+    # official full-trace XSim run remains an explicit requirement because the
+    # repository contract names HLS cosimulation as the authoritative RTL gate.
+    status = _combined_status(list(substatus.values()))
+    return _gate(
+        "c_sim_and_rtl_parity",
+        status,
+        (
+            "Both the direct generated-Verilog harness and official Vitis XSim reproduce the frozen 64-token encoded oracle exactly."
+            if status == "PASS"
+            else "Exact HLS C simulation passes, but one or both required 64-token RTL parity paths remain incomplete or failing."
+        ),
+        (
+            RS2_HLS,
+            RS2_RTL_CONTROL,
+            RS2_RTL_DIRECT,
+            RS2_RTL_OFFICIAL,
+            RS2_RTL_OFFICIAL_RESET,
+        ),
+        substatus,
+    )
+
+
+def _closed_loop_gate() -> dict[str, object]:
+    closed = _load_json(QWEN_CLOSED_LOOP)
+    diagnostic = _load_json(QWEN_DIAGNOSTIC)
+    closed_pass = bool(
+        closed
+        and closed.get("status") == "PASS"
+        and closed.get("cache_faithful_decode") == "PASS"
+        and closed.get("held_out_quality_gate") == "PASS"
+    )
+    diagnostic_pass = bool(
+        diagnostic
+        and diagnostic.get("status") == "PASS"
+        and diagnostic.get("source_metadata", {}).get("total_valid_tokens") == 60
+    )
+    if closed_pass:
+        status = "PASS"
+        finding = "Cache-faithful closed-loop Qwen evaluation passes its preregistered held-out quality gate."
+    elif closed:
+        status = "FAIL"
+        finding = "A closed-loop Qwen report exists but does not pass its preregistered quality gate."
+    else:
+        status = "BLOCKED_EXTERNAL"
+        finding = "Short model-derived recurrence diagnostics pass, but the 80B checkpoint and adequate execution memory are absent; no closed-loop perplexity or downstream result exists."
+    return _gate(
+        "closed_loop_real_model_quality",
+        status,
+        finding,
+        (QWEN_DIAGNOSTIC, QWEN_CLOSED_LOOP, ROOT / "reports/golden/qwen_capture_status.md"),
+        {
+            "short_model_derived_recurrence": "PASS" if diagnostic_pass else "FAIL" if diagnostic else "NOT_RUN",
+            "cache_faithful_closed_loop_quality": "PASS" if closed_pass else "FAIL" if closed else "BLOCKED_EXTERNAL",
+        },
+    )
+
+
+def _pareto_gate() -> dict[str, object]:
+    stability = _load_json(RS2_STABILITY)
+    hls = _load_json(RS2_HLS)
+    physical = _load_json(RS2_PHYSICAL)
+    direct = _load_json(RS2_RTL_DIRECT)
+    held_out = str(
+        (stability or {}).get("gate_results", {}).get("held_out", {}).get("status", "NOT_RUN")
+    )
+    extended = str(
+        (stability or {}).get("gate_results", {}).get("extended_development", {}).get("status", "NOT_RUN")
+    )
+    hls_advantage = str(
+        (hls or {}).get("comparison", {}).get("hls_cost_latency_advantage_vs_bf16", "NOT_RUN")
+    )
+    memory = "PASS" if hls and float(hls.get("comparison", {}).get("state_bytes_ratio_rs2_to_bf16", 2.0)) < 1.0 else "NOT_RUN" if not hls else "FAIL"
+    routed = "PASS" if physical and physical.get("status") == "PASS" else "NOT_RUN" if not physical else "FAIL"
+    service = "PASS" if direct and direct.get("status") == "PASS" else "NOT_RUN" if not direct else "FAIL"
+    board = _load_json(BOARD_VALIDATION)
+    energy = "PASS" if board and board.get("matched_energy_pareto") == "PASS" else "FAIL" if board else "BLOCKED_EXTERNAL"
+    substatus = {
+        "held_out_1024_quality": held_out,
+        "extended_8192_quality": extended,
+        "logical_state_bytes_vs_bf16": memory,
+        "hls_lut_and_latency_vs_bf16": hls_advantage,
+        "routed_cost": routed,
+        "average_and_p99_service_latency": service,
+        "measured_energy": energy,
+    }
+    status = _combined_status(list(substatus.values()))
+    return _gate(
+        "selected_method_pareto_advantage",
+        status,
+        (
+            "The selected method is Pareto-superior to BF16 in quality, physical memory, average/p99 latency, and measured energy."
+            if status == "PASS"
+            else "The RS2/R3 method is numerically stable and reduces logical state bytes, but the matched HLS comparison currently uses more LUTs and cycles than BF16; measured board energy is also unavailable."
+        ),
+        (RS2_STABILITY, RS2_HLS, RS2_PHYSICAL, RS2_RTL_DIRECT, BOARD_VALIDATION),
+        substatus,
+    )
+
+
+def _physical_fit_gate() -> dict[str, object]:
+    report = _load_json(RS2_PHYSICAL)
+    passed = bool(
+        report
+        and report.get("status") == "PASS"
+        and report.get("route_completion") == "PASS"
+        and report.get("physical_fit") == "PASS"
+        and "all-layer" in str(report.get("scope", ""))
+    )
+    return _gate(
+        "physical_all_layer_state_bank_fit",
+        "PASS" if passed else "FAIL" if report else "NOT_RUN",
+        (
+            "All 36 logical GDN state slots physically fit in the routed U55C out-of-context kernel; this is not complete-model residency."
+            if passed
+            else "Selected-candidate all-layer physical banking and route evidence is absent or does not fit."
+        ),
+        (RS2_PHYSICAL,),
+    )
+
+
+def _postroute_gate() -> dict[str, object]:
+    report = _load_json(RS2_PHYSICAL)
+    if not report:
+        return _gate(
+            "post_route_timing_and_drc",
+            "NOT_RUN",
+            "Selected-candidate post-route timing and DRC extraction has not completed.",
+        )
+    drc = report.get("drc", {})
+    substatus = {
+        "route_completion": str(report.get("route_completion", "NOT_RUN")),
+        "target_250mhz_timing": str(report.get("target_clock", {}).get("status", "NOT_RUN")),
+        "drc": "PASS" if drc.get("signoff_status") in {"PASS", "PASS_WITH_WARNINGS"} and drc.get("critical_warning_count") == 0 and drc.get("error_count") == 0 else "FAIL",
+    }
+    status = _combined_status(list(substatus.values()))
+    return _gate(
+        "post_route_timing_and_drc",
+        status,
+        (
+            "The routed selected candidate closes the declared 250 MHz target and has no DRC errors or critical warnings."
+            if status == "PASS"
+            else "Route evidence is complete only if the selected candidate closes 250 MHz and passes DRC; a slower sweep point does not satisfy this gate."
+        ),
+        (RS2_PHYSICAL,),
+        substatus,
+    )
+
+
+def _board_gate() -> dict[str, object]:
+    validation = _load_json(BOARD_VALIDATION)
+    hardware = _load_json(HARDWARE_AVAILABILITY)
+    passed = bool(
+        validation
+        and validation.get("status") == "PASS"
+        and validation.get("bit_exact_parity") == "PASS"
+        and validation.get("telemetry_energy") == "PASS"
+    )
+    if passed:
+        status = "PASS"
+        finding = "A real U55C passes bit parity, repeated latency, and integrated idle-subtracted board-energy measurements."
+    elif validation:
+        status = "FAIL"
+        finding = "A U55C board report exists but parity or telemetry validation failed."
+    else:
+        status = "BLOCKED_EXTERNAL"
+        finding = "Vitis and Vivado are installed, but no attached U55C, U55C XRT platform, xclbin, or board telemetry interface is present."
+    board_status = str(
+        (hardware or {}).get("u55c_board_experiment", {}).get("status", "NOT_RUN")
+    )
+    return _gate(
+        "real_board_parity_and_energy",
+        status,
+        finding,
+        (HARDWARE_AVAILABILITY, BOARD_VALIDATION),
+        {
+            "local_toolchain": str((hardware or {}).get("toolchain", {}).get("status", "NOT_RUN")),
+            "u55c_environment": board_status,
+            "bit_exact_board_parity": "PASS" if passed else "FAIL" if validation else "BLOCKED_EXTERNAL",
+            "measured_board_energy": "PASS" if passed else "FAIL" if validation else "BLOCKED_EXTERNAL",
+        },
+    )
+
+
+def _paper_audit_is_current(
+    assets: dict[str, Any] | None,
+    build: dict[str, Any] | None,
+    visual: dict[str, Any] | None,
+) -> bool:
+    return bool(
+        assets
+        and assets.get("status") == "PASS"
+        and build
+        and build.get("status") == "PASS"
+        and build.get("artifact_kind") == "internal_audit_candidate"
+        and build.get("submission_eligible") is False
         and AUDIT_PDF.is_file()
-    ):
-        return
-    gate["evidence"].extend(
-        path.relative_to(ROOT).as_posix() for path in paths if path.exists()
+        and _sha256(AUDIT_PDF) == str(build.get("output_sha256", "")).upper()
+        and _sha256(ASSET_MANIFEST) == str(build.get("asset_manifest_sha256", "")).upper()
+        and visual
+        and visual.get("status") == "PASS"
+        and visual.get("visual_audit_status") == "PASS"
+        and _sha256(AUDIT_PDF) == str(visual.get("audit_candidate_sha256", "")).upper()
+        and _sha256(AUDIT_BUILD_MANIFEST)
+        == str(visual.get("build_manifest_sha256", "")).upper()
+        and len(visual.get("pages", [])) == int(visual.get("page_count", -1))
+        and bool(visual.get("pages"))
+        and all(
+            (ROOT / row.get("path", "")).is_file()
+            and _sha256(ROOT / row["path"])
+            == str(row.get("sha256", "")).upper()
+            for row in visual.get("pages", [])
+        )
     )
-    try:
-        assets = _load_json(ASSET_MANIFEST)
-        build = _load_json(AUDIT_BUILD_MANIFEST)
-        visual = _load_json(VISUAL_AUDIT_MANIFEST)
-        pages = visual.get("pages")
-        valid = (
-            assets.get("status") == "PASS"
-            and build.get("status") == "PASS"
-            and build.get("build_status") == "PASS"
-            and build.get("artifact_kind") == "internal_audit_candidate"
-            and build.get("submission_eligible") is False
-            and _sha256(ASSET_MANIFEST)
-            == str(build.get("asset_manifest_sha256", "")).upper()
-            and AUDIT_PDF.is_file()
-            and _sha256(AUDIT_PDF)
-            == str(build.get("output_sha256", "")).upper()
-            and visual.get("status") == "PASS"
-            and visual.get("visual_audit_status") == "PASS"
-            and visual.get("submission_eligible") is False
-            and _sha256(AUDIT_BUILD_MANIFEST)
-            == str(visual.get("build_manifest_sha256", "")).upper()
-            and _sha256(AUDIT_PDF)
-            == str(visual.get("audit_candidate_sha256", "")).upper()
-            and isinstance(pages, list)
-            and len(pages) == int(visual.get("page_count", -1))
-            and bool(pages)
-            and all(
-                isinstance(row, dict)
-                and (ROOT / str(row.get("path", ""))).is_file()
-                and _sha256(ROOT / str(row["path"]))
-                == str(row.get("sha256", "")).upper()
-                for row in pages
-            )
-        )
-        gate["status"] = "PASS" if valid else "FAIL"
-        gate["finding"] = (
-            "Corrected numbers, source assets, compiled audit-candidate bytes, "
-            "and every rendered page pass hash and visual checks; these exact "
-            "bytes are eligible for gated finalization."
-            if valid
-            else "The corrected paper audit artifacts are incomplete or stale."
-        )
-    except (OSError, ValueError, json.JSONDecodeError, TypeError):
-        gate["status"] = "FAIL"
-        gate["finding"] = "The corrected paper audit artifacts are malformed or stale."
+
+
+def _traceability_gate() -> dict[str, object]:
+    report = _load_json(TRACEABILITY_STATUS)
+    visual = _load_json(VISUAL_AUDIT_MANIFEST)
+    assets = _load_json(ASSET_MANIFEST)
+    build = _load_json(AUDIT_BUILD_MANIFEST)
+    passed = bool(
+        report
+        and report.get("status") == "PASS"
+        and report.get("comment_row_count") == 68
+        and report.get("directive_row_count") == 25
+        and all(row.get("status") == "PASS" for row in report.get("rows", []))
+        and TRACEABILITY_SOURCE.is_file()
+        and _sha256(TRACEABILITY_SOURCE) == str(report.get("traceability_source_sha256", "")).upper()
+        and visual
+        and visual.get("status") == "PASS"
+        and _sha256(VISUAL_AUDIT_MANIFEST) == str(report.get("visual_audit_sha256", "")).upper()
+        and _paper_audit_is_current(assets, build, visual)
+    )
+    return _gate(
+        "reviewer_traceability",
+        "PASS" if passed else "FAIL" if report else "NOT_RUN",
+        (
+            "All 68 reviewer rows and 25 remediation directives trace to the current page-audited paper."
+            if passed
+            else "The reviewer ledger has not been regenerated against the current RS2 paper audit bytes."
+        ),
+        (TRACEABILITY_SOURCE, TRACEABILITY_STATUS, VISUAL_AUDIT_MANIFEST),
+    )
+
+
+def _paper_audit_gate() -> dict[str, object]:
+    assets = _load_json(ASSET_MANIFEST)
+    build = _load_json(AUDIT_BUILD_MANIFEST)
+    visual = _load_json(VISUAL_AUDIT_MANIFEST)
+    passed = _paper_audit_is_current(assets, build, visual)
+    return _gate(
+        "paper_provenance_and_final_pdf_audit",
+        "PASS" if passed else "FAIL" if any((assets, build, visual)) else "NOT_RUN",
+        (
+            "Generated numbers, provenance, audit-candidate bytes, and every rendered page pass freshness and visual checks."
+            if passed
+            else "The current RS2 paper assets, audit candidate, provenance, or page-by-page visual audit are missing or stale."
+        ),
+        (ASSET_MANIFEST, AUDIT_BUILD_MANIFEST, VISUAL_AUDIT_MANIFEST, AUDIT_PDF),
+    )
 
 
 def build_final_gates() -> tuple[dict[str, object], ...]:
-    gates = list(copy.deepcopy(_BASE_FINAL_GATES))
-    mxfp8_gate = next(
-        row for row in gates if row["gate"] == "matched_native_mxfp8_baseline"
+    gates = (
+        _prior_art_gate(),
+        _official_parity_gate(),
+        _independent_reference_gate(),
+        _rtl_gate(),
+        _closed_loop_gate(),
+        _pareto_gate(),
+        _physical_fit_gate(),
+        _postroute_gate(),
+        _board_gate(),
+        _traceability_gate(),
+        _paper_audit_gate(),
     )
-    if MXFP8_HLS.exists():
-        mxfp8 = _load_json(MXFP8_HLS)
-        mxfp8_pass = (
-            mxfp8.get("status") == "PASS"
-            and mxfp8.get("csim", {}).get("arithmetic", {}).get("status") == "PASS"
-            and mxfp8.get("csim", {}).get("persistent_kernel", {}).get("status") == "PASS"
-            and mxfp8.get("csynth", {}).get("status") == "PASS"
-            and mxfp8.get("csynth", {}).get("targeted_loop_ii_status") == "PASS"
-        )
-        mxfp8_gate["status"] = "PASS" if mxfp8_pass else "FAIL"
-        mxfp8_gate["finding"] = (
-            "The matched native E4M3/E8M0 baseline passes exhaustive bounded "
-            "arithmetic C-sim, one exact persistent-kernel transition, U55C "
-            "C-synthesis, and every explicit II=1 constraint."
-            if mxfp8_pass
-            else "The matched native MXFP8 baseline evidence is incomplete or stale."
-        )
-        mxfp8_gate["evidence"] = [MXFP8_HLS.relative_to(ROOT).as_posix()]
-        mxfp8_gate["substatus"] = {
-            "arithmetic_csim": mxfp8.get("csim", {}).get("arithmetic", {}).get("status", "NOT_RUN"),
-            "persistent_kernel_csim": mxfp8.get("csim", {}).get("persistent_kernel", {}).get("status", "NOT_RUN"),
-            "csynthesis": mxfp8.get("csynth", {}).get("status", "NOT_RUN"),
-            "explicit_ii1_constraints": mxfp8.get("csynth", {}).get("targeted_loop_ii_status", "NOT_RUN"),
-            "post_route": "NOT_RUN",
-        }
-        if MXFP8_POSTROUTE.exists():
-            mxfp8_physical = _load_json(MXFP8_POSTROUTE)
-            mxfp8_gate["evidence"].append(MXFP8_POSTROUTE.relative_to(ROOT).as_posix())
-            mxfp8_gate["substatus"]["post_route"] = (
-                "PASS"
-                if mxfp8_physical.get("status") == "PASS"
-                and mxfp8_physical.get("physical_fit") == "PASS"
-                else "FAIL"
-            )
-
-    closed_loop_gate = next(
-        row for row in gates if row["gate"] == "closed_loop_real_model_quality"
-    )
-    if QWEN_RECURRENT.exists():
-        qwen = _load_json(QWEN_RECURRENT)
-        short_real_pass = (
-            qwen.get("status") == "PASS"
-            and qwen.get("source_metadata", {}).get("total_valid_tokens") == 60
-            and len(qwen.get("aggregate", {})) == 4
-            and all(
-                row.get("nonfinite_events") == 0
-                for row in qwen.get("aggregate", {}).values()
-            )
-        )
-        closed_loop_gate["substatus"] = {
-            "short_real_input_recurrence": "PASS" if short_real_pass else "FAIL",
-            "closed_loop_full_model_quality": "BLOCKED_EXTERNAL",
-        }
-        if QWEN_RECURRENT.relative_to(ROOT).as_posix() not in closed_loop_gate["evidence"]:
-            closed_loop_gate["evidence"].append(QWEN_RECURRENT.relative_to(ROOT).as_posix())
-
-    uniform_rtl_path = (
-        ROOT
-        / "reports"
-        / "cosim"
-        / "corrected"
-        / "direct_rtl_trace64"
-        / "direct_rtl_trace64_summary.json"
-    )
-    rtl_gate = next(row for row in gates if row["gate"] == "c_sim_and_rtl_parity")
-    e2m0_hls_path = ROOT / "reports" / "csynth" / "corrected" / "e2m0_hls_summary.json"
-    uniform_rtl_pass = False
-    if uniform_rtl_path.exists():
-        summary = json.loads(uniform_rtl_path.read_text(encoding="utf-8"))
-        uniform_rtl_pass = (
-            summary.get("status") == "PASS"
-            and summary.get("required_64_token_rtl_parity") == "PASS"
-            and summary.get("parity", {}).get("ordered_tokens") == 64
-            and summary.get("parity", {}).get("final_generation") == 64
-        )
-    if e2m0_hls_path.exists():
-        e2m0 = json.loads(e2m0_hls_path.read_text(encoding="utf-8"))
-        c_sim_pass = (
-            e2m0.get("status") == "PASS"
-            and e2m0.get("csim", {}).get("required_64_token_csim") == "PASS"
-        )
-        rtl_gate["substatus"]["corrected_candidate_hls_c_sim_64_token"] = (
-            "PASS" if c_sim_pass else "FAIL"
-        )
-        rtl_gate["substatus"]["uniform_mxfp4_rtl_64_token"] = (
-            "PASS" if uniform_rtl_pass else "NOT_RUN"
-        )
-        control_pass = False
-        if E2M0_CONTROL_COSIM.exists():
-            control = _load_json(E2M0_CONTROL_COSIM)
-            control_pass = (
-                control.get("status") == "PASS"
-                and control.get("official_hls_cosim", {}).get("status") == "PASS"
-                and control.get("rtl_simulation", {}).get("completed_transactions")
-                == 2
-                and control.get("recurrent_transition_covered") is False
-                and control.get("required_64_token_rtl_parity") == "NOT_RUN"
-            )
-            rtl_gate["evidence"].append(
-                E2M0_CONTROL_COSIM.relative_to(ROOT).as_posix()
-            )
-        rtl_gate["substatus"]["corrected_candidate_rtl_control_smoke"] = (
-            "PASS" if control_pass else "FAIL"
-        )
-        candidate_trace_pass = False
-        candidate_trace_partial = False
-        if E2M0_TRACE_COSIM.exists():
-            trace = _load_json(E2M0_TRACE_COSIM)
-            candidate_trace_pass = (
-                trace.get("status") == "PASS"
-                and trace.get("required_64_token_rtl_parity") == "PASS"
-                and trace.get("rtl_simulation", {}).get("completed_transactions") == 66
-                and trace.get("parity", {}).get("ordered_tokens") == 64
-            )
-            candidate_trace_partial = (
-                trace.get("status") == "PARTIAL"
-                and trace.get("required_64_token_rtl_parity") == "NOT_ESTABLISHED"
-                and trace.get("hls_c_simulation", {}).get("status") == "PASS"
-                and trace.get("direct_generated_rtl_load", {}).get("status") == "PASS"
-                and trace.get("rtl_simulation", {}).get("completed_recurrent_steps") == 0
-            )
-            rtl_gate["evidence"].append(E2M0_TRACE_COSIM.relative_to(ROOT).as_posix())
-        rtl_gate["substatus"]["corrected_candidate_rtl_64_token"] = (
-            "PASS" if candidate_trace_pass else "FAIL"
-        )
-        rtl_gate["status"] = (
-            "PASS"
-            if c_sim_pass and control_pass and candidate_trace_pass and uniform_rtl_pass
-            else "FAIL"
-        )
-        rtl_gate["finding"] = (
-            "The corrected candidate passes exact 64-token HLS C simulation "
-            "and generated-RTL parity for all 64 recurrent STEPs, "
-            "per-token outputs/counters, and the final state snapshot. The "
-            "separate two-command control smoke and uniform-MXFP4 RTL trace also pass."
-            if rtl_gate["status"] == "PASS"
-            else (
-                "The corrected candidate passes exact 64-token HLS C simulation, "
-                "two generated-RTL control commands, and one direct generated-RTL "
-                "LOAD. Two official XSIM attempts exhaust host memory before "
-                "transaction one; no corrected recurrent STEP completes in RTL, "
-                "so 64-token candidate parity is not established."
-                if candidate_trace_partial and c_sim_pass and control_pass
-                else "Corrected-candidate C-sim or scoped generated-RTL evidence is missing or stale."
-            )
-        )
-
-    wider_physical_gate = next(
-        row for row in gates if row["gate"] == "controlled_wider_physical_baselines"
-    )
-    if BF16_PHYSICAL.exists():
-        bf16_physical = _load_json(BF16_PHYSICAL)
-        bf16_attempt_valid = (
-            bf16_physical.get("status") == "PASS"
-            and bf16_physical.get("synthesis_completion") == "PASS"
-            and bf16_physical.get("physical_fit") == "FAIL"
-            and bf16_physical.get("placement_completion") == "FAIL_CAPACITY"
-        )
-        mxfp8_fit = "NOT_RUN"
-        evidence = [BF16_PHYSICAL.relative_to(ROOT).as_posix()]
-        if MXFP8_POSTROUTE.exists():
-            mxfp8_physical = _load_json(MXFP8_POSTROUTE)
-            mxfp8_fit = str(mxfp8_physical.get("physical_fit", "NOT_RUN"))
-            evidence.append(MXFP8_POSTROUTE.relative_to(ROOT).as_posix())
-        wider_physical_gate["status"] = "FAIL" if bf16_attempt_valid else "NOT_RUN"
-        wider_physical_gate["finding"] = (
-            "The controlled 36-layer BF16 physical attempt completes synthesis "
-            "but fails U55C memory capacity before placement; a smaller layout is "
-            "not substituted. Native MXFP8 physical status is reported separately."
-            if bf16_attempt_valid
-            else "The controlled BF16 physical-attempt evidence is missing or stale."
-        )
-        wider_physical_gate["evidence"] = evidence
-        wider_physical_gate["substatus"] = {
-            "bf16_synthesis": "PASS" if bf16_attempt_valid else "FAIL",
-            "bf16_physical_fit": "FAIL" if bf16_attempt_valid else "NOT_RUN",
-            "mxfp8_physical_fit": mxfp8_fit,
-            "uniform_mxfp4_physical_fit": "NOT_RUN",
-        }
-
-    pareto_gate = next(
-        row for row in gates if row["gate"] == "selected_method_pareto_advantage"
-    )
-    held_out_path = (
-        ROOT
-        / "reports"
-        / "benchmark"
-        / "corrected"
-        / "e2m0_encoded"
-        / "held_out"
-        / "held_out_summary.json"
-    )
-    if held_out_path.exists() and e2m0_hls_path.exists():
-        held_out = json.loads(held_out_path.read_text(encoding="utf-8"))
-        e2m0 = json.loads(e2m0_hls_path.read_text(encoding="utf-8"))
-        pareto_gate["substatus"]["high_retention_1024_quality"] = (
-            "PASS" if held_out.get("registered_held_out_gate") == "PASS" else "FAIL"
-        )
-        pareto_gate["substatus"]["full_deterministic_recompute"] = str(
-            held_out.get("full_deterministic_recompute", "NOT_RUN")
-        )
-        pareto_gate["substatus"]["hls_200mhz_timing"] = str(
-            e2m0.get("phase4_decision_gate", {})
-            .get("criteria", {})
-            .get("estimated_fmax_at_least_200_mhz", "NOT_RUN")
-        )
-        pareto_gate["substatus"]["hls_configured_timing_margin"] = str(
-            e2m0.get("phase4_decision_gate", {})
-            .get("criteria", {})
-            .get("configured_target_minus_uncertainty_timing_margin", "NOT_RUN")
-        )
-        pareto_gate["substatus"]["hls_explicit_ii1_constraints"] = str(
-            e2m0.get("csynth", {}).get("targeted_loop_ii_status", "NOT_RUN")
-        )
-        pareto_gate["substatus"]["hls_lut_and_step_cost_vs_bf16"] = str(
-            e2m0.get("hls_lut_and_nonfold_step_cost_advantage_vs_bf16", "NOT_RUN")
-        )
-    extended_path = (
-        ROOT
-        / "reports"
-        / "benchmark"
-        / "corrected"
-        / "e2m0_encoded"
-        / "extended_development"
-        / "extended_summary.json"
-    )
-    if extended_path.exists():
-        extended = json.loads(extended_path.read_text(encoding="utf-8"))
-        extended_status = str(extended.get("status", "NOT_RUN"))
-        replay_status = str(extended.get("full_deterministic_recompute", "NOT_RUN"))
-        if extended_status == "PASS" and replay_status == "PASS":
-            pareto_gate["substatus"]["extended_8192_quality"] = "PASS"
-            pareto_gate["finding"] = (
-                "The corrected candidate passes three 1024-token test seed "
-                "blocks under two paired initial-state conditions and "
-                f"{int(extended.get('run_count', 0))} fully recomputed "
-                "8192-token development traces, but its HLS LUT and STEP costs "
-                "exceed BF16 and its configured timing margin and explicit II=1 "
-                "constraints fail."
-            )
-        elif "FAIL" in (extended_status, replay_status):
-            pareto_gate["substatus"]["extended_8192_quality"] = "FAIL"
-        else:
-            pareto_gate["substatus"]["extended_8192_quality"] = "NOT_RUN"
-        pareto_gate["evidence"].append(
-            extended_path.relative_to(ROOT).as_posix()
-        )
-    physical_gate = next(
-        row for row in gates if row["gate"] == "physical_all_layer_state_bank_fit"
-    )
-    postroute_gate = next(
-        row for row in gates if row["gate"] == "post_route_timing_and_drc"
-    )
-    if E2M0_POSTROUTE.exists():
-        postroute = _load_json(E2M0_POSTROUTE)
-        physical_pass = (
-            postroute.get("status") == "PASS"
-            and postroute.get("route_completion") == "PASS"
-            and postroute.get("physical_fit") == "PASS"
-        )
-        drc = postroute.get("drc", {})
-        timing_evidence_pass = (
-            physical_pass
-            and drc.get("signoff_status") in {"PASS", "PASS_WITH_WARNINGS"}
-            and drc.get("critical_warning_count") == 0
-            and drc.get("error_count") == 0
-            and postroute.get("first_tested_closing_point", {}).get("status")
-            == "PASS"
-        )
-        evidence_path = E2M0_POSTROUTE.relative_to(ROOT).as_posix()
-        physical_gate["evidence"] = [evidence_path]
-        physical_gate["status"] = "PASS" if physical_pass else "FAIL"
-        physical_gate["finding"] = (
-            "The declared corrected-candidate resident-state design physically "
-            "fits out of context on the U55C at 624 URAM and 208,523 CLB LUTs. "
-            "This is not a complete-model or shell-integrated fit claim."
-            if physical_pass
-            else "The corrected candidate does not have a valid physical-fit result."
-        )
-        postroute_gate["evidence"] = [evidence_path]
-        postroute_gate["status"] = "PASS" if timing_evidence_pass else "FAIL"
-        postroute_gate["finding"] = (
-            "Post-route timing and DRC evidence is complete: the candidate "
-            "fails setup at 250 and 200 MHz, first closes at the tested "
-            "180.18 MHz point, and has warnings but no critical warnings or "
-            "errors. The gate passes evidence completeness, not target timing."
-            if timing_evidence_pass
-            else "Corrected-candidate post-route timing or DRC evidence is missing or invalid."
-        )
-        postroute_gate["substatus"] = {
-            "route_completion": postroute.get("route_completion", "NOT_RUN"),
-            "physical_fit": postroute.get("physical_fit", "NOT_RUN"),
-            "target_250mhz_timing": postroute.get("target_clock", {}).get(
-                "status", "NOT_RUN"
-            ),
-            "timing_200mhz": postroute.get("implemented_200mhz_timing", "NOT_RUN"),
-            "first_tested_closing_point": postroute.get(
-                "first_tested_closing_point", {}
-            ).get("status", "NOT_RUN"),
-            "drc": drc.get("signoff_status", "NOT_RUN"),
-            "vectorless_power": "PASS"
-            if postroute.get("power_at_5p6ns", {}).get("measured_on_board") is False
-            else "FAIL",
-            "measured_board_energy": "BLOCKED_EXTERNAL",
-        }
-        pareto_gate["substatus"]["allocated_physical_memory"] = (
-            "PASS" if physical_pass else "FAIL"
-        )
-        pareto_gate["substatus"]["energy"] = "BLOCKED_EXTERNAL"
-        pareto_gate["evidence"].append(evidence_path)
-
-    board_gate = next(
-        row for row in gates if row["gate"] == "real_board_parity_and_energy"
-    )
-    if HARDWARE_AVAILABILITY.exists():
-        hardware = _load_json(HARDWARE_AVAILABILITY)
-        board = hardware.get("u55c_board_experiment", {})
-        gpu = hardware.get("native_fp4_gpu_experiment", {})
-        board_gate["status"] = "BLOCKED_EXTERNAL"
-        board_gate["substatus"] = {
-            "toolchain": hardware.get("toolchain", {}).get("status", "NOT_RUN"),
-            "u55c_board": board.get("status", "NOT_RUN"),
-            "native_fp4_gpu": gpu.get("status", "NOT_RUN"),
-        }
-        board_gate["evidence"] = [HARDWARE_AVAILABILITY.relative_to(ROOT).as_posix()]
-    traceability_gate = next(
-        row for row in gates if row["gate"] == "reviewer_traceability"
-    )
-    _apply_traceability_evidence(traceability_gate)
-    paper_gate = next(
-        row for row in gates if row["gate"] == "paper_provenance_and_final_pdf_audit"
-    )
-    _apply_paper_audit_evidence(paper_gate)
-    return tuple(gates)
+    if tuple(str(row["gate"]) for row in gates) != GATE_NAMES:
+        raise AssertionError("completion-gate construction does not match the directive")
+    return gates
 
 
 FINAL_GATES = build_final_gates()
@@ -668,46 +523,36 @@ FINAL_GATES = build_final_gates()
 
 def _git_revision() -> str:
     return subprocess.check_output(
-        [
-            "git",
-            "-c",
-            f"safe.directory={ROOT.as_posix()}",
-            "rev-parse",
-            "HEAD",
-        ],
+        ["git", "-c", f"safe.directory={ROOT.as_posix()}", "rev-parse", "HEAD"],
         cwd=ROOT,
         text=True,
     ).strip()
 
 
 def evaluate(gates: tuple[dict[str, object], ...]) -> dict[str, object]:
-    names = [str(row["gate"]) for row in gates]
+    names = tuple(str(row.get("gate", "")) for row in gates)
     if len(names) != len(set(names)):
         raise ValueError("final gate names must be unique")
-    invalid = [row for row in gates if row["status"] not in ALLOWED_STATUSES]
+    invalid = [row for row in gates if row.get("status") not in ALLOWED_STATUSES]
     if invalid:
-        raise ValueError(f"invalid final-gate status: {invalid[0]['status']}")
-    required = [row for row in gates if row.get("release_required", True)]
-    if not required:
-        raise ValueError("final gate set has no release-required rows")
-    ready = all(row["status"] == "PASS" for row in required)
+        raise ValueError(f"invalid final-gate status: {invalid[0].get('status')}")
     nonpassing = [row for row in gates if row["status"] != "PASS"]
-    required_nonpassing = [row for row in required if row["status"] != "PASS"]
+    ready = bool(gates) and not nonpassing
     return {
-        "schema": 1,
+        "schema": 2,
         "status": "PASS" if ready else "FAIL",
         "release_state": "READY FOR HUMAN SUBMISSION REVIEW" if ready else "NOT PAPER READY",
         "paper_pdf_permitted": ready,
         "gate_count": len(gates),
-        "required_gate_count": len(required),
+        "required_gate_count": len(gates),
         "nonpassing_gate_count": len(nonpassing),
-        "required_nonpassing_gate_count": len(required_nonpassing),
+        "required_nonpassing_gate_count": len(nonpassing),
         "gates": list(gates),
     }
 
 
 def write_report(json_path: Path, markdown_path: Path) -> dict[str, object]:
-    report = evaluate(FINAL_GATES)
+    report = evaluate(build_final_gates())
     report["generated_at"] = datetime.now(timezone.utc).isoformat()
     report["source_revision"] = _git_revision()
     json_path.parent.mkdir(parents=True, exist_ok=True)
@@ -722,45 +567,25 @@ def write_report(json_path: Path, markdown_path: Path) -> dict[str, object]:
         "",
         f"Release state: **{report['release_state']}**",
         "",
-        "| Gate | Release required | Status | Finding |",
-        "|---|---:|---|---|",
+        "All eleven rows are release-required. Any non-PASS row means `NOT PAPER READY`.",
+        "",
+        "| Gate | Status | Finding |",
+        "|---|---|---|",
     ]
     for row in report["gates"]:
-        lines.append(
-            f"| `{row['gate']}` | {'yes' if row.get('release_required', True) else 'no'} | "
-            f"{row['status']} | {row['finding']} |"
-        )
-    lines.extend(
-        [
-            "",
-            "A corrected paper PDF may be generated and delivered only when every",
-            "release-required row is `PASS`. Non-required rows preserve negative",
-            "research outcomes and explicitly scoped limitations; they do not become",
-            "positive claims and do not block publication of a supported negative result.",
-            "",
-        ]
-    )
+        lines.append(f"| `{row['gate']}` | {row['status']} | {row['finding']} |")
+    lines.extend(["", "A working draft may be compiled separately, but it is not a submission artifact.", ""])
     markdown_path.write_text("\n".join(lines), encoding="utf-8")
     return report
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--json",
-        type=Path,
-        default=ROOT / "reports" / "final_completion_gate.json",
-    )
-    parser.add_argument(
-        "--markdown",
-        type=Path,
-        default=ROOT / "docs" / "final_completion_gate.md",
-    )
+    parser.add_argument("--json", type=Path, default=ROOT / "reports/final_completion_gate.json")
+    parser.add_argument("--markdown", type=Path, default=ROOT / "docs/final_completion_gate.md")
     args = parser.parse_args(argv)
     json_path = args.json if args.json.is_absolute() else ROOT / args.json
-    markdown_path = (
-        args.markdown if args.markdown.is_absolute() else ROOT / args.markdown
-    )
+    markdown_path = args.markdown if args.markdown.is_absolute() else ROOT / args.markdown
     report = write_report(json_path, markdown_path)
     print(json.dumps({"status": report["status"], "release_state": report["release_state"]}))
     return 0 if report["paper_pdf_permitted"] else 1

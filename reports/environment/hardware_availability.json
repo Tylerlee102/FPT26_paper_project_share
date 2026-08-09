@@ -1,11 +1,15 @@
 {
   "schema": "hardware-availability-v1",
-  "generated_at": "2026-08-05T16:47:17.125136+00:00",
+  "generated_at": "2026-08-06T16:18:57.367234+00:00",
   "host": "Tyler",
   "toolchain": {
     "vitis_hls": "C:\\AMDDesignTools\\2025.2\\Vitis\\bin\\unwrapped\\win64.o\\vitis_hls.exe",
     "vivado": "C:\\AMDDesignTools\\2025.2\\Vivado\\bin\\vivado.bat",
-    "status": "AVAILABLE"
+    "vitis_compiler": "C:\\AMDDesignTools\\2025.2\\Vitis\\bin\\v++.bat",
+    "platforminfo": "C:\\AMDDesignTools\\2025.2\\Vitis\\bin\\platforminfo.bat",
+    "xsim": "C:\\AMDDesignTools\\2025.2\\Vivado\\bin\\xsim.bat",
+    "status": "AVAILABLE",
+    "acceleration_tools_status": "AVAILABLE"
   },
   "u55c_board_experiment": {
     "xrt_commands": {

@@ -128,6 +128,40 @@ int main() {
     std::cerr << "BF16 generation counter mismatch\n";
     return 1;
   }
-  std::cout << "BF16_HLS_CSIM PASS reset_steps_readback=4 generation=2\n";
+
+  // Exercise the BRAM-backed side of the physical state split as well as the
+  // URAM-backed layer used above.
+  state_in[0][0][0] = BF16_ONE;
+  if (!run_command(
+          gdn::COMMAND_LOAD,
+          gdn::NUM_LAYERS - 1,
+          gdn::PAYLOAD_STATE,
+          gdn::STATUS_OK,
+          1)) {
+    return 1;
+  }
+  if (!run_command(
+          gdn::COMMAND_READBACK,
+          gdn::NUM_LAYERS - 1,
+          gdn::PAYLOAD_NONE,
+          gdn::STATUS_OK,
+          1)) {
+    return 1;
+  }
+  for (int head = 0; head < gdn::NUM_VALUE_HEADS; ++head) {
+    for (int row = 0; row < gdn::KEY_DIM; ++row) {
+      for (int column = 0; column < gdn::VALUE_DIM; ++column) {
+        const unsigned expected =
+            head == 0 && row == 0 && column == 0 ? BF16_ONE : BF16_ZERO;
+        if (state_out[head][row][column].to_uint() != expected) {
+          std::cerr << "BF16 BRAM-bank state mismatch at " << head << ',' << row
+                    << ',' << column << '\n';
+          return 1;
+        }
+      }
+    }
+  }
+
+  std::cout << "BF16_HLS_CSIM PASS commands=6 bank_classes=2 generation=2\n";
   return 0;
 }

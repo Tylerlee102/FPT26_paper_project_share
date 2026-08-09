@@ -1,0 +1,7 @@
+run_id,split,seed,trace_family,variant,layer_id,token_index,output_cosine_fp32,output_rel_l2,output_max_abs,state_rel_l2,state_max_abs,folds,coefficient_rebases,dropped_entries,live_entries,max_live_entries,logical_state_bytes,event_metrics_status
+synthetic_a17e5eed_high_retention_random,held_out,2709413613,high_retention,fp32,0,64,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_a17e5eed_high_retention_random,held_out,2709413613,high_retention,mxfp4_rs2_act_rs2_dense_base_b32_mxfp4_rs2_log_fixed_b32_r2,0,64,0.9981436414274584,0.06100040982576823,0.002459211740642786,0.06036787629049641,0.058843255043029785,32,0,0,0,2,570512,PASS
+synthetic_a17e5eed_high_retention_random,held_out,2709413613,high_retention,fp32,0,256,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_a17e5eed_high_retention_random,held_out,2709413613,high_retention,mxfp4_rs2_act_rs2_dense_base_b32_mxfp4_rs2_log_fixed_b32_r2,0,256,0.996304782388023,0.08602838850596423,0.0047253817319869995,0.08651341388699638,0.12487471103668213,128,0,0,0,2,570512,PASS
+synthetic_a17e5eed_high_retention_random,held_out,2709413613,high_retention,fp32,0,1024,1.0,0.0,0.0,0.0,0.0,0,0,0,0,0,2097152,PASS
+synthetic_a17e5eed_high_retention_random,held_out,2709413613,high_retention,mxfp4_rs2_act_rs2_dense_base_b32_mxfp4_rs2_log_fixed_b32_r2,0,1024,0.9960727758557245,0.08876051269554502,0.005122595466673374,0.0912564309867535,0.11520576477050781,512,0,0,0,2,570512,PASS

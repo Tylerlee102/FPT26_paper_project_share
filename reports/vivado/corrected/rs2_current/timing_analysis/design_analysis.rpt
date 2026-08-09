@@ -1,0 +1,67 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Thu Aug  6 07:19:25 2026
+| Host         : Tyler running 64-bit major release  (build 9200)
+| Command      : report_design_analysis -timing -logic_level_distribution -file X:/reports/vivado/corrected/rs2_current/timing_analysis/design_analysis.rpt
+| Design       : gdn_rs2_top
+| Device       : xcu55c
+| Design State : Routed
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Design Analysis
+
+Table of Contents
+-----------------
+1. Setup Path Characteristics 1-1
+2. Logic Level Distribution
+
+1. Setup Path Characteristics 1-1
+---------------------------------
+
++---------------------------+-------------------------------------------------------------------------------+
+|      Characteristics      |                                    Path #1                                    |
++---------------------------+-------------------------------------------------------------------------------+
+| Requirement               | 4.000                                                                         |
+| Path Delay                | 5.269                                                                         |
+| Logic Delay               | 0.524(10%)                                                                    |
+| Net Delay                 | 4.745(90%)                                                                    |
+| Clock Skew                | 0.244                                                                         |
+| Slack                     | -1.736                                                                        |
+| Clock Uncertainty         | 0.035                                                                         |
+| Clock Pair Classification | Partial False Path                                                            |
+| Clock Delay Group         | Same Clock                                                                    |
+| Logic Levels              | 5                                                                             |
+| Routes                    | 6                                                                             |
+| Logical Path              | FDRE/C-(1)-LUT2-(133)-LUT6-(5)-LUT6-(19)-LUT6-(17)-LUT6-(18)-URAM288/BWE_B[3] |
+| Start Point Clock         | ap_clk                                                                        |
+| End Point Clock           | ap_clk                                                                        |
+| DSP Block                 | None                                                                          |
+| RAM Registers             | None-IREG_PRE(0)-REG_CAS(0)                                                   |
+| IO Crossings              | 2                                                                             |
+| SLR Crossings             | 1                                                                             |
+| PBlocks                   | 0                                                                             |
+| High Fanout               | 133                                                                           |
+| ASYNC REG                 | 0                                                                             |
+| Dont Touch                | 0                                                                             |
+| Mark Debug                | 0                                                                             |
+| Start Point Pin Primitive | FDRE/C                                                                        |
+| End Point Pin Primitive   | URAM288/BWE_B[3]                                                              |
+| Start Point Pin           | icmp_ln1440_reg_13979_reg[0]_replica/C                                        |
+| End Point Pin             | ram_reg_uram_129/BWE_B[3]                                                     |
++---------------------------+-------------------------------------------------------------------------------+
+* Bounding box calculated as % of dimensions for the target device (5130, 1566)
+
+
+2. Logic Level Distribution
+---------------------------
+
++-----------------+-------------+----+----+----+-----+-----+----+
+| End Point Clock | Requirement |  1 |  2 |  3 |  4  |  5  |  6 |
++-----------------+-------------+----+----+----+-----+-----+----+
+| ap_clk          | 4.000ns     | 16 | 33 | 31 | 521 | 388 | 11 |
++-----------------+-------------+----+----+----+-----+-----+----+
+* Columns represent the logic levels per end point clock
+** Distribution is for top worst 1000 paths
+
+

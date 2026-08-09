@@ -16,6 +16,7 @@ from scripts.evidence_source_snapshot import describe_source_files
 from scripts.reportlab_fonts import FONT_SOURCE, register_embedded_sans
 from scripts.plot_long_sequence_stability import (
     ROOT,
+    RS2_VARIANT,
     VARIANT_ORDER,
     _group_series,
     _read_rows,
@@ -47,6 +48,7 @@ SHORT_NAMES = {
     "fp32": "FP32 reference",
     "bf16_qdq_fp32_accum_state_bf16": "BF16",
     "native_mxfp4_encoded_act_b32_state_b32": "Encoded MXFP4",
+    RS2_VARIANT: "Native MXFP4 RS2/R3",
     "mxfp4_qdq_act_b32_state_b32": "MXFP4 floating Q/DQ",
     "mxfp4_qdq_act_b32_mxfp8_e4m3_state_b32": "MXFP4 Q/DQ + MXFP8 state",
     "flat_int4_qdq": "Flat INT4",

@@ -1,0 +1,44 @@
+{
+  "claim_boundary": [
+    "C transaction generation and RTL elaboration completed.",
+    "No official XSIM transaction completed in the preserved run.",
+    "This artifact does not establish one-token or 64-token RTL parity."
+  ],
+  "generated_at": "2026-08-06T15:48:25.308928+00:00",
+  "milestones": {
+    "completed_transactions": 0,
+    "eight_token_c_transaction_generation": "PASS",
+    "total_transactions": 10,
+    "xelab": "PASS",
+    "xsim_launch": "PASS"
+  },
+  "raw_artifacts": {
+    "reports/cosim/corrected/rs2_current/xsim_diagnostic/raw/c_transaction_generator.log": {
+      "bytes": 81,
+      "sha256": "C6DE6653694CB2985C330DE4F9F621ED2DB7016A3BCBB33EF0516115EAF3C31B",
+      "source": "gdn_rs2_reset_trace_cosim_hls/u55c_250mhz/sim/wrapc/tmp.log",
+      "source_sha256": "C6DE6653694CB2985C330DE4F9F621ED2DB7016A3BCBB33EF0516115EAF3C31B"
+    },
+    "reports/cosim/corrected/rs2_current/xsim_diagnostic/raw/xelab.log": {
+      "bytes": 93355,
+      "sha256": "82B5D0436D14F1E95D3D4DC7D0BD323AD765720DDF1BDE5DCFD5173AC90445F8",
+      "source": "gdn_rs2_reset_trace_cosim_hls/u55c_250mhz/sim/verilog/xelab.log",
+      "source_sha256": "82B5D0436D14F1E95D3D4DC7D0BD323AD765720DDF1BDE5DCFD5173AC90445F8"
+    },
+    "reports/cosim/corrected/rs2_current/xsim_diagnostic/raw/xsim.log": {
+      "bytes": 290828,
+      "sha256": "9450982003460CED88A6404C62D26A4A96339B4097082DAF94261EDAE784F697",
+      "source": "gdn_rs2_reset_trace_cosim_hls/u55c_250mhz/sim/verilog/xsim.log",
+      "source_sha256": "9450982003460CED88A6404C62D26A4A96339B4097082DAF94261EDAE784F697"
+    }
+  },
+  "required_64_token_rtl_parity": "NOT_RUN",
+  "schema": 1,
+  "scope": "bounded official Vitis HLS/XSIM diagnostic; not RTL parity evidence",
+  "status": "INCOMPLETE",
+  "termination": {
+    "finding": "The run was intentionally stopped after XSIM launched and the last preserved progress sample remained at 0/10 transactions.",
+    "kind": "BOUNDED_DIAGNOSTIC_STOP"
+  },
+  "trace_tokens": 8
+}

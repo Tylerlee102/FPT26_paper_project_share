@@ -700,6 +700,34 @@ class EncodedE2M0WriteLogGDN:
         )
         return np.stack((primary_m, residual_m)), np.stack((primary_x, residual_x))
 
+    def _new_counters(self) -> ArithmeticCounters:
+        return E2M0ArithmeticCounters()
+
+    def _quantize_base_exact(
+        self,
+        mantissas: np.ndarray,
+        exponents: np.ndarray,
+        counters: ArithmeticCounters,
+    ) -> EncodedE2M0State:
+        if not isinstance(counters, E2M0ArithmeticCounters):
+            raise TypeError("E2M0 base quantization requires E2M0 counters")
+        return _quantize_state_exact(
+            mantissas,
+            exponents,
+            block_size=self.block_size,
+            counters=counters,
+        )
+
+    def _base_scale_change_count(self, replacement: EncodedE2M0State) -> int:
+        return int(
+            np.count_nonzero(
+                replacement.primary_scales != self.base.primary_scales
+            )
+            + np.count_nonzero(
+                replacement.residual_scales != self.base.residual_scales
+            )
+        )
+
     def _decoded_logs(self) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         key_stack = EncodedMXFP4Stack(
             self.key_elements[: self.live_entries],
@@ -917,7 +945,7 @@ class EncodedE2M0WriteLogGDN:
         if alpha.shape != (self.num_value_heads,) or beta.shape != alpha.shape:
             raise ValueError("alpha and beta have the wrong shape")
 
-        counters = E2M0ArithmeticCounters()
+        counters = self._new_counters()
         for head in range(self.num_value_heads):
             self.gamma_codes[head] = np.uint16(
                 _multiply_coefficient_codes(int(self.gamma_codes[head]), int(alpha[head]))
@@ -973,20 +1001,12 @@ class EncodedE2M0WriteLogGDN:
         folded = self.live_entries == self.capacity
         if folded:
             state_m, state_x = self._materialize_exact(counters)
-            replacement = _quantize_state_exact(
+            replacement = self._quantize_base_exact(
                 state_m,
                 state_x,
-                block_size=self.block_size,
-                counters=counters,
+                counters,
             )
-            counters.state_scale_changes += int(
-                np.count_nonzero(
-                    replacement.primary_scales != self.base.primary_scales
-                )
-                + np.count_nonzero(
-                    replacement.residual_scales != self.base.residual_scales
-                )
-            )
+            counters.state_scale_changes += self._base_scale_change_count(replacement)
             self.base = replacement
             self.gamma_codes.fill(COEFFICIENT_ONE)
             self.key_elements.fill(0)

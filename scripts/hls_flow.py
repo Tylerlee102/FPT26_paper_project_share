@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -26,6 +27,17 @@ TCL_BY_STEP = {
     "e2m0-csynth": Path("hls/e2m0/tcl/run_csynth.tcl"),
     "e2m0-trace-csim": Path("hls/e2m0/tcl/run_trace_csim.tcl"),
     "e2m0-trace-cosim": Path("hls/e2m0/tcl/run_trace_cosim.tcl"),
+    "rs2-arithmetic-csim": Path("hls/rs2/tcl/run_arithmetic_csim.tcl"),
+    "rs2-csim": Path("hls/rs2/tcl/run_csim.tcl"),
+    "rs2-control-cosim": Path("hls/rs2/tcl/run_control_cosim.tcl"),
+    "rs2-reset-trace-cosim": Path("hls/rs2/tcl/run_reset_trace_cosim.tcl"),
+    "rs2-reset-trace-cosim-resume": Path(
+        "hls/rs2/tcl/run_reset_trace_cosim_resume.tcl"
+    ),
+    "rs2-csynth": Path("hls/rs2/tcl/run_csynth.tcl"),
+    "rs2-trace-csim": Path("hls/rs2/tcl/run_trace_csim.tcl"),
+    "rs2-trace-cosim": Path("hls/rs2/tcl/run_trace_cosim.tcl"),
+    "bf16-csim": Path("hls/bf16/tcl/run_csim.tcl"),
     "bf16-csynth": Path("hls/bf16/tcl/run_csynth.tcl"),
     "mxfp8-arithmetic-csim": Path("hls/mxfp8/tcl/run_arithmetic_csim.tcl"),
     "mxfp8-csim": Path("hls/mxfp8/tcl/run_csim.tcl"),
@@ -45,6 +57,176 @@ def _hls_loader_for_unwrapped_exe(vitis_hls: Path) -> Path | None:
     bin_dir = vitis_hls.parents[2]
     loader = bin_dir / "loader.bat"
     return loader if loader.exists() else None
+
+
+def _archive_completed_step(step: str, root: Path) -> None:
+    if step == "bf16-csim":
+        source_root = root / "gdn_bf16_hls" / "u55c_250mhz"
+        destination = root / "reports" / "csim" / "corrected" / "bf16_current"
+        copies = {
+            source_root / "csim" / "report" / "gdn_bf16_top_csim.log": (
+                destination / "gdn_bf16_top_csim.log"
+            ),
+            source_root / "u55c_250mhz.log": destination / "u55c_250mhz.log",
+        }
+    elif step == "bf16-csynth":
+        source_root = root / "gdn_bf16_hls" / "u55c_250mhz"
+        report_root = source_root / "syn" / "report"
+        destination = root / "reports" / "csynth" / "corrected" / "bf16_current"
+        copies = {
+            report_root / "gdn_bf16_top_csynth.xml": (
+                destination / "report" / "gdn_bf16_top_csynth.xml"
+            ),
+            report_root / "gdn_bf16_top_csynth.rpt": (
+                destination / "report" / "gdn_bf16_top_csynth.rpt"
+            ),
+            report_root / "gdn_bf16_top_impl_csynth.rpt": (
+                destination / "report" / "gdn_bf16_top_impl_csynth.rpt"
+            ),
+            source_root / "u55c_250mhz.log": destination / "u55c_250mhz.log",
+        }
+    elif step in {"rs2-arithmetic-csim", "rs2-csim", "rs2-trace-csim"}:
+        project = {
+            "rs2-arithmetic-csim": "gdn_rs2_arithmetic_hls",
+            "rs2-csim": "gdn_rs2_hls",
+            "rs2-trace-csim": "gdn_rs2_trace_hls",
+        }[step]
+        stem = {
+            "rs2-arithmetic-csim": "arithmetic",
+            "rs2-csim": "smoke",
+            "rs2-trace-csim": "trace64",
+        }[step]
+        source_root = root / project / "u55c_250mhz"
+        destination = root / "reports" / "csim" / "corrected" / "rs2_current" / stem
+        copies = {
+            source_root / "csim" / "report" / "gdn_rs2_top_csim.log": (
+                destination / "gdn_rs2_top_csim.log"
+            ),
+            source_root / "u55c_250mhz.log": destination / "u55c_250mhz.log",
+        }
+        if step == "rs2-arithmetic-csim":
+            copies = {
+                source_root / "csim" / "report" / "rs2_arithmetic_top_csim.log": (
+                    destination / "rs2_arithmetic_top_csim.log"
+                ),
+                source_root / "u55c_250mhz.log": destination / "u55c_250mhz.log",
+            }
+        elif step == "rs2-trace-csim":
+            trace_log = source_root / "csim" / "report" / "gdn_rs2_top_csim.log"
+            marker = (
+                "PASS: 64 encoded random-state tokens, exact outputs/counters, "
+                "and final snapshot"
+            )
+            if marker not in trace_log.read_text(encoding="utf-8", errors="replace"):
+                raise RuntimeError(
+                    "refusing to archive rs2-trace-csim without the 64-token PASS marker"
+                )
+    elif step == "rs2-csynth":
+        source_root = root / "gdn_rs2_hls" / "u55c_250mhz"
+        report_root = source_root / "syn" / "report"
+        destination = root / "reports" / "csynth" / "corrected" / "rs2_current"
+        copies = {
+            report_root / "gdn_rs2_top_csynth.xml": (
+                destination / "report" / "gdn_rs2_top_csynth.xml"
+            ),
+            report_root / "gdn_rs2_top_csynth.rpt": (
+                destination / "report" / "gdn_rs2_top_csynth.rpt"
+            ),
+            report_root / "gdn_rs2_top_impl_csynth.rpt": (
+                destination / "report" / "gdn_rs2_top_impl_csynth.rpt"
+            ),
+            report_root / "p_anonymous_namespace_fold_log_csynth.rpt": (
+                destination / "report" / "p_anonymous_namespace_fold_log_csynth.rpt"
+            ),
+            report_root / "select_e2m1_scale_power_csynth.rpt": (
+                destination / "report" / "select_e2m1_scale_power_csynth.rpt"
+            ),
+            report_root / "select_e2m1_scale_power_Pipeline_select_e2m1_normalize_csynth.rpt": (
+                destination
+                / "report"
+                / "select_e2m1_scale_power_Pipeline_select_e2m1_normalize_csynth.rpt"
+            ),
+            report_root / "select_e2m1_scale_power_Pipeline_select_e2m1_max_csynth.rpt": (
+                destination
+                / "report"
+                / "select_e2m1_scale_power_Pipeline_select_e2m1_max_csynth.rpt"
+            ),
+            source_root / "u55c_250mhz.log": destination / "u55c_250mhz.log",
+        }
+    elif step in {
+        "rs2-control-cosim",
+        "rs2-reset-trace-cosim",
+        "rs2-reset-trace-cosim-resume",
+        "rs2-trace-cosim",
+    }:
+        project = {
+            "rs2-control-cosim": "gdn_rs2_hls",
+            "rs2-reset-trace-cosim": "gdn_rs2_reset_trace_cosim_hls",
+            "rs2-reset-trace-cosim-resume": "gdn_rs2_reset_trace_cosim_hls",
+            "rs2-trace-cosim": "gdn_rs2_trace_cosim_hls",
+        }[step]
+        stem = {
+            "rs2-control-cosim": "control",
+            "rs2-reset-trace-cosim": "trace64_reset",
+            "rs2-reset-trace-cosim-resume": "trace64_reset",
+            "rs2-trace-cosim": "trace64",
+        }[step]
+        source_root = root / project / "u55c_250mhz"
+        destination = root / "reports" / "cosim" / "corrected" / "rs2_current" / stem
+        solution_log = source_root / "u55c_250mhz.log"
+        rtl_log = source_root / "sim" / "report" / "verilog" / "gdn_rs2_top.log"
+        marker = {
+            "rs2-control-cosim": (
+                "PASS: corrected RS2 generated-RTL control smoke, two exact commands"
+            ),
+            "rs2-reset-trace-cosim": (
+                "PASS: 64 encoded reset-state tokens, exact outputs/counters, "
+                "and final snapshot"
+            ),
+            "rs2-reset-trace-cosim-resume": (
+                "PASS: 64 encoded reset-state tokens, exact outputs/counters, "
+                "and final snapshot"
+            ),
+            "rs2-trace-cosim": (
+                "PASS: 64 encoded random-state tokens, exact outputs/counters, "
+                "and final snapshot"
+            ),
+        }[step]
+        solution_text = solution_log.read_text(encoding="utf-8", errors="replace")
+        rtl_text = rtl_log.read_text(encoding="utf-8", errors="replace")
+        if marker not in rtl_text or "C/RTL co-simulation finished: PASS" not in solution_text:
+            raise RuntimeError(f"refusing to archive {step} without its RTL PASS markers")
+        copies = {
+            source_root / "sim" / "report" / "gdn_rs2_top_cosim.rpt": (
+                destination / "gdn_rs2_top_cosim.rpt"
+            ),
+            rtl_log: (
+                destination / "verilog" / "gdn_rs2_top.log"
+            ),
+            source_root / "sim" / "report" / "verilog" / "lat.rpt": (
+                destination / "verilog" / "lat.rpt"
+            ),
+            source_root
+            / "sim"
+            / "report"
+            / "verilog"
+            / "result.transaction.rpt": (
+                destination / "verilog" / "result.transaction.rpt"
+            ),
+            source_root / "sim" / "wrapc_pc" / "run_xsim.log": (
+                destination / "verilog" / "run_xsim.log"
+            ),
+            solution_log: destination / "u55c_250mhz.log",
+        }
+    else:
+        return
+
+    for source, target in copies.items():
+        if not source.is_file():
+            raise FileNotFoundError(f"completed {step} artifact is absent: {source}")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+    print(f"Archived {len(copies)} {step} artifacts under {destination.relative_to(root)}")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -110,12 +292,18 @@ def main(argv: list[str] | None = None) -> int:
                 "} "
                 "exit $rc"
             )
-            return subprocess.call(
+            return_code = subprocess.call(
                 ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", ps_command],
                 cwd=root,
             )
+            if return_code == 0:
+                _archive_completed_step(args.step, root)
+            return return_code
 
-    return subprocess.call([str(vitis_hls), "-f", str(tcl)], cwd=root)
+    return_code = subprocess.call([str(vitis_hls), "-f", str(tcl)], cwd=root)
+    if return_code == 0:
+        _archive_completed_step(args.step, root)
+    return return_code
 
 
 if __name__ == "__main__":

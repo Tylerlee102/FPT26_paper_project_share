@@ -11,9 +11,9 @@ The named workbook was recovered from the local Downloads directory and preserve
 ## Authoritative 68-Comment Ledger
 
 Each row below corresponds to one distinct reviewer thread/reply message in the preserved workbook. Exact text and full context are retained in `docs/evidence/reviewer_workbook_reconciliation.csv`.
-Each `PASS` was rechecked against `paper/corrected/paper.tex`, the exact audit
-candidate recorded by `paper/corrected/paper_audit_build_manifest.json`, and
-the page records in `paper/corrected/paper_visual_audit.json`; the row-level
+Each `PASS` records a source-level correction or an explicitly removed claim.
+Hash binding to the current selected-candidate PDF and page records is a
+separate machine gate and is not implied by these row labels; the row-level
 evidence path below preserves the authoritative source location.
 
 | Source comment | Reviewer | Concern | Required action | Evidence path | Paper section | Status |
@@ -103,13 +103,13 @@ are not safely reducible to prose edits.
 | Directive-07 | Active HLS ignores block scales/alignment. | Wire activation/state scales and block alignment into the corrected datapath. | `hls/src/block_exp_align.cpp`, `reports/csim/corrected/results.md` | Implementation | PASS |
 | Directive-08 | Beta encoding can exceed one and alpha is absent. | Implement validated Q1.15 alpha/beta with exact endpoints. | `hls/src/phase2_state_read.cpp`, `hls/src/phase3_update.cpp`, `reports/csim/corrected/results.md` | Numerical Method | PASS |
 | Directive-09 | Resident state lacks reset/load/readback and runtime identity. | Implement atomic controls with sequence/layer isolation. | `golden/gdn_resident_state.py`, `hls/src/gdn_top.cpp`, `reports/csim/corrected/results.md` | Implementation | PASS |
-| Directive-10 | Tests can pass while computation is wrong. | Add independent random, adversarial, multi-token, all-layer, and state-control tests. | `tests/`, `reports/golden/official_parity/official_parity_verification.json`, `reports/benchmark/corrected/e2m0_encoded/held_out/held_out_summary.json`, `reports/csynth/corrected/e2m0_hls_summary.json` | Evaluation | PASS |
+| Directive-10 | Tests can pass while computation is wrong. | Add independent random, adversarial, multi-token, all-layer, and state-control tests. | `tests/`, `reports/golden/official_parity/official_parity_verification.json`, `reports/benchmark/corrected/rs2_encoded/rs2_encoded_candidate_summary.json`, `reports/csynth/corrected/rs2_hls_summary.json` | Evaluation | PASS |
 | Directive-11 | Real activation hooks are open loop. | Use the real capture only for range characterization and remove closed-loop model-quality claims. | `reports/golden/qwen_capture_characterization.json`; `paper/corrected/paper.tex`; `paper/corrected/paper_visual_audit.json` | Evaluation/Limitations | PASS |
-| Directive-12 | FP8 baseline is missing. | Include the available MXFP8-E4M3 software state fallback and disclose that no matched MXFP8 HLS baseline exists. | `reports/benchmark/corrected/long_trace_checkpoints.csv`; `paper/corrected/paper.tex` | Evaluation/Limitations | PASS |
-| Directive-13 | Long-horizon stability is unsupported. | Run the frozen 64--8192-token synthetic traces and state explicitly that real closed-loop recurrence remains unavailable. | `reports/benchmark/corrected/synthetic_stability_verification.json`, `reports/benchmark/corrected/e2m0_encoded/held_out/held_out_summary.json`, `reports/benchmark/corrected/e2m0_encoded/extended_development/extended_summary.json`, `paper/corrected/paper.tex` | Results/Limitations | PASS |
-| Directive-14 | Candidate lazy log may overlap prior art. | Prove equivalence and classify the candidate against a precise gap before HLS. | `golden/gdn_e2m0_encoded.py`, `tests/test_gdn_e2m0_encoded.py`, `docs/prior_art_matrix.md`, `reports/csynth/corrected/e2m0_hls_summary.json` | Related Work/Method | PASS |
-| Directive-15 | Existing model-wide fit claims use logical bytes only. | Remove complete-model fit claims, label raw-bit capacity as necessary but insufficient, and report only the physically allocated candidate. | `reports/benchmark/corrected/state_capacity_lower_bound.json`; `reports/vivado/corrected/e2m0/e2m0_postroute_summary.json`; `paper/corrected/paper.tex` | Hardware Results/Limitations | PASS |
-| Directive-16 | No timing DRC, bitstream, XRT, or board parity exists. | Report the out-of-context route and generated-RTL scope while explicitly excluding shell, xclbin, XRT, and board parity. | `reports/vivado/corrected/e2m0/e2m0_postroute_summary.json`; `reports/cosim/corrected/e2m0_control_smoke/e2m0_control_smoke_summary.json`; `reports/cosim/corrected/e2m0_trace64/e2m0_trace64_cosim_summary.json`; `paper/corrected/paper.tex` | Hardware Results/Limitations | PASS |
+| Directive-12 | FP8 baseline is missing. | Include MXFP8-E4M3 software, matched native HLS, and routed physical baselines. | `reports/benchmark/corrected/rs2_controlled/controlled_long_trace_manifest.json`; `reports/csynth/corrected/mxfp8_hls_summary.json`; `reports/vivado/baselines/mxfp8/mxfp8_vivado_summary.json`; `paper/corrected/paper.tex` | Evaluation/Limitations | PASS |
+| Directive-13 | Long-horizon stability is unsupported. | Run controlled 64--8192-token synthetic traces and state explicitly that real closed-loop recurrence remains unavailable. | `reports/benchmark/corrected/rs2_controlled/controlled_long_trace_manifest.json`; `reports/benchmark/corrected/rs2_encoded/rs2_encoded_candidate_summary.json`; `paper/corrected/paper.tex` | Results/Limitations | PASS |
+| Directive-14 | Candidate lazy log may overlap prior art. | Prove exact lazy-update equivalence and classify the selected RS2/R3 candidate against a precise gap before HLS. | `golden/gdn_write_log.py`; `golden/gdn_rs2_encoded.py`; `tests/test_gdn_rs2_encoded.py`; `docs/prior_art_matrix.md`; `reports/csynth/corrected/rs2_hls_summary.json` | Related Work/Method | PASS |
+| Directive-15 | Existing model-wide fit claims use logical bytes only. | Remove complete-model fit claims, label raw-bit capacity as necessary but insufficient, and report only the physically allocated candidate. | `reports/benchmark/corrected/state_capacity_lower_bound.json`; `reports/vivado/corrected/rs2_current/rs2_vivado_summary.json`; `paper/corrected/paper.tex` | Hardware Results/Limitations | PASS |
+| Directive-16 | No timing DRC, bitstream, XRT, or board parity exists. | Report the out-of-context route and generated-RTL scope while explicitly excluding shell, xclbin, XRT, and board parity. | `reports/vivado/corrected/rs2_current/rs2_vivado_summary.json`; `reports/cosim/corrected/rs2_current/control/gdn_rs2_top_cosim.rpt`; `reports/cosim/corrected/rs2_current/trace64_direct/rs2_trace64_direct_summary.json`; `reports/cosim/corrected/rs2_current/xsim_diagnostic/rs2_xsim_diagnostic.json`; `paper/corrected/paper.tex` | Hardware Results/Limitations | PASS |
 | Directive-17 | Vivado power times simulated latency is called energy. | Remove the invalid current claim and require physical telemetry for measured energy. | `paper/corrected/paper.tex`, `docs/experimental_protocol.md` | Results | PASS |
 | Directive-18 | H100 comparison derives energy from TDP. | Remove it unless rerun at the same boundary with telemetry and synchronization. | `paper/corrected/paper.tex`, `tests/test_corrected_manuscript.py` | Results | PASS |
 | Directive-19 | Application and scalability boundary is overstated. | Account separately for convolution state, attention KV, weights, activations, and traffic. | `paper/corrected/paper.tex`, `docs/experimental_protocol.md` | Limitations | PASS |
@@ -117,25 +117,25 @@ are not safely reducible to prose edits.
 | Directive-21 | Datapath figure does not expose widths, rates, scales, and legend. | Redraw only after the corrected datapath is frozen and visually audit it. | `paper/figures/corrected/corrected_candidate_datapath.pdf`; `paper/figures/corrected/corrected_candidate_datapath_manifest.json`; `docs/evidence/corrected_candidate_datapath_220dpi.png` | Architecture | PASS |
 | Directive-22 | Component ownership is not explicit. | Include inherited/corrected/modified/new classification. | `docs/prior_art_matrix.md` | Related Work | PASS |
 | Directive-23 | Reference [4] lacks complete archival metadata. | Verify authors, title, venue/publisher/DOI or clearly label arXiv status. | `docs/prior_art_matrix.md`; `docs/evidence/g0_prior_art_refresh_2026_08_01.md` | References | PASS |
-| Directive-24 | Archival references should replace arXiv when available. | Recheck every citation at G7 and record both the archival/preprint class and audit date. | `docs/evidence/citation_archival_audit_2026_08_03_v3.csv`; `docs/evidence/citation_archival_audit_2026_08_03_v3.md`; `docs/evidence/prior_art_gap_recheck_2026_08_02_v2.md`; `tests/test_citation_archival_audit.py` | References | PASS |
-| Directive-25 | Final paper numbers and figures are not valid for the corrected design. | Regenerate from evidence only, render, and inspect every page. | `paper/corrected/numbers.json`, `paper/corrected/provenance.json`, `paper/corrected/asset_manifest.json`, `paper/corrected/paper_audit_build_manifest.json`, `paper/corrected/paper_visual_audit.json`, `reports/rendered/corrected_paper/`, `docs/venue_requirements_2026_08_02.md` | All | PASS |
+| Directive-24 | Archival references should replace arXiv when available. | Recheck every citation at G7 and record both the archival/preprint class and audit date. | `docs/evidence/citation_archival_audit_2026_08_06_v4.csv`; `docs/evidence/citation_archival_audit_2026_08_06_v4.md`; `docs/evidence/prior_art_gap_recheck_2026_08_02_v2.md`; `tests/test_citation_archival_audit.py` | References | PASS |
+| Directive-25 | Final paper numbers and figures are not valid for the selected design. | Regenerate from evidence only, render, and inspect every page. | `paper/corrected/numbers.json`, `paper/corrected/provenance.json`, `paper/corrected/asset_manifest.json`, `paper/corrected/working_draft_build_manifest.json`, `paper/corrected/working_draft_visual_audit.json`, `reports/rendered/working_draft/`, `docs/venue_requirements_2026_08_02.md` | All | PASS |
 
 ## Closure Rule
 
-All 68 authoritative comment rows and all 25 remediation directives are
-`PASS` against the hash-bound audit candidate with eight content pages plus one
-reference-only page and its page-by-page visual audit. Here, `PASS` means that
-the final manuscript either implements and evidences the requested correction
-or removes the unsupported claim and states the missing experiment as a
-limitation. It does not imply that absent closed-loop, matched BF16 route,
-shell, XRT, or board experiments were executed.
+All 68 authoritative comment rows and all 25 remediation directives record
+source-level `PASS`: the working manuscript either implements and evidences the
+requested correction or removes the unsupported claim and states the missing
+experiment as a limitation. This does not imply that absent closed-loop, shell,
+XRT, board, or same-boundary native-FP4 GPU experiments were executed. Current
+PDF-byte and page-audit status is reported separately by the machine gate.
 
 The corrected manuscript contains the controlled research question,
 inherited-component classification, exact recurrence boundary, MX format and
 scale-alignment description, MXFP8 software and native-hardware baselines,
 long-sequence figures, adverse HLS and post-route results, and explicit
 layer-level/synthetic limitations. Final release remains governed by the
-completion and exact-byte finalization gates.
+completion and exact-byte finalization gates; a source-level traceability pass
+does not waive any nonpassing release row.
 
 The three cleaned decision reviews supplied on 2026-08-03 are mapped separately
 in `docs/decision_review_response.md`. That supplemental matrix covers all 29

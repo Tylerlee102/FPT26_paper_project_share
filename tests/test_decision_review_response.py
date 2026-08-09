@@ -31,12 +31,14 @@ def test_decision_response_preserves_nonpassing_evidence_boundaries() -> None:
     text = RESPONSE.read_text(encoding="utf-8")
     normalized = re.sub(r"\s+", " ", text).lower()
     for phrase in (
-        "matched native mxfp8 hls",
+        "matched bf16 and native-mxfp8 hls",
         "closed-loop real-model quality",
         "complete-model residency",
         "board parity and energy",
         "same-boundary native-fp4 gpu comparison remain externally blocked",
-        "ready for human submission review",
+        "not paper ready",
+        "visibly watermarked working draft",
     ):
         assert phrase in normalized
-    assert "all release-required traceability and pdf-audit gates now pass" in normalized
+    assert "ready for human submission review" not in normalized
+    assert "all release-required traceability and pdf-audit gates now pass" not in normalized

@@ -1,0 +1,93 @@
+{
+  "capacity": 3,
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "hls_parity_reset",
+    "state_block_size": 32,
+    "tokens": 64,
+    "trace_family": "high_retention",
+    "value_dim": 128
+  },
+  "counter_count": 7,
+  "independent_reference": "frozen scalar RS2 oracle, via its bit-exact cross-checked vectorized executor",
+  "initial_command": "reset",
+  "initial_state_mode": "zero",
+  "input_stream_sha256": "838EC1B7581ACD06AD5CDCE6992E11D0F27B035DCE7CA57FF91AC87EB7781146",
+  "schema": 1,
+  "scope": "encoded_rs2_hls_csim_trace",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 22556,
+      "changed_file_count": 5,
+      "sha256": "9B73ACD4C08542B6479513B85B38838D8996E89B08FD728D97D12F2AC87828A3"
+    },
+    "files": {
+      "golden/gdn_e2m0_encoded.py": {
+        "bytes": 40915,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "1CD8859E345B42AD0E47370C7F6C55AB47873792DBC848019C998DC41EF40CB0"
+      },
+      "golden/gdn_e2m0_encoded_vectorized.py": {
+        "bytes": 19665,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "393CC77CD03B395D2FEFE2145AA9C771CEFEF213E128F67A9D44CE878A0787B4"
+      },
+      "golden/gdn_mxfp4_encoded.py": {
+        "bytes": 22670,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402"
+      },
+      "golden/gdn_mxfp4_encoded_vectorized.py": {
+        "bytes": 13109,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D"
+      },
+      "golden/gdn_rs2_encoded.py": {
+        "bytes": 5290,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B2AB1B22ED6CB2A9626671904F7698598ACDAB79E7E533500CAAB10F24036CE3"
+      },
+      "golden/gdn_rs2_encoded_vectorized.py": {
+        "bytes": 1729,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "29DBC4EEC7CF03FAE7059C5BD012904CE0EFCB9B54F34228CB14308B54EF62A1"
+      },
+      "scripts/generate_rs2_hls_trace.py": {
+        "bytes": 8924,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "3C035913948E9DBCEF18BBA761F065E2FCD2CBDD2BCE559C1050AFDC0FC4E78D"
+      }
+    },
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_sha256": {
+    "golden/gdn_e2m0_encoded.py": "1CD8859E345B42AD0E47370C7F6C55AB47873792DBC848019C998DC41EF40CB0",
+    "golden/gdn_e2m0_encoded_vectorized.py": "393CC77CD03B395D2FEFE2145AA9C771CEFEF213E128F67A9D44CE878A0787B4",
+    "golden/gdn_mxfp4_encoded.py": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402",
+    "golden/gdn_mxfp4_encoded_vectorized.py": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D",
+    "golden/gdn_rs2_encoded.py": "B2AB1B22ED6CB2A9626671904F7698598ACDAB79E7E533500CAAB10F24036CE3",
+    "golden/gdn_rs2_encoded_vectorized.py": "29DBC4EEC7CF03FAE7059C5BD012904CE0EFCB9B54F34228CB14308B54EF62A1",
+    "scripts/generate_rs2_hls_trace.py": "3C035913948E9DBCEF18BBA761F065E2FCD2CBDD2BCE559C1050AFDC0FC4E78D"
+  },
+  "stack_depth": 2,
+  "status": "PASS",
+  "timestamp": "2026-08-06T13:59:27.455591+00:00",
+  "trace": "data/vectors/rs2_resident_trace64_reset.bin",
+  "trace_sha256": "899CF430C23D80150EE84C0DF77B1DF1FD6A9783EAD434D96066D3A75C9C8F2B",
+  "trace_version": 2
+}

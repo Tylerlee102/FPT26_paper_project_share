@@ -5,6 +5,37 @@ namespace gdn_bf16 {
 namespace {
 
 using state_block_word_t = ap_uint<16 * gdn::BLOCK_SIZE>;
+using state_half_word_t = ap_uint<8 * gdn::BLOCK_SIZE>;
+
+// A 512-bit inferred RAM falls back to BRAM in Vivado 2025.2. Split each
+// logical BF16 word into parallel 256-bit banks, then use both memory classes
+// so the full 36-layer state fits on U55C without changing its layout.
+constexpr int URAM_LAYER_COUNT = 29;
+constexpr int BRAM_LAYER_COUNT = gdn::NUM_LAYERS - URAM_LAYER_COUNT;
+constexpr int STATE_HALF_BITS = 8 * gdn::BLOCK_SIZE;
+
+static_assert(URAM_LAYER_COUNT > 0, "BF16 URAM bank must be non-empty");
+static_assert(BRAM_LAYER_COUNT > 0, "BF16 BRAM bank must be non-empty");
+
+state_half_word_t lower_state_half(state_block_word_t word) {
+#pragma HLS INLINE
+  return word.range(STATE_HALF_BITS - 1, 0);
+}
+
+state_half_word_t upper_state_half(state_block_word_t word) {
+#pragma HLS INLINE
+  return word.range(2 * STATE_HALF_BITS - 1, STATE_HALF_BITS);
+}
+
+state_block_word_t join_state_halves(
+    state_half_word_t lower,
+    state_half_word_t upper) {
+#pragma HLS INLINE
+  state_block_word_t word = 0;
+  word.range(STATE_HALF_BITS - 1, 0) = lower;
+  word.range(2 * STATE_HALF_BITS - 1, STATE_HALF_BITS) = upper;
+  return word;
+}
 
 bf16_t decode_bf16(bf16_bits_t bits) {
 #pragma HLS INLINE
@@ -342,13 +373,26 @@ void gdn_bf16_top_impl(
     gdn::generation_t generation_out[1],
     counter_array_t command_counters_out,
     counter_array_t cumulative_counters_out) {
-  static state_block_word_t resident_state[gdn::NUM_SEQUENCES][gdn::NUM_LAYERS]
-      [gdn::NUM_VALUE_HEADS][gdn::KEY_DIM][gdn::VALUE_BLOCKS];
+  static state_half_word_t resident_state_uram_lower[gdn::NUM_SEQUENCES]
+      [URAM_LAYER_COUNT][gdn::NUM_VALUE_HEADS][gdn::KEY_DIM]
+      [gdn::VALUE_BLOCKS];
+  static state_half_word_t resident_state_uram_upper[gdn::NUM_SEQUENCES]
+      [URAM_LAYER_COUNT][gdn::NUM_VALUE_HEADS][gdn::KEY_DIM]
+      [gdn::VALUE_BLOCKS];
+  static state_half_word_t resident_state_bram_lower[gdn::NUM_SEQUENCES]
+      [BRAM_LAYER_COUNT][gdn::NUM_VALUE_HEADS][gdn::KEY_DIM]
+      [gdn::VALUE_BLOCKS];
+  static state_half_word_t resident_state_bram_upper[gdn::NUM_SEQUENCES]
+      [BRAM_LAYER_COUNT][gdn::NUM_VALUE_HEADS][gdn::KEY_DIM]
+      [gdn::VALUE_BLOCKS];
   static bool initialized[gdn::NUM_SEQUENCES][gdn::NUM_LAYERS] = {};
   static gdn::generation_t generations[gdn::NUM_SEQUENCES][gdn::NUM_LAYERS] = {};
   static gdn::counter_t cumulative_counters[gdn::NUM_SEQUENCES][gdn::NUM_LAYERS]
       [gdn::COUNTER_COUNT] = {};
-#pragma HLS BIND_STORAGE variable=resident_state type=ram_t2p impl=uram
+#pragma HLS BIND_STORAGE variable=resident_state_uram_lower type=ram_t2p impl=uram
+#pragma HLS BIND_STORAGE variable=resident_state_uram_upper type=ram_t2p impl=uram
+#pragma HLS BIND_STORAGE variable=resident_state_bram_lower type=ram_t2p impl=bram
+#pragma HLS BIND_STORAGE variable=resident_state_bram_upper type=ram_t2p impl=bram
 #pragma HLS ARRAY_PARTITION variable=cumulative_counters complete dim=3
 
   command_counter_array_t command_counters;
@@ -433,7 +477,14 @@ clear_bf16_output_heads:
       reset_bf16_blocks:
         for (int block = 0; block < gdn::VALUE_BLOCKS; ++block) {
 #pragma HLS PIPELINE II=1
-          resident_state[sequence_id][layer_id][head][row][block] = 0;
+          if (layer_id < URAM_LAYER_COUNT) {
+            resident_state_uram_lower[sequence_id][layer_id][head][row][block] = 0;
+            resident_state_uram_upper[sequence_id][layer_id][head][row][block] = 0;
+          } else {
+            const int bram_layer = layer_id - URAM_LAYER_COUNT;
+            resident_state_bram_lower[sequence_id][bram_layer][head][row][block] = 0;
+            resident_state_bram_upper[sequence_id][bram_layer][head][row][block] = 0;
+          }
         }
       }
     }
@@ -481,7 +532,18 @@ clear_bf16_output_heads:
             const int column = block * gdn::BLOCK_SIZE + lane;
             pack_state_element(packed, lane, state_in[head][row][column]);
           }
-          resident_state[sequence_id][layer_id][head][row][block] = packed;
+          if (layer_id < URAM_LAYER_COUNT) {
+            resident_state_uram_lower[sequence_id][layer_id][head][row][block] =
+                lower_state_half(packed);
+            resident_state_uram_upper[sequence_id][layer_id][head][row][block] =
+                upper_state_half(packed);
+          } else {
+            const int bram_layer = layer_id - URAM_LAYER_COUNT;
+            resident_state_bram_lower[sequence_id][bram_layer][head][row][block] =
+                lower_state_half(packed);
+            resident_state_bram_upper[sequence_id][bram_layer][head][row][block] =
+                upper_state_half(packed);
+          }
         }
       }
     }
@@ -523,8 +585,17 @@ clear_bf16_output_heads:
       for (int row = 0; row < gdn::KEY_DIM; ++row) {
       readback_bf16_blocks:
         for (int block = 0; block < gdn::VALUE_BLOCKS; ++block) {
-          const state_block_word_t packed =
-              resident_state[sequence_id][layer_id][head][row][block];
+          state_block_word_t packed;
+          if (layer_id < URAM_LAYER_COUNT) {
+            packed = join_state_halves(
+                resident_state_uram_lower[sequence_id][layer_id][head][row][block],
+                resident_state_uram_upper[sequence_id][layer_id][head][row][block]);
+          } else {
+            const int bram_layer = layer_id - URAM_LAYER_COUNT;
+            packed = join_state_halves(
+                resident_state_bram_lower[sequence_id][bram_layer][head][row][block],
+                resident_state_bram_upper[sequence_id][bram_layer][head][row][block]);
+          }
         readback_bf16_lanes:
           for (int lane = 0; lane < gdn::BLOCK_SIZE; ++lane) {
 #pragma HLS PIPELINE II=1
@@ -598,8 +669,17 @@ step_bf16_heads:
     for (int block = 0; block < gdn::VALUE_BLOCKS; ++block) {
     load_bf16_resident_rows:
       for (int row = 0; row < gdn::KEY_DIM; ++row) {
-        const state_block_word_t packed =
-            resident_state[sequence_id][layer_id][head][row][block];
+        state_block_word_t packed;
+        if (layer_id < URAM_LAYER_COUNT) {
+          packed = join_state_halves(
+              resident_state_uram_lower[sequence_id][layer_id][head][row][block],
+              resident_state_uram_upper[sequence_id][layer_id][head][row][block]);
+        } else {
+          const int bram_layer = layer_id - URAM_LAYER_COUNT;
+          packed = join_state_halves(
+              resident_state_bram_lower[sequence_id][bram_layer][head][row][block],
+              resident_state_bram_upper[sequence_id][bram_layer][head][row][block]);
+        }
       unpack_bf16_resident_lanes:
         for (int lane = 0; lane < gdn::BLOCK_SIZE; ++lane) {
 #pragma HLS PIPELINE II=1
@@ -625,7 +705,18 @@ step_bf16_heads:
 #pragma HLS PIPELINE II=1
           pack_state_element(packed, lane, state_tile[row][lane]);
         }
-        resident_state[sequence_id][layer_id][head][row][block] = packed;
+        if (layer_id < URAM_LAYER_COUNT) {
+          resident_state_uram_lower[sequence_id][layer_id][head][row][block] =
+              lower_state_half(packed);
+          resident_state_uram_upper[sequence_id][layer_id][head][row][block] =
+              upper_state_half(packed);
+        } else {
+          const int bram_layer = layer_id - URAM_LAYER_COUNT;
+          resident_state_bram_lower[sequence_id][bram_layer][head][row][block] =
+              lower_state_half(packed);
+          resident_state_bram_upper[sequence_id][bram_layer][head][row][block] =
+              upper_state_half(packed);
+        }
       }
     }
   }

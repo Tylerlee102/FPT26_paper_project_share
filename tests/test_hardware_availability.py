@@ -20,6 +20,7 @@ def test_collect_distinguishes_tools_from_missing_board(monkeypatch) -> None:
     )
 
     assert payload["toolchain"]["status"] == "AVAILABLE"
+    assert payload["toolchain"]["acceleration_tools_status"] == "INCOMPLETE"
     assert payload["u55c_board_experiment"]["status"] == (
         "BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT"
     )
@@ -48,6 +49,7 @@ def test_collect_marks_complete_board_stack_available(monkeypatch) -> None:
 
     assert payload["u55c_board_experiment"]["status"] == "AVAILABLE"
     assert payload["native_fp4_gpu_experiment"]["status"] == "AVAILABLE"
+    assert payload["toolchain"]["acceleration_tools_status"] == "AVAILABLE"
 
 
 def test_markdown_names_external_measurement_boundary(monkeypatch) -> None:
@@ -62,5 +64,6 @@ def test_markdown_names_external_measurement_boundary(monkeypatch) -> None:
     markdown = module._markdown(payload)
 
     assert "U55C board parity and telemetry" in markdown
+    assert "Vitis compiler, platform inventory, and XSim" in markdown
     assert "Native-FP4 GPU baseline" in markdown
     assert "not represented by estimates" in markdown

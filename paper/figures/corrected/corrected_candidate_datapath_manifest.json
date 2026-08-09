@@ -1,48 +1,48 @@
 {
-  "generated_at": "2026-08-04T11:45:15.266997+00:00",
+  "generated_at": "2026-08-09T01:13:39.854416+00:00",
   "limitations": [
     "logical architecture figure, not placement or routing evidence",
-    "the five-phase schedule is inherited; only the arithmetic and corrected state representation are modified"
+    "the five-phase schedule is inherited; only the arithmetic and RS2/R3 state representation are modified"
   ],
   "numbers": "paper/corrected/numbers.json",
   "outputs": {
-    "paper/figures/corrected/corrected_candidate_datapath.pdf": "8AFB2147ACEE9D6E63DC9921F2F6AFB6E4043B1AA53CA311B75D3C3D279C455E"
+    "paper/figures/corrected/corrected_candidate_datapath.pdf": "4ECA7EA992FB18EE133E298D41345EE0BB24B0D1418E5A6A8B221F097FB77FFD"
   },
   "schema": 1,
-  "scope": "corrected-candidate recurrence-core datapath figure",
+  "scope": "selected RS2/R3 recurrence-core datapath figure",
   "source_identity": {
     "dirty_patch": {
-      "bytes": 87156,
-      "changed_file_count": 4,
-      "sha256": "CB24F86D61688223772275E7E7513EDDBF63658AD964057EC06DA72E62A18C83"
+      "bytes": 73102,
+      "changed_file_count": 3,
+      "sha256": "ED90A5BFF044009D1C72C7A614A11523ECFA6EB697BCB4773935BADBB0004458"
     },
     "files": {
-      "hls/e2m0/include/gdn_e2m0_kernel.hpp": {
-        "bytes": 10237,
+      "hls/rs2/include/gdn_rs2_kernel.hpp": {
+        "bytes": 9508,
         "changed_from_revision": true,
         "git_state": "untracked",
-        "sha256": "B9A662F2DCDFC9BDCD552CF3F90410258FA7FB72EB5A9606208A172B8072EC6A"
+        "sha256": "15B937C959C3E88729EBD658CF60CC1FE58E72CD2BB402BAC53C2189DD1F5132"
       },
-      "hls/e2m0/src/gdn_e2m0_top.cpp": {
-        "bytes": 58224,
+      "hls/rs2/src/gdn_rs2_top.cpp": {
+        "bytes": 57674,
         "changed_from_revision": true,
         "git_state": "untracked",
-        "sha256": "8408CD27675FD7759C543272A2F00404A7DD7F310D306F202F93A85D4EF6C429"
+        "sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E"
       },
       "scripts/corrected_datapath_figure.py": {
-        "bytes": 14551,
+        "bytes": 14523,
         "changed_from_revision": true,
-        "git_state": "untracked",
-        "sha256": "172B94DCBF1212352CF84801F2D4CB16D03F0849885D78DA247C6AAE3B2BF4C3"
+        "git_state": "tracked",
+        "sha256": "1C789D0590E704443A458EBAF448C99FC5F77D49E39D211BF53B279B9A31459C"
       },
       "scripts/reportlab_fonts.py": {
-        "bytes": 944,
-        "changed_from_revision": true,
-        "git_state": "untracked",
-        "sha256": "D68D3699969A05E16B49E1323BBFCB95666940DF7FCA3B6513A189A2DCE4767A"
+        "bytes": 943,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "08B078C9B5D80ED4FEB1028E78C6C53979A4B522271A3537D26EBACC1B00DDA0"
       }
     },
-    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "status": "PASS",
@@ -59,13 +59,13 @@
     "corrected_accumulator_bits": 32,
     "corrected_alignment_guard_bits": 5,
     "corrected_candidate_step_input_logical_bytes": 8832,
-    "corrected_log_capacity": 7,
-    "corrected_logical_state_bytes": 537744,
+    "corrected_log_capacity": 3,
+    "corrected_logical_state_bytes": 576912,
     "native_expanded_integer_output_logical_bytes": 24576
   },
   "verification": [
     "all displayed numeric widths, rates, dimensions, and capacities are read from corrected paper numbers",
-    "phase ordering and fold timing are cross-checked against the frozen corrected HLS source",
+    "phase ordering and fold timing are cross-checked against the selected RS2/R3 HLS source",
     "PDF rendering and visual inspection are separate evidence"
   ]
 }

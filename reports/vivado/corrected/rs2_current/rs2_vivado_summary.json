@@ -1,0 +1,505 @@
+{
+  "claim_boundary": {
+    "bitstream_or_xclbin_execution": "BLOCKED_EXTERNAL",
+    "measured_board_power_or_energy": "BLOCKED_EXTERNAL",
+    "post_route_250mhz": "NOT_SUPPORTED",
+    "post_route_first_tested_closing_frequency": "SUPPORTED",
+    "post_route_fit": "SUPPORTED",
+    "vectorless_power_estimate": "SUPPORTED"
+  },
+  "drc": {
+    "by_rule": {
+      "DPIP-2": 6,
+      "DPOP-3": 7,
+      "DPOP-4": 12,
+      "RTSTAT-10": 1
+    },
+    "critical_warning_count": 0,
+    "error_count": 0,
+    "signoff_status": "PASS_WITH_WARNINGS",
+    "violation_count": 26,
+    "warning_count": 26
+  },
+  "first_tested_closing_point": {
+    "frequency_mhz": 166.66666666666666,
+    "period_ns": 6.0,
+    "qualification": "first passing point in the tested fixed-route period sweep; not a binary-searched maximum frequency",
+    "status": "PASS",
+    "whs_ns": 0.01,
+    "wns_ns": 0.264
+  },
+  "generated_at": "2026-08-06T15:06:23.820285+00:00",
+  "limitations": [
+    "Out-of-context kernel implementation; no U55C shell integration or xclbin was built.",
+    "Vivado power is a vectorless estimate, not board telemetry or energy per token.",
+    "The RS2/R3 kernel has exact 64-token HLS C simulation; generated-RTL parity is reported separately.",
+    "The first passing fixed-route sweep point is not a binary-searched maximum frequency."
+  ],
+  "physical_fit": "PASS",
+  "postroute_optimization_attempts": [
+    {
+      "drc": {
+        "by_rule": {
+          "DPIP-2": 6,
+          "DPOP-3": 7,
+          "DPOP-4": 12,
+          "RTSTAT-10": 1
+        },
+        "critical_warning_count": 0,
+        "error_count": 0,
+        "signoff_status": "PASS_WITH_WARNINGS",
+        "violation_count": 26,
+        "warning_count": 26
+      },
+      "drc_source": "reports/vivado/corrected/rs2_current/postroute_fanout_opt/drc.rpt",
+      "name": "aggressive_fanout",
+      "operation": "post-route aggressive fanout optimization",
+      "status": "PASS",
+      "target_timing_status": "FAIL",
+      "timing": {
+        "hold_failing_endpoints": 0,
+        "hold_total_endpoints": 221457,
+        "pulse_width_failing_endpoints": 0,
+        "pulse_width_total_endpoints": 75648,
+        "setup_failing_endpoints": 43354,
+        "setup_total_endpoints": 221870,
+        "ths_ns": 0.0,
+        "tns_ns": -23753.203,
+        "tpws_ns": 0.0,
+        "whs_ns": 0.01,
+        "wns_ns": -1.656,
+        "wpws_ns": 1.3
+      },
+      "timing_source": "reports/vivado/corrected/rs2_current/postroute_fanout_opt/timing_4p000ns.rpt"
+    },
+    {
+      "drc": {
+        "by_rule": {
+          "DPIP-2": 6,
+          "DPOP-3": 7,
+          "DPOP-4": 12,
+          "RTSTAT-10": 1
+        },
+        "critical_warning_count": 0,
+        "error_count": 0,
+        "signoff_status": "PASS_WITH_WARNINGS",
+        "violation_count": 26,
+        "warning_count": 26
+      },
+      "drc_source": "reports/vivado/corrected/rs2_current/postroute_retime_opt/drc.rpt",
+      "name": "retiming",
+      "operation": "post-route retiming optimization",
+      "status": "PASS",
+      "target_timing_status": "FAIL",
+      "timing": {
+        "hold_failing_endpoints": 0,
+        "hold_total_endpoints": 221457,
+        "pulse_width_failing_endpoints": 0,
+        "pulse_width_total_endpoints": 75648,
+        "setup_failing_endpoints": 43354,
+        "setup_total_endpoints": 221870,
+        "ths_ns": 0.0,
+        "tns_ns": -23753.203,
+        "tpws_ns": 0.0,
+        "whs_ns": 0.01,
+        "wns_ns": -1.656,
+        "wpws_ns": 1.3
+      },
+      "timing_source": "reports/vivado/corrected/rs2_current/postroute_retime_opt/timing_4p000ns.rpt"
+    },
+    {
+      "drc": {
+        "by_rule": {
+          "DPIP-2": 6,
+          "DPOP-3": 7,
+          "DPOP-4": 12,
+          "RTSTAT-10": 1
+        },
+        "critical_warning_count": 0,
+        "error_count": 0,
+        "signoff_status": "PASS_WITH_WARNINGS",
+        "violation_count": 26,
+        "warning_count": 26
+      },
+      "drc_source": "reports/vivado/corrected/rs2_current/postroute_slr_opt/drc.rpt",
+      "name": "slr_crossing",
+      "operation": "post-route SLR-crossing optimization",
+      "status": "PASS",
+      "target_timing_status": "FAIL",
+      "timing": {
+        "hold_failing_endpoints": 0,
+        "hold_total_endpoints": 221457,
+        "pulse_width_failing_endpoints": 0,
+        "pulse_width_total_endpoints": 75648,
+        "setup_failing_endpoints": 43593,
+        "setup_total_endpoints": 221870,
+        "ths_ns": 0.0,
+        "tns_ns": -24864.826,
+        "tpws_ns": 0.0,
+        "whs_ns": 0.01,
+        "wns_ns": -1.736,
+        "wpws_ns": 1.3
+      },
+      "timing_source": "reports/vivado/corrected/rs2_current/postroute_slr_opt/timing_4p000ns.rpt"
+    }
+  ],
+  "raw_artifact_sha256": {
+    "build/vivado/gdn_rs2_vivado/rs2_post_impl.dcp": "886EB989B0FB48907090F5EB676D3FE7646FA6BA5065BA1C1DCE272C93B99006",
+    "build/vivado/rs2_ooc_rtl/manifest.json": "FCEBE8B414FC431152DB8067C85FCBC91AEBFA656EE77E5ADBCE8C03B076EC34",
+    "reports/vivado/corrected/rs2_current/impl_drc.rpt": "11D58B47F7EB165F5D4F8AD358681D59D461D701CAB79E483320B3AD4686B51E",
+    "reports/vivado/corrected/rs2_current/impl_timing.rpt": "05AC0AF44B73ABE59B750AA4D95E0B73824C574C6D1BF3B95F33947DBACB088F",
+    "reports/vivado/corrected/rs2_current/impl_util.rpt": "6B6AF67E62D6723E6E18AC51695E26B76B5918DF216363B9E56C504C14E44183",
+    "reports/vivado/corrected/rs2_current/postroute_fanout_opt/drc.rpt": "96C7681395908B99CA353D80CF13CE4E8B0F5748D77A149C17C6E9BE8C284530",
+    "reports/vivado/corrected/rs2_current/postroute_fanout_opt/timing_4p000ns.rpt": "09E99B31419B0765B72FA8348374E3137E3B2A0DD299FA7D5F5D3AB709A68D88",
+    "reports/vivado/corrected/rs2_current/postroute_retime_opt/drc.rpt": "4ACBB9C37B1E1851103537B1050383D7A6E088CD5453A0E2D60C17C8ED447783",
+    "reports/vivado/corrected/rs2_current/postroute_retime_opt/timing_4p000ns.rpt": "F108BD6E490597FEB430F060274DAC377ACEBC11EE772AC0AE16EC8645883C73",
+    "reports/vivado/corrected/rs2_current/postroute_slr_opt/drc.rpt": "E1BB3A5AB11E920EBF7C82369C3BE735FBF5E2664B8BE5331CD2E6CABD953401",
+    "reports/vivado/corrected/rs2_current/postroute_slr_opt/timing_4p000ns.rpt": "7A9E5C57666725B7B79F54AC971905C16CE2E59DE645FC5AD561371A42F9B4E5",
+    "reports/vivado/corrected/rs2_current/postroute_sweep/first_passing_period.txt": "37D230A26DD6D390B00606AF02398A510CA0052FB514A2084BF7CAF4413B4E30",
+    "reports/vivado/corrected/rs2_current/postroute_sweep/power_first_passing.rpt": "A7E171A5A830A28998786195072F178B5B6FA6691D343319E89E918AFDF91FA2",
+    "reports/vivado/corrected/rs2_current/postroute_sweep/timing_4p000ns.rpt": "0EC99C4EA28194F3C9C50AED34B447A5CC3C3001C8F516CB5B04DE514300ED87",
+    "reports/vivado/corrected/rs2_current/postroute_sweep/timing_5p000ns.rpt": "F984721EB3D393D88563F8EE0AB18DB553C3D40898CC9E854A7B901AFB17AA44",
+    "reports/vivado/corrected/rs2_current/postroute_sweep/timing_6p000ns.rpt": "870D07BE288755654AB8CA5B529810E90F65617CD7ACB21A91599370929D64AF",
+    "reports/vivado/corrected/rs2_current/postroute_sweep/timing_6p500ns.rpt": "BD1E89DEDF8B9CEFB85F9F219DB79532073008F06469554D7828207FC4811F94",
+    "reports/vivado/corrected/rs2_current/postroute_sweep/timing_7p000ns.rpt": "1831D6846B2D286DB6F1AAE63A02E3069BDD993440B82E6FD6B5AAAB8EB9676D",
+    "reports/vivado/corrected/rs2_current/postroute_sweep/timing_7p500ns.rpt": "F6AA65AE1FDB9C45DC8194C44E6532874861F1973A32A8145D42D7F13B7A6454",
+    "reports/vivado/corrected/rs2_current/postroute_sweep/timing_8p000ns.rpt": "8E7CE240789DE642DD0E80BDC3E5B5ACD4E2CF706037E40AF6C0A38BD442BEFF",
+    "reports/vivado/corrected/rs2_current/postroute_sweep/timing_9p000ns.rpt": "E6339FEBF625317D8ADF4AC0F4B3C1EC47732A989B3B6978568D3DD09D7A4EF7",
+    "reports/vivado/vivado_rs2-impl.log": "4687DC8E5BFBF81E685782913EE9239E13684DB084F75DA3C358C6735132195D",
+    "reports/vivado/vivado_rs2-postroute-sweep.log": "8206B7BD36753FA89ED28B987E20F8C48A5D988D36F68606DCE4946E761529B3"
+  },
+  "route_completion": "PASS",
+  "rtl_transformation": {
+    "integrity_status": "PASS",
+    "output": "build/vivado/rs2_ooc_rtl/gdn_rs2_top.v",
+    "output_sha256": "98E5AD855304FD864304FEB532BFCEF5F64C56CD681B2A5183951F3F3999BF40",
+    "source": "gdn_rs2_hls/u55c_250mhz/syn/verilog/gdn_rs2_top.v",
+    "source_sha256": "BE4C2C13B3B2E59A30453AA1F6092A68476EB123268ECF711D61081100183EC2",
+    "status": "PASS",
+    "timestamp": "2026-08-06T12:32:36.803455+00:00",
+    "transformation": "insert_top_level_bufgce_and_rewire_internal_ap_clk"
+  },
+  "schema": 1,
+  "scope": "selected native-MXFP4 RS2/R3 all-layer persistent-state kernel, out-of-context post-route on U55C",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 108154,
+      "changed_file_count": 11,
+      "sha256": "D9BD0178E18BD7567A1B45CF72A16C938D3296D02F64F8C108C40A4E1E8C5072"
+    },
+    "files": {
+      "hls/rs2/include/gdn_rs2_kernel.hpp": {
+        "bytes": 9508,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "15B937C959C3E88729EBD658CF60CC1FE58E72CD2BB402BAC53C2189DD1F5132"
+      },
+      "hls/rs2/src/gdn_rs2_top.cpp": {
+        "bytes": 57674,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E"
+      },
+      "hls/rs2/src/rs2_arithmetic.cpp": {
+        "bytes": 9857,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "34AE95CD5E2F48ABC53C3FFDC2477179093FE83DFA6787597F41FFD994A3B03F"
+      },
+      "scripts/prepare_rs2_ooc_rtl.py": {
+        "bytes": 3314,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "8148F76908990178BA2187AD51C0E2ADB35D8D85FF8D4EB51F331F8841661B88"
+      },
+      "scripts/rs2_vivado_report.py": {
+        "bytes": 15935,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "E15AAC3E6F8D072DA83C7436191391A40C476FC94EECA255F69DD4BB2AE495D7"
+      },
+      "vivado/tcl/create_rs2_project.tcl": {
+        "bytes": 1406,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "3CF605F14C5DA7EC7E7FCBBDC1423400103E92A40BA6BD31C9E9A3393A660C1E"
+      },
+      "vivado/tcl/run_rs2_impl.tcl": {
+        "bytes": 1467,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "6CD30F06B944F36A50AFC8D130A80520DB0CF8FCD9E4E3B643118B9F6A9BEF9C"
+      },
+      "vivado/tcl/run_rs2_postroute_fanout_opt.tcl": {
+        "bytes": 863,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "51A24C08E04BFA4CD0CCBDD83CEB45690F4C2A09EB5B15A31B1B83FCBFFE6957"
+      },
+      "vivado/tcl/run_rs2_postroute_retime_opt.tcl": {
+        "bytes": 888,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B9DC3A90D8BB269F74CF8A27816DD071F3D92E93BB2B47C7FD534EB0A8436C8F"
+      },
+      "vivado/tcl/run_rs2_postroute_slr_opt.tcl": {
+        "bytes": 844,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "14AFD8B8A57868EBC9AB93CA74DBA86492E220FDD5F85E871BDA361BB42D7AAB"
+      },
+      "vivado/tcl/run_rs2_postroute_sweep.tcl": {
+        "bytes": 1343,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "E4DD10E6E121D9A25B40E7AE43016E5BACAAF15D66D3059BAD252490B2E137AF"
+      }
+    },
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+  "status": "PASS",
+  "target_clock": {
+    "frequency_mhz": 250.0,
+    "period_ns": 4.0,
+    "status": "FAIL",
+    "timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 221457,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 43593,
+      "setup_total_endpoints": 221870,
+      "ths_ns": 0.0,
+      "tns_ns": -24864.826,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.736,
+      "wpws_ns": 1.3
+    }
+  },
+  "timing_sweep": [
+    {
+      "frequency_mhz": 250.0,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 221457,
+      "period_ns": 4.0,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 43593,
+      "setup_status": "FAIL",
+      "setup_total_endpoints": 221870,
+      "sha256": "0EC99C4EA28194F3C9C50AED34B447A5CC3C3001C8F516CB5B04DE514300ED87",
+      "source": "reports/vivado/corrected/rs2_current/postroute_sweep/timing_4p000ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": -24864.826,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.736,
+      "wpws_ns": 1.3
+    },
+    {
+      "frequency_mhz": 200.0,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 221457,
+      "period_ns": 5.0,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 5971,
+      "setup_status": "FAIL",
+      "setup_total_endpoints": 221870,
+      "sha256": "F984721EB3D393D88563F8EE0AB18DB553C3D40898CC9E854A7B901AFB17AA44",
+      "source": "reports/vivado/corrected/rs2_current/postroute_sweep/timing_5p000ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": -1239.693,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -0.736,
+      "wpws_ns": 1.8
+    },
+    {
+      "frequency_mhz": 166.66666666666666,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 221457,
+      "period_ns": 6.0,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 0,
+      "setup_status": "PASS",
+      "setup_total_endpoints": 221870,
+      "sha256": "870D07BE288755654AB8CA5B529810E90F65617CD7ACB21A91599370929D64AF",
+      "source": "reports/vivado/corrected/rs2_current/postroute_sweep/timing_6p000ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": 0.0,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": 0.264,
+      "wpws_ns": 2.3
+    },
+    {
+      "frequency_mhz": 153.84615384615384,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 221457,
+      "period_ns": 6.5,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 0,
+      "setup_status": "PASS",
+      "setup_total_endpoints": 221870,
+      "sha256": "BD1E89DEDF8B9CEFB85F9F219DB79532073008F06469554D7828207FC4811F94",
+      "source": "reports/vivado/corrected/rs2_current/postroute_sweep/timing_6p500ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": 0.0,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": 0.764,
+      "wpws_ns": 2.55
+    },
+    {
+      "frequency_mhz": 142.85714285714286,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 221457,
+      "period_ns": 7.0,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 0,
+      "setup_status": "PASS",
+      "setup_total_endpoints": 221870,
+      "sha256": "1831D6846B2D286DB6F1AAE63A02E3069BDD993440B82E6FD6B5AAAB8EB9676D",
+      "source": "reports/vivado/corrected/rs2_current/postroute_sweep/timing_7p000ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": 0.0,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": 1.264,
+      "wpws_ns": 2.8
+    },
+    {
+      "frequency_mhz": 133.33333333333334,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 221457,
+      "period_ns": 7.5,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 0,
+      "setup_status": "PASS",
+      "setup_total_endpoints": 221870,
+      "sha256": "F6AA65AE1FDB9C45DC8194C44E6532874861F1973A32A8145D42D7F13B7A6454",
+      "source": "reports/vivado/corrected/rs2_current/postroute_sweep/timing_7p500ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": 0.0,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": 1.764,
+      "wpws_ns": 3.05
+    },
+    {
+      "frequency_mhz": 125.0,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 221457,
+      "period_ns": 8.0,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 0,
+      "setup_status": "PASS",
+      "setup_total_endpoints": 221870,
+      "sha256": "8E7CE240789DE642DD0E80BDC3E5B5ACD4E2CF706037E40AF6C0A38BD442BEFF",
+      "source": "reports/vivado/corrected/rs2_current/postroute_sweep/timing_8p000ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": 0.0,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": 2.264,
+      "wpws_ns": 3.3
+    },
+    {
+      "frequency_mhz": 111.11111111111111,
+      "hold_failing_endpoints": 0,
+      "hold_status": "PASS",
+      "hold_total_endpoints": 221457,
+      "period_ns": 9.0,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 0,
+      "setup_status": "PASS",
+      "setup_total_endpoints": 221870,
+      "sha256": "E6339FEBF625317D8ADF4AC0F4B3C1EC47732A989B3B6978568D3DD09D7A4EF7",
+      "source": "reports/vivado/corrected/rs2_current/postroute_sweep/timing_9p000ns.rpt",
+      "ths_ns": 0.0,
+      "tns_ns": 0.0,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": 3.264,
+      "wpws_ns": 3.8
+    }
+  ],
+  "tool": {
+    "target_device": "xcu55c-fsvh2892-2L-e",
+    "tool_version": "Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025"
+  },
+  "tool_shutdown": {
+    "exception": null,
+    "qualification": "Vivado exited normally after completing the sweep.",
+    "status": "PASS"
+  },
+  "utilization": {
+    "block_ram_tiles": {
+      "available": 2016,
+      "used": 341,
+      "utilization_percent": 16.91
+    },
+    "bufgce": {
+      "available": 288,
+      "used": 2,
+      "utilization_percent": 0.69
+    },
+    "clb_luts": {
+      "available": 1303680,
+      "used": 82038,
+      "utilization_percent": 6.29
+    },
+    "clb_registers": {
+      "available": 2607360,
+      "used": 69800,
+      "utilization_percent": 2.68
+    },
+    "dsps": {
+      "available": 9024,
+      "used": 12,
+      "utilization_percent": 0.13
+    },
+    "uram": {
+      "available": 960,
+      "used": 598,
+      "utilization_percent": 62.29
+    }
+  },
+  "vectorless_power": {
+    "components": {
+      "block_ram_w": 0.137,
+      "clb_logic_w": 0.335,
+      "clocks_w": 0.294,
+      "dsps_w": 0.004,
+      "signals_w": 0.45,
+      "uram_w": 0.654
+    },
+    "confidence": "Medium",
+    "dynamic_w": 1.874,
+    "energy_per_token": "NOT_DERIVED",
+    "frequency_mhz": 166.66666666666666,
+    "measured_on_board": false,
+    "method": "Vivado vectorless activity propagation",
+    "period_ns": 6.0,
+    "static_w": 3.368,
+    "timing_closed_at_this_period": true,
+    "total_on_chip_w": 5.242
+  }
+}

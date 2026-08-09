@@ -84,7 +84,9 @@ def test_corrected_paper_assets_are_evidence_backed_and_release_neutral(
     assert numbers["uniform_mxfp4_all_layer_logical_state_mib"]["value"] == 9.5625
     assert numbers["bf16_ideal_min_uram_for_mantissas"]["value"] == 1024
     assert numbers["u55c_available_uram"]["value"] == 960
-    assert numbers["physical_all_layer_state_bank_fit"]["value"] == "NOT_RUN"
+    assert numbers["physical_all_layer_state_bank_fit"]["value"] == "SEE_PHYSICAL_FIT_BY_VARIANT"
+    assert numbers["bf16_physical_fit_status"]["value"] == "PASS"
+    assert numbers["bf16_first_tested_closing_period_ns"]["value"] == 7.125
     assert numbers["bf16_step_input_logical_bytes"]["value"] == 16512
     assert numbers["uniform_mxfp4_step_input_logical_bytes"]["value"] == 4480
     assert numbers["corrected_candidate_step_input_logical_bytes"]["value"] == 8832

@@ -1,0 +1,169 @@
+{
+  "candidate_evidence_status": "NOT_RUN",
+  "candidate_name": "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5",
+  "controlled_configuration": {
+    "accumulator_bits": 32,
+    "activation_block_size": 32,
+    "activation_stack_depth": 2,
+    "alignment_guard_bits": 5,
+    "base_stack_depth": 2,
+    "coefficient_format": "Q1.15",
+    "element_format": "E2M1",
+    "fold_policy": "fixed atomic all-head fold after three writes",
+    "key_dim": 128,
+    "log_capacity": 3,
+    "log_stack_depth": 2,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "shared_scale_format": "E8M0",
+    "state_block_size": 32,
+    "target": "AMD Alveo U55C xcu55c-fsvh2892-2L-e",
+    "value_dim": 128
+  },
+  "development_gate": {
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "initial_state_modes": [
+      "random",
+      "zero"
+    ],
+    "results": {
+      "random": {
+        "cumulative_accumulator_saturations": 0,
+        "cumulative_element_saturations": 0,
+        "cumulative_scale_clamps": 0,
+        "evidence_sha256": {
+          "reports/benchmark/corrected/rs2_encoded/r3_development/high_retention_0000fb72_random_1024_checkpoints.csv": "FA30922210137CD5C8258373DAF9F3EF84BDDEEFD4F3103F0820806729ED0433",
+          "reports/benchmark/corrected/rs2_encoded/r3_development/high_retention_0000fb72_random_1024_manifest.json": "B4D6BEB4545BFEAB00CCE814651B317A6F361B08E9F33C2F8E33CAB0D8386202",
+          "reports/benchmark/corrected/rs2_encoded/r3_development/high_retention_0000fb72_random_1024_tokens.csv": "69035B51150E92FDACF047FC43E1CFD692A189ED44FA28A00B4A18BA914663D4"
+        },
+        "final_state_relative_l2": 0.08160588521134571,
+        "input_stream_sha256": "F36CDB646F79095EBC6B2EB93F2231B7F4F3FEA58CD5C1E58F51314E7552A656",
+        "maximum_all_token_state_relative_l2": 0.08244488557132311,
+        "minimum_all_token_output_cosine": 0.9961808777325812,
+        "minimum_checkpoint_output_cosine": 0.9966242698248406
+      },
+      "zero": {
+        "cumulative_accumulator_saturations": 0,
+        "cumulative_element_saturations": 0,
+        "cumulative_scale_clamps": 0,
+        "evidence_sha256": {
+          "reports/benchmark/corrected/rs2_encoded/r3_development/high_retention_0000fb72_zero_1024_checkpoints.csv": "02AB0ECE71A5D27BE4A1225FAA6DE1B3050F0E3CCFC133BEA2CF3F47553D6800",
+          "reports/benchmark/corrected/rs2_encoded/r3_development/high_retention_0000fb72_zero_1024_manifest.json": "9018952D9D4B0C8DF47D0B29B95E60BA7262153206CF44CDEE2B5EC4A5FC3D8F",
+          "reports/benchmark/corrected/rs2_encoded/r3_development/high_retention_0000fb72_zero_1024_tokens.csv": "F9C0D8DC952A13647B867163109190D44C16FF525DEFF3268D14B902CE109005"
+        },
+        "final_state_relative_l2": 0.08166668320894137,
+        "input_stream_sha256": "1084E695938E2E38ECFD16802A18BF8CB1D2B2431C70FD98D059FC2B70312D86",
+        "maximum_all_token_state_relative_l2": 0.08236293308691847,
+        "minimum_all_token_output_cosine": 0.9962387099809155,
+        "minimum_checkpoint_output_cosine": 0.9966541250326769
+      }
+    },
+    "seed": 64370,
+    "seed_hex": "0xFB72",
+    "status": "PASS",
+    "tokens": 1024,
+    "trace_family": "high_retention"
+  },
+  "extended_development_gate": {
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "initial_state_modes": [
+      "random",
+      "zero"
+    ],
+    "rule": "both runs must pass every registered quality threshold",
+    "seed": 64370,
+    "seed_hex": "0xFB72",
+    "status": "NOT_RUN",
+    "tokens": 8192,
+    "trace_family": "high_retention"
+  },
+  "frozen_source_sha256": {
+    "golden/gdn_e2m0_encoded.py": "1CD8859E345B42AD0E47370C7F6C55AB47873792DBC848019C998DC41EF40CB0",
+    "golden/gdn_e2m0_encoded_vectorized.py": "393CC77CD03B395D2FEFE2145AA9C771CEFEF213E128F67A9D44CE878A0787B4",
+    "golden/gdn_mxfp4_encoded.py": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402",
+    "golden/gdn_mxfp4_encoded_vectorized.py": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D",
+    "golden/gdn_rs2_encoded.py": "B2AB1B22ED6CB2A9626671904F7698598ACDAB79E7E533500CAAB10F24036CE3",
+    "golden/gdn_rs2_encoded_vectorized.py": "29DBC4EEC7CF03FAE7059C5BD012904CE0EFCB9B54F34228CB14308B54EF62A1",
+    "scripts/register_rs2_encoded_candidate.py": "C08D7632F19C682E2D6CBC89C829775B78466669E6906D782086A990806D0507",
+    "scripts/rs2_encoded_stability.py": "B6A6F63AC7A12852772535F315EB4F89DD778B15FF5E04B6B8D4022671658C53",
+    "scripts/verify_rs2_encoded_stability.py": "37A204E62561A5D36EE021FE48C927309FF2C2D94EDF4D7D50A2780AFB729662"
+  },
+  "held_out_gate": {
+    "aggregate_rule": "all six runs must pass every registered quality threshold",
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "execution_order": "seed order as registered; random then zero within each seed",
+    "initial_state_modes": [
+      "random",
+      "zero"
+    ],
+    "run_count": 6,
+    "seed_hex": [
+      "0xA17E5EED",
+      "0xC4D3B2A1",
+      "0x06E5A1D0"
+    ],
+    "seeds": [
+      2709413613,
+      3302208161,
+      115712464
+    ],
+    "split": "rs2_encoded_held_out",
+    "status": "NOT_RUN",
+    "tokens": 1024,
+    "trace_family": "high_retention"
+  },
+  "limitations": [
+    "synthetic layer-level encoded-integer evidence only at registration",
+    "HLS, RTL, routed, board-energy, and closed-loop model evidence remain NOT_RUN",
+    "the encoded payload is smaller than BF16 but 6.70 percent larger than uniform MXFP8"
+  ],
+  "logical_state_bytes": {
+    "encoded_candidate": 576912,
+    "uniform_bf16": 1048576,
+    "uniform_mxfp8_e4m3_b32": 540672
+  },
+  "mitigation_history": [
+    {
+      "accumulator_saturations": 0,
+      "all_token_output_cosine_min": 0.9942235348398534,
+      "all_token_state_relative_l2_max": 0.10262031499307715,
+      "candidate": "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r2_q1_15_int32_guard5",
+      "element_saturations": 0,
+      "manifest": "reports/benchmark/corrected/rs2_encoded/development/high_retention_0000fb72_random_1024_manifest.json",
+      "manifest_sha256": "ECA469C9F95290DAA1CDC7A02AE4A919ED53A286EC5EFA633E54843EBA7F62F0",
+      "reason": "all-token state relative L2 exceeded the frozen 0.10 limit",
+      "scale_clamps": 0,
+      "single_change": "increase fixed write-log capacity from two to three entries",
+      "status": "FAIL"
+    }
+  ],
+  "quality_gate": {
+    "encoded_accumulator_saturations_required": 0,
+    "encoded_element_saturations_required": 0,
+    "encoded_scale_clamps_required": 0,
+    "maximum_all_token_state_relative_l2": 0.1,
+    "maximum_final_state_relative_l2": 0.1,
+    "minimum_all_token_output_cosine": 0.99,
+    "minimum_checkpoint_output_cosine": 0.99
+  },
+  "registered_at": "2026-08-06T09:42:58.921177+00:00",
+  "registration_status": "PASS",
+  "schema": 1,
+  "scope": "encoded-integer native-MXFP4 layer-level synthetic recurrent stability",
+  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+  "stopping_rule": "Do not alter the registered candidate after held-out execution. Retain every failed run and report the aggregate failure."
+}

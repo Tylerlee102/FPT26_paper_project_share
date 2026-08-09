@@ -1,0 +1,12 @@
+\begin{tabular}{lrrr}
+\toprule
+Metric & BF16 & Native MXFP4 RS2/R3 & Ratio \\
+\midrule
+Logical state bytes/layer & 1{,}048{,}576 & 576{,}912 & 0.550 \\
+HLS LUT & 85{,}350 & 167{,}082 & 1.958 \\
+Non-fold STEP max cycles & 4{,}225{,}856 & 13{,}522{,}144 & 3.200 \\
+Amortized cycles/STEP & 4{,}225{,}856 & 43{,}065{,}280 & 10.191 \\
+Estimated Fmax (MHz) & 342.47 & 321.96 & -- \\
+Explicit II=1 loops & PASS & PASS & -- \\
+\bottomrule
+\end{tabular}

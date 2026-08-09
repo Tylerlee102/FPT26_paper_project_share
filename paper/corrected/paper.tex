@@ -11,6 +11,13 @@
 \usepackage{xcolor}
 \usepackage{url}
 
+\ifdefined\WorkingDraft
+\usepackage{draftwatermark}
+\SetWatermarkText{WORKING DRAFT - NOT SUBMISSION READY}
+\SetWatermarkScale{0.52}
+\SetWatermarkColor[gray]{0.88}
+\fi
+
 \setlength{\textfloatsep}{6pt plus 1pt minus 2pt}
 \setlength{\floatsep}{6pt plus 1pt minus 2pt}
 \setlength{\intextsep}{6pt plus 1pt minus 2pt}
@@ -30,34 +37,26 @@ This paper asks whether native Open Compute Project (OCP) MXFP4 arithmetic can
 replace bfloat16 (BF16)-style arithmetic in a persistent-state Gated DeltaNet
 recurrence-core kernel on an AMD Alveo U55C field-programmable gate array
 (FPGA). Persistent state and the five-phase token schedule are inherited from
-prior work and held fixed. We implement E2M1 products in integer lookup-table (LUT) logic and
-E8M0-aware accumulation, then separate floating quantize/dequantize (Q/DQ)
-diagnostics from the native encoded path. At token \CorrectedLongTraceTokens,
-BF16 gives \CorrectedBfSixteenCosineEightK{} output cosine and
-\CorrectedBfSixteenStateRelLTwoEightK{} recurrent-state relative $L_2$ error
-against single-precision floating point (FP32). MXFP4 Q/DQ gives
-\CorrectedQdqMxfpFourCosineEightK{} and
-\CorrectedQdqMxfpFourStateRelLTwoEightK{}, whereas the native encoded path gives
-\CorrectedNativeEncodedCosineEightK{} and
-\CorrectedNativeEncodedStateRelLTwoEightK{}. The encoded HLS kernel uses
-\CorrectedUniformToBfSixteenLutRatio{} times the LUTs and
-\CorrectedUniformToBfSixteenStepRatio{} times the maximum estimated STEP cycles
-of the fixed-geometry BF16 kernel. A recurrence-aware residual/write-log
-candidate passes \CorrectedHeldoutSeedBlocks{} test seed blocks crossed with
-two initial-state conditions and two \CorrectedLongTraceTokens{}-token
-development conditions, but uses \CorrectedCandidateToBfSixteenLutRatio{} times
-the BF16 LUTs and misses \CorrectedCandidateFailedIiLoops{} explicit II=1
-constraints. Thus the present native MXFP4 implementations do not support
-replacing BF16. The corrected candidate's out-of-context post-route image fits
-using \CorrectedPostrouteLut{} CLB LUTs and \CorrectedPostrouteUram{} of
-\CorrectedDeviceAvailableUram{} URAMs, but has
-\CorrectedPostrouteTwoFiftyWnsNs{} ns worst negative slack at
-\CorrectedPostrouteTargetMhz{} MHz; the first passing point in the tested
-fixed-route sweep is \CorrectedPostrouteFirstClosingMhz{} MHz. The long-horizon
-quality result is layer-level and synthetic. Four short model-derived Qwen
-layer-12 recurrence traces preserve the same arithmetic ordering but contain
-only \CorrectedQwenRecurrentMinTokens{}--\CorrectedQwenRecurrentMaxTokens{}
-valid tokens each. Power is a vectorless estimate rather than board energy.
+prior work and held fixed. We implement lookup-table (LUT) E2M1 products,
+E8M0-aware integer accumulation, and a recurrence-aware two-term state with a
+three-entry write log (RS2/R3). Against single-precision floating point (FP32),
+the exact encoded path is evaluated at \RsTwoCheckpointSet{} tokens. At token
+\RsTwoLongTokens, BF16 reaches \RsTwoBfSixteenCosineEightK{} output cosine and
+\RsTwoBfSixteenStateLTwoEightK{} recurrent-state relative $L_2$ error; uniform
+MXFP4 floating quantize/dequantize reaches \RsTwoQdqCosineEightK{} and
+\RsTwoQdqStateLTwoEightK{}, while native RS2/R3 reaches
+\RsTwoCandidateCosineEightK{} and \RsTwoCandidateStateLTwoEightK{}. The two
+registered long runs report zero element saturations, accumulator saturations,
+and scale clamps. RS2/R3 stores \RsTwoStatePercentOfBfSixteen{}\% of the BF16
+state, but its HLS estimate uses \RsTwoHlsLutRatio{} times the LUTs and
+\RsTwoHlsAmortizedRatio{} times the amortized cycles per STEP. Its all-layer
+out-of-context image fits, yet has \RsTwoRouteTargetWns{} ns worst negative
+slack at \RsTwoRouteTargetMhz{} MHz; the first passing tested fixed-route point
+is \RsTwoRouteClosingMhz{} MHz. Thus native MXFP4 can satisfy the registered
+long-horizon synthetic stability bounds only with a mitigation that does not replace BF16
+on the measured cost and timing axes. Four short model-derived
+Qwen layer-12 traces are diagnostic rather than closed-loop quality evidence,
+and power is vectorless rather than measured board energy.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -98,23 +97,22 @@ contributes:
         synthesis (HLS) arithmetic with explicit E2M1 decoding, E8M0 alignment,
         round-to-nearest-even (RNE), Q1.15 controls, and event counters;
   \item long synthetic traces at \CorrectedCheckpointSet{} tokens for
-        FP32, BF16, MXFP4 floating Q/DQ, native encoded MXFP4, flat INT4, and
-        a floating-Q/DQ MXFP8-state fallback, plus four short model-derived
-        recurrence traces and
+        FP32, BF16, MXFP4 floating Q/DQ, native encoded RS2/R3, flat INT4, and
+        an MXFP8-state fallback, plus four short model-derived recurrence traces and
         \CorrectedScalePolicyCount{} scale
         refresh policies;
-  \item a fixed-geometry BF16, encoded-MXFP4, and native-MXFP8 HLS comparison and a
-        separately classified recurrence-aware correction, including
-        out-of-context post-route timing, utilization, design-rule, and
-        vectorless-power evidence for the correction and MXFP8 baseline; and
-  \item an evidence-backed negative answer for the current implementations,
-        including the numerical failure of native encoded MXFP4 and the hardware cost
-        of the correction that meets the frozen long-horizon synthetic gate.
+  \item a fixed-geometry BF16, native-MXFP8, and RS2/R3 HLS comparison, with
+        all-layer out-of-context post-route timing, utilization, design-rule,
+        and vectorless-power evidence for all three implementations; and
+  \item an evidence-backed negative answer: recurrence-aware native MXFP4
+        meets the registered synthetic stability bounds and reduces state
+        bytes, but loses to BF16 in LUT and cycle cost and misses the declared
+        route-frequency target.
 \end{enumerate}
 
 The evaluation covers one recurrence core, synthetic recurrent traces, four
 short model-derived layer-12 recurrence traces, matched HLS estimates, and
-out-of-context implementation attempts. It does not measure Qwen3-Next
+out-of-context implementations. It does not measure Qwen3-Next
 perplexity, downstream accuracy, or board energy. Within that boundary, can native MXFP4 replace BF16-style
 arithmetic while reducing FPGA cost and limiting empirical recurrent-state
 drift over long synthetic decode traces?
@@ -203,7 +201,7 @@ E2M1/E8M0 FPGA arithmetic & Modified & OCP format plus QLlama and Jack of All
 Scales \cite{ocpmx,qllama,jackscales} \\
 Encoded arithmetic oracle & Newly proposed & Artifact-specific independent
 integer implementation \\
-E2M1/E2M0 residual plus fixed write log & Modified & Related
+Two-term E2M1/E8M0 state and fixed R3 write log & Modified & Related
 residual-buffer methods exist \cite{kivi,ssdi8}; no first-use claim \\
 Long-horizon drift harness & Newly proposed & Same recurrence and synthetic
 input prefix \\
@@ -262,22 +260,22 @@ wider coefficient operations may still map to DSPs and are reported as such.
 
 \subsection{Recurrence-Aware Correction}
 Native encoded MXFP4 fails the frozen finite-trace thresholds, so we also
-evaluate one locally frozen correction. The base state has an E2M1 primary term and a dense
-signed \CorrectedEZeroResidualBits{}-bit E2M0-style residual, each with B32
-scales. \CorrectedResidualStackTerms{}-term residual-stacked E2M1 vectors
-represent token inputs and live rank-one writes.
-Up to \CorrectedLogCapacity{} writes remain in a log with Q1.15 decay
-coefficients. At capacity, all \CorrectedLogCapacity{} entries are folded
-tilewise into the base and the log is cleared.
-This candidate aligns shared exponents with \CorrectedAlignmentGuardBits{}
-guard bits before signed \CorrectedAccumulatorBits{}-bit accumulation.
+evaluate one locally frozen correction. The base state is the sum of two E2M1
+terms, each with an independent E8M0 B32 scale. Token $q$, $k$, and $v$ vectors
+and each live rank-one write use the same two-term representation. Up to three
+writes remain in a log with Q1.15 decay coefficients. At capacity, all three
+entries are folded tilewise into the base and the log is cleared. The encoded
+implementation aligns shared exponents with \CorrectedAlignmentGuardBits{} guard bits before signed
+\CorrectedAccumulatorBits{}-bit accumulation; these constants are emitted as
+generated macros and tables with the result artifacts.
 
 This representation is a mitigation, not the controlled uniform replacement.
 It changes the physical state representation and adds a periodic fold. Its
-logical payload is \CorrectedLogicalStateBytes{} bytes per layer, only
-\CorrectedBytesBelowMxfpEight{} bytes below a uniform
-MXFP8-E4M3-B32 state. Exact arithmetic equivalence was tested separately before
-quantized evaluation.
+logical payload is \RsTwoLogicalStateBytes{} bytes per layer,
+\RsTwoStatePercentOfBfSixteen{}\% of BF16 and
+\RsTwoStatePercentAboveMxfpEight{}\% larger than a uniform MXFP8-E4M3-B32
+state. Exact arithmetic equivalence was tested separately before quantized
+evaluation.
 
 \section{FPGA Implementation}
 Both controlled baselines use equivalent persistent-state command semantics and
@@ -286,16 +284,9 @@ the same five-phase token organization. Commands select one of
 READBACK. Their data-plane encodings are not identical: BF16 transports BF16
 tensors, whereas MXFP4 transports encoded elements and scales and returns
 expanded integer output fields. Packing and token quantization are outside both
-HLS kernels. Before interface packing, a STEP consumes
-\CorrectedBfSixteenStepInputBytes{} logical input bytes in the BF16 kernel and
-\CorrectedUniformMxfpFourStepInputBytes{} in the uniform MXFP4 kernel; the
-corrected residual-stack candidate consumes
-\CorrectedCandidateStepInputBytes{}. BF16 returns
-\CorrectedBfSixteenOutputBytes{} logical output bytes, while the native kernels'
-expanded INT32-mantissa/INT16-exponent fields total
-\CorrectedNativeExpandedOutputBytes{}. These are type-layout counts, not
-measured AXI traffic; RESET has no tensor payload, and resident-state LOAD and
-READBACK use their separately reported logical state payloads. The HLS target is
+HLS kernels. Table~\ref{tab:transfers} reports exact logical tensor payloads
+for LOAD, READBACK, and STEP. These are type-layout counts before interface
+packing, not measured AXI traffic; RESET has no tensor payload. The HLS target is
 \texttt{xcu55c-fsvh2892-2L-e} under Vitis HLS
 \CorrectedHlsToolVersion{} at \CorrectedTargetClockNs{} ns with
 $P_K=\CorrectedPk$, $P_V=\CorrectedPv$, and B32.
@@ -303,17 +294,25 @@ We retain the U55C target used by the inherited BF16 dataflow so the arithmetic
 comparison does not also change devices. We fix this target and parallelism
 point for the replacement rather than tune each format independently.
 
-The corrected candidate adds packed primary and residual banks,
-\CorrectedLogCapacity{} packed key/update log entries, per-head gamma and lambda
+The corrected candidate adds packed primary and residual banks, three packed
+key/update log entries, per-head gamma and lambda
 coefficients, and event counters. A non-mutating snapshot exposes all
 persistent fields for exact verification. Folding is atomic at the command
 boundary.
+
+\begin{table}[t]
+\centering
+\caption{Logical command payload sizes before AXI packing.}
+\label{tab:transfers}
+\footnotesize
+\input{paper/corrected/tables/rs2_transfer_sizes.tex}
+\end{table}
 
 Figure~\ref{fig:datapath} maps the correction onto the inherited five-phase
 schedule. The base state remains resident while each STEP decays its
 coefficient, evaluates the base and live writes, appends the new rank-one
 update, and reads the output from the updated logical state. When the
-\CorrectedLogCapacity{}-entry log fills, a tilewise fold runs after the output
+three-entry log fills, a tilewise fold runs after the output
 has observed the newest write.
 
 \begin{figure*}[t]
@@ -329,28 +328,18 @@ not physical-placement evidence.}
 \end{figure*}
 
 Logically, B32 blocks run along the V-column axis within each K row. The code
-partitions the K and V access lanes by $P_K$ and $P_V$ and targets an initiation
-interval (II) of \CorrectedTargetIi{} on inner loops. Source directives request
-block RAM and UltraRAM bindings, but the inferred memory counts contradict
-bit-capacity lower bounds for the declared deep arrays and are excluded from
-paper conclusions.
-After removing invalid pipeline directives from long validation and
-requantization loops, HLS estimates a \CorrectedCandidatePathNs{} ns path. The
-\CorrectedTargetClockNs{} ns target and tool-reported uncertainty imply a
-\CorrectedConfiguredTimingBudgetNs{} ns effective budget, so the estimate
-misses the configured margin by \CorrectedConfiguredTimingShortfallNs{} ns.
-\CorrectedCandidateFailedIiLoops{} remaining targeted loops achieve
-II=\CorrectedFailedLoopIi{} rather than II=\CorrectedTargetIi{}. HLS reports
-\CorrectedCandidateDsp{} DSPs for coefficient and
+uses the same $P_K$ and $P_V$ constants as the BF16 comparator and targets an
+initiation interval (II) of \CorrectedTargetIi{} on its explicitly pipelined
+inner loops. All reported targeted loops meet II=1. HLS estimates
+\RsTwoHlsFmax{} MHz and reports \RsTwoHlsLut{} LUTs and \RsTwoHlsDsp{} DSPs.
+The DSPs implement coefficient and
 wider arithmetic; the E2M1 element multiplier itself remains integer logic.
-These source bindings and estimates do not establish a physically allocated
-\CorrectedNumLayers{}-layer bank by themselves;
-Section~\ref{sec:postroute} separately reports the corrected candidate's
-out-of-context implementation.
+Section~\ref{sec:postroute} separately reports the physically allocated
+\CorrectedNumLayers{}-slot out-of-context implementation.
 
 \section{Evaluation}
 \subsection{Questions and Controls}
-The experiments answer three questions:
+The experiments answer these questions:
 
 \begin{itemize}
   \item Does native encoded MXFP4 limit empirical output and recurrent-state
@@ -364,50 +353,49 @@ The experiments answer three questions:
         clock target after out-of-context routing?
 \end{itemize}
 
-The controlled nominal baseline variants use \CorrectedNumQkHeads{} query/key heads,
+The controlled variants use \CorrectedNumQkHeads{} query/key heads,
 \CorrectedNumValueHeads{} value heads, $K=\CorrectedKeyDim$,
 $V=\CorrectedValueDim$, the
 same K-by-V state, and the same generated input prefix. The development seed is
 \texttt{\CorrectedSeedHex}. Required checkpoints are \CorrectedCheckpointSet.
-The nominal trace draws query and key vectors from independent standard normal
+The trace draws query and key vectors from independent standard normal
 distributions before normalization. Values and random initial states are
 zero-mean normal with standard deviations \CorrectedSyntheticValueStdDev{} and
 \CorrectedSyntheticInitialStateStdDev{}, respectively. Nominal decay and delta
 gates follow $\mathcal{U}[\CorrectedNominalAlphaMinimum,
 \CorrectedNominalAlphaMaximum]$ and
 $\mathcal{U}[\CorrectedNominalBetaMinimum,\CorrectedNominalBetaMaximum]$.
-The high-retention correction traces keep the vector distributions but use
+The long-horizon comparison uses the high-retention family, which keeps the
+vector distributions but uses
 $\alpha\sim\mathcal{U}[\CorrectedHighRetentionAlphaMinimum,
 \CorrectedHighRetentionAlphaMaximum]$ and
 $\beta\sim\mathcal{U}[\CorrectedHighRetentionBetaMinimum,
 \CorrectedHighRetentionBetaMaximum]$, with both random and zero initial states.
 Changing the trace-family tag changes the deterministic RNG stream, even at the
-same seed. The correction results are therefore not paired numerical ablations
-of the nominal baseline trace.
+same seed. Every variant in the main checkpoint table consumes the same
+high-retention random-state input prefix; zero-state and held-out runs are
+additional RS2/R3 stability checks.
 The frozen engineering gate requires output cosine at least
 \CorrectedOutputCosineThreshold{} at every checkpoint, final state relative
 $L_2$ at most \CorrectedFinalStateRelLTwoThreshold{}, and zero element
 saturation, accumulator saturation, and scale-clamp events. These are the three
-hard-event counters; alignment underflows and deliberate E2M0 residual clips
-are reported but excluded from the zero-event condition. We fixed these
+hard-event counters; alignment underflows and state-scale changes are reported
+but excluded from the zero-event condition. We fixed these
 complementary diagnostics before test-set access: cosine constrains observable
 output direction, while state relative $L_2$ constrains hidden-state magnitude.
 They were not calibrated to downstream model quality.
 
-The correction uses \CorrectedHeldoutSeedBlocks{} test seed blocks crossed with
-random and zero initial states, producing \CorrectedHeldoutPairedConditions{}
-paired \CorrectedHeldoutTraceTokens{}-token conditions. Every artifact was
+RS2/R3 uses \RsTwoHeldoutRuns{} held-out conditions formed by crossing the
+registered seed blocks with random and zero initial states. Every artifact was
 deterministically recomputed by the same implementation and compared field by
 field with its recorded comma-separated values (CSV) artifact. This checks
 integrity and determinism, not implementation independence. The
-\CorrectedExtendedRunCount{} \CorrectedLongTraceTokens{}-token
-development runs use the same
+\RsTwoExtendedRuns{} \RsTwoLongTokens{}-token development runs use the same
 recorded seed with random and zero initial states. Each longer run was fully
 recomputed from source and compared field by field with its recorded CSV
 artifact. The encoded HLS candidate was
-also checked for \CorrectedArithmeticCsimCases{} frozen arithmetic cases and for
-\CorrectedStatefulCsimTokens{} stateful C-simulation tokens through repeated
-folds and final snapshot readback.
+also checked against frozen arithmetic cases and a stateful C-simulation trace
+through repeated folds and final snapshot readback.
 
 The corrected candidate is synthesized and routed out of context for the
 declared U55C part. A source-level clock-buffer insertion is hash-checked
@@ -415,15 +403,15 @@ against the HLS-generated top before implementation. Timing is re-reported on
 the same routed checkpoint at several clock periods; the first passing tested
 point is not interpreted as a binary-searched maximum frequency. Post-route
 power uses Vivado vectorless activity propagation at a timing-closed
-\CorrectedPostroutePowerPeriodNs{} ns period. It is a tool estimate, not board
+\RsTwoRouteClosingPeriodNs{} ns period. It is a tool estimate, not board
 telemetry. Vitis HLS/XSIM also runs
 \CorrectedEZeroControlCosimCommands{} exact early-return commands through the
 generated RTL. Those commands exercise control/status behavior but no recurrent
 state transition. A direct AXI harness over the same HLS-generated Verilog
-additionally completes an exact candidate LOAD in
-\CorrectedEZeroRtlDirectLoadCycles{} cycles. Two isolated official 64-token
-XSIM attempts exhaust host memory before transaction one, so neither result is
-reported as candidate recurrent RTL parity.
+executes \RsTwoRtlTransactions{} ordered commands and compares
+\RsTwoRtlOutputs{} output fields plus the final persistent-state snapshot.
+Its generated status macro is \RsTwoRtlStatus{}. Official full-trace XSIM is
+kept as a separate evidence row rather than inferred from the direct harness.
 
 Separately, a pinned real Qwen3-Next layer-input capture at layer
 \CorrectedQwenCaptureLayer{} is combined with the matching checkpoint
@@ -451,36 +439,42 @@ missing later level.
 
 \section{Results}
 \subsection{Uniform Arithmetic Replacement}
-Figure~\ref{fig:long} and Table~\ref{tab:long} show the controlled synthetic
-trace. BF16 remains close to FP32 through the final checkpoint. Both MXFP4 Q/DQ
-and native encoded MXFP4 fail the frozen criteria, and the encoded path drifts
-more than its floating diagnostic. Flat INT4 also fails. The floating-Q/DQ
-MXFP8-E4M3 state fallback
-improves on four-bit state but still misses both final criteria. Thus the Q/DQ
-curve cannot be paired with the encoded HLS cost as if they were one
-implementation.
+Figures~\ref{fig:cosine} and~\ref{fig:state-error}, together with
+Table~\ref{tab:long}, use one controlled high-retention input prefix for every
+variant. BF16 remains close to FP32 through the final checkpoint. Uniform
+MXFP4 floating Q/DQ and flat INT4 drift substantially. Keeping MXFP4 token
+operands while widening only the state to MXFP8 improves both metrics but does
+not meet the registered RS2/R3 state-error bound. Native RS2/R3 reaches
+\RsTwoCandidateCosineEightK{} output cosine and
+\RsTwoCandidateStateLTwoEightK{} state relative $L_2$ at token
+\RsTwoLongTokens{}, while BF16 reaches \RsTwoBfSixteenCosineEightK{} and
+\RsTwoBfSixteenStateLTwoEightK{}. The uniform Q/DQ curve is a diagnostic and is
+not paired with the encoded RS2/R3 hardware cost as if they were one method.
 
-Two supplemental full-geometry, \CorrectedLongTraceTokens{}-token Q/DQ
-traces test deterministic exponent cycling and alternating-sign cancellation.
-Each pair below reports (output cosine, state relative $L_2$) at token 8192.
-Dynamic range gives BF16
-$($\CorrectedDynamicRangeBfSixteenCosineEightK{},
-\CorrectedDynamicRangeBfSixteenStateRelLTwoEightK{}$)$, MXFP4
-$($\CorrectedDynamicRangeQdqMxfpFourCosineEightK{},
-\CorrectedDynamicRangeQdqMxfpFourStateRelLTwoEightK{}$)$, and MXFP8 state
-$($\CorrectedDynamicRangeMxfpEightStateCosineEightK{},
-\CorrectedDynamicRangeMxfpEightStateRelLTwoEightK{}$)$.
-Cancellation gives BF16
-$($\CorrectedCancellationBfSixteenCosineEightK{},
-\CorrectedCancellationBfSixteenStateRelLTwoEightK{}$)$, MXFP4
-$($\CorrectedCancellationQdqMxfpFourCosineEightK{},
-\CorrectedCancellationQdqMxfpFourStateRelLTwoEightK{}$)$, and MXFP8 state
-$($\CorrectedCancellationMxfpEightStateCosineEightK{},
-\CorrectedCancellationMxfpEightStateRelLTwoEightK{}$)$.
-BF16 stays within both full-trace thresholds; every low-precision variant
-fails at least one, although MXFP8 state is the strongest low-precision
-comparator. These traces are synthetic range/cancellation probes, not
-model-derived outlier evidence.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{paper/figures/corrected/rs2_output_cosine_vs_token.pdf}
+\caption{Output cosine versus token index on the controlled synthetic trace.
+The threshold is an engineering criterion, not a model-quality guarantee.}
+\label{fig:cosine}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{paper/figures/corrected/rs2_state_relative_l2_vs_token.pdf}
+\caption{Recurrent-state relative $L_2$ error versus token index on the same
+trace. All variants share the recurrence, dimensions, and input prefix.}
+\label{fig:state-error}
+\end{figure}
+
+\begin{table*}[t]
+\centering
+\caption{Controlled synthetic drift at every required checkpoint. Each cell
+gives output cosine/state relative $L_2$ against FP32.}
+\label{tab:long}
+\scriptsize
+\resizebox{\textwidth}{!}{\input{paper/corrected/tables/rs2_controlled_long.tex}}
+\end{table*}
 
 \paragraph{Real-capture checks.}
 The pinned Qwen layer-input capture contains
@@ -499,38 +493,24 @@ relative $L_2$ of
 \CorrectedQwenRecurrentMxfpEightStateMeanFinalCosine{}/
 \CorrectedQwenRecurrentMxfpEightStateMeanStateRelLTwo{}, and INT4 gives
 \CorrectedQwenRecurrentIntFourMeanFinalCosine{}/
-\CorrectedQwenRecurrentIntFourMeanStateRelLTwo{}. The ordering agrees with the
-synthetic study, but these short traces cannot establish long-horizon stability,
+\CorrectedQwenRecurrentIntFourMeanStateRelLTwo{}. The exact RS2/R3 path gives
+\CorrectedQwenRecurrentRsTwoMeanFinalCosine{}/
+\CorrectedQwenRecurrentRsTwoMeanStateRelLTwo{} on average; its worst cosine
+and state relative $L_2$ are \CorrectedQwenRecurrentRsTwoWorstCosine{} and
+\CorrectedQwenRecurrentRsTwoWorstStateRelLTwo{}. It records
+\CorrectedQwenRecurrentRsTwoAccumulatorSaturations{} transient accumulator
+saturations. These short traces cannot establish long-horizon stability,
 perplexity, or downstream accuracy.
 
 \begin{table*}[t]
 \centering
-\caption{Floating-Q/DQ recurrence diagnostics on four model-derived Qwen
-layer-12 prompt traces. Final values are averaged per prompt; ``worst'' and
-maximum absolute error range over all prompts and valid token positions.}
+\caption{Exact RS2/R3 and floating-Q/DQ recurrence diagnostics on four
+model-derived Qwen layer-12 prompt traces. Final values are averaged per prompt;
+``worst'' and maximum absolute error range over all prompts and valid token
+positions.}
 \label{tab:qwen-recurrence}
 \scriptsize
 \resizebox{\textwidth}{!}{\input{paper/corrected/tables/qwen_recurrent_stability.tex}}
-\end{table*}
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{paper/figures/corrected/long_sequence_stability_panel.pdf}
-\caption{Layer-level synthetic output cosine (left) and recurrent-state relative
-$L_2$ error (right) versus token index. The horizontal threshold guides are
-engineering criteria, not model-quality guarantees. Each line is one
-deterministic nominal development trace. Curves distinguish floating Q/DQ from
-native encoded MXFP4; one seed cannot estimate trace-population uncertainty.}
-\label{fig:long}
-\end{figure*}
-
-\begin{table*}[t]
-\centering
-\caption{Controlled synthetic drift at every required checkpoint. Each
-cell gives output cosine and state relative $L_2$ against FP32.}
-\label{tab:long}
-\scriptsize
-\resizebox{\textwidth}{!}{\input{paper/corrected/tables/long_sequence.tex}}
 \end{table*}
 
 No tested floating-Q/DQ scale policy rescues uniform MXFP4. Fixed scales retain
@@ -554,179 +534,125 @@ changes are cumulative floating quantize/dequantize diagnostics.}
 
 \subsection{Fixed-Geometry HLS Cost}
 Table~\ref{tab:hls} holds the recurrence, dataflow, target, parallelism, and
-block size fixed. The native encoded MXFP4 point is larger and has a longer
-estimated STEP schedule than BF16, so the HLS cost hypothesis fails. Native
-MXFP8 is also synthesized at the same boundary as a wider low-precision
-baseline. The
-different data-plane encodings and excluded packing mean this is not an
-end-to-end interface or energy ratio. All inferred memory counts are omitted
-because they conflict with bit-capacity lower bounds for the declared arrays.
+block size fixed. RS2/R3 reduces logical state bytes but uses
+\RsTwoHlsLutRatio{} times the BF16 LUT estimate,
+\RsTwoHlsNonfoldRatio{} times the maximum non-fold STEP cycles, and
+\RsTwoHlsAmortizedRatio{} times the amortized cycles once periodic folds are
+charged. Native MXFP8 is synthesized at the same boundary as the wider
+low-precision comparator. The different data-plane encodings and excluded
+packing mean these ratios are not end-to-end interface or energy ratios.
 
 \begin{table}[t]
 \centering
-\caption{Fixed-geometry U55C HLS logic and schedule estimates. Memory counts,
-packing, and transport are excluded.}
+\caption{Fixed-geometry U55C HLS logic and schedule estimates.}
 \label{tab:hls}
 \scriptsize
-\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/controlled_hls.tex}}
+\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/rs2_hls.tex}}
 \end{table}
 
-Figure~\ref{fig:tradeoff} places the evidence levels side by side without filling
-missing measurements. The declared \CorrectedNumLayers{}-core BF16 state is
-\CorrectedBfSixteenAllLayerStateMiB{} MiB and requires an ideal minimum of
-\CorrectedBfSixteenIdealUram{} URAM288 primitives, already above the U55C total
-of \CorrectedDeviceAvailableUram{}. Uniform MXFP4 is
-\CorrectedUniformMxfpFourAllLayerStateMiB{} MiB and has an ideal lower bound of
-\CorrectedUniformMxfpFourIdealUram{} URAM288 plus
-\CorrectedUniformMxfpFourIdealBram{} BRAM18K, so it passes only the raw-bit
-necessary condition. These totals cover one sequence of recurrence-core state;
-they exclude weights, convolution state, full-attention key/value caches,
-activations, ports, banking, replication, scratch space, placement, and
-routing. Consequently, they do not establish which complete model fits on the
-card. The matched all-layer BF16 synthesis requires
-\CorrectedBfSixteenRambRequired{} RAMB36/FIFO primitives versus
-\CorrectedBfSixteenRambAvailable{} available, so physical fit is
-\CorrectedBfSixteenPhysicalFit{} and no BF16 routed timing or power result
-exists. A reduced-layer design is not substituted because it would change the
-controlled state layout. The HLS panel contains matched BF16, native encoded MXFP4, and native
-MXFP8 kernels; matched INT4 remains unrun. No energy axis is shown because
-energy was not measured.
+Figure~\ref{fig:tradeoff} separates three non-interchangeable axes: logical
+state payload, final synthetic quality, and HLS cycle estimate. The state
+totals cover one sequence of \CorrectedNumLayers{} recurrence cores; they
+exclude weights, convolution state, full-attention key/value caches,
+activations, shell logic, and scratch space. They therefore answer whether the
+declared recurrence bank fits, not which complete model fits on the card.
+Matched INT4 hardware remains unrun and is not imputed.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{paper/figures/corrected/tradeoff_evidence.pdf}
-\caption{Evidence-level storage, quality, and schedule view, not a measured
-Pareto frontier. (a) Logical recurrent-state payload for
-\CorrectedNumLayers{} cores; raw PASS/FAIL is only a necessary primitive-bit
-capacity condition. (b) Layer-level synthetic output cosine at token
-\CorrectedLongTraceTokens{}; floating Q/DQ and native encoded paths remain
-distinct. (c) Matched fixed-geometry HLS maximum STEP estimates; the unavailable
-INT4 hardware point is marked not run rather than imputed.}
+\includegraphics[width=\textwidth]{paper/figures/corrected/rs2_memory_performance_accuracy.pdf}
+\caption{Memory--performance--accuracy view for the controlled comparators.
+It combines logical storage, synthetic quality, and HLS estimates, not board
+energy or a measured end-to-end Pareto frontier.}
 \label{fig:tradeoff}
 \end{figure*}
 
-\subsection{Recurrence-Aware Correction}
-The correction passes all \CorrectedHeldoutSeedBlocks{} test seed blocks under
-both initial-state conditions. Table~\ref{tab:corrected-quality} reports the
-worst of the \CorrectedHeldoutPairedConditions{} paired test conditions beside
-the two fully recomputed \CorrectedLongTraceTokens{}-token development
-conditions. Passing the three-hard-counter gate does not imply event-free
-arithmetic: the longer runs contain large alignment-underflow and deliberate
-residual-clip counts. The seed block, not each initial-state condition, is the
-stochastic unit. These are finite-trace engineering checks, not a
-lossless-arithmetic or robustness claim.
+\subsection{Registered RS2/R3 Stability}
+RS2/R3 passes the frozen held-out protocol for all \RsTwoHeldoutRuns{} runs and
+both initial-state conditions. Table~\ref{tab:rs2-stability} reports the worst
+held-out metric beside the two independently recomputed
+\RsTwoLongTokens{}-token development runs. The long runs reach a minimum
+all-token cosine of \RsTwoExtendedMinCosine{} and maximum all-token state
+relative $L_2$ of \RsTwoExtendedMaxStateLTwo{}, with
+\RsTwoExtendedElementSaturations{} element saturations,
+\RsTwoExtendedAccumulatorSaturations{} accumulator saturations, and
+\RsTwoExtendedScaleClamps{} scale clamps. Alignment underflow remains a counted
+diagnostic because discarding terms below the retained integer window is part
+of the declared arithmetic; it is not silently reclassified as saturation.
+These are finite-trace engineering checks, not a formal stability certificate.
 
 \begin{table}[t]
 \centering
-\caption{Corrected-candidate test and development results. Test values are the
-worst across \CorrectedHeldoutSeedBlocks{} seed blocks, each paired with random
-and zero initial state. Development values are the worst or total across
-\CorrectedExtendedRunCount{} fully recomputed conditions. Dashes denote
-diagnostics not aggregated for the test set.}
-\label{tab:corrected-quality}
+\caption{Registered RS2/R3 finite-trace stability. Rows aggregate independent
+random- and zero-state runs; all metrics are measured against FP32.}
+\label{tab:rs2-stability}
 \scriptsize
-\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/corrected_quality.tex}}
-\end{table}
-
-The numerical recovery does not produce an FPGA Pareto improvement.
-Table~\ref{tab:mitigation-cost} compares logical storage and HLS estimates with
-both baselines. The correction is larger and slower even before physical
-implementation; its periodic fold also creates a large command burst. Three
-explicit II=\CorrectedTargetIi{} constraints fail.
-
-\begin{table}[t]
-\centering
-\caption{Logical storage and per-layer HLS command estimates for the
-recurrence-aware mitigation. ``Amortized'' charges one fold every
-\CorrectedFoldPeriodTokens{} STEPs; it is not service p99.}
-\label{tab:mitigation-cost}
-\scriptsize
-\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/mitigation_hls.tex}}
+\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/rs2_stability_gates.tex}}
 \end{table}
 
 \subsection{Post-Route and Generated-RTL Evidence}
 \label{sec:postroute}
-The corrected candidate physically fits the U55C in the out-of-context flow.
-It uses \CorrectedPostrouteLut{} CLB LUTs, \CorrectedPostrouteFf{} flip-flops,
-\CorrectedPostrouteBram{} BRAM tiles, \CorrectedPostrouteUram{} URAMs, and
-\CorrectedPostrouteDsp{} DSPs. URAM is the limiting reported resource at
-\CorrectedPostrouteUramPercent{} percent. The implementation has
-\CorrectedPostrouteDrcWarnings{} design-rule warnings but no critical warnings
-or errors.
-
-Physical fit does not imply target timing. At
-\CorrectedPostrouteTargetMhz{} MHz the design has
-\CorrectedPostrouteTwoFiftyWnsNs{} ns WNS, and the
-\CorrectedPostrouteSecondaryMhz{}-MHz check also fails. The first passing point
-in the tested fixed-route sweep is \CorrectedPostrouteFirstClosingMhz{} MHz.
-The \CorrectedPostrouteCriticalPathNs{} ns target-clock critical path is
-\CorrectedPostrouteCriticalRoutePercent{} percent routing with
-\CorrectedPostrouteCriticalLogicLevels{} logic levels and terminates at a
-resident-state URAM reset/write-enable pin. It is not an E2M1 multiplier path.
-
-Official Vitis HLS/XSIM co-simulation passes
-\CorrectedEZeroControlCosimCommands{} of
-\CorrectedEZeroControlCosimCommands{} generated-RTL control commands at
-\CorrectedEZeroControlCosimLatency{} cycles per command. Both commands return
-before a recurrent update, so the candidate's
-\CorrectedStatefulCsimTokens{}-token exact recurrent result remains C
-simulation, not RTL parity. The direct Verilator snapshot LOAD is
-\CorrectedEZeroRtlDirectLoadStatus{}, but the harness completes
-\CorrectedEZeroRtlCompletedSteps{} recurrent
-STEPs; the required 64-token candidate result is therefore
-\CorrectedEZeroRtlSixtyFourStatus{}. Table~\ref{tab:postroute} preserves this
-boundary.
+All three matched recurrence cores physically fit in the U55C
+out-of-context flow. Table~\ref{tab:postroute} reports their routed resources,
+first passing tested frequencies, and vectorless power. RS2/R3 uses
+\RsTwoRouteLut{} CLB LUTs, \RsTwoRouteBram{} BRAM tiles,
+\RsTwoRouteUram{} URAMs, and \RsTwoRouteDsp{} DSPs. Its design-rule check has no
+critical warning or error, but physical fit does not imply target timing: WNS
+is \RsTwoRouteTargetWns{} ns at \RsTwoRouteTargetMhz{} MHz, and the first
+passing point in the fixed-route sweep is \RsTwoRouteClosingMhz{} MHz. A
+post-route aggressive-fanout pass improves slack slightly; subsequent
+retiming and SLR-crossing passes also fail the declared target. We retain the
+original routed checkpoint for the matched table.
 
 \begin{table}[t]
 \centering
-\caption{Corrected-candidate out-of-context physical and generated-RTL
-evidence. Power is vectorless; the closing frequency is the first passing
-tested fixed-route point.}
+\caption{Matched out-of-context physical results. Power is vectorless; each
+frequency is the first passing point in the tested fixed-route sweep.}
 \label{tab:postroute}
 \scriptsize
-\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/postroute_evidence.tex}}
+\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/rs2_postroute.tex}}
 \end{table}
 
-At a timing-closed \CorrectedPostroutePowerPeriodNs{} ns period, Vivado reports
-\CorrectedPostroutePowerTotalW{} W total on-chip power:
-\CorrectedPostroutePowerDynamicW{} W dynamic and
-\CorrectedPostroutePowerStaticW{} W static, with
-\CorrectedPostroutePowerConfidence{} confidence. No measured activity, board
-telemetry, matched routed BF16 design, or recurrent RTL service latency is
-available, so we do not derive energy per token or an energy-efficiency ratio.
-The matched native-MXFP8 image also fits, using
-\CorrectedMxfpEightPostrouteLut{} LUTs and
-\CorrectedMxfpEightPostrouteUram{} URAMs. It fails the 250-MHz check and first
-closes at \CorrectedMxfpEightPostrouteFirstClosingMhz{} MHz in the tested
-fixed-route sweep. Its \CorrectedMxfpEightPostroutePowerTotalW{} W vectorless
-estimate is not measured energy.
+The direct Verilator harness drives the HLS-generated Verilog through snapshot
+LOAD, \RsTwoRtlTransactions{} commands, all log-fold boundaries, and final
+READBACK. It compares \RsTwoRtlOutputs{} decoded output values plus counters and
+the complete final encoded state against the independent integer oracle; the
+\RsTwoRtlTokens{}-token \RsTwoRtlStatus{} result establishes recurrent
+generated-RTL parity for the required trace. Official XSIM control smoke is
+reported separately and is not substituted for the recurrent run.
+
+At the timing-closed \RsTwoRouteClosingPeriodNs{} ns point, RS2/R3 has a
+\RsTwoRoutePowerW{} W vectorless estimate, split into
+\RsTwoRouteDynamicW{} W dynamic and \RsTwoRouteStaticW{} W static power.
+Table~\ref{tab:power} gives the same report categories for every routed
+variant. Because activity is vectorless and no board telemetry is available,
+we do not derive energy per token or an energy-efficiency ratio.
+
+\begin{table}[t]
+\centering
+\caption{Vivado vectorless power components at each variant's first passing
+tested clock point. These are tool estimates, not board measurements.}
+\label{tab:power}
+\scriptsize
+\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/rs2_power_breakdown.tex}}
+\end{table}
 
 \section{Discussion}
-The controlled answer is no for the current implementations. Floating Q/DQ
-already predicts substantial four-bit drift, while the native encoded path is
-worse and records \CorrectedNativeEncodedAlignmentUnderflowsEightK{} alignment
-underflows through token \CorrectedLongTraceTokens. The encoded HLS point also
-costs more than BF16. Adding a dense residual and recent-write log restores the
-finite-trace engineering criteria, but its worst longer-run state error is close
-to the boundary and its computation costs more than BF16.
+The controlled answer is no for the current implementation. Uniform MXFP4
+drifts substantially, and widening only the recurrent state to MXFP8 improves
+but does not remove that drift. RS2/R3 restores the registered finite-trace
+criteria and reduces logical state bytes relative to BF16, but it is not a
+cost-reducing arithmetic replacement: its HLS LUT estimate, non-fold latency,
+amortized latency, and routed target-frequency result all lose to the BF16
+baseline.
 
 This result separates representation density from implementation cost. Shared
 scales reduce bits, but exponent comparison, alignment, requantization, and
 folding add control and arithmetic. The E2M1 multiplier is small and DSP-free;
-the surrounding recurrence is not. Table~\ref{tab:resource-ablation} localizes
-the dominant generated hierarchy. The correction's fold engine and update
-quantizer account for \CorrectedCorrectionMachineryLutPercent{} percent of its
-top-level LUT estimate. A useful replacement must reduce the full state-update
-path, not only the encoded element width.
-
-\begin{table}[t]
-\centering
-\caption{Generated HLS hierarchy ablation. Shares are relative to each
-variant's own top-level LUT estimate and are not routed utilization.}
-\label{tab:resource-ablation}
-\scriptsize
-\resizebox{\columnwidth}{!}{\input{paper/corrected/tables/resource_ablation.tex}}
-\end{table}
+the surrounding recurrence is not. The fixed write log also creates a periodic
+fold whose service cost dominates the amortized schedule. A useful replacement
+must simplify the complete state-update path rather than only narrowing the
+stored elements or replacing a multiplier.
 
 The word \emph{drift} is deliberate. For one head, let $E_t$ be candidate minus
 reference state. For the same external token inputs, define $R_t$ as the exact
@@ -772,13 +698,13 @@ input and base quantization, logged coefficients, folding, alignment,
 accumulation, scale changes, and clipping. ``Stable'' in the engineering gate
 therefore means only that the measured finite traces stay within its thresholds.
 
-The correction also changes the experimental role of MXFP8. Uniform MXFP8
-state is a stronger numerical baseline than MXFP4, while the corrected
-candidate's logical payload is only \CorrectedPercentBelowMxfpEight{} percent
-smaller. Both the corrected candidate and native MXFP8 physically fit out of
-context, but neither closes 250 MHz. Without measured activity, a routed BF16
-comparator, or board energy, their power estimates do not establish an energy
-advantage for the more complex representation.
+The correction also changes the experimental role of MXFP8. MXFP8 state is a
+stronger numerical baseline than uniform MXFP4, and the RS2/R3 payload is
+\RsTwoStatePercentAboveMxfpEight{} percent larger than uniform MXFP8. All three
+matched images fit out of context, but none of the vectorless power estimates
+establishes an energy advantage. We also have no same-boundary measurement on
+a GPU with native four-bit floating-point support, so we make no GPU
+superiority claim.
 
 \section{Limitations and Threats to Validity}
 The long-horizon numerical evidence is layer-level and synthetic. The short
@@ -789,39 +715,38 @@ tokens per prompt. It is not closed-loop execution and supports neither
 perplexity nor downstream-task claims. The kernel excludes projections,
 normalization, full-attention layers, and their key-value cache.
 
-The nominal study uses one development seed. The correction uses a separate
-high-retention trace family and only \CorrectedHeldoutSeedBlocks{} test seed
-blocks crossed with two initial states, so it is not a paired numerical
-ablation. Its registration was not externally timestamped with the full
-dependency closure; replay checks integrity, not independence. Metrics flatten
-heads and have no trace-population confidence interval or FP64 long-horizon
-curve. Thresholds are not calibrated to model quality. The longer-run error is
-only
-\CorrectedExtendedStateRelLTwoGateMargin{} below its boundary, and changing that
-boundary alone to \CorrectedStateRelLTwoSensitivityProbe{} rejects both test and
-development conditions. Section~VII supplies no formal stability certificate.
+The synthetic protocol covers a small registered seed set, two initial-state
+conditions, and one high-retention trace family. Metrics flatten heads, do not
+provide a trace-population confidence interval, and are not calibrated to
+perplexity or task accuracy. Replay and source hashes establish integrity, not
+external preregistration. Section~VII gives an explanatory error recurrence,
+not a formal stability certificate.
 
-BF16 and uniform-MXFP4 results remain HLS estimates. The correction and native
-MXFP8 baseline are routed out of context; both fit but fail 250 MHz. The
-fixed-route sweeps are not global frequency searches, and matched all-layer
-BF16 fails capacity before routing. Xilinx Runtime (XRT), xclbin, board checks, and synchronized
-same-boundary GPU measurements are absent; vectorless power is not board energy.
+The routed designs are all-layer recurrence-state subsystems synthesized out of
+context. They exclude the platform shell, weights, projections, convolution
+state, full-attention key/value caches, and host scheduling. The tested
+fixed-route points are not global frequency searches. Xilinx Runtime (XRT)
+execution, xclbin
+integration, physical board parity, telemetry, synchronized GPU measurements,
+and measured energy are absent. Vectorless power cannot substitute for any of
+them.
 
-Packing and token quantization are excluded, and no multi-layer service latency
-is measured. Verification is asymmetric: uniform MXFP4 has a 64-token RTL
-trace; the correction has 64-token C parity, a two-command RTL control smoke,
-and one exact direct-RTL LOAD. Two isolated XSIM runs exhaust host memory before
-transaction one, and no candidate recurrent STEP completes. Results cover one
-U55C and one parallelism point; cross-device and longer real-trace studies
-remain open.
+Generated-RTL parity covers one registered synthetic trace. Full official XSIM
+recurrent cosimulation remains incomplete and is reported as such independently
+from the direct Verilator run; neither path is used to fill missing board
+evidence. Results cover one U55C target,
+one $P_K/P_V$ point, one block size, and batch one; multi-sequence occupancy,
+cross-device behavior, and service-level tail latency remain open.
 
 \section{Conclusion}
-Native encoded MXFP4 does not replace BF16 in this persistent-state GDN core:
-it has more drift and higher fixed-geometry HLS cost. A residual/write-log
-mitigation meets bounded synthetic criteria but exceeds BF16 cost, misses II
-and routed clock targets, and lacks recurrent RTL parity. The corrected and
-MXFP8 images fit out of context, but longer real traces, closed-loop quality,
-and measured board energy remain necessary.
+Native MXFP4 is feasible as an exact LUT-based arithmetic path for this
+persistent-state GDN recurrence core, but it is not a viable BF16 replacement
+under the joint criteria studied here. Uniform MXFP4 drifts; RS2/R3 meets the
+registered long synthetic stability bounds and reduces logical state storage,
+yet costs more LUTs and cycles and misses the target routed frequency. The
+result is therefore a qualified negative, not an accuracy or energy claim.
+Closed-loop model quality, shell-integrated board execution, and measured
+energy are required before revisiting that conclusion at model scale.
 
 \begin{thebibliography}{00}
 \bibitem{gateddeltanet}
@@ -894,8 +819,9 @@ arXiv:2607.24377v1, Jul. 2026, doi: 10.48550/arXiv.2607.24377.
 
 \bibitem{mxfpbenchmark}
 M. Zhang \emph{et al.}, ``Benchmarking Post-Training Quantization of Large
-Language Models under Microscaling Floating Point Formats,'' arXiv preprint
-arXiv:2601.09555v1, Jan. 2026, doi: 10.48550/arXiv.2601.09555.
+Language Models under Microscaling Floating Point Formats,'' in \emph{Proc.
+64th Annu. Meeting Assoc. Comput. Linguistics}, pp. 39907--39923, 2026, doi:
+10.18653/v1/2026.acl-long.1854.
 
 \bibitem{quantgdn}
 L. Zhang \emph{et al.}, ``When Good Enough Is Optimal: Multiplication-Only

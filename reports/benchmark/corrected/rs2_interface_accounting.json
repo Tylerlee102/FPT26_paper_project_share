@@ -1,0 +1,92 @@
+{
+  "commands": {
+    "LOAD": {
+      "bf16_input_bytes": 1048576,
+      "output_bytes": 0,
+      "rs2_input_bytes": 576912
+    },
+    "READBACK": {
+      "bf16_output_bytes": 1048576,
+      "input_bytes": 0,
+      "rs2_output_bytes": 576912
+    },
+    "RESET": {
+      "bf16_input_bytes": 0,
+      "output_bytes": 0,
+      "rs2_input_bytes": 0
+    },
+    "STEP": {
+      "bf16_input_bytes": 16512,
+      "bf16_output_bytes": 8192,
+      "rs2_input_bytes": 8832,
+      "rs2_output_bytes": 24576
+    }
+  },
+  "configuration": {
+    "activation_stack_depth": 2,
+    "bf16_bytes": 2,
+    "block_size": 32,
+    "coefficient_bytes": 2,
+    "e2m1_bits": 4,
+    "e8m0_scale_bytes": 1,
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "rs2_output_exponent_bytes": 2,
+    "rs2_output_mantissa_bytes": 4,
+    "value_dim": 128
+  },
+  "formulas": {
+    "bf16_step_input": "2*(QK_HEADS*KEY_DIM*2 bytes) + VALUE_HEADS*VALUE_DIM*2 bytes + 2*VALUE_HEADS*2-byte coefficients",
+    "bf16_step_output": "VALUE_HEADS*VALUE_DIM*2 bytes",
+    "rs2_step_input": "q+k+v two-term E2M1 payloads + one E8M0 byte per B32 term block + alpha/beta Q1.15",
+    "rs2_step_output": "VALUE_HEADS*VALUE_DIM*(INT32 mantissa + INT16 exponent)"
+  },
+  "generated_at": "2026-08-06T13:31:14.671483+00:00",
+  "limitations": [
+    "logical type-layout accounting before AXI beat padding, host packing, or protocol overhead",
+    "not measured PCIe, HBM, or board traffic",
+    "persistent STEP does not transfer recurrent state"
+  ],
+  "schema": 1,
+  "scope": "logical command payloads before AXI packing for matched BF16 and selected RS2/R3 recurrence-core kernels",
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 75094,
+      "changed_file_count": 3,
+      "sha256": "CBA885CBCC3E63A512203694ED8C4B1C112093649FCC7786BA43118934CD9F02"
+    },
+    "files": {
+      "hls/bf16/include/gdn_bf16_kernel.hpp": {
+        "bytes": 2208,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "7B89B4E23292430AA6C7387DE724CE6C18FB3A18FF9A76591505C6A9FE1358A7"
+      },
+      "hls/rs2/include/gdn_rs2_kernel.hpp": {
+        "bytes": 9508,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "15B937C959C3E88729EBD658CF60CC1FE58E72CD2BB402BAC53C2189DD1F5132"
+      },
+      "hls/rs2/src/gdn_rs2_top.cpp": {
+        "bytes": 57674,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E"
+      },
+      "scripts/rs2_interface_accounting.py": {
+        "bytes": 5305,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "2FD2F76E2D5DB3BDEC4BE9E0D55E69E08594985106319C6269594977933D33A4"
+      }
+    },
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_sha256": {
+    "reports/benchmark/corrected/rs2_encoded_candidate_preregistration.json": "273F648DA72077C0FB013A3C1AE0D6FDC50673F9CB725FB3F59A01BA8B42691D"
+  },
+  "status": "PASS"
+}

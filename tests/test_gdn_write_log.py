@@ -217,6 +217,35 @@ class TestLazyWriteLogGDN(unittest.TestCase):
             np.testing.assert_array_equal(left[0], right[0])
             np.testing.assert_array_equal(left[1], right[1])
 
+    def test_mxfp4_residual_stack_log_is_supported_and_deterministic(self) -> None:
+        rng = np.random.default_rng(0xFB72)
+        initial = rng.normal(size=(2, 4, 4)).astype(np.float32)
+        config = WriteLogConfiguration(
+            capacity=3,
+            mode="mxfp4",
+            activation_block_size=16,
+            base_block_size=16,
+            log_block_size=16,
+            log_precision="mxfp4_rs2",
+            activation_stack_depth=2,
+            base_stack_depth=2,
+        )
+        engines = [
+            LazyWriteLogGDN(initial, num_qk_heads=1, config=config),
+            LazyWriteLogGDN(initial, num_qk_heads=1, config=config),
+        ]
+        values = (
+            rng.normal(size=(1, 4)).astype(np.float32),
+            rng.normal(size=(1, 4)).astype(np.float32),
+            rng.normal(size=(2, 4)).astype(np.float32),
+            rng.uniform(0.8, 1.0, size=2).astype(np.float32),
+            rng.uniform(0.0, 1.0, size=2).astype(np.float32),
+        )
+        left = engines[0].step(*values)
+        right = engines[1].step(*values)
+        np.testing.assert_array_equal(left[0], right[0])
+        np.testing.assert_array_equal(left[1], right[1])
+
     def test_second_mxfp4_residual_term_reduces_roundtrip_error(self) -> None:
         rng = np.random.default_rng(0x5EED5)
         values = rng.normal(size=(4, 32)).astype(np.float32)

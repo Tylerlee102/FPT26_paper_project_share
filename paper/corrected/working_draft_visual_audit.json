@@ -1,0 +1,128 @@
+{
+  "artifact_kind": "watermarked_working_draft",
+  "auditor": "Codex visual inspection at 220 DPI",
+  "blocking_gates": [
+    {
+      "gate": "c_sim_and_rtl_parity",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "closed_loop_real_model_quality",
+      "status": "BLOCKED_EXTERNAL"
+    },
+    {
+      "gate": "selected_method_pareto_advantage",
+      "status": "FAIL"
+    },
+    {
+      "gate": "post_route_timing_and_drc",
+      "status": "FAIL"
+    },
+    {
+      "gate": "real_board_parity_and_energy",
+      "status": "BLOCKED_EXTERNAL"
+    },
+    {
+      "gate": "reviewer_traceability",
+      "status": "FAIL"
+    },
+    {
+      "gate": "paper_provenance_and_final_pdf_audit",
+      "status": "FAIL"
+    }
+  ],
+  "build_manifest": "paper/corrected/working_draft_build_manifest.json",
+  "build_manifest_sha256": "8E5F52A887189264B5A30D6A004A784CBD377B6B0AAF815BCF2786860CF28619",
+  "checklist": "paper/corrected/working_draft_visual_checklist.json",
+  "checklist_sha256": "8F3D44A73795A5284D5D348FE36B4DF43CCEE77F8DD7790BA639233382549D19",
+  "generated_at": "2026-08-09T01:14:49.726302+00:00",
+  "page_count": 9,
+  "pages": [
+    {
+      "height": 2420,
+      "notes": "Title, abstract, contribution boundary, two-column text, and watermark are readable with no clipping.",
+      "page": 1,
+      "path": "reports/rendered/working_draft/page-01.png",
+      "sha256": "5F09363D525379501C8F967A6E7A644CB00593D7EBC4234260F4207C08F084BD",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Recurrence equations and ownership table are aligned and legible; citations and table rules render cleanly.",
+      "page": 2,
+      "path": "reports/rendered/working_draft/page-02.png",
+      "sha256": "6B4AC961BEDA9624488757A8D45239255ABD00B5AF16B96FB58D4F6CD45BB4B5",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Method, payload table, and evaluation controls fit within both columns without overlap.",
+      "page": 3,
+      "path": "reports/rendered/working_draft/page-03.png",
+      "sha256": "161F824BF09C8886464B358250EC0F736BFDF4BE1A184BA8DC283CFCF7989901",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Full-width datapath figure, legend, caption, equations, and surrounding text are sharp and unobstructed.",
+      "page": 4,
+      "path": "reports/rendered/working_draft/page-04.png",
+      "sha256": "A42C08032F1A5BD9DDD9534EDCA64585735F1E507AE93F8FD4122C4628436523",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Both long-sequence plots have readable legends, threshold lines, axis labels, and the 8,192-token tick.",
+      "page": 5,
+      "path": "reports/rendered/working_draft/page-05.png",
+      "sha256": "88263DCEE9AD787D79818932766DF3B1D5F11A21375C056997EA8A13E2A47EA4",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "All six result tables are legible; Table IV max-absolute and nonfinite columns are visibly separated after repair.",
+      "page": 6,
+      "path": "reports/rendered/working_draft/page-06.png",
+      "sha256": "5F9B75AC9AC5183903491F33082BC6B456E00D2E3CE14B79A8609E98E2747DA2",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Trade-off figure and power table are readable; bar labels, caption, and discussion equations stay inside margins.",
+      "page": 7,
+      "path": "reports/rendered/working_draft/page-07.png",
+      "sha256": "F6ACA90C76DF227782C8E1F915BFF90A859391545B95AB81301E652AACD96AED",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "Discussion equations, limitations, conclusion, and references 1-14 render without clipping or broken glyphs.",
+      "page": 8,
+      "path": "reports/rendered/working_draft/page-08.png",
+      "sha256": "FAEEB4E7236324BA429C37A0D011DF9A134E36DA5C607010A0CEE1F9620B2DF4",
+      "width": 1870
+    },
+    {
+      "height": 2420,
+      "notes": "References 15-16 are complete and readable; this references-only overflow page has no clipped content.",
+      "page": 9,
+      "path": "reports/rendered/working_draft/page-09.png",
+      "sha256": "27E26734742012424B310CCB499487BA3C43E88E7D01765643FA9F5B9836C2EC",
+      "width": 1870
+    }
+  ],
+  "release_state": "NOT PAPER READY",
+  "required_checks": [
+    "captions_and_references",
+    "figures_and_legends",
+    "margins_and_clipping",
+    "tables",
+    "text_and_equations"
+  ],
+  "schema": 1,
+  "status": "PASS",
+  "submission_eligible": false,
+  "visual_audit_status": "PASS",
+  "working_draft": "paper/corrected/mxfp4_gdn_working_draft.pdf",
+  "working_draft_sha256": "7C2BA94A05C16658C587B82356E589037925FA36115B2E67B12617AC8CDDF686"
+}

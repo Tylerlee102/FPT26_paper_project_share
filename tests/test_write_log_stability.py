@@ -65,6 +65,12 @@ class TestWriteLogStability(unittest.TestCase):
         r8 = logical_state_bytes(config, capacity=8, log_precision="mxfp8_e4m3")
         self.assertGreater(r4, 2 * 8 * 8 * 0.5)
         self.assertGreater(r8, r4)
+        mxfp4_rs2_log = logical_state_bytes(
+            config,
+            capacity=4,
+            log_precision="mxfp4_rs2",
+        )
+        self.assertGreater(mxfp4_rs2_log, r4)
         stacked = logical_state_bytes(
             config,
             capacity=4,

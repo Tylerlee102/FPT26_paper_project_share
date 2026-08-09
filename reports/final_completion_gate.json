@@ -1,14 +1,13 @@
 {
-  "gate_count": 13,
+  "gate_count": 11,
   "gates": [
     {
       "evidence": [
         "docs/prior_art_matrix.md",
         "docs/evidence/g0_focused_gap_resolution_2026_08_01.md",
-        "docs/evidence/prior_art_gap_recheck_2026_08_02.md",
         "docs/evidence/prior_art_gap_recheck_2026_08_02_v2.md"
       ],
-      "finding": "A bounded primary-source search found no exact synthetic recurrence-core and matched-HLS study; overlapping arithmetic, state, and dataflow constituents are attributed and no architectural-first claim is made.",
+      "finding": "The bounded primary-source audit attributes persistent state and the five-phase schedule to Gupta et al.; the remaining claim is limited to the recurrence-aware native-MX arithmetic study.",
       "gate": "prior_art_gap",
       "release_required": true,
       "status": "PASS"
@@ -17,188 +16,148 @@
       "evidence": [
         "reports/golden/official_parity/official_parity_verification.json"
       ],
-      "finding": "FP64/FP32 and pinned recurrent/chunk/cache comparisons pass at the controlled layer boundary.",
+      "finding": "The independent FP32/FP64 recurrence agrees with pinned Transformers and FLA recurrent, chunked, and cache paths at the declared recurrence-core boundary.",
       "gate": "exact_official_recurrence_parity",
       "release_required": true,
       "status": "PASS"
     },
     {
       "evidence": [
-        "golden/gdn_mxfp4_encoded.py",
-        "golden/gdn_e2m0_encoded.py",
-        "reports/csynth/corrected/e2m0_hls_summary.json"
+        "reports/benchmark/corrected/rs2_encoded_candidate_preregistration.json",
+        "reports/csynth/corrected/rs2_hls_summary.json",
+        "reports/csynth/corrected/mxfp8_hls_summary.json"
       ],
-      "finding": "Independent encoded arithmetic and resident-command oracles pass bounded exhaustive, adversarial, and corrected E2M0 checks.",
+      "finding": "The frozen encoded-integer RS2 oracle, native E2M1/E8M0 arithmetic C simulation, exact 64-token C trace, and matched E4M3/E8M0 reference all pass.",
       "gate": "independent_bit_exact_mx_reference",
-      "release_required": true,
-      "status": "PASS"
-    },
-    {
-      "evidence": [
-        "reports/csynth/corrected/mxfp8_hls_summary.json",
-        "reports/vivado/baselines/mxfp8/mxfp8_vivado_summary.json"
-      ],
-      "finding": "The matched native E4M3/E8M0 baseline passes exhaustive bounded arithmetic C-sim, one exact persistent-kernel transition, U55C C-synthesis, and every explicit II=1 constraint.",
-      "gate": "matched_native_mxfp8_baseline",
       "release_required": true,
       "status": "PASS",
       "substatus": {
-        "arithmetic_csim": "PASS",
-        "csynthesis": "PASS",
-        "explicit_ii1_constraints": "PASS",
-        "persistent_kernel_csim": "PASS",
-        "post_route": "PASS"
+        "matched_native_mxfp8_reference": "PASS",
+        "registered_source_hashes": "PASS",
+        "rs2_encoded_arithmetic_csim": "PASS"
       }
     },
     {
       "evidence": [
-        "reports/csynth/corrected/e2m0_hls_summary.json",
-        "reports/test_results/e2m0_resident_trace64_csim_20260802.log",
-        "reports/cosim/corrected/e2m0_control_smoke/e2m0_control_smoke_summary.json",
-        "reports/cosim/corrected/e2m0_trace64/e2m0_trace64_cosim_summary.json"
+        "reports/csynth/corrected/rs2_hls_summary.json",
+        "reports/cosim/corrected/rs2_current/control/gdn_rs2_top_cosim.rpt",
+        "reports/cosim/corrected/rs2_current/trace64_direct/rs2_trace64_direct_summary.json"
       ],
-      "finding": "The corrected candidate passes exact 64-token HLS C simulation, two generated-RTL control commands, and one direct generated-RTL LOAD. Two official XSIM attempts exhaust host memory before transaction one; no corrected recurrent STEP completes in RTL, so 64-token candidate parity is not established.",
+      "finding": "Exact HLS C simulation passes, but one or both required 64-token RTL parity paths remain incomplete or failing.",
       "gate": "c_sim_and_rtl_parity",
-      "release_required": false,
-      "status": "FAIL",
+      "release_required": true,
+      "status": "NOT_RUN",
       "substatus": {
-        "corrected_candidate_hls_c_sim_64_token": "PASS",
-        "corrected_candidate_rtl_64_token": "FAIL",
-        "corrected_candidate_rtl_control_smoke": "PASS",
-        "uniform_mxfp4_rtl_64_token": "PASS"
+        "direct_generated_rtl_64_token": "PASS",
+        "exact_64_token_hls_c_simulation": "PASS",
+        "official_xsim_64_token_random_or_reset_state": "NOT_RUN",
+        "official_xsim_control": "PASS"
       }
     },
     {
       "evidence": [
-        "reports/golden/qwen_capture_characterization.json",
         "reports/benchmark/qwen_recurrent_stability_manifest.json",
-        "docs/experimental_protocol.md"
+        "reports/golden/qwen_capture_status.md"
       ],
-      "finding": "Four short model-derived Qwen recurrence traces are complete, but full-model closed-loop quality, perplexity, and downstream accuracy require external 80B model execution assets.",
+      "finding": "Short model-derived recurrence diagnostics pass, but the 80B checkpoint and adequate execution memory are absent; no closed-loop perplexity or downstream result exists.",
       "gate": "closed_loop_real_model_quality",
-      "release_required": false,
+      "release_required": true,
       "status": "BLOCKED_EXTERNAL",
       "substatus": {
-        "closed_loop_full_model_quality": "BLOCKED_EXTERNAL",
-        "short_real_input_recurrence": "PASS"
+        "cache_faithful_closed_loop_quality": "BLOCKED_EXTERNAL",
+        "short_model_derived_recurrence": "PASS"
       }
     },
     {
       "evidence": [
-        "reports/benchmark/corrected/e2m0_encoded/held_out/held_out_summary.json",
-        "reports/csynth/corrected/e2m0_hls_summary.json",
-        "reports/benchmark/corrected/e2m0_encoded/extended_development/extended_summary.json",
-        "reports/vivado/corrected/e2m0/e2m0_postroute_summary.json"
+        "reports/benchmark/corrected/rs2_encoded/rs2_encoded_candidate_summary.json",
+        "reports/csynth/corrected/rs2_hls_summary.json",
+        "reports/vivado/corrected/rs2_current/rs2_vivado_summary.json",
+        "reports/cosim/corrected/rs2_current/trace64_direct/rs2_trace64_direct_summary.json"
       ],
-      "finding": "The corrected candidate passes three 1024-token test seed blocks under two paired initial-state conditions and 2 fully recomputed 8192-token development traces, but its HLS LUT and STEP costs exceed BF16 and its configured timing margin and explicit II=1 constraints fail.",
+      "finding": "The RS2/R3 method is numerically stable and reduces logical state bytes, but the matched HLS comparison currently uses more LUTs and cycles than BF16; measured board energy is also unavailable.",
       "gate": "selected_method_pareto_advantage",
-      "release_required": false,
+      "release_required": true,
       "status": "FAIL",
       "substatus": {
-        "allocated_physical_memory": "PASS",
-        "average_and_p99_service_latency": "NOT_RUN",
-        "energy": "BLOCKED_EXTERNAL",
+        "average_and_p99_service_latency": "PASS",
         "extended_8192_quality": "PASS",
-        "full_deterministic_recompute": "PASS",
-        "high_retention_1024_quality": "PASS",
-        "hls_200mhz_timing": "PASS",
-        "hls_configured_timing_margin": "FAIL",
-        "hls_explicit_ii1_constraints": "FAIL",
-        "hls_lut_and_step_cost_vs_bf16": "FAIL",
-        "logical_payload_below_uniform_mxfp8": "PASS"
+        "held_out_1024_quality": "PASS",
+        "hls_lut_and_latency_vs_bf16": "FAIL",
+        "logical_state_bytes_vs_bf16": "PASS",
+        "measured_energy": "BLOCKED_EXTERNAL",
+        "routed_cost": "PASS"
       }
     },
     {
       "evidence": [
-        "reports/vivado/baselines/bf16/bf16_vivado_summary.json",
-        "reports/vivado/baselines/mxfp8/mxfp8_vivado_summary.json"
+        "reports/vivado/corrected/rs2_current/rs2_vivado_summary.json"
       ],
-      "finding": "The controlled 36-layer BF16 physical attempt completes synthesis but fails U55C memory capacity before placement; a smaller layout is not substituted. Native MXFP8 physical status is reported separately.",
-      "gate": "controlled_wider_physical_baselines",
-      "release_required": false,
-      "status": "FAIL",
-      "substatus": {
-        "bf16_physical_fit": "FAIL",
-        "bf16_synthesis": "PASS",
-        "mxfp8_physical_fit": "PASS",
-        "uniform_mxfp4_physical_fit": "NOT_RUN"
-      }
-    },
-    {
-      "evidence": [
-        "reports/vivado/corrected/e2m0/e2m0_postroute_summary.json"
-      ],
-      "finding": "The declared corrected-candidate resident-state design physically fits out of context on the U55C at 624 URAM and 208,523 CLB LUTs. This is not a complete-model or shell-integrated fit claim.",
+      "finding": "All 36 logical GDN state slots physically fit in the routed U55C out-of-context kernel; this is not complete-model residency.",
       "gate": "physical_all_layer_state_bank_fit",
       "release_required": true,
       "status": "PASS"
     },
     {
       "evidence": [
-        "reports/vivado/corrected/e2m0/e2m0_postroute_summary.json"
+        "reports/vivado/corrected/rs2_current/rs2_vivado_summary.json"
       ],
-      "finding": "Post-route timing and DRC evidence is complete: the candidate fails setup at 250 and 200 MHz, first closes at the tested 180.18 MHz point, and has warnings but no critical warnings or errors. The gate passes evidence completeness, not target timing.",
+      "finding": "Route evidence is complete only if the selected candidate closes 250 MHz and passes DRC; a slower sweep point does not satisfy this gate.",
       "gate": "post_route_timing_and_drc",
       "release_required": true,
-      "status": "PASS",
+      "status": "FAIL",
       "substatus": {
-        "drc": "PASS_WITH_WARNINGS",
-        "first_tested_closing_point": "PASS",
-        "measured_board_energy": "BLOCKED_EXTERNAL",
-        "physical_fit": "PASS",
+        "drc": "PASS",
         "route_completion": "PASS",
-        "target_250mhz_timing": "FAIL",
-        "timing_200mhz": "FAIL",
-        "vectorless_power": "PASS"
+        "target_250mhz_timing": "FAIL"
       }
     },
     {
       "evidence": [
         "reports/environment/hardware_availability.json"
       ],
-      "finding": "Vitis/Vivado are installed, but no attached U55C, U55C XRT platform, xclbin, or board telemetry is available; vectorless power is not measured energy.",
+      "finding": "Vitis and Vivado are installed, but no attached U55C, U55C XRT platform, xclbin, or board telemetry interface is present.",
       "gate": "real_board_parity_and_energy",
-      "release_required": false,
+      "release_required": true,
       "status": "BLOCKED_EXTERNAL",
       "substatus": {
-        "native_fp4_gpu": "BLOCKED_EXTERNAL_NO_NATIVE_FP4_GPU",
-        "toolchain": "AVAILABLE",
-        "u55c_board": "BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT"
+        "bit_exact_board_parity": "BLOCKED_EXTERNAL",
+        "local_toolchain": "AVAILABLE",
+        "measured_board_energy": "BLOCKED_EXTERNAL",
+        "u55c_environment": "BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT"
       }
     },
     {
       "evidence": [
         "docs/reviewer_traceability.md",
-        "docs/reviewer_traceability_status.json"
+        "docs/reviewer_traceability_status.json",
+        "paper/corrected/paper_visual_audit.json"
       ],
-      "finding": "All 68 reviewer-comment rows and 25 reviewer directives are traceable to the page-audited paper candidate.",
+      "finding": "The reviewer ledger has not been regenerated against the current RS2 paper audit bytes.",
       "gate": "reviewer_traceability",
       "release_required": true,
-      "status": "PASS"
+      "status": "FAIL"
     },
     {
       "evidence": [
-        "docs/evidence_manifest.md",
-        "docs/implementation_status.md",
-        "docs/venue_requirements_2026_08_02.md",
         "paper/corrected/asset_manifest.json",
         "paper/corrected/paper_audit_build_manifest.json",
         "paper/corrected/paper_visual_audit.json",
         "paper/corrected/paper_audit_candidate.pdf"
       ],
-      "finding": "Corrected numbers, source assets, compiled audit-candidate bytes, and every rendered page pass hash and visual checks; these exact bytes are eligible for gated finalization.",
+      "finding": "The current RS2 paper assets, audit candidate, provenance, or page-by-page visual audit are missing or stale.",
       "gate": "paper_provenance_and_final_pdf_audit",
       "release_required": true,
-      "status": "PASS"
+      "status": "FAIL"
     }
   ],
-  "generated_at": "2026-08-05T21:14:27.717347+00:00",
-  "nonpassing_gate_count": 5,
-  "paper_pdf_permitted": true,
-  "release_state": "READY FOR HUMAN SUBMISSION REVIEW",
-  "required_gate_count": 8,
-  "required_nonpassing_gate_count": 0,
-  "schema": 1,
-  "source_revision": "227ee410a962925872682b25d5b6b4de1a6c28ec",
-  "status": "PASS"
+  "generated_at": "2026-08-09T01:13:40.799752+00:00",
+  "nonpassing_gate_count": 7,
+  "paper_pdf_permitted": false,
+  "release_state": "NOT PAPER READY",
+  "required_gate_count": 11,
+  "required_nonpassing_gate_count": 7,
+  "schema": 2,
+  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+  "status": "FAIL"
 }

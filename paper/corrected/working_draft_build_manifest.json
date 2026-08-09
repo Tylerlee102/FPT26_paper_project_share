@@ -1,0 +1,121 @@
+{
+  "artifact_kind": "watermarked_working_draft",
+  "asset_manifest_sha256": "6240498E0BABC50B460357F39E4FA6C47C3E7804488A305E0087F7E20AAB9353",
+  "asset_source_identity": {
+    "dirty_patch": {
+      "bytes": 124159,
+      "changed_file_count": 4,
+      "sha256": "1999E192130ED321E7967DD6A525FEFBD97952866D32D01883A07F22878D8D93"
+    },
+    "files": {
+      "paper/corrected/paper.tex": {
+        "bytes": 43919,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "A5E57641614C2E9116F278D03ADDA5C433001F98ABA837166D3F96FD2E8E28F6"
+      },
+      "scripts/corrected_paper_assets.py": {
+        "bytes": 122130,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "601BC4334C3CDF63BB7BC4A1B29AD5CE40D199247B8D63C40A096751D7827D9E"
+      },
+      "scripts/rs2_paper_assets.py": {
+        "bytes": 46860,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "4633F6518ED93A7EFBC463C2F7D3B83296423C1FB97AF75E5EE3AD60D6CE49FD"
+      },
+      "scripts/rs2_paper_figures.py": {
+        "bytes": 15407,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "C45C7D08671460B5A530D77B28E75E1899E84B8063140D07B000B6EE431CD6B7"
+      }
+    },
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "blocking_gates": [
+    {
+      "gate": "c_sim_and_rtl_parity",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "closed_loop_real_model_quality",
+      "status": "BLOCKED_EXTERNAL"
+    },
+    {
+      "gate": "selected_method_pareto_advantage",
+      "status": "FAIL"
+    },
+    {
+      "gate": "post_route_timing_and_drc",
+      "status": "FAIL"
+    },
+    {
+      "gate": "real_board_parity_and_energy",
+      "status": "BLOCKED_EXTERNAL"
+    },
+    {
+      "gate": "reviewer_traceability",
+      "status": "FAIL"
+    },
+    {
+      "gate": "paper_provenance_and_final_pdf_audit",
+      "status": "FAIL"
+    }
+  ],
+  "build_log": "paper/corrected/build_working_draft/working_draft_build.log",
+  "build_log_sha256": "A235B6DEEAFD8C722EE5386AD009915F4C2F176F1EE3EC9EFB84BD0B88876BF7",
+  "build_source_identity": {
+    "dirty_patch": {
+      "bytes": 53392,
+      "changed_file_count": 3,
+      "sha256": "25CFA5536588223A7E63298569A3100D9073A2C758B8DDAE38AF618714644C27"
+    },
+    "files": {
+      "paper/corrected/paper.tex": {
+        "bytes": 43919,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "A5E57641614C2E9116F278D03ADDA5C433001F98ABA837166D3F96FD2E8E28F6"
+      },
+      "paper/corrected/working_draft.tex": {
+        "bytes": 55,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "F5A0CE3B13CB4FFD004B0015C5AAEAE6DDDC31CD13148CA651098A34F93601DE"
+      },
+      "scripts/build_working_draft.py": {
+        "bytes": 4861,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "1539C7C836F82FD81145C129B89C0664C2927C539B90A1513519BCA8F74ACFFE"
+      }
+    },
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "command": [
+    "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\.tools\\tectonic\\tectonic.exe",
+    "--color",
+    "never",
+    "-Z",
+    "search-path=C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review",
+    "--keep-logs",
+    "--outdir",
+    "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\paper\\corrected\\build_working_draft",
+    "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\paper\\corrected\\working_draft.tex"
+  ],
+  "generated_at": "2026-08-09T01:13:43.439376+00:00",
+  "output": "paper/corrected/mxfp4_gdn_working_draft.pdf",
+  "output_sha256": "7C2BA94A05C16658C587B82356E589037925FA36115B2E67B12617AC8CDDF686",
+  "page_count": 9,
+  "release_state": "NOT PAPER READY",
+  "schema": 1,
+  "status": "PASS",
+  "submission_eligible": false,
+  "tool_version": "Tectonic 0.17.0",
+  "visual_audit_status": "NOT_RUN"
+}

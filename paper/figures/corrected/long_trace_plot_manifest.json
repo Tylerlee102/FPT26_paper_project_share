@@ -8,6 +8,7 @@
       4096,
       8192
     ],
+    "initial_state_mode": "random",
     "key_dim": 128,
     "num_qk_heads": 16,
     "num_value_heads": 32,
@@ -16,7 +17,7 @@
     "state_block_size": 32,
     "state_orientation": "KxV",
     "tokens": 8192,
-    "trace_family": "nominal",
+    "trace_family": "high_retention",
     "uncertainty": "single deterministic trace; no interval",
     "value_dim": 128,
     "variants": [
@@ -25,17 +26,11 @@
       "fp32",
       "mxfp4_qdq_act_b32_mxfp8_e4m3_state_b32",
       "mxfp4_qdq_act_b32_state_b32",
-      "native_mxfp4_encoded_act_b32_state_b32"
+      "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5"
     ]
   },
-  "encoded_input": {
-    "path": "reports/benchmark/corrected/native_encoded_long_trace_tokens.csv",
-    "sha256": "06f7b5c7a21a52411e0b218af3f63dd56f56a1798d74f144be58e092e9efbc9b"
-  },
-  "encoded_upstream_manifest": {
-    "path": "reports/benchmark/corrected/native_encoded_long_trace_manifest.json",
-    "sha256": "7595e7caf2b6d2d85e50d6d26e7030b3cee9cce3fd1b73868183ffbdd5c3b24f"
-  },
+  "encoded_input": null,
+  "encoded_upstream_manifest": null,
   "evidence_scope": "synthetic_floating_qdq_and_native_encoded_figures",
   "execution": {
     "command": "python -m scripts.plot_long_sequence_stability",
@@ -43,11 +38,11 @@
     "raw_log": "paper/figures/corrected/long_trace_plot_manifest.json"
   },
   "input": {
-    "path": "reports/benchmark/corrected/long_trace_tokens.csv",
-    "sha256": "c074d9709de38297ad1fd77b87f2df21aea563d72827afa9d1b1488dd6909904"
+    "path": "reports/benchmark/corrected/rs2_controlled/controlled_long_trace_tokens.csv",
+    "sha256": "a28e0a1f507f50aef939ae118a6c5dfd3a7aca22f7bd26fd4e18110a9a2b2734"
   },
   "limitations": [
-    "synthetic nominal inputs",
+    "synthetic high_retention inputs",
     "native encoded MXFP4 is software-executed; HLS/RTL parity is separately bounded to 64 tokens",
     "single deterministic development trace without an uncertainty interval",
     "not closed-loop Qwen quality or physical-FPGA evidence"
@@ -58,42 +53,42 @@
     "state_relative_l2": "complete H,K,V tensor flattened; ||candidate-reference||2 / max(||reference||2, 1e-12)"
   },
   "outputs": {
-    "paper/figures/corrected/output_cosine_vs_token.pdf": "715b27f27769127b076c798c62c9cf25af8258a8a269bd95afb01ed0a6f94f65",
-    "paper/figures/corrected/state_relative_l2_vs_token.pdf": "bfe99d439384c9b88b352f2a493612cfaeeeb1b60a2140bdc2b47aa8c4a4e938"
+    "paper/figures/corrected/output_cosine_vs_token.pdf": "c98491692b6ce18843f3457d246d881ab0d756a9fdae1c3ef73cfd870335ade8",
+    "paper/figures/corrected/state_relative_l2_vs_token.pdf": "87153ccb5991baf977e6659ebf2e2ab2e699b7a474b33543de5e8a52d485428b"
   },
   "schema": 1,
   "source": {
     "path": "scripts/plot_long_sequence_stability.py",
-    "sha256": "9da01df904233a7f74611310dac763e70225be6afe8b02e1f7aa46821c3fe92e"
+    "sha256": "b9126cb6f99f831ceb014f43ddaaad93e5f0cec8e343128e5c4c19ad6acd738f"
   },
   "source_identity": {
     "dirty_patch": {
-      "bytes": 24509,
-      "changed_file_count": 2,
-      "sha256": "13BC2BB86BBD4F1B5328C568EB5395C4306EEAB77BBBBF7C73427784BA315B51"
+      "bytes": 4084,
+      "changed_file_count": 1,
+      "sha256": "85B915992CC3847D7555AB6D774728A3372599D7B84F26CA4F31ADD8B6287729"
     },
     "files": {
       "scripts/plot_long_sequence_stability.py": {
-        "bytes": 22532,
+        "bytes": 23043,
         "changed_from_revision": true,
-        "git_state": "untracked",
-        "sha256": "9DA01DF904233A7F74611310DAC763E70225BE6AFE8B02E1F7AA46821C3FE92E"
+        "git_state": "tracked",
+        "sha256": "B9126CB6F99F831CEB014F43DDAAAD93E5F0CEC8E343128E5C4C19AD6ACD738F"
       },
       "scripts/reportlab_fonts.py": {
-        "bytes": 944,
-        "changed_from_revision": true,
-        "git_state": "untracked",
-        "sha256": "D68D3699969A05E16B49E1323BBFCB95666940DF7FCA3B6513A189A2DCE4767A"
+        "bytes": 943,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "08B078C9B5D80ED4FEB1028E78C6C53979A4B522271A3537D26EBACC1B00DDA0"
       }
     },
-    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
-  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
   "status": "PASS",
-  "timestamp": "2026-08-04T11:29:05.867571+00:00",
+  "timestamp": "2026-08-06T15:39:13.464822+00:00",
   "upstream_manifest": {
-    "path": "reports/benchmark/corrected/long_trace_manifest.json",
-    "sha256": "6814584cc6c073e951ea5a1732fecb76780d3ca01c532e0869b44e74c3ac657a"
+    "path": "reports/benchmark/corrected/rs2_controlled/controlled_long_trace_manifest.json",
+    "sha256": "877a0857bf8e71b79b0f6630ff608631a171c8bd1e46e2dc20da9e9bbd07a2f5"
   }
 }

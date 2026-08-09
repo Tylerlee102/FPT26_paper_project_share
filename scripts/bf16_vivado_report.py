@@ -1,4 +1,4 @@
-"""Extract the matched BF16 U55C synthesis and physical-fit result."""
+"""Extract the matched full-capacity BF16 U55C post-route evidence."""
 
 from __future__ import annotations
 
@@ -10,15 +10,18 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
-from scripts.e2m0_vivado_report import parse_utilization
+from scripts.e2m0_vivado_report import parse_drc, parse_power, parse_timing_summary
+from scripts.evidence_source_snapshot import describe_source_files
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REPORT_DIR = ROOT / "reports" / "vivado" / "baselines" / "bf16"
 DEFAULT_OUTPUT = DEFAULT_REPORT_DIR
+SYNTH_LOG = ROOT / "reports" / "vivado" / "vivado_bf16-synth.log"
 IMPL_LOG = ROOT / "reports" / "vivado" / "vivado_bf16-impl.log"
+SWEEP_LOG = ROOT / "reports" / "vivado" / "vivado_bf16-postroute-sweep.log"
 RTL_MANIFEST = ROOT / "build" / "vivado" / "bf16_ooc_rtl" / "manifest.json"
-SYNTH_DCP = ROOT / "build" / "vivado" / "gdn_bf16_vivado" / "bf16_post_synth.dcp"
+ROUTED_DCP = ROOT / "build" / "vivado" / "gdn_bf16_vivado" / "bf16_post_impl.dcp"
 CAPACITY = ROOT / "reports" / "benchmark" / "corrected" / "state_capacity_lower_bound.json"
 
 
@@ -34,101 +37,278 @@ def _git_revision() -> str:
     ).strip()
 
 
-def _requirement(text: str, resource: str) -> dict[str, int]:
-    line = next(
-        (
-            row
-            for row in text.splitlines()
-            if "ERROR: [DRC UTLZ-1]" in row
-            and f"Resource utilization: {resource}" in row
-        ),
-        None,
-    )
-    if line is None:
-        raise ValueError(f"BF16 capacity DRC is absent for {resource}")
-    match = re.search(
-        r"requires (\d+) of such cell types but only (\d+) compatible sites are available",
-        line,
-    )
-    if match is None:
-        raise ValueError(f"BF16 capacity counts are absent for {resource}")
-    return {"required": int(match.group(1)), "available": int(match.group(2))}
+def _number(value: str) -> int | float:
+    parsed = float(value.replace(",", "").replace("<", ""))
+    return int(parsed) if parsed.is_integer() else parsed
+
+
+def _pipe_row(text: str, name: str) -> list[str]:
+    for line in text.splitlines():
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        if cells and cells[0] == name:
+            return cells
+    raise ValueError(f"report row is absent: {name}")
+
+
+def parse_fractional_utilization(text: str) -> dict[str, dict[str, int | float]]:
+    names = {
+        "clb_luts": "CLB LUTs",
+        "clb_registers": "CLB Registers",
+        "block_ram_tiles": "Block RAM Tile",
+        "uram": "URAM",
+        "dsps": "DSPs",
+        "bufgce": "BUFGCE",
+    }
+    result: dict[str, dict[str, int | float]] = {}
+    for key, display in names.items():
+        cells = _pipe_row(text, display)
+        if len(cells) < 6:
+            raise ValueError(f"unexpected utilization row shape: {display}")
+        result[key] = {
+            "used": _number(cells[1]),
+            "available": _number(cells[4]),
+            "utilization_percent": float(cells[5].replace("<", "")),
+        }
+    return result
+
+
+def _tool_identity(text: str) -> dict[str, str]:
+    version = re.search(r"Tool Version\s*:\s*(.+?)\s*$", text, re.MULTILINE)
+    device = re.search(r"Device\s*:\s*(\S+)", text, re.MULTILINE)
+    if version is None or device is None:
+        raise ValueError("Vivado tool or device identity is absent")
+    return {"tool_version": version.group(1), "target_device": device.group(1)}
 
 
 def generate_report(report_dir: Path, output: Path) -> dict[str, object]:
-    util_path = report_dir / "synth_util.rpt"
-    required = (util_path, IMPL_LOG, RTL_MANIFEST, SYNTH_DCP, CAPACITY)
-    for path in required:
+    sweep_dir = report_dir / "postroute_sweep"
+    paths = {
+        "utilization": report_dir / "impl_util.rpt",
+        "timing": report_dir / "impl_timing.rpt",
+        "drc": report_dir / "impl_drc.rpt",
+        "power": sweep_dir / "power_first_passing.rpt",
+        "first_passing_period": sweep_dir / "first_passing_period.txt",
+        "synthesis_log": SYNTH_LOG,
+        "implementation_log": IMPL_LOG,
+        "sweep_log": SWEEP_LOG,
+        "rtl_manifest": RTL_MANIFEST,
+        "routed_checkpoint": ROUTED_DCP,
+        "capacity_lower_bound": CAPACITY,
+    }
+    for path in paths.values():
         if not path.is_file():
             raise FileNotFoundError(path)
 
-    util_text = util_path.read_text(encoding="utf-8", errors="replace")
-    log_text = IMPL_LOG.read_text(encoding="utf-8", errors="replace")
-    utilization = parse_utilization(util_text.replace("CLB LUTs*", "CLB LUTs"))
-    ram36 = _requirement(log_text, "RAMB36/FIFO over-utilized")
-    compatible = _requirement(log_text, "RAMB18 and RAMB36/FIFO over-utilized")
-    capacity = json.loads(CAPACITY.read_text(encoding="utf-8"))
+    utilization_text = paths["utilization"].read_text(
+        encoding="utf-8", errors="replace"
+    )
+    timing_text = paths["timing"].read_text(encoding="utf-8", errors="replace")
+    drc_text = paths["drc"].read_text(encoding="utf-8", errors="replace")
+    power_text = paths["power"].read_text(encoding="utf-8", errors="replace")
+    synth_log_text = paths["synthesis_log"].read_text(
+        encoding="utf-8", errors="replace"
+    )
+    impl_log_text = paths["implementation_log"].read_text(
+        encoding="utf-8", errors="replace"
+    )
+    sweep_log_text = paths["sweep_log"].read_text(
+        encoding="utf-8", errors="replace"
+    )
+    rtl = json.loads(paths["rtl_manifest"].read_text(encoding="utf-8"))
+    capacity = json.loads(paths["capacity_lower_bound"].read_text(encoding="utf-8"))
     bf16_capacity = next(row for row in capacity["rows"] if row["variant"] == "BF16")
-    rtl_manifest = json.loads(RTL_MANIFEST.read_text(encoding="utf-8"))
-    rtl_source = ROOT / rtl_manifest["source"]
-    rtl_output = ROOT / rtl_manifest["output"]
+
+    rtl_source = ROOT / str(rtl["source"])
+    rtl_output = ROOT / str(rtl["output"])
     rtl_integrity = (
-        rtl_manifest.get("status") == "PASS"
-        and _sha256(rtl_source) == rtl_manifest["source_sha256"].upper()
-        and _sha256(rtl_output) == rtl_manifest["output_sha256"].upper()
+        rtl.get("status") == "PASS"
+        and rtl_source.is_file()
+        and rtl_output.is_file()
+        and _sha256(rtl_source) == str(rtl["source_sha256"]).upper()
+        and _sha256(rtl_output) == str(rtl["output_sha256"]).upper()
     )
-    synthesis_pass = (
-        "synth_design completed successfully" in log_text
-        and "Synthesis finished with 0 errors" in log_text
+
+    timing = parse_timing_summary(timing_text)
+    utilization = parse_fractional_utilization(utilization_text)
+    drc = parse_drc(drc_text)
+    power = parse_power(power_text)
+    synthesis_complete = (
+        "synth_design completed successfully" in synth_log_text
+        and "Synthesis finished with 0 errors" in synth_log_text
     )
-    placement_capacity_fail = (
-        "place_design failed" in log_text
-        and "ERROR: [DRC UTLZ-1]" in log_text
-        and ram36["required"] > ram36["available"]
+    placement_complete = "place_design completed successfully" in impl_log_text
+    route_complete = (
+        "route_design completed successfully" in impl_log_text
+        and "bf16_post_impl.dcp" in impl_log_text
     )
-    extraction_pass = synthesis_pass and placement_capacity_fail and rtl_integrity
+    physical_fit = all(
+        float(row["utilization_percent"]) <= 100.0 for row in utilization.values()
+    )
+    target_timing = (
+        "PASS"
+        if float(timing["wns_ns"]) >= 0.0 and float(timing["whs_ns"]) >= 0.0
+        else "FAIL"
+    )
+
+    sweep_rows: list[dict[str, object]] = []
+    for sweep_path in sorted(sweep_dir.glob("timing_*ns.rpt")):
+        match = re.fullmatch(r"timing_(\d+)p(\d+)ns\.rpt", sweep_path.name)
+        if match is None:
+            raise ValueError(f"unexpected timing-sweep filename: {sweep_path.name}")
+        period_ns = float(f"{int(match.group(1))}.{match.group(2)}")
+        sweep_timing = parse_timing_summary(
+            sweep_path.read_text(encoding="utf-8", errors="replace")
+        )
+        sweep_rows.append(
+            {
+                "period_ns": period_ns,
+                "frequency_mhz": 1000.0 / period_ns,
+                **sweep_timing,
+                "setup_status": (
+                    "PASS" if float(sweep_timing["wns_ns"]) >= 0.0 else "FAIL"
+                ),
+                "hold_status": (
+                    "PASS" if float(sweep_timing["whs_ns"]) >= 0.0 else "FAIL"
+                ),
+                "source": sweep_path.relative_to(ROOT).as_posix(),
+                "sha256": _sha256(sweep_path),
+            }
+        )
+    if not sweep_rows:
+        raise FileNotFoundError(sweep_dir / "timing_*ns.rpt")
+    sweep_rows.sort(key=lambda row: float(row["period_ns"]))
+    selected_period = float(
+        paths["first_passing_period"].read_text(encoding="utf-8").strip()
+    )
+    first_passing = next(
+        (row for row in sweep_rows if float(row["period_ns"]) == selected_period),
+        None,
+    )
+    if (
+        first_passing is None
+        or first_passing["setup_status"] != "PASS"
+        or first_passing["hold_status"] != "PASS"
+        or any(
+            row["setup_status"] == "PASS"
+            and row["hold_status"] == "PASS"
+            and float(row["period_ns"]) < selected_period
+            for row in sweep_rows
+        )
+    ):
+        raise ValueError("recorded first passing period is inconsistent with the sweep")
+    sweep_complete = (
+        "report_power completed successfully" in sweep_log_text
+        and "Exiting Vivado" in sweep_log_text
+    )
+
+    status = (
+        "PASS"
+        if synthesis_complete
+        and placement_complete
+        and route_complete
+        and physical_fit
+        and rtl_integrity
+        and sweep_complete
+        and drc["signoff_status"] != "FAIL"
+        else "FAIL"
+    )
+    source_identity = describe_source_files(
+        [
+            Path(__file__).resolve(),
+            ROOT / "hls" / "bf16" / "src" / "gdn_bf16_top.cpp",
+            ROOT / "hls" / "bf16" / "include" / "gdn_bf16_kernel.hpp",
+            ROOT / "vivado" / "tcl" / "run_bf16_impl.tcl",
+            ROOT / "vivado" / "tcl" / "run_bf16_postroute_sweep.tcl",
+        ]
+    )
     report: dict[str, object] = {
-        "schema": 1,
-        "status": "PASS" if extraction_pass else "FAIL",
-        "scope": "matched 36-layer BF16 persistent-state U55C out-of-context physical-fit attempt",
+        "schema": 2,
+        "status": status,
+        "scope": "matched BF16 all-layer persistent-state kernel, out-of-context post-route on U55C",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source_revision": _git_revision(),
-        "target_device": "xcu55c-fsvh2892-2L-e",
-        "target_period_ns": 4.0,
-        "synthesis_completion": "PASS" if synthesis_pass else "FAIL",
-        "placement_completion": "FAIL_CAPACITY" if placement_capacity_fail else "UNKNOWN",
-        "route_completion": "NOT_APPLICABLE_PHYSICAL_FIT_FAILED",
-        "physical_fit": "FAIL",
-        "synthesized_utilization": utilization,
-        "capacity_drc": {
-            "ramb36_fifo": ram36,
-            "ramb18_ramb36_compatible": compatible,
-            "rule": "UTLZ-1",
+        "source_identity": source_identity,
+        "tool": _tool_identity(utilization_text),
+        "synthesis_completion": "PASS" if synthesis_complete else "FAIL",
+        "placement_completion": "PASS" if placement_complete else "FAIL",
+        "route_completion": "PASS" if route_complete else "FAIL",
+        "physical_fit": "PASS" if physical_fit else "FAIL",
+        "target_clock": {
+            "period_ns": 4.0,
+            "frequency_mhz": 250.0,
+            "status": target_timing,
+            "timing": timing,
+        },
+        "first_tested_closing_point": {
+            "period_ns": first_passing["period_ns"],
+            "frequency_mhz": first_passing["frequency_mhz"],
+            "wns_ns": first_passing["wns_ns"],
+            "whs_ns": first_passing["whs_ns"],
+            "status": "PASS",
+            "qualification": "first passing point in the tested fixed-route period sweep; not a binary-searched maximum frequency",
+        },
+        "timing_sweep": sweep_rows,
+        "utilization": utilization,
+        "drc": drc,
+        "vectorless_power": {
+            **power,
+            "period_ns": first_passing["period_ns"],
+            "frequency_mhz": first_passing["frequency_mhz"],
+            "timing_closed_at_this_period": True,
+            "energy_per_token": "NOT_DERIVED",
+        },
+        "state_memory_organization": {
+            "logical_layers": 36,
+            "uram_layers": 29,
+            "bram_layers": 7,
+            "banks": {
+                "uram_lower_256b": 1,
+                "uram_upper_256b": 1,
+                "bram_lower_256b": 1,
+                "bram_upper_256b": 1,
+            },
+            "routed_uram": utilization["uram"]["used"],
+            "routed_bram_tiles": utilization["block_ram_tiles"]["used"],
+            "controlled_state_layout_preserved": True,
         },
         "ideal_state_only_lower_bound": {
             "logical_state_bytes": bf16_capacity["logical_state_bytes"],
-            "ideal_min_uram": bf16_capacity["ideal_min_uram_for_mantissas"],
+            "ideal_min_uram_if_uram_only": bf16_capacity[
+                "ideal_min_uram_for_mantissas"
+            ],
             "available_uram": bf16_capacity["device_uram"],
-            "raw_bit_capacity_necessary_condition": bf16_capacity[
+            "uram_only_raw_bit_capacity_necessary_condition": bf16_capacity[
                 "raw_bit_capacity_necessary_condition"
             ],
+            "qualification": "The URAM-only lower bound fails; the routed implementation preserves all 36 logical layers by splitting the same BF16 state layout across URAM and BRAM banks.",
         },
         "rtl_transformation": {
-            **rtl_manifest,
+            **rtl,
             "integrity_status": "PASS" if rtl_integrity else "FAIL",
         },
-        "timing": "NOT_RUN_PHYSICAL_FIT_FAILED",
-        "vectorless_power": "NOT_RUN_PHYSICAL_FIT_FAILED",
-        "board_energy": "BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT",
         "raw_artifact_sha256": {
-            path.relative_to(ROOT).as_posix(): _sha256(path) for path in required
+            path.relative_to(ROOT).as_posix(): _sha256(path)
+            for path in (*paths.values(), *sorted(sweep_dir.glob("timing_*ns.rpt")))
+        },
+        "claim_boundary": {
+            "post_route_fit": "SUPPORTED" if physical_fit else "NOT_SUPPORTED",
+            "post_route_250mhz": (
+                "SUPPORTED" if target_timing == "PASS" else "NOT_SUPPORTED"
+            ),
+            "post_route_first_tested_closing_frequency": "SUPPORTED",
+            "vectorless_power_estimate": "SUPPORTED",
+            "measured_board_power_or_energy": "BLOCKED_EXTERNAL",
+            "bitstream_or_xclbin_execution": "BLOCKED_EXTERNAL",
         },
         "limitations": [
-            "The all-layer BF16 state bank cannot be placed on the declared U55C; no routed timing or power value exists.",
-            "The synthesis netlist mapped the state bank to RAMB36, but the independent ideal URAM-only state lower bound also exceeds the device's 960 URAMs.",
-            "A reduced-layer BF16 route would change the controlled state layout and is therefore not substituted.",
+            "Out-of-context kernel implementation; no U55C shell integration or xclbin was built.",
+            "The full-capacity BF16 route does not close the 250 MHz target.",
+            "Vivado power is a vectorless estimate, not board telemetry or energy per token.",
+            "The first passing fixed-route sweep point is not a binary-searched maximum frequency.",
+            "The out-of-context clock lacks shell-level HD.CLK_SRC qualification.",
         ],
     }
+
     output.mkdir(parents=True, exist_ok=True)
     (output / "bf16_vivado_summary.json").write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -136,20 +316,22 @@ def generate_report(report_dir: Path, output: Path) -> dict[str, object]:
     (output / "bf16_vivado_summary.md").write_text(
         "\n".join(
             [
-                "# Matched BF16 Physical-Fit Attempt",
+                "# Matched BF16 Post-Route Evidence",
                 "",
-                f"Generated: `{report['generated_at']}`",
-                f"Extraction status: `{report['status']}`",
-                "",
+                f"- Extraction and integrity: `{status}`",
                 f"- Synthesis: `{report['synthesis_completion']}`",
                 f"- Placement: `{report['placement_completion']}`",
+                f"- Route: `{report['route_completion']}`",
                 f"- Physical fit: `{report['physical_fit']}`",
-                f"- Synthesized resources: `{utilization['clb_luts']['used']:,}` CLB LUT, `{utilization['clb_registers']['used']:,}` FF, `{utilization['block_ram_tiles']['used']:,}` BRAM tiles, `{utilization['uram']['used']}` URAM, `{utilization['dsps']['used']}` DSP",
-                f"- Capacity DRC: `{ram36['required']:,}` RAMB36/FIFO required versus `{ram36['available']:,}` available",
-                f"- Independent state-only lower bound: `{bf16_capacity['ideal_min_uram_for_mantissas']:,}` URAM versus `{bf16_capacity['device_uram']}` available",
-                "- Routed timing, vectorless power, and energy: unavailable because placement failed",
+                f"- 250 MHz timing: `{target_timing}` (WNS `{timing['wns_ns']:.3f}` ns, WHS `{timing['whs_ns']:.3f}` ns)",
+                f"- First tested closing point: `{first_passing['period_ns']:.3f}` ns (`{first_passing['frequency_mhz']:.2f}` MHz)",
+                f"- Resources: `{utilization['clb_luts']['used']}` CLB LUT, `{utilization['clb_registers']['used']}` FF, `{utilization['block_ram_tiles']['used']}` BRAM tiles, `{utilization['uram']['used']}` URAM, `{utilization['dsps']['used']}` DSP",
+                f"- State banking: `29` layers in paired 256-bit URAM banks and `7` layers in paired 256-bit BRAM banks",
+                f"- DRC: `{drc['signoff_status']}`",
+                f"- Vectorless power at first closure: `{power['total_on_chip_w']:.3f}` W total (`{power['confidence']}` confidence)",
+                "- Board execution and measured energy: `BLOCKED_EXTERNAL`",
                 "",
-                "A reduced-layer route is not substituted because it would change the controlled all-layer state layout.",
+                "The URAM-only raw-capacity lower bound still fails; the full 36-layer logical state fits by controlled hybrid URAM/BRAM banking.",
                 "",
             ]
         ),
@@ -158,15 +340,25 @@ def generate_report(report_dir: Path, output: Path) -> dict[str, object]:
     return report
 
 
+def _resolve(path: Path) -> Path:
+    return path if path.is_absolute() else ROOT / path
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report-dir", type=Path, default=DEFAULT_REPORT_DIR)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args(argv)
-    report_dir = args.report_dir if args.report_dir.is_absolute() else ROOT / args.report_dir
-    output = args.output if args.output.is_absolute() else ROOT / args.output
-    report = generate_report(report_dir, output)
-    print(json.dumps({"status": report["status"], "physical_fit": report["physical_fit"]}))
+    report = generate_report(_resolve(args.report_dir), _resolve(args.output))
+    print(
+        json.dumps(
+            {
+                "status": report["status"],
+                "physical_fit": report["physical_fit"],
+                "target_clock": report["target_clock"]["status"],
+            }
+        )
+    )
     return 0 if report["status"] == "PASS" else 1
 
 

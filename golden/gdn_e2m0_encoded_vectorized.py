@@ -396,6 +396,21 @@ class EncodedE2M0WriteLogGDNVectorized(EncodedE2M0WriteLogGDN):
     def materialize_state_fp32(self) -> np.ndarray:
         return super().materialize_state_fp32()
 
+    def _quantize_base_exact_vectorized(
+        self,
+        mantissas: np.ndarray,
+        exponents: np.ndarray,
+        counters: ArithmeticCounters,
+    ) -> EncodedE2M0State:
+        if not isinstance(counters, E2M0ArithmeticCounters):
+            raise TypeError("E2M0 base quantization requires E2M0 counters")
+        return _quantize_state_exact_vectorized(
+            mantissas,
+            exponents,
+            block_size=self.block_size,
+            counters=counters,
+        )
+
     def step(self, token: EncodedE2M0Token) -> EncodedE2M0StepResult:
         if self.live_entries >= self.capacity:
             raise RuntimeError("write log is full before accepting a token")
@@ -416,7 +431,7 @@ class EncodedE2M0WriteLogGDNVectorized(EncodedE2M0WriteLogGDN):
         if alpha.shape != (self.num_value_heads,) or beta.shape != alpha.shape:
             raise ValueError("alpha and beta have the wrong shape")
 
-        counters = E2M0ArithmeticCounters()
+        counters = self._new_counters()
         self.gamma_codes = np.clip(
             _round_shift_rne_array(
                 self.gamma_codes.astype(np.int64) * alpha, np.int64(15)
@@ -463,20 +478,12 @@ class EncodedE2M0WriteLogGDNVectorized(EncodedE2M0WriteLogGDN):
         folded = self.live_entries == self.capacity
         if folded:
             state_m, state_x = self._materialize_vectorized(counters)
-            replacement = _quantize_state_exact_vectorized(
+            replacement = self._quantize_base_exact_vectorized(
                 state_m,
                 state_x,
-                block_size=self.block_size,
-                counters=counters,
+                counters,
             )
-            counters.state_scale_changes += int(
-                np.count_nonzero(
-                    replacement.primary_scales != self.base.primary_scales
-                )
-                + np.count_nonzero(
-                    replacement.residual_scales != self.base.residual_scales
-                )
-            )
+            counters.state_scale_changes += self._base_scale_change_count(replacement)
             self.base = replacement
             self.gamma_codes.fill(COEFFICIENT_ONE)
             self.key_elements.fill(0)

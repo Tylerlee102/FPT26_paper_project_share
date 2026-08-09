@@ -1,5 +1,5 @@
 variant,element_bits,block_scale_bits,per_layer_logical_state_bits,per_layer_logical_state_bytes,logical_state_bits,logical_state_bytes,mantissa_state_bits,block_scale_state_bits,ideal_min_uram_for_mantissas,ideal_min_bram18k_for_scales,device_uram,device_bram18k,raw_bit_capacity_necessary_condition,reported_hls_uram,reported_hls_bram18k,reported_hls_counts_cover_ideal_lower_bound,physical_banked_fit
-BF16,16,0,8388608,1048576,301989888,37748736,301989888,0,1024,0,960,4032,FAIL,128,13,FAIL,FAIL
+BF16,16,0,8388608,1048576,301989888,37748736,301989888,0,1024,0,960,4032,FAIL,128,269,FAIL,PASS
 uniform_mxfp4_e2m1_e8m0_b32,4,8,2228224,278528,80216064,10027008,75497472,4718592,256,256,960,4032,PASS,32,24,FAIL,NOT_RUN
-mxfp8_e4m3_e8m0_b32,8,8,4325376,540672,155713536,19464192,150994944,4718592,512,256,960,4032,PASS,64,25,FAIL,NOT_RUN
+mxfp8_e4m3_e8m0_b32,8,8,4325376,540672,155713536,19464192,150994944,4718592,512,256,960,4032,PASS,64,25,FAIL,PASS
 flat_int4,4,0,2097152,262144,75497472,9437184,75497472,0,256,0,960,4032,PASS,,,NOT_RUN,NOT_RUN

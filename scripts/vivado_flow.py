@@ -9,6 +9,7 @@ from pathlib import Path
 from .prepare_e2m0_ooc_rtl import generate as prepare_e2m0_ooc_rtl
 from .prepare_bf16_ooc_rtl import generate as prepare_bf16_ooc_rtl
 from .prepare_mxfp8_ooc_rtl import generate as prepare_mxfp8_ooc_rtl
+from .prepare_rs2_ooc_rtl import generate as prepare_rs2_ooc_rtl
 from .xilinx_tools import find_vivado_batch
 
 
@@ -18,8 +19,22 @@ TCL_BY_STEP = {
     "e2m0-synth": Path("vivado/tcl/run_e2m0_synth.tcl"),
     "e2m0-impl": Path("vivado/tcl/run_e2m0_impl.tcl"),
     "e2m0-postroute-sweep": Path("vivado/tcl/run_e2m0_postroute_sweep.tcl"),
+    "rs2-synth": Path("vivado/tcl/run_rs2_synth.tcl"),
+    "rs2-impl": Path("vivado/tcl/run_rs2_impl.tcl"),
+    "rs2-postroute-sweep": Path("vivado/tcl/run_rs2_postroute_sweep.tcl"),
+    "rs2-postroute-fanout-opt": Path(
+        "vivado/tcl/run_rs2_postroute_fanout_opt.tcl"
+    ),
+    "rs2-postroute-retime-opt": Path(
+        "vivado/tcl/run_rs2_postroute_retime_opt.tcl"
+    ),
+    "rs2-postroute-slr-opt": Path(
+        "vivado/tcl/run_rs2_postroute_slr_opt.tcl"
+    ),
+    "rs2-timing-analysis": Path("vivado/tcl/analyze_rs2_timing.tcl"),
     "bf16-synth": Path("vivado/tcl/run_bf16_synth.tcl"),
     "bf16-impl": Path("vivado/tcl/run_bf16_impl.tcl"),
+    "bf16-postroute-sweep": Path("vivado/tcl/run_bf16_postroute_sweep.tcl"),
     "mxfp8-synth": Path("vivado/tcl/run_mxfp8_synth.tcl"),
     "mxfp8-impl": Path("vivado/tcl/run_mxfp8_impl.tcl"),
     "mxfp8-postroute-sweep": Path("vivado/tcl/run_mxfp8_postroute_sweep.tcl"),
@@ -46,7 +61,15 @@ def main(argv: list[str] | None = None) -> int:
     root = Path(__file__).resolve().parents[1]
     if args.step.startswith("e2m0-"):
         prepare_e2m0_ooc_rtl()
-    elif args.step.startswith("bf16-"):
+    elif args.step.startswith("rs2-") and args.step not in {
+        "rs2-postroute-sweep",
+        "rs2-postroute-fanout-opt",
+        "rs2-postroute-retime-opt",
+        "rs2-postroute-slr-opt",
+        "rs2-timing-analysis",
+    }:
+        prepare_rs2_ooc_rtl()
+    elif args.step.startswith("bf16-") and args.step != "bf16-postroute-sweep":
         prepare_bf16_ooc_rtl()
     elif args.step.startswith("mxfp8-") and args.step != "mxfp8-postroute-sweep":
         prepare_mxfp8_ooc_rtl()

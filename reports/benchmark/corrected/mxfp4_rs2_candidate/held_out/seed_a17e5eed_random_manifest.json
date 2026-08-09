@@ -1,0 +1,54 @@
+{
+  "activation_stack_depth": 2,
+  "adaptive_min_entries": 1,
+  "base_residual_block_fraction": 1.0,
+  "base_stack_depth": 2,
+  "capacities": [
+    2
+  ],
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 2709413613,
+    "split": "held_out",
+    "state_block_size": 32,
+    "tokens": 1024,
+    "trace_family": "high_retention",
+    "value_dim": 128
+  },
+  "fold_decay_threshold": 0.85,
+  "fold_policy": "fixed",
+  "initial_state_mode": "random",
+  "input_stream_sha256": "3ea8857d661ee9cd851a545271f037abf71b397ca2b881b150eb59bd4a672dfb",
+  "limitations": [
+    "synthetic inputs",
+    "floating Q/DQ candidate, not the encoded-integer oracle",
+    "logical storage bytes, not placed BRAM/URAM allocation",
+    "not closed-loop Qwen quality evidence"
+  ],
+  "log_precision": "mxfp4_rs2",
+  "numpy": "2.5.1",
+  "outputs": {
+    "reports/benchmark/corrected/mxfp4_rs2_candidate/held_out/seed_a17e5eed_random_checkpoints.csv": "f1a1934c789cccba58bacce1cf6b9972454913d90ca2661bba61ff3be8c3603d",
+    "reports/benchmark/corrected/mxfp4_rs2_candidate/held_out/seed_a17e5eed_random_tokens.csv": "65591bd2ba05680568be454cb7cdf0c013158f777e09ebe709f8f2466c573ef1"
+  },
+  "python": "3.12.10",
+  "schema": 1,
+  "source_hashes": {
+    "golden/gdn_fp32.py": "7ebc9b7a0ba400a553e9c079b2e2e98596723dcc8b1d137b0477c798e34697c5",
+    "golden/gdn_mxfp4.py": "22e9975b4a60a948a909fa0fc35630b1bc6ad68f7464b5c8e0c68f70bcaa44b8",
+    "golden/gdn_write_log.py": "01c069228bcf9fd202780e07acdf766860263dfe60ce5e1c02d0e10362f88ba1",
+    "golden/mx_format.py": "b0f8bee046465f342e8049b33a91c3e424c3c2c6e69fb53e85d2d63656be269d",
+    "scripts/long_sequence_stability.py": "977ba478f143676388bbc78b87777330269e150abafc38c68b848a9647b05c14",
+    "scripts/write_log_stability.py": "be7584a2d9db7d9739dcf6f8612de9c006f0456ac18e6cbbbdb0ca196d43c0a1"
+  },
+  "status": "diagnostic_only",
+  "timestamp": "2026-08-06T08:37:32.154381+00:00"
+}

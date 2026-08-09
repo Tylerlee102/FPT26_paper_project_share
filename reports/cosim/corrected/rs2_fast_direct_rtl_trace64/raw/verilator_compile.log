@@ -1,0 +1,448 @@
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_512_Pipeline_align_terms.v:1193:31: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                           : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_gdn_rs2_top_impl_Outline_output_log_entries_fu_9422.grp_p_anonymous_namespace_dot_log_entry_fu_225.grp_aligned_sum_guarded_512_s_fu_342.grp_aligned_sum_guarded_512_Pipeline_align_terms_fu_226'
+ 1193 | assign aligned_2_fu_1176_p9 = 'bx;
+      |                               ^~~
+                        ... For warning description see https://verilator.org/warn/WIDTHXZEXPAND?v=5.050
+                        ... Use "/* verilator lint_off WIDTHXZEXPAND */" and lint_on around source to disable this message.
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_512_Pipeline_align_terms.v:1235:34: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                           : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_gdn_rs2_top_impl_Outline_output_log_entries_fu_9422.grp_p_anonymous_namespace_dot_log_entry_fu_225.grp_aligned_sum_guarded_512_s_fu_342.grp_aligned_sum_guarded_512_Pipeline_align_terms_fu_226'
+ 1235 | assign counters_1_1_fu_1384_p7 = 'bx;
+      |                                  ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_read_snapshot_Outline_read_snapshot_update_heads.v:548:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                                                    : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_read_snapshot_fu_9702.grp_p_anonymous_namespace_read_snapshot_Outline_read_snapshot_terms_fu_511.grp_p_anonymous_namespace_read_snapshot_Outline_read_snapshot_update_heads_fu_178'
+  548 |         m_axi_gmem13_0_AWADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_read_snapshot_Outline_read_snapshot_key_heads.v:564:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                                                 : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_read_snapshot_fu_9702.grp_p_anonymous_namespace_read_snapshot_Outline_read_snapshot_terms_fu_511.grp_p_anonymous_namespace_read_snapshot_Outline_read_snapshot_key_heads_fu_162'
+  564 |         m_axi_gmem12_0_AWADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_load_snapshot_Outline_load_snapshot_update_heads.v:533:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                                                    : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_load_snapshot_fu_9223.grp_p_anonymous_namespace_load_snapshot_Outline_load_snapshot_terms_fu_515.grp_p_anonymous_namespace_load_snapshot_Outline_load_snapshot_update_heads_fu_178'
+  533 |         m_axi_gmem7_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_load_snapshot_Outline_load_snapshot_key_heads.v:565:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                                                 : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_load_snapshot_fu_9223.grp_p_anonymous_namespace_load_snapshot_Outline_load_snapshot_terms_fu_515.grp_p_anonymous_namespace_load_snapshot_Outline_load_snapshot_key_heads_fu_162'
+  565 |         m_axi_gmem6_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_7_Pipeline_find_dominant.v:380:25: Unsized constant being X/Z extended to 36 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                          : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_combine_action_fu_9629.grp_aligned_sum_guarded_7_s_fu_537.grp_aligned_sum_guarded_7_Pipeline_find_dominant_fu_210'
+  380 | assign tmp_fu_241_p15 = 'bx;
+      |                         ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_7_Pipeline_align_terms.v:657:30: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_combine_action_fu_9629.grp_aligned_sum_guarded_7_s_fu_537.grp_aligned_sum_guarded_7_Pipeline_align_terms_fu_244'
+  657 | assign aligned_2_fu_675_p9 = 'bx;
+      |                              ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_7_Pipeline_align_terms.v:697:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_combine_action_fu_9629.grp_aligned_sum_guarded_7_s_fu_537.grp_aligned_sum_guarded_7_Pipeline_align_terms_fu_244'
+  697 | assign counters_1_1_fu_883_p7 = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_7_Pipeline_align_terms.v:747:25: Unsized constant being X/Z extended to 36 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_combine_action_fu_9629.grp_aligned_sum_guarded_7_s_fu_537.grp_aligned_sum_guarded_7_Pipeline_align_terms_fu_244'
+  747 | assign raw_fu_344_p15 = 'bx;
+      |                         ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_4_Pipeline_align_terms.v:617:30: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668.grp_aligned_sum_guarded_4_s_fu_8326.grp_aligned_sum_guarded_4_Pipeline_align_terms_fu_182'
+  617 | assign aligned_2_fu_580_p9 = 'bx;
+      |                              ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_4_Pipeline_align_terms.v:659:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668.grp_aligned_sum_guarded_4_s_fu_8326.grp_aligned_sum_guarded_4_Pipeline_align_terms_fu_182'
+  659 | assign counters_1_1_fu_788_p7 = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_2_Pipeline_align_terms.v:557:30: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668.grp_aligned_sum_guarded_2_s_fu_8314.grp_aligned_sum_guarded_2_Pipeline_align_terms_fu_142'
+  557 | assign aligned_2_fu_525_p9 = 'bx;
+      |                              ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_2_Pipeline_align_terms.v:595:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668.grp_aligned_sum_guarded_2_s_fu_8314.grp_aligned_sum_guarded_2_Pipeline_align_terms_fu_142'
+  595 | assign counters_1_1_fu_733_p7 = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_value_stack.v:564:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_token_fu_9303.grp_p_anonymous_namespace_validate_value_stack_fu_218'
+  564 |         m_axi_gmem18_0_ARADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_value_stack.v:674:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_token_fu_9303.grp_p_anonymous_namespace_validate_value_stack_fu_218'
+  674 |         m_axi_gmem2_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_qk_stack.v:564:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                     : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_token_fu_9303.grp_p_anonymous_namespace_validate_qk_stack_fu_202'
+  564 |         m_axi_gmem0_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_qk_stack.v:674:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                     : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_token_fu_9303.grp_p_anonymous_namespace_validate_qk_stack_fu_202'
+  674 |         m_axi_gmem16_0_ARADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_quantize_fold_block.v:3940:54: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668.grp_p_anonymous_namespace_quantize_fold_block_fu_8160'
+ 3940 |         grp_select_e2m1_scale_power_fu_2521_p_read = 'bx;
+      |                                                      ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_quantize_fold_block.v:4245:25: Unsized constant being X/Z extended to 44 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668.grp_p_anonymous_namespace_quantize_fold_block_fu_8160'
+ 4245 |             ap_NS_fsm = 'bx;
+      |                         ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_3_Pipeline_find_dominant.v:339:24: Unsized constant being X/Z extended to 33 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                          : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_aligned_sum_guarded_3_s_fu_9656.grp_aligned_sum_guarded_3_Pipeline_find_dominant_fu_148'
+  339 | assign tmp_fu_183_p7 = 'bx;
+      |                        ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_3_Pipeline_align_terms.v:610:30: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_aligned_sum_guarded_3_s_fu_9656.grp_aligned_sum_guarded_3_Pipeline_align_terms_fu_166'
+  610 | assign aligned_2_fu_581_p9 = 'bx;
+      |                              ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_3_Pipeline_align_terms.v:652:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_aligned_sum_guarded_3_s_fu_9656.grp_aligned_sum_guarded_3_Pipeline_align_terms_fu_166'
+  652 | assign counters_1_1_fu_789_p7 = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_3_Pipeline_align_terms.v:706:24: Unsized constant being X/Z extended to 33 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                        : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_aligned_sum_guarded_3_s_fu_9656.grp_aligned_sum_guarded_3_Pipeline_align_terms_fu_166'
+  706 | assign raw_fu_282_p7 = 'bx;
+      |                        ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_2_1_Pipeline_align_terms.v:556:30: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                          : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_aligned_sum_guarded_2_1_fu_14267.grp_aligned_sum_guarded_2_1_Pipeline_align_terms_fu_144'
+  556 | assign aligned_2_fu_516_p9 = 'bx;
+      |                              ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_aligned_sum_guarded_2_1_Pipeline_align_terms.v:594:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                          : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_aligned_sum_guarded_2_1_fu_14267.grp_aligned_sum_guarded_2_1_Pipeline_align_terms_fu_144'
+  594 | assign counters_1_1_fu_724_p7 = 'bx;
+      |                                 ^~~
+%Warning-ASCRANGE: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gmem19_m_axi.v:693:14: Ascending bit range vector: left < right of bit range: [0:1]
+                                                                                                     : ... note: In instance 'rs2_fast_wrapper.dut.gmem19_m_axi_U.store_unit_0'
+  693 |         wire [0 : TOTAL_PADS-1]      tail_pad_sel;  
+      |              ^
+                   ... For warning description see https://verilator.org/warn/ASCRANGE?v=5.050
+                   ... Use "/* verilator lint_off ASCRANGE */" and lint_on around source to disable this message.
+%Warning-ASCRANGE: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gmem14_m_axi.v:693:14: Ascending bit range vector: left < right of bit range: [0:1]
+                                                                                                     : ... note: In instance 'rs2_fast_wrapper.dut.gmem14_m_axi_U.store_unit_0'
+  693 |         wire [0 : TOTAL_PADS-1]      tail_pad_sel;  
+      |              ^
+%Warning-ASCRANGE: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gmem13_m_axi.v:693:14: Ascending bit range vector: left < right of bit range: [0:3]
+                                                                                                     : ... note: In instance 'rs2_fast_wrapper.dut.gmem13_m_axi_U.store_unit_0'
+  693 |         wire [0 : TOTAL_PADS-1]      tail_pad_sel;  
+      |              ^
+%Warning-ASCRANGE: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gmem12_m_axi.v:693:14: Ascending bit range vector: left < right of bit range: [0:3]
+                                                                                                     : ... note: In instance 'rs2_fast_wrapper.dut.gmem12_m_axi_U.store_unit_0'
+  693 |         wire [0 : TOTAL_PADS-1]      tail_pad_sel;  
+      |              ^
+%Warning-ASCRANGE: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gmem11_m_axi.v:693:14: Ascending bit range vector: left < right of bit range: [0:3]
+                                                                                                     : ... note: In instance 'rs2_fast_wrapper.dut.gmem11_m_axi_U.store_unit_0'
+  693 |         wire [0 : TOTAL_PADS-1]      tail_pad_sel;  
+      |              ^
+%Warning-ASCRANGE: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gmem10_m_axi.v:693:14: Ascending bit range vector: left < right of bit range: [0:3]
+                                                                                                     : ... note: In instance 'rs2_fast_wrapper.dut.gmem10_m_axi_U.store_unit_0'
+  693 |         wire [0 : TOTAL_PADS-1]      tail_pad_sel;  
+      |              ^
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_token.v:1435:71: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                   : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_token_fu_9303'
+ 1435 |         grp_p_anonymous_namespace_validate_qk_stack_fu_202_elements = 'bx;
+      |                                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_token.v:1445:69: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                   : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_token_fu_9303'
+ 1445 |         grp_p_anonymous_namespace_validate_qk_stack_fu_202_scales = 'bx;
+      |                                                                     ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_token.v:1456:36: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                   : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_token_fu_9303'
+ 1456 |             m_axi_gmem3_0_ARADDR = 'bx;
+      |                                    ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_token.v:1459:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                   : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_token_fu_9303'
+ 1459 |         m_axi_gmem3_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_snapshot.v:2098:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                      : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_snapshot_fu_9187'
+ 2098 |         m_axi_gmem4_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_snapshot.v:2210:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                      : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_snapshot_fu_9187'
+ 2210 |         m_axi_gmem5_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_snapshot.v:2322:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                      : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_snapshot_fu_9187'
+ 2322 |         m_axi_gmem6_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_snapshot.v:2434:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                      : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_snapshot_fu_9187'
+ 2434 |         m_axi_gmem7_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_snapshot.v:2547:36: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                      : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_snapshot_fu_9187'
+ 2547 |             m_axi_gmem8_0_ARADDR = 'bx;
+      |                                    ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_snapshot.v:2550:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                      : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_snapshot_fu_9187'
+ 2550 |         m_axi_gmem8_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_validate_snapshot.v:2884:25: Unsized constant being X/Z extended to 69 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                      : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_validate_snapshot_fu_9187'
+ 2884 |             ap_NS_fsm = 'bx;
+      |                         ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_store_key.v:602:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                             : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_store_key_fu_9398'
+  602 |         m_axi_gmem17_0_ARADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_store_key.v:712:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                             : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_store_key_fu_9398'
+  712 |         m_axi_gmem1_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_read_snapshot.v:1712:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                  : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_read_snapshot_fu_9702'
+ 1712 |         m_axi_gmem10_0_AWADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_read_snapshot.v:1878:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                  : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_read_snapshot_fu_9702'
+ 1878 |         m_axi_gmem11_0_AWADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_read_snapshot.v:2046:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                  : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_read_snapshot_fu_9702'
+ 2046 |         m_axi_gmem14_0_AWADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_quantize_update_block.v:3872:54: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                          : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_quantize_update_block_fu_9482'
+ 3872 |         grp_select_e2m1_scale_power_fu_2489_p_read = 'bx;
+      |                                                      ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_quantize_update_block.v:3938:37: Unsized constant being X/Z extended to 128 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                          : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_quantize_update_block_fu_9482'
+ 3938 |         resident_updates_d0_local = 'bx;
+      |                                     ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_quantize_update_block.v:4167:25: Unsized constant being X/Z extended to 44 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                          : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_quantize_update_block_fu_9482'
+ 4167 |             ap_NS_fsm = 'bx;
+      |                         ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_load_snapshot.v:1732:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                  : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_load_snapshot_fu_9223'
+ 1732 |         m_axi_gmem4_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_load_snapshot.v:1844:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                  : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_load_snapshot_fu_9223'
+ 1844 |         m_axi_gmem5_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_load_snapshot.v:1958:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                  : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_load_snapshot_fu_9223'
+ 1958 |         m_axi_gmem8_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_load_snapshot.v:2270:25: Unsized constant being X/Z extended to 33 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                  : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_load_snapshot_fu_9223'
+ 2270 |             ap_NS_fsm = 'bx;
+      |                         ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_fold_log.v:4853:55: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                             : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668'
+ 4853 |         grp_aligned_sum_guarded_4_s_fu_8326_p_read2 = 'bx;
+      |                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_fold_log.v:4863:55: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                             : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668'
+ 4863 |         grp_aligned_sum_guarded_4_s_fu_8326_p_read3 = 'bx;
+      |                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_fold_log.v:5516:25: Unsized constant being X/Z extended to 40 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                             : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668'
+ 5516 |             ap_NS_fsm = 'bx;
+      |                         ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_fold_log.v:5729:35: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                             : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668'
+ 5729 | assign counters_1_4_fu_11575_p7 = 'bx;
+      |                                   ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_fold_log.v:5731:35: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                             : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668'
+ 5731 | assign counters_1_5_fu_11809_p7 = 'bx;
+      |                                   ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_fold_log.v:5733:35: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                             : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668'
+ 5733 | assign counters_1_6_fu_12044_p7 = 'bx;
+      |                                   ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_fold_log.v:5735:35: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                             : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_fold_log_fu_9668'
+ 5735 | assign counters_1_7_fu_12279_p7 = 'bx;
+      |                                   ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_dot_base_column.v:2738:31: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                    : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_dot_base_column_fu_9448'
+ 2738 | assign counters_1_fu_760_p7 = 'bx;
+      |                               ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_combine_action.v:1842:34: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                   : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_combine_action_fu_9629'
+ 1842 | assign counters_1_3_fu_2227_p7 = 'bx;
+      |                                  ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_combine_action.v:1846:34: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                   : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_combine_action_fu_9629'
+ 1846 | assign counters_1_5_fu_2435_p7 = 'bx;
+      |                                  ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_p_anonymous_namespace_combine_action.v:1848:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                                   : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562.grp_p_anonymous_namespace_combine_action_fu_9629'
+ 1848 | assign counters_1_fu_1698_p7 = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:12951:103: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                 : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+12951 |         gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_2_d0_local = 'bx;
+      |                                                                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13001:103: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                 : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13001 |         gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_3_d0_local = 'bx;
+      |                                                                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13051:103: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                 : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13051 |         gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_d0_local = 'bx;
+      |                                                                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13101:103: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                 : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13101 |         gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_5_d0_local = 'bx;
+      |                                                                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13151:103: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                 : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13151 |         gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_d0_local = 'bx;
+      |                                                                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13201:103: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                 : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13201 |         gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_7_d0_local = 'bx;
+      |                                                                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13251:103: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                 : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13251 |         gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_8_d0_local = 'bx;
+      |                                                                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13303:103: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                 : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13303 |         gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_d0_local = 'bx;
+      |                                                                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13513:56: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13513 |         grp_aligned_sum_guarded_2_1_fu_14267_p_read3 = 'bx;
+      |                                                        ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13523:56: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13523 |         grp_aligned_sum_guarded_2_1_fu_14267_p_read4 = 'bx;
+      |                                                        ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13843:69: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13843 |         grp_p_anonymous_namespace_dot_base_column_fu_9448_p_read2 = 'bx;
+      |                                                                     ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13853:69: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13853 |         grp_p_anonymous_namespace_dot_base_column_fu_9448_p_read3 = 'bx;
+      |                                                                     ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13863:77: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13863 |         grp_p_anonymous_namespace_dot_base_column_fu_9448_vector_elements = 'bx;
+      |                                                                             ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:13873:75: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+13873 |         grp_p_anonymous_namespace_dot_base_column_fu_9448_vector_scales = 'bx;
+      |                                                                           ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:14533:55: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+14533 |         grp_select_e2m1_scale_power_fu_14276_p_read = 'bx;
+      |                                                       ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:14545:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+14545 |         m_axi_gmem0_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:14791:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+14791 |         m_axi_gmem15_0_AWADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:14903:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+14903 |         m_axi_gmem15_0_WDATA = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:14980:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+14980 |         m_axi_gmem16_0_ARADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:15138:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+15138 |         m_axi_gmem17_0_ARADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:15318:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+15318 |         m_axi_gmem18_0_ARADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:15432:33: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+15432 |         m_axi_gmem19_0_AWADDR = 'bx;
+      |                                 ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:15602:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+15602 |         m_axi_gmem1_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:15782:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+15782 |         m_axi_gmem2_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:15898:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+15898 |         m_axi_gmem3_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:16034:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+16034 |         m_axi_gmem4_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:16164:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+16164 |         m_axi_gmem5_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:16294:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+16294 |         m_axi_gmem6_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:16424:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+16424 |         m_axi_gmem7_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:16554:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+16554 |         m_axi_gmem8_0_ARADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:16686:32: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+16686 |         m_axi_gmem9_0_AWADDR = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:17576:28: Unsized constant being X/Z extended to 128 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+17576 |         resident_keys_d0 = 'bx;
+      |                            ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:17726:31: Unsized constant being X/Z extended to 128 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+17726 |         resident_primary_d0 = 'bx;
+      |                               ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:17838:32: Unsized constant being X/Z extended to 128 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+17838 |         resident_residual_d0 = 'bx;
+      |                                ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:18060:31: Unsized constant being X/Z extended to 128 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+18060 |         resident_updates_d0 = 'bx;
+      |                               ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:20037:25: Unsized constant being X/Z extended to 331 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+20037 |             ap_NS_fsm = 'bx;
+      |                         ^~~
+%Warning-WIDTHXZEXPAND: /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/gdn_rs2_top_gdn_rs2_top_impl.v:20802:41: Unsized constant being X/Z extended to 64 bits: ?32?bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                                                                                : ... note: In instance 'rs2_fast_wrapper.dut.grp_gdn_rs2_top_impl_fu_562'
+20802 | assign command_counters_9_fu_11833_p7 = 'bx;
+      |                                         ^~~
+make: Entering directory '/tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/obj'
+g++  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -Os  -c -o rs2_fast_harness.o /tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/src/rs2_fast_harness.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -c -o verilated.o /usr/local/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -c -o verilated_dpi.o /usr/local/share/verilator/include/verilated_dpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -c -o verilated_threads.o /usr/local/share/verilator/include/verilated_threads.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -x c++-header Vrs2_fast_wrapper__pch.h -o Vrs2_fast_wrapper__pch.h.fast.gch
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -x c++-header Vrs2_fast_wrapper__pch.h -o Vrs2_fast_wrapper__pch.h.slow.gch
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.slow -c Vrs2_fast_wrapper__ConstPool__0__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.slow -c Vrs2_fast_wrapper___024root__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.slow -c Vrs2_fast_wrapper___024root__0__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.slow -c Vrs2_fast_wrapper___024root__1__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.slow -c Vrs2_fast_wrapper___024root__2__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.slow -c Vrs2_fast_wrapper__Syms__Slow.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper___024root__0.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper___024root__1.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper___024root__2.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper___024root__3.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper___024root__4.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper___024root__5.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper___024root__6.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper___024root__7.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper___024root__8.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper___024root__9.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper___024root__10.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3 -std=c++17 -DRS2_MODEL_THREADS=4   -include Vrs2_fast_wrapper__pch.h.fast -c Vrs2_fast_wrapper__Dpi.cpp
+g++    rs2_fast_harness.o verilated.o verilated_dpi.o verilated_threads.o Vrs2_fast_wrapper__ALL.a    -pthread -lpthread -latomic   -o Vrs2_fast_wrapper
+rm Vrs2_fast_wrapper__ALL.verilator_deplist.tmp
+make: Leaving directory '/tmp/gdn_rs2_fast_cache_4dc58ac571e0ed398008/obj'
+- V e r i l a t i o n   R e p o r t: Verilator 5.050 2026-07-01 rev v5.050
+- Verilator: Built from 772.214 MB sources in 331 modules, into 24.727 MB in 19 C++ files needing 0.013 MB
+- Verilator: Walltime 30.643 s (elab=1.763, cvt=7.341, bld=20.370); cpu 9.571 s on 8 threads; allocated 375.129 MB

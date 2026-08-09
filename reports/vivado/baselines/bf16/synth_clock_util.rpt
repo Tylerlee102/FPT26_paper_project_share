@@ -1,9 +1,9 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version      : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date              : Tue Aug  4 23:28:39 2026
+| Date              : Wed Aug  5 22:28:22 2026
 | Host              : Tyler running 64-bit major release  (build 9200)
-| Command           : report_clock_utilization -file Y:/reports/vivado/baselines/bf16/synth_clock_util.rpt
+| Command           : report_clock_utilization -file X:/reports/vivado/baselines/bf16/synth_clock_util.rpt
 | Design            : gdn_bf16_top
 | Device            : xcu55c-fsvh2892
 | Speed File        : -2L  PRODUCTION 1.30 05-01-2022
@@ -45,7 +45,7 @@ Table of Contents
 +-----------+-----------+-----------------+------------+------+--------------+------+-------------------+------------------+-------------------+-------------+-----------------+--------------+--------+-------------------+-------------------+
 | Global Id | Source Id | Driver Type/Pin | Constraint | Site | Clock Region | Root | Clock Delay Group | Clock Low Fanout | Load Clock Region | Clock Loads | Non-Clock Loads | Clock Period | Clock  | Driver Pin        | Net               |
 +-----------+-----------+-----------------+------------+------+--------------+------+-------------------+------------------+-------------------+-------------+-----------------+--------------+--------+-------------------+-------------------+
-| g0        | src0      | BUFGCE/O        | None       |      | n/a          | X3Y5 |                   |                  |                 0 |       63381 |               0 |        4.000 | ap_clk | ooc_ap_clk_bufg/O | ooc_ap_clk_global |
+| g0        | src0      | BUFGCE/O        | None       |      | n/a          | X3Y5 |                   |                  |                 0 |       56767 |               0 |        4.000 | ap_clk | ooc_ap_clk_bufg/O | ooc_ap_clk_global |
 +-----------+-----------+-----------------+------------+------+--------------+------+-------------------+------------------+-------------------+-------------+-----------------+--------------+--------+-------------------+-------------------+
 * Clock Loads column represents cell count of net connects that connect to a clock pin. Internal cell leaf pins are not considered
 ** Non-Clock Loads column represents cell count of non-clock pin loads

@@ -1,14 +1,16 @@
-# Matched BF16 Physical-Fit Attempt
+# Matched BF16 Post-Route Evidence
 
-Generated: `2026-08-05T06:32:03.104535+00:00`
-Extraction status: `PASS`
-
+- Extraction and integrity: `PASS`
 - Synthesis: `PASS`
-- Placement: `FAIL_CAPACITY`
-- Physical fit: `FAIL`
-- Synthesized resources: `46,894` CLB LUT, `38,165` FF, `9,216` BRAM tiles, `0` URAM, `15` DSP
-- Capacity DRC: `9,216` RAMB36/FIFO required versus `2,016` available
-- Independent state-only lower bound: `1,024` URAM versus `960` available
-- Routed timing, vectorless power, and energy: unavailable because placement failed
+- Placement: `PASS`
+- Route: `PASS`
+- Physical fit: `PASS`
+- 250 MHz timing: `FAIL` (WNS `-3.020` ns, WHS `0.000` ns)
+- First tested closing point: `7.125` ns (`140.35` MHz)
+- Resources: `57942` CLB LUT, `38550` FF, `1602.5` BRAM tiles, `928` URAM, `15` DSP
+- State banking: `29` layers in paired 256-bit URAM banks and `7` layers in paired 256-bit BRAM banks
+- DRC: `PASS_WITH_WARNINGS`
+- Vectorless power at first closure: `5.648` W total (`Medium` confidence)
+- Board execution and measured energy: `BLOCKED_EXTERNAL`
 
-A reduced-layer route is not substituted because it would change the controlled all-layer state layout.
+The URAM-only raw-capacity lower bound still fails; the full 36-layer logical state fits by controlled hybrid URAM/BRAM banking.

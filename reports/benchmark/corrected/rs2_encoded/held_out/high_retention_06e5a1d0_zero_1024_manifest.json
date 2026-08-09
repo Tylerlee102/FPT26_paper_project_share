@@ -1,0 +1,143 @@
+{
+  "arithmetic_contract": {
+    "accumulator_bits": 32,
+    "alignment_guard_bits": 5,
+    "capacity": 3,
+    "coefficient_format": "Q1.15",
+    "fold_policy": "fixed all-head atomic at capacity",
+    "state": "two E2M1/E8M0 B32 terms",
+    "token_and_log": "two E2M1/E8M0 B32 terms"
+  },
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 115712464,
+    "split": "rs2_encoded_held_out",
+    "state_block_size": 32,
+    "tokens": 1024,
+    "trace_family": "high_retention",
+    "value_dim": 128
+  },
+  "evidence_scope": "encoded_integer_synthetic_stability",
+  "execution": {
+    "command": "C:\\Users\\tyboy\\AppData\\Local\\Programs\\Python\\Python312\\python.exe -m scripts.rs2_encoded_stability --tokens 1024 --seed 0x06E5A1D0 --split rs2_encoded_held_out --trace-family high_retention --initial-state zero --output-dir reports/benchmark/corrected/rs2_encoded/held_out",
+    "exit_code": 0
+  },
+  "gate": {
+    "accumulator_saturations_required": 0,
+    "element_saturations_required": 0,
+    "gate_pass": true,
+    "metrics": {
+      "all_token_output_cosine_min": 0.9961151704673247,
+      "all_token_state_relative_l2_max": 0.08243488321815229,
+      "cumulative_accumulator_saturations": 0,
+      "cumulative_alignment_underflows": 108751225,
+      "cumulative_element_saturations": 0,
+      "cumulative_scale_clamps": 0,
+      "cumulative_state_scale_changes": 2781954,
+      "final_output_cosine": 0.9964726841230845,
+      "final_state_relative_l2": 0.08172190775358329
+    },
+    "output_cosine_minimum": 0.99,
+    "scale_clamps_required": 0,
+    "scope": "every token in the trace",
+    "state_relative_l2_maximum": 0.1
+  },
+  "independent_verification": "python -m scripts.verify_rs2_encoded_stability",
+  "initial_state_mode": "zero",
+  "input_stream_sha256": "D80A37B38DD9BC2FDB65D2332D9EABA8CB1136F73B3C68145A09942C1FBEC752",
+  "limitations": [
+    "layer-level deterministic synthetic traces only",
+    "vectorized executor is software, not HLS C simulation or RTL",
+    "closed-loop Qwen quality, placement, routing, board parity, and energy are NOT_RUN"
+  ],
+  "logical_state_bytes": 576912,
+  "numpy": "2.5.1",
+  "outputs": {
+    "reports/benchmark/corrected/rs2_encoded/held_out/high_retention_06e5a1d0_zero_1024.log": "5ED3D4938937D0BBD958E12B6E10B3AC9B58B5AA1E305C22BA4923F0F72D7A65",
+    "reports/benchmark/corrected/rs2_encoded/held_out/high_retention_06e5a1d0_zero_1024_checkpoints.csv": "6A52A026D875F60BD3B919A029DB1CD6D115F10C6A23DA6C408E1291B24D6B03",
+    "reports/benchmark/corrected/rs2_encoded/held_out/high_retention_06e5a1d0_zero_1024_tokens.csv": "74148A16E83F04463E12BA3B6D6A4CB8B54BA08F4E2C00514466FCB6ED070F4B"
+  },
+  "python": "3.12.10",
+  "schema": 1,
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 30392,
+      "changed_file_count": 5,
+      "sha256": "CD5C2AD61DB05CB7B3D686DC6A0FBDA240178E68993EE4E4620F6501C25468DE"
+    },
+    "files": {
+      "golden/gdn_e2m0_encoded.py": {
+        "bytes": 40915,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "1CD8859E345B42AD0E47370C7F6C55AB47873792DBC848019C998DC41EF40CB0"
+      },
+      "golden/gdn_e2m0_encoded_vectorized.py": {
+        "bytes": 19665,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "393CC77CD03B395D2FEFE2145AA9C771CEFEF213E128F67A9D44CE878A0787B4"
+      },
+      "golden/gdn_fp32.py": {
+        "bytes": 8406,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "7EBC9B7A0BA400A553E9C079B2E2E98596723DCC8B1D137B0477C798E34697C5"
+      },
+      "golden/gdn_mxfp4_encoded.py": {
+        "bytes": 22670,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402"
+      },
+      "golden/gdn_mxfp4_encoded_vectorized.py": {
+        "bytes": 13109,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D"
+      },
+      "golden/gdn_rs2_encoded.py": {
+        "bytes": 5290,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B2AB1B22ED6CB2A9626671904F7698598ACDAB79E7E533500CAAB10F24036CE3"
+      },
+      "golden/gdn_rs2_encoded_vectorized.py": {
+        "bytes": 1729,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "29DBC4EEC7CF03FAE7059C5BD012904CE0EFCB9B54F34228CB14308B54EF62A1"
+      },
+      "scripts/rs2_encoded_stability.py": {
+        "bytes": 16542,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B6A6F63AC7A12852772535F315EB4F89DD778B15FF5E04B6B8D4022671658C53"
+      }
+    },
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+  "source_sha256": {
+    "golden/gdn_e2m0_encoded.py": "1CD8859E345B42AD0E47370C7F6C55AB47873792DBC848019C998DC41EF40CB0",
+    "golden/gdn_e2m0_encoded_vectorized.py": "393CC77CD03B395D2FEFE2145AA9C771CEFEF213E128F67A9D44CE878A0787B4",
+    "golden/gdn_fp32.py": "7EBC9B7A0BA400A553E9C079B2E2E98596723DCC8B1D137B0477C798E34697C5",
+    "golden/gdn_mxfp4_encoded.py": "5DF84CA9FDC9B58A4A4DA8541014CA200C530ED00EB725A6032E88AFBD6A3402",
+    "golden/gdn_mxfp4_encoded_vectorized.py": "102044C256202B02A71E79486D3337094B60A84D116536EA596322603E4EAF1D",
+    "golden/gdn_rs2_encoded.py": "B2AB1B22ED6CB2A9626671904F7698598ACDAB79E7E533500CAAB10F24036CE3",
+    "golden/gdn_rs2_encoded_vectorized.py": "29DBC4EEC7CF03FAE7059C5BD012904CE0EFCB9B54F34228CB14308B54EF62A1",
+    "scripts/rs2_encoded_stability.py": "B6A6F63AC7A12852772535F315EB4F89DD778B15FF5E04B6B8D4022671658C53"
+  },
+  "status": "PASS",
+  "timestamp": "2026-08-06T10:42:50.180122+00:00",
+  "variant": "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5"
+}

@@ -20,12 +20,11 @@ class TestLegacyPaperProvenancePreservation(unittest.TestCase):
         gate = json.loads(
             Path("reports/final_completion_gate.json").read_text(encoding="utf-8")
         )
-        self.assertIn("READY FOR HUMAN SUBMISSION REVIEW", status)
+        self.assertIn("NOT PAPER READY", status)
         self.assertIn("must not be", status)
         self.assertIn("current paper evidence", status)
-        self.assertTrue(gate["paper_pdf_permitted"])
-        self.assertEqual(gate["required_nonpassing_gate_count"], 0)
-        self.assertTrue(Path("paper/corrected/paper.pdf").is_file())
+        self.assertFalse(gate["paper_pdf_permitted"])
+        self.assertGreater(gate["required_nonpassing_gate_count"], 0)
 
     def test_legacy_every_number_has_provenance(self) -> None:
         numbers = json.loads(Path("paper/numbers.json").read_text(encoding="utf-8"))

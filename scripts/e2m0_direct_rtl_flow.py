@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
-import os
 import shlex
 import subprocess
 from datetime import datetime, timezone
@@ -52,6 +52,23 @@ def _bash(distro: str, script: str, *, timeout: int) -> subprocess.CompletedProc
     )
 
 
+def _build_key(
+    *, rtl: Path, version: str, model_threads: int
+) -> str:
+    digest = hashlib.sha256()
+    digest.update(version.encode("utf-8"))
+    digest.update(f"model_threads={model_threads}\n".encode("ascii"))
+    digest.update(b"verilator_options=v2\n")
+    for path in (TB, AXI, *sorted(rtl.glob("*.v"))):
+        digest.update(path.name.encode("utf-8"))
+        file_digest = hashlib.sha256()
+        with path.open("rb") as handle:
+            while chunk := handle.read(1024 * 1024):
+                file_digest.update(chunk)
+        digest.update(file_digest.digest())
+    return digest.hexdigest()[:20]
+
+
 def run_flow(
     *,
     distro: str = "Ubuntu-24.04",
@@ -60,6 +77,7 @@ def run_flow(
     jobs: int = 4,
     model_threads: int = 1,
     token_limit: int = 64,
+    simulation_timeout_seconds: int | None = None,
 ) -> dict[str, object]:
     for path in (TB, AXI, rtl):
         if not path.exists():
@@ -68,7 +86,11 @@ def run_flow(
         raise ValueError("the corrected-candidate HLS RTL directory is incomplete")
     assets = evidence / "assets"
     manifest = generate_assets(output_dir=assets)
-    raw = evidence / "raw"
+    raw = (
+        evidence / "raw"
+        if token_limit == 64
+        else evidence / "benchmarks" / f"t{model_threads}_{token_limit}token" / "raw"
+    )
     raw.mkdir(parents=True, exist_ok=True)
 
     version = _run(
@@ -76,19 +98,39 @@ def run_flow(
     )
     if version.returncode != 0:
         raise RuntimeError(f"Verilator is unavailable in {distro}: {version.stdout}")
-    temp_root = f"/tmp/gdn_e2m0_direct_{os.getpid()}"
+    build_key = _build_key(
+        rtl=rtl, version=version.stdout.strip(), model_threads=model_threads
+    )
+    temp_root = f"/tmp/gdn_e2m0_direct_cache_{build_key}"
     rtl_wsl = _wsl_path(rtl, distro)
     tb_wsl = _wsl_path(TB, distro)
     axi_wsl = _wsl_path(AXI, distro)
     assets_wsl = _wsl_path(assets, distro)
+    binary = temp_root + "/obj/Vtb_gdn_e2m0_top_direct"
+    cache_probe = _bash(
+        distro, f"test -x {shlex.quote(binary)}", timeout=30
+    )
+    cache_hit = cache_probe.returncode == 0
     setup = "\n".join(
         [
             "set -euo pipefail",
-            f"rm -rf -- {shlex.quote(temp_root)}",
+            *(
+                [f"rm -rf -- {shlex.quote(temp_root)}"]
+                if not cache_hit
+                else []
+            ),
             f"mkdir -p {shlex.quote(temp_root + '/src')} {shlex.quote(temp_root + '/run/assets')} {shlex.quote(temp_root + '/obj')}",
-            f"cp {shlex.quote(rtl_wsl)}/*.v {shlex.quote(temp_root + '/src/')}",
+            *(
+                [
+                    f"cp {shlex.quote(rtl_wsl)}/*.v {shlex.quote(temp_root + '/src/')}",
+                    f"cp {shlex.quote(tb_wsl)} {shlex.quote(axi_wsl)} {shlex.quote(temp_root + '/src/')}",
+                ]
+                if not cache_hit
+                else []
+            ),
+            f"rm -rf -- {shlex.quote(temp_root + '/run')}",
+            f"mkdir -p {shlex.quote(temp_root + '/run/assets')}",
             f"cp {shlex.quote(rtl_wsl)}/*.dat {shlex.quote(temp_root + '/run/')}",
-            f"cp {shlex.quote(tb_wsl)} {shlex.quote(axi_wsl)} {shlex.quote(temp_root + '/src/')}",
             f"cp {shlex.quote(assets_wsl)}/*.hex {shlex.quote(temp_root + '/run/assets/')}",
         ]
     )
@@ -113,8 +155,16 @@ def run_flow(
             shlex.quote(temp_root + "/src") + "/*.v",
         ]
     )
-    print("Compiling 151 HLS-generated Verilog files with Verilator...", flush=True)
-    compile_result = _bash(distro, compile_command, timeout=7200)
+    if cache_hit:
+        print(f"Using cached Verilator model {build_key}...", flush=True)
+        compile_result = subprocess.CompletedProcess(
+            args=["verilator-cache", build_key],
+            returncode=0,
+            stdout=f"CACHE_HIT key={build_key}\n",
+        )
+    else:
+        print("Compiling 151 HLS-generated Verilog files with Verilator...", flush=True)
+        compile_result = _bash(distro, compile_command, timeout=7200)
     (raw / "verilator_compile.log").write_text(
         compile_result.stdout, encoding="utf-8", errors="replace"
     )
@@ -138,19 +188,28 @@ def run_flow(
             shlex.quote(temp_root + "/run"),
             "&& /usr/bin/time -v -o",
             shlex.quote(temp_root + "/run_time.log"),
+            "stdbuf -oL -eL",
             shlex.quote(temp_root + "/obj/Vtb_gdn_e2m0_top_direct"),
             f"+TOKEN_LIMIT={token_limit}",
         ]
     )
-    if args.token_limit == 0:
+    if token_limit == 0:
         stage = "LOAD-only exact RTL check"
     else:
-        stage = f"LOAD + {args.token_limit} STEP + READBACK exact RTL trace"
+        stage = f"LOAD + {token_limit} STEP"
+        if token_limit == 64:
+            stage += " + READBACK exact RTL trace"
     print(f"Running {stage}...", flush=True)
-    simulation_result = _bash(distro, run_command, timeout=7200)
-    (raw / "verilator_run.log").write_text(
-        simulation_result.stdout, encoding="utf-8", errors="replace"
-    )
+    timeout_seconds = simulation_timeout_seconds
+    if timeout_seconds is None:
+        timeout_seconds = 36 * 3600 if token_limit == 64 else 4 * 3600
+    run_log_wsl = _wsl_path(raw / "verilator_run.log", distro)
+    run_command += f" 2>&1 | tee {shlex.quote(run_log_wsl)}"
+    simulation_result = _bash(distro, run_command, timeout=timeout_seconds)
+    if not (raw / "verilator_run.log").is_file():
+        (raw / "verilator_run.log").write_text(
+            simulation_result.stdout, encoding="utf-8", errors="replace"
+        )
     copy_run_time = _bash(
         distro,
         f"cp {shlex.quote(temp_root + '/run_time.log')} {_shell_path(raw / 'verilator_run_time.log', distro)}",
@@ -167,6 +226,9 @@ def run_flow(
         "jobs": jobs,
         "model_threads": model_threads,
         "token_limit": token_limit,
+        "simulation_timeout_seconds": timeout_seconds,
+        "build_cache_key": build_key,
+        "build_cache_hit": cache_hit,
         "temporary_build_directory": temp_root,
         "compile_exit_code": compile_result.returncode,
         "simulation_exit_code": simulation_result.returncode,
@@ -201,9 +263,6 @@ def run_flow(
         (evidence / f"benchmark_t{model_threads}_{token_limit}token.json").write_text(
             json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
         )
-    cleanup = _bash(distro, f"rm -rf -- {shlex.quote(temp_root)}", timeout=120)
-    if cleanup.returncode != 0:
-        print(f"Warning: temporary WSL build was not removed: {temp_root}", flush=True)
     return report
 
 
@@ -219,6 +278,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--jobs", type=int, default=4)
     parser.add_argument("--model-threads", type=int, default=1)
     parser.add_argument("--token-limit", type=int, default=64)
+    parser.add_argument("--simulation-timeout-seconds", type=int)
     args = parser.parse_args(argv)
     evidence = args.evidence if args.evidence.is_absolute() else ROOT / args.evidence
     rtl = args.rtl if args.rtl.is_absolute() else ROOT / args.rtl
@@ -229,6 +289,7 @@ def main(argv: list[str] | None = None) -> int:
         jobs=args.jobs,
         model_threads=args.model_threads,
         token_limit=args.token_limit,
+        simulation_timeout_seconds=args.simulation_timeout_seconds,
     )
     print(
         json.dumps(

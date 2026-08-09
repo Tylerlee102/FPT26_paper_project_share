@@ -29,17 +29,18 @@ def test_variant_dash_patterns_are_stable_and_grayscale_distinct() -> None:
     assert _variant_dash("fp32") == ()
 
 
-def test_current_plot_manifest_includes_verified_native_trace() -> None:
+def test_current_plot_manifest_includes_selected_native_trace() -> None:
     payload = json.loads(DEFAULT_MANIFEST.read_text(encoding="utf-8"))
     assert payload["status"] == "PASS"
     assert payload["evidence_scope"] == (
         "synthetic_floating_qdq_and_native_encoded_figures"
     )
-    assert "native_mxfp4_encoded_act_b32_state_b32" in payload["configuration"][
-        "variants"
-    ]
-    assert payload["encoded_input"] is not None
-    assert payload["encoded_upstream_manifest"] is not None
+    assert (
+        "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5"
+        in payload["configuration"]["variants"]
+    )
+    assert payload["encoded_input"] is None
+    assert payload["encoded_upstream_manifest"] is None
 
 
 class TestPlotLongSequenceStability(unittest.TestCase):

@@ -21,8 +21,15 @@ def test_bf16_baseline_keeps_controlled_boundary_and_dataflow() -> None:
     assert "phase3_delta_tile" in source
     assert "phase4_update_state_tile" in source
     assert "phase5_output_tile" in source
-    assert "resident_state[gdn::NUM_SEQUENCES][gdn::NUM_LAYERS]" in source
-    assert "BIND_STORAGE variable=resident_state type=ram_t2p impl=uram" in source
+    assert "constexpr int URAM_LAYER_COUNT = 29" in source
+    assert "constexpr int BRAM_LAYER_COUNT = gdn::NUM_LAYERS - URAM_LAYER_COUNT" in source
+    assert "resident_state_uram_lower" in source
+    assert "resident_state_uram_upper" in source
+    assert "resident_state_bram_lower" in source
+    assert "resident_state_bram_upper" in source
+    assert "BIND_STORAGE variable=resident_state_uram_lower type=ram_t2p impl=uram" in source
+    assert "BIND_STORAGE variable=resident_state_bram_lower type=ram_t2p impl=bram" in source
+    assert "join_state_halves" in source
     assert "qk_head = head / (gdn::NUM_VALUE_HEADS / gdn::NUM_QK_HEADS)" in source
 
 
@@ -37,3 +44,5 @@ def test_bf16_baseline_has_bounded_csim_and_csynth_entrypoints() -> None:
     assert "xcu55c-fsvh2892-2L-e" in csim
     assert "create_clock -period 4.0" in csynth
     assert "BF16_HLS_CSIM PASS" in testbench
+    assert "commands=6 bank_classes=2" in testbench
+    assert "gdn::NUM_LAYERS - 1" in testbench

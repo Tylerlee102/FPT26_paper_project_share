@@ -1,0 +1,101 @@
+{
+  "configuration": {
+    "activation_block_size": 32,
+    "checkpoints": [
+      64,
+      256,
+      1024,
+      4096,
+      8192
+    ],
+    "key_dim": 128,
+    "num_qk_heads": 16,
+    "num_value_heads": 32,
+    "seed": 64370,
+    "split": "development",
+    "state_block_size": 32,
+    "tokens": 8192,
+    "trace_family": "high_retention",
+    "value_dim": 128
+  },
+  "evidence_scope": "synthetic_floating_qdq_diagnostic",
+  "execution": {
+    "command": "python -m scripts.long_sequence_stability --tokens 8192 --seed 0xFB72 --split development --trace-family high_retention --token-csv reports/benchmark/corrected/rs2_controlled/high_retention_random_baselines_tokens.csv --checkpoint-csv reports/benchmark/corrected/rs2_controlled/high_retention_random_baselines_checkpoints.csv --report reports/benchmark/corrected/rs2_controlled/high_retention_random_baselines.md --manifest reports/benchmark/corrected/rs2_controlled/high_retention_random_baselines_manifest.json",
+    "exit_code": 0,
+    "raw_log": "reports/benchmark/corrected/rs2_controlled/high_retention_random_baselines.md"
+  },
+  "independent_verification": "python -m scripts.verify_synthetic_stability cross-checks hashes, row sequences, checkpoint projections, metrics, and scale-policy parity",
+  "initial_state_sha256": "70f50a948f2c61c683bdf2c648e3737b8259c84a01868430aff70034bc432856",
+  "input_sha256": "c657289c3e1498a60d6b7219395766b112aeba40a0c6c0928e458a46c6a0e078",
+  "limitations": [
+    "synthetic inputs",
+    "floating Q/DQ variants are not the encoded-integer oracle",
+    "event counters are NOT_RUN for Q/DQ variants",
+    "not closed-loop Qwen quality evidence"
+  ],
+  "numpy": "2.5.1",
+  "outputs": {
+    "reports/benchmark/corrected/rs2_controlled/high_retention_random_baselines_checkpoints.csv": "64ae6df6768c6e9d19ca421deea97c592d3644fedf080d5e6e88b670630e15bd",
+    "reports/benchmark/corrected/rs2_controlled/high_retention_random_baselines_tokens.csv": "b14732e0b7674c537a068389d21c35fbb4c162f0467ada6956f0a51c158d3942"
+  },
+  "python": "3.12.10",
+  "schema": 1,
+  "source_hashes": {
+    "golden/gdn_bf16.py": "e020e4dbe5b2940fb06199fcd7b9b2c6e4e05f5f7923623871bca7f9fdee6d0f",
+    "golden/gdn_fp32.py": "7ebc9b7a0ba400a553e9c079b2e2e98596723dcc8b1d137b0477c798e34697c5",
+    "golden/gdn_int4.py": "d871306a336f2daa888643aeaccb6763e418f15e5f400c5489be8ebf61d2224d",
+    "golden/gdn_mxfp4.py": "22e9975b4a60a948a909fa0fc35630b1bc6ad68f7464b5c8e0c68f70bcaa44b8",
+    "golden/mx_format.py": "b0f8bee046465f342e8049b33a91c3e424c3c2c6e69fb53e85d2d63656be269d",
+    "scripts/long_sequence_stability.py": "977ba478f143676388bbc78b87777330269e150abafc38c68b848a9647b05c14"
+  },
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 0,
+      "changed_file_count": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "files": {
+      "golden/gdn_bf16.py": {
+        "bytes": 1585,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "E020E4DBE5B2940FB06199FCD7B9B2C6E4E05F5F7923623871BCA7F9FDEE6D0F"
+      },
+      "golden/gdn_fp32.py": {
+        "bytes": 8406,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "7EBC9B7A0BA400A553E9C079B2E2E98596723DCC8B1D137B0477C798E34697C5"
+      },
+      "golden/gdn_int4.py": {
+        "bytes": 1690,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "D871306A336F2DAA888643AEACCB6763E418F15E5F400C5489BE8EBF61D2224D"
+      },
+      "golden/gdn_mxfp4.py": {
+        "bytes": 4313,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "22E9975B4A60A948A909FA0FC35630B1BC6AD68F7464B5C8E0C68F70BCAA44B8"
+      },
+      "golden/mx_format.py": {
+        "bytes": 10211,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "B0F8BEE046465F342E8049B33A91C3E424C3C2C6E69FB53E85D2D63656BE269D"
+      },
+      "scripts/long_sequence_stability.py": {
+        "bytes": 20364,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "977BA478F143676388BBC78B87777330269E150ABAFC38C68B848A9647B05C14"
+      }
+    },
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
+  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+  "status": "PASS",
+  "timestamp": "2026-08-06T13:02:34.843811+00:00"
+}

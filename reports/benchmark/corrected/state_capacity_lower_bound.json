@@ -17,13 +17,13 @@
     "a raw-capacity PASS is necessary but not sufficient for physical fit",
     "HLS totals include non-state memories and therefore cannot be smaller than a valid state-only lower bound",
     "uniform-MXFP4 and flat-INT4 all-layer physical banking remain NOT_RUN",
-    "the BF16 physical attempt fails capacity and is not replaced by a reduced-layer design"
+    "the BF16 URAM-only raw-capacity condition fails, but the controlled full 36-layer layout physically fits by splitting its state banks across URAM and BRAM"
   ],
-  "physical_all_layer_state_bank_fit": "NOT_RUN",
+  "physical_all_layer_state_bank_fit": "SEE_PHYSICAL_FIT_BY_VARIANT",
   "physical_fit_by_variant": {
-    "BF16": "FAIL",
+    "BF16": "PASS",
     "flat_int4": "NOT_RUN",
-    "mxfp8_e4m3_e8m0_b32": "NOT_RUN",
+    "mxfp8_e4m3_e8m0_b32": "PASS",
     "uniform_mxfp4_e2m1_e8m0_b32": "NOT_RUN"
   },
   "primitive_capacity_assumptions": {
@@ -34,10 +34,11 @@
   "raw_input_sha256": {
     "hls/include/gdn_params.hpp": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82",
     "reports/csynth/corrected/baseline_csynth_summary.json": "E41A7D78948384082C447C09A04679BC013457E8440F541E773126C3916A0CD3",
-    "reports/csynth/corrected/bf16_current/report/gdn_bf16_top_csynth.xml": "9EA0EDD568ACCEFA3CC81E467F18383B4D840A7E2386E82CE5499C50512F0378",
-    "reports/csynth/corrected/bf16_hls_summary.json": "010349D332F8843CF6E3B6511B486116BF5FF6033744CE672BF1552C558F2F95",
+    "reports/csynth/corrected/bf16_current/report/gdn_bf16_top_csynth.xml": "9CD32F3B0337F2335C5253832841E7680432EB8BCE6116F3A3A903948BFBB6C7",
+    "reports/csynth/corrected/bf16_hls_summary.json": "151D590E03125ABF31E25D50923511479EBEA0FF3F24B50C307933AB4AF232AB",
     "reports/csynth/corrected/mxfp8_hls_summary.json": "1EF6CB422542513C70838B5B9332073F9192B9498630E3FD6C55F70D9CE17657",
-    "reports/vivado/baselines/bf16/bf16_vivado_summary.json": "E477E43465AC3EB695BB8D7545B3525506173E958C8323CFE5F69A3ECB5A58E5"
+    "reports/vivado/baselines/bf16/bf16_vivado_summary.json": "9CCADCA6F7EB50212FE767C3A1A5C5BA0C7EDFAB2AE6F30CC22D68DAF8A88091",
+    "reports/vivado/baselines/mxfp8/mxfp8_vivado_summary.json": "7BC8C936DC03D75BEB810AC61F30C7F58FDCBB6CDEE75CD3CA0B95384D93FD0D"
   },
   "rows": [
     {
@@ -53,9 +54,9 @@
       "mantissa_state_bits": 301989888,
       "per_layer_logical_state_bits": 8388608,
       "per_layer_logical_state_bytes": 1048576,
-      "physical_banked_fit": "FAIL",
+      "physical_banked_fit": "PASS",
       "raw_bit_capacity_necessary_condition": "FAIL",
-      "reported_hls_bram18k": 13,
+      "reported_hls_bram18k": 269,
       "reported_hls_counts_cover_ideal_lower_bound": "FAIL",
       "reported_hls_uram": 128,
       "variant": "BF16"
@@ -93,7 +94,7 @@
       "mantissa_state_bits": 150994944,
       "per_layer_logical_state_bits": 4325376,
       "per_layer_logical_state_bytes": 540672,
-      "physical_banked_fit": "NOT_RUN",
+      "physical_banked_fit": "PASS",
       "raw_bit_capacity_necessary_condition": "PASS",
       "reported_hls_bram18k": 25,
       "reported_hls_counts_cover_ideal_lower_bound": "FAIL",
@@ -125,31 +126,31 @@
   "scope": "logical state capacity and ideal primitive-count lower bounds",
   "source_identity": {
     "dirty_patch": {
-      "bytes": 17446,
-      "changed_file_count": 2,
-      "sha256": "07E7FAD3DAC961C08C63814A7D071FB9A256D634A86159414347EDB2866A78D0"
+      "bytes": 3449,
+      "changed_file_count": 1,
+      "sha256": "B9E95F757DDDCFFC1D3A87A6353F26BB8FBEA7ED9238AEC2CE681E3479852C33"
     },
     "files": {
       "hls/include/gdn_params.hpp": {
         "bytes": 3045,
-        "changed_from_revision": true,
+        "changed_from_revision": false,
         "git_state": "tracked",
         "sha256": "D1B4029C69526CA76DF65061EB51C094D271160B72FA668C20064747CA0F3C82"
       },
       "scripts/state_capacity_lower_bound.py": {
-        "bytes": 12567,
+        "bytes": 13060,
         "changed_from_revision": true,
-        "git_state": "untracked",
-        "sha256": "AD876405628BAE0D19D256403A0B1A9D2C7BFC63447D3A4067DCE17068D7E3C0"
+        "git_state": "tracked",
+        "sha256": "B8F9EE4FE8C34B4015F732637F598DA464A39F7A4D517573763ADC5151053EB8"
       }
     },
-    "git_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
-  "source_revision": "bdd90bae3fdbeb6cb11e3a6538dc9bef72e26bfe",
+  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
   "state_elements": 18874368,
   "state_scale_blocks": 589824,
   "status": "PASS",
-  "timestamp": "2026-08-05T17:01:15.008727+00:00",
+  "timestamp": "2026-08-06T07:20:01.141589+00:00",
   "uniform_mxfp4_all_layer_raw_capacity": "PASS"
 }

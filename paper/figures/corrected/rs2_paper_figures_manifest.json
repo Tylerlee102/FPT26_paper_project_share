@@ -1,0 +1,31 @@
+{
+  "checkpoints": [
+    64,
+    256,
+    1024,
+    4096,
+    8192
+  ],
+  "generated_at": "2026-08-09T01:13:39.489699+00:00",
+  "limitations": [
+    "quality panels are layer-level synthetic evidence",
+    "HLS schedules are estimates rather than board latency or energy",
+    "the MXFP8 quality and native-HLS bars have separately labeled arithmetic boundaries"
+  ],
+  "numbers": {
+    "path": "paper/corrected/numbers.json",
+    "sha256": "D7A408C0CE8AB39CB1576D2B3ACE6D61A535158C51018FF76218872D32AFE7C0"
+  },
+  "outputs": {
+    "paper/figures/corrected/rs2_memory_performance_accuracy.pdf": "E7F8477F5D70B5F723E12173095CCEA2990BBF55BAEAF824E46B84532B4B13CC",
+    "paper/figures/corrected/rs2_output_cosine_vs_token.pdf": "1DF29C3EC8FA6E9FD124BA6EB2B7BD6B91D638E2031F7A649C28ABEC9CE2E8AE",
+    "paper/figures/corrected/rs2_state_relative_l2_vs_token.pdf": "F4929EB92E723E9FBFFE174E9F985781387AD0CEF30044B19D0691D50FD10DEE"
+  },
+  "schema": 1,
+  "scope": "RS2/R3 paper figures generated exclusively from canonical paper numbers",
+  "status": "PASS",
+  "threshold_keys": [
+    "rs2_quality_minimum_cosine_gate",
+    "rs2_quality_maximum_state_relative_l2_gate"
+  ]
+}

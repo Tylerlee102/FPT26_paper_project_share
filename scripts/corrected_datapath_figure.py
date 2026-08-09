@@ -32,8 +32,8 @@ DEFAULT_MANIFEST = (
     / "corrected"
     / "corrected_candidate_datapath_manifest.json"
 )
-HLS_TOP = ROOT / "hls" / "e2m0" / "src" / "gdn_e2m0_top.cpp"
-HLS_HEADER = ROOT / "hls" / "e2m0" / "include" / "gdn_e2m0_kernel.hpp"
+HLS_TOP = ROOT / "hls" / "rs2" / "src" / "gdn_rs2_top.cpp"
+HLS_HEADER = ROOT / "hls" / "rs2" / "include" / "gdn_rs2_kernel.hpp"
 
 PAGE_WIDTH = 7.16 * 72
 PAGE_HEIGHT = 3.50 * 72
@@ -205,7 +205,7 @@ def generate(numbers_path: Path, output: Path, manifest_path: Path) -> dict[str,
 
     output.parent.mkdir(parents=True, exist_ok=True)
     drawing = canvas.Canvas(str(output), pagesize=(PAGE_WIDTH, PAGE_HEIGHT))
-    drawing.setTitle("Corrected Gated DeltaNet recurrence-core datapath")
+    drawing.setTitle("Selected RS2/R3 Gated DeltaNet recurrence-core datapath")
     drawing.setAuthor("Anonymous artifact")
     drawing.setSubject("Evidence-backed MXFP4 recurrence-core architecture")
     drawing.setFillColor(INK)
@@ -346,10 +346,10 @@ def generate(numbers_path: Path, output: Path, manifest_path: Path) -> dict[str,
         y=state_y,
         width=state_w,
         height=state_h,
-        title="Persistent base state (correction)",
+        title="Persistent RS2 base state",
         lines=[
             f"{value_heads} heads x {key_dim} x {value_dim} (K-by-V)",
-            f"E2M1 primary + signed E2M0 residual, B{block}",
+            f"E2M1 primary + E2M1 residual, B{block}",
             "separate E8M0 scales; gamma in Q1.15",
             f"logical layer payload: {logical_bytes:,} bytes including log",
         ],
@@ -406,7 +406,7 @@ def generate(numbers_path: Path, output: Path, manifest_path: Path) -> dict[str,
     legend = (
         (SCHEDULE, "inherited five-phase schedule/control"),
         (MX, "native MX arithmetic"),
-        (STATE, "persistent corrected state"),
+        (STATE, "persistent RS2 state"),
         (FOLD, "periodic fold"),
     )
     cursor = 96
@@ -432,7 +432,7 @@ def generate(numbers_path: Path, output: Path, manifest_path: Path) -> dict[str,
         "schema": 1,
         "status": "PASS",
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "scope": "corrected-candidate recurrence-core datapath figure",
+        "scope": "selected RS2/R3 recurrence-core datapath figure",
         "source_identity": source_identity,
         "numbers": (
             numbers_path.relative_to(ROOT).as_posix()
@@ -443,12 +443,12 @@ def generate(numbers_path: Path, output: Path, manifest_path: Path) -> dict[str,
         "outputs": {relative_output: _sha256(output)},
         "verification": [
             "all displayed numeric widths, rates, dimensions, and capacities are read from corrected paper numbers",
-            "phase ordering and fold timing are cross-checked against the frozen corrected HLS source",
+            "phase ordering and fold timing are cross-checked against the selected RS2/R3 HLS source",
             "PDF rendering and visual inspection are separate evidence",
         ],
         "limitations": [
             "logical architecture figure, not placement or routing evidence",
-            "the five-phase schedule is inherited; only the arithmetic and corrected state representation are modified",
+            "the five-phase schedule is inherited; only the arithmetic and RS2/R3 state representation are modified",
         ],
     }
     manifest_path.parent.mkdir(parents=True, exist_ok=True)

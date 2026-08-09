@@ -259,7 +259,7 @@ def generate_report(
         "uniform_mxfp4_all_layer_raw_capacity": rows[1][
             "raw_bit_capacity_necessary_condition"
         ],
-        "physical_all_layer_state_bank_fit": "NOT_RUN",
+        "physical_all_layer_state_bank_fit": "SEE_PHYSICAL_FIT_BY_VARIANT",
         "physical_fit_by_variant": physical_fit_by_variant,
         "raw_input_sha256": {
             _display_path(path): _sha256(path)
@@ -278,7 +278,7 @@ def generate_report(
             "a raw-capacity PASS is necessary but not sufficient for physical fit",
             "HLS totals include non-state memories and therefore cannot be smaller than a valid state-only lower bound",
             "uniform-MXFP4 and flat-INT4 all-layer physical banking remain NOT_RUN",
-            "the BF16 physical attempt fails capacity and is not replaced by a reduced-layer design",
+            "the BF16 URAM-only raw-capacity condition fails, but the controlled full 36-layer layout physically fits by splitting its state banks across URAM and BRAM",
         ],
     }
 
@@ -300,7 +300,7 @@ def generate_report(
                 "",
                 f"Generated: `{manifest['timestamp']}`",
                 "Calculation status: `PASS`",
-                "Uniform-MXFP4 physical all-layer bank fit: `NOT_RUN`",
+                "Physical fit is reported per variant; BF16 and MXFP8 have routed results while uniform MXFP4 and flat INT4 remain `NOT_RUN`.",
                 "",
                 f"Declared state: `{params['num_sequences']}` sequence x `{params['num_layers']}` layers x `{params['num_value_heads']}` value heads x `{params['key_dim']}` K x `{params['value_dim']}` V = `{elements}` elements.",
                 "",
@@ -311,15 +311,17 @@ def generate_report(
                     for row in rows
                 ],
                 "",
-                "The BF16 state alone requires an ideal minimum of 1,024 URAM288",
-                f"primitives, exceeding the device total of {available['URAM']}. Uniform MXFP4",
+                "The BF16 state alone would require an ideal minimum of 1,024 URAM288",
+                f"primitives if stored only in URAM, exceeding the device total of {available['URAM']}.",
+                "The routed BF16 implementation instead preserves all 36 logical layers with",
+                "29 layers in paired 256-bit URAM banks and seven layers in paired 256-bit BRAM banks.",
+                "Uniform MXFP4",
                 "requires at least 256 URAM288 for E2M1 elements and 256 BRAM18K for",
                 "E8M0 scales, before any implementation overhead.",
                 "",
-                "The HLS totals for BF16, MXFP4, and MXFP8 are below their state-only",
-                "lower bounds. They are therefore",
-                "not valid physical-capacity evidence. A placed, banked all-layer design",
-                "is required before claiming fit for each variant.",
+                "HLS memory totals are not used as physical-capacity evidence. The physical-fit",
+                "column is populated only from placed and routed all-layer implementations;",
+                "variants without one remain NOT_RUN.",
                 "",
             ]
         ),

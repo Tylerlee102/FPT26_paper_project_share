@@ -1,0 +1,59 @@
+{
+  "auditor": "Codex visual inspection at 220 DPI",
+  "pages": [
+    {
+      "page": 1,
+      "status": "PASS",
+      "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
+      "notes": "Title, abstract, contribution boundary, two-column text, and watermark are readable with no clipping."
+    },
+    {
+      "page": 2,
+      "status": "PASS",
+      "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
+      "notes": "Recurrence equations and ownership table are aligned and legible; citations and table rules render cleanly."
+    },
+    {
+      "page": 3,
+      "status": "PASS",
+      "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
+      "notes": "Method, payload table, and evaluation controls fit within both columns without overlap."
+    },
+    {
+      "page": 4,
+      "status": "PASS",
+      "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
+      "notes": "Full-width datapath figure, legend, caption, equations, and surrounding text are sharp and unobstructed."
+    },
+    {
+      "page": 5,
+      "status": "PASS",
+      "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
+      "notes": "Both long-sequence plots have readable legends, threshold lines, axis labels, and the 8,192-token tick."
+    },
+    {
+      "page": 6,
+      "status": "PASS",
+      "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
+      "notes": "All six result tables are legible; Table IV max-absolute and nonfinite columns are visibly separated after repair."
+    },
+    {
+      "page": 7,
+      "status": "PASS",
+      "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
+      "notes": "Trade-off figure and power table are readable; bar labels, caption, and discussion equations stay inside margins."
+    },
+    {
+      "page": 8,
+      "status": "PASS",
+      "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
+      "notes": "Discussion equations, limitations, conclusion, and references 1-14 render without clipping or broken glyphs."
+    },
+    {
+      "page": 9,
+      "status": "PASS",
+      "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
+      "notes": "References 15-16 are complete and readable; this references-only overflow page has no clipped content."
+    }
+  ]
+}

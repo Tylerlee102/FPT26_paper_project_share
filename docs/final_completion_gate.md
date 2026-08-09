@@ -1,26 +1,23 @@
 # Final Completion Gate
 
-Generated: `2026-08-05T21:14:27.717347+00:00`
+Generated: `2026-08-09T01:13:40.799752+00:00`
 
-Release state: **READY FOR HUMAN SUBMISSION REVIEW**
+Release state: **NOT PAPER READY**
 
-| Gate | Release required | Status | Finding |
-|---|---:|---|---|
-| `prior_art_gap` | yes | PASS | A bounded primary-source search found no exact synthetic recurrence-core and matched-HLS study; overlapping arithmetic, state, and dataflow constituents are attributed and no architectural-first claim is made. |
-| `exact_official_recurrence_parity` | yes | PASS | FP64/FP32 and pinned recurrent/chunk/cache comparisons pass at the controlled layer boundary. |
-| `independent_bit_exact_mx_reference` | yes | PASS | Independent encoded arithmetic and resident-command oracles pass bounded exhaustive, adversarial, and corrected E2M0 checks. |
-| `matched_native_mxfp8_baseline` | yes | PASS | The matched native E4M3/E8M0 baseline passes exhaustive bounded arithmetic C-sim, one exact persistent-kernel transition, U55C C-synthesis, and every explicit II=1 constraint. |
-| `c_sim_and_rtl_parity` | no | FAIL | The corrected candidate passes exact 64-token HLS C simulation, two generated-RTL control commands, and one direct generated-RTL LOAD. Two official XSIM attempts exhaust host memory before transaction one; no corrected recurrent STEP completes in RTL, so 64-token candidate parity is not established. |
-| `closed_loop_real_model_quality` | no | BLOCKED_EXTERNAL | Four short model-derived Qwen recurrence traces are complete, but full-model closed-loop quality, perplexity, and downstream accuracy require external 80B model execution assets. |
-| `selected_method_pareto_advantage` | no | FAIL | The corrected candidate passes three 1024-token test seed blocks under two paired initial-state conditions and 2 fully recomputed 8192-token development traces, but its HLS LUT and STEP costs exceed BF16 and its configured timing margin and explicit II=1 constraints fail. |
-| `controlled_wider_physical_baselines` | no | FAIL | The controlled 36-layer BF16 physical attempt completes synthesis but fails U55C memory capacity before placement; a smaller layout is not substituted. Native MXFP8 physical status is reported separately. |
-| `physical_all_layer_state_bank_fit` | yes | PASS | The declared corrected-candidate resident-state design physically fits out of context on the U55C at 624 URAM and 208,523 CLB LUTs. This is not a complete-model or shell-integrated fit claim. |
-| `post_route_timing_and_drc` | yes | PASS | Post-route timing and DRC evidence is complete: the candidate fails setup at 250 and 200 MHz, first closes at the tested 180.18 MHz point, and has warnings but no critical warnings or errors. The gate passes evidence completeness, not target timing. |
-| `real_board_parity_and_energy` | no | BLOCKED_EXTERNAL | Vitis/Vivado are installed, but no attached U55C, U55C XRT platform, xclbin, or board telemetry is available; vectorless power is not measured energy. |
-| `reviewer_traceability` | yes | PASS | All 68 reviewer-comment rows and 25 reviewer directives are traceable to the page-audited paper candidate. |
-| `paper_provenance_and_final_pdf_audit` | yes | PASS | Corrected numbers, source assets, compiled audit-candidate bytes, and every rendered page pass hash and visual checks; these exact bytes are eligible for gated finalization. |
+All eleven rows are release-required. Any non-PASS row means `NOT PAPER READY`.
 
-A corrected paper PDF may be generated and delivered only when every
-release-required row is `PASS`. Non-required rows preserve negative
-research outcomes and explicitly scoped limitations; they do not become
-positive claims and do not block publication of a supported negative result.
+| Gate | Status | Finding |
+|---|---|---|
+| `prior_art_gap` | PASS | The bounded primary-source audit attributes persistent state and the five-phase schedule to Gupta et al.; the remaining claim is limited to the recurrence-aware native-MX arithmetic study. |
+| `exact_official_recurrence_parity` | PASS | The independent FP32/FP64 recurrence agrees with pinned Transformers and FLA recurrent, chunked, and cache paths at the declared recurrence-core boundary. |
+| `independent_bit_exact_mx_reference` | PASS | The frozen encoded-integer RS2 oracle, native E2M1/E8M0 arithmetic C simulation, exact 64-token C trace, and matched E4M3/E8M0 reference all pass. |
+| `c_sim_and_rtl_parity` | NOT_RUN | Exact HLS C simulation passes, but one or both required 64-token RTL parity paths remain incomplete or failing. |
+| `closed_loop_real_model_quality` | BLOCKED_EXTERNAL | Short model-derived recurrence diagnostics pass, but the 80B checkpoint and adequate execution memory are absent; no closed-loop perplexity or downstream result exists. |
+| `selected_method_pareto_advantage` | FAIL | The RS2/R3 method is numerically stable and reduces logical state bytes, but the matched HLS comparison currently uses more LUTs and cycles than BF16; measured board energy is also unavailable. |
+| `physical_all_layer_state_bank_fit` | PASS | All 36 logical GDN state slots physically fit in the routed U55C out-of-context kernel; this is not complete-model residency. |
+| `post_route_timing_and_drc` | FAIL | Route evidence is complete only if the selected candidate closes 250 MHz and passes DRC; a slower sweep point does not satisfy this gate. |
+| `real_board_parity_and_energy` | BLOCKED_EXTERNAL | Vitis and Vivado are installed, but no attached U55C, U55C XRT platform, xclbin, or board telemetry interface is present. |
+| `reviewer_traceability` | FAIL | The reviewer ledger has not been regenerated against the current RS2 paper audit bytes. |
+| `paper_provenance_and_final_pdf_audit` | FAIL | The current RS2 paper assets, audit candidate, provenance, or page-by-page visual audit are missing or stale. |
+
+A working draft may be compiled separately, but it is not a submission artifact.

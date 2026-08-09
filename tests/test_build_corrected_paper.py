@@ -2,12 +2,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import json
-
-from scripts.build_corrected_paper import ROOT, main
+from scripts.build_corrected_paper import main
 
 
-def test_corrected_pdf_build_uses_explicit_noncanonical_outputs(
+def test_corrected_pdf_build_is_blocked_until_upstream_gates_pass(
     tmp_path: Path, capsys
 ) -> None:
     output = tmp_path / "paper.pdf"
@@ -23,14 +21,7 @@ def test_corrected_pdf_build_uses_explicit_noncanonical_outputs(
             "--manifest",
             str(manifest_path),
         ]
-    ) == 0
-    assert '"status": "PASS"' in capsys.readouterr().out
-    assert output.read_bytes().startswith(b"%PDF-")
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    expected_output = (
-        output.relative_to(ROOT).as_posix()
-        if output.is_relative_to(ROOT)
-        else str(output.resolve())
-    )
-    assert manifest["output"] == expected_output
-    assert manifest["submission_eligible"] is False
+    ) == 1
+    assert "blocked by upstream completion gates" in capsys.readouterr().out
+    assert not output.exists()
+    assert not manifest_path.exists()

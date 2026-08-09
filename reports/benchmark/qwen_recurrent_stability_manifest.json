@@ -1,6 +1,11 @@
 {
   "aggregate": {
     "bf16_qdq_fp32_accum_state_bf16": {
+      "cumulative_accumulator_saturations": "",
+      "cumulative_alignment_underflows": "",
+      "cumulative_element_saturations": "",
+      "cumulative_scale_clamps": "",
+      "cumulative_state_scale_changes": "",
       "max_state_abs_error": 0.019169330596923828,
       "mean_final_output_cosine_fp32": 0.999991252704719,
       "mean_final_state_rel_l2": 0.005893844352315457,
@@ -9,6 +14,11 @@
       "worst_state_rel_l2": 0.006567816610582679
     },
     "flat_int4_qdq": {
+      "cumulative_accumulator_saturations": "",
+      "cumulative_alignment_underflows": "",
+      "cumulative_element_saturations": "",
+      "cumulative_scale_clamps": "",
+      "cumulative_state_scale_changes": "",
       "max_state_abs_error": 0.4050605297088623,
       "mean_final_output_cosine_fp32": 0.8660712712725239,
       "mean_final_state_rel_l2": 0.7745231919669394,
@@ -17,6 +27,11 @@
       "worst_state_rel_l2": 0.822525858793407
     },
     "mxfp4_qdq_state_mxfp4_b32": {
+      "cumulative_accumulator_saturations": "",
+      "cumulative_alignment_underflows": "",
+      "cumulative_element_saturations": "",
+      "cumulative_scale_clamps": "",
+      "cumulative_state_scale_changes": "",
       "max_state_abs_error": 0.6159488558769226,
       "mean_final_output_cosine_fp32": 0.9820479871398721,
       "mean_final_state_rel_l2": 0.324787928774988,
@@ -25,23 +40,84 @@
       "worst_state_rel_l2": 0.3388829136396676
     },
     "mxfp4_qdq_state_mxfp8_b32": {
+      "cumulative_accumulator_saturations": "",
+      "cumulative_alignment_underflows": "",
+      "cumulative_element_saturations": "",
+      "cumulative_scale_clamps": "",
+      "cumulative_state_scale_changes": "",
       "max_state_abs_error": 0.46683406829833984,
       "mean_final_output_cosine_fp32": 0.9891728460442457,
       "mean_final_state_rel_l2": 0.207192147269526,
       "nonfinite_events": 0,
       "worst_output_cosine_fp32": 0.9696698475976059,
       "worst_state_rel_l2": 0.2199432580622261
+    },
+    "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5": {
+      "cumulative_accumulator_saturations": 2,
+      "cumulative_alignment_underflows": 38150730,
+      "cumulative_element_saturations": 0,
+      "cumulative_scale_clamps": 0,
+      "cumulative_state_scale_changes": 400478,
+      "max_state_abs_error": 0.07849466800689697,
+      "mean_final_output_cosine_fp32": 0.9996349402168501,
+      "mean_final_state_rel_l2": 0.04700900616705284,
+      "nonfinite_events": 0,
+      "worst_output_cosine_fp32": 0.9994076305680074,
+      "worst_state_rel_l2": 0.05048513616582577
     }
   },
-  "arithmetic_boundary": "floating_qdq_recurrence_diagnostic",
+  "arithmetic_boundary": "exact_rs2_plus_floating_qdq_recurrence_diagnostic",
+  "exact_encoded_candidate": {
+    "capacity": 3,
+    "coefficient_format": "Q1.15",
+    "event_metrics_status": "PASS",
+    "state_and_token_format": "two-term E2M1/E8M0 B32 residual stack",
+    "variant": "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5"
+  },
   "input": "C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/data/calibration/qwen3_next_80b_a3b_layer12_recurrence.npz",
   "input_sha256": "e20955ebcb60d14c4ca69b1b9aa4ac200460d0d35b10743418222205b5618d84",
   "limitations": [
     "Four real prompt traces contain only 12 to 18 valid tokens each.",
-    "The low-precision paths are floating Q/DQ diagnostics, not HLS bit-exact execution.",
+    "The RS2/R3 path is the exact encoded software oracle; the other low-precision paths are floating Q/DQ diagnostics.",
+    "Q/K/V/alpha/beta were reconstructed from real layer inputs and pinned checkpoint projections, not captured directly from a closed-loop decode.",
     "No full-model logits or perplexity are evaluated."
   ],
   "schema": 1,
+  "source_identity": {
+    "dirty_patch": {
+      "bytes": 19385,
+      "changed_file_count": 3,
+      "sha256": "B30C9A0C0C79A005970AA908452547B83838FBD555DB6AEF86AD3CCA9E2A1C53"
+    },
+    "files": {
+      "golden/gdn_fp32.py": {
+        "bytes": 8406,
+        "changed_from_revision": false,
+        "git_state": "tracked",
+        "sha256": "7EBC9B7A0BA400A553E9C079B2E2E98596723DCC8B1D137B0477C798E34697C5"
+      },
+      "golden/gdn_rs2_encoded.py": {
+        "bytes": 5290,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "B2AB1B22ED6CB2A9626671904F7698598ACDAB79E7E533500CAAB10F24036CE3"
+      },
+      "golden/gdn_rs2_encoded_vectorized.py": {
+        "bytes": 1729,
+        "changed_from_revision": true,
+        "git_state": "untracked",
+        "sha256": "29DBC4EEC7CF03FAE7059C5BD012904CE0EFCB9B54F34228CB14308B54EF62A1"
+      },
+      "scripts/qwen_recurrent_stability.py": {
+        "bytes": 13086,
+        "changed_from_revision": true,
+        "git_state": "tracked",
+        "sha256": "70A3CE875DFEB295E4F2DACB0777937C58D651E05F10A80CDC9D07AE7CFA8C77"
+      }
+    },
+    "git_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
+    "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
+  },
   "source_metadata": {
     "characterization": {
       "alpha": {
@@ -130,14 +206,16 @@
     "weights_sha256": "4cbda5ff27bbbad55d5928a0c9bae378e6c3dd8034e1c70c4a0cae502b60ea07",
     "weights_shard": "model-00011-of-00041.safetensors"
   },
+  "source_revision": "5a0dda226096f358209245aadd3b0572b1aabed0",
   "status": "PASS",
   "summary_csv": "C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/reports/benchmark/qwen_recurrent_stability_summary.csv",
-  "summary_sha256": "4c2a4b434352ab76e31689c446a0a0882565a36b8b2f98966bcb17addc02834d",
-  "timestamp": "2026-08-05T16:47:28.358031+00:00",
+  "summary_sha256": "494cd3c05a8abd117c6718e93cb7872dcf9eb59cddb9a6392d83ca11ea094d3a",
+  "timestamp": "2026-08-06T12:47:29.468638+00:00",
   "trace_csv": "C:/Users/tyboy/OneDrive/Documents/mxfp4 improve/FPT26_data_review/reports/benchmark/qwen_recurrent_stability.csv",
-  "trace_sha256": "13dc9bf0b22e915d084b562fae5deea43a2060f044a3b58e0a3b2c3004034718",
+  "trace_sha256": "7a420e12f650cd3aeda9ee2c574d83d3c5e9a0b7fe6a003c12d0fb1d47740f2d",
   "variants": [
     "bf16_qdq_fp32_accum_state_bf16",
+    "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5",
     "mxfp4_qdq_state_mxfp4_b32",
     "mxfp4_qdq_state_mxfp8_b32",
     "flat_int4_qdq"

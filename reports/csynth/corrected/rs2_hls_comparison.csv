@@ -1,0 +1,3 @@
+variant,logical_state_bytes,estimated_fmax_mhz,step_cycles_max,amortized_cycles_max,bram_18k,dsp,ff,lut,uram
+BF16,1048576,342.4657534246575,4225856,4225856.0,269,0,39270,85350,128
+mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5,576912,321.9575016097875,13522144,43065280.0,74,26,73831,167082,88

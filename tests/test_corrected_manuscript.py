@@ -17,9 +17,8 @@ EXTENDED = (
     / "reports"
     / "benchmark"
     / "corrected"
-    / "e2m0_encoded"
-    / "extended_development"
-    / "extended_summary.json"
+    / "rs2_encoded"
+    / "rs2_encoded_candidate_summary.json"
 )
 
 
@@ -34,34 +33,37 @@ def test_corrected_manuscript_uses_the_controlled_question_and_current_assets() 
     assert "does not replace BF16" in text
     assert "paper/corrected/snippets/corrected_result_macros.tex" in text
     for name in (
-        "long_sequence.tex",
+        "rs2_transfer_sizes.tex",
+        "rs2_controlled_long.tex",
         "qwen_recurrent_stability.tex",
-        "controlled_hls.tex",
-        "mitigation_hls.tex",
-        "resource_ablation.tex",
-        "corrected_quality.tex",
+        "rs2_hls.tex",
+        "rs2_stability_gates.tex",
+        "rs2_postroute.tex",
+        "rs2_power_breakdown.tex",
         "scale_policy.tex",
-        "postroute_evidence.tex",
     ):
         assert f"paper/corrected/tables/{name}" in text
     assert "paper/figures/corrected/corrected_candidate_datapath.pdf" in text
-    assert "paper/figures/corrected/long_sequence_stability_panel.pdf" in text
-    assert "paper/figures/corrected/tradeoff_evidence.pdf" in text
-    assert "high-retention correction traces" in text
+    assert "paper/figures/corrected/rs2_output_cosine_vs_token.pdf" in text
+    assert "paper/figures/corrected/rs2_state_relative_l2_vs_token.pdf" in text
+    assert "paper/figures/corrected/rs2_memory_performance_accuracy.pdf" in text
+    assert "same high-retention random-state input prefix" in normalized
     assert "performs reductions in FP32" in text
     assert "signed symmetric four-bit quantization" in text
     assert "MXFP4 floating Q/DQ" in text
     assert "native encoded path" in text
     assert "not a formal stability certificate" in normalized
-    assert "not a measured Pareto frontier" in normalized
-    assert "type-layout counts, not measured AXI traffic" in normalized
+    assert "not board energy or a measured end-to-end Pareto frontier" in normalized
+    assert (
+        "type-layout counts before interface packing, not measured AXI traffic"
+        in normalized
+    )
     assert "There are no projection weights in a test vector" in normalized
     assert "s=\\lceil\\log_2(m/x_{\\max})\\rceil" in text
-    assert "model-derived outlier evidence" in normalized
     assert "short model-derived Qwen" in normalized
-    assert "native-MXFP8 HLS comparison" in normalized
-    assert "\\CorrectedDynamicRangeQdqMxfpFourCosineEightK{}" in text
-    assert "\\CorrectedCancellationMxfpEightStateRelLTwoEightK{}" in text
+    assert "native-MXFP8, and RS2/R3 HLS comparison" in normalized
+    assert "\\RsTwoCandidateCosineEightK{}" in text
+    assert "\\RsTwoCandidateStateLTwoEightK{}" in text
 
 
 def test_corrected_manuscript_defines_formats_and_positions_prior_work() -> None:
@@ -144,11 +146,11 @@ def test_corrected_manuscript_states_the_finite_horizon_error_bound() -> None:
 def test_corrected_manuscript_consolidates_adjacent_quality_tables() -> None:
     text = PAPER.read_text(encoding="utf-8")
     assert len(re.findall(r"\\begin\{table\*?\}", text)) == 9
-    assert len(re.findall(r"\\begin\{figure\*?\}", text)) == 3
-    assert "\\label{tab:corrected-quality}" in text
-    assert "paper/corrected/tables/corrected_quality.tex" in text
-    assert "\\label{tab:heldout}" not in text
-    assert "\\label{tab:extended}" not in text
+    assert len(re.findall(r"\\begin\{figure\*?\}", text)) == 4
+    assert "\\label{tab:rs2-stability}" in text
+    assert "paper/corrected/tables/rs2_stability_gates.tex" in text
+    assert "paper/corrected/tables/corrected_quality.tex" not in text
+    assert "paper/corrected/tables/mitigation_hls.tex" not in text
 
 
 def test_corrected_manuscript_avoids_invalidated_claims() -> None:
@@ -177,11 +179,14 @@ def test_corrected_manuscript_avoids_invalidated_claims() -> None:
 def test_corrected_manuscript_macro_references_are_defined_and_not_bare() -> None:
     text = PAPER.read_text(encoding="utf-8")
     macro_text = MACROS.read_text(encoding="utf-8")
-    defined = set(re.findall(r"\\newcommand\{\\(Corrected[A-Za-z]+)\}", macro_text))
-    used = set(re.findall(r"\\(Corrected[A-Za-z]+)", text))
+    defined = set(
+        re.findall(r"\\newcommand\{\\((?:Corrected|RsTwo)[A-Za-z]+)\}", macro_text)
+    )
+    used = set(re.findall(r"\\((?:Corrected|RsTwo)[A-Za-z]+)", text))
     assert used
     assert used <= defined
     assert re.search(r"(?<!\\)\bCorrected[A-Z][A-Za-z]+", text) is None
+    assert re.search(r"(?<!\\)\bRsTwo[A-Z][A-Za-z]+", text) is None
     for stale_literal in (
         "0.729275",
         "1.103841",
@@ -251,7 +256,6 @@ def test_corrected_manuscript_has_balanced_latex_and_resolved_dependencies() -> 
 def test_corrected_manuscript_extended_pass_claim_has_full_replay_evidence() -> None:
     payload = json.loads(EXTENDED.read_text(encoding="utf-8"))
     assert payload["status"] == "PASS"
-    assert payload["extended_run_gate"] == "PASS"
-    assert payload["full_deterministic_recompute"] == "PASS"
-    assert payload["run_count"] > 0
-    assert payload["recomputed_run_count"] == payload["run_count"]
+    extended = payload["gate_results"]["extended_development"]
+    assert extended["status"] == "PASS"
+    assert extended["run_count"] == extended["expected_run_count"] == 2

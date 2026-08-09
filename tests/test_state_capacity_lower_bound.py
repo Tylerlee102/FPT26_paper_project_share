@@ -24,7 +24,7 @@ def test_all_layer_capacity_lower_bound(tmp_path: Path) -> None:
     assert rows["uniform_mxfp4_e2m1_e8m0_b32"]["per_layer_logical_state_bytes"] == 278_528
     assert rows["uniform_mxfp4_e2m1_e8m0_b32"]["ideal_min_uram_for_mantissas"] == 256
     assert rows["uniform_mxfp4_e2m1_e8m0_b32"]["ideal_min_bram18k_for_scales"] == 256
-    assert rows["BF16"]["physical_banked_fit"] == "FAIL"
+    assert rows["BF16"]["physical_banked_fit"] == "PASS"
     assert rows["mxfp8_e4m3_e8m0_b32"]["reported_hls_uram"] == 64
     assert rows["mxfp8_e4m3_e8m0_b32"]["reported_hls_counts_cover_ideal_lower_bound"] == "FAIL"
-    assert report["physical_all_layer_state_bank_fit"] == "NOT_RUN"
+    assert report["physical_all_layer_state_bank_fit"] == "SEE_PHYSICAL_FIT_BY_VARIANT"

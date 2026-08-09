@@ -169,6 +169,18 @@ def logical_state_bytes(
             config.num_qk_heads * key_row_bytes
             + config.num_value_heads * update_row_bytes
         )
+    elif log_precision == "mxfp4_rs2":
+        bytes_per_block = config.state_block_size // 2 + 1
+        key_row_bytes = 2 * _blocked_bytes(
+            config.key_dim, config.state_block_size, bytes_per_block
+        )
+        update_row_bytes = 2 * _blocked_bytes(
+            config.value_dim, config.state_block_size, bytes_per_block
+        )
+        log_vectors = capacity * (
+            config.num_qk_heads * key_row_bytes
+            + config.num_value_heads * update_row_bytes
+        )
     elif log_precision in {"bf16", "fp16"}:
         log_vectors = capacity * 2 * (
             config.num_qk_heads * config.key_dim
@@ -588,7 +600,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--capacities", nargs="+", type=int, default=[4, 8, 16])
     parser.add_argument(
         "--log-precision",
-        choices=["mxfp8_e4m3", "bf16", "fp16", "fp32"],
+        choices=["mxfp8_e4m3", "mxfp4_rs2", "bf16", "fp16", "fp32"],
         default="mxfp8_e4m3",
     )
     parser.add_argument("--activation-stack-depth", type=int, default=1)
