@@ -31,6 +31,8 @@ gdn_rs2_fold_write_hls/
 gdn_rs2_fold_write_trace_hls/
 gdn_rs2_layer_banks_hls/
 gdn_rs2_layer_banks_trace_hls/
+gdn_rs2_partial_layer_banks_hls/
+gdn_rs2_partial_layer_banks_trace_hls/
 gdn_rs2_uram_latency2_hls/
 gdn_rs2_uram_latency2_trace_hls/
 vitis_hls.log

@@ -59,6 +59,13 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   fail. Relative to the selected route, it worsens WNS by 0.131 ns, TNS by
   16,216.483 ns, and failing endpoints by 11,216 while adding 27,797 routed
   LUTs and two DSPs. It is rejected and not promoted.
+- A fifth source-isolated experiment cyclically partitions the same state stores
+  into six layer banks. Exact 64-token C simulation, all explicit synthesis
+  constraints, routing, hold, and DRC pass. Routed WNS improves from -1.736 ns
+  to -1.621 ns, but TNS worsens from -24,864.826 ns to -24,890.834 ns and the
+  failing setup endpoints increase from 43,593 to 44,629. The route adds 5,744
+  LUTs, 2,377 registers, and two DSPs; its worst path crosses one SLR with
+  fanout 41 into URAM control. It still fails 250 MHz and is not promoted.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
@@ -105,7 +112,7 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 374 passed, 2 skipped, and 0 failed tests.
+- The latest full regression records 379 passed, 2 skipped, and 0 failed tests.
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

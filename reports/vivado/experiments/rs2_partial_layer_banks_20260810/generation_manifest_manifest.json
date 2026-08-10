@@ -1,0 +1,18 @@
+{
+  "behavioral_contract": "same arithmetic, state layout, capacity, command behavior, and fold cadence; only the primary/residual layer dimension is cyclically partitioned six ways",
+  "experiment": "RS2 six-way cyclic primary/residual layer banks",
+  "generated_at": "2026-08-10T07:50:59.290638+00:00",
+  "insertions": [
+    "#pragma HLS ARRAY_PARTITION variable=resident_primary cyclic factor=6 dim=2",
+    "#pragma HLS ARRAY_PARTITION variable=resident_residual cyclic factor=6 dim=2"
+  ],
+  "layers_per_bank": 6,
+  "output": "build/experiments/rs2_partial_layer_banks/gdn_rs2_top.cpp",
+  "output_sha256": "C1ABD8E3BAE38867416DC781CF3C320C4A6A729CA7537EA95795F8970041D104",
+  "partition_factor": 6,
+  "schema": 1,
+  "selected_source_modified": false,
+  "source": "hls/rs2/src/gdn_rs2_top.cpp",
+  "source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+  "status": "PASS"
+}

@@ -1,0 +1,9 @@
+{
+  "output": "build/vivado/rs2_partial_layer_banks_ooc_rtl/gdn_rs2_top.v",
+  "output_sha256": "E4A4191E921E20DE053B0E3D5A1E0E1A3DD7BD432A53FC9C71DC38172EE3086C",
+  "source": "gdn_rs2_partial_layer_banks_hls/u55c_250mhz/syn/verilog/gdn_rs2_top.v",
+  "source_sha256": "3C0BE483366D3DE9DEE7CABC6F6781FBC7A08F30A090C9769092C5D421EFA1DB",
+  "status": "PASS",
+  "timestamp": "2026-08-10T08:23:46.596757+00:00",
+  "transformation": "insert_top_level_bufgce_and_rewire_internal_ap_clk"
+}

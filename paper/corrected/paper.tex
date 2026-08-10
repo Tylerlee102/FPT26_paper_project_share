@@ -633,6 +633,15 @@ and DSP cost, and worsened setup slack, total negative slack, and the failing
 endpoint count. We therefore reject simple complete layer banking as a timing
 fix; bank locality must be co-designed with layer selection and read-return
 pipelining.
+A fifth isolated variant instead used factor-six cyclic layer banking to reduce
+the selector and logic cost of complete partitioning. It preserved the exact
+recurrent trace, all explicit synthesis loop constraints, and all-layer
+capacity. The matched route slightly improved worst setup slack relative to the
+selected design, but still missed the target while worsening total negative
+slack and the failing-endpoint count and increasing LUT, register, and DSP use.
+Its worst path again crosses an SLR into high-fanout URAM control. We therefore
+reject partial layer banking as a standalone timing fix and retain the
+source-locked candidate.
 
 \begin{table}[t]
 \centering

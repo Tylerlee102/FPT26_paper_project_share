@@ -1,0 +1,320 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date              : Mon Aug 10 05:32:37 2026
+| Host              : Tyler running 64-bit major release  (build 9200)
+| Command           : report_timing -delay_type max -max_paths 100 -nworst 1 -path_type summary -file X:/reports/vivado/experiments/rs2_partial_layer_banks_20260810/worst_100_setup_paths.rpt
+| Design            : gdn_rs2_top
+| Device            : xcu55c-fsvh2892
+| Speed File        : -2L  PRODUCTION 1.30 05-01-2022
+| Design State      : Routed
+| Temperature Grade : E
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Startpoint                     Endpoint                       Slack(ns)     
+----------------------------------------------------------------------------
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_23/EN_A
+                                                              -1.621        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_39/EN_A
+                                                              -1.617        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_42/ADDR_A[10]
+                                                              -1.617        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_U/ram_reg_uram_35/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_dot_base_column_fu_9734/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_366/word_reg_2103_reg[100]/D
+                                                              -1.617        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_49/ADDR_A[10]
+                                                              -1.616        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_10_U/ram_reg_uram_15/EN_B
+                                                              -1.615        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_U/ram_reg_uram_35/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_dot_base_column_fu_9734/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_366/word_reg_2103_reg[108]/D
+                                                              -1.614        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_U/ram_reg_uram_21/EN_A
+                                                              -1.612        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_23/EN_B
+                                                              -1.608        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_49/ADDR_A[8]
+                                                              -1.607        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_34/EN_A
+                                                              -1.606        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_8_U/ram_reg_uram_20/EN_A
+                                                              -1.604        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_U/ram_reg_uram_20/EN_A
+                                                              -1.603        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_10_U/ram_reg_uram_28/EN_A
+                                                              -1.603        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_20/EN_A
+                                                              -1.602        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_22/EN_A
+                                                              -1.602        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_40/BWE_B[5]
+                                                              -1.600        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_8_U/ram_reg_uram_20/EN_B
+                                                              -1.600        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[1]_replica_2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_8_U/ram_reg_uram_51/ADDR_A[0]
+                                                              -1.599        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_read_snapshot_fu_10020/p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_2_reg_1360_reg[126]/D
+                                                              -1.598        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_40/BWE_B[3]
+                                                              -1.597        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_fold_log_fu_9972/word_reg_13620_reg[126]/D
+                                                              -1.596        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_40/BWE_B[4]
+                                                              -1.595        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_40/BWE_B[1]
+                                                              -1.595        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_40/BWE_B[6]
+                                                              -1.594        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_40/BWE_B[2]
+                                                              -1.594        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_40/BWE_B[7]
+                                                              -1.593        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_40/EN_A
+                                                              -1.591        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_44/EN_B
+                                                              -1.589        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_40/BWE_B[0]
+                                                              -1.589        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_40/BWE_B[8]
+                                                              -1.588        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_dot_base_column_fu_9734/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_366/word_reg_2103_reg[89]/D
+                                                              -1.588        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_U/ram_reg_uram_56/EN_A
+                                                              -1.588        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_U/ram_reg_uram_35/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_read_snapshot_fu_10020/p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_2_reg_1360_reg[91]/D
+                                                              -1.588        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_read_snapshot_fu_10020/p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_2_reg_1360_reg[82]/D
+                                                              -1.586        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_read_snapshot_fu_10020/p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_2_reg_1360_reg[87]/D
+                                                              -1.586        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_35/EN_A
+                                                              -1.585        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_fold_log_fu_9972/word_reg_13620_reg[88]/D
+                                                              -1.585        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_U/ram_reg_uram_20/EN_B
+                                                              -1.584        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_42/ADDR_A[2]
+                                                              -1.584        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_46/ADDR_A[10]
+                                                              -1.583        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_U/ram_reg_uram_35/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_dot_base_column_fu_9734/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_366/word_reg_2103_reg[122]/D
+                                                              -1.583        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_11/EN_B
+                                                              -1.582        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_U/ram_reg_uram_35/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_dot_base_column_fu_9734/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_366/word_reg_2103_reg[95]/D
+                                                              -1.582        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_10_U/ram_reg_uram_15/EN_A
+                                                              -1.580        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_15/EN_B
+                                                              -1.578        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_44/EN_A
+                                                              -1.578        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_fold_log_fu_9972/word_reg_13620_reg[79]/D
+                                                              -1.576        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[0]_replica_2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_10_U/ram_reg_uram_42/ADDR_A[1]
+                                                              -1.574        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_49/ADDR_A[2]
+                                                              -1.572        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_7_U/ram_reg_uram_34/EN_A
+                                                              -1.572        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_11/EN_A
+                                                              -1.570        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[0]_replica_2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_10_U/ram_reg_uram_42/ADDR_A[2]
+                                                              -1.570        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_fold_log_fu_9972/word_reg_13620_reg[80]/D
+                                                              -1.566        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_34/ADDR_A[10]
+                                                              -1.563        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_8_U/ram_reg_uram_49/ADDR_A[7]
+                                                              -1.562        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_42/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_dot_base_column_fu_9734/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_366/word_34_reg_2093_reg[101]/D
+                                                              -1.562        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_22/EN_B
+                                                              -1.561        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[0]_replica_2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_10_U/ram_reg_uram_42/ADDR_A[9]
+                                                              -1.560        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_39/BWE_B[3]
+                                                              -1.559        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_42/EN_A
+                                                              -1.559        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[1]_replica_2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_8_U/ram_reg_uram_49/ADDR_A[5]
+                                                              -1.559        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_38/ADDR_A[10]
+                                                              -1.558        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_39/EN_B
+                                                              -1.557        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_7_U/ram_reg_uram_43/EN_A
+                                                              -1.557        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_dot_base_column_fu_9734/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_366/word_reg_2103_reg[126]/D
+                                                              -1.557        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[134]_replica_1/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_10_U/ram_reg_uram_17/BWE_B[8]
+                                                              -1.556        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_39/BWE_B[2]
+                                                              -1.556        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_19/BWE_B[1]
+                                                              -1.556        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_50/EN_A
+                                                              -1.555        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_10_U/ram_reg_uram_16/EN_A
+                                                              -1.554        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[134]_replica_1/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_10_U/ram_reg_uram_17/BWE_B[6]
+                                                              -1.553        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_20/EN_B
+                                                              -1.553        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_fold_log_fu_9972/word_reg_13620_reg[84]/D
+                                                              -1.553        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_read_snapshot_fu_10020/p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_2_reg_1360_reg[109]/D
+                                                              -1.553        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_37/EN_A
+                                                              -1.552        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_39/BWE_B[1]
+                                                              -1.552        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_42/BWE_B[5]
+                                                              -1.552        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[275]_rep__4/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_41/ADDR_A[10]
+                                                              -1.551        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_39/BWE_B[4]
+                                                              -1.551        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_19/BWE_B[0]
+                                                              -1.550        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_7_U/ram_reg_uram_46/EN_A
+                                                              -1.549        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_3_U/ram_reg_uram_6/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_dot_base_column_fu_9734/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_366/word_34_reg_2093_reg[9]/D
+                                                              -1.548        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_15/EN_A
+                                                              -1.547        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_39/BWE_B[0]
+                                                              -1.547        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_39/BWE_B[7]
+                                                              -1.547        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_U/ram_reg_uram_35/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_dot_base_column_fu_9734/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_366/word_reg_2103_reg[98]/D
+                                                              -1.546        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_49/EN_A
+                                                              -1.546        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_19/BWE_B[3]
+                                                              -1.546        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_34/EN_B
+                                                              -1.546        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_42/BWE_B[7]
+                                                              -1.546        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_10_U/ram_reg_uram_10/EN_A
+                                                              -1.544        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_39/BWE_B[5]
+                                                              -1.544        
+grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U/ram_reg_uram_34/CLK
+                               grp_gdn_rs2_top_impl_fu_582/grp_p_anonymous_namespace_read_snapshot_fu_10020/p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_2_reg_1360_reg[80]/D
+                                                              -1.543        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_19/BWE_B[2]
+                                                              -1.543        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_19/BWE_B[8]
+                                                              -1.543        
+gmem4_m_axi_U/load_unit_0/fifo_rreq/full_n_reg/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_28/EN_A
+                                                              -1.542        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_42/BWE_B[4]
+                                                              -1.542        
+grp_gdn_rs2_top_impl_fu_582/ap_CS_fsm_reg[265]_rep__2/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U/ram_reg_uram_39/BWE_B[8]
+                                                              -1.542        
+grp_gdn_rs2_top_impl_fu_582/trunc_ln1073_reg_13348_reg[2]_rep/C
+                               grp_gdn_rs2_top_impl_fu_582/gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U/ram_reg_uram_19/BWE_B[7]
+                                                              -1.542        
+
+
+
