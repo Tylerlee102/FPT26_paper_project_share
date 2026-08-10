@@ -98,6 +98,21 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   reset control, and nine in the top FSM. The route uses 82,155 LUTs, 70,464
   registers, 341 BRAM tiles, 598 URAMs, and 12 DSPs. The split is rejected and
   not promoted.
+- A ninth source-isolated experiment applies the snapshot-write commit boundary
+  directly to the strongest unbanked fold-write parent. Exact 64-token C
+  simulation, every explicit synthesis constraint, routing, hold, and DRC pass.
+  HLS retains the parent's 3.106 ns estimate and 102,360,798-cycle worst-case
+  latency while adding 128 FFs and 88 LUTs. The final route reaches -1.494 ns
+  WNS, -26,161.480 ns TNS, and 43,246 failing setup endpoints, which is 0.200 ns
+  worse in WNS, 12,966.477 ns worse in TNS, and 14,078 more failing endpoints
+  than the parent. Its 5.226 ns worst path contains 4.863 ns of net delay, five
+  logic levels, one SLR crossing, and fanout 569. Of the 100 worst setup paths,
+  70 start in the top FSM, 15 at resident URAM read clocks, 11 in fold control,
+  two in top-level implementation control, one in snapshot-read control, and
+  one in reset control; none starts in snapshot-load or snapshot-commit logic.
+  The route uses 83,269 LUTs, 70,679 registers, 341 BRAM tiles, 598 URAMs, and
+  12 DSPs. The boundary changes the origin mix but does not close 250 MHz, so
+  the variant is rejected and not promoted.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
@@ -144,7 +159,10 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 393 passed, 2 skipped, and 0 failed tests.
+- The latest full regression records 398 passed, 2 skipped, and 0 failed tests;
+  its JUnit artifact is
+  `reports/test_results/final_pytest_20260810_snapshot_write_unbanked.xml`
+  (SHA256 `D8F891C14DDA6F73430A91506B312FF1BC68A84F4E4082C2A6E21FFDFD6DB48D`).
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

@@ -1,0 +1,67 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Mon Aug 10 13:18:57 2026
+| Host         : Tyler running 64-bit major release  (build 9200)
+| Command      : report_design_analysis -timing -logic_level_distribution -file X:/reports/vivado/experiments/rs2_snapshot_write_unbanked_20260810/design_analysis.rpt
+| Design       : gdn_rs2_top
+| Device       : xcu55c
+| Design State : Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Design Analysis
+
+Table of Contents
+-----------------
+1. Setup Path Characteristics 1-1
+2. Logic Level Distribution
+
+1. Setup Path Characteristics 1-1
+---------------------------------
+
++---------------------------+----------------------------------------------------------------------------+
+|      Characteristics      |                                   Path #1                                  |
++---------------------------+----------------------------------------------------------------------------+
+| Requirement               | 4.000                                                                      |
+| Path Delay                | 5.226                                                                      |
+| Logic Delay               | 0.363(7%)                                                                  |
+| Net Delay                 | 4.863(93%)                                                                 |
+| Clock Skew                | 0.540                                                                      |
+| Slack                     | -1.494                                                                     |
+| Clock Uncertainty         | 0.035                                                                      |
+| Clock Pair Classification | Partial False Path                                                         |
+| Clock Delay Group         | Same Clock                                                                 |
+| Logic Levels              | 5                                                                          |
+| Routes                    | 6                                                                          |
+| Logical Path              | FDRE/C-(76)-LUT2-(569)-LUT6-(259)-LUT2-(16)-LUT5-(2)-LUT3-(2)-URAM288/EN_A |
+| Start Point Clock         | ap_clk                                                                     |
+| End Point Clock           | ap_clk                                                                     |
+| DSP Block                 | None                                                                       |
+| RAM Registers             | None-IREG_PRE(0)-REG_CAS(0)                                                |
+| IO Crossings              | 1                                                                          |
+| SLR Crossings             | 1                                                                          |
+| PBlocks                   | 0                                                                          |
+| High Fanout               | 569                                                                        |
+| ASYNC REG                 | 0                                                                          |
+| Dont Touch                | 0                                                                          |
+| Mark Debug                | 0                                                                          |
+| Start Point Pin Primitive | FDRE/C                                                                     |
+| End Point Pin Primitive   | URAM288/EN_A                                                               |
+| Start Point Pin           | ap_CS_fsm_reg[253]_rep/C                                                   |
+| End Point Pin             | ram_reg_uram_120/EN_A                                                      |
++---------------------------+----------------------------------------------------------------------------+
+* Bounding box calculated as % of dimensions for the target device (5130, 1566)
+
+
+2. Logic Level Distribution
+---------------------------
+
++-----------------+-------------+-----+---+-----+----+-----+
+| End Point Clock | Requirement |  1  | 2 |  3  |  4 |  5  |
++-----------------+-------------+-----+---+-----+----+-----+
+| ap_clk          | 4.000ns     | 501 | 3 | 185 | 99 | 212 |
++-----------------+-------------+-----+---+-----+----+-----+
+* Columns represent the logic levels per end point clock
+** Distribution is for top worst 1000 paths
+
+

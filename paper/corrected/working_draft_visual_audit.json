@@ -32,10 +32,10 @@
     }
   ],
   "build_manifest": "paper/corrected/working_draft_build_manifest.json",
-  "build_manifest_sha256": "0FDB2222BB79FA3DED3E18E6936B37A3BE927DE9C868E125E80EF0CC724FA5AE",
+  "build_manifest_sha256": "EC50D5F9A195FA08539E287589400DA2D3EE6F3CCDEF529B44A8EDBDF0FD30C3",
   "checklist": "paper/corrected/working_draft_visual_checklist.json",
-  "checklist_sha256": "0BA87AA65DA1C4CE003C2D98C21061C131A1E96A399659D7686B052C185FE627",
-  "generated_at": "2026-08-10T15:41:08.106802+00:00",
+  "checklist_sha256": "CC2C38BAD3F2A74BF6B155553354A9C9046D4E6B700176D6FD070E5F53970337",
+  "generated_at": "2026-08-10T17:28:44.447831+00:00",
   "page_count": 9,
   "pages": [
     {
@@ -88,18 +88,18 @@
     },
     {
       "height": 2420,
-      "notes": "Trade-off figure and the first portion of all eight architecture-ablation paragraphs are readable; the split-fold result flows cleanly to page 8 without clipping or overlap.",
+      "notes": "Trade-off figure and the first portion of all nine architecture-ablation paragraphs are readable; the eighth result flows cleanly to page 8 without clipping or overlap.",
       "page": 7,
       "path": "reports/rendered/working_draft/page-07.png",
-      "sha256": "3E5FA6F4985AFA565CD9634A69D933C5BD4173F3A4146467E40DC08C8BE84EC6",
+      "sha256": "4D17EF3D3A0CCDC20A3567247B7ACDD7848FDCB04AA8F458D58109578FD7A3DE",
       "width": 1870
     },
     {
       "height": 2420,
-      "notes": "The split-fold ablation continuation, post-route and power tables, discussion equations, and limitations render without clipping, overlap, or broken glyphs.",
+      "notes": "The eighth-ablation continuation and complete ninth ablation, post-route and power tables, and discussion equations render without clipping, overlap, or broken glyphs.",
       "page": 8,
       "path": "reports/rendered/working_draft/page-08.png",
-      "sha256": "C9DBF47EB35EBD4EA5D879EF24A832AC4FD4A6A4BB051CA9CAA1A8397135C0B8",
+      "sha256": "1FEE81F7A92FDDBDF6FEC7B62E9FE232AD4113A4B68589CDB428153493B419B1",
       "width": 1870
     },
     {
@@ -107,7 +107,7 @@
       "notes": "The remaining limitations, conclusion, and references 1-16 are complete and readable with no clipped content.",
       "page": 9,
       "path": "reports/rendered/working_draft/page-09.png",
-      "sha256": "7906335F04A8B66E96B50F5E935927CD52ACBB7A4D74FAEDFFF495C9F10430B2",
+      "sha256": "3F59992422383983A2C5032CCC50F46DC86F6825593003CEC442CDADD3F76A55",
       "width": 1870
     }
   ],
@@ -124,5 +124,5 @@
   "submission_eligible": false,
   "visual_audit_status": "PASS",
   "working_draft": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "working_draft_sha256": "C8C2B9D80F982314274B168A000246F9F1C4BDD2FBE16470D750E4490057C3F4"
+  "working_draft_sha256": "8B058F5AD3511947F456906C54D58815171099533222279607FBB4EE95E02485"
 }

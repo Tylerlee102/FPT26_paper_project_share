@@ -1,0 +1,23 @@
+{
+  "behavioral_contract": "same arithmetic, state layout and capacity, commands, fold cadence, and unbanked resident state; only LOAD resident-write hierarchy changes",
+  "experiment": "RS2 localized snapshot writes on unbanked fold-write parent",
+  "generated_at": "2026-08-10T16:02:10.758397+00:00",
+  "output": "build/experiments/rs2_snapshot_write_unbanked/gdn_rs2_top.cpp",
+  "output_sha256": "453AC560A3FD544BDD6076DC24DFF8175F4E72590C50661E7BB7EA59E64DE7F0",
+  "parent_output_sha256": "B1E12FC52C984FF4DF3CEB545F0ED97A8344FF4F398A404BBE3E8FC07C973E54",
+  "parent_transform": {
+    "fold_control_helpers": 1,
+    "fold_control_replacements": 1,
+    "fold_write_helpers": 1,
+    "fold_write_replacements": 1
+  },
+  "schema": 1,
+  "selected_source_modified": false,
+  "snapshot_write_transform": {
+    "helpers": 1,
+    "replacements": 1
+  },
+  "source": "hls/rs2/src/gdn_rs2_top.cpp",
+  "source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+  "status": "PASS"
+}

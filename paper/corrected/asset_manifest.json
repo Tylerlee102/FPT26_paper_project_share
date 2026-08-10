@@ -1,14 +1,14 @@
 {
   "extended_8192_replay_status": "PASS",
   "extended_8192_status": "PASS",
-  "generated_at": "2026-08-10T15:33:07.771287+00:00",
+  "generated_at": "2026-08-10T17:24:02.562307+00:00",
   "held_out_status": "PASS",
   "hls_cost_latency_advantage_vs_bf16": "FAIL",
   "inputs_sha256": {
     "docs/numerical_contract.md": "21C9885BCA373479F2215D127DF4CE2E4103790D6042F145FE43853B18B5A27E",
     "docs/synthetic_trace_protocol.json": "7D485020F522054CCEE8D3129A682E20E865D78FF17E22E7DB486E63DAD88BBA",
-    "paper/corrected/paper.tex": "93ACFF1FEE7CC331B3FB3DAE6A846F88269B0E0266149134ABF2864D6F77D3C5",
-    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "22154B381EF6E20FE0A970794B3123F1B93D13E16AB29A92B3C29065F486FE3F",
+    "paper/corrected/paper.tex": "66E058B05F4B23590CDBBF932610B4909CCE5681A01D38E335C59040C7F9680D",
+    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "AC77D220939F9010084887DE86A9CAF8C0C56140CD4CDD5413D2821A6DCB3DB9",
     "paper/figures/corrected/long_sequence_stability_panel_manifest.json": "AE6B110B5528DDD1C826A3970BBBFC91BAC2F0FB7135F58DF34B9D775BCFD540",
     "paper/figures/corrected/long_trace_plot_manifest.json": "3BDC02346C9F68BD3BA6B819CA61C230F24DE6BDDDF56B23B2ADCFDB25CB74AE",
     "paper/figures/corrected/tradeoff_evidence_manifest.json": "9ACBFEAAFBA585F8CFE30C930DCA77F9AE874E7DA52D706464F6B1C6FDB0CCF5",
@@ -53,8 +53,8 @@
     "the current RS2/R3 mitigation has no HLS cost/latency advantage over BF16"
   ],
   "outputs_sha256": {
-    "paper/corrected/numbers.json": "A391E1876A215273B969F6C840D4DFAB00605D8BBEF797B10A7D3C5AD96D5F80",
-    "paper/corrected/provenance.json": "A391E1876A215273B969F6C840D4DFAB00605D8BBEF797B10A7D3C5AD96D5F80",
+    "paper/corrected/numbers.json": "63165F870E4108319DDBD6C6CCE130F176F0A1F7C942C374EB93117B307FA075",
+    "paper/corrected/provenance.json": "63165F870E4108319DDBD6C6CCE130F176F0A1F7C942C374EB93117B307FA075",
     "paper/corrected/snippets/corrected_result_macros.tex": "2BE56F30BA4E45A399C998EAAA8ADE11BC80E522586736723560429F385E6199",
     "paper/corrected/tables/controlled_hls.tex": "D9E524B3F1895E05D5B52D1FA361C5C92A6752F908E49CEA09AEF9F6BB6D334F",
     "paper/corrected/tables/corrected_extended.tex": "894F804599CDE5B4C9CF5D08FD0CD4FDE849E1CF0FC4949816DEC665B094BCD2",
@@ -80,16 +80,16 @@
   "selected_candidate": "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5",
   "source_identity": {
     "dirty_patch": {
-      "bytes": 1252,
+      "bytes": 1280,
       "changed_file_count": 1,
-      "sha256": "2C0DE96A5191AC06DF7930563EBDDCF8874E26226F4360301898C4CB504B6E8D"
+      "sha256": "3423A10C54E5C60CFD9AA69955CAA4C40C6CCFC46B8EF58D654C53CAB9523E57"
     },
     "files": {
       "paper/corrected/paper.tex": {
-        "bytes": 49360,
+        "bytes": 50128,
         "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "93ACFF1FEE7CC331B3FB3DAE6A846F88269B0E0266149134ABF2864D6F77D3C5"
+        "sha256": "66E058B05F4B23590CDBBF932610B4909CCE5681A01D38E335C59040C7F9680D"
       },
       "scripts/corrected_paper_assets.py": {
         "bytes": 122130,
@@ -110,19 +110,19 @@
         "sha256": "C45C7D08671460B5A530D77B28E75E1899E84B8063140D07B000B6EE431CD6B7"
       }
     },
-    "git_revision": "658dc36e3d534cc81c0fc15234ea034da3c4e27a",
+    "git_revision": "77212e300d8f40c9dcbcaafb7bd52b311d7eb54b",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
-  "source_revision": "658dc36e3d534cc81c0fc15234ea034da3c4e27a",
+  "source_revision": "77212e300d8f40c9dcbcaafb7bd52b311d7eb54b",
   "status": "PASS",
   "verified_figure_sha256": {
-    "paper/figures/corrected/corrected_candidate_datapath.pdf": "7428651710789EABE780F4DEC6EC9C2E44DCCFE42AB559B0F4962C720056782E",
-    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "22154B381EF6E20FE0A970794B3123F1B93D13E16AB29A92B3C29065F486FE3F",
+    "paper/figures/corrected/corrected_candidate_datapath.pdf": "FA27D3913169E12347B775FB0F9CB73882A92E5F44918643593CA1267ECD3DCB",
+    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "AC77D220939F9010084887DE86A9CAF8C0C56140CD4CDD5413D2821A6DCB3DB9",
     "paper/figures/corrected/long_sequence_stability_panel.pdf": "C73D03ABFEF1B96775975AE2DE3BFC756F56E9AD2F499F1E82B8376B9DBF6D4B",
     "paper/figures/corrected/output_cosine_vs_token.pdf": "C98491692B6CE18843F3457D246D881AB0D756A9FDAE1C3EF73CFD870335ADE8",
     "paper/figures/corrected/rs2_memory_performance_accuracy.pdf": "E7F8477F5D70B5F723E12173095CCEA2990BBF55BAEAF824E46B84532B4B13CC",
     "paper/figures/corrected/rs2_output_cosine_vs_token.pdf": "1DF29C3EC8FA6E9FD124BA6EB2B7BD6B91D638E2031F7A649C28ABEC9CE2E8AE",
-    "paper/figures/corrected/rs2_paper_figures_manifest.json": "74F9BC8903C19CFFA0308F7E7F454B6DFDF9B4805A74B19208D5AA2C186C01AD",
+    "paper/figures/corrected/rs2_paper_figures_manifest.json": "4584B4D8F1737E644053CEFC98209D1794CF509691344E3B7D2313B27621B26C",
     "paper/figures/corrected/rs2_state_relative_l2_vs_token.pdf": "F4929EB92E723E9FBFFE174E9F985781387AD0CEF30044B19D0691D50FD10DEE",
     "paper/figures/corrected/state_relative_l2_vs_token.pdf": "87153CCB5991BAF977E6659EBF2E2AB2E699B7A474B33543DE5E8A52D485428B",
     "paper/figures/corrected/tradeoff_evidence.pdf": "7E6A77638D932A719C223B33573A0C051407EB12BCE3D7D3374AE36FB2C8C067"
