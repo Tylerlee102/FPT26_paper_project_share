@@ -1,0 +1,25 @@
+{
+  "behavioral_contract": "same arithmetic, state layout, capacity, commands, and fold cadence; only fold-write hierarchy and primary/residual physical layer banking change",
+  "experiment": "RS2 localized fold writes with six-way cyclic layer banks",
+  "fold_write_intermediate_sha256": "B1E12FC52C984FF4DF3CEB545F0ED97A8344FF4F398A404BBE3E8FC07C973E54",
+  "fold_write_transform": {
+    "fold_control_helpers": 1,
+    "fold_control_replacements": 1,
+    "fold_write_helpers": 1,
+    "fold_write_replacements": 1
+  },
+  "generated_at": "2026-08-10T09:42:55.265469+00:00",
+  "layers_per_bank": 6,
+  "output": "build/experiments/rs2_fold_write_partial_banks/gdn_rs2_top.cpp",
+  "output_sha256": "F323C342106C72CD79EE6D21185DAC4E95D90D1B5D8F37AEB0299EE61808A525",
+  "partition_factor": 6,
+  "partition_insertions": [
+    "#pragma HLS ARRAY_PARTITION variable=resident_primary cyclic factor=6 dim=2",
+    "#pragma HLS ARRAY_PARTITION variable=resident_residual cyclic factor=6 dim=2"
+  ],
+  "schema": 1,
+  "selected_source_modified": false,
+  "source": "hls/rs2/src/gdn_rs2_top.cpp",
+  "source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+  "status": "PASS"
+}

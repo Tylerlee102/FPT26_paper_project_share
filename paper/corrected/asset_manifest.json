@@ -1,15 +1,15 @@
 {
   "extended_8192_replay_status": "PASS",
   "extended_8192_status": "PASS",
-  "generated_at": "2026-08-10T09:38:51.019383+00:00",
+  "generated_at": "2026-08-10T11:03:23.939941+00:00",
   "held_out_status": "PASS",
   "hls_cost_latency_advantage_vs_bf16": "FAIL",
   "inputs_sha256": {
     "docs/numerical_contract.md": "21C9885BCA373479F2215D127DF4CE2E4103790D6042F145FE43853B18B5A27E",
     "docs/synthetic_trace_protocol.json": "7D485020F522054CCEE8D3129A682E20E865D78FF17E22E7DB486E63DAD88BBA",
-    "paper/corrected/paper.tex": "5D548014F46C12DB43283C963BAB57117819C90E6E69685360DBD3198A89A392",
-    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "06E91756BE47CF5C82489DFA48ABF1CE76CFFB918D81F7F6F68084950E1F4A31",
-    "paper/figures/corrected/long_sequence_stability_panel_manifest.json": "D590172915F3D932C6AA09E3C81A1CA5B52A0B6B449D6ED0386F90A80B05942F",
+    "paper/corrected/paper.tex": "C887A0AB83219D0C0A0F105D10AB6DB418C535BFA88FC76C05715D1F370F9B50",
+    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "AB0EB4AC38825EC282AAE59F7A0EA0DD8B1EBDF0A49E780E19FDEA951EBD42BA",
+    "paper/figures/corrected/long_sequence_stability_panel_manifest.json": "71B27BA848D157AE658E93073FE536A503CEFB29AE320EFCF7427758DD5009C1",
     "paper/figures/corrected/long_trace_plot_manifest.json": "3BDC02346C9F68BD3BA6B819CA61C230F24DE6BDDDF56B23B2ADCFDB25CB74AE",
     "paper/figures/corrected/tradeoff_evidence_manifest.json": "9ACBFEAAFBA585F8CFE30C930DCA77F9AE874E7DA52D706464F6B1C6FDB0CCF5",
     "reports/benchmark/corrected/e2m0_encoded/extended_development/extended_summary.json": "D876B11E3C43C008D34176196AE0B3BA1DA238260BE8922C42F06FD86D915051",
@@ -22,7 +22,7 @@
     "reports/benchmark/corrected/rs2_controlled/controlled_long_trace_manifest.json": "877A0857BF8E71B79B0F6630FF608631A171C8BD1E46E2DC20DA9E9BBD07A2F5",
     "reports/benchmark/corrected/rs2_encoded/rs2_encoded_candidate_summary.json": "3E2339DEFC6D34C6545A833BD2B95DEA2DDBB3C2ED418EF5167D317849980DB6",
     "reports/benchmark/corrected/rs2_encoded_candidate_preregistration.json": "273F648DA72077C0FB013A3C1AE0D6FDC50673F9CB725FB3F59A01BA8B42691D",
-    "reports/benchmark/corrected/rs2_interface_accounting.json": "D724D4485E909FFED13CC4ECEF42F376E8E201FC5E07F980E2C1DE49EBFE0749",
+    "reports/benchmark/corrected/rs2_interface_accounting.json": "E9C3672073D569EF0B0F44B7A56482293E835FFD85A038A84E74E1FCB9B6ADBB",
     "reports/benchmark/corrected/scale_policy_checkpoints.csv": "6C2FF3F714F856AC0D4471EC3C0CEC6E95CF8A13DC4154F7E847B0B8E65C96F0",
     "reports/benchmark/corrected/scale_policy_manifest.json": "1BBFBC435A19BDADC45FC047727F3456B0C9D51E8556FBE8E06863FBE91FC7E4",
     "reports/benchmark/corrected/state_capacity_lower_bound.json": "8434DC2A07E937F03B774A285E7D277CD15D27975440C7E99F56CBF2A935CD21",
@@ -53,8 +53,8 @@
     "the current RS2/R3 mitigation has no HLS cost/latency advantage over BF16"
   ],
   "outputs_sha256": {
-    "paper/corrected/numbers.json": "BB2B77D8BE913DF0C43F31900DFA55CBC3EB4E54F440EE6F76A70230ECE159BD",
-    "paper/corrected/provenance.json": "BB2B77D8BE913DF0C43F31900DFA55CBC3EB4E54F440EE6F76A70230ECE159BD",
+    "paper/corrected/numbers.json": "3109AEC3F7D9D020CAC9F565E4531EFFE302529B00D8696B88B59AD3E3941054",
+    "paper/corrected/provenance.json": "3109AEC3F7D9D020CAC9F565E4531EFFE302529B00D8696B88B59AD3E3941054",
     "paper/corrected/snippets/corrected_result_macros.tex": "2BE56F30BA4E45A399C998EAAA8ADE11BC80E522586736723560429F385E6199",
     "paper/corrected/tables/controlled_hls.tex": "D9E524B3F1895E05D5B52D1FA361C5C92A6752F908E49CEA09AEF9F6BB6D334F",
     "paper/corrected/tables/corrected_extended.tex": "894F804599CDE5B4C9CF5D08FD0CD4FDE849E1CF0FC4949816DEC665B094BCD2",
@@ -80,16 +80,16 @@
   "selected_candidate": "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5",
   "source_identity": {
     "dirty_patch": {
-      "bytes": 1111,
+      "bytes": 1103,
       "changed_file_count": 1,
-      "sha256": "386124AA06B2F6DC8F2FB649CD9FDC824EE7B14060492F36068F2B5B5C96B25D"
+      "sha256": "9F78BE1316F3A1E9F33E6CA3AAA01EDA3D9D98C8742279B85318C61408337DDA"
     },
     "files": {
       "paper/corrected/paper.tex": {
-        "bytes": 47256,
+        "bytes": 47877,
         "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "5D548014F46C12DB43283C963BAB57117819C90E6E69685360DBD3198A89A392"
+        "sha256": "C887A0AB83219D0C0A0F105D10AB6DB418C535BFA88FC76C05715D1F370F9B50"
       },
       "scripts/corrected_paper_assets.py": {
         "bytes": 122130,
@@ -110,19 +110,19 @@
         "sha256": "C45C7D08671460B5A530D77B28E75E1899E84B8063140D07B000B6EE431CD6B7"
       }
     },
-    "git_revision": "3b8817b03586ebe36cb56a4c153effd0c2763a6f",
+    "git_revision": "98db5064c3ba0f062332e0fffffe32e808e36135",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
-  "source_revision": "3b8817b03586ebe36cb56a4c153effd0c2763a6f",
+  "source_revision": "98db5064c3ba0f062332e0fffffe32e808e36135",
   "status": "PASS",
   "verified_figure_sha256": {
-    "paper/figures/corrected/corrected_candidate_datapath.pdf": "A3659DE43DA12EB48E9EEC9FE001BAECE0BCE65090D042DA2A6B90F59369783E",
-    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "06E91756BE47CF5C82489DFA48ABF1CE76CFFB918D81F7F6F68084950E1F4A31",
+    "paper/figures/corrected/corrected_candidate_datapath.pdf": "7AE78CE1B2A7892C7DAFFE2D8391E1B537BBB73F04B06B88802289B183C7E3B5",
+    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "AB0EB4AC38825EC282AAE59F7A0EA0DD8B1EBDF0A49E780E19FDEA951EBD42BA",
     "paper/figures/corrected/long_sequence_stability_panel.pdf": "C73D03ABFEF1B96775975AE2DE3BFC756F56E9AD2F499F1E82B8376B9DBF6D4B",
     "paper/figures/corrected/output_cosine_vs_token.pdf": "C98491692B6CE18843F3457D246D881AB0D756A9FDAE1C3EF73CFD870335ADE8",
     "paper/figures/corrected/rs2_memory_performance_accuracy.pdf": "E7F8477F5D70B5F723E12173095CCEA2990BBF55BAEAF824E46B84532B4B13CC",
     "paper/figures/corrected/rs2_output_cosine_vs_token.pdf": "1DF29C3EC8FA6E9FD124BA6EB2B7BD6B91D638E2031F7A649C28ABEC9CE2E8AE",
-    "paper/figures/corrected/rs2_paper_figures_manifest.json": "55E9BDA606A81F9F8C4ADB7D3054032DF2B23F2A12CD34FB83447BA5AE73B1FD",
+    "paper/figures/corrected/rs2_paper_figures_manifest.json": "8DB96F7665F56D5C9BF4329E4037C514BD833D9E33886761CA15FD37B361F52B",
     "paper/figures/corrected/rs2_state_relative_l2_vs_token.pdf": "F4929EB92E723E9FBFFE174E9F985781387AD0CEF30044B19D0691D50FD10DEE",
     "paper/figures/corrected/state_relative_l2_vs_token.pdf": "87153CCB5991BAF977E6659EBF2E2AB2E699B7A474B33543DE5E8A52D485428B",
     "paper/figures/corrected/tradeoff_evidence.pdf": "7E6A77638D932A719C223B33573A0C051407EB12BCE3D7D3374AE36FB2C8C067"

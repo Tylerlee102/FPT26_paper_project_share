@@ -66,6 +66,14 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   failing setup endpoints increase from 43,593 to 44,629. The route adds 5,744
   LUTs, 2,377 registers, and two DSPs; its worst path crosses one SLR with
   fanout 41 into URAM control. It still fails 250 MHz and is not promoted.
+- A sixth source-isolated experiment composes factor-six cyclic layer banking
+  with the strongest localized fold-write hierarchy. Exact 64-token C
+  simulation, every explicit synthesis constraint, routing, hold, and DRC
+  pass, but the final route is dominated by both parent experiments: WNS is
+  -2.757 ns, TNS is -51,999.980 ns, and 53,673 setup endpoints fail. The
+  6.226 ns worst path contains 5.989 ns of net delay and crosses two SLRs.
+  Relative to selected, the route adds 6,939 LUTs, 2,638 registers, and two
+  DSPs. The composition is rejected and not promoted.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
@@ -112,7 +120,7 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 379 passed, 2 skipped, and 0 failed tests.
+- The latest full regression records 383 passed, 2 skipped, and 0 failed tests.
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

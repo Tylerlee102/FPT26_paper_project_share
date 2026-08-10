@@ -41,19 +41,19 @@
       "page": 7,
       "status": "PASS",
       "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
-      "notes": "Trade-off figure and power table are readable; bar labels, caption, and discussion equations stay inside margins."
+      "notes": "Trade-off figure, post-route table, and all six architecture-ablation paragraphs are readable; the added composition result stays inside both columns."
     },
     {
       "page": 8,
       "status": "PASS",
       "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
-      "notes": "Discussion equations, limitations, conclusion, and references 1-14 render without clipping or broken glyphs."
+      "notes": "Power table, discussion equations, and limitations render without clipping, overlap, or broken glyphs."
     },
     {
       "page": 9,
       "status": "PASS",
       "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
-      "notes": "References 15-16 are complete and readable; this references-only overflow page has no clipped content."
+      "notes": "The remaining limitations, conclusion, and references 1-16 are complete and readable with no clipped content."
     }
   ]
 }

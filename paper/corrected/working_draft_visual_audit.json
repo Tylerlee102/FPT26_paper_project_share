@@ -32,10 +32,10 @@
     }
   ],
   "build_manifest": "paper/corrected/working_draft_build_manifest.json",
-  "build_manifest_sha256": "9D039D6D08354EB1AFA6DCF9E47AC0DCC5D84B24AF326C5CD1BBE6D18059EEBF",
+  "build_manifest_sha256": "2242EF5388B229B353485C35A12E77F1AF6B2EA3F98922331113A7FF3F18399D",
   "checklist": "paper/corrected/working_draft_visual_checklist.json",
-  "checklist_sha256": "8F3D44A73795A5284D5D348FE36B4DF43CCEE77F8DD7790BA639233382549D19",
-  "generated_at": "2026-08-10T09:38:53.071644+00:00",
+  "checklist_sha256": "6CFB994AD1F95584ABFD0AEDE1288931605380D37FE3E8077EA8285962A99E4D",
+  "generated_at": "2026-08-10T11:04:34.542094+00:00",
   "page_count": 9,
   "pages": [
     {
@@ -88,26 +88,26 @@
     },
     {
       "height": 2420,
-      "notes": "Trade-off figure and power table are readable; bar labels, caption, and discussion equations stay inside margins.",
+      "notes": "Trade-off figure, post-route table, and all six architecture-ablation paragraphs are readable; the added composition result stays inside both columns.",
       "page": 7,
       "path": "reports/rendered/working_draft/page-07.png",
-      "sha256": "D55B9B80C082A621E3071C3C146A44ACB85095189C880FC32F80DFDFFC775F80",
+      "sha256": "C03D4C1DECAA2691A096F0128305D0D19131EF7548571DB0FCD3AF5B520550D4",
       "width": 1870
     },
     {
       "height": 2420,
-      "notes": "Discussion equations, limitations, conclusion, and references 1-14 render without clipping or broken glyphs.",
+      "notes": "Power table, discussion equations, and limitations render without clipping, overlap, or broken glyphs.",
       "page": 8,
       "path": "reports/rendered/working_draft/page-08.png",
-      "sha256": "5140EE2744279B6AE3CF3C9AA7A7EE3CEB746C482626E5448C27E423B5BEE31F",
+      "sha256": "DF7E5F57AF9B4AF9AA2F40593B5AA5D83A600A6827C0B0A0C4A1C0258A20C2BF",
       "width": 1870
     },
     {
       "height": 2420,
-      "notes": "References 15-16 are complete and readable; this references-only overflow page has no clipped content.",
+      "notes": "The remaining limitations, conclusion, and references 1-16 are complete and readable with no clipped content.",
       "page": 9,
       "path": "reports/rendered/working_draft/page-09.png",
-      "sha256": "8F584B31435FBE5587105378DAF73CB9EFAD2EFBD63E08609475F47086D13B9C",
+      "sha256": "8F87DB6585D29D59F0839583BA6865D33AB479AD9A03220B7E66FED62FA37169",
       "width": 1870
     }
   ],
@@ -124,5 +124,5 @@
   "submission_eligible": false,
   "visual_audit_status": "PASS",
   "working_draft": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "working_draft_sha256": "A932DD82010CFBEC93B836D018DE936608E10C701FCD871D2F99E3282B4C3C3F"
+  "working_draft_sha256": "6714052FA6610738D02005B839C057A6BAC318C86E2C37A1F1E8EDA5EAA34852"
 }

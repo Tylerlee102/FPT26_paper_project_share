@@ -642,6 +642,15 @@ slack and the failing-endpoint count and increasing LUT, register, and DSP use.
 Its worst path again crosses an SLR into high-fanout URAM control. We therefore
 reject partial layer banking as a standalone timing fix and retain the
 source-locked candidate.
+Finally, we composed factor-six banking with the strongest isolated fold-write
+hierarchy. Exact C-simulation and every explicit synthesis constraint still
+passed, but the matched route was worse than either parent in worst slack,
+total negative slack, and failing endpoints. The critical path crossed two
+SLRs and remained dominated by interconnect into resident-state memory. This
+negative composition result shows that reducing one high-fanout fold-control
+net does not solve the wider snapshot, reset, and bank-selection distribution
+problem. We reject the composition and leave the source-locked candidate
+unchanged.
 
 \begin{table}[t]
 \centering
