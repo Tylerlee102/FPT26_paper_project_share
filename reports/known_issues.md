@@ -113,6 +113,19 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   The route uses 83,269 LUTs, 70,679 registers, 341 BRAM tiles, 598 URAMs, and
   12 DSPs. The boundary changes the origin mix but does not close 250 MHz, so
   the variant is rejected and not promoted.
+- A tenth source-isolated experiment combines the strongest fold-write parent
+  with two contiguous layer banks. Exact 64-token C simulation, every explicit
+  synthesis constraint, routing, hold, and DRC pass. HLS retains the parent's
+  3.106 ns estimate and adds four worst-case cycles, 9,649 LUTs, 2,385 FFs, two
+  DSPs, and 64 HLS-reported URAMs. The final route reaches -2.966 ns WNS,
+  -66,301.594 ns TNS, and 64,439 failing setup endpoints, which is 1.672 ns
+  worse in WNS, 53,106.591 ns worse in TNS, and 35,271 more failing endpoints
+  than the parent. Its 6.377 ns worst path contains 6.174 ns of net delay,
+  three logic levels, two SLR crossings, and fanout 97. Of the 100 worst setup
+  paths, 80 start in the `gmem4` state-input AXI load FIFO, 19 in snapshot-load
+  control, and one at a resident URAM read clock. The route uses 85,951 LUTs,
+  72,275 registers, 341 BRAM tiles, 598 URAMs, and 14 DSPs. Contiguous banking
+  exposes a new load-to-banked-URAM control cone and is rejected, not promoted.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
@@ -159,10 +172,10 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 398 passed, 2 skipped, and 0 failed tests;
+- The latest full regression records 403 passed, 2 skipped, and 0 failed tests;
   its JUnit artifact is
-  `reports/test_results/final_pytest_20260810_snapshot_write_unbanked.xml`
-  (SHA256 `D8F891C14DDA6F73430A91506B312FF1BC68A84F4E4082C2A6E21FFDFD6DB48D`).
+  `reports/test_results/final_pytest_20260810_fold_write_contiguous_banks.xml`
+  (SHA256 `511F34A4BBB9CCFF2BB811B45B68E0090638283D39F9437FC86E8E2495AFA912`).
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

@@ -1,0 +1,26 @@
+{
+  "behavioral_contract": "same arithmetic, state layout, capacity, commands, and fold cadence; only fold-write hierarchy and contiguous primary/residual layer banking change",
+  "experiment": "RS2 fold-write hierarchy with two contiguous layer banks",
+  "generated_at": "2026-08-10T17:39:38.270445+00:00",
+  "layers_per_bank": 18,
+  "output": "build/experiments/rs2_fold_write_contiguous_banks/gdn_rs2_top.cpp",
+  "output_sha256": "B1F62ADB560A959BEC6EC22D90AC7829F8E30E359FB643391CA67314F504325C",
+  "parent_output_sha256": "B1E12FC52C984FF4DF3CEB545F0ED97A8344FF4F398A404BBE3E8FC07C973E54",
+  "parent_transform": {
+    "fold_control_helpers": 1,
+    "fold_control_replacements": 1,
+    "fold_write_helpers": 1,
+    "fold_write_replacements": 1
+  },
+  "partition_factor": 2,
+  "partition_insertions": [
+    "#pragma HLS ARRAY_PARTITION variable=resident_primary block factor=2 dim=2",
+    "#pragma HLS ARRAY_PARTITION variable=resident_residual block factor=2 dim=2"
+  ],
+  "partition_style": "block",
+  "schema": 1,
+  "selected_source_modified": false,
+  "source": "hls/rs2/src/gdn_rs2_top.cpp",
+  "source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+  "status": "PASS"
+}

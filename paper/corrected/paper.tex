@@ -671,16 +671,15 @@ accounted for every worst-path startpoint, and the longest path crossed two
 SLRs with delay dominated by interconnect. Separating one write-control cone
 therefore displaced rather than removed the global resident-memory control
 problem; the split variant is rejected and not promoted.
-The ninth isolated variant applied the snapshot-write boundary directly to the
-strongest unbanked fold-write parent. Exact C-simulation, every explicit
-synthesis constraint, routing, hold, and design rules passed, and HLS retained
-the parent's schedule with only a small logic increase. Snapshot-load and
-snapshot-commit logic disappeared from the worst-path startpoints, but the
-matched route still failed the target and regressed slightly relative to its
-parent in worst slack, total negative slack, and failing endpoints. Top-level
-control, resident-memory read clocks, and fold control dominated the remaining
-paths. We therefore reject this variant: isolating the snapshot-write cone is
-insufficient without restructuring the shared state-memory control network.
+The ninth variant applied snapshot-write locality directly to that unbanked
+parent. Exact C-simulation and physical checks passed, and snapshot write/load
+logic left the worst-path origins, but setup regressed as top-level, URAM-read,
+and fold control became dominant. Snapshot-write isolation alone is rejected.
+The tenth variant instead added two contiguous layer banks to the fold-write
+parent. Exact C-simulation and physical checks again passed, but setup regressed
+sharply: 80 of the 100 worst paths began in the state-input AXI load FIFO and
+crossed two SLRs into banked URAM control. We reject contiguous banking without
+a separately pipelined load/control plane.
 
 \begin{table}[t]
 \centering
