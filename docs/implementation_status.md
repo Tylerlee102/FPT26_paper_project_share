@@ -77,9 +77,10 @@ A negative cost/stability outcome can be publishable; an unsupported claim,
 stale provenance record, or unaudited PDF cannot.
 
 The release gate keeps completed evidence separate from research outcomes.
-Corrected-candidate 64-token RTL parity is a scoped nonblocking failure because
-the manuscript reports it as not established; it is not silently filled by the
-uniform-MXFP4 RTL trace or by C simulation.
+Corrected-candidate 64-token direct generated-RTL parity passes all 66 commands,
+262,144 output values, counters, and final recurrent state. Official recurrent
+XSim remains separately `NOT_RUN`; the direct Verilator result and C simulation
+do not silently fill that missing simulator path.
 
 All eleven completion-gate rows are release-required. Any `FAIL`, `NOT_RUN`,
 or `BLOCKED_EXTERNAL` row keeps the project `NOT PAPER READY`; no negative
@@ -90,7 +91,8 @@ The current nonpassing outcomes include:
 | Research outcome or limitation | Status |
 |---|---|
 | Selected-method Pareto advantage | FAIL |
-| Corrected-candidate 64-token RTL parity | IN_PROGRESS / NOT_ESTABLISHED |
+| Corrected-candidate direct generated-RTL parity | PASS |
+| Corrected-candidate official 64-token XSim parity | NOT_RUN |
 | Controlled wider physical baselines | BF16 and MXFP8 fit, but miss 250 MHz |
 | Closed-loop real-model quality | BLOCKED_EXTERNAL |
 | Board parity and measured energy | BLOCKED_EXTERNAL |

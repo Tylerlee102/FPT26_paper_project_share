@@ -618,6 +618,13 @@ reduced control fanout and setup violation. The target still failed, however;
 the remaining worst path runs from the local fold state machine to a URAM
 byte-write-enable pin. We therefore retain this as architecture-diagnostic
 evidence rather than replacing the source-locked candidate.
+A third isolated variant retained that fold boundary and moved each folded-state
+write into a separate non-inlined commit stage. It again preserved exact
+C-simulation and the HLS loop constraints, and produced the strongest isolated
+setup improvement with fewer failing endpoints. It nevertheless missed the
+declared clock, increased periodic-fold latency, and moved the worst high-fanout
+path back to outer fold control driving a resident-primary URAM enable. This
+variant is likewise not promoted.
 
 \begin{table}[t]
 \centering

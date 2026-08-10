@@ -1,0 +1,320 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date              : Mon Aug 10 00:20:55 2026
+| Host              : Tyler running 64-bit major release  (build 9200)
+| Command           : report_timing -delay_type max -max_paths 100 -nworst 1 -path_type summary -file X:/reports/vivado/experiments/rs2_fold_write_20260809/worst_100_setup_paths.rpt
+| Design            : gdn_rs2_top
+| Device            : xcu55c-fsvh2892
+| Speed File        : -2L  PRODUCTION 1.30 05-01-2022
+| Design State      : Routed
+| Temperature Grade : E
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Startpoint                     Endpoint                       Slack(ns)     
+----------------------------------------------------------------------------
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[13]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_136/EN_B
+                                                              -1.294        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_read_snapshot_fu_9623/resident_primary_load_reg_1218_reg[26]/D
+                                                              -1.292        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_85/EN_A
+                                                              -1.290        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/word_reg_13370_reg[26]/D
+                                                              -1.289        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_55/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/word_reg_13370_reg[1]/D
+                                                              -1.282        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[13]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_136/EN_A
+                                                              -1.278        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_196/EN_A
+                                                              -1.274        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_44/BWE_B[7]
+                                                              -1.273        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_225/EN_A
+                                                              -1.271        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/BWE_B[7]
+                                                              -1.271        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/BWE_B[5]
+                                                              -1.270        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_44/BWE_B[3]
+                                                              -1.270        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/BWE_B[3]
+                                                              -1.269        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_44/BWE_B[1]
+                                                              -1.268        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_44/BWE_B[5]
+                                                              -1.267        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_50/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_read_snapshot_fu_9623/resident_primary_load_reg_1218_reg[50]/D
+                                                              -1.267        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_44/BWE_B[2]
+                                                              -1.267        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_44/BWE_B[6]
+                                                              -1.266        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/BWE_B[2]
+                                                              -1.266        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_dot_base_column_fu_9403/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_368/word_reg_2105_reg[26]/D
+                                                              -1.266        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_121/EN_A
+                                                              -1.266        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_191/BWE_B[3]
+                                                              -1.265        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_55/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_read_snapshot_fu_9623/resident_primary_load_reg_1218_reg[33]/D
+                                                              -1.264        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_191/BWE_B[7]
+                                                              -1.263        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_50/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_dot_base_column_fu_9403/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_368/word_reg_2105_reg[11]/D
+                                                              -1.263        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/BWE_B[6]
+                                                              -1.263        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_191/BWE_B[5]
+                                                              -1.262        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_191/BWE_B[1]
+                                                              -1.262        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_245/EN_A
+                                                              -1.262        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_44/BWE_B[4]
+                                                              -1.261        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_145/BWE_B[3]
+                                                              -1.261        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_196/EN_B
+                                                              -1.260        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/BWE_B[4]
+                                                              -1.260        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_145/BWE_B[2]
+                                                              -1.258        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_145/BWE_B[5]
+                                                              -1.257        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_191/BWE_B[2]
+                                                              -1.257        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_191/BWE_B[6]
+                                                              -1.256        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_46/EN_A
+                                                              -1.256        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_44/BWE_B[0]
+                                                              -1.255        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/BWE_B[1]
+                                                              -1.254        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_201/EN_A
+                                                              -1.254        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_145/BWE_B[4]
+                                                              -1.252        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_225/BWE_B[3]
+                                                              -1.251        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_read_snapshot_fu_9623/resident_primary_load_reg_1218_reg[5]/D
+                                                              -1.251        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_191/BWE_B[4]
+                                                              -1.251        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_115/EN_A
+                                                              -1.250        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_225/BWE_B[1]
+                                                              -1.249        
+grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_225/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_dot_base_column_fu_9403/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_368/word_34_reg_2095_reg[94]/D
+                                                              -1.249        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_225/BWE_B[2]
+                                                              -1.248        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_44/BWE_B[8]
+                                                              -1.248        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_40/BWE_B[0]
+                                                              -1.248        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_50/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/word_reg_13370_reg[59]/D
+                                                              -1.247        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_191/BWE_B[0]
+                                                              -1.245        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_191/BWE_B[8]
+                                                              -1.245        
+grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_186/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/word_7_reg_13380_reg[86]/D
+                                                              -1.245        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_50/EN_A
+                                                              -1.244        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_55/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_dot_base_column_fu_9403/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_368/word_reg_2105_reg[1]/D
+                                                              -1.244        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_145/BWE_B[7]
+                                                              -1.243        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_55/EN_B
+                                                              -1.243        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_145/BWE_B[1]
+                                                              -1.241        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_245/EN_B
+                                                              -1.241        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_97/EN_A
+                                                              -1.239        
+grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_233/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_dot_base_column_fu_9403/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_368/word_34_reg_2095_reg[82]/D
+                                                              -1.237        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_145/BWE_B[6]
+                                                              -1.237        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_145/BWE_B[0]
+                                                              -1.235        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_43/EN_A
+                                                              -1.235        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_144/BWE_B[5]
+                                                              -1.234        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_50/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/word_reg_13370_reg[55]/D
+                                                              -1.233        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_50/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_dot_base_column_fu_9403/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_368/word_reg_2105_reg[0]/D
+                                                              -1.232        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_144/BWE_B[4]
+                                                              -1.232        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_43/BWE_B[3]
+                                                              -1.231        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/tmp_34_reg_13185_reg[18]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_145/BWE_B[8]
+                                                              -1.230        
+grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_186/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_dot_base_column_fu_9403/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_368/word_34_reg_2095_reg[86]/D
+                                                              -1.230        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[13]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_85/BWE_B[6]
+                                                              -1.230        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_55/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/word_reg_13370_reg[16]/D
+                                                              -1.228        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_225/BWE_B[4]
+                                                              -1.228        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_43/BWE_B[2]
+                                                              -1.228        
+grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_252/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_read_snapshot_fu_9623/resident_residual_load_reg_1223_reg[72]/D
+                                                              -1.228        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_43/BWE_B[1]
+                                                              -1.227        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_225/BWE_B[0]
+                                                              -1.227        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_43/BWE_B[5]
+                                                              -1.227        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_225/BWE_B[5]
+                                                              -1.223        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_225/BWE_B[7]
+                                                              -1.222        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_50/EN_B
+                                                              -1.221        
+grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_246/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/word_7_reg_13380_reg[115]/D
+                                                              -1.221        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_43/BWE_B[7]
+                                                              -1.220        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_43/BWE_B[0]
+                                                              -1.220        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[13]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_85/BWE_B[5]
+                                                              -1.220        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_55/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_dot_base_column_fu_9403/grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_368/word_reg_2105_reg[33]/D
+                                                              -1.220        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_50/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_read_snapshot_fu_9623/resident_primary_load_reg_1218_reg[14]/D
+                                                              -1.217        
+grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_189/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_read_snapshot_fu_9623/resident_residual_load_reg_1223_reg[112]/D
+                                                              -1.217        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_55/EN_A
+                                                              -1.217        
+grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_50/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_read_snapshot_fu_9623/resident_primary_load_reg_1218_reg[49]/D
+                                                              -1.216        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_44/EN_A
+                                                              -1.215        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_43/BWE_B[8]
+                                                              -1.215        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[19]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_225/BWE_B[6]
+                                                              -1.215        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[13]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_85/BWE_B[4]
+                                                              -1.214        
+grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_242/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/word_7_reg_13380_reg[103]/D
+                                                              -1.213        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln_reg_364_reg[13]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_primary_U/ram_reg_uram_85/BWE_B[7]
+                                                              -1.213        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/grp_p_anonymous_namespace_quantize_fold_block_fu_8160/grp_p_anonymous_namespace_commit_fold_block_fu_2704/lshr_ln9_reg_369_reg[14]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_248/EN_A
+                                                              -1.213        
+
+
+

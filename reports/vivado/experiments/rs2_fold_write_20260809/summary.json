@@ -1,0 +1,272 @@
+{
+  "artifact_sha256": {
+    "csim_report_gdn_rs2_top_csim.log": "8EA706ACE230A8842DECB5707D837CD1309EA10990CCFB65BD375C33F4654A99",
+    "csim_solution_log_u55c_250mhz.log": "771703E1DD11F55685F96B0C5C5186FEE82DCF320DA95E08BC773EFD44228E73",
+    "csynth_impl_report_gdn_rs2_top_impl_csynth.rpt": "E96F863309BFDE33C62540637C680908609D720AE42EFD880FE8C5FD026A6FC7",
+    "csynth_solution_log_u55c_250mhz.log": "F08C57220DE0AF8E51A46B934E076679DC2B6B2F38C6EB0C1223B4E1B010EE95",
+    "csynth_top_report_gdn_rs2_top_csynth.rpt": "DBDF87577A768FAA490FD3D7BC345F1970B734980B5E8E30B63EF8C97E3A9CA3",
+    "csynth_top_xml_gdn_rs2_top_csynth.xml": "4FAAE5683D574C5E0701473C465208E961F4172D59581300AAE4A3C92EA78861",
+    "derived_source_gdn_rs2_top.cpp": "B1E12FC52C984FF4DF3CEB545F0ED97A8344FF4F398A404BBE3E8FC07C973E54",
+    "design_analysis.rpt": "8AF7708812DE48A9FC6295C4EF817338FFFC7FFD6B397C82572DA092DBD6DC9C",
+    "generation_manifest_manifest.json": "88FF98FF6EF2033D7086F26649B86596913615B59B623A172C06DC9EA3DAF9F1",
+    "impl_clock_util.rpt": "65A0610BB3024C476B83C64A0A0CB9C6D7BAD52BCDA8000AE3BB0B5A7F9DCE25",
+    "impl_drc.rpt": "3F7321EF2DF193EA06F9F11A0D72A8C41F58DE3CDD1F5E5AD3E62B0DB2449738",
+    "impl_methodology.rpt": "C69A22E95E859E4E9F337CEDF4F3188D46104F37CCBB12FCD31EE39781BB19CD",
+    "impl_power.rpt": "F77DADC02D2F3CDD9147677E80BEAFBCA87F1BA10E91696588F1ED48A6FA64DF",
+    "impl_timing.rpt": "996FE85D57494029AE37ACD04E376AF8813D2454F525B8DF1E89525C2BCD5D48",
+    "impl_util.rpt": "3D4939FC131192F16C929C490CE6617F5B13525E7428317CE0E9230B0840BAB0",
+    "impl_util_hierarchical.rpt": "D7C26C5364B444F3B5FFCE446A182909ED7A7A874F4D9C6252962BDDE61923D6",
+    "ooc_manifest_manifest.json": "37E26BEB8A6E69B61917CFADB0D318378CFD9D139117ED80AEB493E1D610F8B5",
+    "vivado_impl_log_vivado_rs2-fold-write-impl.log": "0B1842C7D25058998EBB0EAE1DF702514EA70730AC0B2FF8DFEA01F65C5230C7",
+    "worst_100_setup_paths.rpt": "B518FD390FF0D0FE4988090BFAE7689B0A31C949D8304A123EB8D99DB1D18CB4"
+  },
+  "decision": {
+    "promoted": false,
+    "reason": "The commit-stage hierarchy gives the best isolated WNS and fewer failing endpoints, but setup remains negative at 250 MHz, high fanout moves back to outer fold control, and latency increases.",
+    "status": "BEST_ISOLATED_TIMING_REJECT_250MHZ"
+  },
+  "experiment": "RS2 localized fold control and write commit",
+  "hls": {
+    "delta_experiment_minus_selected": {
+      "BRAM_18K": 0,
+      "DSP": 0,
+      "FF": 654,
+      "LUT": 108,
+      "URAM": 0,
+      "latency_cycles_max": 32765
+    },
+    "experiment": {
+      "available_device_resources": {
+        "BRAM_18K": 4032,
+        "DSP": 9024,
+        "FF": 2607360,
+        "LUT": 1303680,
+        "URAM": 960
+      },
+      "clock_uncertainty_ns": 1.08,
+      "device_utilization_percent": {
+        "BRAM_18K": 1.8353174603174602,
+        "DSP": 0.28812056737588654,
+        "FF": 2.856720974472263,
+        "LUT": 12.824466126656848,
+        "URAM": 9.166666666666666
+      },
+      "estimated_clock_ns": 3.106,
+      "estimated_fmax_mhz": 321.9575016097875,
+      "interval_cycles_max": 102360799,
+      "interval_cycles_min": 4131,
+      "latency_cycles_average": 580885,
+      "latency_cycles_max": 102360798,
+      "latency_cycles_min": 4130,
+      "resources": {
+        "BRAM_18K": 74,
+        "DSP": 26,
+        "FF": 74485,
+        "LUT": 167190,
+        "URAM": 88
+      },
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "tool_version": "2025.2"
+    },
+    "selected": {
+      "available_device_resources": {
+        "BRAM_18K": 4032,
+        "DSP": 9024,
+        "FF": 2607360,
+        "LUT": 1303680,
+        "URAM": 960
+      },
+      "clock_uncertainty_ns": 1.08,
+      "device_utilization_percent": {
+        "BRAM_18K": 1.8353174603174602,
+        "DSP": 0.28812056737588654,
+        "FF": 2.8316381320569466,
+        "LUT": 12.816181885125184,
+        "URAM": 9.166666666666666
+      },
+      "estimated_clock_ns": 3.106,
+      "estimated_fmax_mhz": 321.9575016097875,
+      "interval_cycles_max": 102328034,
+      "interval_cycles_min": 4131,
+      "latency_cycles_average": 580690,
+      "latency_cycles_max": 102328033,
+      "latency_cycles_min": 4130,
+      "resources": {
+        "BRAM_18K": 74,
+        "DSP": 26,
+        "FF": 73831,
+        "LUT": 167082,
+        "URAM": 88
+      },
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "tool_version": "2025.2"
+    }
+  },
+  "postroute": {
+    "delta_experiment_minus_prior": {
+      "setup_failing_endpoints": -2824,
+      "tns_ns": 2259.7309999999998,
+      "wns_ns": 0.07699999999999996
+    },
+    "delta_experiment_minus_selected": {
+      "setup_failing_endpoints": -14425,
+      "tns_ns": 11669.823,
+      "wns_ns": 0.44199999999999995
+    },
+    "drc": {
+      "by_rule": {
+        "DPIP-2": 6,
+        "DPOP-3": 7,
+        "DPOP-4": 12,
+        "RTSTAT-10": 1
+      },
+      "critical_warning_count": 0,
+      "error_count": 0,
+      "signoff_status": "PASS_WITH_WARNINGS",
+      "violation_count": 26,
+      "warning_count": 26
+    },
+    "experiment_path_characteristics": {
+      "high_fanout": 307,
+      "logic_delay_ns": 0.469,
+      "logic_levels": 4,
+      "net_delay_ns": 4.524,
+      "path_delay_ns": 4.993,
+      "slr_crossings": 1
+    },
+    "experiment_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 222740,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 76473,
+      "setup_failing_endpoints": 29168,
+      "setup_total_endpoints": 223153,
+      "ths_ns": 0.0,
+      "tns_ns": -13195.003,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.294,
+      "wpws_ns": 1.3
+    },
+    "path_delta_experiment_minus_prior": {
+      "high_fanout": 220.0,
+      "logic_delay_ns": -0.014000000000000012,
+      "logic_levels": -1.0,
+      "net_delay_ns": 0.09999999999999964,
+      "path_delay_ns": 0.0860000000000003,
+      "slr_crossings": 0.0
+    },
+    "prior_fold_control_path_characteristics": {
+      "high_fanout": 87,
+      "logic_delay_ns": 0.483,
+      "logic_levels": 5,
+      "net_delay_ns": 4.424,
+      "path_delay_ns": 4.907,
+      "slr_crossings": 1
+    },
+    "prior_fold_control_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 222501,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 76361,
+      "setup_failing_endpoints": 31992,
+      "setup_total_endpoints": 222914,
+      "ths_ns": 0.0,
+      "tns_ns": -15454.734,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.371,
+      "wpws_ns": 1.3
+    },
+    "selected_path_characteristics": {
+      "high_fanout": 133,
+      "logic_delay_ns": 0.524,
+      "logic_levels": 5,
+      "net_delay_ns": 4.745,
+      "path_delay_ns": 5.269,
+      "slr_crossings": 1
+    },
+    "selected_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 221457,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 43593,
+      "setup_total_endpoints": 221870,
+      "ths_ns": 0.0,
+      "tns_ns": -24864.826,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.736,
+      "wpws_ns": 1.3
+    },
+    "utilization": {
+      "block_ram_tiles": {
+        "available": 2016,
+        "used": 341,
+        "utilization_percent": 16.91
+      },
+      "bufgce": {
+        "available": 288,
+        "used": 1,
+        "utilization_percent": 0.35
+      },
+      "clb_luts": {
+        "available": 1303680,
+        "used": 82249,
+        "utilization_percent": 6.31
+      },
+      "clb_registers": {
+        "available": 2607360,
+        "used": 70683,
+        "utilization_percent": 2.71
+      },
+      "dsps": {
+        "available": 9024,
+        "used": 12,
+        "utilization_percent": 0.13
+      },
+      "uram": {
+        "available": 960,
+        "used": 598,
+        "utilization_percent": 62.29
+      }
+    },
+    "vectorless_power_at_failed_4ns_constraint": {
+      "components": {
+        "block_ram_w": 0.21,
+        "clb_logic_w": 0.504,
+        "clocks_w": 0.458,
+        "dsps_w": 0.006,
+        "signals_w": 0.728,
+        "uram_w": 0.987
+      },
+      "confidence": "Medium",
+      "dynamic_w": 2.892,
+      "measured_on_board": false,
+      "method": "Vivado vectorless activity propagation",
+      "static_w": 3.391,
+      "total_on_chip_w": 6.284
+    }
+  },
+  "schema": 1,
+  "scope": "isolated architecture timing experiment; selected kernel unchanged",
+  "source_identity": {
+    "derived_source_sha256": "B1E12FC52C984FF4DF3CEB545F0ED97A8344FF4F398A404BBE3E8FC07C973E54",
+    "ooc_top_sha256": "748BBF0C9BDA4E55344E2BBD824CE6B1C5B391661B9D91E7213DAC2EEDA4C202",
+    "selected_source_modified": false,
+    "selected_source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "timestamp": "2026-08-10T04:25:03.835203+00:00",
+  "verification": {
+    "csynth": "PASS",
+    "exact_64_token_csim": "PASS",
+    "explicit_loop_constraints": "PASS",
+    "route_completion": "PASS",
+    "target_250mhz": "FAIL"
+  }
+}

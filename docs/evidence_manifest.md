@@ -1970,6 +1970,28 @@ remain historical evidence and are not silently rewritten.
   control. The experiment is `IMPROVES_BUT_REJECT_250MHZ`; it does not replace
   the selected source or its completed generated-RTL evidence.
 
+### E-G7-010b - Localized Fold-Write Architecture Experiment
+
+- Evidence: `reports/vivado/experiments/rs2_fold_write_20260809/summary.json`,
+  SHA256 `3A8F3018149440DDC36663C6A91086151AE2B445015E99F60ACB7235D2643EDF`;
+  README SHA256
+  `1976DD352F810005C6E23A1815751F7C6783018D34D24348CA3FA82835A2EDBD`.
+  The source-isolated variant retains the localized fold decision and moves
+  each folded-state write into a separate non-inlined commit helper. It passes
+  exact 64-token C simulation, all explicit HLS loop constraints, and a matched
+  U55C out-of-context route.
+- HLS reports the same 3.106 ns estimated clock as the selected source, with
+  654 additional FFs, 108 additional LUTs, and 32,765 additional worst-case
+  cycles. The routed result reaches -1.294 ns WNS, -13,195.003 ns TNS, and
+  29,168 setup-failing endpoints, improving WNS by 0.442 ns versus the selected
+  route and 0.077 ns versus the prior fold-control experiment. Hold passes at
+  0.010 ns and DRC has zero critical warnings or errors.
+- The worst path has four logic levels, one SLR crossing, 90% route delay, and
+  fanout 307 from outer fold control to resident-primary URAM enable. The
+  variant is `BEST_ISOLATED_TIMING_REJECT_250MHZ`: it remains diagnostic, is
+  not promoted, and its vectorless 6.284 W estimate at the failed 4 ns
+  constraint is not energy evidence.
+
 ### E-G7-011 - Current Physical Evidence
 
 - Evidence: `reports/vivado/corrected/rs2_current/rs2_vivado_summary.json`,
@@ -2012,23 +2034,23 @@ remain historical evidence and are not silently rewritten.
 ### E-G7-013 - Working Draft, Regression, and Release Guard
 
 - Working draft PDF: `paper/corrected/mxfp4_gdn_working_draft.pdf`, SHA256
-  `DC6F598BA056BA89E656E085E487510B00DF07F62422E3DC458069F450C5F4A6`.
+  `CB59CB4A3EC443C4B0CEFEB9AD6BE51CFF813E06BBC613FC79B574A201376377`.
   Build-manifest SHA256 is
-  `C188940AAB142D73E204858461DFF64FCB99F3BDDAFEDA68B2998BA3A60F0B5F`;
+  `0F478165E6A4FCF596D8D9DF284A9B21BCF2A3D3DFF7A5EF21F8C99780638F8B`;
   page-by-page visual-audit SHA256 is
-  `333BA60CBCE87D7F0D20A8882FF21E8FCC582F9C0B8930A635F71E7B57D8D672`.
+  `E42A6A0527B90C320881D03F23F50F51EA550CF95F2F1AEB7F37DCBF17040E92`.
   All nine 220-DPI page renders pass checks for text, equations, figures,
   legends, tables, captions, references, margins, and clipping. The PDF is
   visibly watermarked and not submission eligible.
-- Full regression: 366 passed, two intentional skips, zero failures; JUnit
-  `reports/test_results/final_pytest_20260809.xml`, SHA256
-  `924BE8573E81E59FC6E5E2C8BEA7FD4BBDAE685B8BE9CBA91420281BE8143B9C`.
+- Full regression: 370 passed, two intentional skips, zero failures; JUnit
+  `reports/test_results/final_pytest_20260810.xml`, SHA256
+  `674D20657658B5B7443515549E223EDB1EB0D6C4E0079C83A1B6AF78E842BF0F`.
   The skips preserve the stale legacy HLS-cosim boundary and prohibit a Phase-7
   pack while the release gate is nonpassing.
 - Final gate: `reports/final_completion_gate.json`, SHA256
-  `AA91E2F0366C648BC1FE6AFBA47EEF880CF283D06DD5EDA83F5D7F4CCC275188`;
+  `A6231981523C95CFBB8265606A1F0398F36AA878B597E5C71CC77360FF00A69F`;
   Markdown SHA256
-  `D357DDBD3498DC14E565DFD7564D62DAE987C5944997C3BEA130319CECA6E948`.
+  `799AAD5914EDE4E00DEAD8F676F4288110C3ECE819657BB46038BC718852D742`.
   Four of eleven release gates pass. Official full-trace XSim is `NOT_RUN`;
   closed-loop model quality and board measurements are `BLOCKED_EXTERNAL`;
   selected-method Pareto advantage and 250 MHz timing are `FAIL`. Reviewer

@@ -22,8 +22,9 @@ hypotheses remain visible; none is silently promoted to a positive claim.
 - The corrected candidate physically fits out of context, but fails setup at
   250 MHz and 200 MHz. The first passing point in the tested fixed-route sweep
   is 166.67 MHz; this is not a binary-searched maximum frequency.
-- Six post-route repair attempts fail 250 MHz. Chaining AggressiveExplore after
-  fanout is best at -1.655 ns WNS, only 0.001 ns better than fanout alone;
+- Six checkpoint-local post-route repair attempts fail 250 MHz. Chaining
+  AggressiveExplore after fanout is best among them at -1.655 ns WNS, only
+  0.001 ns better than fanout alone;
   Vivado reports that the violation is too large for likely post-route repair.
 - The critical path is dominated by routing into resident-state URAM control,
   not the E2M1 multiplier. Further timing work requires an architecture-level
@@ -41,6 +42,14 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   250 MHz, adds 700 HLS-estimated FFs and 137 LUTs, and leaves a 90%-routing
   path from the local fold FSM to resident-primary URAM byte-write control.
   The selected source and completed generated-RTL validation remain unchanged.
+- A third source-isolated experiment retains localized fold control and moves
+  folded-state writes into a non-inlined commit helper. It passes exact
+  64-token C simulation, every explicit synthesis constraint, and matched U55C
+  routing. Routed WNS improves to -1.294 ns, TNS to -13,195.003 ns, and setup
+  failures to 29,168 endpoints, the best isolated result so far. It still fails
+  250 MHz, adds 654 HLS-estimated FFs, 108 LUTs, and 32,765 worst-case cycles,
+  and its worst path has fanout 307 from outer fold control to a
+  resident-primary URAM enable. It is not promoted.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
@@ -87,7 +96,7 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 366 passed, 2 skipped, and 0 failed tests.
+- The latest full regression records 370 passed, 2 skipped, and 0 failed tests.
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

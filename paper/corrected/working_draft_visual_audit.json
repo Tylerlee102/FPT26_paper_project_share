@@ -32,10 +32,10 @@
     }
   ],
   "build_manifest": "paper/corrected/working_draft_build_manifest.json",
-  "build_manifest_sha256": "C188940AAB142D73E204858461DFF64FCB99F3BDDAFEDA68B2998BA3A60F0B5F",
+  "build_manifest_sha256": "0F478165E6A4FCF596D8D9DF284A9B21BCF2A3D3DFF7A5EF21F8C99780638F8B",
   "checklist": "paper/corrected/working_draft_visual_checklist.json",
   "checklist_sha256": "8F3D44A73795A5284D5D348FE36B4DF43CCEE77F8DD7790BA639233382549D19",
-  "generated_at": "2026-08-10T01:55:49.473731+00:00",
+  "generated_at": "2026-08-10T04:27:54.815216+00:00",
   "page_count": 9,
   "pages": [
     {
@@ -83,7 +83,7 @@
       "notes": "All six result tables are legible; Table IV max-absolute and nonfinite columns are visibly separated after repair.",
       "page": 6,
       "path": "reports/rendered/working_draft/page-06.png",
-      "sha256": "94B3B69FBB4A4D0B6895017634E79963AB3C57F81F7DBABD640EF6B4EB1AED54",
+      "sha256": "7EE51078679E5C07E9AAA6707FB8375901C104049ADF985724C094D7478E4E82",
       "width": 1870
     },
     {
@@ -91,7 +91,7 @@
       "notes": "Trade-off figure and power table are readable; bar labels, caption, and discussion equations stay inside margins.",
       "page": 7,
       "path": "reports/rendered/working_draft/page-07.png",
-      "sha256": "CF4975F01E5C1FE9C37D5873CDA30D5B0C554AC548A66F1DB6206D90F67300AE",
+      "sha256": "BBDCAF8B66E40527126C0166AFA0D85B1F4C99A269377D7A6852F5FF6CFFFF20",
       "width": 1870
     },
     {
@@ -99,7 +99,7 @@
       "notes": "Discussion equations, limitations, conclusion, and references 1-14 render without clipping or broken glyphs.",
       "page": 8,
       "path": "reports/rendered/working_draft/page-08.png",
-      "sha256": "E7ECDE0A0F7E96F2C436AA1C95E6C65CB438CA656940ACF0D9BF7D9303C0B5C9",
+      "sha256": "D1B0561C33E7F0E34753CE5FF1E93F7B5F69F049A3D58BC82A1EF7D830F4E3C0",
       "width": 1870
     },
     {
@@ -107,7 +107,7 @@
       "notes": "References 15-16 are complete and readable; this references-only overflow page has no clipped content.",
       "page": 9,
       "path": "reports/rendered/working_draft/page-09.png",
-      "sha256": "395B061BCECFFF913DBFD6A714812F3EF87B48D88C651EEC4E16C9FC1C0235F6",
+      "sha256": "EEEFAB6D49688F75B34BA5245273748CF706CA4CDC8A845C027D50AB3350C1A0",
       "width": 1870
     }
   ],
@@ -124,5 +124,5 @@
   "submission_eligible": false,
   "visual_audit_status": "PASS",
   "working_draft": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "working_draft_sha256": "DC6F598BA056BA89E656E085E487510B00DF07F62422E3DC458069F450C5F4A6"
+  "working_draft_sha256": "CB59CB4A3EC443C4B0CEFEB9AD6BE51CFF813E06BBC613FC79B574A201376377"
 }
