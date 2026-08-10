@@ -11,7 +11,9 @@ def test_collect_distinguishes_tools_from_missing_board(monkeypatch) -> None:
     payload = module.collect(
         which=lambda _name: None,
         platform_finder=lambda: [],
+        platform_inventory_finder=lambda: ["C:/platforms/vck190/base.xpfm"],
         device_probe=lambda: {"returncode": 0, "stdout": "", "stderr": ""},
+        wsl_probe=lambda: {"status": "NO_XRT_OR_U55C_ASSETS", "distributions": []},
         gpu_probe=lambda _command: {
             "returncode": 0,
             "stdout": "NVIDIA GeForce RTX 3070, 8192 MiB, 8.6, 610.88",
@@ -24,6 +26,10 @@ def test_collect_distinguishes_tools_from_missing_board(monkeypatch) -> None:
     assert payload["u55c_board_experiment"]["status"] == (
         "BLOCKED_EXTERNAL_NO_U55C_DEVICE_OR_XRT"
     )
+    assert payload["u55c_board_experiment"]["platform_inventory_count"] == 1
+    assert payload["u55c_board_experiment"]["wsl_xrt_probe"]["status"] == (
+        "NO_XRT_OR_U55C_ASSETS"
+    )
     assert payload["native_fp4_gpu_experiment"]["status"] == (
         "BLOCKED_EXTERNAL_NO_NATIVE_FP4_GPU"
     )
@@ -35,11 +41,13 @@ def test_collect_marks_complete_board_stack_available(monkeypatch) -> None:
     payload = module.collect(
         which=lambda name: f"C:/XRT/{name}.exe",
         platform_finder=lambda: ["C:/platforms/u55c/base.xpfm"],
+        platform_inventory_finder=lambda: ["C:/platforms/u55c/base.xpfm"],
         device_probe=lambda: {
             "returncode": 0,
             "stdout": '{"FriendlyName":"Alveo U55C"}',
             "stderr": "",
         },
+        wsl_probe=lambda: {"status": "ASSETS_FOUND", "distributions": []},
         gpu_probe=lambda _command: {
             "returncode": 0,
             "stdout": "NVIDIA B200, 183359 MiB, 10.0, 610.88",
@@ -58,7 +66,9 @@ def test_markdown_names_external_measurement_boundary(monkeypatch) -> None:
     payload = module.collect(
         which=lambda _name: None,
         platform_finder=lambda: [],
+        platform_inventory_finder=lambda: [],
         device_probe=lambda: {"returncode": 0, "stdout": "", "stderr": ""},
+        wsl_probe=lambda: {"status": "NO_XRT_OR_U55C_ASSETS", "distributions": []},
         gpu_probe=lambda _command: {"returncode": 1, "stdout": "", "stderr": "missing"},
     )
     markdown = module._markdown(payload)
@@ -66,4 +76,5 @@ def test_markdown_names_external_measurement_boundary(monkeypatch) -> None:
     assert "U55C board parity and telemetry" in markdown
     assert "Vitis compiler, platform inventory, and XSim" in markdown
     assert "Native-FP4 GPU baseline" in markdown
+    assert "Installed XPFM inventory" in markdown
     assert "not represented by estimates" in markdown

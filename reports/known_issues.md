@@ -28,6 +28,19 @@ hypotheses remain visible; none is silently promoted to a positive claim.
 - The critical path is dominated by routing into resident-state URAM control,
   not the E2M1 multiplier. Further timing work requires an architecture-level
   control-path or floorplanning change and complete revalidation.
+- A source-isolated two-cycle URAM-output experiment passes the exact 64-token
+  C simulation and every explicit synthesis loop constraint, but leaves the
+  3.106 ns HLS estimate unchanged while adding 1,145 FFs, 72 LUTs, and 20,480
+  worst-case cycles. It is rejected before route because 94 of the reported
+  100 worst routed paths already terminate in `resident_residual` URAM control;
+  output latency does not target those enable/write-control endpoints.
+- A second source-isolated experiment localizes the fold decision in a
+  non-inlined helper. It passes exact 64-token C simulation and synthesis, then
+  improves routed WNS from -1.736 ns to -1.371 ns, reduces high fanout from 133
+  to 87, and reduces route delay from 4.745 ns to 4.424 ns. It still fails
+  250 MHz, adds 700 HLS-estimated FFs and 137 LUTs, and leaves a 90%-routing
+  path from the local fold FSM to resident-primary URAM byte-write control.
+  The selected source and completed generated-RTL validation remain unchanged.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
@@ -47,6 +60,9 @@ hypotheses remain visible; none is silently promoted to a positive claim.
 - Vitis and Vivado are installed, but no attached U55C, U55C XRT platform,
   xbutil/xrt-smi, shell/xclbin, or board telemetry is available. The host GPU is
   an RTX 3070 without native FP4 tensor-core support.
+- A full installed-platform inventory finds seven XPFMs, all for non-U55C
+  targets. Windows and Ubuntu WSL contain no xbutil, xrt-smi, or xbmgmt, and
+  neither environment exposes a Xilinx PCI device.
 - The 5.242 W post-route value is a Medium-confidence vectorless Vivado
   estimate at 6.0 ns. It is not measured power and is not converted to energy
   per token.
@@ -71,7 +87,7 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 359 passed, 2 skipped, and 0 failed tests.
+- The latest full regression records 366 passed, 2 skipped, and 0 failed tests.
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

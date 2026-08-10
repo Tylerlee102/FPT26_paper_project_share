@@ -25,6 +25,10 @@ gdn_rs2_hls/
 gdn_rs2_reset_trace_cosim_hls/
 gdn_rs2_trace_cosim_hls/
 gdn_rs2_trace_hls/
+gdn_rs2_fold_control_hls/
+gdn_rs2_fold_control_trace_hls/
+gdn_rs2_uram_latency2_hls/
+gdn_rs2_uram_latency2_trace_hls/
 vitis_hls.log
 clockInfo.txt
 *.jou

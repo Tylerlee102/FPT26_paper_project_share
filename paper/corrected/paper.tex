@@ -606,6 +606,18 @@ fanout-plus-AggressiveExplore pass also fail the declared target. The best WNS
 remains strongly negative, so further timing work requires architecture-level
 or floorplanning changes rather than another post-route directive. We retain
 the original routed checkpoint for the matched table.
+An isolated experiment then registered the four URAM output paths. It preserved
+exact C-simulation and all explicit synthesis loop constraints, but left the
+HLS clock estimate unchanged while increasing logic and worst-case latency.
+Because the routed failures terminate on URAM enable and write-control pins,
+the output-latency variant does not target the failing path and was not promoted
+or routed.
+A second isolated variant moved the fold decision into a non-inlined helper.
+It preserved exact C-simulation and the HLS schedule, and its matched route
+reduced control fanout and setup violation. The target still failed, however;
+the remaining worst path runs from the local fold state machine to a URAM
+byte-write-enable pin. We therefore retain this as architecture-diagnostic
+evidence rather than replacing the source-locked candidate.
 
 \begin{table}[t]
 \centering
@@ -738,7 +750,8 @@ fixed-route points are not global frequency searches. Xilinx Runtime (XRT)
 execution, xclbin
 integration, physical board parity, telemetry, synchronized GPU measurements,
 and measured energy are absent. Vectorless power cannot substitute for any of
-them.
+them. A host and WSL inventory found no U55C XPFM, XRT management tools, or
+Xilinx PCI device.
 
 Generated-RTL parity covers one registered synthetic trace. Full official XSIM
 recurrent cosimulation remains incomplete and is reported independently from

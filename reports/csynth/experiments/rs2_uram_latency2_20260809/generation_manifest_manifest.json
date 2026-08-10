@@ -1,0 +1,29 @@
+{
+  "experiment": "RS2 two-cycle URAM binding",
+  "generated_at": "2026-08-09T23:55:11.913822+00:00",
+  "output": "build/experiments/rs2_uram_latency2/gdn_rs2_top.cpp",
+  "output_sha256": "3027E675605140296A0ACEAFE4F80E408A58A0ECFBFF9A473DB953F0A3249E5B",
+  "replacements": [
+    {
+      "from": "#pragma HLS BIND_STORAGE variable=resident_primary type=ram_t2p impl=uram",
+      "to": "#pragma HLS BIND_STORAGE variable=resident_primary type=ram_t2p impl=uram latency=2"
+    },
+    {
+      "from": "#pragma HLS BIND_STORAGE variable=resident_residual type=ram_t2p impl=uram",
+      "to": "#pragma HLS BIND_STORAGE variable=resident_residual type=ram_t2p impl=uram latency=2"
+    },
+    {
+      "from": "#pragma HLS BIND_STORAGE variable=resident_keys type=ram_t2p impl=uram",
+      "to": "#pragma HLS BIND_STORAGE variable=resident_keys type=ram_t2p impl=uram latency=2"
+    },
+    {
+      "from": "#pragma HLS BIND_STORAGE variable=resident_updates type=ram_t2p impl=uram",
+      "to": "#pragma HLS BIND_STORAGE variable=resident_updates type=ram_t2p impl=uram latency=2"
+    }
+  ],
+  "schema": 1,
+  "selected_source_modified": false,
+  "source": "hls/rs2/src/gdn_rs2_top.cpp",
+  "source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+  "status": "PASS"
+}

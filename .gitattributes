@@ -11,3 +11,7 @@ Makefile text eol=lf
 *.png binary
 *.jpg binary
 *.zip binary
+
+# Preserve archived tool evidence exactly so manifest SHA256 values survive checkout.
+reports/csynth/experiments/** binary
+reports/vivado/experiments/** binary

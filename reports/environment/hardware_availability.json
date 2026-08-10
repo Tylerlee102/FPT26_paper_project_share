@@ -1,6 +1,6 @@
 {
   "schema": "hardware-availability-v1",
-  "generated_at": "2026-08-09T19:27:43.032677+00:00",
+  "generated_at": "2026-08-09T23:39:20.719870+00:00",
   "host": "Tyler",
   "toolchain": {
     "vitis_hls": "C:\\AMDDesignTools\\2025.2\\Vitis\\bin\\unwrapped\\win64.o\\vitis_hls.exe",
@@ -15,9 +15,31 @@
     "xrt_commands": {
       "xbutil": null,
       "xrt-smi": null,
+      "xbmgmt": null,
       "xclbinutil": "C:\\AMDDesignTools\\2025.2\\Vitis\\bin\\unwrapped\\win64.o\\xclbinutil.exe"
     },
     "u55c_platform_files": [],
+    "platform_inventory": [
+      "C:\\AMDDesignTools\\2025.2\\Vitis\\base_platforms\\vek385_base\\vek385_base.xpfm",
+      "C:\\AMDDesignTools\\2025.2\\Vitis\\base_platforms\\vrk160_base\\vrk160_base.xpfm",
+      "C:\\AMDDesignTools\\2025.2\\Vitis\\base_platforms\\xilinx_kv260_base_202520_1\\xilinx_kv260_base_202520_1.xpfm",
+      "C:\\AMDDesignTools\\2025.2\\Vitis\\base_platforms\\xilinx_vck190_base_202520_1\\xilinx_vck190_base_202520_1.xpfm",
+      "C:\\AMDDesignTools\\2025.2\\Vitis\\base_platforms\\xilinx_vck190_base_dfx_202520_1\\xilinx_vck190_base_dfx_202520_1.xpfm",
+      "C:\\AMDDesignTools\\2025.2\\Vitis\\base_platforms\\xilinx_vek280_base_202520_1\\xilinx_vek280_base_202520_1.xpfm",
+      "C:\\AMDDesignTools\\2025.2\\Vitis\\base_platforms\\xilinx_vmk180_base_202520_1\\xilinx_vmk180_base_202520_1.xpfm"
+    ],
+    "platform_inventory_count": 7,
+    "wsl_xrt_probe": {
+      "status": "NO_XRT_OR_U55C_ASSETS",
+      "distributions": [
+        {
+          "name": "Ubuntu-24.04",
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        }
+      ]
+    },
     "pcie_probe": {
       "returncode": 0,
       "stdout": "",

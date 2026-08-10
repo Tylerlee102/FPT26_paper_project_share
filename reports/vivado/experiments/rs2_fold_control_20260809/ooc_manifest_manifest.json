@@ -1,0 +1,9 @@
+{
+  "output": "build/vivado/rs2_fold_control_ooc_rtl/gdn_rs2_top.v",
+  "output_sha256": "2155B78122CA48FB3B6A8BC3E9A45C57638F22EFCE7E92B30F9E583418B1B27F",
+  "source": "gdn_rs2_fold_control_hls/u55c_250mhz/syn/verilog/gdn_rs2_top.v",
+  "source_sha256": "46AB1D457D537A939E215B64A3CFE7A6D01A00B37EB258B65011A38951AAC40F",
+  "status": "PASS",
+  "timestamp": "2026-08-10T00:22:17.892457+00:00",
+  "transformation": "insert_top_level_bufgce_and_rewire_internal_ap_clk"
+}

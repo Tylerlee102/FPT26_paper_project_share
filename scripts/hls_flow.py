@@ -36,6 +36,18 @@ TCL_BY_STEP = {
     ),
     "rs2-csynth": Path("hls/rs2/tcl/run_csynth.tcl"),
     "rs2-trace-csim": Path("hls/rs2/tcl/run_trace_csim.tcl"),
+    "rs2-uram-latency2-csim": Path(
+        "hls/rs2/tcl/run_uram_latency2_csim.tcl"
+    ),
+    "rs2-uram-latency2-csynth": Path(
+        "hls/rs2/tcl/run_uram_latency2_csynth.tcl"
+    ),
+    "rs2-fold-control-csim": Path(
+        "hls/rs2/tcl/run_fold_control_csim.tcl"
+    ),
+    "rs2-fold-control-csynth": Path(
+        "hls/rs2/tcl/run_fold_control_csynth.tcl"
+    ),
     "rs2-trace-cosim": Path("hls/rs2/tcl/run_trace_cosim.tcl"),
     "bf16-csim": Path("hls/bf16/tcl/run_csim.tcl"),
     "bf16-csynth": Path("hls/bf16/tcl/run_csynth.tcl"),

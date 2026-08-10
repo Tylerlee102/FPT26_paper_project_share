@@ -1945,6 +1945,30 @@ remain historical evidence and are not silently rewritten.
   `F29E182F154E70814944CB129BF9239E0118A2130C6BA09D48CEEE3E12290962`.
   It saved only 370 LUTs (`0.22%`) while adding 28 FFs and changing neither
   latency nor estimated Fmax, so the selected source was restored unchanged.
+- Rejected architecture experiment: the two-cycle URAM binding study is
+  archived under `reports/csynth/experiments/rs2_uram_latency2_20260809/`.
+  Its summary SHA256 is
+  `72D3419704D6251C2E70517BC25EE15CB78CC0F0C32089E86264671BD3CF5F7D`;
+  its README SHA256 is
+  `D6FEB5A8536E986D0ED963F4B13382DF2C03B8602B9073DAE776A4019A09B910`.
+  Exact 64-token C simulation and all explicit synthesis loop constraints pass,
+  but the variant leaves estimated Fmax unchanged, adds 1,145 FFs, 72 LUTs,
+  and 20,480 worst-case cycles, and does not target the routed URAM
+  enable/write-control endpoints. It is `REJECT_BEFORE_ROUTE`; the selected
+  source remains unchanged.
+- Architecture timing experiment: the localized fold-control study is archived
+  under `reports/vivado/experiments/rs2_fold_control_20260809/`. Its summary
+  SHA256 is
+  `AD557065D5F61114E471CC818D36C20A1698B608C9CB93A42D9AED4558FFC6E3`;
+  its README SHA256 is
+  `53339557847F5EF4230E7C48024E89ECDF2DBA64205754653B527378B4A9CBE1`.
+  The variant passes exact 64-token C simulation, all explicit HLS loop
+  constraints, and matched OOC routing. WNS improves from -1.736 ns to
+  -1.371 ns, high fanout falls from 133 to 87, and net delay falls from
+  4.745 ns to 4.424 ns, but 250 MHz still fails. The remaining path starts in
+  the localized fold FSM and terminates at resident-primary URAM byte-write
+  control. The experiment is `IMPROVES_BUT_REJECT_250MHZ`; it does not replace
+  the selected source or its completed generated-RTL evidence.
 
 ### E-G7-011 - Current Physical Evidence
 
@@ -1971,10 +1995,12 @@ remain historical evidence and are not silently rewritten.
 
 - Local hardware/tool audit:
   `reports/environment/hardware_availability.json`, SHA256
-  `23C34ACFE928318315A93E75AD5DA3C68107ED713B6C44BA662DF220BEA83325`.
+  `F841C89FA01D2DC892EAB62B057A21943CC6C0BEFA5749F3BF102C92D967606B`.
   Vitis HLS, Vivado, Vitis compiler, platforminfo, and XSim are installed. No
-  attached U55C, U55C XRT platform, `xbutil`/`xrt-smi`, xclbin, or telemetry
-  interface is present. The detected RTX 3070 lacks native FP4 support.
+  attached U55C, U55C XRT platform, `xbutil`/`xrt-smi`/`xbmgmt`, xclbin, or
+  telemetry interface is present. The exhaustive platform inventory finds
+  seven non-U55C XPFMs; Ubuntu WSL exposes no XRT or U55C asset. The detected
+  RTX 3070 lacks native FP4 support.
 - Public model/data audit:
   `reports/environment/qwen_public_asset_audit.json`, SHA256
   `FCBF7E8FC1435D77FE037FAE7C08CE1742077D5D60BA6D9C6375C4429167A6D1`;
@@ -1986,23 +2012,23 @@ remain historical evidence and are not silently rewritten.
 ### E-G7-013 - Working Draft, Regression, and Release Guard
 
 - Working draft PDF: `paper/corrected/mxfp4_gdn_working_draft.pdf`, SHA256
-  `53534E359C63263B024515EE172A37D75296C129F1BCACE5053FE60DF48DD9FD`.
+  `DC6F598BA056BA89E656E085E487510B00DF07F62422E3DC458069F450C5F4A6`.
   Build-manifest SHA256 is
-  `70D6F958A1C71077B490E5A551C09E88904C3ABE941494DC46B49DB11690F143`;
+  `C188940AAB142D73E204858461DFF64FCB99F3BDDAFEDA68B2998BA3A60F0B5F`;
   page-by-page visual-audit SHA256 is
-  `6238023B35E18F7A468BBBE9008B6EE07B3C9E0EE664B9EE89F48EF03BC868AD`.
+  `333BA60CBCE87D7F0D20A8882FF21E8FCC582F9C0B8930A635F71E7B57D8D672`.
   All nine 220-DPI page renders pass checks for text, equations, figures,
   legends, tables, captions, references, margins, and clipping. The PDF is
   visibly watermarked and not submission eligible.
-- Full regression: 359 passed, two intentional skips, zero failures; JUnit
+- Full regression: 366 passed, two intentional skips, zero failures; JUnit
   `reports/test_results/final_pytest_20260809.xml`, SHA256
-  `E3092CD7049331C31F1AD4FAA0595AA08D8485487ABBD6535C6BCD46251F5882`.
+  `924BE8573E81E59FC6E5E2C8BEA7FD4BBDAE685B8BE9CBA91420281BE8143B9C`.
   The skips preserve the stale legacy HLS-cosim boundary and prohibit a Phase-7
   pack while the release gate is nonpassing.
 - Final gate: `reports/final_completion_gate.json`, SHA256
-  `03881A45623722EA01C3348061945AEAD719F45AD1BB837694132B67974CE1A0`;
+  `AA91E2F0366C648BC1FE6AFBA47EEF880CF283D06DD5EDA83F5D7F4CCC275188`;
   Markdown SHA256
-  `96391D6125173E9173FCBE8FE3F901CC57829530EA3CCB5ACFB2812309B65256`.
+  `D357DDBD3498DC14E565DFD7564D62DAE987C5944997C3BEA130319CECA6E948`.
   Four of eleven release gates pass. Official full-trace XSim is `NOT_RUN`;
   closed-loop model quality and board measurements are `BLOCKED_EXTERNAL`;
   selected-method Pareto advantage and 250 MHz timing are `FAIL`. Reviewer

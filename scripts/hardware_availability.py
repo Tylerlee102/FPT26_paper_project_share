@@ -18,7 +18,7 @@ from scripts.xilinx_tools import find_vitis_hls, find_vivado_batch
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_JSON = ROOT / "reports" / "environment" / "hardware_availability.json"
 DEFAULT_MARKDOWN = ROOT / "reports" / "environment" / "hardware_availability.md"
-XRT_COMMANDS = ("xbutil", "xrt-smi", "xclbinutil")
+XRT_COMMANDS = ("xbutil", "xrt-smi", "xbmgmt", "xclbinutil")
 VITIS_COMMANDS = ("v++", "platforminfo", "xsim")
 PLATFORM_ROOTS = (
     Path("C:/AMDDesignTools"),
@@ -61,6 +61,10 @@ def _which(name: str) -> str | None:
             Path("C:/Xilinx/XRT/bin/xrt-smi.exe"),
             Path("C:/Program Files/Xilinx/XRT/bin/xrt-smi.exe"),
         ),
+        "xbmgmt": (
+            Path("C:/Xilinx/XRT/bin/xbmgmt.exe"),
+            Path("C:/Program Files/Xilinx/XRT/bin/xbmgmt.exe"),
+        ),
     }
     for candidate in known.get(name, ()):
         if candidate.is_file():
@@ -97,6 +101,16 @@ def _find_u55c_platforms(roots: tuple[Path, ...] = PLATFORM_ROOTS) -> list[str]:
     return sorted(hits)
 
 
+def _find_platform_inventory(roots: tuple[Path, ...] = PLATFORM_ROOTS) -> list[str]:
+    hits: set[str] = set()
+    for root in roots:
+        if not root.exists():
+            continue
+        for candidate in root.rglob("*.xpfm"):
+            hits.add(str(candidate.resolve()))
+    return sorted(hits)
+
+
 def _windows_xilinx_devices() -> dict[str, object]:
     if os.name != "nt":
         return {"returncode": None, "stdout": "", "stderr": "not Windows"}
@@ -107,6 +121,34 @@ def _windows_xilinx_devices() -> dict[str, object]:
         "Select-Object Status,Class,FriendlyName,InstanceId | ConvertTo-Json -Compress"
     )
     return _run(["powershell", "-NoProfile", "-Command", script])
+
+
+def _windows_wsl_xrt() -> dict[str, object]:
+    if os.name != "nt" or not shutil.which("wsl.exe"):
+        return {"status": "NOT_AVAILABLE", "distributions": []}
+    listing = _run(["wsl.exe", "-l", "-q"])
+    names = [
+        line.strip()
+        for line in str(listing.get("stdout", "")).replace("\x00", "").splitlines()
+        if line.strip() and "docker" not in line.lower()
+    ]
+    rows: list[dict[str, object]] = []
+    script = (
+        "for x in xbutil xrt-smi xbmgmt xclbinutil; do "
+        "command -v $x 2>/dev/null || true; done; "
+        "find /opt/xilinx -maxdepth 5 -type f -iname '*u55c*.xpfm' "
+        "2>/dev/null | head -20; "
+        "lspci -nn 2>/dev/null | grep -Ei '10ee|xilinx|alveo' || true; "
+        "ls /dev/xclmgmt* /dev/xdma* 2>/dev/null || true"
+    )
+    for name in names:
+        result = _run(["wsl.exe", "-d", name, "--", "bash", "-lc", script])
+        rows.append({"name": name, **result})
+    has_assets = any(str(row.get("stdout", "")).strip() for row in rows)
+    return {
+        "status": "ASSETS_FOUND" if has_assets else "NO_XRT_OR_U55C_ASSETS",
+        "distributions": rows,
+    }
 
 
 def _parse_gpu(query: dict[str, object]) -> dict[str, object]:
@@ -148,13 +190,17 @@ def collect(
     *,
     which: Callable[[str], str | None] = _which,
     platform_finder: Callable[[], list[str]] = _find_u55c_platforms,
+    platform_inventory_finder: Callable[[], list[str]] = _find_platform_inventory,
     device_probe: Callable[[], dict[str, object]] = _windows_xilinx_devices,
+    wsl_probe: Callable[[], dict[str, object]] = _windows_wsl_xrt,
     gpu_probe: Callable[[list[str]], dict[str, object]] = _run,
 ) -> dict[str, object]:
     xrt_commands = {name: which(name) for name in XRT_COMMANDS}
     vitis_commands = {name: which(name) for name in VITIS_COMMANDS}
     platforms = platform_finder()
+    platform_inventory = platform_inventory_finder()
     pcie = device_probe()
+    wsl = wsl_probe()
     pcie_present = pcie.get("returncode") == 0 and bool(str(pcie.get("stdout", "")).strip())
     board_ready = bool(platforms) and bool(xrt_commands["xbutil"] or xrt_commands["xrt-smi"]) and pcie_present
     gpu_query = gpu_probe(
@@ -184,6 +230,9 @@ def collect(
         "u55c_board_experiment": {
             "xrt_commands": xrt_commands,
             "u55c_platform_files": platforms,
+            "platform_inventory": platform_inventory,
+            "platform_inventory_count": len(platform_inventory),
+            "wsl_xrt_probe": wsl,
             "pcie_probe": pcie,
             "pcie_device_present": pcie_present,
             "ready": board_ready,
@@ -228,6 +277,7 @@ def _markdown(payload: dict[str, object]) -> str:
             f"| Vitis HLS and Vivado | {tools['status']} | HLS: `{tools['vitis_hls']}`; Vivado: `{tools['vivado']}` |",
             f"| Vitis compiler, platform inventory, and XSim | {tools['acceleration_tools_status']} | v++: `{tools['vitis_compiler']}`; platforminfo: `{tools['platforminfo']}`; XSim: `{tools['xsim']}` |",
             f"| U55C board parity and telemetry | {board['status']} | PCI device: `{board['pcie_device_present']}`; U55C platforms: `{len(board['u55c_platform_files'])}`; xbutil: `{xrt['xbutil']}`; xrt-smi: `{xrt['xrt-smi']}` |",
+            f"| Installed XPFM inventory | {'AVAILABLE' if board['platform_inventory'] else 'NONE'} | {board['platform_inventory_count']} total platform files; WSL: `{board['wsl_xrt_probe']['status']}` |",
             f"| Native-FP4 GPU baseline | {gpu['status']} | {gpu_text} |",
             "",
             "The installed synthesis and acceleration tools support HLS, Vivado, v++, "

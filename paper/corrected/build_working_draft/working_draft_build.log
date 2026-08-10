@@ -1,8 +1,8 @@
 note: Running TeX ...
 note: Rerunning TeX because "working_draft.aux" changed ...
 note: Running xdvipdfmx ...
-note: Writing `C:\Users\tyboy\OneDrive\Documents\mxfp4 improve\FPT26_data_review\paper\corrected\build_working_draft\working_draft.pdf` (252.111328125 KiB)
 note: Writing `C:\Users\tyboy\OneDrive\Documents\mxfp4 improve\FPT26_data_review\paper\corrected\build_working_draft\working_draft.log` (46.1337890625 KiB)
+note: Writing `C:\Users\tyboy\OneDrive\Documents\mxfp4 improve\FPT26_data_review\paper\corrected\build_working_draft\working_draft.pdf` (253.0263671875 KiB)
 note: Skipped writing 1 intermediate files (use --keep-intermediates to keep them)
 
 Fontconfig error: Cannot load default config file: No such file: (null)
@@ -201,21 +201,21 @@ warning: paper/corrected/paper.tex:206: Underfull \hbox (badness 10000) in parag
 warning: paper/corrected/paper.tex:206: Underfull \hbox (badness 10000) in paragraph at lines 206--206
 warning: paper/corrected/paper.tex:290: Requested font "[lmmono10-regular]:" at 10.0pt
 warning: paper/corrected/paper.tex:309: Overfull \hbox (20.51225pt too wide) in paragraph at lines 1--309
-warning: paper/corrected/paper.tex:609: Underfull \vbox (badness 10000) has occurred while \output is active
-warning: paper/corrected/paper.tex:626: Underfull \vbox (badness 4316) has occurred while \output is active
-warning: paper/corrected/paper.tex:711: Underfull \hbox (badness 1360) in paragraph at lines 704--711
-warning: paper/corrected/paper.tex:784: Underfull \hbox (badness 10000) in paragraph at lines 780--784
-warning: paper/corrected/paper.tex:784: Underfull \hbox (badness 10000) in paragraph at lines 780--784
-warning: paper/corrected/paper.tex:784: Underfull \hbox (badness 10000) in paragraph at lines 780--784
-warning: paper/corrected/paper.tex:789: Underfull \hbox (badness 3977) in paragraph at lines 786--789
-warning: paper/corrected/paper.tex:789: Underfull \hbox (badness 10000) in paragraph at lines 786--789
-warning: paper/corrected/paper.tex:789: Underfull \hbox (badness 10000) in paragraph at lines 786--789
-warning: paper/corrected/paper.tex:795: Underfull \hbox (badness 10000) in paragraph at lines 791--795
-warning: paper/corrected/paper.tex:795: Underfull \hbox (badness 10000) in paragraph at lines 791--795
-warning: paper/corrected/paper.tex:795: Underfull \hbox (badness 10000) in paragraph at lines 791--795
-warning: paper/corrected/paper.tex:795: Underfull \hbox (badness 10000) in paragraph at lines 791--795
-warning: paper/corrected/paper.tex:819: Underfull \hbox (badness 3199) in paragraph at lines 815--819
-warning: paper/corrected/paper.tex:819: Underfull \hbox (badness 2205) in paragraph at lines 815--819
+warning: paper/corrected/paper.tex:621: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: paper/corrected/paper.tex:638: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: paper/corrected/paper.tex:723: Underfull \hbox (badness 1360) in paragraph at lines 716--723
+warning: paper/corrected/paper.tex:797: Underfull \hbox (badness 10000) in paragraph at lines 793--797
+warning: paper/corrected/paper.tex:797: Underfull \hbox (badness 10000) in paragraph at lines 793--797
+warning: paper/corrected/paper.tex:797: Underfull \hbox (badness 10000) in paragraph at lines 793--797
+warning: paper/corrected/paper.tex:802: Underfull \hbox (badness 3977) in paragraph at lines 799--802
+warning: paper/corrected/paper.tex:802: Underfull \hbox (badness 10000) in paragraph at lines 799--802
+warning: paper/corrected/paper.tex:802: Underfull \hbox (badness 10000) in paragraph at lines 799--802
+warning: paper/corrected/paper.tex:808: Underfull \hbox (badness 10000) in paragraph at lines 804--808
+warning: paper/corrected/paper.tex:808: Underfull \hbox (badness 10000) in paragraph at lines 804--808
+warning: paper/corrected/paper.tex:808: Underfull \hbox (badness 10000) in paragraph at lines 804--808
+warning: paper/corrected/paper.tex:808: Underfull \hbox (badness 10000) in paragraph at lines 804--808
+warning: paper/corrected/paper.tex:832: Underfull \hbox (badness 3199) in paragraph at lines 828--832
+warning: paper/corrected/paper.tex:832: Underfull \hbox (badness 2205) in paragraph at lines 828--832
 warning: paper/corrected/paper.tex:32: 
 Requested font "[TeXGyreTermesX-Regular.otf]/OT" at 9.99997pt
 warning: paper/corrected/paper.tex:32: Requested font "[TeXGyreTermesX-Regular.otf]/OT" at 10.00003pt
@@ -412,19 +412,19 @@ warning: paper/corrected/paper.tex:206: Underfull \hbox (badness 10000) in parag
 warning: paper/corrected/paper.tex:290: 
 Requested font "[lmmono10-regular]:" at 10.0pt
 warning: paper/corrected/paper.tex:309: Overfull \hbox (20.51225pt too wide) in paragraph at lines 1--309
-warning: paper/corrected/paper.tex:609: Underfull \vbox (badness 10000) has occurred while \output is active
-warning: paper/corrected/paper.tex:626: Underfull \vbox (badness 4316) has occurred while \output is active
-warning: paper/corrected/paper.tex:711: Underfull \hbox (badness 1360) in paragraph at lines 704--711
-warning: paper/corrected/paper.tex:784: Underfull \hbox (badness 10000) in paragraph at lines 780--784
-warning: paper/corrected/paper.tex:784: Underfull \hbox (badness 10000) in paragraph at lines 780--784
-warning: paper/corrected/paper.tex:784: Underfull \hbox (badness 10000) in paragraph at lines 780--784
-warning: paper/corrected/paper.tex:789: Underfull \hbox (badness 3977) in paragraph at lines 786--789
-warning: paper/corrected/paper.tex:789: Underfull \hbox (badness 10000) in paragraph at lines 786--789
-warning: paper/corrected/paper.tex:789: Underfull \hbox (badness 10000) in paragraph at lines 786--789
-warning: paper/corrected/paper.tex:795: Underfull \hbox (badness 10000) in paragraph at lines 791--795
-warning: paper/corrected/paper.tex:795: Underfull \hbox (badness 10000) in paragraph at lines 791--795
-warning: paper/corrected/paper.tex:795: Underfull \hbox (badness 10000) in paragraph at lines 791--795
-warning: paper/corrected/paper.tex:795: Underfull \hbox (badness 10000) in paragraph at lines 791--795
-warning: paper/corrected/paper.tex:819: Underfull \hbox (badness 3199) in paragraph at lines 815--819
-warning: paper/corrected/paper.tex:819: Underfull \hbox (badness 2205) in paragraph at lines 815--819
+warning: paper/corrected/paper.tex:621: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: paper/corrected/paper.tex:638: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: paper/corrected/paper.tex:723: Underfull \hbox (badness 1360) in paragraph at lines 716--723
+warning: paper/corrected/paper.tex:797: Underfull \hbox (badness 10000) in paragraph at lines 793--797
+warning: paper/corrected/paper.tex:797: Underfull \hbox (badness 10000) in paragraph at lines 793--797
+warning: paper/corrected/paper.tex:797: Underfull \hbox (badness 10000) in paragraph at lines 793--797
+warning: paper/corrected/paper.tex:802: Underfull \hbox (badness 3977) in paragraph at lines 799--802
+warning: paper/corrected/paper.tex:802: Underfull \hbox (badness 10000) in paragraph at lines 799--802
+warning: paper/corrected/paper.tex:802: Underfull \hbox (badness 10000) in paragraph at lines 799--802
+warning: paper/corrected/paper.tex:808: Underfull \hbox (badness 10000) in paragraph at lines 804--808
+warning: paper/corrected/paper.tex:808: Underfull \hbox (badness 10000) in paragraph at lines 804--808
+warning: paper/corrected/paper.tex:808: Underfull \hbox (badness 10000) in paragraph at lines 804--808
+warning: paper/corrected/paper.tex:808: Underfull \hbox (badness 10000) in paragraph at lines 804--808
+warning: paper/corrected/paper.tex:832: Underfull \hbox (badness 3199) in paragraph at lines 828--832
+warning: paper/corrected/paper.tex:832: Underfull \hbox (badness 2205) in paragraph at lines 828--832
 warning: warnings were issued by the TeX engine; use --print and/or --keep-logs for details.
