@@ -1,0 +1,441 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version     : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date             : Mon Aug 10 03:38:50 2026
+| Host             : Tyler running 64-bit major release  (build 9200)
+| Command          : report_power -file X:/reports/vivado/experiments/rs2_layer_banks_20260810/impl_power.rpt
+| Design           : gdn_rs2_top
+| Device           : xcu55c-fsvh2892-2L-e
+| Design State     : routed
+| Grade            : extended
+| Process          : typical
+| Characterization : Production
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Power Report
+
+Table of Contents
+-----------------
+1. Summary
+1.1 On-Chip Components
+1.2 Power Supply Summary
+1.3 Confidence Level
+2. Settings
+2.1 Environment
+2.2 Clock Constraints
+3. Detailed Reports
+3.1 By Hierarchy
+
+1. Summary
+----------
+
++--------------------------+--------------+
+| Total On-Chip Power (W)  | 6.004        |
+|   FPGA Power (W)         | 5.614        |
+|   HBM Power (W)          | 0.390        |
+| Design Power Budget (W)  | Unspecified* |
+| Power Budget Margin (W)  | NA           |
+| Dynamic (W)              | 2.619        |
+| Device Static (W)        | 3.385        |
+| Effective TJA (C/W)      | 0.4          |
+| Max Ambient (C)          | 97.4         |
+| Junction Temperature (C) | 27.6         |
+| Confidence Level         | Medium       |
+| Setting File             | ---          |
+| Simulation Activity File | ---          |
+| Design Nets Matched      | NA           |
++--------------------------+--------------+
+* Specify Design Power Budget using, set_operating_conditions -design_power_budget <value in Watts>
+
+
+1.1 On-Chip Components
+----------------------
+
++--------------------------+-----------+----------+-----------+-----------------+
+| On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
++--------------------------+-----------+----------+-----------+-----------------+
+| Clocks                   |     0.494 |        3 |       --- |             --- |
+| CLB Logic                |     0.496 |   205310 |       --- |             --- |
+|   LUT as Logic           |     0.403 |   107055 |   1303680 |            8.21 |
+|   LUT as Shift Register  |     0.042 |     1800 |    600960 |            0.30 |
+|   Register               |     0.024 |    72998 |   2607360 |            2.80 |
+|   CARRY8                 |     0.015 |     2939 |    162960 |            1.80 |
+|   LUT as Distributed RAM |     0.012 |     1191 |    600960 |            0.20 |
+|   Others                 |     0.000 |     1375 |       --- |             --- |
+|   F7/F8 Muxes            |     0.000 |     2975 |   1303680 |            0.23 |
+| Signals                  |     0.494 |   201650 |       --- |             --- |
+| Block RAM                |     0.203 |      341 |      2016 |           16.91 |
+| URAM                     |     0.925 |      598 |       960 |           62.29 |
+| DSPs                     |     0.007 |       14 |      9024 |            0.16 |
+| Static Power             |     3.385 |          |           |                 |
+| Total                    |     6.004 |          |           |                 |
++--------------------------+-----------+----------+-----------+-----------------+
+
+
+1.2 Power Supply Summary
+------------------------
+
++------------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+| Source           | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
++------------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+| Vccint           |       0.850 |     4.449 |       3.071 |      1.378 |       NA    | Unspecified | NA         |
+| Vccint_io        |       0.850 |     0.242 |       0.000 |      0.242 |       NA    | Unspecified | NA         |
+| Vccbram          |       0.850 |     0.050 |       0.010 |      0.040 |       NA    | Unspecified | NA         |
+| Vccaux           |       1.800 |     0.819 |       0.000 |      0.819 |       NA    | Unspecified | NA         |
+| Vccaux_io        |       1.800 |     0.035 |       0.000 |      0.035 |       NA    | Unspecified | NA         |
+| Vcco33           |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco25           |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco18           |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco15           |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco135          |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco12           |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco10           |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vccadc           |       1.800 |     0.024 |       0.000 |      0.024 |       NA    | Unspecified | NA         |
+| VCC_IO_HBM       |       1.200 |     0.082 |       0.000 |      0.082 |       NA    | Unspecified | NA         |
+| VCC_HBM          |       1.200 |     0.155 |       0.000 |      0.155 |       NA    | Unspecified | NA         |
+| VCCAUX_HBM       |       2.500 |     0.043 |       0.000 |      0.043 |       NA    | Unspecified | NA         |
+| VMGTAVCC (GTY)   |       0.900 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VMGTAVTT (GTY)   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VMGTVCCAUX (GTY) |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
++------------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+
+
+1.3 Confidence Level
+--------------------
+
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| User Input Data             | Confidence | Details                                        | Action                                                                                                     |
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Design implementation state | High       | Design is routed                               |                                                                                                            |
+| Clock nodes activity        | High       | User specified more than 95% of clocks         |                                                                                                            |
+| I/O nodes activity          | High       | User specified more than 95% of inputs         |                                                                                                            |
+| Internal nodes activity     | Medium     | User specified less than 25% of internal nodes | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views |
+| Device models               | High       | Device models are Production                   |                                                                                                            |
+|                             |            |                                                |                                                                                                            |
+| Overall confidence level    | Medium     |                                                |                                                                                                            |
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+
+
+2. Settings
+-----------
+
+2.1 Environment
+---------------
+
++-----------------------+--------------------------+
+| Ambient Temp (C)      | 25.0                     |
+| ThetaJA (C/W)         | 0.4                      |
+| Airflow (LFM)         | 250                      |
+| Heat Sink             | medium (Medium Profile)  |
+| ThetaSA (C/W)         | 0.5                      |
+| Board Selection       | medium (10"x10")         |
+| # of Board Layers     | 12to15 (12 to 15 Layers) |
+| Board Temperature (C) | 25.0                     |
++-----------------------+--------------------------+
+
+
+2.2 Clock Constraints
+---------------------
+
++--------+--------+-----------------+
+| Clock  | Domain | Constraint (ns) |
++--------+--------+-----------------+
+| ap_clk | ap_clk |             4.0 |
++--------+--------+-----------------+
+
+
+3. Detailed Reports
+-------------------
+
+3.1 By Hierarchy
+----------------
+
++----------------------------------------------------------------------------------------------------+-----------+
+| Name                                                                                               | Power (W) |
++----------------------------------------------------------------------------------------------------+-----------+
+| gdn_rs2_top                                                                                        |     2.619 |
+|   control_r_s_axi_U                                                                                |     0.025 |
+|   gmem0_m_axi_U                                                                                    |     0.016 |
+|     bus_read                                                                                       |     0.006 |
+|       rreq_burst_conv                                                                              |     0.004 |
+|     load_unit_0                                                                                    |     0.010 |
+|       buff_rdata                                                                                   |     0.006 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem10_m_axi_U                                                                                   |     0.016 |
+|     bus_write                                                                                      |     0.008 |
+|       wreq_burst_conv                                                                              |     0.004 |
+|       wreq_throttle                                                                                |     0.003 |
+|     store_unit_0                                                                                   |     0.008 |
+|       buff_wdata                                                                                   |     0.001 |
+|       bus_wide_gen.buff_wdata_in                                                                   |     0.001 |
+|       bus_wide_gen.wreq_offset                                                                     |     0.001 |
+|       fifo_wreq                                                                                    |     0.001 |
+|   gmem11_m_axi_U                                                                                   |     0.016 |
+|     bus_write                                                                                      |     0.008 |
+|       wreq_burst_conv                                                                              |     0.004 |
+|       wreq_throttle                                                                                |     0.003 |
+|     store_unit_0                                                                                   |     0.008 |
+|       buff_wdata                                                                                   |     0.001 |
+|       bus_wide_gen.buff_wdata_in                                                                   |     0.001 |
+|       bus_wide_gen.wreq_offset                                                                     |     0.001 |
+|       fifo_wreq                                                                                    |     0.001 |
+|   gmem12_m_axi_U                                                                                   |     0.016 |
+|     bus_write                                                                                      |     0.008 |
+|       wreq_burst_conv                                                                              |     0.004 |
+|       wreq_throttle                                                                                |     0.003 |
+|     store_unit_0                                                                                   |     0.008 |
+|       buff_wdata                                                                                   |     0.001 |
+|       bus_wide_gen.buff_wdata_in                                                                   |     0.001 |
+|       bus_wide_gen.wreq_offset                                                                     |     0.001 |
+|       fifo_wreq                                                                                    |     0.001 |
+|   gmem13_m_axi_U                                                                                   |     0.016 |
+|     bus_write                                                                                      |     0.008 |
+|       wreq_burst_conv                                                                              |     0.004 |
+|       wreq_throttle                                                                                |     0.003 |
+|     store_unit_0                                                                                   |     0.008 |
+|       buff_wdata                                                                                   |     0.001 |
+|       bus_wide_gen.buff_wdata_in                                                                   |     0.001 |
+|       bus_wide_gen.wreq_offset                                                                     |     0.001 |
+|       fifo_wreq                                                                                    |     0.001 |
+|   gmem14_m_axi_U                                                                                   |     0.015 |
+|     bus_write                                                                                      |     0.008 |
+|       wreq_burst_conv                                                                              |     0.004 |
+|       wreq_throttle                                                                                |     0.004 |
+|     store_unit_0                                                                                   |     0.007 |
+|       buff_wdata                                                                                   |     0.001 |
+|       bus_wide_gen.buff_wdata_in                                                                   |     0.001 |
+|       fifo_wreq                                                                                    |     0.001 |
+|   gmem15_m_axi_U                                                                                   |     0.016 |
+|     bus_write                                                                                      |     0.009 |
+|       wreq_burst_conv                                                                              |     0.004 |
+|       wreq_throttle                                                                                |     0.004 |
+|     store_unit_0                                                                                   |     0.008 |
+|       buff_wdata                                                                                   |     0.004 |
+|       fifo_wreq                                                                                    |     0.002 |
+|   gmem16_m_axi_U                                                                                   |     0.018 |
+|     bus_read                                                                                       |     0.006 |
+|       rreq_burst_conv                                                                              |     0.004 |
+|     load_unit_0                                                                                    |     0.012 |
+|       buff_rdata                                                                                   |     0.006 |
+|       bus_wide_gen.rs_rdata_int                                                                    |     0.002 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem17_m_axi_U                                                                                   |     0.017 |
+|     bus_read                                                                                       |     0.006 |
+|       rreq_burst_conv                                                                              |     0.005 |
+|     load_unit_0                                                                                    |     0.011 |
+|       buff_rdata                                                                                   |     0.006 |
+|       bus_wide_gen.rs_rdata_int                                                                    |     0.002 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem18_m_axi_U                                                                                   |     0.017 |
+|     bus_read                                                                                       |     0.006 |
+|       rreq_burst_conv                                                                              |     0.004 |
+|     load_unit_0                                                                                    |     0.011 |
+|       buff_rdata                                                                                   |     0.006 |
+|       bus_wide_gen.rs_rdata_int                                                                    |     0.001 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem19_m_axi_U                                                                                   |     0.016 |
+|     bus_write                                                                                      |     0.008 |
+|       wreq_burst_conv                                                                              |     0.004 |
+|       wreq_throttle                                                                                |     0.003 |
+|     store_unit_0                                                                                   |     0.008 |
+|       buff_wdata                                                                                   |     0.001 |
+|       bus_wide_gen.buff_wdata_in                                                                   |     0.001 |
+|       fifo_wreq                                                                                    |     0.002 |
+|   gmem1_m_axi_U                                                                                    |     0.015 |
+|     bus_read                                                                                       |     0.006 |
+|       rreq_burst_conv                                                                              |     0.004 |
+|     load_unit_0                                                                                    |     0.009 |
+|       buff_rdata                                                                                   |     0.006 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem2_m_axi_U                                                                                    |     0.015 |
+|     bus_read                                                                                       |     0.006 |
+|       rreq_burst_conv                                                                              |     0.004 |
+|     load_unit_0                                                                                    |     0.010 |
+|       buff_rdata                                                                                   |     0.006 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem3_m_axi_U                                                                                    |     0.017 |
+|     bus_read                                                                                       |     0.005 |
+|       rreq_burst_conv                                                                              |     0.004 |
+|     load_unit_0                                                                                    |     0.011 |
+|       buff_rdata                                                                                   |     0.006 |
+|       bus_wide_gen.rs_rdata_int                                                                    |     0.002 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem4_m_axi_U                                                                                    |     0.021 |
+|     bus_read                                                                                       |     0.007 |
+|       rreq_burst_conv                                                                              |     0.005 |
+|       rs_rdata                                                                                     |     0.001 |
+|     load_unit_0                                                                                    |     0.015 |
+|       buff_rdata                                                                                   |     0.010 |
+|       bus_wide_gen.rs_rdata_int                                                                    |     0.002 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem5_m_axi_U                                                                                    |     0.017 |
+|     bus_read                                                                                       |     0.006 |
+|       rreq_burst_conv                                                                              |     0.005 |
+|     load_unit_0                                                                                    |     0.011 |
+|       buff_rdata                                                                                   |     0.006 |
+|       bus_wide_gen.rs_rdata_int                                                                    |     0.001 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem6_m_axi_U                                                                                    |     0.017 |
+|     bus_read                                                                                       |     0.006 |
+|       rreq_burst_conv                                                                              |     0.005 |
+|     load_unit_0                                                                                    |     0.011 |
+|       buff_rdata                                                                                   |     0.006 |
+|       bus_wide_gen.rs_rdata_int                                                                    |     0.001 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem7_m_axi_U                                                                                    |     0.019 |
+|     bus_read                                                                                       |     0.006 |
+|       rreq_burst_conv                                                                              |     0.005 |
+|     load_unit_0                                                                                    |     0.013 |
+|       buff_rdata                                                                                   |     0.007 |
+|       bus_wide_gen.rs_rdata_int                                                                    |     0.002 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem8_m_axi_U                                                                                    |     0.018 |
+|     bus_read                                                                                       |     0.006 |
+|       rreq_burst_conv                                                                              |     0.004 |
+|     load_unit_0                                                                                    |     0.012 |
+|       buff_rdata                                                                                   |     0.007 |
+|       bus_wide_gen.rs_rdata_int                                                                    |     0.001 |
+|       fifo_rreq                                                                                    |     0.002 |
+|   gmem9_m_axi_U                                                                                    |     0.015 |
+|     bus_write                                                                                      |     0.009 |
+|       wreq_burst_conv                                                                              |     0.004 |
+|       wreq_throttle                                                                                |     0.004 |
+|     store_unit_0                                                                                   |     0.006 |
+|       buff_wdata                                                                                   |     0.002 |
+|       fifo_wreq                                                                                    |     0.002 |
+|   grp_gdn_rs2_top_impl_fu_702                                                                      |     2.242 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_10_U          |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_11_U          |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_12_U          |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_13_U          |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_14_U          |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_15_U          |     0.013 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_16_U          |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_17_U          |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_18_U          |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_19_U          |     0.015 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_1_U           |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_22_U          |     0.002 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_23_U          |     0.002 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_25_U          |     0.001 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_26_U          |     0.001 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_28_U          |     0.001 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_29_U          |     0.001 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_2_U           |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_3_U           |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_4_U           |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_5_U           |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_6_U           |     0.013 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_7_U           |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_8_U           |     0.012 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_9_U           |     0.015 |
+|     gdn_rs2_top_impl_unsigned_char_unsigned_short_unsigned_char_unsigned_char_ap_uin_U             |     0.012 |
+|     grp_aligned_sum_guarded_3_s_fu_11529                                                           |     0.025 |
+|       grp_aligned_sum_guarded_3_Pipeline_align_terms_fu_166                                        |     0.021 |
+|       grp_aligned_sum_guarded_3_Pipeline_find_dominant_fu_148                                      |     0.001 |
+|     grp_gdn_rs2_top_impl_Outline_decay_coefficients_heads_fu_11140                                 |     0.005 |
+|       mul_16ns_16ns_32_1_1_U242                                                                    |     0.002 |
+|     grp_gdn_rs2_top_impl_Outline_output_log_entries_fu_11219                                       |     0.044 |
+|       grp_p_anonymous_namespace_dot_log_entry_fu_225                                               |     0.043 |
+|     grp_gdn_rs2_top_impl_Outline_prediction_log_entries_fu_11170                                   |     0.045 |
+|       grp_p_anonymous_namespace_dot_log_entry_fu_233                                               |     0.043 |
+|     grp_p_anonymous_namespace_combine_action_fu_11494                                              |     0.039 |
+|       grp_aligned_sum_guarded_7_s_fu_537                                                           |     0.022 |
+|       mul_32s_16ns_48_2_1_U647                                                                     |     0.001 |
+|       mul_32s_16ns_48_2_1_U649                                                                     |     0.001 |
+|       mul_5s_32s_36_2_1_U665                                                                       |     0.001 |
+|     grp_p_anonymous_namespace_dot_base_column_fu_11392                                             |     0.057 |
+|       grp_aligned_sum_guarded_512_s_fu_441                                                         |     0.018 |
+|       grp_p_anonymous_namespace_dot_base_column_Pipeline_dot_base_vector_terms_dot_base_sta_fu_346 |     0.027 |
+|       mul_32s_16ns_48_2_1_U563                                                                     |     0.002 |
+|     grp_p_anonymous_namespace_fold_log_fu_11541                                                    |     0.427 |
+|       grp_aligned_sum_guarded_2_s_fu_8320                                                          |     0.010 |
+|       grp_aligned_sum_guarded_4_s_fu_8332                                                          |     0.034 |
+|       grp_p_anonymous_namespace_clear_log_fu_8149                                                  |     0.004 |
+|       grp_p_anonymous_namespace_quantize_fold_block_fu_8168                                        |     0.326 |
+|       mul_32s_16ns_48_2_1_U1356                                                                    |     0.003 |
+|     grp_p_anonymous_namespace_load_snapshot_fu_10798                                               |     0.090 |
+|       grp_p_anonymous_namespace_load_snapshot_Outline_load_snapshot_terms_fu_521                   |     0.016 |
+|       grp_p_anonymous_namespace_load_snapshot_Pipeline_load_snapshot_lanes_fu_506                  |     0.034 |
+|     grp_p_anonymous_namespace_quantize_update_block_fu_11245                                       |     0.284 |
+|       grp_aligned_sum_guarded_2_1_fu_2623                                                          |     0.020 |
+|       grp_p_anonymous_namespace_quantize_update_block_Pipeline_quantize_update_second_fu_2633      |     0.178 |
+|       grp_select_e2m1_scale_power_fu_2489                                                          |     0.048 |
+|     grp_p_anonymous_namespace_read_snapshot_fu_11827                                               |     0.027 |
+|       grp_p_anonymous_namespace_read_snapshot_Outline_read_snapshot_terms_fu_517                   |     0.013 |
+|       grp_p_anonymous_namespace_read_snapshot_Pipeline_read_snapshot_lanes_fu_502                  |     0.005 |
+|     grp_p_anonymous_namespace_reset_slot_fu_10516                                                  |     0.004 |
+|       grp_p_anonymous_namespace_clear_log_fu_278                                                   |     0.002 |
+|     grp_p_anonymous_namespace_store_key_fu_11195                                                   |     0.004 |
+|       grp_p_anonymous_namespace_store_key_Pipeline_store_key_terms_store_key_heads_store_ke_fu_106 |     0.004 |
+|     grp_p_anonymous_namespace_validate_snapshot_fu_10480                                           |     0.012 |
+|       grp_p_anonymous_namespace_validate_snapshot_Pipeline_validate_snapshot_key_lanes_fu_636      |     0.002 |
+|       grp_p_anonymous_namespace_validate_snapshot_Pipeline_validate_snapshot_lanes_fu_619          |     0.003 |
+|       grp_p_anonymous_namespace_validate_snapshot_Pipeline_validate_snapshot_update_lanes_fu_651   |     0.002 |
+|     grp_p_anonymous_namespace_validate_token_fu_11100                                              |     0.006 |
+|       grp_p_anonymous_namespace_validate_qk_stack_fu_202                                           |     0.002 |
+|       grp_p_anonymous_namespace_validate_value_stack_fu_218                                        |     0.002 |
+|     mul_32s_16ns_48_2_1_U1544                                                                      |     0.002 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_10_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_11_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_12_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_13_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_14_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_15_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_16_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_17_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_18_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_19_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_1_U          |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_20_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_21_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_22_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_23_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_24_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_25_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_26_U         |     0.013 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_27_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_28_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_29_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_2_U          |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_30_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_31_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_32_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_33_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_34_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_35_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_36_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_37_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_38_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_39_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_3_U          |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_40_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_41_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_42_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_43_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_44_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_45_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_46_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_47_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_48_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_49_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_4_U          |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_50_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_51_U         |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_5_U          |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_6_U          |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_7_U          |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_8_U          |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_9_U          |     0.012 |
+|     p_ZZN7gdn_rs216gdn_rs2_top_implEhthhPA16_A128_K7ap_uintILi4EEPA16_A4_KS0_ILi8EES5_U            |     0.013 |
+|     resident_gamma_U                                                                               |     0.002 |
+|     resident_key_scales_U                                                                          |     0.006 |
+|     resident_keys_U                                                                                |     0.020 |
+|     resident_lambda_U                                                                              |     0.003 |
+|     resident_primary_scales_U                                                                      |     0.068 |
+|     resident_residual_scales_U                                                                     |     0.068 |
+|     resident_update_scales_U                                                                       |     0.007 |
+|     resident_updates_U                                                                             |     0.025 |
++----------------------------------------------------------------------------------------------------+-----------+
+
+

@@ -1,0 +1,16 @@
+{
+  "behavioral_contract": "same arithmetic, state layout, capacity, command behavior, and fold cadence; only the physical layer dimension of primary/residual state is partitioned",
+  "experiment": "RS2 layer-local primary/residual URAM banks",
+  "generated_at": "2026-08-10T04:36:25.596729+00:00",
+  "insertions": [
+    "#pragma HLS ARRAY_PARTITION variable=resident_primary complete dim=2",
+    "#pragma HLS ARRAY_PARTITION variable=resident_residual complete dim=2"
+  ],
+  "output": "build/experiments/rs2_layer_banks/gdn_rs2_top.cpp",
+  "output_sha256": "CD3EF03E62D8CBE00DD2B8BEA9195D9D6EED1E2E8265D459161C3DCC534F747A",
+  "schema": 1,
+  "selected_source_modified": false,
+  "source": "hls/rs2/src/gdn_rs2_top.cpp",
+  "source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+  "status": "PASS"
+}

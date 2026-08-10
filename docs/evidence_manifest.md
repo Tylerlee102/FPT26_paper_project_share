@@ -1992,6 +1992,29 @@ remain historical evidence and are not silently rewritten.
   not promoted, and its vectorless 6.284 W estimate at the failed 4 ns
   constraint is not energy evidence.
 
+### E-G7-010c - Layer-Local State-Bank Architecture Experiment
+
+- Evidence: `reports/vivado/experiments/rs2_layer_banks_20260810/summary.json`,
+  SHA256 `D9D910AF65763995A2EB846C0EB0027860A6D3AAE72E024FBEE04D1AAC89011E`;
+  README SHA256
+  `CC189884D8EA2BDB61C27E3B41FC9945C89305442938F205A437904AD32DAEBC`.
+  The source-isolated variant completely partitions the primary and residual
+  stores across the 36 layer slots while preserving arithmetic, state capacity,
+  command behavior, and fold cadence. Exact 64-token C simulation, every
+  explicit HLS loop constraint, synthesis, route completion, hold, and DRC pass.
+- HLS adds 35,033 LUTs, 3,251 FFs, two DSPs, 512 estimated URAMs, and 3,969
+  worst-case cycles relative to the selected source. Routed utilization is
+  110,046 LUTs, 72,728 registers, 341 BRAM tiles, 598 URAMs, and 14 DSPs.
+- The routed result reaches -1.867 ns WNS, -41,081.309 ns TNS, and 54,809
+  failing setup endpoints. Relative to the selected route, WNS worsens by
+  0.131 ns, TNS by 16,216.483 ns, and failing endpoints by 11,216. The worst
+  path has fanout 3, four logic levels, one SLR crossing, and 71% net delay from
+  a bank-local URAM read through selector/fold logic. Complete banking removes
+  the former monolithic write-enable bottleneck but replaces it with a broader
+  read/selector regression, so the variant is
+  `REJECT_LAYER_BANKING_TIMING_AND_COST` and is not promoted. Its vectorless
+  6.004 W estimate at the failed 4 ns constraint is not energy evidence.
+
 ### E-G7-011 - Current Physical Evidence
 
 - Evidence: `reports/vivado/corrected/rs2_current/rs2_vivado_summary.json`,
@@ -2034,23 +2057,23 @@ remain historical evidence and are not silently rewritten.
 ### E-G7-013 - Working Draft, Regression, and Release Guard
 
 - Working draft PDF: `paper/corrected/mxfp4_gdn_working_draft.pdf`, SHA256
-  `CB59CB4A3EC443C4B0CEFEB9AD6BE51CFF813E06BBC613FC79B574A201376377`.
+  `51C7CDDC18DEA533641261A8410C9B3083D0133269673D3D2DDFDE7F15FCC014`.
   Build-manifest SHA256 is
-  `0F478165E6A4FCF596D8D9DF284A9B21BCF2A3D3DFF7A5EF21F8C99780638F8B`;
+  `A0C8EF392CB4BC6869128BF9073CBEE6905E3F26342DF9725D821FF038521445`;
   page-by-page visual-audit SHA256 is
-  `E42A6A0527B90C320881D03F23F50F51EA550CF95F2F1AEB7F37DCBF17040E92`.
+  `59721A4BCD832AB95745F84B1ACBB00A1430B63F06AE14D250976D20423868FF`.
   All nine 220-DPI page renders pass checks for text, equations, figures,
   legends, tables, captions, references, margins, and clipping. The PDF is
   visibly watermarked and not submission eligible.
-- Full regression: 370 passed, two intentional skips, zero failures; JUnit
-  `reports/test_results/final_pytest_20260810.xml`, SHA256
-  `674D20657658B5B7443515549E223EDB1EB0D6C4E0079C83A1B6AF78E842BF0F`.
+- Full regression: 374 passed, two intentional skips, zero failures; JUnit
+  `reports/test_results/final_pytest_20260810_layer_banks.xml`, SHA256
+  `CF1F1774166F150D5892C668F477D8471BE54BE6A5313699BEE72A668196DE1D`.
   The skips preserve the stale legacy HLS-cosim boundary and prohibit a Phase-7
   pack while the release gate is nonpassing.
 - Final gate: `reports/final_completion_gate.json`, SHA256
-  `A6231981523C95CFBB8265606A1F0398F36AA878B597E5C71CC77360FF00A69F`;
+  `2D0659A046B2C09B4873D05C85726AB86E6401A2D74EE5FB7F1B038FCB92CC9E`;
   Markdown SHA256
-  `799AAD5914EDE4E00DEAD8F676F4288110C3ECE819657BB46038BC718852D742`.
+  `C35BE0FBAC535C97D47B506744E696AA4CDA7D8FFE3C21670E451A90B3AC3A18`.
   Four of eleven release gates pass. Official full-trace XSim is `NOT_RUN`;
   closed-loop model quality and board measurements are `BLOCKED_EXTERNAL`;
   selected-method Pareto advantage and 250 MHz timing are `FAIL`. Reviewer

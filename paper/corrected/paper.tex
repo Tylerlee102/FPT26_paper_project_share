@@ -625,6 +625,14 @@ setup improvement with fewer failing endpoints. It nevertheless missed the
 declared clock, increased periodic-fold latency, and moved the worst high-fanout
 path back to outer fold control driving a resident-primary URAM enable. This
 variant is likewise not promoted.
+A fourth isolated variant completely partitioned the primary and residual state
+stores by layer. This preserved the exact recurrent trace and all-layer capacity,
+and it removed the monolithic high-fanout write-enable path. The routed design
+instead exposed a bank-local read/selector path into fold logic, increased LUT
+and DSP cost, and worsened setup slack, total negative slack, and the failing
+endpoint count. We therefore reject simple complete layer banking as a timing
+fix; bank locality must be co-designed with layer selection and read-return
+pipelining.
 
 \begin{table}[t]
 \centering

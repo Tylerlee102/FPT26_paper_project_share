@@ -1,0 +1,8 @@
+INFO: [SIM 2] *************** CSIM start ***************
+   Compiling ../../../../hls/rs2/tb/tb_gdn_rs2_trace.cpp in debug mode
+   Compiling ../../../../build/experiments/rs2_layer_banks/gdn_rs2_top.cpp in debug mode
+   Compiling ../../../../hls/rs2/src/rs2_arithmetic.cpp in debug mode
+   Generating csim.exe
+PASS: 64 encoded random-state tokens, exact outputs/counters, and final snapshot
+INFO: [SIM 1] CSim done with 0 errors.
+INFO: [SIM 3] *************** CSIM finish ***************

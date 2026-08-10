@@ -25,6 +25,7 @@ TCL_BY_STEP = {
         "vivado/tcl/run_rs2_fold_control_impl.tcl"
     ),
     "rs2-fold-write-impl": Path("vivado/tcl/run_rs2_fold_write_impl.tcl"),
+    "rs2-layer-banks-impl": Path("vivado/tcl/run_rs2_layer_banks_impl.tcl"),
     "rs2-postroute-sweep": Path("vivado/tcl/run_rs2_postroute_sweep.tcl"),
     "rs2-postroute-fanout-opt": Path(
         "vivado/tcl/run_rs2_postroute_fanout_opt.tcl"
@@ -110,6 +111,24 @@ def main(argv: list[str] | None = None) -> int:
                 / "gdn_rs2_top.v"
             ),
         )
+    elif args.step == "rs2-layer-banks-impl":
+        prepare_rs2_ooc_rtl(
+            source=(
+                root
+                / "gdn_rs2_layer_banks_hls"
+                / "u55c_250mhz"
+                / "syn"
+                / "verilog"
+                / "gdn_rs2_top.v"
+            ),
+            output=(
+                root
+                / "build"
+                / "vivado"
+                / "rs2_layer_banks_ooc_rtl"
+                / "gdn_rs2_top.v"
+            ),
+        )
     elif args.step.startswith("rs2-") and args.step not in {
         "rs2-postroute-sweep",
         "rs2-postroute-fanout-opt",
@@ -121,6 +140,7 @@ def main(argv: list[str] | None = None) -> int:
         "rs2-timing-analysis",
         "rs2-fold-control-impl",
         "rs2-fold-write-impl",
+        "rs2-layer-banks-impl",
     }:
         prepare_rs2_ooc_rtl()
     elif args.step.startswith("bf16-") and args.step != "bf16-postroute-sweep":

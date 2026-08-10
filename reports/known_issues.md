@@ -50,6 +50,15 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   250 MHz, adds 654 HLS-estimated FFs, 108 LUTs, and 32,765 worst-case cycles,
   and its worst path has fanout 307 from outer fold control to a
   resident-primary URAM enable. It is not promoted.
+- A fourth source-isolated experiment completely partitions the primary and
+  residual state stores by layer. Exact 64-token C simulation, every explicit
+  synthesis constraint, full all-layer capacity, routing, hold, and DRC pass.
+  The partition removes the monolithic high-fanout write-enable path, but the
+  worst path becomes a bank-local URAM read/selector path into fold logic.
+  Routed WNS is -1.867 ns, TNS is -41,081.309 ns, and 54,809 setup endpoints
+  fail. Relative to the selected route, it worsens WNS by 0.131 ns, TNS by
+  16,216.483 ns, and failing endpoints by 11,216 while adding 27,797 routed
+  LUTs and two DSPs. It is rejected and not promoted.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
@@ -96,7 +105,7 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 370 passed, 2 skipped, and 0 failed tests.
+- The latest full regression records 374 passed, 2 skipped, and 0 failed tests.
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

@@ -50,6 +50,8 @@ TCL_BY_STEP = {
     ),
     "rs2-fold-write-csim": Path("hls/rs2/tcl/run_fold_write_csim.tcl"),
     "rs2-fold-write-csynth": Path("hls/rs2/tcl/run_fold_write_csynth.tcl"),
+    "rs2-layer-banks-csim": Path("hls/rs2/tcl/run_layer_banks_csim.tcl"),
+    "rs2-layer-banks-csynth": Path("hls/rs2/tcl/run_layer_banks_csynth.tcl"),
     "rs2-trace-cosim": Path("hls/rs2/tcl/run_trace_cosim.tcl"),
     "bf16-csim": Path("hls/bf16/tcl/run_csim.tcl"),
     "bf16-csynth": Path("hls/bf16/tcl/run_csynth.tcl"),
