@@ -80,6 +80,12 @@ TCL_BY_STEP = {
     "rs2-fold-write-contiguous-banks-csynth": Path(
         "hls/rs2/tcl/run_fold_write_contiguous_banks_csynth.tcl"
     ),
+    "rs2-snapshot-write-contiguous-banks-csim": Path(
+        "hls/rs2/tcl/run_snapshot_write_contiguous_banks_csim.tcl"
+    ),
+    "rs2-snapshot-write-contiguous-banks-csynth": Path(
+        "hls/rs2/tcl/run_snapshot_write_contiguous_banks_csynth.tcl"
+    ),
     "rs2-layer-banks-csim": Path("hls/rs2/tcl/run_layer_banks_csim.tcl"),
     "rs2-layer-banks-csynth": Path("hls/rs2/tcl/run_layer_banks_csynth.tcl"),
     "rs2-partial-layer-banks-csim": Path(

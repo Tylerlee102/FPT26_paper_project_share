@@ -1,0 +1,28 @@
+{
+  "behavioral_contract": "same arithmetic, state layout and capacity, commands, fold cadence, and contiguous layer banking; only LOAD resident-write hierarchy changes",
+  "experiment": "RS2 localized snapshot/fold writes with two contiguous banks",
+  "generated_at": "2026-08-10T19:13:15.011491+00:00",
+  "output": "build/experiments/rs2_snapshot_write_contiguous_banks/gdn_rs2_top.cpp",
+  "output_sha256": "771C77AE0DB05F92552828EE2FF068200ECD884FA919667319A0EDAF44BD2719",
+  "parent_output_sha256": "B1F62ADB560A959BEC6EC22D90AC7829F8E30E359FB643391CA67314F504325C",
+  "parent_transform": {
+    "fold_write_transform": {
+      "fold_control_helpers": 1,
+      "fold_control_replacements": 1,
+      "fold_write_helpers": 1,
+      "fold_write_replacements": 1
+    },
+    "layers_per_bank": 18,
+    "partition_factor": 2,
+    "partition_style": "block"
+  },
+  "schema": 1,
+  "selected_source_modified": false,
+  "snapshot_write_transform": {
+    "helpers": 1,
+    "replacements": 1
+  },
+  "source": "hls/rs2/src/gdn_rs2_top.cpp",
+  "source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+  "status": "PASS"
+}

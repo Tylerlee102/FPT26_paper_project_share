@@ -1,0 +1,294 @@
+{
+  "artifact_sha256": {
+    "csim_report_gdn_rs2_top_csim.log": "315D8C561031B10D7B98AC0CCB7AF2F782560154B6B140822A7E56F795C0038D",
+    "csim_solution_log_u55c_250mhz.log": "6C4F2D797CBF7D41AC0DAF0E5AD782C337ABFB02E38BA558F822CA8A59CAB963",
+    "csynth_impl_report_gdn_rs2_top_impl_csynth.rpt": "01BDAC9523A3ED276181D4DB3BFE1344EB342B9BA2E1CE2212B19580758AEAC7",
+    "csynth_solution_log_u55c_250mhz.log": "647D7A4FDD90B784D1C09FF2E34383041867392F6D9679C255C776942C7AFEF7",
+    "csynth_top_report_gdn_rs2_top_csynth.rpt": "6ECD8E543D550916C0BD4F106DA38F050E96FEF98541938FA2A64A5186E6DBAF",
+    "csynth_top_xml_gdn_rs2_top_csynth.xml": "8602C83E4A58270F69F6CC03653FE3B541FB1407D80A98E7E8B6BD89D34C0CB1",
+    "derived_source_gdn_rs2_top.cpp": "771C77AE0DB05F92552828EE2FF068200ECD884FA919667319A0EDAF44BD2719",
+    "design_analysis.rpt": "875E820BD5753D09421F4B93D5FFD7F3F151765BDD4F5C7A2ED71E2FDC487890",
+    "generation_manifest_manifest.json": "21E8D647164774E35E46CFBF4F8E967FC3B3BD5DE1AB194FE762608D3F1792A4",
+    "impl_clock_util.rpt": "DB3892725D94685767E4891300AAD764CC7145CE7A1D15DBEC900305558CD894",
+    "impl_drc.rpt": "6C5ABF433DCC73FDFD9B5547DC04AA140335F1DADA8A241A270D3429943E1999",
+    "impl_methodology.rpt": "E88D9A38063266CBAA8C12E2E5C4B4511830A530AF56859C5E9AF699906746DD",
+    "impl_power.rpt": "6BC5539A36299C20266B8A73861E9414D024681651D6667F47F4DBEDD80439F2",
+    "impl_timing.rpt": "A3BB9BD348CCFCA122427D11CE1D8ACAEB697A1B3A2D64E4F6A86F84D1C0B128",
+    "impl_util.rpt": "54A44F900FEEA768E8B9EA9E4C7F96C045E9F1A8BAB734CC33D1815D3531D2F9",
+    "impl_util_hierarchical.rpt": "0C81B2E94C87A9BB72DAE3B23C40F007F2B62898B5865A9F7B73726B4AC17EF5",
+    "ooc_manifest_manifest.json": "BED447F30CDACEC039102D5E1BB1C75B47950303EFE0385D71AFDAEA7FFEC864",
+    "vivado_impl_log_vivado_rs2-snapshot-write-contiguous-banks-impl.log": "CCCCA2B9ED53244CD7B1030E2FDDEDF6AAC6491C201F2930193C6EBC9A40B2D3",
+    "worst_100_setup_paths.rpt": "9CCB09697DBDAB12A16857180B9C7D4355396C2A52C0D378914CFA75B0586E5A"
+  },
+  "decision": {
+    "promoted": false,
+    "status": "REJECT_SNAPSHOT_CONTIGUOUS_BANKING_TIMING"
+  },
+  "experiment": "RS2 snapshot/fold writes with two contiguous layer banks",
+  "hls": {
+    "experiment": {
+      "available_device_resources": {
+        "BRAM_18K": 4032,
+        "DSP": 9024,
+        "FF": 2607360,
+        "LUT": 1303680,
+        "URAM": 960
+      },
+      "clock_uncertainty_ns": 1.08,
+      "device_utilization_percent": {
+        "BRAM_18K": 1.8353174603174602,
+        "DSP": 0.3102836879432624,
+        "FF": 2.9465436303387333,
+        "LUT": 13.561073269513992,
+        "URAM": 15.833333333333334
+      },
+      "estimated_clock_ns": 3.106,
+      "estimated_fmax_mhz": 321.9575016097875,
+      "interval_cycles_max": 102360803,
+      "interval_cycles_min": 4131,
+      "latency_cycles_average": 581080,
+      "latency_cycles_max": 102360802,
+      "latency_cycles_min": 4130,
+      "resources": {
+        "BRAM_18K": 74,
+        "DSP": 28,
+        "FF": 76827,
+        "LUT": 176793,
+        "URAM": 152
+      },
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "tool_version": "2025.2"
+    },
+    "selected": {
+      "available_device_resources": {
+        "BRAM_18K": 4032,
+        "DSP": 9024,
+        "FF": 2607360,
+        "LUT": 1303680,
+        "URAM": 960
+      },
+      "clock_uncertainty_ns": 1.08,
+      "device_utilization_percent": {
+        "BRAM_18K": 1.8353174603174602,
+        "DSP": 0.28812056737588654,
+        "FF": 2.8316381320569466,
+        "LUT": 12.816181885125184,
+        "URAM": 9.166666666666666
+      },
+      "estimated_clock_ns": 3.106,
+      "estimated_fmax_mhz": 321.9575016097875,
+      "interval_cycles_max": 102328034,
+      "interval_cycles_min": 4131,
+      "latency_cycles_average": 580690,
+      "latency_cycles_max": 102328033,
+      "latency_cycles_min": 4130,
+      "resources": {
+        "BRAM_18K": 74,
+        "DSP": 26,
+        "FF": 73831,
+        "LUT": 167082,
+        "URAM": 88
+      },
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "tool_version": "2025.2"
+    }
+  },
+  "postroute": {
+    "contiguous_bank_parent_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 226385,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 78247,
+      "setup_failing_endpoints": 64439,
+      "setup_total_endpoints": 226798,
+      "ths_ns": 0.0,
+      "tns_ns": -66301.594,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -2.966,
+      "wpws_ns": 1.3
+    },
+    "delta_experiment_minus_contiguous_bank_parent": {
+      "setup_failing_endpoints": 3343,
+      "tns_ns": -20429.85100000001,
+      "wns_ns": -0.657
+    },
+    "delta_experiment_minus_selected": {
+      "setup_failing_endpoints": 24189,
+      "tns_ns": -61866.619000000006,
+      "wns_ns": -1.8870000000000002
+    },
+    "delta_experiment_minus_unbanked_fold_write_parent": {
+      "setup_failing_endpoints": 38614,
+      "tns_ns": -73536.44200000001,
+      "wns_ns": -2.329
+    },
+    "drc": {
+      "by_rule": {
+        "DPIP-2": 8,
+        "DPOP-3": 8,
+        "DPOP-4": 14,
+        "RTSTAT-10": 1
+      },
+      "critical_warning_count": 0,
+      "error_count": 0,
+      "signoff_status": "PASS_WITH_WARNINGS",
+      "violation_count": 31,
+      "warning_count": 31
+    },
+    "experiment_path_characteristics": {
+      "high_fanout": 96,
+      "logic_delay_ns": 0.327,
+      "logic_levels": 5,
+      "net_delay_ns": 6.825,
+      "path_delay_ns": 7.152,
+      "slr_crossings": 2
+    },
+    "experiment_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 226388,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 78206,
+      "setup_failing_endpoints": 67782,
+      "setup_total_endpoints": 226801,
+      "ths_ns": 0.0,
+      "tns_ns": -86731.445,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -3.623,
+      "wpws_ns": 1.3
+    },
+    "selected_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 221457,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 43593,
+      "setup_total_endpoints": 221870,
+      "ths_ns": 0.0,
+      "tns_ns": -24864.826,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.736,
+      "wpws_ns": 1.3
+    },
+    "selected_utilization": {
+      "block_ram_tiles": {
+        "available": 2016,
+        "used": 341,
+        "utilization_percent": 16.91
+      },
+      "bufgce": {
+        "available": 288,
+        "used": 2,
+        "utilization_percent": 0.69
+      },
+      "clb_luts": {
+        "available": 1303680,
+        "used": 82038,
+        "utilization_percent": 6.29
+      },
+      "clb_registers": {
+        "available": 2607360,
+        "used": 69800,
+        "utilization_percent": 2.68
+      },
+      "dsps": {
+        "available": 9024,
+        "used": 12,
+        "utilization_percent": 0.13
+      },
+      "uram": {
+        "available": 960,
+        "used": 598,
+        "utilization_percent": 62.29
+      }
+    },
+    "unbanked_fold_write_parent_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 222740,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 76473,
+      "setup_failing_endpoints": 29168,
+      "setup_total_endpoints": 223153,
+      "ths_ns": 0.0,
+      "tns_ns": -13195.003,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.294,
+      "wpws_ns": 1.3
+    },
+    "utilization": {
+      "block_ram_tiles": {
+        "available": 2016,
+        "used": 341,
+        "utilization_percent": 16.91
+      },
+      "bufgce": {
+        "available": 288,
+        "used": 1,
+        "utilization_percent": 0.35
+      },
+      "clb_luts": {
+        "available": 1303680,
+        "used": 86263,
+        "utilization_percent": 6.62
+      },
+      "clb_registers": {
+        "available": 2607360,
+        "used": 72215,
+        "utilization_percent": 2.77
+      },
+      "dsps": {
+        "available": 9024,
+        "used": 14,
+        "utilization_percent": 0.16
+      },
+      "uram": {
+        "available": 960,
+        "used": 598,
+        "utilization_percent": 62.29
+      }
+    },
+    "vectorless_power_at_failed_4ns_constraint": {
+      "components": {
+        "block_ram_w": 0.244,
+        "clb_logic_w": 0.561,
+        "clocks_w": 0.477,
+        "dsps_w": 0.008,
+        "signals_w": 0.833,
+        "uram_w": 0.998
+      },
+      "confidence": "Medium",
+      "dynamic_w": 3.121,
+      "measured_on_board": false,
+      "method": "Vivado vectorless activity propagation",
+      "static_w": 3.397,
+      "total_on_chip_w": 6.518
+    },
+    "worst_100_startpoint_origins": {
+      "top_fsm": 100
+    }
+  },
+  "schema": 1,
+  "scope": "isolated architecture experiment; selected kernel unchanged",
+  "source_identity": {
+    "derived_source_sha256": "771C77AE0DB05F92552828EE2FF068200ECD884FA919667319A0EDAF44BD2719",
+    "ooc_top_sha256": "EF09E5B5FB628E8421FAC1F70ADB7334072ABB4C55A93FC410CA46BA13FBE26B",
+    "parent_output_sha256": "B1F62ADB560A959BEC6EC22D90AC7829F8E30E359FB643391CA67314F504325C",
+    "selected_source_modified": false,
+    "selected_source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "timestamp": "2026-08-10T21:06:20.876746+00:00",
+  "verification": {
+    "csynth": "PASS",
+    "exact_64_token_csim": "PASS",
+    "route_completion": "PASS",
+    "target_250mhz": "FAIL",
+    "worst_100_path_classification": "PASS"
+  }
+}
