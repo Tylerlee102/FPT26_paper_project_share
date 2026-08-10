@@ -1,0 +1,318 @@
+{
+  "artifact_sha256": {
+    "csim_report_gdn_rs2_top_csim.log": "E60E3E85225EB6C89481E264F7DC81B155830A638AFC28344F53107D0D6612ED",
+    "csim_solution_log_u55c_250mhz.log": "568691D82B2A143CCCCBA0F89D7952CC3CA1821EE894E8FD24A706DF9A48A4EB",
+    "csynth_impl_report_gdn_rs2_top_impl_csynth.rpt": "031849AFFA856532C81E5A6D3F8A0939C53AFA0E7BCB3CF52BB34EC10BEA5E36",
+    "csynth_solution_log_u55c_250mhz.log": "04E5A7C7285FF1B4C28EBB20C2CA86D24F2E4342358F4C044AED1A16DE989657",
+    "csynth_top_report_gdn_rs2_top_csynth.rpt": "D3CA63CDC190A35E1297DECC99D960623972733ED595C963C5572D3053A7C0E9",
+    "csynth_top_xml_gdn_rs2_top_csynth.xml": "F269B62B625423943F2E93961743C4528D98AAF62A821991DE9140DD697E0EFF",
+    "derived_source_gdn_rs2_top.cpp": "A2DF7A1A91B6E388E70D141A5C2D8A75BC649F869AF986FD15EC95CBAE8799DD",
+    "design_analysis.rpt": "2734286F33401EFAA7F66B3152F85884136F8312A0D28142C676C4B849B5267F",
+    "generation_manifest_manifest.json": "2E887045AAA4D2E6E80124DC4F8F1D26DD970455BDD1509223EA0629724CB658",
+    "impl_clock_util.rpt": "E8F4DA4A5104AF295376E685FCD7ECA7776E669F5663FCDBCC3AD588AB0D19EC",
+    "impl_drc.rpt": "9384788B1BB32776B4646ED30F13DDF3CC04912EE6A7AB30B51DC3C1F0EA90F1",
+    "impl_methodology.rpt": "178257448A60D85782200BAFB554FAB429AF7B55535523FA364F4A80E655DFE7",
+    "impl_power.rpt": "D96D1D08348101DDDDE59A7CCE60904483A8260F3C9AA19A781ABC7746402359",
+    "impl_timing.rpt": "B59949D381605FE8FEBD54718E1C6DC45B75B8404045FFBFD882BB3F2F1807FE",
+    "impl_util.rpt": "A575E3D20BAFC879CCD121B82754673DAFC179B34480CDC5D6EC357909943D49",
+    "impl_util_hierarchical.rpt": "23A0606D59AE0133299F349E66FF02E4CD9477BC9A599D85392AFD5C18FDB5E6",
+    "ooc_manifest_manifest.json": "4B4B04A1C3454A5B6C0F062ECEF46889C17B04EBAC39D0FDA71F48A5AE88EB2A",
+    "vivado_impl_log_vivado_rs2-snapshot-write-partial-banks-impl.log": "D55E0DCD54E9DDA383141B52681FBE2046BF675E3BB2E743DF2BB188DC450696",
+    "worst_100_setup_paths.rpt": "4C688D221D4B0ABE87D9A05739189451F313B05C43553C0FD673223E27BDDD3F"
+  },
+  "comparison_sources": {
+    "combined_parent": {
+      "path": "reports/vivado/experiments/rs2_fold_write_partial_banks_20260810/summary.json",
+      "sha256": "762F8FAD9A1EF847BF128C263555BC0B1D0F29855E3573494CBBD77A59025432"
+    },
+    "selected_hls": {
+      "path": "reports/csynth/corrected/rs2_hls_summary.json",
+      "sha256": "9E780192929DFD2A8947AED9C0081BA93F4BC672C36BA8E7318271B0FD42CA5B"
+    },
+    "selected_utilization": {
+      "path": "reports/vivado/corrected/rs2_current/impl_util.rpt",
+      "sha256": "6B6AF67E62D6723E6E18AC51695E26B76B5918DF216363B9E56C504C14E44183"
+    },
+    "selected_vivado": {
+      "path": "reports/vivado/corrected/rs2_current/rs2_vivado_summary.json",
+      "sha256": "4ADB1073C47C40182DC98CE1C097F5BAA96F2CB309F68125EDB293EAF012CAC0"
+    }
+  },
+  "decision": {
+    "promoted": false,
+    "reason": "Snapshot-write hierarchy improves worst setup slack but worsens at least one aggregate setup metric relative to the matched parent and does not close 250 MHz; the locality idea may inform a smaller unbanked experiment, while this composition is not promoted.",
+    "status": "RETAIN_SNAPSHOT_WRITE_LOCALITY_FOR_NEXT_ITERATION"
+  },
+  "experiment": "RS2 localized snapshot/fold writes with six-way cyclic layer banks",
+  "hls": {
+    "delta_experiment_minus_selected": {
+      "BRAM_18K": 0,
+      "DSP": 2,
+      "FF": 3486,
+      "LUT": 19116,
+      "URAM": 320,
+      "latency_cycles_max": 36876
+    },
+    "experiment": {
+      "available_device_resources": {
+        "BRAM_18K": 4032,
+        "DSP": 9024,
+        "FF": 2607360,
+        "LUT": 1303680,
+        "URAM": 960
+      },
+      "clock_uncertainty_ns": 1.08,
+      "device_utilization_percent": {
+        "BRAM_18K": 1.8353174603174602,
+        "DSP": 0.3102836879432624,
+        "FF": 2.965336585665194,
+        "LUT": 14.28249263622975,
+        "URAM": 42.5
+      },
+      "estimated_clock_ns": 3.231,
+      "estimated_fmax_mhz": 309.50170225936245,
+      "interval_cycles_max": 102364910,
+      "interval_cycles_min": 4131,
+      "latency_cycles_average": 581132,
+      "latency_cycles_max": 102364909,
+      "latency_cycles_min": 4130,
+      "resources": {
+        "BRAM_18K": 74,
+        "DSP": 28,
+        "FF": 77317,
+        "LUT": 186198,
+        "URAM": 408
+      },
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "tool_version": "2025.2"
+    },
+    "selected": {
+      "available_device_resources": {
+        "BRAM_18K": 4032,
+        "DSP": 9024,
+        "FF": 2607360,
+        "LUT": 1303680,
+        "URAM": 960
+      },
+      "clock_uncertainty_ns": 1.08,
+      "device_utilization_percent": {
+        "BRAM_18K": 1.8353174603174602,
+        "DSP": 0.28812056737588654,
+        "FF": 2.8316381320569466,
+        "LUT": 12.816181885125184,
+        "URAM": 9.166666666666666
+      },
+      "estimated_clock_ns": 3.106,
+      "estimated_fmax_mhz": 321.9575016097875,
+      "interval_cycles_max": 102328034,
+      "interval_cycles_min": 4131,
+      "latency_cycles_average": 580690,
+      "latency_cycles_max": 102328033,
+      "latency_cycles_min": 4130,
+      "resources": {
+        "BRAM_18K": 74,
+        "DSP": 26,
+        "FF": 73831,
+        "LUT": 167082,
+        "URAM": 88
+      },
+      "target_clock_ns": 4.0,
+      "target_device": "xcu55c-fsvh2892-2L-e",
+      "tool_version": "2025.2"
+    }
+  },
+  "postroute": {
+    "combined_parent_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 226613,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 78434,
+      "setup_failing_endpoints": 53673,
+      "setup_total_endpoints": 227026,
+      "ths_ns": 0.0,
+      "tns_ns": -51999.98,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -2.757,
+      "wpws_ns": 1.3
+    },
+    "delta_experiment_minus_combined_parent": {
+      "setup_failing_endpoints": 18747,
+      "tns_ns": -27337.988999999994,
+      "wns_ns": 0.27300000000000013
+    },
+    "delta_experiment_minus_selected": {
+      "setup_failing_endpoints": 28827,
+      "tns_ns": -54473.143,
+      "wns_ns": -0.748
+    },
+    "drc": {
+      "by_rule": {
+        "DPIP-2": 8,
+        "DPOP-3": 8,
+        "DPOP-4": 14,
+        "RTSTAT-10": 1
+      },
+      "critical_warning_count": 0,
+      "error_count": 0,
+      "signoff_status": "PASS_WITH_WARNINGS",
+      "violation_count": 31,
+      "warning_count": 31
+    },
+    "experiment_path_characteristics": {
+      "high_fanout": 83,
+      "logic_delay_ns": 0.805,
+      "logic_levels": 7,
+      "net_delay_ns": 4.991,
+      "path_delay_ns": 5.796,
+      "slr_crossings": 1
+    },
+    "experiment_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 226747,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 78429,
+      "setup_failing_endpoints": 72420,
+      "setup_total_endpoints": 227160,
+      "ths_ns": 0.0,
+      "tns_ns": -79337.969,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -2.484,
+      "wpws_ns": 1.3
+    },
+    "route_log_timing_critical_warning_count": 1,
+    "selected_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 221457,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 75648,
+      "setup_failing_endpoints": 43593,
+      "setup_total_endpoints": 221870,
+      "ths_ns": 0.0,
+      "tns_ns": -24864.826,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.736,
+      "wpws_ns": 1.3
+    },
+    "selected_utilization": {
+      "block_ram_tiles": {
+        "available": 2016,
+        "used": 341,
+        "utilization_percent": 16.91
+      },
+      "bufgce": {
+        "available": 288,
+        "used": 2,
+        "utilization_percent": 0.69
+      },
+      "clb_luts": {
+        "available": 1303680,
+        "used": 82038,
+        "utilization_percent": 6.29
+      },
+      "clb_registers": {
+        "available": 2607360,
+        "used": 69800,
+        "utilization_percent": 2.68
+      },
+      "dsps": {
+        "available": 9024,
+        "used": 12,
+        "utilization_percent": 0.13
+      },
+      "uram": {
+        "available": 960,
+        "used": 598,
+        "utilization_percent": 62.29
+      }
+    },
+    "utilization": {
+      "block_ram_tiles": {
+        "available": 2016,
+        "used": 341,
+        "utilization_percent": 16.91
+      },
+      "bufgce": {
+        "available": 288,
+        "used": 1,
+        "utilization_percent": 0.35
+      },
+      "clb_luts": {
+        "available": 1303680,
+        "used": 88830,
+        "utilization_percent": 6.81
+      },
+      "clb_registers": {
+        "available": 2607360,
+        "used": 72540,
+        "utilization_percent": 2.78
+      },
+      "dsps": {
+        "available": 9024,
+        "used": 14,
+        "utilization_percent": 0.16
+      },
+      "uram": {
+        "available": 960,
+        "used": 598,
+        "utilization_percent": 62.29
+      }
+    },
+    "utilization_delta_experiment_minus_selected": {
+      "block_ram_tiles": 0,
+      "bufgce": -1,
+      "clb_luts": 6792,
+      "clb_registers": 2740,
+      "dsps": 2,
+      "uram": 0
+    },
+    "vectorless_power_at_failed_4ns_constraint": {
+      "components": {
+        "block_ram_w": 0.206,
+        "clb_logic_w": 0.562,
+        "clocks_w": 0.487,
+        "dsps_w": 0.009,
+        "signals_w": 0.757,
+        "uram_w": 0.976
+      },
+      "confidence": "Medium",
+      "dynamic_w": 2.997,
+      "measured_on_board": false,
+      "method": "Vivado vectorless activity propagation",
+      "static_w": 3.394,
+      "total_on_chip_w": 6.391
+    },
+    "worst_100_startpoint_origins": {
+      "fold": 6,
+      "layer_address_control": 64,
+      "reset_slot": 1,
+      "resident_uram_read_clock": 9,
+      "top_fsm": 20
+    }
+  },
+  "schema": 1,
+  "scope": "isolated architecture experiment; selected kernel unchanged",
+  "source_identity": {
+    "derived_source_sha256": "A2DF7A1A91B6E388E70D141A5C2D8A75BC649F869AF986FD15EC95CBAE8799DD",
+    "ooc_top_sha256": "18EA9B2EEFF48BA9C0716F95788992925392B89769FB5B2598869B2BEA4EA455",
+    "parent_output_sha256": "F323C342106C72CD79EE6D21185DAC4E95D90D1B5D8F37AEB0299EE61808A525",
+    "selected_source_modified": false,
+    "selected_source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "timestamp": "2026-08-10T13:26:44.261367+00:00",
+  "verification": {
+    "csynth": "PASS",
+    "cyclic_factor_6_layer_partition": "PASS",
+    "exact_64_token_csim": "PASS",
+    "explicit_loop_constraints": "PASS",
+    "route_completion": "PASS",
+    "snapshot_and_fold_write_hierarchy": "PASS",
+    "target_250mhz": "FAIL",
+    "worst_100_path_classification": "PASS"
+  }
+}

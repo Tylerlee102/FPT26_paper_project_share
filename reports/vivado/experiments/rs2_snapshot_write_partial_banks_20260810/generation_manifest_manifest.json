@@ -1,0 +1,27 @@
+{
+  "behavioral_contract": "same arithmetic, state layout and capacity, commands, fold cadence, and layer banking; only LOAD resident-write hierarchy changes",
+  "experiment": "RS2 localized snapshot/fold writes with six-way layer banks",
+  "generated_at": "2026-08-10T11:41:34.691968+00:00",
+  "output": "build/experiments/rs2_snapshot_write_partial_banks/gdn_rs2_top.cpp",
+  "output_sha256": "A2DF7A1A91B6E388E70D141A5C2D8A75BC649F869AF986FD15EC95CBAE8799DD",
+  "parent_output_sha256": "F323C342106C72CD79EE6D21185DAC4E95D90D1B5D8F37AEB0299EE61808A525",
+  "parent_transform": {
+    "fold_write_transform": {
+      "fold_control_helpers": 1,
+      "fold_control_replacements": 1,
+      "fold_write_helpers": 1,
+      "fold_write_replacements": 1
+    },
+    "layers_per_bank": 6,
+    "partition_factor": 6
+  },
+  "schema": 1,
+  "selected_source_modified": false,
+  "snapshot_write_transform": {
+    "helpers": 1,
+    "replacements": 1
+  },
+  "source": "hls/rs2/src/gdn_rs2_top.cpp",
+  "source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+  "status": "PASS"
+}

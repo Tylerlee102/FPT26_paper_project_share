@@ -74,6 +74,18 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   6.226 ns worst path contains 5.989 ns of net delay and crosses two SLRs.
   Relative to selected, the route adds 6,939 LUTs, 2,638 registers, and two
   DSPs. The composition is rejected and not promoted.
+- A seventh source-isolated experiment adds a non-inlined snapshot-write
+  commit boundary to the sixth composition. Exact 64-token C simulation, every
+  explicit synthesis constraint, routing, hold, and DRC pass. Routed WNS
+  improves by 0.273 ns versus the sixth experiment to -2.484 ns, but TNS
+  worsens to -79,337.969 ns and 72,420 setup endpoints fail. The 5.796 ns worst
+  path contains 4.991 ns of net delay, seven logic levels, one SLR crossing,
+  and fanout 83. Of the 100 worst setup paths, 64 start in shared layer/address
+  control, 20 in the top FSM, nine at resident URAM clocks, six in fold control,
+  and one in reset control; none starts in snapshot-load or its commit helper.
+  The route uses 88,830 LUTs, 72,540 registers, 341 BRAM tiles, 598 URAMs, and
+  14 DSPs. Snapshot-write locality is retained only as a clue for a smaller
+  unbanked experiment; the composed variant is not promoted.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
@@ -120,7 +132,7 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 383 passed, 2 skipped, and 0 failed tests.
+- The latest full regression records 388 passed, 2 skipped, and 0 failed tests.
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

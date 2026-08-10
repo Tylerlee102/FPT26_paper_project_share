@@ -651,6 +651,16 @@ negative composition result shows that reducing one high-fanout fold-control
 net does not solve the wider snapshot, reset, and bank-selection distribution
 problem. We reject the composition and leave the source-locked candidate
 unchanged.
+A seventh isolated variant placed the remaining snapshot-load state writes
+behind a non-inlined commit boundary on top of that composition. Exact
+C-simulation, every explicit synthesis constraint, routing, hold, and design
+rules passed. The boundary removed snapshot-load control from the worst-path
+startpoints and modestly improved worst slack, but total negative slack and the
+failing-endpoint count grew substantially. The worst paths instead originated
+primarily in shared layer/address control, with smaller contributions from
+resident-memory clocks, top-level control, and fold control. We therefore retain
+snapshot-write locality only as a clue for a lower-cost unbanked experiment;
+this composed variant is not promoted.
 
 \begin{table}[t]
 \centering
