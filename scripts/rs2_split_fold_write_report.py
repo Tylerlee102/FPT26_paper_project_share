@@ -1,0 +1,432 @@
+"""Archive the isolated RS2 split fold-write experiment."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import shutil
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
+
+from scripts.bf16_hls_report import parse_top_xml
+from scripts.e2m0_vivado_report import parse_drc, parse_power, parse_timing_summary
+from scripts.rs2_layer_banks_report import _delta, _path_characteristics, _read, _sha256
+from scripts.rs2_vivado_report import parse_fractional_utilization
+
+
+ROOT = Path(__file__).resolve().parents[1]
+OUTPUT = (
+    ROOT / "reports" / "vivado" / "experiments" / "rs2_split_fold_write_20260810"
+)
+HLS_ROOT = ROOT / "gdn_rs2_split_fold_write_hls" / "u55c_250mhz"
+CSIM_ROOT = ROOT / "gdn_rs2_split_fold_write_trace_hls" / "u55c_250mhz"
+MANIFEST = ROOT / "build" / "experiments" / "rs2_split_fold_write" / "manifest.json"
+OOC_MANIFEST = (
+    ROOT / "build" / "vivado" / "rs2_split_fold_write_ooc_rtl" / "manifest.json"
+)
+IMPL_LOG = ROOT / "reports" / "vivado" / "vivado_rs2-split-fold-write-impl.log"
+SELECTED_HLS = ROOT / "reports" / "csynth" / "corrected" / "rs2_hls_summary.json"
+SELECTED_VIVADO = (
+    ROOT
+    / "reports"
+    / "vivado"
+    / "corrected"
+    / "rs2_current"
+    / "rs2_vivado_summary.json"
+)
+SELECTED_UTIL = (
+    ROOT / "reports" / "vivado" / "corrected" / "rs2_current" / "impl_util.rpt"
+)
+PARENT = (
+    ROOT
+    / "reports"
+    / "vivado"
+    / "experiments"
+    / "rs2_fold_write_20260809"
+    / "summary.json"
+)
+
+
+def _utilization_delta(
+    current: dict[str, dict[str, int | float]],
+    baseline: dict[str, dict[str, int | float]],
+) -> dict[str, int]:
+    return {
+        key: int(current[key]["used"]) - int(baseline[key]["used"])
+        for key in baseline
+    }
+
+
+def _startpoint_origins(text: str) -> dict[str, int]:
+    origins: Counter[str] = Counter()
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped.endswith(("/C", "/CLK")) or line[:1].isspace():
+            continue
+        if "commit_primary_fold_block" in stripped:
+            label = "commit_primary_fold_block"
+        elif "commit_residual_fold_block" in stripped:
+            label = "commit_residual_fold_block"
+        elif "commit_fold_block" in stripped:
+            label = "combined_commit_fold_block"
+        elif "load_snapshot" in stripped:
+            label = "load_snapshot"
+        elif "read_snapshot" in stripped:
+            label = "read_snapshot"
+        elif "reset_slot" in stripped:
+            label = "reset_slot"
+        elif "trunc_ln1150" in stripped:
+            label = "layer_address_control"
+        elif "ram_reg_uram" in stripped:
+            label = "resident_uram_read_clock"
+        elif "dot_base" in stripped:
+            label = "dot_base"
+        elif "fold" in stripped:
+            label = "fold"
+        elif "ap_CS_fsm_reg" in stripped:
+            label = "top_fsm"
+        elif "grp_gdn_rs2_top_impl" in stripped:
+            label = "top_impl"
+        else:
+            label = "other"
+        origins[label] += 1
+    return dict(sorted(origins.items()))
+
+
+def generate_report(output: Path = OUTPUT) -> dict[str, object]:
+    paths = {
+        "derived_source": MANIFEST.parent / "gdn_rs2_top.cpp",
+        "generation_manifest": MANIFEST,
+        "csim_report": CSIM_ROOT / "csim" / "report" / "gdn_rs2_top_csim.log",
+        "csim_solution_log": CSIM_ROOT / "u55c_250mhz.log",
+        "csynth_top_xml": HLS_ROOT / "syn" / "report" / "gdn_rs2_top_csynth.xml",
+        "csynth_top_report": HLS_ROOT / "syn" / "report" / "gdn_rs2_top_csynth.rpt",
+        "csynth_impl_report": HLS_ROOT
+        / "syn"
+        / "report"
+        / "gdn_rs2_top_impl_csynth.rpt",
+        "csynth_solution_log": HLS_ROOT / "u55c_250mhz.log",
+        "ooc_manifest": OOC_MANIFEST,
+        "vivado_impl_log": IMPL_LOG,
+        "utilization": output / "impl_util.rpt",
+        "timing": output / "impl_timing.rpt",
+        "drc": output / "impl_drc.rpt",
+        "power": output / "impl_power.rpt",
+        "design_analysis": output / "design_analysis.rpt",
+        "worst_paths": output / "worst_100_setup_paths.rpt",
+    }
+    for path in (
+        *paths.values(),
+        SELECTED_HLS,
+        SELECTED_VIVADO,
+        SELECTED_UTIL,
+        PARENT,
+    ):
+        if not path.is_file():
+            raise FileNotFoundError(path)
+
+    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    ooc = json.loads(OOC_MANIFEST.read_text(encoding="utf-8"))
+    selected_hls = json.loads(SELECTED_HLS.read_text(encoding="utf-8"))["csynth"][
+        "metrics"
+    ]
+    selected_vivado = json.loads(SELECTED_VIVADO.read_text(encoding="utf-8"))
+    parent = json.loads(PARENT.read_text(encoding="utf-8"))
+    experiment_hls = parse_top_xml(paths["csynth_top_xml"])
+    timing = parse_timing_summary(_read(paths["timing"]))
+    utilization = parse_fractional_utilization(_read(paths["utilization"]))
+    selected_utilization = parse_fractional_utilization(_read(SELECTED_UTIL))
+    drc = parse_drc(_read(paths["drc"]))
+    power = parse_power(_read(paths["power"]))
+    path_characteristics = _path_characteristics(_read(paths["design_analysis"]))
+    startpoint_origins = _startpoint_origins(_read(paths["worst_paths"]))
+
+    selected_source = ROOT / str(manifest["source"])
+    derived_source = ROOT / str(manifest["output"])
+    expected_transform = {
+        "combined_helpers_remaining": 0,
+        "primary_calls": 1,
+        "primary_helpers": 1,
+        "residual_calls": 1,
+        "residual_helpers": 1,
+    }
+    source_identity_pass = (
+        manifest.get("selected_source_modified") is False
+        and manifest.get("split_write_transform") == expected_transform
+        and _sha256(selected_source) == manifest["source_sha256"]
+        and _sha256(derived_source) == manifest["output_sha256"]
+        and ooc.get("status") == "PASS"
+        and _sha256(ROOT / str(ooc["source"])) == ooc["source_sha256"]
+        and _sha256(ROOT / str(ooc["output"])) == ooc["output_sha256"]
+    )
+    csim_text = _read(paths["csim_report"]) + "\n" + _read(paths["csim_solution_log"])
+    csynth_text = _read(paths["csynth_solution_log"])
+    impl_text = _read(paths["vivado_impl_log"])
+    exact_pass = (
+        "PASS: 64 encoded random-state tokens, exact outputs/counters, and final snapshot"
+        in csim_text
+        and "CSim done with 0 errors" in csim_text
+    )
+    helper_rtl = HLS_ROOT / "syn" / "verilog"
+    primary_helper = (
+        helper_rtl
+        / "gdn_rs2_top_p_anonymous_namespace_commit_primary_fold_block.v"
+    )
+    residual_helper = (
+        helper_rtl
+        / "gdn_rs2_top_p_anonymous_namespace_commit_residual_fold_block.v"
+    )
+    combined_helper = (
+        helper_rtl / "gdn_rs2_top_p_anonymous_namespace_commit_fold_block.v"
+    )
+    csynth_pass = (
+        "Finished Command csynth_design" in csynth_text
+        and "Loop Constraint Status: All loop constraints were satisfied" in csynth_text
+        and primary_helper.is_file()
+        and residual_helper.is_file()
+        and not combined_helper.exists()
+        and (
+            helper_rtl / "gdn_rs2_top_p_anonymous_namespace_fold_log_if_full.v"
+        ).is_file()
+    )
+    route_pass = (
+        "route_design completed successfully" in impl_text
+        and "rs2_split_fold_write_post_impl.dcp' has been generated" in impl_text
+        and "Exiting Vivado" in impl_text
+    )
+
+    selected_timing = selected_vivado["target_clock"]["timing"]
+    parent_timing = parent["postroute"]["experiment_timing"]
+    timing_keys = ("wns_ns", "tns_ns", "setup_failing_endpoints")
+    hls_resource_delta = {
+        key: int(experiment_hls["resources"][key])
+        - int(selected_hls["resources"][key])
+        for key in selected_hls["resources"]
+    }
+    hls_resource_delta["latency_cycles_max"] = int(
+        experiment_hls["latency_cycles_max"]
+    ) - int(selected_hls["latency_cycles_max"])
+
+    output.mkdir(parents=True, exist_ok=True)
+    copied: dict[str, str] = {}
+    for label in (
+        "derived_source",
+        "generation_manifest",
+        "csim_report",
+        "csim_solution_log",
+        "csynth_top_xml",
+        "csynth_top_report",
+        "csynth_impl_report",
+        "csynth_solution_log",
+        "ooc_manifest",
+        "vivado_impl_log",
+    ):
+        source = paths[label]
+        destination = output / f"{label}_{source.name}"
+        shutil.copy2(source, destination)
+        copied[destination.name] = _sha256(destination)
+    for path in output.glob("*.rpt"):
+        copied[path.name] = _sha256(path)
+
+    path_classification_pass = sum(startpoint_origins.values()) == 100
+    status = (
+        "PASS"
+        if source_identity_pass
+        and exact_pass
+        and csynth_pass
+        and route_pass
+        and path_classification_pass
+        and drc["error_count"] == 0
+        and drc["critical_warning_count"] == 0
+        else "FAIL"
+    )
+    if float(timing["wns_ns"]) >= 0.0 and float(timing["whs_ns"]) >= 0.0:
+        decision_status = "PROMOTION_CANDIDATE_SPLIT_FOLD_WRITES"
+        decision_reason = (
+            "The split variant closes the declared 250 MHz constraint and must be "
+            "ported into the selected source and reverified before promotion."
+        )
+    elif float(timing["wns_ns"]) > float(parent_timing["wns_ns"]):
+        if (
+            float(timing["tns_ns"]) > float(parent_timing["tns_ns"])
+            and int(timing["setup_failing_endpoints"])
+            <= int(parent_timing["setup_failing_endpoints"])
+        ):
+            decision_status = "RETAIN_PROMISING_SPLIT_FOLD_WRITES"
+            decision_reason = (
+                "Splitting primary and residual commits improves every registered setup "
+                "metric relative to the matched parent but does not close 250 MHz."
+            )
+        else:
+            decision_status = "RETAIN_SPLIT_FOLD_WRITES_FOR_NEXT_ITERATION"
+            decision_reason = (
+                "The split improves worst setup slack but worsens at least one aggregate "
+                "setup metric relative to the matched parent and remains below 250 MHz."
+            )
+    else:
+        decision_status = "REJECT_SPLIT_FOLD_WRITE_TIMING"
+        decision_reason = (
+            "Splitting primary and residual commits does not improve worst setup slack "
+            "relative to the matched parent and remains below 250 MHz."
+        )
+
+    comparison_sources = {
+        "selected_hls": SELECTED_HLS,
+        "selected_vivado": SELECTED_VIVADO,
+        "selected_utilization": SELECTED_UTIL,
+        "fold_write_parent": PARENT,
+    }
+    summary: dict[str, object] = {
+        "schema": 1,
+        "status": status,
+        "experiment": "RS2 split primary/residual fold-write commits",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "scope": "isolated architecture experiment; selected kernel unchanged",
+        "comparison_sources": {
+            label: {
+                "path": path.relative_to(ROOT).as_posix(),
+                "sha256": _sha256(path),
+            }
+            for label, path in comparison_sources.items()
+        },
+        "source_identity": {
+            "status": "PASS" if source_identity_pass else "FAIL",
+            "selected_source_modified": False,
+            "selected_source_sha256": manifest["source_sha256"],
+            "parent_output_sha256": manifest["parent_output_sha256"],
+            "derived_source_sha256": manifest["output_sha256"],
+            "ooc_top_sha256": ooc["output_sha256"],
+        },
+        "verification": {
+            "exact_64_token_csim": "PASS" if exact_pass else "FAIL",
+            "csynth": "PASS" if csynth_pass else "FAIL",
+            "explicit_loop_constraints": "PASS" if csynth_pass else "FAIL",
+            "split_primary_residual_commit_hierarchy": (
+                "PASS" if csynth_pass else "FAIL"
+            ),
+            "worst_100_path_classification": (
+                "PASS" if path_classification_pass else "FAIL"
+            ),
+            "route_completion": "PASS" if route_pass else "FAIL",
+            "target_250mhz": (
+                "PASS"
+                if float(timing["wns_ns"]) >= 0.0 and float(timing["whs_ns"]) >= 0.0
+                else "FAIL"
+            ),
+        },
+        "hls": {
+            "selected": selected_hls,
+            "experiment": experiment_hls,
+            "delta_experiment_minus_selected": hls_resource_delta,
+        },
+        "postroute": {
+            "selected_timing": selected_timing,
+            "fold_write_parent_timing": parent_timing,
+            "experiment_timing": timing,
+            "delta_experiment_minus_selected": _delta(
+                timing, selected_timing, timing_keys
+            ),
+            "delta_experiment_minus_fold_write_parent": _delta(
+                timing, parent_timing, timing_keys
+            ),
+            "experiment_path_characteristics": path_characteristics,
+            "worst_100_startpoint_origins": startpoint_origins,
+            "selected_utilization": selected_utilization,
+            "utilization": utilization,
+            "utilization_delta_experiment_minus_selected": _utilization_delta(
+                utilization, selected_utilization
+            ),
+            "drc": drc,
+            "route_log_timing_critical_warning_count": impl_text.count(
+                "CRITICAL WARNING: [Route 35-39]"
+            ),
+            "vectorless_power_at_failed_4ns_constraint": power,
+        },
+        "decision": {
+            "status": decision_status,
+            "promoted": False,
+            "reason": decision_reason,
+        },
+        "artifact_sha256": dict(sorted(copied.items())),
+    }
+    if status != "PASS":
+        raise RuntimeError("refusing to archive an invalid split fold-write experiment")
+
+    (output / "summary.json").write_text(
+        json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    parent_delta = summary["postroute"][
+        "delta_experiment_minus_fold_write_parent"
+    ]
+    selected_delta = summary["postroute"]["delta_experiment_minus_selected"]
+    (output / "README.md").write_text(
+        "\n".join(
+            [
+                "# RS2 split fold-write experiment",
+                "",
+                "This source-isolated variant splits the primary and residual folded-state",
+                "writes into sequential non-inlined helpers on the matched unbanked",
+                "fold-write parent. Arithmetic, state layout and capacity, commands, fold",
+                "cadence, target, and route directives remain fixed.",
+                "",
+                f"Exact 64-token C simulation passes. HLS estimates {experiment_hls['estimated_clock_ns']:.3f} ns",
+                f"and {experiment_hls['latency_cycles_max']:,} maximum cycles. The final",
+                f"route reaches {timing['wns_ns']:.3f} ns WNS and {timing['tns_ns']:,.3f} ns TNS",
+                f"with {timing['setup_failing_endpoints']:,} failing setup endpoints.",
+                f"Hold is {timing['whs_ns']:+.3f} ns with {timing['hold_failing_endpoints']} failures;",
+                f"DRC has {drc['critical_warning_count']} critical warnings and {drc['error_count']} errors.",
+                "",
+                f"Relative to the fold-write parent, WNS changes by {parent_delta['wns_ns']:+.3f} ns,",
+                f"TNS by {parent_delta['tns_ns']:+,.3f} ns, and failing endpoints by",
+                f"{parent_delta['setup_failing_endpoints']:+,}. Relative to selected, WNS",
+                f"changes by {selected_delta['wns_ns']:+.3f} ns.",
+                f"The worst path is {path_characteristics['path_delay_ns']:.3f} ns, with",
+                f"{path_characteristics['logic_delay_ns']:.3f} ns logic and",
+                f"{path_characteristics['net_delay_ns']:.3f} ns net delay across",
+                f"{path_characteristics['slr_crossings']} SLR crossings.",
+                "",
+                f"Decision: `{decision_status}`. Vectorless power at a failed 4 ns",
+                "constraint is diagnostic only.",
+                "",
+                "## Worst-100 startpoint origins",
+                "",
+                "| Origin | Paths |",
+                "|---|---:|",
+                *[
+                    f"| `{name}` | {count} |"
+                    for name, count in startpoint_origins.items()
+                ],
+                "",
+                "## Artifact hashes",
+                "",
+                "| Artifact | SHA256 |",
+                "|---|---|",
+                *[
+                    f"| `{name}` | `{digest}` |"
+                    for name, digest in sorted(copied.items())
+                ],
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    return summary
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, default=OUTPUT)
+    args = parser.parse_args(argv)
+    output = args.output if args.output.is_absolute() else ROOT / args.output
+    try:
+        result = generate_report(output)
+    except (FileNotFoundError, KeyError, RuntimeError, TypeError, ValueError) as exc:
+        print(exc)
+        return 1
+    print(json.dumps({"status": result["status"], "decision": result["decision"]}))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

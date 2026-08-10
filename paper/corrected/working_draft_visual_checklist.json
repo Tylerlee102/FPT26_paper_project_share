@@ -41,13 +41,13 @@
       "page": 7,
       "status": "PASS",
       "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
-      "notes": "Trade-off figure, post-route table, and all seven architecture-ablation paragraphs are readable; the added snapshot-write result stays inside both columns."
+      "notes": "Trade-off figure and the first portion of all eight architecture-ablation paragraphs are readable; the split-fold result flows cleanly to page 8 without clipping or overlap."
     },
     {
       "page": 8,
       "status": "PASS",
       "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
-      "notes": "Power table, discussion equations, and limitations render without clipping, overlap, or broken glyphs."
+      "notes": "The split-fold ablation continuation, post-route and power tables, discussion equations, and limitations render without clipping, overlap, or broken glyphs."
     },
     {
       "page": 9,

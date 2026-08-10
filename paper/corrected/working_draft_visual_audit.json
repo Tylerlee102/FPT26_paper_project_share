@@ -32,10 +32,10 @@
     }
   ],
   "build_manifest": "paper/corrected/working_draft_build_manifest.json",
-  "build_manifest_sha256": "5D32283D7F4FC2B09CFE79F4CE6D6CE0C88033802C6EB38992EC1330655DAF01",
+  "build_manifest_sha256": "0FDB2222BB79FA3DED3E18E6936B37A3BE927DE9C868E125E80EF0CC724FA5AE",
   "checklist": "paper/corrected/working_draft_visual_checklist.json",
-  "checklist_sha256": "0454A90F4F51E1221B18772A2E3D85B67E3A911C7EC06E4F0B199C55CDCA1063",
-  "generated_at": "2026-08-10T13:32:34.841421+00:00",
+  "checklist_sha256": "0BA87AA65DA1C4CE003C2D98C21061C131A1E96A399659D7686B052C185FE627",
+  "generated_at": "2026-08-10T15:41:08.106802+00:00",
   "page_count": 9,
   "pages": [
     {
@@ -88,7 +88,7 @@
     },
     {
       "height": 2420,
-      "notes": "Trade-off figure, post-route table, and all seven architecture-ablation paragraphs are readable; the added snapshot-write result stays inside both columns.",
+      "notes": "Trade-off figure and the first portion of all eight architecture-ablation paragraphs are readable; the split-fold result flows cleanly to page 8 without clipping or overlap.",
       "page": 7,
       "path": "reports/rendered/working_draft/page-07.png",
       "sha256": "3E5FA6F4985AFA565CD9634A69D933C5BD4173F3A4146467E40DC08C8BE84EC6",
@@ -96,7 +96,7 @@
     },
     {
       "height": 2420,
-      "notes": "Power table, discussion equations, and limitations render without clipping, overlap, or broken glyphs.",
+      "notes": "The split-fold ablation continuation, post-route and power tables, discussion equations, and limitations render without clipping, overlap, or broken glyphs.",
       "page": 8,
       "path": "reports/rendered/working_draft/page-08.png",
       "sha256": "C9DBF47EB35EBD4EA5D879EF24A832AC4FD4A6A4BB051CA9CAA1A8397135C0B8",
@@ -124,5 +124,5 @@
   "submission_eligible": false,
   "visual_audit_status": "PASS",
   "working_draft": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "working_draft_sha256": "398CADE079E5E73E92EE116DD47C1DCA48CB1FCEEC267DFDC336D2C0C3FE748D"
+  "working_draft_sha256": "C8C2B9D80F982314274B168A000246F9F1C4BDD2FBE16470D750E4490057C3F4"
 }

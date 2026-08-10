@@ -33,6 +33,8 @@ gdn_rs2_fold_write_partial_banks_hls/
 gdn_rs2_fold_write_partial_banks_trace_hls/
 gdn_rs2_snapshot_write_partial_banks_hls/
 gdn_rs2_snapshot_write_partial_banks_trace_hls/
+gdn_rs2_split_fold_write_hls/
+gdn_rs2_split_fold_write_trace_hls/
 gdn_rs2_layer_banks_hls/
 gdn_rs2_layer_banks_trace_hls/
 gdn_rs2_partial_layer_banks_hls/

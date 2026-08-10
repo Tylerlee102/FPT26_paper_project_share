@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import io
 import json
 import math
 from datetime import datetime, timezone
@@ -176,7 +177,9 @@ def _verify_run(
     }
 
 
-def aggregate(*, require_extended: bool = False) -> dict[str, object]:
+def aggregate(
+    *, require_extended: bool = False, write_outputs: bool = True
+) -> dict[str, object]:
     registration = json.loads(REGISTRATION.read_text(encoding="utf-8"))
     if (
         registration["registration_status"] != "PASS"
@@ -257,7 +260,6 @@ def aggregate(*, require_extended: bool = False) -> dict[str, object]:
             "not closed-loop model quality or board energy evidence",
         ],
     }
-    EVIDENCE.mkdir(parents=True, exist_ok=True)
     fields = [
         "gate",
         "split",
@@ -281,15 +283,13 @@ def aggregate(*, require_extended: bool = False) -> dict[str, object]:
         "cumulative_state_scale_changes",
         "input_stream_sha256",
     ]
-    with OUTPUT_CSV.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
-        writer.writeheader()
-        writer.writerows(runs)
+    csv_buffer = io.StringIO(newline="")
+    writer = csv.DictWriter(csv_buffer, fieldnames=fields, extrasaction="ignore")
+    writer.writeheader()
+    writer.writerows(runs)
+    csv_bytes = csv_buffer.getvalue().encode("utf-8")
     payload["summary_csv"] = _relative(OUTPUT_CSV)
-    payload["summary_csv_sha256"] = _sha256(OUTPUT_CSV)
-    OUTPUT_JSON.write_text(
-        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    payload["summary_csv_sha256"] = hashlib.sha256(csv_bytes).hexdigest().upper()
     lines = [
         "# Encoded RS2/R3 Candidate Evidence",
         "",
@@ -316,7 +316,13 @@ def aggregate(*, require_extended: bool = False) -> dict[str, object]:
             "",
         ]
     )
-    OUTPUT_MD.write_text("\n".join(lines), encoding="utf-8")
+    if write_outputs:
+        EVIDENCE.mkdir(parents=True, exist_ok=True)
+        OUTPUT_CSV.write_bytes(csv_bytes)
+        OUTPUT_JSON.write_text(
+            json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+        OUTPUT_MD.write_text("\n".join(lines), encoding="utf-8")
     return payload
 
 

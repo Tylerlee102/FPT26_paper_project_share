@@ -86,6 +86,18 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   The route uses 88,830 LUTs, 72,540 registers, 341 BRAM tiles, 598 URAMs, and
   14 DSPs. Snapshot-write locality is retained only as a clue for a smaller
   unbanked experiment; the composed variant is not promoted.
+- An eighth source-isolated experiment returns to the strongest unbanked
+  fold-write parent and splits its primary and residual commits into sequential
+  non-inlined helpers. Exact 64-token C simulation, every explicit synthesis
+  constraint, routing, hold, and DRC pass. HLS estimates 3.106 ns with 74 BRAM,
+  26 DSP, 74,489 FFs, 167,279 LUTs, 88 URAMs, and 102,377,182 worst-case cycles.
+  The final route regresses to -3.091 ns WNS, -67,683.023 ns TNS, and 55,650
+  failing setup endpoints. Its 6.973 ns worst path contains 6.515 ns of net
+  delay, five logic levels, two SLR crossings, and fanout 103. Of the 100 worst
+  setup paths, 35 start in snapshot-load control, 31 in fold control, 25 in
+  reset control, and nine in the top FSM. The route uses 82,155 LUTs, 70,464
+  registers, 341 BRAM tiles, 598 URAMs, and 12 DSPs. The split is rejected and
+  not promoted.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
@@ -132,7 +144,7 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 388 passed, 2 skipped, and 0 failed tests.
+- The latest full regression records 393 passed, 2 skipped, and 0 failed tests.
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

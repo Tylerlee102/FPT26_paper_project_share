@@ -4,7 +4,7 @@ from scripts.aggregate_rs2_encoded_candidate import aggregate
 
 
 def test_held_out_encoded_gate_passes_all_registered_runs() -> None:
-    summary = aggregate()
+    summary = aggregate(write_outputs=False)
     held_out = summary["gate_results"]["held_out"]
     assert held_out["status"] == "PASS"
     assert held_out["run_count"] == 6
@@ -16,7 +16,7 @@ def test_held_out_encoded_gate_passes_all_registered_runs() -> None:
 
 
 def test_encoded_summary_remains_partial_until_8192_runs_exist() -> None:
-    summary = aggregate()
+    summary = aggregate(write_outputs=False)
     extended = summary["gate_results"]["extended_development"]
     assert extended["status"] in {"NOT_RUN", "PARTIAL", "PASS"}
     assert summary["status"] == (

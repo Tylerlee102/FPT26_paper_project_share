@@ -661,6 +661,16 @@ primarily in shared layer/address control, with smaller contributions from
 resident-memory clocks, top-level control, and fold control. We therefore retain
 snapshot-write locality only as a clue for a lower-cost unbanked experiment;
 this composed variant is not promoted.
+An eighth isolated variant returned to the strongest unbanked fold-write parent
+and split its combined primary and residual commit into sequential non-inlined
+helpers. Exact C-simulation, every explicit synthesis constraint, routing,
+hold, and design rules passed, while HLS resource use changed negligibly. The
+matched route nevertheless regressed sharply in worst slack, total negative
+slack, and failing endpoints. Snapshot-load, fold, reset, and top-level control
+accounted for every worst-path startpoint, and the longest path crossed two
+SLRs with delay dominated by interconnect. Separating one write-control cone
+therefore displaced rather than removed the global resident-memory control
+problem; the split variant is rejected and not promoted.
 
 \begin{table}[t]
 \centering

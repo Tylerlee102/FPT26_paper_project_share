@@ -1,0 +1,26 @@
+{
+  "behavioral_contract": "same arithmetic, state layout and capacity, commands, fold cadence, and write values; only primary/residual fold-write hierarchy changes",
+  "experiment": "RS2 split primary/residual fold-write commits",
+  "generated_at": "2026-08-10T14:09:44.372667+00:00",
+  "output": "build/experiments/rs2_split_fold_write/gdn_rs2_top.cpp",
+  "output_sha256": "A686EFDCE85BB9277EA728273292F60B4E6716D521160B0A5EA1021F34DDC6B3",
+  "parent_output_sha256": "B1E12FC52C984FF4DF3CEB545F0ED97A8344FF4F398A404BBE3E8FC07C973E54",
+  "parent_transform": {
+    "fold_control_helpers": 1,
+    "fold_control_replacements": 1,
+    "fold_write_helpers": 1,
+    "fold_write_replacements": 1
+  },
+  "schema": 1,
+  "selected_source_modified": false,
+  "source": "hls/rs2/src/gdn_rs2_top.cpp",
+  "source_sha256": "87D9D80BD8C2EB1DA665D195EADF0536FEE455F4E246B61BD2ABD3523382647E",
+  "split_write_transform": {
+    "combined_helpers_remaining": 0,
+    "primary_calls": 1,
+    "primary_helpers": 1,
+    "residual_calls": 1,
+    "residual_helpers": 1
+  },
+  "status": "PASS"
+}
