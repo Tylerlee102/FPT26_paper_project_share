@@ -1,0 +1,191 @@
+{
+  "artifact_sha256": {
+    "design_analysis.rpt": "DEBCA22DB8FECD1B64AE702D22119B1B7B5B88FD42ACEE25AB56D099F0970B83",
+    "generation_manifest_manifest.json": "ACF93CCC4D504051F1392760A83EC899E5DE68263E986F48EDF58736F0D4E833",
+    "impl_clock_util.rpt": "CCFAB7A49A5255F201C1F99DE7B7BEA2B1743391AB239B9B9915A1A96C1EC266",
+    "impl_drc.rpt": "C200E8B07241739444206EFFA8983C57E18669C198B1576D25B510D090A85285",
+    "impl_methodology.rpt": "E116D47DC64FF9F8B059691BAB9A67EE2D49B75AFAEC34A0645A492023DEF1BC",
+    "impl_power.rpt": "80D5817F1DDFD81DA9C68F0DE610E49EDAC0A9E4E9C0BB50A29FFBC14467A603",
+    "impl_timing.rpt": "255CA3CBD228134BEC4FFB3E99DA64AA7ED2B87363A1FDAAB3D8CBA66D4E4033",
+    "impl_util.rpt": "F841CBB76B312B0FEFF9CC69ECC09ED52B1926FEACAAB053F748686B39EC9C7B",
+    "impl_util_hierarchical.rpt": "A955EFDCD6EDFB7101B524A081EACD522E76508641FDDED659284E8D0D6133A8",
+    "modified_impl_gdn_rs2_top_gdn_rs2_top_impl.v": "1171858349340CE50E91E62ACBC185B77FC5D933B910EF55A47C21D6BAE6B963",
+    "ooc_manifest_manifest.json": "3F14B2B98571C491C23718D32E1605AC8163F099ECEC1E40B795C0FE477C66DB",
+    "vivado_impl_log_vivado_rs2-snapshot-write-unbanked-fsm-fanout16-impl.log": "4B865C4169FE988F1E7AA923188B401F0ABB399748D29BBF43F742408A7CAD8E",
+    "worst_100_setup_paths.rpt": "FC3EAE67176C2FFED598787F6CB983B53FB8033B723E8EA561C31DD344BD5732"
+  },
+  "decision": {
+    "promoted": false,
+    "status": "REJECT_FSM_FANOUT16_TIMING"
+  },
+  "experiment": "RS2 unbanked snapshot-write top-FSM max-fanout 16",
+  "postroute": {
+    "delta_experiment_minus_parent": {
+      "setup_failing_endpoints": 15747,
+      "tns_ns": -32336.637,
+      "wns_ns": -1.192
+    },
+    "drc": {
+      "by_rule": {
+        "DPIP-2": 6,
+        "DPOP-3": 7,
+        "DPOP-4": 12,
+        "RTSTAT-10": 1
+      },
+      "critical_warning_count": 0,
+      "error_count": 0,
+      "signoff_status": "PASS_WITH_WARNINGS",
+      "violation_count": 26,
+      "warning_count": 26
+    },
+    "experiment_path_characteristics": {
+      "high_fanout": 97,
+      "logic_delay_ns": 0.51,
+      "logic_levels": 5,
+      "net_delay_ns": 6.166,
+      "path_delay_ns": 6.676,
+      "slr_crossings": 2
+    },
+    "experiment_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 223722,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 77319,
+      "setup_failing_endpoints": 58993,
+      "setup_total_endpoints": 224135,
+      "ths_ns": 0.0,
+      "tns_ns": -58498.117,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -2.686,
+      "wpws_ns": 1.3
+    },
+    "parent_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 223020,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 76502,
+      "setup_failing_endpoints": 43246,
+      "setup_total_endpoints": 223433,
+      "ths_ns": 0.0,
+      "tns_ns": -26161.48,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.494,
+      "wpws_ns": 1.3
+    },
+    "parent_utilization": {
+      "block_ram_tiles": {
+        "available": 2016,
+        "used": 341,
+        "utilization_percent": 16.91
+      },
+      "bufgce": {
+        "available": 288,
+        "used": 1,
+        "utilization_percent": 0.35
+      },
+      "clb_luts": {
+        "available": 1303680,
+        "used": 83269,
+        "utilization_percent": 6.39
+      },
+      "clb_registers": {
+        "available": 2607360,
+        "used": 70679,
+        "utilization_percent": 2.71
+      },
+      "dsps": {
+        "available": 9024,
+        "used": 12,
+        "utilization_percent": 0.13
+      },
+      "uram": {
+        "available": 960,
+        "used": 598,
+        "utilization_percent": 62.29
+      }
+    },
+    "utilization": {
+      "block_ram_tiles": {
+        "available": 2016,
+        "used": 341,
+        "utilization_percent": 16.91
+      },
+      "bufgce": {
+        "available": 288,
+        "used": 1,
+        "utilization_percent": 0.35
+      },
+      "clb_luts": {
+        "available": 1303680,
+        "used": 83210,
+        "utilization_percent": 6.38
+      },
+      "clb_registers": {
+        "available": 2607360,
+        "used": 71391,
+        "utilization_percent": 2.74
+      },
+      "dsps": {
+        "available": 9024,
+        "used": 12,
+        "utilization_percent": 0.13
+      },
+      "uram": {
+        "available": 960,
+        "used": 598,
+        "utilization_percent": 62.29
+      }
+    },
+    "vectorless_power_at_failed_4ns_constraint": {
+      "components": {
+        "block_ram_w": 0.189,
+        "clb_logic_w": 0.474,
+        "clocks_w": 0.483,
+        "dsps_w": 0.006,
+        "signals_w": 0.626,
+        "uram_w": 0.991
+      },
+      "confidence": "Medium",
+      "dynamic_w": 2.769,
+      "measured_on_board": false,
+      "method": "Vivado vectorless activity propagation",
+      "static_w": 3.389,
+      "total_on_chip_w": 6.157
+    },
+    "worst_100_startpoint_origins": {
+      "commit_snapshot_block": 14,
+      "fold": 5,
+      "reset_slot": 21,
+      "resident_uram_read_clock": 2,
+      "top_fsm": 58
+    }
+  },
+  "replication": {
+    "max_instances_in_one_event": 15,
+    "replicated_instance_count": 326,
+    "replication_event_count": 134
+  },
+  "schema": 1,
+  "scope": "synthesis-only RTL attribute experiment; HLS logic unchanged",
+  "source_identity": {
+    "generated_rtl_modified": true,
+    "hls_cpp_modified": false,
+    "modified_impl_sha256": "1171858349340CE50E91E62ACBC185B77FC5D933B910EF55A47C21D6BAE6B963",
+    "ooc_top_sha256": "68CA136403A5AC1143EDE1EFA95BEB5BDFCAC62843E37115492F2AA26A66C2B4",
+    "parent_generated_rtl_immutable": true,
+    "parent_impl_sha256": "9F36AC91B9DEE21D906996960A13D8A1C0F6193C96C9C5C0E63B7CACA1DE1C5A",
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "timestamp": "2026-08-10T22:55:18.092855+00:00",
+  "verification": {
+    "parent_exact_64_token_csim": "PASS",
+    "replication_observed": "PASS",
+    "route_completion": "PASS",
+    "synthesis_only_transform": "PASS",
+    "target_250mhz": "FAIL",
+    "worst_100_path_classification": "PASS"
+  }
+}

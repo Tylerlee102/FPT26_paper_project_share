@@ -1,0 +1,320 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date              : Mon Aug 10 18:40:02 2026
+| Host              : Tyler running 64-bit major release  (build 9200)
+| Command           : report_timing -delay_type max -max_paths 100 -nworst 1 -path_type summary -file X:/reports/vivado/experiments/rs2_snapshot_write_unbanked_fsm_fanout16_20260810/worst_100_setup_paths.rpt
+| Design            : gdn_rs2_top
+| Device            : xcu55c-fsvh2892
+| Speed File        : -2L  PRODUCTION 1.30 05-01-2022
+| Design State      : Routed
+| Temperature Grade : E
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Startpoint                     Endpoint                       Slack(ns)     
+----------------------------------------------------------------------------
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__18_replica_2/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_195/EN_A
+                                                              -2.686        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_204/EN_A
+                                                              -2.683        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_180/EN_A
+                                                              -2.682        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_191/EN_A
+                                                              -2.680        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__18_replica_2/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_232/EN_A
+                                                              -2.671        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_194/ADDR_A[1]
+                                                              -2.663        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_194/EN_A
+                                                              -2.662        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_181/EN_A
+                                                              -2.654        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_180/ADDR_A[1]
+                                                              -2.653        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_191/ADDR_A[1]
+                                                              -2.652        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_8/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_200/EN_A
+                                                              -2.647        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_181/ADDR_A[1]
+                                                              -2.647        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_5/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_269/EN_A
+                                                              -2.646        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_184/ADDR_A[1]
+                                                              -2.642        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_8/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_201/EN_A
+                                                              -2.639        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_5/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_256/EN_A
+                                                              -2.637        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_8/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_197/EN_A
+                                                              -2.633        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_174/EN_A
+                                                              -2.626        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_161/EN_A
+                                                              -2.624        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_221/EN_B
+                                                              -2.621        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_8/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_45/EN_A
+                                                              -2.615        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[98]_rep/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_261/EN_A
+                                                              -2.612        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_52/EN_A
+                                                              -2.608        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_29/EN_A
+                                                              -2.606        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_263/EN_A
+                                                              -2.606        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__18_replica_2/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_233/EN_A
+                                                              -2.604        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_212/EN_A
+                                                              -2.599        
+grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_181/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/word_7_reg_13380_reg[90]/D
+                                                              -2.597        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__18_replica_2/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_196/EN_A
+                                                              -2.597        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_14/EN_A
+                                                              -2.597        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_184/EN_A
+                                                              -2.595        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_221/BWE_B[3]
+                                                              -2.595        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_300/EN_A
+                                                              -2.593        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_221/BWE_B[2]
+                                                              -2.592        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_221/BWE_B[5]
+                                                              -2.590        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_221/BWE_B[1]
+                                                              -2.586        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_221/EN_A
+                                                              -2.586        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_221/BWE_B[4]
+                                                              -2.585        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_164/EN_A
+                                                              -2.585        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_54/EN_A
+                                                              -2.584        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_221/BWE_B[6]
+                                                              -2.584        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_191/BWE_B[3]
+                                                              -2.584        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_238/EN_A
+                                                              -2.583        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_275/EN_A
+                                                              -2.583        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_171/ADDR_A[1]
+                                                              -2.583        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_191/BWE_B[2]
+                                                              -2.582        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_221/BWE_B[7]
+                                                              -2.581        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_168/EN_A
+                                                              -2.581        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__18_replica_2/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_266/EN_A
+                                                              -2.581        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_52/EN_B
+                                                              -2.581        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_221/BWE_B[0]
+                                                              -2.580        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_261/ADDR_A[1]
+                                                              -2.579        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_195/ADDR_A[1]
+                                                              -2.579        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__18_replica_2/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_225/EN_A
+                                                              -2.579        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[98]_rep/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_19/EN_A
+                                                              -2.577        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_191/BWE_B[1]
+                                                              -2.577        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_221/BWE_B[8]
+                                                              -2.576        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_191/BWE_B[4]
+                                                              -2.576        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_191/BWE_B[7]
+                                                              -2.575        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_212/EN_B
+                                                              -2.573        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_10/EN_A
+                                                              -2.572        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_191/BWE_B[0]
+                                                              -2.571        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_52/BWE_B[3]
+                                                              -2.570        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_212/BWE_B[3]
+                                                              -2.570        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_191/BWE_B[8]
+                                                              -2.569        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_113/ADDR_B[1]
+                                                              -2.569        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_52/BWE_B[2]
+                                                              -2.567        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_212/BWE_B[2]
+                                                              -2.567        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_52/BWE_B[5]
+                                                              -2.566        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_10/EN_B
+                                                              -2.564        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_191/BWE_B[5]
+                                                              -2.563        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_200/ADDR_A[1]
+                                                              -2.563        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_260/EN_A
+                                                              -2.563        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[98]_rep/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_19/EN_B
+                                                              -2.562        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_68/EN_B
+                                                              -2.562        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_52/BWE_B[4]
+                                                              -2.561        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_186/EN_A
+                                                              -2.561        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_212/BWE_B[1]
+                                                              -2.561        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_212/BWE_B[4]
+                                                              -2.561        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_303/EN_A
+                                                              -2.560        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_52/BWE_B[1]
+                                                              -2.558        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_191/BWE_B[6]
+                                                              -2.557        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_212/BWE_B[0]
+                                                              -2.555        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_52/BWE_B[7]
+                                                              -2.553        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_52/BWE_B[0]
+                                                              -2.552        
+grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_180/CLK
+                               grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/word_7_reg_13380_reg[116]/D
+                                                              -2.552        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_fold_log_if_full_fu_9368/grp_p_anonymous_namespace_fold_log_fu_207/ap_CS_fsm_reg[38]_replica_8/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_45/EN_B
+                                                              -2.551        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_269/ADDR_A[1]
+                                                              -2.551        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_52/BWE_B[8]
+                                                              -2.548        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__18_replica_5/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_189/EN_A
+                                                              -2.547        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_29/EN_B
+                                                              -2.546        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_45/ADDR_A[1]
+                                                              -2.546        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_196/ADDR_A[1]
+                                                              -2.545        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_212/BWE_B[5]
+                                                              -2.541        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__43_replica_6/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_212/BWE_B[7]
+                                                              -2.541        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__18_replica_5/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_61/BWE_B[3]
+                                                              -2.540        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__8_replica/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_259/EN_A
+                                                              -2.539        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_load_snapshot_fu_9143/grp_p_anonymous_namespace_commit_snapshot_block_fu_484/lshr_ln8_reg_181_reg[1]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_10/ADDR_A[1]
+                                                              -2.538        
+grp_gdn_rs2_top_impl_fu_562/ap_CS_fsm_reg[123]_rep__18_replica_5/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_61/BWE_B[2]
+                                                              -2.537        
+grp_gdn_rs2_top_impl_fu_562/grp_p_anonymous_namespace_reset_slot_fu_9193/lshr_ln2_reg_725_reg[17]/C
+                               grp_gdn_rs2_top_impl_fu_562/resident_residual_U/ram_reg_uram_240/EN_A
+                                                              -2.536        
+
+
+

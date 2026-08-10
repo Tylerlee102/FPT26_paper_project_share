@@ -1,0 +1,20 @@
+{
+  "behavioral_contract": "Verilog behavior is unchanged; max_fanout is a synthesis-only replication hint",
+  "experiment": "RS2 unbanked snapshot-write top-FSM max-fanout 16",
+  "generated_at": "2026-08-10T22:46:57.153637+00:00",
+  "generated_rtl_modified": true,
+  "hls_cpp_modified": false,
+  "output_impl_sha256": "1171858349340CE50E91E62ACBC185B77FC5D933B910EF55A47C21D6BAE6B963",
+  "output_root": "build/experiments/rs2_snapshot_write_unbanked_fsm_fanout16/rtl",
+  "schema": 1,
+  "scope": "synthesis attribute only; RTL logic and selected HLS source unchanged",
+  "source_file_count": 154,
+  "source_impl_sha256": "9F36AC91B9DEE21D906996960A13D8A1C0F6193C96C9C5C0E63B7CACA1DE1C5A",
+  "source_root": "gdn_rs2_snapshot_write_unbanked_hls/u55c_250mhz/syn/verilog",
+  "status": "PASS",
+  "transform": {
+    "attribute": "max_fanout",
+    "declaration_replacements": 1,
+    "value": 16
+  }
+}

@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-10T21:07:21.157484+00:00",
+  "generated_at": "2026-08-10T22:50:06.356060+00:00",
   "limitations": [
     "logical architecture figure, not placement or routing evidence",
     "the five-phase schedule is inherited; only the arithmetic and RS2/R3 state representation are modified"
   ],
   "numbers": "paper/corrected/numbers.json",
   "outputs": {
-    "paper/figures/corrected/corrected_candidate_datapath.pdf": "FB8AA0617B4A56476E7C55B007233BC5FC47118180CC8233859D77C4B73361BB"
+    "paper/figures/corrected/corrected_candidate_datapath.pdf": "FC818C5B874461D84512857F736DF285363F397F8D3155DE014B769386D64EF5"
   },
   "schema": 1,
   "scope": "selected RS2/R3 recurrence-core datapath figure",
@@ -42,7 +42,7 @@
         "sha256": "08B078C9B5D80ED4FEB1028E78C6C53979A4B522271A3537D26EBACC1B00DDA0"
       }
     },
-    "git_revision": "7e5ec89d41dcb1acf4daa7d0cd572af09d979e91",
+    "git_revision": "75fb381418386ea6792a5839aef1f50f68765d51",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "status": "PASS",

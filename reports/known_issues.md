@@ -140,6 +140,20 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   14 DSPs. Local snapshot-write isolation therefore displaces the banked-memory
   control bottleneck without improving timing; the composition is rejected and
   not promoted.
+- A twelfth RTL-only experiment adds `max_fanout=16` to the stronger unbanked
+  snapshot-write parent's explicit top-FSM declaration. All RTL logic and HLS
+  evidence remain unchanged, and Vivado creates 326 replicated instances across
+  134 replication events. The matched route nevertheless reaches -2.686 ns WNS,
+  -58,498.117 ns TNS, and 58,993 failing setup endpoints: 1.192 ns worse WNS,
+  32,336.637 ns worse TNS, and 15,747 more failing endpoints than the parent.
+  The 6.676 ns worst path contains 6.166 ns of net delay, five logic levels,
+  two SLR crossings, and fanout 97. Of the 100 worst setup paths, 58 begin at
+  replicated top-FSM registers, 21 in reset control, 14 in the snapshot commit
+  helper, five in fold control, and two at resident URAM clocks. The route uses
+  83,210 LUTs, 71,391 registers, 341 BRAM tiles, 598 URAMs, and 12 DSPs.
+  Pre-synthesis controller
+  replication therefore increases register cost and worsens every setup metric;
+  it is rejected and not promoted.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
@@ -186,10 +200,10 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 408 passed, 2 skipped, and 0 failed tests;
+- The latest full regression records 412 passed, 2 skipped, and 0 failed tests;
   its JUnit artifact is
-  `reports/test_results/final_pytest_20260810_snapshot_write_contiguous_banks.xml`
-  (SHA256 `EC131FFDCAA6F7D6966E0011CF08074325988F33C8E551A7C49073164220FC64`).
+  `reports/test_results/final_pytest_20260810_fsm_fanout16.xml`
+  (SHA256 `0FC1295640D222DDB89B8C8BC56D3B5F753F3048E785554C3AE2CCC15F3EAC05`).
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

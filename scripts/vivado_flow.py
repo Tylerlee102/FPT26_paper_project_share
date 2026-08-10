@@ -47,6 +47,9 @@ TCL_BY_STEP = {
     "rs2-snapshot-write-contiguous-banks-impl": Path(
         "vivado/tcl/run_rs2_snapshot_write_contiguous_banks_impl.tcl"
     ),
+    "rs2-snapshot-write-unbanked-fsm-fanout16-impl": Path(
+        "vivado/tcl/run_rs2_snapshot_write_unbanked_fsm_fanout_impl.tcl"
+    ),
     "rs2-postroute-sweep": Path("vivado/tcl/run_rs2_postroute_sweep.tcl"),
     "rs2-postroute-fanout-opt": Path(
         "vivado/tcl/run_rs2_postroute_fanout_opt.tcl"
@@ -276,6 +279,24 @@ def main(argv: list[str] | None = None) -> int:
                 / "gdn_rs2_top.v"
             ),
         )
+    elif args.step == "rs2-snapshot-write-unbanked-fsm-fanout16-impl":
+        prepare_rs2_ooc_rtl(
+            source=(
+                root
+                / "build"
+                / "experiments"
+                / "rs2_snapshot_write_unbanked_fsm_fanout16"
+                / "rtl"
+                / "gdn_rs2_top.v"
+            ),
+            output=(
+                root
+                / "build"
+                / "vivado"
+                / "rs2_snapshot_write_unbanked_fsm_fanout16_ooc_rtl"
+                / "gdn_rs2_top.v"
+            ),
+        )
     elif args.step.startswith("rs2-") and args.step not in {
         "rs2-postroute-sweep",
         "rs2-postroute-fanout-opt",
@@ -295,6 +316,7 @@ def main(argv: list[str] | None = None) -> int:
         "rs2-snapshot-write-unbanked-impl",
         "rs2-fold-write-contiguous-banks-impl",
         "rs2-snapshot-write-contiguous-banks-impl",
+        "rs2-snapshot-write-unbanked-fsm-fanout16-impl",
     }:
         prepare_rs2_ooc_rtl()
     elif args.step.startswith("bf16-") and args.step != "bf16-postroute-sweep":

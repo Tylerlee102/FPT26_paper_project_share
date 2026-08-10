@@ -41,13 +41,13 @@
       "page": 7,
       "status": "PASS",
       "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
-      "notes": "Trade-off figure and the first portion of all eleven architecture-ablation paragraphs are readable; the eighth result flows cleanly to page 8 without clipping or overlap."
+      "notes": "Trade-off figure and the first portion of all twelve architecture-ablation paragraphs are readable; the eighth result flows cleanly to page 8 without clipping or overlap."
     },
     {
       "page": 8,
       "status": "PASS",
       "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
-      "notes": "The eighth-ablation continuation and complete ninth through eleventh ablations, post-route and power tables, and discussion equations render without clipping, overlap, or broken glyphs."
+      "notes": "The eighth-ablation continuation and complete ninth through twelfth ablations, post-route and power tables, and discussion equations render without clipping, overlap, or broken glyphs."
     },
     {
       "page": 9,

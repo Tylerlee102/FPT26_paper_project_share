@@ -680,11 +680,12 @@ parent. Exact C-simulation and physical checks again passed, but setup regressed
 sharply: 80 of the 100 worst paths began in the state-input AXI load FIFO and
 crossed two SLRs into banked URAM control. We reject contiguous banking without
 a separately pipelined load/control plane.
-An eleventh variant combined those banks with snapshot-write locality. It
-removed load and snapshot startpoints, but all 100 worst paths moved to the top
-FSM and timing worsened further. We reject this composition; closing 250 MHz
-requires a redesigned memory-owner/control hierarchy rather than another local
-helper boundary.
+An eleventh variant combined those banks with snapshot-write locality; all 100
+worst paths moved to the top FSM and timing worsened, so we reject it. In a
+twelfth RTL-only variant, a bounded-fanout hint on the stronger unbanked parent
+replicated controller registers but worsened all three setup metrics. This too
+is rejected; closing 250 MHz requires a redesigned memory-owner/control
+hierarchy.
 
 \begin{table}[t]
 \centering
