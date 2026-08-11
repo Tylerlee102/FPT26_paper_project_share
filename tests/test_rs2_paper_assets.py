@@ -9,6 +9,7 @@ from scripts.rs2_paper_assets import (
     VARIANTS,
     _add_timing_ablation_numbers,
     _controlled_rows,
+    _official_xsim_evidence,
 )
 
 
@@ -60,3 +61,36 @@ def test_generated_timing_ablation_table_is_manifest_bound() -> None:
     assert "Selected RS2/R3 & -1.736 & 43{,}593" in text
     assert "Fold-write commit & -1.294 & 29{,}168" in text
     assert "Address fanout 16 & -1.453 & 35{,}126" in text
+
+
+def test_official_xsim_evidence_requires_full_generated_flow_markers(tmp_path) -> None:
+    files = {
+        "rs2_accelerated_cosim_complete.txt": "RS2_ACCELERATED_HLS_XSIM_PASS\n",
+        "verilog/xsim.log": "RTL Simulation : 66 / 66\n",
+        "postcheck/temp0.log": (
+            "PASS: 64 encoded reset-state tokens, exact outputs/counters, "
+            "and final snapshot\n"
+        ),
+        "verilog/run_xsim.bat": "xelab --O3 --debug off --mt 8\n",
+        "verilog/xelab.log": "Using 8 slave threads.\n",
+    }
+    for relative, text in files.items():
+        path = tmp_path / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+    evidence = _official_xsim_evidence(tmp_path)
+    assert evidence["status"] == "PASS"
+    assert evidence["tokens"] == 64
+    assert evidence["transactions"] == 66
+    assert evidence["elaboration_threads"] == 8
+
+    (tmp_path / "verilog/xsim.log").write_text(
+        "RTL Simulation : 66 / 66\nOut of memory\n", encoding="utf-8"
+    )
+    try:
+        _official_xsim_evidence(tmp_path)
+    except ValueError as exc:
+        assert "Out of memory" in str(exc)
+    else:
+        raise AssertionError("memory-failed XSim evidence was accepted")

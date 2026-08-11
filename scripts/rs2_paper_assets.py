@@ -77,6 +77,21 @@ RS2_RTL = (
     / "trace64_direct"
     / "rs2_trace64_direct_summary.json"
 )
+RS2_OFFICIAL_XSIM_ROOT = (
+    ROOT
+    / "reports"
+    / "cosim"
+    / "corrected"
+    / "rs2_current"
+    / "trace64_reset_accelerated"
+)
+RS2_OFFICIAL_XSIM_COMPLETION = (
+    RS2_OFFICIAL_XSIM_ROOT / "rs2_accelerated_cosim_complete.txt"
+)
+RS2_OFFICIAL_XSIM_LOG = RS2_OFFICIAL_XSIM_ROOT / "verilog" / "xsim.log"
+RS2_OFFICIAL_XSIM_POSTCHECK = RS2_OFFICIAL_XSIM_ROOT / "postcheck" / "temp0.log"
+RS2_OFFICIAL_XELAB_LOG = RS2_OFFICIAL_XSIM_ROOT / "verilog" / "xelab.log"
+RS2_OFFICIAL_XSIM_COMMAND = RS2_OFFICIAL_XSIM_ROOT / "verilog" / "run_xsim.bat"
 QWEN = ROOT / "reports" / "benchmark" / "qwen_recurrent_stability_manifest.json"
 SCALE_POLICY = (
     ROOT / "reports" / "benchmark" / "corrected" / "scale_policy_manifest.json"
@@ -234,6 +249,47 @@ def _line_after(path: Path, anchor: str, marker: str) -> int:
         if marker in lines[index]:
             return index + 1
     raise ValueError(f"marker {marker!r} after {anchor!r} is absent from {path}")
+
+
+def _official_xsim_evidence(root: Path = RS2_OFFICIAL_XSIM_ROOT) -> dict[str, object]:
+    files = {
+        "completion": root / "rs2_accelerated_cosim_complete.txt",
+        "xsim": root / "verilog" / "xsim.log",
+        "postcheck": root / "postcheck" / "temp0.log",
+        "command": root / "verilog" / "run_xsim.bat",
+        "xelab": root / "verilog" / "xelab.log",
+    }
+    markers = {
+        "completion": "RS2_ACCELERATED_HLS_XSIM_PASS",
+        "xsim": "RTL Simulation : 66 / 66",
+        "postcheck": (
+            "PASS: 64 encoded reset-state tokens, exact outputs/counters, "
+            "and final snapshot"
+        ),
+        "command": "--O3 --debug off --mt 8",
+        "xelab": "Using 8 slave threads.",
+    }
+    texts: dict[str, str] = {}
+    for name, path in files.items():
+        if not path.is_file():
+            raise FileNotFoundError(path)
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if markers[name] not in text:
+            raise ValueError(
+                f"official XSim marker {markers[name]!r} is absent from {path}"
+            )
+        texts[name] = text
+    for failure in ("Out of memory", "Simulation engine not responding"):
+        if failure in texts["xsim"]:
+            raise ValueError(f"official XSim log contains failure marker {failure!r}")
+    return {
+        "status": "PASS",
+        "tokens": 64,
+        "transactions": 66,
+        "elaboration_threads": 8,
+        "files": files,
+        "markers": markers,
+    }
 
 
 def _record(
@@ -466,6 +522,7 @@ def _add_hardware_numbers(
     mxfp8_hls: dict[str, object],
     route: dict[str, object],
     rtl: dict[str, object],
+    official_xsim: dict[str, object],
     bf16_route: dict[str, object],
     mxfp8_route: dict[str, object],
     revision: str,
@@ -620,6 +677,37 @@ def _add_hardware_numbers(
             units=units,
             source=RS2_RTL,
             marker=marker,
+            revision=revision,
+            timestamp=timestamp,
+        )
+
+    official_specs = {
+        "rs2_official_xsim_64_token_status": (
+            official_xsim["status"], "status", "completion"
+        ),
+        "rs2_official_xsim_tokens": (
+            official_xsim["tokens"], "tokens", "postcheck"
+        ),
+        "rs2_official_xsim_transactions": (
+            official_xsim["transactions"], "commands", "xsim"
+        ),
+        "rs2_official_xsim_elaboration_threads": (
+            official_xsim["elaboration_threads"], "threads", "xelab"
+        ),
+    }
+    official_files = official_xsim["files"]
+    official_markers = official_xsim["markers"]
+    for key, (value, units, source_name) in official_specs.items():
+        source = official_files[source_name]
+        marker = official_markers[source_name]
+        _record(
+            numbers,
+            provenance,
+            key=key,
+            value=value,
+            units=units,
+            source=source,
+            source_line=_line(source, marker),
             revision=revision,
             timestamp=timestamp,
         )
@@ -1073,6 +1161,10 @@ def _append_macros(output: Path, numbers: dict[str, dict[str, object]]) -> Path:
         "RsTwoRtlTransactions": _tex_int(numbers["rs2_rtl_transactions"]["value"]),
         "RsTwoRtlOutputs": _tex_int(numbers["rs2_rtl_output_values"]["value"]),
         "RsTwoRtlStepMean": _tex_int(round(float(numbers["rs2_rtl_step_cycles_mean"]["value"]))),
+        "RsTwoOfficialXsimStatus": _tex_value(numbers["rs2_official_xsim_64_token_status"]["value"]),
+        "RsTwoOfficialXsimTokens": _tex_int(numbers["rs2_official_xsim_tokens"]["value"]),
+        "RsTwoOfficialXsimTransactions": _tex_int(numbers["rs2_official_xsim_transactions"]["value"]),
+        "RsTwoOfficialXsimThreads": _tex_int(numbers["rs2_official_xsim_elaboration_threads"]["value"]),
     }
     retained.extend(
         f"\\newcommand{{\\{name}}}{{{value}}}" for name, value in macros.items()
@@ -1093,6 +1185,11 @@ def generate(output: Path) -> dict[str, object]:
         BF16_VIVADO,
         MXFP8_VIVADO,
         RS2_RTL,
+        RS2_OFFICIAL_XSIM_COMPLETION,
+        RS2_OFFICIAL_XSIM_LOG,
+        RS2_OFFICIAL_XSIM_POSTCHECK,
+        RS2_OFFICIAL_XELAB_LOG,
+        RS2_OFFICIAL_XSIM_COMMAND,
         QWEN,
         SCALE_POLICY,
         INTERFACE,
@@ -1120,6 +1217,7 @@ def generate(output: Path) -> dict[str, object]:
     bf16_route = _load_json(BF16_VIVADO)
     mxfp8_route = _load_json(MXFP8_VIVADO)
     rtl = _load_json(RS2_RTL)
+    official_xsim = _official_xsim_evidence()
     _load_json(QWEN)
     _load_json(SCALE_POLICY)
 
@@ -1144,6 +1242,7 @@ def generate(output: Path) -> dict[str, object]:
         mxfp8_hls,
         route,
         rtl,
+        official_xsim,
         bf16_route,
         mxfp8_route,
         revision,
@@ -1199,6 +1298,7 @@ def generate(output: Path) -> dict[str, object]:
             "held_out_status": candidate["gate_results"]["held_out"]["status"],
             "extended_8192_status": candidate["gate_results"]["extended_development"]["status"],
             "rtl_64_token_status": rtl["required_64_token_rtl_parity"],
+            "official_xsim_64_token_status": official_xsim["status"],
             "post_route_status": route["status"],
             "hls_cost_latency_advantage_vs_bf16": hls["comparison"]["hls_cost_latency_advantage_vs_bf16"],
         }

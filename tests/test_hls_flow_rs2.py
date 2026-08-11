@@ -115,6 +115,17 @@ def test_rs2_accelerated_reset_cosim_is_guarded_and_registered() -> None:
     assert "Out of memory" in text
 
 
+def test_makefile_exposes_accelerated_reset_trace_cosim() -> None:
+    makefile = (Path(__file__).resolve().parents[1] / "Makefile").read_text(
+        encoding="utf-8"
+    )
+    assert "hls-rs2-reset-trace-cosim-accelerated:" in makefile
+    assert (
+        "$(PYTHON) -m scripts.hls_flow rs2-reset-trace-cosim-accelerated"
+        in makefile
+    )
+
+
 def test_rs2_accelerated_archive_requires_raw_xsim_and_postcheck(
     tmp_path: Path,
 ) -> None:
