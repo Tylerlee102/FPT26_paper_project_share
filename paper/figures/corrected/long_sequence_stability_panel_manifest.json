@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T00:24:10.433561+00:00",
+  "generated_at": "2026-08-11T00:45:06.469230+00:00",
   "limitations": [
     "single deterministic layer-level synthetic trace",
     "thresholds are engineering criteria, not model-quality guarantees",
@@ -36,7 +36,7 @@
         "sha256": "08B078C9B5D80ED4FEB1028E78C6C53979A4B522271A3537D26EBACC1B00DDA0"
       }
     },
-    "git_revision": "730b50e464ce4df033d4ce2a6fdd1e7997da5a96",
+    "git_revision": "3bf83b773e43d55473e75a45a50cd5a2facfe25f",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "status": "PASS",

@@ -6,7 +6,7 @@
     4096,
     8192
   ],
-  "generated_at": "2026-08-11T00:28:55.275183+00:00",
+  "generated_at": "2026-08-11T00:45:07.177229+00:00",
   "limitations": [
     "quality panels are layer-level synthetic evidence",
     "HLS schedules are estimates rather than board latency or energy",
@@ -14,7 +14,7 @@
   ],
   "numbers": {
     "path": "paper/corrected/numbers.json",
-    "sha256": "B5BF508F722525DB6448AB17BD7A2775AA2E23D54AA1D341C710BD6506BBD514"
+    "sha256": "C63027F204B9B2AF91A4182873EFA3968BD781ED71350A9F502F08422883CEBE"
   },
   "outputs": {
     "paper/figures/corrected/rs2_memory_performance_accuracy.pdf": "E7F8477F5D70B5F723E12173095CCEA2990BBF55BAEAF824E46B84532B4B13CC",

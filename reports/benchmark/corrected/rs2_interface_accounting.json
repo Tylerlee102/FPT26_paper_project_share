@@ -42,7 +42,7 @@
     "rs2_step_input": "q+k+v two-term E2M1 payloads + one E8M0 byte per B32 term block + alpha/beta Q1.15",
     "rs2_step_output": "VALUE_HEADS*VALUE_DIM*(INT32 mantissa + INT16 exponent)"
   },
-  "generated_at": "2026-08-11T00:24:02.487530+00:00",
+  "generated_at": "2026-08-11T00:45:04.765212+00:00",
   "limitations": [
     "logical type-layout accounting before AXI beat padding, host packing, or protocol overhead",
     "not measured PCIe, HBM, or board traffic",
@@ -82,7 +82,7 @@
         "sha256": "2FD2F76E2D5DB3BDEC4BE9E0D55E69E08594985106319C6269594977933D33A4"
       }
     },
-    "git_revision": "730b50e464ce4df033d4ce2a6fdd1e7997da5a96",
+    "git_revision": "3bf83b773e43d55473e75a45a50cd5a2facfe25f",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "source_sha256": {

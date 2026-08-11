@@ -32,10 +32,10 @@
     }
   ],
   "build_manifest": "paper/corrected/working_draft_build_manifest.json",
-  "build_manifest_sha256": "39A79E71BBECC94D49945992DA7E2C2EEC537748628000135B2DD54AA4C51D11",
+  "build_manifest_sha256": "8364E21B34D987E042CEEF5D850A31EB12313C8E720570BCFAC5D2267D04CE40",
   "checklist": "paper/corrected/working_draft_visual_checklist.json",
   "checklist_sha256": "396DB98A9DA1DE0841EDC457373FCACC97DB0E56359187C85AC720AD82C67973",
-  "generated_at": "2026-08-11T00:30:08.541825+00:00",
+  "generated_at": "2026-08-11T00:47:59.667596+00:00",
   "page_count": 9,
   "pages": [
     {
@@ -124,5 +124,5 @@
   "submission_eligible": false,
   "visual_audit_status": "PASS",
   "working_draft": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "working_draft_sha256": "1DF48E09AAA067DAFFBAC601395184C7BBC7FCD614EE078CC4B7EBE19E5A6514"
+  "working_draft_sha256": "1E2EA31D1DA1CE8A161F658EFBE9E71E5D1731362AD525ABECCFFCB39160AA5E"
 }

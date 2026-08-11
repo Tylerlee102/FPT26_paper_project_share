@@ -216,8 +216,8 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   final submission PDF.
 - The latest full regression records 416 passed, 2 skipped, and 0 failed tests;
   its JUnit artifact is
-  `reports/test_results/final_pytest_20260810_address_fanout16.xml`
-  (SHA256 `202F2E435645000A8A404473BA2E7982B23685B7DBE64D207FDA9AC4473A8FD7`).
+  `reports/test_results/final_pytest_20260810_paper_refresh.xml`
+  (SHA256 `A26FC01DC91A2801DB1F96518526344C5A3153890CF11ED40183446E2EF753F0`).
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

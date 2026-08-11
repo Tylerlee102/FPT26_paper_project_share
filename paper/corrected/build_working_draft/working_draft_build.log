@@ -1,8 +1,8 @@
 note: Running TeX ...
 note: Rerunning TeX because "working_draft.aux" changed ...
 note: Running xdvipdfmx ...
-note: Writing `C:\Users\tyboy\OneDrive\Documents\mxfp4 improve\FPT26_data_review\paper\corrected\build_working_draft\working_draft.log` (46.2763671875 KiB)
 note: Writing `C:\Users\tyboy\OneDrive\Documents\mxfp4 improve\FPT26_data_review\paper\corrected\build_working_draft\working_draft.pdf` (257.015625 KiB)
+note: Writing `C:\Users\tyboy\OneDrive\Documents\mxfp4 improve\FPT26_data_review\paper\corrected\build_working_draft\working_draft.log` (46.2763671875 KiB)
 note: Skipped writing 1 intermediate files (use --keep-intermediates to keep them)
 
 Fontconfig error: Cannot load default config file: No such file: (null)
