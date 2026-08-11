@@ -214,10 +214,10 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 416 passed, 2 skipped, and 0 failed tests;
+- The latest full regression records 418 passed, 2 skipped, and 0 failed tests;
   its JUnit artifact is
-  `reports/test_results/final_pytest_20260810_paper_refresh.xml`
-  (SHA256 `A26FC01DC91A2801DB1F96518526344C5A3153890CF11ED40183446E2EF753F0`).
+  `reports/test_results/final_pytest_20260810_timing_table_pass.xml`
+  (SHA256 `34EB8D03283ED4074C620761A043456342571F1EEB1C3B88DB84CBDA5AC1089F`).
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

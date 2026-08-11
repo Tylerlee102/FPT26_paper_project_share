@@ -32,10 +32,10 @@
     }
   ],
   "build_manifest": "paper/corrected/working_draft_build_manifest.json",
-  "build_manifest_sha256": "8364E21B34D987E042CEEF5D850A31EB12313C8E720570BCFAC5D2267D04CE40",
+  "build_manifest_sha256": "06B274E2A5B8B1E5FCA332B88F7538E0081342BD241A6DC6CB6174277AB422D5",
   "checklist": "paper/corrected/working_draft_visual_checklist.json",
-  "checklist_sha256": "396DB98A9DA1DE0841EDC457373FCACC97DB0E56359187C85AC720AD82C67973",
-  "generated_at": "2026-08-11T00:47:59.667596+00:00",
+  "checklist_sha256": "6F7BC245B6C15E8ED4AAB5125F18FE98A125EBDF90770E078E0CCBF4EE8FC1AD",
+  "generated_at": "2026-08-11T01:03:33.966351+00:00",
   "page_count": 9,
   "pages": [
     {
@@ -75,39 +75,39 @@
       "notes": "Both long-sequence plots have readable legends, threshold lines, axis labels, and the 8,192-token tick.",
       "page": 5,
       "path": "reports/rendered/working_draft/page-05.png",
-      "sha256": "88263DCEE9AD787D79818932766DF3B1D5F11A21375C056997EA8A13E2A47EA4",
+      "sha256": "524AD84A9120907ABFCF098245E5440630990B94186176C18D7F74C7D6090B03",
       "width": 1870
     },
     {
       "height": 2420,
-      "notes": "All six result tables are legible; Table IV max-absolute and nonfinite columns are visibly separated after repair.",
+      "notes": "Tables III-VII are legible; the timing-ablation setup and compact synthesis text begin cleanly in the right column without clipping.",
       "page": 6,
       "path": "reports/rendered/working_draft/page-06.png",
-      "sha256": "7EE51078679E5C07E9AAA6707FB8375901C104049ADF985724C094D7478E4E82",
+      "sha256": "7A59241A3A5E8CD2DB6404D850168163803680CC2265DC5F2D7DF36B5BA7721B",
       "width": 1870
     },
     {
       "height": 2420,
-      "notes": "Trade-off figure and the first portion of all thirteen architecture-ablation paragraphs are readable; the eighth result flows cleanly to page 8 without clipping or overlap.",
+      "notes": "The trade-off figure, timing-ablation synthesis, generated-RTL and power text, and opening discussion equations remain readable and separated.",
       "page": 7,
       "path": "reports/rendered/working_draft/page-07.png",
-      "sha256": "4D17EF3D3A0CCDC20A3567247B7ACDD7848FDCB04AA8F458D58109578FD7A3DE",
+      "sha256": "F9E608F187FCA8D3A43A35F0934DED64234DF5845BC08C4A8A19E93475295E40",
       "width": 1870
     },
     {
       "height": 2420,
-      "notes": "The eighth-ablation continuation and complete ninth through thirteenth ablations, post-route and power tables, and discussion equations render without clipping, overlap, or broken glyphs.",
+      "notes": "The full-width thirteen-experiment timing table, matched post-route and power tables, discussion continuation, and limitations heading render without clipping or overlap.",
       "page": 8,
       "path": "reports/rendered/working_draft/page-08.png",
-      "sha256": "2F0D3408E58D45DA2817582B03CF681B7E0AD3301A06A65DC7189665F6399FFB",
+      "sha256": "9EDE4AA543FE28EB9D5BD029AD2F1563970ACA06B11DA221FCB5162718AC8A8C",
       "width": 1870
     },
     {
       "height": 2420,
-      "notes": "The remaining limitations, conclusion, and references 1-16 are complete and readable with no clipped content.",
+      "notes": "The remaining limitations, complete conclusion, and references 1-16 are readable in both columns with no clipped content.",
       "page": 9,
       "path": "reports/rendered/working_draft/page-09.png",
-      "sha256": "FCDEBB693C30CA90BF1F5A127791BC5F1CB1BA0A6B35728DB971FEDF70A265B5",
+      "sha256": "06359BD757FDDD48D5A7F46AEA5DBEB9F38EC68A221A00971A563935C027B8E7",
       "width": 1870
     }
   ],
@@ -124,5 +124,5 @@
   "submission_eligible": false,
   "visual_audit_status": "PASS",
   "working_draft": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "working_draft_sha256": "1E2EA31D1DA1CE8A161F658EFBE9E71E5D1731362AD525ABECCFFCB39160AA5E"
+  "working_draft_sha256": "F90333957DCA61F07CF296CABD6C8C21A045BA71EE00956889A57F1CDB44FF44"
 }

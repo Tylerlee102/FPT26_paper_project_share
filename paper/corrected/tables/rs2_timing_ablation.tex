@@ -1,0 +1,20 @@
+\begin{tabular}{lrrl}
+\toprule
+Design change & WNS (ns) & Failing endpoints & Outcome \\
+\midrule
+Selected RS2/R3 & -1.736 & 43{,}593 & Reference \\
+URAM output latency & -- & -- & HLS-only; path mismatch \\
+Local fold control & -1.371 & 31{,}992 & Better; misses target \\
+Fold-write commit & -1.294 & 29{,}168 & Best WNS; misses target \\
+Full layer partition & -1.867 & 54{,}809 & Worse timing and cost \\
+Six-way layer banks & -1.621 & 44{,}629 & WNS gain; worse TNS \\
+Banks + fold-write & -2.757 & 53{,}673 & Worse than both parents \\
+Snapshot commit + banks & -2.484 & 72{,}420 & WNS gain; worse TNS \\
+Split fold writes & -3.091 & 55{,}650 & Worse than parent \\
+Snapshot commit, unbanked & -1.494 & 43{,}246 & Worse than parent \\
+Two contiguous banks & -2.966 & 64{,}439 & AXI/SLR regression \\
+Snapshot + contiguous banks & -3.623 & 67{,}782 & Top-FSM regression \\
+FSM fanout 16 & -2.686 & 58{,}993 & Replication worsens setup \\
+Address fanout 16 & -1.453 & 35{,}126 & Origins move; setup worsens \\
+\bottomrule
+\end{tabular}

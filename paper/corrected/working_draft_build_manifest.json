@@ -1,18 +1,18 @@
 {
   "artifact_kind": "watermarked_working_draft",
-  "asset_manifest_sha256": "4A08D520E15FA142926D02BB5284048F4575AA0DAC29BE0C994D32EE4037A346",
+  "asset_manifest_sha256": "63F135E57CEE577BA98403EF344A23F9BADCBEED74EF3670DA61CB84924090B6",
   "asset_source_identity": {
     "dirty_patch": {
-      "bytes": 0,
-      "changed_file_count": 0,
-      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      "bytes": 15314,
+      "changed_file_count": 2,
+      "sha256": "8AB15021535DCB7C37A679AA664A0FD898EBBCE16A59D310A2CBD07AEB545AC0"
     },
     "files": {
       "paper/corrected/paper.tex": {
-        "bytes": 50404,
-        "changed_from_revision": false,
+        "bytes": 46335,
+        "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "A937637ED34C3BEE5CD1E6730793D520414FA0512FA071931591818218C84843"
+        "sha256": "681DE274889CB0276DD51243CE94163E2A5AA267C652CB15B13BFE72A99172E3"
       },
       "scripts/corrected_paper_assets.py": {
         "bytes": 122130,
@@ -21,10 +21,10 @@
         "sha256": "601BC4334C3CDF63BB7BC4A1B29AD5CE40D199247B8D63C40A096751D7827D9E"
       },
       "scripts/rs2_paper_assets.py": {
-        "bytes": 46860,
-        "changed_from_revision": false,
+        "bytes": 52494,
+        "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "4633F6518ED93A7EFBC463C2F7D3B83296423C1FB97AF75E5EE3AD60D6CE49FD"
+        "sha256": "F4524C11243B222651E5438DC9144DB513DC1FA6C28C569EE3BA8AAFCA010CED"
       },
       "scripts/rs2_paper_figures.py": {
         "bytes": 15407,
@@ -33,7 +33,7 @@
         "sha256": "C45C7D08671460B5A530D77B28E75E1899E84B8063140D07B000B6EE431CD6B7"
       }
     },
-    "git_revision": "3bf83b773e43d55473e75a45a50cd5a2facfe25f",
+    "git_revision": "f5ae1cc408da6f1fb80bcb5e71be1c71c1f1e756",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "blocking_gates": [
@@ -67,19 +67,19 @@
     }
   ],
   "build_log": "paper/corrected/build_working_draft/working_draft_build.log",
-  "build_log_sha256": "3AF409CCA0435533A7249E31C0EE72A2C25D73E1DB0F9C1463E6EFFB4583F6B5",
+  "build_log_sha256": "A30565DC6E8F4450773A26F49E1F759FB768B30270DA7F8FF5E14F87F5B08BC9",
   "build_source_identity": {
     "dirty_patch": {
-      "bytes": 0,
-      "changed_file_count": 0,
-      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      "bytes": 7935,
+      "changed_file_count": 1,
+      "sha256": "F10BCED5B2CB84CAE5777D2C6504813D154B2501850E452E717342FE26B612D0"
     },
     "files": {
       "paper/corrected/paper.tex": {
-        "bytes": 50404,
-        "changed_from_revision": false,
+        "bytes": 46335,
+        "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "A937637ED34C3BEE5CD1E6730793D520414FA0512FA071931591818218C84843"
+        "sha256": "681DE274889CB0276DD51243CE94163E2A5AA267C652CB15B13BFE72A99172E3"
       },
       "paper/corrected/working_draft.tex": {
         "bytes": 55,
@@ -94,7 +94,7 @@
         "sha256": "1539C7C836F82FD81145C129B89C0664C2927C539B90A1513519BCA8F74ACFFE"
       }
     },
-    "git_revision": "3bf83b773e43d55473e75a45a50cd5a2facfe25f",
+    "git_revision": "f5ae1cc408da6f1fb80bcb5e71be1c71c1f1e756",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "command": [
@@ -108,9 +108,9 @@
     "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\paper\\corrected\\build_working_draft",
     "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\paper\\corrected\\working_draft.tex"
   ],
-  "generated_at": "2026-08-11T00:47:00.581856+00:00",
+  "generated_at": "2026-08-11T01:02:43.982286+00:00",
   "output": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "output_sha256": "1E2EA31D1DA1CE8A161F658EFBE9E71E5D1731362AD525ABECCFFCB39160AA5E",
+  "output_sha256": "F90333957DCA61F07CF296CABD6C8C21A045BA71EE00956889A57F1CDB44FF44",
   "page_count": 9,
   "release_state": "NOT PAPER READY",
   "schema": 1,

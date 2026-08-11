@@ -35,25 +35,25 @@
       "page": 6,
       "status": "PASS",
       "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
-      "notes": "All six result tables are legible; Table IV max-absolute and nonfinite columns are visibly separated after repair."
+      "notes": "Tables III-VII are legible; the timing-ablation setup and compact synthesis text begin cleanly in the right column without clipping."
     },
     {
       "page": 7,
       "status": "PASS",
       "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
-      "notes": "Trade-off figure and the first portion of all thirteen architecture-ablation paragraphs are readable; the eighth result flows cleanly to page 8 without clipping or overlap."
+      "notes": "The trade-off figure, timing-ablation synthesis, generated-RTL and power text, and opening discussion equations remain readable and separated."
     },
     {
       "page": 8,
       "status": "PASS",
       "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
-      "notes": "The eighth-ablation continuation and complete ninth through thirteenth ablations, post-route and power tables, and discussion equations render without clipping, overlap, or broken glyphs."
+      "notes": "The full-width thirteen-experiment timing table, matched post-route and power tables, discussion continuation, and limitations heading render without clipping or overlap."
     },
     {
       "page": 9,
       "status": "PASS",
       "checks": ["captions_and_references", "figures_and_legends", "margins_and_clipping", "tables", "text_and_equations"],
-      "notes": "The remaining limitations, conclusion, and references 1-16 are complete and readable with no clipped content."
+      "notes": "The remaining limitations, complete conclusion, and references 1-16 are readable in both columns with no clipped content."
     }
   ]
 }

@@ -84,6 +84,88 @@ SCALE_POLICY = (
 INTERFACE = (
     ROOT / "reports" / "benchmark" / "corrected" / "rs2_interface_accounting.json"
 )
+URAM_LATENCY_EXPERIMENT = (
+    ROOT
+    / "reports"
+    / "csynth"
+    / "experiments"
+    / "rs2_uram_latency2_20260809"
+    / "summary.json"
+)
+TIMING_EXPERIMENTS = (
+    (
+        "fold_control",
+        "Local fold control",
+        ROOT / "reports/vivado/experiments/rs2_fold_control_20260809/summary.json",
+        "Better; misses target",
+    ),
+    (
+        "fold_write",
+        "Fold-write commit",
+        ROOT / "reports/vivado/experiments/rs2_fold_write_20260809/summary.json",
+        "Best WNS; misses target",
+    ),
+    (
+        "layer_banks",
+        "Full layer partition",
+        ROOT / "reports/vivado/experiments/rs2_layer_banks_20260810/summary.json",
+        "Worse timing and cost",
+    ),
+    (
+        "partial_layer_banks",
+        "Six-way layer banks",
+        ROOT / "reports/vivado/experiments/rs2_partial_layer_banks_20260810/summary.json",
+        "WNS gain; worse TNS",
+    ),
+    (
+        "fold_write_partial_banks",
+        "Banks + fold-write",
+        ROOT / "reports/vivado/experiments/rs2_fold_write_partial_banks_20260810/summary.json",
+        "Worse than both parents",
+    ),
+    (
+        "snapshot_write_partial_banks",
+        "Snapshot commit + banks",
+        ROOT / "reports/vivado/experiments/rs2_snapshot_write_partial_banks_20260810/summary.json",
+        "WNS gain; worse TNS",
+    ),
+    (
+        "split_fold_write",
+        "Split fold writes",
+        ROOT / "reports/vivado/experiments/rs2_split_fold_write_20260810/summary.json",
+        "Worse than parent",
+    ),
+    (
+        "snapshot_write_unbanked",
+        "Snapshot commit, unbanked",
+        ROOT / "reports/vivado/experiments/rs2_snapshot_write_unbanked_20260810/summary.json",
+        "Worse than parent",
+    ),
+    (
+        "fold_write_contiguous_banks",
+        "Two contiguous banks",
+        ROOT / "reports/vivado/experiments/rs2_fold_write_contiguous_banks_20260810/summary.json",
+        "AXI/SLR regression",
+    ),
+    (
+        "snapshot_write_contiguous_banks",
+        "Snapshot + contiguous banks",
+        ROOT / "reports/vivado/experiments/rs2_snapshot_write_contiguous_banks_20260810/summary.json",
+        "Top-FSM regression",
+    ),
+    (
+        "snapshot_write_unbanked_fsm_fanout16",
+        "FSM fanout 16",
+        ROOT / "reports/vivado/experiments/rs2_snapshot_write_unbanked_fsm_fanout16_20260810/summary.json",
+        "Replication worsens setup",
+    ),
+    (
+        "fold_write_address_fanout16",
+        "Address fanout 16",
+        ROOT / "reports/vivado/experiments/rs2_fold_write_address_fanout16_20260810/summary.json",
+        "Origins move; setup worsens",
+    ),
+)
 
 CHECKPOINTS = (64, 256, 1024, 4096, 8192)
 VARIANTS = {
@@ -708,6 +790,60 @@ def _add_derived_numbers(
         )
 
 
+def _add_timing_ablation_numbers(
+    numbers: dict[str, dict[str, object]],
+    provenance: dict[str, dict[str, object]],
+    revision: str,
+    timestamp: str,
+) -> None:
+    route = _load_json(RS2_VIVADO)
+    target = route["target_clock"]["timing"]
+    for suffix, value, units, marker in (
+        ("wns_ns", target["wns_ns"], "ns", '"wns_ns"'),
+        (
+            "setup_failing_endpoints",
+            target["setup_failing_endpoints"],
+            "endpoints",
+            '"setup_failing_endpoints"',
+        ),
+    ):
+        _record(
+            numbers,
+            provenance,
+            key=f"rs2_timing_ablation_selected_{suffix}",
+            value=value,
+            units=units,
+            source=RS2_VIVADO,
+            source_line=_line_after(RS2_VIVADO, '"target_clock"', marker),
+            revision=revision,
+            timestamp=timestamp,
+        )
+
+    for slug, _, path, _ in TIMING_EXPERIMENTS:
+        payload = _load_json(path)
+        timing = payload["postroute"]["experiment_timing"]
+        for suffix, value, units, marker in (
+            ("wns_ns", timing["wns_ns"], "ns", '"wns_ns"'),
+            (
+                "setup_failing_endpoints",
+                timing["setup_failing_endpoints"],
+                "endpoints",
+                '"setup_failing_endpoints"',
+            ),
+        ):
+            _record(
+                numbers,
+                provenance,
+                key=f"rs2_timing_ablation_{slug}_{suffix}",
+                value=value,
+                units=units,
+                source=path,
+                source_line=_line_after(path, '"experiment_timing"', marker),
+                revision=revision,
+                timestamp=timestamp,
+            )
+
+
 def _write_tables(
     output: Path,
     numbers: dict[str, dict[str, object]],
@@ -825,6 +961,30 @@ def _write_tables(
     power_lines.extend([r"\bottomrule", r"\end{tabular}"])
     _write_table(power, power_lines)
 
+    timing_ablation = tables / "rs2_timing_ablation.tex"
+    timing_lines = [
+        r"\begin{tabular}{lrrl}",
+        r"\toprule",
+        r"Design change & WNS (ns) & Failing endpoints & Outcome \\",
+        r"\midrule",
+        (
+            "Selected RS2/R3 & "
+            f"{float(numbers['rs2_timing_ablation_selected_wns_ns']['value']):.3f} & "
+            f"{_tex_int(numbers['rs2_timing_ablation_selected_setup_failing_endpoints']['value'])} & Reference "
+            + r"\\"
+        ),
+        "URAM output latency & -- & -- & HLS-only; path mismatch " + r"\\",
+    ]
+    for slug, label, _, outcome in TIMING_EXPERIMENTS:
+        timing_lines.append(
+            f"{label} & "
+            f"{float(numbers[f'rs2_timing_ablation_{slug}_wns_ns']['value']):.3f} & "
+            f"{_tex_int(numbers[f'rs2_timing_ablation_{slug}_setup_failing_endpoints']['value'])} & "
+            f"{outcome} " + r"\\"
+        )
+    timing_lines.extend([r"\bottomrule", r"\end{tabular}"])
+    _write_table(timing_ablation, timing_lines)
+
     transfers = tables / "rs2_transfer_sizes.tex"
     _write_table(
         transfers,
@@ -840,7 +1000,15 @@ def _write_tables(
             r"\end{tabular}",
         ],
     )
-    return [long_table, gates, hls_table, postroute, power, transfers]
+    return [
+        long_table,
+        gates,
+        hls_table,
+        postroute,
+        power,
+        transfers,
+        timing_ablation,
+    ]
 
 
 def _append_macros(output: Path, numbers: dict[str, dict[str, object]]) -> Path:
@@ -928,6 +1096,8 @@ def generate(output: Path) -> dict[str, object]:
         QWEN,
         SCALE_POLICY,
         INTERFACE,
+        URAM_LATENCY_EXPERIMENT,
+        *(path for _, _, path, _ in TIMING_EXPERIMENTS),
     )
     for path in required:
         if not path.is_file():
@@ -982,6 +1152,7 @@ def generate(output: Path) -> dict[str, object]:
     _add_derived_numbers(
         numbers, provenance, by_key, line_by_key, revision, timestamp
     )
+    _add_timing_ablation_numbers(numbers, provenance, revision, timestamp)
     if set(numbers) != set(provenance):
         raise ValueError("paper numbers and provenance keys diverged")
     numbers_path.write_text(

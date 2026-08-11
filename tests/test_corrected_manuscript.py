@@ -145,10 +145,12 @@ def test_corrected_manuscript_states_the_finite_horizon_error_bound() -> None:
 
 def test_corrected_manuscript_consolidates_adjacent_quality_tables() -> None:
     text = PAPER.read_text(encoding="utf-8")
-    assert len(re.findall(r"\\begin\{table\*?\}", text)) == 9
+    assert len(re.findall(r"\\begin\{table\*?\}", text)) == 10
     assert len(re.findall(r"\\begin\{figure\*?\}", text)) == 4
     assert "\\label{tab:rs2-stability}" in text
+    assert "\\label{tab:timing-ablation}" in text
     assert "paper/corrected/tables/rs2_stability_gates.tex" in text
+    assert "paper/corrected/tables/rs2_timing_ablation.tex" in text
     assert "paper/corrected/tables/corrected_quality.tex" not in text
     assert "paper/corrected/tables/mitigation_hls.tex" not in text
 

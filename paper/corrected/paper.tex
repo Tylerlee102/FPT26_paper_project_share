@@ -606,85 +606,35 @@ fanout-plus-AggressiveExplore pass also fail the declared target. The best WNS
 remains strongly negative, so further timing work requires architecture-level
 or floorplanning changes rather than another post-route directive. We retain
 the original routed checkpoint for the matched table.
-An isolated experiment then registered the four URAM output paths. It preserved
-exact C-simulation and all explicit synthesis loop constraints, but left the
-HLS clock estimate unchanged while increasing logic and worst-case latency.
-Because the routed failures terminate on URAM enable and write-control pins,
-the output-latency variant does not target the failing path and was not promoted
-or routed.
-A second isolated variant moved the fold decision into a non-inlined helper.
-It preserved exact C-simulation and the HLS schedule, and its matched route
-reduced control fanout and setup violation. The target still failed, however;
-the remaining worst path runs from the local fold state machine to a URAM
-byte-write-enable pin. We therefore retain this as architecture-diagnostic
-evidence rather than replacing the source-locked candidate.
-A third isolated variant retained that fold boundary and moved each folded-state
-write into a separate non-inlined commit stage. It again preserved exact
-C-simulation and the HLS loop constraints, and produced the strongest isolated
-setup improvement with fewer failing endpoints. It nevertheless missed the
-declared clock, increased periodic-fold latency, and moved the worst high-fanout
-path back to outer fold control driving a resident-primary URAM enable. This
-variant is likewise not promoted.
-A fourth isolated variant completely partitioned the primary and residual state
-stores by layer. This preserved the exact recurrent trace and all-layer capacity,
-and it removed the monolithic high-fanout write-enable path. The routed design
-instead exposed a bank-local read/selector path into fold logic, increased LUT
-and DSP cost, and worsened setup slack, total negative slack, and the failing
-endpoint count. We therefore reject simple complete layer banking as a timing
-fix; bank locality must be co-designed with layer selection and read-return
-pipelining.
-A fifth isolated variant instead used factor-six cyclic layer banking to reduce
-the selector and logic cost of complete partitioning. It preserved the exact
-recurrent trace, all explicit synthesis loop constraints, and all-layer
-capacity. The matched route slightly improved worst setup slack relative to the
-selected design, but still missed the target while worsening total negative
-slack and the failing-endpoint count and increasing LUT, register, and DSP use.
-Its worst path again crosses an SLR into high-fanout URAM control. We therefore
-reject partial layer banking as a standalone timing fix and retain the
-source-locked candidate.
-Finally, we composed factor-six banking with the strongest isolated fold-write
-hierarchy. Exact C-simulation and every explicit synthesis constraint still
-passed, but the matched route was worse than either parent in worst slack,
-total negative slack, and failing endpoints. The critical path crossed two
-SLRs and remained dominated by interconnect into resident-state memory. This
-negative composition result shows that reducing one high-fanout fold-control
-net does not solve the wider snapshot, reset, and bank-selection distribution
-problem. We reject the composition and leave the source-locked candidate
-unchanged.
-A seventh isolated variant placed the remaining snapshot-load state writes
-behind a non-inlined commit boundary on top of that composition. Exact
-C-simulation, every explicit synthesis constraint, routing, hold, and design
-rules passed. The boundary removed snapshot-load control from the worst-path
-startpoints and modestly improved worst slack, but total negative slack and the
-failing-endpoint count grew substantially. The worst paths instead originated
-primarily in shared layer/address control, with smaller contributions from
-resident-memory clocks, top-level control, and fold control. We therefore retain
-snapshot-write locality only as a clue for a lower-cost unbanked experiment;
-this composed variant is not promoted.
-An eighth isolated variant returned to the strongest unbanked fold-write parent
-and split its combined primary and residual commit into sequential non-inlined
-helpers. Exact C-simulation, every explicit synthesis constraint, routing,
-hold, and design rules passed, while HLS resource use changed negligibly. The
-matched route nevertheless regressed sharply in worst slack, total negative
-slack, and failing endpoints. Snapshot-load, fold, reset, and top-level control
-accounted for every worst-path startpoint, and the longest path crossed two
-SLRs with delay dominated by interconnect. Separating one write-control cone
-therefore displaced rather than removed the global resident-memory control
-problem; the split variant is rejected and not promoted.
-The ninth variant applied snapshot-write locality directly to that unbanked
-parent. Exact C-simulation and physical checks passed, and snapshot write/load
-logic left the worst-path origins, but setup regressed as top-level, URAM-read,
-and fold control became dominant. Snapshot-write isolation alone is rejected.
-The tenth variant instead added two contiguous layer banks to the fold-write
-parent. Exact C-simulation and physical checks again passed, but setup regressed
-sharply: 80 of the 100 worst paths began in the state-input AXI load FIFO and
-crossed two SLRs into banked URAM control. We reject contiguous banking without
-a separately pipelined load/control plane.
-An eleventh combination moved all 100 worst paths to the top FSM and worsened
-timing. Two RTL-only fanout-16 hints next targeted the top FSM and fold-write
-addresses. Both regressed setup. The address hint cut those origins from 47 to
-four, but WNS worsened from $-1.294$ to $-1.453$ ns as 59 paths shifted to URAM
-clocks. Closing 250 MHz needs redesigned global control.
+
+Table~\ref{tab:timing-ablation} summarizes thirteen isolated timing
+experiments. The URAM-output variant was stopped before routing because it
+added latency while registering read outputs rather than the failing write and
+control pins. The twelve routed variants preserve the selected arithmetic and
+capacity; source-derived variants pass exact 64-token C simulation and their
+declared HLS loop constraints, while the two RTL fanout variants inherit the
+same logic. All routed variants pass hold checks and design rules, but none
+closes 250 MHz.
+
+The fold-control and fold-write boundaries are the only isolated changes that
+improve both WNS and the number of failing setup endpoints relative to the
+selected route. The fold-write boundary gives the best tested WNS, yet remains
+negative. Layer banking, snapshot-write isolation, composed write boundaries,
+and fanout constraints repeatedly move the worst paths among fold, snapshot,
+reset, top-FSM, URAM-clock, and AXI-load control. The address constraint, for
+example, reduces the targeted address origins but shifts most worst paths to
+resident-URAM clocks. The remaining problem is therefore distributed global
+control and memory placement, not one arithmetic stage or one fanout net.
+
+\begin{table*}[t]
+\centering
+\caption{Selected 4.0 ns route and thirteen isolated timing experiments. WNS
+and failing-endpoint counts are from matched out-of-context routes; the one
+HLS-only row was rejected before route. No experiment is promoted.}
+\label{tab:timing-ablation}
+\scriptsize
+\resizebox{\textwidth}{!}{\input{paper/corrected/tables/rs2_timing_ablation.tex}}
+\end{table*}
 
 \begin{table}[t]
 \centering
