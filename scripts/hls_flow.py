@@ -34,6 +34,9 @@ TCL_BY_STEP = {
     "rs2-reset-trace-cosim-resume": Path(
         "hls/rs2/tcl/run_reset_trace_cosim_resume.tcl"
     ),
+    "rs2-reset-trace-cosim-accelerated": Path(
+        "hls/rs2/tcl/run_reset_trace_cosim_accelerated.tcl"
+    ),
     "rs2-csynth": Path("hls/rs2/tcl/run_csynth.tcl"),
     "rs2-trace-csim": Path("hls/rs2/tcl/run_trace_csim.tcl"),
     "rs2-uram-latency2-csim": Path(
@@ -208,6 +211,56 @@ def _archive_completed_step(step: str, root: Path) -> None:
                 destination
                 / "report"
                 / "select_e2m1_scale_power_Pipeline_select_e2m1_max_csynth.rpt"
+            ),
+            source_root / "u55c_250mhz.log": destination / "u55c_250mhz.log",
+        }
+    elif step == "rs2-reset-trace-cosim-accelerated":
+        source_root = root / "gdn_rs2_reset_trace_cosim_hls" / "u55c_250mhz"
+        sim_root = source_root / "sim"
+        verilog_root = sim_root / "verilog"
+        destination = (
+            root
+            / "reports"
+            / "cosim"
+            / "corrected"
+            / "rs2_current"
+            / "trace64_reset_accelerated"
+        )
+        completion = verilog_root / "rs2_accelerated_cosim_complete.txt"
+        xsim_log = verilog_root / "xsim.log"
+        postcheck_log = sim_root / "wrapc_pc" / "temp0.log"
+        pass_marker = (
+            "PASS: 64 encoded reset-state tokens, exact outputs/counters, "
+            "and final snapshot"
+        )
+        required_text = {
+            completion: "RS2_ACCELERATED_HLS_XSIM_PASS",
+            xsim_log: "RTL Simulation : 66 / 66",
+            postcheck_log: pass_marker,
+            verilog_root / "run_xsim.bat": "--O3 --debug off --mt 8",
+            verilog_root / "xelab.log": "Using 8 slave threads.",
+        }
+        for path, marker in required_text.items():
+            if not path.is_file() or marker not in path.read_text(
+                encoding="utf-8", errors="replace"
+            ):
+                raise RuntimeError(
+                    f"refusing to archive {step}: missing {marker!r} in {path}"
+                )
+        xsim_text = xsim_log.read_text(encoding="utf-8", errors="replace")
+        for failure in ("Out of memory", "Simulation engine not responding"):
+            if failure in xsim_text:
+                raise RuntimeError(
+                    f"refusing to archive {step}: XSim contains {failure!r}"
+                )
+        copies = {
+            completion: destination / completion.name,
+            xsim_log: destination / "verilog" / xsim_log.name,
+            verilog_root / "xelab.log": destination / "verilog" / "xelab.log",
+            verilog_root / "run_xsim.bat": destination / "verilog" / "run_xsim.bat",
+            postcheck_log: destination / "postcheck" / "temp0.log",
+            sim_root / "report" / "verilog" / "gdn_rs2_top.log": (
+                destination / "verilog" / "gdn_rs2_top.log"
             ),
             source_root / "u55c_250mhz.log": destination / "u55c_250mhz.log",
         }

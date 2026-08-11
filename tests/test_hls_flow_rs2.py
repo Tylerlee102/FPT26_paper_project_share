@@ -101,3 +101,63 @@ def test_rs2_reset_trace_cosim_resume_is_optimized_and_registered() -> None:
     assert "cosim_design -O" in text
     assert "RS2_RESET_TRACE_COSIM_METADATA_REUSED" in text
     assert "RS2_TRACE_PATH" in text
+
+
+def test_rs2_accelerated_reset_cosim_is_guarded_and_registered() -> None:
+    path = TCL_BY_STEP["rs2-reset-trace-cosim-accelerated"]
+    assert path == Path("hls/rs2/tcl/run_reset_trace_cosim_accelerated.tcl")
+    text = (Path(__file__).resolve().parents[1] / path).read_text(encoding="utf-8")
+    assert "cosim_design -O" in text
+    assert "-setup" in text
+    assert "--O3 --debug off --mt 8" in text
+    assert "RTL Simulation : 66 / 66" in text
+    assert "PASS: 64 encoded reset-state tokens" in text
+    assert "Out of memory" in text
+
+
+def test_rs2_accelerated_archive_requires_raw_xsim_and_postcheck(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "gdn_rs2_reset_trace_cosim_hls/u55c_250mhz"
+    verilog = source / "sim/verilog"
+    postcheck = source / "sim/wrapc_pc"
+    report = source / "sim/report/verilog"
+    for path in (verilog, postcheck, report):
+        path.mkdir(parents=True)
+    marker = (
+        "PASS: 64 encoded reset-state tokens, exact outputs/counters, "
+        "and final snapshot"
+    )
+    (verilog / "rs2_accelerated_cosim_complete.txt").write_text(
+        "RS2_ACCELERATED_HLS_XSIM_PASS\n", encoding="utf-8"
+    )
+    (verilog / "xsim.log").write_text(
+        "RTL Simulation : 66 / 66\n", encoding="utf-8"
+    )
+    (verilog / "xelab.log").write_text(
+        "Using 8 slave threads.\n", encoding="utf-8"
+    )
+    (verilog / "run_xsim.bat").write_text(
+        "xelab --O3 --debug off --mt 8\n", encoding="utf-8"
+    )
+    (postcheck / "temp0.log").write_text(marker + "\n", encoding="utf-8")
+    (report / "gdn_rs2_top.log").write_text("generated\n", encoding="utf-8")
+    (source / "u55c_250mhz.log").write_text("setup\n", encoding="utf-8")
+
+    _archive_completed_step("rs2-reset-trace-cosim-accelerated", tmp_path)
+    archived = (
+        tmp_path
+        / "reports/cosim/corrected/rs2_current/trace64_reset_accelerated"
+    )
+    assert marker in (archived / "postcheck/temp0.log").read_text(
+        encoding="utf-8"
+    )
+    assert "66 / 66" in (archived / "verilog/xsim.log").read_text(
+        encoding="utf-8"
+    )
+
+    (verilog / "xsim.log").write_text(
+        "RTL Simulation : 66 / 66\nOut of memory\n", encoding="utf-8"
+    )
+    with pytest.raises(RuntimeError, match="Out of memory"):
+        _archive_completed_step("rs2-reset-trace-cosim-accelerated", tmp_path)
