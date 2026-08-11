@@ -9,8 +9,9 @@ mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5
 ```
 
 Generated-RTL recurrent STEPs through the first R3 fold boundary pass exactly.
-The complete 64-token generated-RTL and official XSIM traces remain governed by
-the machine completion gate; shorter parity is not promoted to that claim.
+The complete 64-token direct-XSim generated-RTL trace passes. The distinct
+Vitis-generated UVM cosim wrapper remains governed by the machine completion
+gate; its shorter control smoke is not promoted to recurrent parity.
 
 ## Controlled Answer
 
@@ -43,7 +44,7 @@ and block size 32.
 | Corrected 8,192-token development | PASS | Random- and zero-state conditions and both independent full recomputations pass; minimum all-token cosine is 0.995974 and worst all-token state relative L2 is 0.082737. |
 | Corrected 64-token HLS C simulation | PASS | Outputs, counters, folds, and final snapshot match exactly. |
 | Corrected generated-RTL control smoke | PASS | Official Vitis HLS/XSIM completes two exact early-return commands. No recurrent transition is covered. |
-| Corrected candidate recurrent RTL parity | PASS (direct generated RTL) | The exact Vitis-generated DUT and its 20 generated AXI memory models pass all 64 recurrent tokens, every output and counter, and the complete final resident-state snapshot in the direct Verilator harness. The separately hash-bound official-XSim diagnostic records PASS C transaction generation, PASS xelab, XSIM launch, and 0/10 completed transactions at the bounded stop; official-XSim completion remains incomplete. |
+| Corrected candidate recurrent RTL parity | PASS (direct generated RTL) | AMD XSim 2025.2 runs the exact Vitis-generated DUT through all 64 recurrent tokens and passes every output, counter, and complete final resident-state snapshot. The distinct generated UVM wrapper reaches transaction 1/66 but exhibits unbounded host-memory growth across waveform-free, profiler-free, event-gated, and single-thread diagnostics; wrapper completion remains incomplete. |
 | Corrected out-of-context physical fit | PASS | 82,038 CLB LUTs, 69,800 FFs, 341 BRAM tiles, 598 URAMs, and 12 DSPs. |
 | Corrected target timing | FAIL outcome | WNS is -1.736 ns at 250 MHz and -0.736 ns at 200 MHz; aggressive-fanout, retiming, and SLR-crossing post-route optimizations also fail. The first passing tested fixed-route point is 166.67 MHz. |
 | Corrected DRC | PASS_WITH_WARNINGS | 26 warnings, zero critical warnings, and zero errors. |
@@ -79,7 +80,7 @@ stale provenance record, or unaudited PDF cannot.
 The release gate keeps completed evidence separate from research outcomes.
 Corrected-candidate 64-token direct generated-RTL parity passes all 66 commands,
 262,144 output values, counters, and final recurrent state. Official recurrent
-XSim remains separately `NOT_RUN`; the direct Verilator result and C simulation
+UVM-wrapper XSim remains separately `NOT_RUN`; the direct XSim result and C simulation
 do not silently fill that missing simulator path.
 
 All eleven completion-gate rows are release-required. Any `FAIL`, `NOT_RUN`,

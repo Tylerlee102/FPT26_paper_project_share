@@ -42,6 +42,7 @@
         "reports/csynth/corrected/rs2_hls_summary.json",
         "reports/cosim/corrected/rs2_current/control/gdn_rs2_top_cosim.rpt",
         "reports/cosim/corrected/rs2_current/trace64_direct/rs2_trace64_direct_summary.json",
+        "reports/cosim/corrected/rs2_current/trace64_reset_accelerated",
         "reports/cosim/corrected/rs2_current/xsim_runtime/rs2_xsim_runtime.json"
       ],
       "finding": "Exact HLS C simulation and direct generated-RTL parity pass, but the required official 64-token XSim path remains incomplete; a measured XSim runtime benchmark bounds its cost.",
@@ -155,13 +156,13 @@
       "status": "FAIL"
     }
   ],
-  "generated_at": "2026-08-11T01:12:18.932098+00:00",
+  "generated_at": "2026-08-11T03:09:34.180061+00:00",
   "nonpassing_gate_count": 7,
   "paper_pdf_permitted": false,
   "release_state": "NOT PAPER READY",
   "required_gate_count": 11,
   "required_nonpassing_gate_count": 7,
   "schema": 2,
-  "source_revision": "80240bac01c42980927652d593b1c0a4e1a206c4",
+  "source_revision": "98d58b0f09963276307865706d2f7a53e0af98fb",
   "status": "FAIL"
 }

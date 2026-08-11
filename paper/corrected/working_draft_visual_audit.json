@@ -32,83 +32,83 @@
     }
   ],
   "build_manifest": "paper/corrected/working_draft_build_manifest.json",
-  "build_manifest_sha256": "06B274E2A5B8B1E5FCA332B88F7538E0081342BD241A6DC6CB6174277AB422D5",
+  "build_manifest_sha256": "72DD80BA3676322A6827128E484A47BEC82DD00A512C00B257AF4B2EFB66C698",
   "checklist": "paper/corrected/working_draft_visual_checklist.json",
   "checklist_sha256": "6F7BC245B6C15E8ED4AAB5125F18FE98A125EBDF90770E078E0CCBF4EE8FC1AD",
-  "generated_at": "2026-08-11T01:03:33.966351+00:00",
+  "generated_at": "2026-08-11T03:11:12.393800+00:00",
   "page_count": 9,
   "pages": [
     {
-      "height": 2420,
+      "height": 1760,
       "notes": "Title, abstract, contribution boundary, two-column text, and watermark are readable with no clipping.",
       "page": 1,
-      "path": "reports/rendered/working_draft/page-01.png",
-      "sha256": "5F09363D525379501C8F967A6E7A644CB00593D7EBC4234260F4207C08F084BD",
-      "width": 1870
+      "path": "reports/rendered/working_draft_20260810/page-01.png",
+      "sha256": "864A034E279C9463F5574B22BBA2721B6A1A293065D8ADF6715744900730EF9C",
+      "width": 1360
     },
     {
-      "height": 2420,
+      "height": 1760,
       "notes": "Recurrence equations and ownership table are aligned and legible; citations and table rules render cleanly.",
       "page": 2,
-      "path": "reports/rendered/working_draft/page-02.png",
-      "sha256": "6B4AC961BEDA9624488757A8D45239255ABD00B5AF16B96FB58D4F6CD45BB4B5",
-      "width": 1870
+      "path": "reports/rendered/working_draft_20260810/page-02.png",
+      "sha256": "89F161446F3DA4D1D7A7B08E6B916698380BF237D13A0BA7AC6596468E5D6FCE",
+      "width": 1360
     },
     {
-      "height": 2420,
+      "height": 1760,
       "notes": "Method, payload table, and evaluation controls fit within both columns without overlap.",
       "page": 3,
-      "path": "reports/rendered/working_draft/page-03.png",
-      "sha256": "161F824BF09C8886464B358250EC0F736BFDF4BE1A184BA8DC283CFCF7989901",
-      "width": 1870
+      "path": "reports/rendered/working_draft_20260810/page-03.png",
+      "sha256": "8F75C4EBCC0270D81772458EB09D692B22EE85EAF0B1ED6D4C4434BE65B05371",
+      "width": 1360
     },
     {
-      "height": 2420,
+      "height": 1760,
       "notes": "Full-width datapath figure, legend, caption, equations, and surrounding text are sharp and unobstructed.",
       "page": 4,
-      "path": "reports/rendered/working_draft/page-04.png",
-      "sha256": "A42C08032F1A5BD9DDD9534EDCA64585735F1E507AE93F8FD4122C4628436523",
-      "width": 1870
+      "path": "reports/rendered/working_draft_20260810/page-04.png",
+      "sha256": "4087F28EFF45FC9DE3CAECA9C65B655E4F0CDB45EDD0EE8ACA70773827765107",
+      "width": 1360
     },
     {
-      "height": 2420,
+      "height": 1760,
       "notes": "Both long-sequence plots have readable legends, threshold lines, axis labels, and the 8,192-token tick.",
       "page": 5,
-      "path": "reports/rendered/working_draft/page-05.png",
-      "sha256": "524AD84A9120907ABFCF098245E5440630990B94186176C18D7F74C7D6090B03",
-      "width": 1870
+      "path": "reports/rendered/working_draft_20260810/page-05.png",
+      "sha256": "F86315111C354C626FFC3A787DD9EB10C4A01FAA589889F26157AED7BF011D97",
+      "width": 1360
     },
     {
-      "height": 2420,
+      "height": 1760,
       "notes": "Tables III-VII are legible; the timing-ablation setup and compact synthesis text begin cleanly in the right column without clipping.",
       "page": 6,
-      "path": "reports/rendered/working_draft/page-06.png",
-      "sha256": "7A59241A3A5E8CD2DB6404D850168163803680CC2265DC5F2D7DF36B5BA7721B",
-      "width": 1870
+      "path": "reports/rendered/working_draft_20260810/page-06.png",
+      "sha256": "2F4D306B06F74894A6DCD6605405E7CEED40145716175C917B0EE7BD39887AD0",
+      "width": 1360
     },
     {
-      "height": 2420,
+      "height": 1760,
       "notes": "The trade-off figure, timing-ablation synthesis, generated-RTL and power text, and opening discussion equations remain readable and separated.",
       "page": 7,
-      "path": "reports/rendered/working_draft/page-07.png",
-      "sha256": "F9E608F187FCA8D3A43A35F0934DED64234DF5845BC08C4A8A19E93475295E40",
-      "width": 1870
+      "path": "reports/rendered/working_draft_20260810/page-07.png",
+      "sha256": "B0CC313FF1A0983E7C7CC9B6A64E59A6B700D3F986CE3E8DEA4E6AEB82CB7354",
+      "width": 1360
     },
     {
-      "height": 2420,
+      "height": 1760,
       "notes": "The full-width thirteen-experiment timing table, matched post-route and power tables, discussion continuation, and limitations heading render without clipping or overlap.",
       "page": 8,
-      "path": "reports/rendered/working_draft/page-08.png",
-      "sha256": "9EDE4AA543FE28EB9D5BD029AD2F1563970ACA06B11DA221FCB5162718AC8A8C",
-      "width": 1870
+      "path": "reports/rendered/working_draft_20260810/page-08.png",
+      "sha256": "21CD9193F6637B1AE44DACD60492228CC15B493D76CBEE56DFE01F876F13533E",
+      "width": 1360
     },
     {
-      "height": 2420,
+      "height": 1760,
       "notes": "The remaining limitations, complete conclusion, and references 1-16 are readable in both columns with no clipped content.",
       "page": 9,
-      "path": "reports/rendered/working_draft/page-09.png",
-      "sha256": "06359BD757FDDD48D5A7F46AEA5DBEB9F38EC68A221A00971A563935C027B8E7",
-      "width": 1870
+      "path": "reports/rendered/working_draft_20260810/page-09.png",
+      "sha256": "785D7797CE68910B6A57172EE5A2A790483216790AA421187CE39B896D7BC392",
+      "width": 1360
     }
   ],
   "release_state": "NOT PAPER READY",
@@ -124,5 +124,5 @@
   "submission_eligible": false,
   "visual_audit_status": "PASS",
   "working_draft": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "working_draft_sha256": "F90333957DCA61F07CF296CABD6C8C21A045BA71EE00956889A57F1CDB44FF44"
+  "working_draft_sha256": "FB9BFAD9885BE8D23C352168F435A50309F967F779D90A2DA8CBF3942D2708C8"
 }

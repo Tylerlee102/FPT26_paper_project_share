@@ -18,11 +18,11 @@ Official recurrence parity, the independent encoded oracle, matched BF16 HLS
 extraction, exact write-log equivalence, and the selected correction's locally
 recorded synthetic stability gates are `PASS`. The corrected candidate also has
 exact 64-token HLS C simulation, an official two-command generated-RTL control
-smoke, exact direct generated-RTL execution through the first R3 fold boundary,
-and an out-of-context routed U55C implementation. A full direct 64-token run is
-in progress. Official XSIM elaborates and launches but has not completed its
-long initial LOAD, so candidate-specific 64-token RTL parity remains
-`NOT_ESTABLISHED`. Uniform MXFP4 fails both the 8192-token stability gate and
+smoke, exact direct-XSim generated-RTL execution of the complete 64-token trace,
+and an out-of-context routed U55C implementation. Candidate-specific direct RTL
+parity is `PASS`. The distinct Vitis-generated UVM wrapper reaches transaction
+1/66 but exhibits host-memory growth, so wrapper completion remains `NOT_RUN`.
+Uniform MXFP4 fails both the 8192-token stability gate and
 the matched HLS LUT/STEP-cost gate. The selected correction restores bounded
 synthetic fidelity but fails its HLS Pareto criteria and the 250/200 MHz routed
 timing points. Four 12--18-token real-input Qwen recurrence traces are complete,
@@ -512,8 +512,8 @@ token. Evidence is rooted at
 
 Official Vitis HLS/XSIM co-simulation passes two exact generated-RTL
 early-return commands. Because neither command executes a recurrent transition,
-this is a control smoke only. A direct Verilator harness retaining the exact DUT
-and 20 generated AXI memory models passes LOAD, all 64 recurrent STEPs, every
+this is a control smoke only. A direct AMD XSim harness retaining the exact DUT
+passes LOAD, all 64 recurrent STEPs, every
 output and counter, and complete final-state readback. The official XSIM path
 separately passes the eight-token C transaction generator and xelab, then
 launches XSIM, but its bounded diagnostic completes no recurrent transaction.
@@ -574,9 +574,9 @@ Selected-method Pareto status: `FAIL`.
 HLS report extraction status: `PASS`. Configured timing margin, HLS cost, and
 explicit II=1 subcriteria: `FAIL`.
 
-Allocated physical-memory subcriterion: `PASS`. Target timing and recurrent RTL
-parity: `FAIL`; the latter is reported as `NOT_ESTABLISHED`. Service-latency and
-measured-energy subcriteria remain `NOT_RUN` or `BLOCKED_EXTERNAL`.
+Allocated physical-memory and direct-XSim recurrent RTL parity subcriteria:
+`PASS`. Target timing is `FAIL`; generated-UVM-wrapper completion and
+service-latency remain `NOT_RUN`, while measured energy is `BLOCKED_EXTERNAL`.
 
 For the lazy-base/write-log hypothesis, prove exact-arithmetic equality to the
 official recurrence before quantization. Exercise paired-key sharing, per-head
@@ -619,9 +619,9 @@ The corrected BF16, uniform-MXFP4, and native-MXFP8 variants have matched HLS
 C-synthesis estimates. BF16 and MXFP8 have bounded HLS C-simulation checks; uniform MXFP4 has
 64-token HLS C parity and 64-token direct generated-Verilog parity. The
 selected mitigation has 64-token HLS C parity and C synthesis. Its RTL evidence
-contains an official two-command control smoke and exact direct recurrent STEPs
-through the first R3 fold boundary; the full direct run is executing, while
-official XSIM has not completed the long initial LOAD. The selected, BF16, and
+contains an official two-command control smoke and exact direct-XSim execution
+of all 64 recurrent STEPs. The generated UVM wrapper remains incomplete after
+transaction 1/66 because of host-memory growth. The selected, BF16, and
 native-MXFP8 variants have out-of-context routed images; all preserve 36 state
 slots, fit, and miss 250 MHz. Board implementation remains externally blocked.
 
@@ -711,10 +711,10 @@ convention are versioned with the artifact. No paper number is typed by hand.
 | Start corrected baseline HLS implementation | PASS | Corrected C simulation, one C-synthesis point, and uniform-path 64-token direct generated-Verilog parity are preserved. |
 | Complete candidate-specific HLS C simulation and synthesis | PASS | Corrected C simulation and a source-locked U55C synthesis extraction exist. |
 | Candidate-specific HLS Pareto advantage | FAIL | LUT, non-fold STEP, and amortized STEP cost exceed BF16 even though every explicit II=1 constraint passes. |
-| Candidate-specific 64-token RTL parity | IN_PROGRESS / NOT_ESTABLISHED | Exact 64-token C simulation passes. Direct generated RTL passes through the first R3 fold boundary and the full trace is executing. Official XSIM elaborates and launches but has not completed its long initial LOAD. Uniform-MXFP4 RTL evidence does not validate the changed candidate. |
+| Candidate-specific 64-token RTL parity | PASS (direct XSim); generated UVM wrapper NOT_RUN | Exact 64-token C simulation and direct XSim over the generated RTL pass all 64 recurrent steps and final-state readback. The distinct generated UVM wrapper reaches 1/66 but exhibits host-memory growth. Uniform-MXFP4 RTL evidence is not transferred to the changed candidate. |
 | Candidate-specific generated-RTL control smoke | PASS | Official Vitis HLS/XSIM passes two early-return commands; no recurrent transition is covered. |
 | Route selected candidate out of context | PASS | The state bank fits; 250 and 200 MHz setup fail after three post-route optimization attempts; the first passing tested point is 166.67 MHz. |
 | Route matched native MXFP8 out of context | PASS | The baseline fits, fails 250 MHz, and first closes at the tested 166.67 MHz point; its vectorless power remains an estimate. |
 | Program U55C and collect telemetry | BLOCKED_EXTERNAL | The host has Vitis/Vivado but no attached U55C, U55C XRT platform, xbutil/xrt-smi, xclbin, or board telemetry. |
-| Generate selected-candidate paper source assets | IN_PROGRESS | Controlled long-trace data and plots are refreshed; macros, tables, numbers, provenance, and the exact RTL-dependent assets await completion of the full direct run. |
+| Generate selected-candidate paper source assets | PASS | Controlled long-trace data, plots, macros, tables, numbers, provenance, and direct-RTL assets are generated. The official-wrapper status remains explicit rather than being filled by direct-XSim evidence. |
 | Render and audit final paper PDF | NOT_RUN | A visibly watermarked working draft is allowed; canonical submission PDF generation remains gated on all eleven release rows passing. |

@@ -251,7 +251,9 @@ def _line_after(path: Path, anchor: str, marker: str) -> int:
     raise ValueError(f"marker {marker!r} after {anchor!r} is absent from {path}")
 
 
-def _official_xsim_evidence(root: Path = RS2_OFFICIAL_XSIM_ROOT) -> dict[str, object]:
+def _official_xsim_evidence(
+    root: Path = RS2_OFFICIAL_XSIM_ROOT, *, allow_incomplete: bool = False
+) -> dict[str, object]:
     files = {
         "completion": root / "rs2_accelerated_cosim_complete.txt",
         "xsim": root / "verilog" / "xsim.log",
@@ -270,6 +272,32 @@ def _official_xsim_evidence(root: Path = RS2_OFFICIAL_XSIM_ROOT) -> dict[str, ob
         "xelab": "Using 8 slave threads.",
     }
     texts: dict[str, str] = {}
+    missing = [path for path in files.values() if not path.is_file()]
+    if missing and allow_incomplete:
+        diagnostic = root / "diagnostics" / "README.md"
+        if not diagnostic.is_file():
+            raise FileNotFoundError(diagnostic)
+        diagnostic_text = diagnostic.read_text(encoding="utf-8", errors="replace")
+        incomplete_markers = {
+            "completion": "Official wrapper status: `NOT_RUN`",
+            "postcheck": "Completed recurrent tokens: `0`",
+            "xsim": "Completed transactions: `1 / 66`",
+            "xelab": "Elaboration threads tested: `8` and `off`",
+        }
+        for marker in incomplete_markers.values():
+            if marker not in diagnostic_text:
+                raise ValueError(
+                    f"incomplete official XSim marker {marker!r} is absent from "
+                    f"{diagnostic}"
+                )
+        return {
+            "status": "NOT_RUN",
+            "tokens": 0,
+            "transactions": 1,
+            "elaboration_threads": 0,
+            "files": {name: diagnostic for name in incomplete_markers},
+            "markers": incomplete_markers,
+        }
     for name, path in files.items():
         if not path.is_file():
             raise FileNotFoundError(path)
@@ -1173,7 +1201,9 @@ def _append_macros(output: Path, numbers: dict[str, dict[str, object]]) -> Path:
     return path
 
 
-def generate(output: Path) -> dict[str, object]:
+def generate(
+    output: Path, *, allow_incomplete_official_xsim: bool = False
+) -> dict[str, object]:
     required = (
         CONTROLLED,
         CONTROLLED_MANIFEST,
@@ -1185,11 +1215,6 @@ def generate(output: Path) -> dict[str, object]:
         BF16_VIVADO,
         MXFP8_VIVADO,
         RS2_RTL,
-        RS2_OFFICIAL_XSIM_COMPLETION,
-        RS2_OFFICIAL_XSIM_LOG,
-        RS2_OFFICIAL_XSIM_POSTCHECK,
-        RS2_OFFICIAL_XELAB_LOG,
-        RS2_OFFICIAL_XSIM_COMMAND,
         QWEN,
         SCALE_POLICY,
         INTERFACE,
@@ -1199,6 +1224,16 @@ def generate(output: Path) -> dict[str, object]:
     for path in required:
         if not path.is_file():
             raise FileNotFoundError(path)
+    if not allow_incomplete_official_xsim:
+        for path in (
+            RS2_OFFICIAL_XSIM_COMPLETION,
+            RS2_OFFICIAL_XSIM_LOG,
+            RS2_OFFICIAL_XSIM_POSTCHECK,
+            RS2_OFFICIAL_XELAB_LOG,
+            RS2_OFFICIAL_XSIM_COMMAND,
+        ):
+            if not path.is_file():
+                raise FileNotFoundError(path)
 
     controlled_manifest = _load_json(CONTROLLED_MANIFEST)
     relative_controlled = _relative(CONTROLLED)
@@ -1217,7 +1252,9 @@ def generate(output: Path) -> dict[str, object]:
     bf16_route = _load_json(BF16_VIVADO)
     mxfp8_route = _load_json(MXFP8_VIVADO)
     rtl = _load_json(RS2_RTL)
-    official_xsim = _official_xsim_evidence()
+    official_xsim = _official_xsim_evidence(
+        allow_incomplete=allow_incomplete_official_xsim
+    )
     _load_json(QWEN)
     _load_json(SCALE_POLICY)
 
@@ -1343,8 +1380,16 @@ def _resolve(path: Path) -> Path:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument(
+        "--allow-incomplete-official-xsim",
+        action="store_true",
+        help="generate watermarked-draft assets with provenance-backed NOT_RUN XSim status",
+    )
     args = parser.parse_args(argv)
-    result = generate(_resolve(args.output))
+    result = generate(
+        _resolve(args.output),
+        allow_incomplete_official_xsim=args.allow_incomplete_official_xsim,
+    )
     print(
         json.dumps(
             {

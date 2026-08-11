@@ -176,7 +176,7 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   exact 8 MiB allocation failure rather than an arithmetic mismatch. A lean
   official XSIM LOAD benchmark completes
   4,447,475 cycles in 502 seconds and projects 90.16 hours for the known
-  2,875,491,178-cycle 64-token command sequence. The direct Verilator harness
+  2,875,491,178-cycle 64-token command sequence. The direct AMD XSim harness
   compiles the same generated RTL and passes all 66 commands, 262,144 output
   values, counters, and the final recurrent state exactly. Official 64-token
   XSIM parity remains `NOT_RUN`; direct generated-RTL parity is established.
@@ -184,9 +184,12 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   `--O3 --debug off --mt 8`, then runs the generated transaction driver and C
   post-check. Its two-command control validation completes 2/2 transactions,
   emits the exact post-check PASS marker, and uses about 1.02 GiB of simulator
-  memory. The corresponding 64-token reset-state run is active; the archive
-  refuses completion unless XSim reaches 66/66, the exact 64-token post-check
-  passes, and no memory-failure signature is present.
+  memory. The corresponding 64-token reset-state run reaches transaction 1/66
+  before host memory grows without bound. Removing wave loading, assertions,
+  coverage, and the dataflow profiler; gating monitor loops; and elaborating
+  single-threaded do not remove the growth. The archive refuses completion
+  unless XSim reaches 66/66, the exact 64-token post-check passes, and no
+  memory-failure signature is present.
 - BF16, uniform MXFP4, and native MXFP8 have matched HLS comparisons. The
   all-layer BF16 implementation physically fits, first closes at the tested
   140.35 MHz point, and has a 5.648 W vectorless estimate.
@@ -223,10 +226,10 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 421 passed, 2 skipped, and 0 failed tests;
+- The latest full regression records 424 passed, 2 skipped, and 0 failed tests;
   its JUnit artifact is
-  `reports/test_results/final_pytest_20260810_accelerated_cosim.xml`
-  (SHA256 `9643A469489A55D0CD1B5888C080653B88C42348A7D0DD85911F259687A3AC0E`).
+  `reports/test_results/final_pytest_20260810_uvm_diagnostic_paper.xml`
+  (SHA256 `0B8E59EF27E1F432CE241E7E96CA33F6D8A3307512A8C4954E621921C5FAD464`).
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

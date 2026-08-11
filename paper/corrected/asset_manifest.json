@@ -1,14 +1,14 @@
 {
   "extended_8192_replay_status": "PASS",
   "extended_8192_status": "PASS",
-  "generated_at": "2026-08-11T00:58:33.635773+00:00",
+  "generated_at": "2026-08-11T03:09:29.339173+00:00",
   "held_out_status": "PASS",
   "hls_cost_latency_advantage_vs_bf16": "FAIL",
   "inputs_sha256": {
-    "docs/numerical_contract.md": "21C9885BCA373479F2215D127DF4CE2E4103790D6042F145FE43853B18B5A27E",
+    "docs/numerical_contract.md": "8A1C440EE52C8C850A43CC240091AFB96E100D7CCB01E146307260E3850114D0",
     "docs/synthetic_trace_protocol.json": "7D485020F522054CCEE8D3129A682E20E865D78FF17E22E7DB486E63DAD88BBA",
-    "paper/corrected/paper.tex": "681DE274889CB0276DD51243CE94163E2A5AA267C652CB15B13BFE72A99172E3",
-    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "4C894A615E69E02DE9EAFC4E41B7C80D9D10A90F5B2478540E693A3C3F42AA6E",
+    "paper/corrected/paper.tex": "0BDB04FC4C4FBEF72C1426D2D2C84DAE54452C02D9591B865E6D1DBC7D398E07",
+    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "B3FE3E5585D01A8BE4C5E0B94C544CA71EC05B65A45C93F55020108F86E85F98",
     "paper/figures/corrected/long_sequence_stability_panel_manifest.json": "E2E725EE753D6F8E3D62767FF8BF85BFF45D81D66037C2AA5EC2BA035D1C2E7B",
     "paper/figures/corrected/long_trace_plot_manifest.json": "3BDC02346C9F68BD3BA6B819CA61C230F24DE6BDDDF56B23B2ADCFDB25CB74AE",
     "paper/figures/corrected/tradeoff_evidence_manifest.json": "9ACBFEAAFBA585F8CFE30C930DCA77F9AE874E7DA52D706464F6B1C6FDB0CCF5",
@@ -22,7 +22,7 @@
     "reports/benchmark/corrected/rs2_controlled/controlled_long_trace_manifest.json": "877A0857BF8E71B79B0F6630FF608631A171C8BD1E46E2DC20DA9E9BBD07A2F5",
     "reports/benchmark/corrected/rs2_encoded/rs2_encoded_candidate_summary.json": "0164E3F3A70396877159E0F51AAF0EB5D688158788ADC498BECB0D1E7BFAD310",
     "reports/benchmark/corrected/rs2_encoded_candidate_preregistration.json": "273F648DA72077C0FB013A3C1AE0D6FDC50673F9CB725FB3F59A01BA8B42691D",
-    "reports/benchmark/corrected/rs2_interface_accounting.json": "661F746631FBF2800AD1E960084D899DB5C64AE9992955035867FCC3C9B1B038",
+    "reports/benchmark/corrected/rs2_interface_accounting.json": "443CA62BA6B8BA4B0BD2E2C72ABB2D10558ED84B49917A14086608BDF6985536",
     "reports/benchmark/corrected/scale_policy_checkpoints.csv": "6C2FF3F714F856AC0D4471EC3C0CEC6E95CF8A13DC4154F7E847B0B8E65C96F0",
     "reports/benchmark/corrected/scale_policy_manifest.json": "1BBFBC435A19BDADC45FC047727F3456B0C9D51E8556FBE8E06863FBE91FC7E4",
     "reports/benchmark/corrected/state_capacity_lower_bound.json": "8434DC2A07E937F03B774A285E7D277CD15D27975440C7E99F56CBF2A935CD21",
@@ -65,10 +65,11 @@
     "Vivado power is vectorless and is not board energy",
     "the current RS2/R3 mitigation has no HLS cost/latency advantage over BF16"
   ],
+  "official_xsim_64_token_status": "NOT_RUN",
   "outputs_sha256": {
-    "paper/corrected/numbers.json": "3C8EADB7E229065E50395DB7E9479C6A0D30DCC867356368ADD1C6BC802EB6DD",
-    "paper/corrected/provenance.json": "3C8EADB7E229065E50395DB7E9479C6A0D30DCC867356368ADD1C6BC802EB6DD",
-    "paper/corrected/snippets/corrected_result_macros.tex": "2BE56F30BA4E45A399C998EAAA8ADE11BC80E522586736723560429F385E6199",
+    "paper/corrected/numbers.json": "1054C037BF18AF58533BB1B8D9EC4837B49A8CD1A3A73932C53169621053F6AE",
+    "paper/corrected/provenance.json": "1054C037BF18AF58533BB1B8D9EC4837B49A8CD1A3A73932C53169621053F6AE",
+    "paper/corrected/snippets/corrected_result_macros.tex": "B0683A1DC349A6CC083CFFD53CE06E65195A2DFEF81E8137BD0EC7445E4AE086",
     "paper/corrected/tables/controlled_hls.tex": "D9E524B3F1895E05D5B52D1FA361C5C92A6752F908E49CEA09AEF9F6BB6D334F",
     "paper/corrected/tables/corrected_extended.tex": "894F804599CDE5B4C9CF5D08FD0CD4FDE849E1CF0FC4949816DEC665B094BCD2",
     "paper/corrected/tables/corrected_heldout.tex": "445EBEC67A7D322CF5F371DF6C055F3F185362A8155CC9D11F861131E291C201",
@@ -94,16 +95,16 @@
   "selected_candidate": "mxfp4_rs2_act_rs2_state_mxfp4rs2_log_r3_q1_15_int32_guard5",
   "source_identity": {
     "dirty_patch": {
-      "bytes": 15314,
+      "bytes": 7667,
       "changed_file_count": 2,
-      "sha256": "8AB15021535DCB7C37A679AA664A0FD898EBBCE16A59D310A2CBD07AEB545AC0"
+      "sha256": "4FA95852077AC00B255DA7D632F8881C4238D649A094AF21C83901FE6C0545F1"
     },
     "files": {
       "paper/corrected/paper.tex": {
-        "bytes": 46335,
+        "bytes": 46399,
         "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "681DE274889CB0276DD51243CE94163E2A5AA267C652CB15B13BFE72A99172E3"
+        "sha256": "0BDB04FC4C4FBEF72C1426D2D2C84DAE54452C02D9591B865E6D1DBC7D398E07"
       },
       "scripts/corrected_paper_assets.py": {
         "bytes": 122130,
@@ -112,10 +113,10 @@
         "sha256": "601BC4334C3CDF63BB7BC4A1B29AD5CE40D199247B8D63C40A096751D7827D9E"
       },
       "scripts/rs2_paper_assets.py": {
-        "bytes": 52494,
+        "bytes": 58199,
         "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "F4524C11243B222651E5438DC9144DB513DC1FA6C28C569EE3BA8AAFCA010CED"
+        "sha256": "92503A73B84F6A9EA912779D4393BC354164288797ED6A97B71D0D216F869B49"
       },
       "scripts/rs2_paper_figures.py": {
         "bytes": 15407,
@@ -124,19 +125,19 @@
         "sha256": "C45C7D08671460B5A530D77B28E75E1899E84B8063140D07B000B6EE431CD6B7"
       }
     },
-    "git_revision": "f5ae1cc408da6f1fb80bcb5e71be1c71c1f1e756",
+    "git_revision": "98d58b0f09963276307865706d2f7a53e0af98fb",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
-  "source_revision": "f5ae1cc408da6f1fb80bcb5e71be1c71c1f1e756",
+  "source_revision": "98d58b0f09963276307865706d2f7a53e0af98fb",
   "status": "PASS",
   "verified_figure_sha256": {
-    "paper/figures/corrected/corrected_candidate_datapath.pdf": "546962C687493D7E4C5DE5990A0FB9E030B4C012C40EA091A200F31CE654A628",
-    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "4C894A615E69E02DE9EAFC4E41B7C80D9D10A90F5B2478540E693A3C3F42AA6E",
+    "paper/figures/corrected/corrected_candidate_datapath.pdf": "6DCC0D7AD1CD1CFA91FDFAD15D94F24658E2A1D067721625B9630E5630214E94",
+    "paper/figures/corrected/corrected_candidate_datapath_manifest.json": "B3FE3E5585D01A8BE4C5E0B94C544CA71EC05B65A45C93F55020108F86E85F98",
     "paper/figures/corrected/long_sequence_stability_panel.pdf": "C73D03ABFEF1B96775975AE2DE3BFC756F56E9AD2F499F1E82B8376B9DBF6D4B",
     "paper/figures/corrected/output_cosine_vs_token.pdf": "C98491692B6CE18843F3457D246D881AB0D756A9FDAE1C3EF73CFD870335ADE8",
     "paper/figures/corrected/rs2_memory_performance_accuracy.pdf": "E7F8477F5D70B5F723E12173095CCEA2990BBF55BAEAF824E46B84532B4B13CC",
     "paper/figures/corrected/rs2_output_cosine_vs_token.pdf": "1DF29C3EC8FA6E9FD124BA6EB2B7BD6B91D638E2031F7A649C28ABEC9CE2E8AE",
-    "paper/figures/corrected/rs2_paper_figures_manifest.json": "D9002F26F0283F62A57457782C7196D89579960E1A5A47CF418D36C9BD37A07C",
+    "paper/figures/corrected/rs2_paper_figures_manifest.json": "2F196565D238CA47A65AB5A3BB65ACA0D280052989A7303A3093F88826CFBF7A",
     "paper/figures/corrected/rs2_state_relative_l2_vs_token.pdf": "F4929EB92E723E9FBFFE174E9F985781387AD0CEF30044B19D0691D50FD10DEE",
     "paper/figures/corrected/state_relative_l2_vs_token.pdf": "87153CCB5991BAF977E6659EBF2E2AB2E699B7A474B33543DE5E8A52D485428B",
     "paper/figures/corrected/tradeoff_evidence.pdf": "7E6A77638D932A719C223B33573A0C051407EB12BCE3D7D3374AE36FB2C8C067"

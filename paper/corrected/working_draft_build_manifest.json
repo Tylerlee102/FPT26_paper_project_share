@@ -1,18 +1,18 @@
 {
   "artifact_kind": "watermarked_working_draft",
-  "asset_manifest_sha256": "63F135E57CEE577BA98403EF344A23F9BADCBEED74EF3670DA61CB84924090B6",
+  "asset_manifest_sha256": "FC12A20A4B821D55A2851996F6FD93B051F5957B52ADC98A43FDE0CCE3540548",
   "asset_source_identity": {
     "dirty_patch": {
-      "bytes": 15314,
+      "bytes": 7667,
       "changed_file_count": 2,
-      "sha256": "8AB15021535DCB7C37A679AA664A0FD898EBBCE16A59D310A2CBD07AEB545AC0"
+      "sha256": "4FA95852077AC00B255DA7D632F8881C4238D649A094AF21C83901FE6C0545F1"
     },
     "files": {
       "paper/corrected/paper.tex": {
-        "bytes": 46335,
+        "bytes": 46399,
         "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "681DE274889CB0276DD51243CE94163E2A5AA267C652CB15B13BFE72A99172E3"
+        "sha256": "0BDB04FC4C4FBEF72C1426D2D2C84DAE54452C02D9591B865E6D1DBC7D398E07"
       },
       "scripts/corrected_paper_assets.py": {
         "bytes": 122130,
@@ -21,10 +21,10 @@
         "sha256": "601BC4334C3CDF63BB7BC4A1B29AD5CE40D199247B8D63C40A096751D7827D9E"
       },
       "scripts/rs2_paper_assets.py": {
-        "bytes": 52494,
+        "bytes": 58199,
         "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "F4524C11243B222651E5438DC9144DB513DC1FA6C28C569EE3BA8AAFCA010CED"
+        "sha256": "92503A73B84F6A9EA912779D4393BC354164288797ED6A97B71D0D216F869B49"
       },
       "scripts/rs2_paper_figures.py": {
         "bytes": 15407,
@@ -33,7 +33,7 @@
         "sha256": "C45C7D08671460B5A530D77B28E75E1899E84B8063140D07B000B6EE431CD6B7"
       }
     },
-    "git_revision": "f5ae1cc408da6f1fb80bcb5e71be1c71c1f1e756",
+    "git_revision": "98d58b0f09963276307865706d2f7a53e0af98fb",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "blocking_gates": [
@@ -67,19 +67,19 @@
     }
   ],
   "build_log": "paper/corrected/build_working_draft/working_draft_build.log",
-  "build_log_sha256": "A30565DC6E8F4450773A26F49E1F759FB768B30270DA7F8FF5E14F87F5B08BC9",
+  "build_log_sha256": "7711A0251E364235B7210AFE40FACE8AFD704D5BCB7A67336A1A13008BB29B4C",
   "build_source_identity": {
     "dirty_patch": {
-      "bytes": 7935,
+      "bytes": 2434,
       "changed_file_count": 1,
-      "sha256": "F10BCED5B2CB84CAE5777D2C6504813D154B2501850E452E717342FE26B612D0"
+      "sha256": "D441D113D8D80C79CF69EEC79CC3FA680127AE55A965069C18B5B790E3E6AB3C"
     },
     "files": {
       "paper/corrected/paper.tex": {
-        "bytes": 46335,
+        "bytes": 46399,
         "changed_from_revision": true,
         "git_state": "tracked",
-        "sha256": "681DE274889CB0276DD51243CE94163E2A5AA267C652CB15B13BFE72A99172E3"
+        "sha256": "0BDB04FC4C4FBEF72C1426D2D2C84DAE54452C02D9591B865E6D1DBC7D398E07"
       },
       "paper/corrected/working_draft.tex": {
         "bytes": 55,
@@ -94,7 +94,7 @@
         "sha256": "1539C7C836F82FD81145C129B89C0664C2927C539B90A1513519BCA8F74ACFFE"
       }
     },
-    "git_revision": "f5ae1cc408da6f1fb80bcb5e71be1c71c1f1e756",
+    "git_revision": "98d58b0f09963276307865706d2f7a53e0af98fb",
     "method": "Concatenated git diff --binary output against HEAD for tracked files and git diff --no-index --binary /dev/null output for untracked files, ordered by repository-relative path."
   },
   "command": [
@@ -108,9 +108,9 @@
     "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\paper\\corrected\\build_working_draft",
     "C:\\Users\\tyboy\\OneDrive\\Documents\\mxfp4 improve\\FPT26_data_review\\paper\\corrected\\working_draft.tex"
   ],
-  "generated_at": "2026-08-11T01:02:43.982286+00:00",
+  "generated_at": "2026-08-11T03:09:40.960330+00:00",
   "output": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "output_sha256": "F90333957DCA61F07CF296CABD6C8C21A045BA71EE00956889A57F1CDB44FF44",
+  "output_sha256": "FB9BFAD9885BE8D23C352168F435A50309F967F779D90A2DA8CBF3942D2708C8",
   "page_count": 9,
   "release_state": "NOT PAPER READY",
   "schema": 1,

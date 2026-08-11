@@ -645,13 +645,13 @@ frequency is the first passing point in the tested fixed-route sweep.}
 \resizebox{\columnwidth}{!}{\input{paper/corrected/tables/rs2_postroute.tex}}
 \end{table}
 
-The direct Verilator harness drives the HLS-generated Verilog through snapshot
+The direct AMD XSim harness drives the HLS-generated Verilog through snapshot
 LOAD, \RsTwoRtlTransactions{} commands, all log-fold boundaries, and final
 READBACK. It compares \RsTwoRtlOutputs{} decoded output values plus counters and
 the complete final encoded state against the independent integer oracle; the
 \RsTwoRtlTokens{}-token \RsTwoRtlStatus{} result establishes recurrent
-generated-RTL parity for the required trace. Official XSIM control smoke is
-reported separately and is not substituted for the recurrent run.
+generated-RTL parity for the required trace. The Vitis-generated UVM cosim
+wrapper is reported separately and is not substituted for the recurrent run.
 
 At the timing-closed \RsTwoRouteClosingPeriodNs{} ns point, RS2/R3 has a
 \RsTwoRoutePowerW{} W vectorless estimate, split into
@@ -770,11 +770,12 @@ and measured energy are absent. Vectorless power cannot substitute for any of
 them. A host and WSL inventory found no U55C XPFM, XRT management tools, or
 Xilinx PCI device.
 
-Generated-RTL parity covers one registered synthetic trace. Full official XSIM
-recurrent cosimulation remains incomplete and is reported independently from
-the direct Verilator run. A completed official-XSim LOAD benchmark bounds the
-full trace at multiple days on this host, but is not parity evidence; neither
-path is used to fill missing board evidence. Results cover one U55C target,
+Generated-RTL parity covers one registered synthetic trace. The Vitis-generated
+UVM cosim wrapper remains incomplete and is reported independently from the
+direct XSim run: waveform, assertion, coverage, profiler, thread-count, and
+monitor diagnostics still produced host-memory growth after transaction 1/66.
+This wrapper limitation is not an arithmetic mismatch and is not used to fill
+missing board evidence. Results cover one U55C target,
 one $P_K/P_V$ point, one block size, and batch one; multi-sequence occupancy,
 cross-device behavior, and service-level tail latency remain open.
 

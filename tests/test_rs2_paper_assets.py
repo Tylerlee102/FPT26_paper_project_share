@@ -94,3 +94,32 @@ def test_official_xsim_evidence_requires_full_generated_flow_markers(tmp_path) -
         assert "Out of memory" in str(exc)
     else:
         raise AssertionError("memory-failed XSim evidence was accepted")
+
+
+def test_official_xsim_incomplete_evidence_requires_explicit_opt_in(tmp_path) -> None:
+    diagnostic = tmp_path / "diagnostics/README.md"
+    diagnostic.parent.mkdir(parents=True)
+    diagnostic.write_text(
+        "\n".join(
+            (
+                "Official wrapper status: `NOT_RUN`",
+                "Completed recurrent tokens: `0`",
+                "Completed transactions: `1 / 66`",
+                "Elaboration threads tested: `8` and `off`",
+            )
+        ),
+        encoding="utf-8",
+    )
+
+    evidence = _official_xsim_evidence(tmp_path, allow_incomplete=True)
+    assert evidence["status"] == "NOT_RUN"
+    assert evidence["tokens"] == 0
+    assert evidence["transactions"] == 1
+    assert evidence["elaboration_threads"] == 0
+
+    try:
+        _official_xsim_evidence(tmp_path)
+    except FileNotFoundError:
+        pass
+    else:
+        raise AssertionError("incomplete official XSim evidence was accepted by default")

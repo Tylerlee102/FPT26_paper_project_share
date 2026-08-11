@@ -19,9 +19,10 @@ tests. The selected candidate also passes three 1,024-token high-retention
 seed blocks crossed with two paired initial-state conditions and two fully
 generated 8,192-token development conditions. Its HLS estimate exceeds BF16
 LUT and STEP cost even though every explicit pipeline constraint reaches II=1.
-The existing uniform-MXFP4 64-token RTL result is not transferred; a selected-
-candidate direct run is in progress and the official XSIM 64-token run is not
-complete. Out-of-context physical fit passes, 250 MHz timing fails, and board
+The existing uniform-MXFP4 64-token RTL result is not transferred. The selected
+candidate's own 64-token direct-XSim RTL trace passes; the distinct generated
+UVM wrapper is incomplete because of host-memory growth. Out-of-context
+physical fit passes, 250 MHz timing fails, and board
 parity is `BLOCKED_EXTERNAL`. This document does not certify a final system.
 
 ## Kernel Boundary And Shapes
@@ -413,7 +414,7 @@ called bit-exact.
 | Selected explicit II=1 constraints | PASS | Every explicitly targeted loop, including the core dot and scale-selection loops, achieves II=1. |
 | Selected HLS LUT/STEP advantage vs BF16 | FAIL | The candidate uses 1.958 times the BF16 LUTs, 3.200 times the maximum non-fold STEP cycles, and 10.191 times the amortized cycles per STEP. |
 | Selected INT32 bounded event check | PASS | Six held-out and two extended traces report zero accumulator saturation; this is bounded empirical evidence, not a universal overflow proof. |
-| Selected candidate 64-token RTL parity | PASS (direct generated RTL) | The exact Vitis-generated DUT and its generated AXI memory models pass all 64 tokens, every output and counter, and the complete final state in the direct Verilator harness. Official XSIM elaborates and launches but its bounded diagnostic completes no recurrent transaction; this separate vendor-simulator run remains incomplete. Uniform-MXFP4 RTL evidence is not transferred. |
+| Selected candidate 64-token RTL parity | PASS (direct generated RTL) | AMD XSim 2025.2 runs the exact Vitis-generated DUT through all 64 tokens and passes every output, counter, and the complete final state. The distinct Vitis-generated UVM wrapper reaches transaction 1/66 but exhibits host-memory growth and remains incomplete. Uniform-MXFP4 RTL evidence is not transferred. |
 | Selected out-of-context physical fit | PASS | Vivado routes the declared 36-slot candidate at 82,038 CLB LUTs, 341 BRAM tiles, and 598 URAMs. This excludes the U55C shell and complete-model storage. |
 | Selected routed target timing | FAIL | The design has WNS -1.736 ns at 250 MHz and -0.736 ns at 200 MHz. Three post-route optimization attempts fail; 166.67 MHz is the first passing point in the tested fixed-route sweep. |
 | Native MXFP8 HLS and physical baseline | PASS with timing failure | Native E4M3/E8M0 C-sim, C-synthesis, and explicit II=1 constraints pass. The routed image fits at 58,582 LUTs and 576 URAMs, fails 250 MHz, and first closes at the tested 166.67 MHz point. |
