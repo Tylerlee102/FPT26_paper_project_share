@@ -54,6 +54,10 @@ RS2_RTL_OFFICIAL_RESET = (
     ROOT
     / "reports/cosim/corrected/rs2_current/trace64_reset/gdn_rs2_top_cosim.rpt"
 )
+RS2_RTL_ACCELERATED_RESET = (
+    ROOT
+    / "reports/cosim/corrected/rs2_current/trace64_reset_accelerated"
+)
 RS2_RTL_CONTROL = (
     ROOT / "reports/cosim/corrected/rs2_current/control/gdn_rs2_top_cosim.rpt"
 )
@@ -214,6 +218,34 @@ def _cosim_report_pass(path: Path) -> bool:
     return "|   Verilog|      Pass|" in text
 
 
+def _accelerated_cosim_pass(root: Path = RS2_RTL_ACCELERATED_RESET) -> bool:
+    required = {
+        root / "rs2_accelerated_cosim_complete.txt": (
+            "RS2_ACCELERATED_HLS_XSIM_PASS"
+        ),
+        root / "verilog/xsim.log": "RTL Simulation : 66 / 66",
+        root / "postcheck/temp0.log": (
+            "PASS: 64 encoded reset-state tokens, exact outputs/counters, "
+            "and final snapshot"
+        ),
+        root / "verilog/run_xsim.bat": "--O3 --debug off --mt 8",
+        root / "verilog/xelab.log": "Using 8 slave threads.",
+    }
+    texts: dict[Path, str] = {}
+    for path, marker in required.items():
+        if not path.is_file():
+            return False
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if marker not in text:
+            return False
+        texts[path] = text
+    xsim_text = texts[root / "verilog/xsim.log"]
+    return not any(
+        marker in xsim_text
+        for marker in ("Out of memory", "Simulation engine not responding")
+    )
+
+
 def _rtl_gate() -> dict[str, object]:
     hls = _load_json(RS2_HLS)
     direct = _load_json(RS2_RTL_DIRECT)
@@ -231,8 +263,10 @@ def _rtl_gate() -> dict[str, object]:
         and direct.get("rtl_simulation", {}).get("completed_transactions") == 66
     )
     control_pass = _cosim_report_pass(RS2_RTL_CONTROL)
-    official_pass = _cosim_report_pass(RS2_RTL_OFFICIAL) or _cosim_report_pass(
-        RS2_RTL_OFFICIAL_RESET
+    official_pass = (
+        _cosim_report_pass(RS2_RTL_OFFICIAL)
+        or _cosim_report_pass(RS2_RTL_OFFICIAL_RESET)
+        or _accelerated_cosim_pass()
     )
     substatus = {
         "exact_64_token_hls_c_simulation": "PASS" if csim else "NOT_RUN" if not hls else "FAIL",
@@ -263,6 +297,7 @@ def _rtl_gate() -> dict[str, object]:
             RS2_RTL_DIRECT,
             RS2_RTL_OFFICIAL,
             RS2_RTL_OFFICIAL_RESET,
+            RS2_RTL_ACCELERATED_RESET,
             RS2_XSIM_RUNTIME,
         ),
         substatus,

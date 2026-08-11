@@ -8,6 +8,7 @@ from scripts.final_completion_gate import (
     FINAL_GATES,
     GATE_NAMES,
     ROOT,
+    _accelerated_cosim_pass,
     evaluate,
     write_report,
 )
@@ -95,3 +96,29 @@ def test_written_gate_uses_live_source_revision(tmp_path) -> None:
     ).strip()
     report = write_report(tmp_path / "gate.json", tmp_path / "gate.md")
     assert report["source_revision"] == expected
+
+
+def test_accelerated_cosim_requires_xsim_postcheck_and_no_memory_failure(
+    tmp_path,
+) -> None:
+    required = {
+        "rs2_accelerated_cosim_complete.txt": "RS2_ACCELERATED_HLS_XSIM_PASS\n",
+        "verilog/xsim.log": "RTL Simulation : 66 / 66\n",
+        "postcheck/temp0.log": (
+            "PASS: 64 encoded reset-state tokens, exact outputs/counters, "
+            "and final snapshot\n"
+        ),
+        "verilog/run_xsim.bat": "xelab --O3 --debug off --mt 8\n",
+        "verilog/xelab.log": "Using 8 slave threads.\n",
+    }
+    for relative, text in required.items():
+        path = tmp_path / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+    assert _accelerated_cosim_pass(tmp_path) is True
+
+    (tmp_path / "verilog/xsim.log").write_text(
+        "RTL Simulation : 66 / 66\nOut of memory\n", encoding="utf-8"
+    )
+    assert _accelerated_cosim_pass(tmp_path) is False
