@@ -53,20 +53,10 @@ RS2_VIVADO = (
     / "rs2_vivado_summary.json"
 )
 BF16_VIVADO = (
-    ROOT
-    / "reports"
-    / "vivado"
-    / "baselines"
-    / "bf16"
-    / "bf16_vivado_summary.json"
+    ROOT / "reports" / "vivado" / "baselines" / "bf16" / "bf16_vivado_summary.json"
 )
 MXFP8_VIVADO = (
-    ROOT
-    / "reports"
-    / "vivado"
-    / "baselines"
-    / "mxfp8"
-    / "mxfp8_vivado_summary.json"
+    ROOT / "reports" / "vivado" / "baselines" / "mxfp8" / "mxfp8_vivado_summary.json"
 )
 RS2_RTL = (
     ROOT
@@ -77,6 +67,21 @@ RS2_RTL = (
     / "trace64_direct"
     / "rs2_trace64_direct_summary.json"
 )
+RS2_OFFICIAL_XSIM_ROOT = (
+    ROOT
+    / "reports"
+    / "cosim"
+    / "corrected"
+    / "rs2_current"
+    / "trace64_reset_accelerated"
+)
+RS2_OFFICIAL_XSIM_COMPLETION = (
+    RS2_OFFICIAL_XSIM_ROOT / "rs2_accelerated_cosim_complete.txt"
+)
+RS2_OFFICIAL_XSIM_LOG = RS2_OFFICIAL_XSIM_ROOT / "verilog" / "xsim.log"
+RS2_OFFICIAL_XSIM_POSTCHECK = RS2_OFFICIAL_XSIM_ROOT / "postcheck" / "temp0.log"
+RS2_OFFICIAL_XELAB_LOG = RS2_OFFICIAL_XSIM_ROOT / "verilog" / "xelab.log"
+RS2_OFFICIAL_XSIM_COMMAND = RS2_OFFICIAL_XSIM_ROOT / "verilog" / "run_xsim.bat"
 QWEN = ROOT / "reports" / "benchmark" / "qwen_recurrent_stability_manifest.json"
 SCALE_POLICY = (
     ROOT / "reports" / "benchmark" / "corrected" / "scale_policy_manifest.json"
@@ -114,19 +119,22 @@ TIMING_EXPERIMENTS = (
     (
         "partial_layer_banks",
         "Six-way layer banks",
-        ROOT / "reports/vivado/experiments/rs2_partial_layer_banks_20260810/summary.json",
+        ROOT
+        / "reports/vivado/experiments/rs2_partial_layer_banks_20260810/summary.json",
         "WNS gain; worse TNS",
     ),
     (
         "fold_write_partial_banks",
         "Banks + fold-write",
-        ROOT / "reports/vivado/experiments/rs2_fold_write_partial_banks_20260810/summary.json",
+        ROOT
+        / "reports/vivado/experiments/rs2_fold_write_partial_banks_20260810/summary.json",
         "Worse than both parents",
     ),
     (
         "snapshot_write_partial_banks",
         "Snapshot commit + banks",
-        ROOT / "reports/vivado/experiments/rs2_snapshot_write_partial_banks_20260810/summary.json",
+        ROOT
+        / "reports/vivado/experiments/rs2_snapshot_write_partial_banks_20260810/summary.json",
         "WNS gain; worse TNS",
     ),
     (
@@ -138,31 +146,36 @@ TIMING_EXPERIMENTS = (
     (
         "snapshot_write_unbanked",
         "Snapshot commit, unbanked",
-        ROOT / "reports/vivado/experiments/rs2_snapshot_write_unbanked_20260810/summary.json",
+        ROOT
+        / "reports/vivado/experiments/rs2_snapshot_write_unbanked_20260810/summary.json",
         "Worse than parent",
     ),
     (
         "fold_write_contiguous_banks",
         "Two contiguous banks",
-        ROOT / "reports/vivado/experiments/rs2_fold_write_contiguous_banks_20260810/summary.json",
+        ROOT
+        / "reports/vivado/experiments/rs2_fold_write_contiguous_banks_20260810/summary.json",
         "AXI/SLR regression",
     ),
     (
         "snapshot_write_contiguous_banks",
         "Snapshot + contiguous banks",
-        ROOT / "reports/vivado/experiments/rs2_snapshot_write_contiguous_banks_20260810/summary.json",
+        ROOT
+        / "reports/vivado/experiments/rs2_snapshot_write_contiguous_banks_20260810/summary.json",
         "Top-FSM regression",
     ),
     (
         "snapshot_write_unbanked_fsm_fanout16",
         "FSM fanout 16",
-        ROOT / "reports/vivado/experiments/rs2_snapshot_write_unbanked_fsm_fanout16_20260810/summary.json",
+        ROOT
+        / "reports/vivado/experiments/rs2_snapshot_write_unbanked_fsm_fanout16_20260810/summary.json",
         "Replication worsens setup",
     ),
     (
         "fold_write_address_fanout16",
         "Address fanout 16",
-        ROOT / "reports/vivado/experiments/rs2_fold_write_address_fanout16_20260810/summary.json",
+        ROOT
+        / "reports/vivado/experiments/rs2_fold_write_address_fanout16_20260810/summary.json",
         "Origins move; setup worsens",
     ),
 )
@@ -225,15 +238,54 @@ def _line(path: Path, marker: str) -> int:
 
 def _line_after(path: Path, anchor: str, marker: str) -> int:
     lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
-    start = next(
-        (index for index, line in enumerate(lines) if anchor in line), None
-    )
+    start = next((index for index, line in enumerate(lines) if anchor in line), None)
     if start is None:
         raise ValueError(f"anchor {anchor!r} is absent from {path}")
     for index in range(start, len(lines)):
         if marker in lines[index]:
             return index + 1
     raise ValueError(f"marker {marker!r} after {anchor!r} is absent from {path}")
+
+
+def _official_xsim_evidence(root: Path = RS2_OFFICIAL_XSIM_ROOT) -> dict[str, object]:
+    files = {
+        "completion": root / "rs2_accelerated_cosim_complete.txt",
+        "xsim": root / "verilog" / "xsim.log",
+        "postcheck": root / "postcheck" / "temp0.log",
+        "command": root / "verilog" / "run_xsim.bat",
+        "xelab": root / "verilog" / "xelab.log",
+    }
+    markers = {
+        "completion": "RS2_ACCELERATED_HLS_XSIM_PASS",
+        "xsim": "RTL Simulation : 66 / 66",
+        "postcheck": (
+            "PASS: 64 encoded reset-state tokens, exact outputs/counters, "
+            "and final snapshot"
+        ),
+        "command": "--O3 --debug off --mt 8",
+        "xelab": "Using 8 slave threads.",
+    }
+    texts: dict[str, str] = {}
+    for name, path in files.items():
+        if not path.is_file():
+            raise FileNotFoundError(path)
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if markers[name] not in text:
+            raise ValueError(
+                f"official XSim marker {markers[name]!r} is absent from {path}"
+            )
+        texts[name] = text
+    for failure in ("Out of memory", "Simulation engine not responding"):
+        if failure in texts["xsim"]:
+            raise ValueError(f"official XSim log contains failure marker {failure!r}")
+    return {
+        "status": "PASS",
+        "tokens": 64,
+        "transactions": 66,
+        "elaboration_threads": 8,
+        "files": files,
+        "markers": markers,
+    }
 
 
 def _record(
@@ -314,9 +366,7 @@ def _controlled_rows() -> tuple[list[dict[str, str]], dict[tuple[str, int], int]
         (row["variant"], int(row["token_index"])): index + 2
         for index, row in enumerate(rows)
     }
-    expected = {
-        (variant, token) for variant in VARIANTS for token in CHECKPOINTS
-    }
+    expected = {(variant, token) for variant in VARIANTS for token in CHECKPOINTS}
     observed = {(row["variant"], int(row["token_index"])) for row in rows}
     if observed != expected or len(rows) != len(expected):
         raise ValueError("controlled RS2 checkpoint matrix is incomplete")
@@ -368,41 +418,89 @@ def _add_candidate_numbers(
     if held["status"] != "PASS" or extended["status"] != "PASS":
         raise ValueError("selected RS2 candidate has not passed both registered gates")
     specs = {
-        "rs2_candidate_name": (candidate["candidate_name"], "identifier", '"candidate_name"', '"candidate_name"'),
-        "rs2_heldout_run_count": (held["run_count"], "runs", '"held_out": {', '"run_count"'),
+        "rs2_candidate_name": (
+            candidate["candidate_name"],
+            "identifier",
+            '"candidate_name"',
+            '"candidate_name"',
+        ),
+        "rs2_heldout_run_count": (
+            held["run_count"],
+            "runs",
+            '"held_out": {',
+            '"run_count"',
+        ),
         "rs2_heldout_min_all_token_cosine": (
-            held["minimum_all_token_output_cosine"], "cosine", '"held_out": {', '"minimum_all_token_output_cosine"'
+            held["minimum_all_token_output_cosine"],
+            "cosine",
+            '"held_out": {',
+            '"minimum_all_token_output_cosine"',
         ),
         "rs2_heldout_max_all_token_state_relative_l2": (
-            held["maximum_all_token_state_relative_l2"], "relative_l2", '"held_out": {', '"maximum_all_token_state_relative_l2"'
+            held["maximum_all_token_state_relative_l2"],
+            "relative_l2",
+            '"held_out": {',
+            '"maximum_all_token_state_relative_l2"',
         ),
         "rs2_heldout_max_final_state_relative_l2": (
-            held["maximum_final_state_relative_l2"], "relative_l2", '"held_out": {', '"maximum_final_state_relative_l2"'
+            held["maximum_final_state_relative_l2"],
+            "relative_l2",
+            '"held_out": {',
+            '"maximum_final_state_relative_l2"',
         ),
         "rs2_heldout_max_state_abs_error": (
-            held["maximum_state_absolute_error"], "absolute", '"held_out": {', '"maximum_state_absolute_error"'
+            held["maximum_state_absolute_error"],
+            "absolute",
+            '"held_out": {',
+            '"maximum_state_absolute_error"',
         ),
-        "rs2_extended_run_count": (extended["run_count"], "runs", '"extended_development": {', '"run_count"'),
+        "rs2_extended_run_count": (
+            extended["run_count"],
+            "runs",
+            '"extended_development": {',
+            '"run_count"',
+        ),
         "rs2_extended_min_all_token_cosine": (
-            extended["minimum_all_token_output_cosine"], "cosine", '"extended_development": {', '"minimum_all_token_output_cosine"'
+            extended["minimum_all_token_output_cosine"],
+            "cosine",
+            '"extended_development": {',
+            '"minimum_all_token_output_cosine"',
         ),
         "rs2_extended_max_all_token_state_relative_l2": (
-            extended["maximum_all_token_state_relative_l2"], "relative_l2", '"extended_development": {', '"maximum_all_token_state_relative_l2"'
+            extended["maximum_all_token_state_relative_l2"],
+            "relative_l2",
+            '"extended_development": {',
+            '"maximum_all_token_state_relative_l2"',
         ),
         "rs2_extended_max_final_state_relative_l2": (
-            extended["maximum_final_state_relative_l2"], "relative_l2", '"extended_development": {', '"maximum_final_state_relative_l2"'
+            extended["maximum_final_state_relative_l2"],
+            "relative_l2",
+            '"extended_development": {',
+            '"maximum_final_state_relative_l2"',
         ),
         "rs2_extended_max_state_abs_error": (
-            extended["maximum_state_absolute_error"], "absolute", '"extended_development": {', '"maximum_state_absolute_error"'
+            extended["maximum_state_absolute_error"],
+            "absolute",
+            '"extended_development": {',
+            '"maximum_state_absolute_error"',
         ),
         "rs2_extended_element_saturations": (
-            extended["cumulative_element_saturations"], "events", '"extended_development": {', '"cumulative_element_saturations"'
+            extended["cumulative_element_saturations"],
+            "events",
+            '"extended_development": {',
+            '"cumulative_element_saturations"',
         ),
         "rs2_extended_accumulator_saturations": (
-            extended["cumulative_accumulator_saturations"], "events", '"extended_development": {', '"cumulative_accumulator_saturations"'
+            extended["cumulative_accumulator_saturations"],
+            "events",
+            '"extended_development": {',
+            '"cumulative_accumulator_saturations"',
         ),
         "rs2_extended_scale_clamps": (
-            extended["cumulative_scale_clamps"], "events", '"extended_development": {', '"cumulative_scale_clamps"'
+            extended["cumulative_scale_clamps"],
+            "events",
+            '"extended_development": {',
+            '"cumulative_scale_clamps"',
         ),
     }
     for key, (value, units, anchor, marker) in specs.items():
@@ -450,7 +548,9 @@ def _add_candidate_numbers(
         numbers,
         provenance,
         key="rs2_quality_maximum_state_relative_l2_gate",
-        value=float(registration["quality_gate"]["maximum_all_token_state_relative_l2"]),
+        value=float(
+            registration["quality_gate"]["maximum_all_token_state_relative_l2"]
+        ),
         units="relative_l2",
         source=REGISTRATION,
         marker='"maximum_all_token_state_relative_l2"',
@@ -466,6 +566,7 @@ def _add_hardware_numbers(
     mxfp8_hls: dict[str, object],
     route: dict[str, object],
     rtl: dict[str, object],
+    official_xsim: dict[str, object],
     bf16_route: dict[str, object],
     mxfp8_route: dict[str, object],
     revision: str,
@@ -475,36 +576,60 @@ def _add_hardware_numbers(
     resources = metrics["resources"]
     comparison = hls["comparison"]
     hls_specs = {
-        "rs2_hls_estimated_clock_ns": (metrics["estimated_clock_ns"], "ns", '"estimated_clock_ns"'),
-        "rs2_hls_estimated_fmax_mhz": (metrics["estimated_fmax_mhz"], "MHz", '"estimated_fmax_mhz"'),
+        "rs2_hls_estimated_clock_ns": (
+            metrics["estimated_clock_ns"],
+            "ns",
+            '"estimated_clock_ns"',
+        ),
+        "rs2_hls_estimated_fmax_mhz": (
+            metrics["estimated_fmax_mhz"],
+            "MHz",
+            '"estimated_fmax_mhz"',
+        ),
         "rs2_hls_lut": (resources["LUT"], "LUT", '"LUT"'),
         "rs2_hls_ff": (resources["FF"], "FF", '"FF"'),
         "rs2_hls_bram18k": (resources["BRAM_18K"], "BRAM18K", '"BRAM_18K"'),
         "rs2_hls_uram": (resources["URAM"], "URAM", '"URAM"'),
         "rs2_hls_dsp": (resources["DSP"], "DSP", '"DSP"'),
         "rs2_hls_nonfold_step_cycles_max": (
-            hls["csynth"]["step_loop_latency_cycles"]["maximum"], "cycles", '"step_loop_latency_cycles"'
+            hls["csynth"]["step_loop_latency_cycles"]["maximum"],
+            "cycles",
+            '"step_loop_latency_cycles"',
         ),
         "rs2_hls_fold_cycles_max": (
-            hls["csynth"]["fold_latency_cycles"]["maximum"], "cycles", '"fold_latency_cycles"'
+            hls["csynth"]["fold_latency_cycles"]["maximum"],
+            "cycles",
+            '"fold_latency_cycles"',
         ),
         "rs2_hls_amortized_cycles_max": (
-            hls["csynth"]["steady_state_amortized_cycles_per_token"]["maximum"], "cycles/STEP", '"steady_state_amortized_cycles_per_token"'
+            hls["csynth"]["steady_state_amortized_cycles_per_token"]["maximum"],
+            "cycles/STEP",
+            '"steady_state_amortized_cycles_per_token"',
         ),
         "rs2_hls_lut_ratio_to_bf16": (
-            comparison["lut_ratio_rs2_to_bf16"], "ratio", '"lut_ratio_rs2_to_bf16"'
+            comparison["lut_ratio_rs2_to_bf16"],
+            "ratio",
+            '"lut_ratio_rs2_to_bf16"',
         ),
         "rs2_hls_nonfold_cycle_ratio_to_bf16": (
-            comparison["nonfold_step_cycle_ratio_rs2_to_bf16"], "ratio", '"nonfold_step_cycle_ratio_rs2_to_bf16"'
+            comparison["nonfold_step_cycle_ratio_rs2_to_bf16"],
+            "ratio",
+            '"nonfold_step_cycle_ratio_rs2_to_bf16"',
         ),
         "rs2_hls_amortized_cycle_ratio_to_bf16": (
-            comparison["amortized_cycle_ratio_rs2_to_bf16"], "ratio", '"amortized_cycle_ratio_rs2_to_bf16"'
+            comparison["amortized_cycle_ratio_rs2_to_bf16"],
+            "ratio",
+            '"amortized_cycle_ratio_rs2_to_bf16"',
         ),
         "rs2_hls_cost_latency_advantage": (
-            comparison["hls_cost_latency_advantage_vs_bf16"], "status", '"hls_cost_latency_advantage_vs_bf16"'
+            comparison["hls_cost_latency_advantage_vs_bf16"],
+            "status",
+            '"hls_cost_latency_advantage_vs_bf16"',
         ),
         "rs2_hls_explicit_ii1_status": (
-            hls["csynth"]["targeted_loop_ii_status"], "status", '"targeted_loop_ii_status"'
+            hls["csynth"]["targeted_loop_ii_status"],
+            "status",
+            '"targeted_loop_ii_status"',
         ),
     }
     for key, (value, units, marker) in hls_specs.items():
@@ -572,22 +697,78 @@ def _add_hardware_numbers(
 
     route_specs = {
         "rs2_route_physical_fit": (route["physical_fit"], "status", '"physical_fit"'),
-        "rs2_route_target_timing": (route["target_clock"]["status"], "status", '"target_clock"'),
-        "rs2_route_target_frequency_mhz": (route["target_clock"]["frequency_mhz"], "MHz", '"frequency_mhz"'),
-        "rs2_route_target_wns_ns": (route["target_clock"]["timing"]["wns_ns"], "ns", '"wns_ns"'),
-        "rs2_route_closing_period_ns": (route["first_tested_closing_point"]["period_ns"], "ns", '"first_tested_closing_point"'),
-        "rs2_route_closing_frequency_mhz": (route["first_tested_closing_point"]["frequency_mhz"], "MHz", '"first_tested_closing_point"'),
-        "rs2_route_lut": (route["utilization"]["clb_luts"]["used"], "CLB LUT", '"clb_luts"'),
-        "rs2_route_ff": (route["utilization"]["clb_registers"]["used"], "FF", '"clb_registers"'),
-        "rs2_route_bram_tiles": (route["utilization"]["block_ram_tiles"]["used"], "BRAM tiles", '"block_ram_tiles"'),
+        "rs2_route_target_timing": (
+            route["target_clock"]["status"],
+            "status",
+            '"target_clock"',
+        ),
+        "rs2_route_target_frequency_mhz": (
+            route["target_clock"]["frequency_mhz"],
+            "MHz",
+            '"frequency_mhz"',
+        ),
+        "rs2_route_target_wns_ns": (
+            route["target_clock"]["timing"]["wns_ns"],
+            "ns",
+            '"wns_ns"',
+        ),
+        "rs2_route_closing_period_ns": (
+            route["first_tested_closing_point"]["period_ns"],
+            "ns",
+            '"first_tested_closing_point"',
+        ),
+        "rs2_route_closing_frequency_mhz": (
+            route["first_tested_closing_point"]["frequency_mhz"],
+            "MHz",
+            '"first_tested_closing_point"',
+        ),
+        "rs2_route_lut": (
+            route["utilization"]["clb_luts"]["used"],
+            "CLB LUT",
+            '"clb_luts"',
+        ),
+        "rs2_route_ff": (
+            route["utilization"]["clb_registers"]["used"],
+            "FF",
+            '"clb_registers"',
+        ),
+        "rs2_route_bram_tiles": (
+            route["utilization"]["block_ram_tiles"]["used"],
+            "BRAM tiles",
+            '"block_ram_tiles"',
+        ),
         "rs2_route_uram": (route["utilization"]["uram"]["used"], "URAM", '"uram"'),
         "rs2_route_dsp": (route["utilization"]["dsps"]["used"], "DSP", '"dsps"'),
-        "rs2_route_drc_status": (route["drc"]["signoff_status"], "status", '"signoff_status"'),
-        "rs2_route_drc_warnings": (route["drc"]["warning_count"], "warnings", '"warning_count"'),
-        "rs2_route_power_total_w": (route["vectorless_power"]["total_on_chip_w"], "W", '"total_on_chip_w"'),
-        "rs2_route_power_dynamic_w": (route["vectorless_power"]["dynamic_w"], "W", '"dynamic_w"'),
-        "rs2_route_power_static_w": (route["vectorless_power"]["static_w"], "W", '"static_w"'),
-        "rs2_route_power_confidence": (route["vectorless_power"]["confidence"], "category", '"confidence"'),
+        "rs2_route_drc_status": (
+            route["drc"]["signoff_status"],
+            "status",
+            '"signoff_status"',
+        ),
+        "rs2_route_drc_warnings": (
+            route["drc"]["warning_count"],
+            "warnings",
+            '"warning_count"',
+        ),
+        "rs2_route_power_total_w": (
+            route["vectorless_power"]["total_on_chip_w"],
+            "W",
+            '"total_on_chip_w"',
+        ),
+        "rs2_route_power_dynamic_w": (
+            route["vectorless_power"]["dynamic_w"],
+            "W",
+            '"dynamic_w"',
+        ),
+        "rs2_route_power_static_w": (
+            route["vectorless_power"]["static_w"],
+            "W",
+            '"static_w"',
+        ),
+        "rs2_route_power_confidence": (
+            route["vectorless_power"]["confidence"],
+            "category",
+            '"confidence"',
+        ),
     }
     for key, (value, units, marker) in route_specs.items():
         _json_record(
@@ -603,13 +784,37 @@ def _add_hardware_numbers(
         )
 
     rtl_specs = {
-        "rs2_rtl_64_token_status": (rtl["required_64_token_rtl_parity"], "status", '"required_64_token_rtl_parity"'),
+        "rs2_rtl_64_token_status": (
+            rtl["required_64_token_rtl_parity"],
+            "status",
+            '"required_64_token_rtl_parity"',
+        ),
         "rs2_rtl_tokens": (rtl["trace"]["tokens"], "tokens", '"tokens"'),
-        "rs2_rtl_transactions": (rtl["rtl_simulation"]["completed_transactions"], "commands", '"completed_transactions"'),
-        "rs2_rtl_output_values": (rtl["parity"]["output_values_compared"], "values", '"output_values_compared"'),
-        "rs2_rtl_step_cycles_min": (rtl["step_latency_cycles"]["minimum"], "cycles", '"step_latency_cycles"'),
-        "rs2_rtl_step_cycles_mean": (rtl["step_latency_cycles"]["mean"], "cycles", '"step_latency_cycles"'),
-        "rs2_rtl_step_cycles_max": (rtl["step_latency_cycles"]["maximum"], "cycles", '"step_latency_cycles"'),
+        "rs2_rtl_transactions": (
+            rtl["rtl_simulation"]["completed_transactions"],
+            "commands",
+            '"completed_transactions"',
+        ),
+        "rs2_rtl_output_values": (
+            rtl["parity"]["output_values_compared"],
+            "values",
+            '"output_values_compared"',
+        ),
+        "rs2_rtl_step_cycles_min": (
+            rtl["step_latency_cycles"]["minimum"],
+            "cycles",
+            '"step_latency_cycles"',
+        ),
+        "rs2_rtl_step_cycles_mean": (
+            rtl["step_latency_cycles"]["mean"],
+            "cycles",
+            '"step_latency_cycles"',
+        ),
+        "rs2_rtl_step_cycles_max": (
+            rtl["step_latency_cycles"]["maximum"],
+            "cycles",
+            '"step_latency_cycles"',
+        ),
     }
     for key, (value, units, marker) in rtl_specs.items():
         _json_record(
@@ -620,6 +825,45 @@ def _add_hardware_numbers(
             units=units,
             source=RS2_RTL,
             marker=marker,
+            revision=revision,
+            timestamp=timestamp,
+        )
+
+    official_specs = {
+        "rs2_official_xsim_64_token_status": (
+            official_xsim["status"],
+            "status",
+            "completion",
+        ),
+        "rs2_official_xsim_tokens": (
+            official_xsim["tokens"],
+            "tokens",
+            "postcheck",
+        ),
+        "rs2_official_xsim_transactions": (
+            official_xsim["transactions"],
+            "commands",
+            "xsim",
+        ),
+        "rs2_official_xsim_elaboration_threads": (
+            official_xsim["elaboration_threads"],
+            "threads",
+            "xelab",
+        ),
+    }
+    official_files = official_xsim["files"]
+    official_markers = official_xsim["markers"]
+    for key, (value, units, source_name) in official_specs.items():
+        source = official_files[source_name]
+        marker = official_markers[source_name]
+        _record(
+            numbers,
+            provenance,
+            key=key,
+            value=value,
+            units=units,
+            source=source,
+            source_line=_line(source, marker),
             revision=revision,
             timestamp=timestamp,
         )
@@ -681,18 +925,78 @@ def _add_derived_numbers(
     bf16 = int(numbers["rs2_bf16_logical_state_bytes"]["value"])
     mxfp8 = int(numbers["rs2_mxfp8_logical_state_bytes"]["value"])
     for key, value, units, marker in (
-        ("rs2_candidate_state_percent_of_bf16", 100.0 * candidate / bf16, "percent", '"logical_state_bytes"'),
-        ("rs2_candidate_state_percent_above_mxfp8", 100.0 * (candidate / mxfp8 - 1.0), "percent", '"logical_state_bytes"'),
-        ("rs2_candidate_all_layer_state_mib", candidate * 36 / (1024.0 * 1024.0), "MiB", '"logical_state_bytes"'),
-        ("rs2_mxfp8_all_layer_state_mib", mxfp8 * 36 / (1024.0 * 1024.0), "MiB", '"logical_state_bytes"'),
-        ("rs2_transfer_bf16_load_bytes", commands["LOAD"]["bf16_input_bytes"], "bytes", '"bf16_input_bytes"'),
-        ("rs2_transfer_bf16_readback_bytes", commands["READBACK"]["bf16_output_bytes"], "bytes", '"bf16_output_bytes"'),
-        ("rs2_transfer_candidate_load_bytes", commands["LOAD"]["rs2_input_bytes"], "bytes", '"rs2_input_bytes"'),
-        ("rs2_transfer_candidate_readback_bytes", commands["READBACK"]["rs2_output_bytes"], "bytes", '"rs2_output_bytes"'),
-        ("rs2_transfer_bf16_step_input_bytes", commands["STEP"]["bf16_input_bytes"], "bytes", '"bf16_input_bytes"'),
-        ("rs2_transfer_candidate_step_input_bytes", commands["STEP"]["rs2_input_bytes"], "bytes", '"rs2_input_bytes"'),
-        ("rs2_transfer_bf16_step_output_bytes", commands["STEP"]["bf16_output_bytes"], "bytes", '"bf16_output_bytes"'),
-        ("rs2_transfer_candidate_step_output_bytes", commands["STEP"]["rs2_output_bytes"], "bytes", '"rs2_output_bytes"'),
+        (
+            "rs2_candidate_state_percent_of_bf16",
+            100.0 * candidate / bf16,
+            "percent",
+            '"logical_state_bytes"',
+        ),
+        (
+            "rs2_candidate_state_percent_above_mxfp8",
+            100.0 * (candidate / mxfp8 - 1.0),
+            "percent",
+            '"logical_state_bytes"',
+        ),
+        (
+            "rs2_candidate_all_layer_state_mib",
+            candidate * 36 / (1024.0 * 1024.0),
+            "MiB",
+            '"logical_state_bytes"',
+        ),
+        (
+            "rs2_mxfp8_all_layer_state_mib",
+            mxfp8 * 36 / (1024.0 * 1024.0),
+            "MiB",
+            '"logical_state_bytes"',
+        ),
+        (
+            "rs2_transfer_bf16_load_bytes",
+            commands["LOAD"]["bf16_input_bytes"],
+            "bytes",
+            '"bf16_input_bytes"',
+        ),
+        (
+            "rs2_transfer_bf16_readback_bytes",
+            commands["READBACK"]["bf16_output_bytes"],
+            "bytes",
+            '"bf16_output_bytes"',
+        ),
+        (
+            "rs2_transfer_candidate_load_bytes",
+            commands["LOAD"]["rs2_input_bytes"],
+            "bytes",
+            '"rs2_input_bytes"',
+        ),
+        (
+            "rs2_transfer_candidate_readback_bytes",
+            commands["READBACK"]["rs2_output_bytes"],
+            "bytes",
+            '"rs2_output_bytes"',
+        ),
+        (
+            "rs2_transfer_bf16_step_input_bytes",
+            commands["STEP"]["bf16_input_bytes"],
+            "bytes",
+            '"bf16_input_bytes"',
+        ),
+        (
+            "rs2_transfer_candidate_step_input_bytes",
+            commands["STEP"]["rs2_input_bytes"],
+            "bytes",
+            '"rs2_input_bytes"',
+        ),
+        (
+            "rs2_transfer_bf16_step_output_bytes",
+            commands["STEP"]["bf16_output_bytes"],
+            "bytes",
+            '"bf16_output_bytes"',
+        ),
+        (
+            "rs2_transfer_candidate_step_output_bytes",
+            commands["STEP"]["rs2_output_bytes"],
+            "bytes",
+            '"rs2_output_bytes"',
+        ),
     ):
         _record(
             numbers,
@@ -710,7 +1014,11 @@ def _add_derived_numbers(
                 if key.startswith("rs2_candidate_state_") or "_all_layer_state_" in key
                 else _line_after(
                     INTERFACE,
-                    '"LOAD"' if "load" in key else '"READBACK"' if "readback" in key else '"STEP"',
+                    '"LOAD"'
+                    if "load" in key
+                    else '"READBACK"'
+                    if "readback" in key
+                    else '"STEP"',
                     marker,
                 )
             ),
@@ -720,9 +1028,27 @@ def _add_derived_numbers(
     for key, value, units, source, marker in (
         ("corrected_log_capacity", 3, "entries", REGISTRATION, '"log_capacity"'),
         ("corrected_accumulator_bits", 32, "bits", REGISTRATION, '"accumulator_bits"'),
-        ("corrected_alignment_guard_bits", 5, "bits", REGISTRATION, '"alignment_guard_bits"'),
-        ("corrected_logical_state_bytes", candidate, "bytes/layer", REGISTRATION, '"encoded_candidate"'),
-        ("corrected_candidate_step_input_logical_bytes", commands["STEP"]["rs2_input_bytes"], "bytes", INTERFACE, '"STEP"'),
+        (
+            "corrected_alignment_guard_bits",
+            5,
+            "bits",
+            REGISTRATION,
+            '"alignment_guard_bits"',
+        ),
+        (
+            "corrected_logical_state_bytes",
+            candidate,
+            "bytes/layer",
+            REGISTRATION,
+            '"encoded_candidate"',
+        ),
+        (
+            "corrected_candidate_step_input_logical_bytes",
+            commands["STEP"]["rs2_input_bytes"],
+            "bytes",
+            INTERFACE,
+            '"STEP"',
+        ),
     ):
         _record(
             numbers,
@@ -735,9 +1061,7 @@ def _add_derived_numbers(
             revision=revision,
             timestamp=timestamp,
         )
-    final_rows = {
-        slug: by_key[(variant, 8192)] for variant, slug in VARIANTS.items()
-    }
+    final_rows = {slug: by_key[(variant, 8192)] for variant, slug in VARIANTS.items()}
     for slug, source_key in (
         ("bf16", "bf16"),
         ("mxfp8", "mxfp8_state"),
@@ -758,7 +1082,9 @@ def _add_derived_numbers(
             revision=revision,
             timestamp=timestamp,
         )
-        variant = next(name for name, mapped in VARIANTS.items() if mapped == source_key)
+        variant = next(
+            name for name, mapped in VARIANTS.items() if mapped == source_key
+        )
         row_line = lines[(variant, 8192)]
         _record(
             numbers,
@@ -859,7 +1185,9 @@ def _write_tables(
         values = []
         for token in CHECKPOINTS:
             cosine = float(numbers[f"rs2_{slug}_token_{token}_output_cosine"]["value"])
-            state = float(numbers[f"rs2_{slug}_token_{token}_state_relative_l2"]["value"])
+            state = float(
+                numbers[f"rs2_{slug}_token_{token}_state_relative_l2"]["value"]
+            )
             values.append(f"{cosine:.3f}/{state:.3f}")
         rows.append(f"{DISPLAY[slug]} & " + " & ".join(values) + r" \\")
     rows.extend([r"\bottomrule", r"\end{tabular}"])
@@ -880,7 +1208,8 @@ def _write_tables(
                 f"{float(numbers['rs2_heldout_min_all_token_cosine']['value']):.6f} & "
                 f"{float(numbers['rs2_heldout_max_all_token_state_relative_l2']['value']):.6f} & "
                 f"{float(numbers['rs2_heldout_max_final_state_relative_l2']['value']):.6f} & "
-                f"{float(numbers['rs2_heldout_max_state_abs_error']['value']):.6f} " + r"\\"
+                f"{float(numbers['rs2_heldout_max_state_abs_error']['value']):.6f} "
+                + r"\\"
             ),
             (
                 "Development, 8{,}192 tokens & "
@@ -888,7 +1217,8 @@ def _write_tables(
                 f"{float(numbers['rs2_extended_min_all_token_cosine']['value']):.6f} & "
                 f"{float(numbers['rs2_extended_max_all_token_state_relative_l2']['value']):.6f} & "
                 f"{float(numbers['rs2_extended_max_final_state_relative_l2']['value']):.6f} & "
-                f"{float(numbers['rs2_extended_max_state_abs_error']['value']):.6f} " + r"\\"
+                f"{float(numbers['rs2_extended_max_state_abs_error']['value']):.6f} "
+                + r"\\"
             ),
             r"\bottomrule",
             r"\end{tabular}",
@@ -903,12 +1233,18 @@ def _write_tables(
             r"\toprule",
             r"Metric & BF16 & Native MXFP4 RS2/R3 & Ratio \\",
             r"\midrule",
-            f"Logical state bytes/layer & {_tex_int(numbers['rs2_bf16_logical_state_bytes']['value'])} & {_tex_int(numbers['rs2_candidate_logical_state_bytes']['value'])} & {float(numbers['rs2_candidate_state_percent_of_bf16']['value']) / 100.0:.3f} " + r"\\",
-            f"HLS LUT & {_tex_int(numbers['rs2_bf16_hls_lut']['value'])} & {_tex_int(numbers['rs2_hls_lut']['value'])} & {float(numbers['rs2_hls_lut_ratio_to_bf16']['value']):.3f} " + r"\\",
-            f"Non-fold STEP max cycles & {_tex_int(numbers['rs2_bf16_hls_step_cycles_max']['value'])} & {_tex_int(numbers['rs2_hls_nonfold_step_cycles_max']['value'])} & {float(numbers['rs2_hls_nonfold_cycle_ratio_to_bf16']['value']):.3f} " + r"\\",
-            f"Amortized cycles/STEP & {_tex_int(round(float(numbers['rs2_bf16_hls_amortized_cycles_max']['value'])))} & {_tex_int(round(float(numbers['rs2_hls_amortized_cycles_max']['value'])))} & {float(numbers['rs2_hls_amortized_cycle_ratio_to_bf16']['value']):.3f} " + r"\\",
-            f"Estimated Fmax (MHz) & {float(numbers['rs2_bf16_hls_estimated_fmax_mhz']['value']):.2f} & {float(numbers['rs2_hls_estimated_fmax_mhz']['value']):.2f} & -- " + r"\\",
-            f"Explicit II=1 loops & PASS & {_tex_value(numbers['rs2_hls_explicit_ii1_status']['value'])} & -- " + r"\\",
+            f"Logical state bytes/layer & {_tex_int(numbers['rs2_bf16_logical_state_bytes']['value'])} & {_tex_int(numbers['rs2_candidate_logical_state_bytes']['value'])} & {float(numbers['rs2_candidate_state_percent_of_bf16']['value']) / 100.0:.3f} "
+            + r"\\",
+            f"HLS LUT & {_tex_int(numbers['rs2_bf16_hls_lut']['value'])} & {_tex_int(numbers['rs2_hls_lut']['value'])} & {float(numbers['rs2_hls_lut_ratio_to_bf16']['value']):.3f} "
+            + r"\\",
+            f"Non-fold STEP max cycles & {_tex_int(numbers['rs2_bf16_hls_step_cycles_max']['value'])} & {_tex_int(numbers['rs2_hls_nonfold_step_cycles_max']['value'])} & {float(numbers['rs2_hls_nonfold_cycle_ratio_to_bf16']['value']):.3f} "
+            + r"\\",
+            f"Amortized cycles/STEP & {_tex_int(round(float(numbers['rs2_bf16_hls_amortized_cycles_max']['value'])))} & {_tex_int(round(float(numbers['rs2_hls_amortized_cycles_max']['value'])))} & {float(numbers['rs2_hls_amortized_cycle_ratio_to_bf16']['value']):.3f} "
+            + r"\\",
+            f"Estimated Fmax (MHz) & {float(numbers['rs2_bf16_hls_estimated_fmax_mhz']['value']):.2f} & {float(numbers['rs2_hls_estimated_fmax_mhz']['value']):.2f} & -- "
+            + r"\\",
+            f"Explicit II=1 loops & PASS & {_tex_value(numbers['rs2_hls_explicit_ii1_status']['value'])} & -- "
+            + r"\\",
             r"\bottomrule",
             r"\end{tabular}",
         ],
@@ -922,14 +1258,22 @@ def _write_tables(
             r"\toprule",
             r"Metric & BF16 & Native MXFP8 & MXFP4 RS2/R3 \\",
             r"\midrule",
-            f"Physical fit & {_tex_value(numbers['bf16_physical_fit_status']['value'])} & {_tex_value(numbers['mxfp8_postroute_physical_fit']['value'])} & {_tex_value(numbers['rs2_route_physical_fit']['value'])} " + r"\\",
-            f"First tested closing MHz & {float(numbers['bf16_first_tested_closing_frequency_mhz']['value']):.2f} & {float(numbers['mxfp8_postroute_first_closing_frequency_mhz']['value']):.2f} & {float(numbers['rs2_route_closing_frequency_mhz']['value']):.2f} " + r"\\",
-            f"CLB LUT & {_tex_int(numbers['bf16_routed_clb_lut']['value'])} & {_tex_int(numbers['mxfp8_postroute_lut_used']['value'])} & {_tex_int(numbers['rs2_route_lut']['value'])} " + r"\\",
-            f"FF & {_tex_int(numbers['bf16_routed_ff']['value'])} & {_tex_int(numbers['mxfp8_postroute_ff_used']['value'])} & {_tex_int(numbers['rs2_route_ff']['value'])} " + r"\\",
-            f"BRAM tiles & {float(numbers['bf16_routed_bram_tiles']['value']):.1f} & {float(numbers['mxfp8_postroute_bram_tiles_used']['value']):.1f} & {float(numbers['rs2_route_bram_tiles']['value']):.1f} " + r"\\",
-            f"URAM & {_tex_int(numbers['bf16_routed_uram']['value'])} & {_tex_int(numbers['mxfp8_postroute_uram_used']['value'])} & {_tex_int(numbers['rs2_route_uram']['value'])} " + r"\\",
-            f"DSP & {_tex_int(numbers['bf16_routed_dsp']['value'])} & {_tex_int(numbers['mxfp8_postroute_dsp_used']['value'])} & {_tex_int(numbers['rs2_route_dsp']['value'])} " + r"\\",
-            f"Vectorless total power (W) & {float(numbers['rs2_bf16_power_total_w']['value']):.3f} & {float(numbers['rs2_mxfp8_power_total_w']['value']):.3f} & {float(numbers['rs2_candidate_power_total_w']['value']):.3f} " + r"\\",
+            f"Physical fit & {_tex_value(numbers['bf16_physical_fit_status']['value'])} & {_tex_value(numbers['mxfp8_postroute_physical_fit']['value'])} & {_tex_value(numbers['rs2_route_physical_fit']['value'])} "
+            + r"\\",
+            f"First tested closing MHz & {float(numbers['bf16_first_tested_closing_frequency_mhz']['value']):.2f} & {float(numbers['mxfp8_postroute_first_closing_frequency_mhz']['value']):.2f} & {float(numbers['rs2_route_closing_frequency_mhz']['value']):.2f} "
+            + r"\\",
+            f"CLB LUT & {_tex_int(numbers['bf16_routed_clb_lut']['value'])} & {_tex_int(numbers['mxfp8_postroute_lut_used']['value'])} & {_tex_int(numbers['rs2_route_lut']['value'])} "
+            + r"\\",
+            f"FF & {_tex_int(numbers['bf16_routed_ff']['value'])} & {_tex_int(numbers['mxfp8_postroute_ff_used']['value'])} & {_tex_int(numbers['rs2_route_ff']['value'])} "
+            + r"\\",
+            f"BRAM tiles & {float(numbers['bf16_routed_bram_tiles']['value']):.1f} & {float(numbers['mxfp8_postroute_bram_tiles_used']['value']):.1f} & {float(numbers['rs2_route_bram_tiles']['value']):.1f} "
+            + r"\\",
+            f"URAM & {_tex_int(numbers['bf16_routed_uram']['value'])} & {_tex_int(numbers['mxfp8_postroute_uram_used']['value'])} & {_tex_int(numbers['rs2_route_uram']['value'])} "
+            + r"\\",
+            f"DSP & {_tex_int(numbers['bf16_routed_dsp']['value'])} & {_tex_int(numbers['mxfp8_postroute_dsp_used']['value'])} & {_tex_int(numbers['rs2_route_dsp']['value'])} "
+            + r"\\",
+            f"Vectorless total power (W) & {float(numbers['rs2_bf16_power_total_w']['value']):.3f} & {float(numbers['rs2_mxfp8_power_total_w']['value']):.3f} & {float(numbers['rs2_candidate_power_total_w']['value']):.3f} "
+            + r"\\",
             r"\bottomrule",
             r"\end{tabular}",
         ],
@@ -993,9 +1337,12 @@ def _write_tables(
             r"\toprule",
             r"Logical payload & BF16 & Native MXFP4 RS2/R3 \\",
             r"\midrule",
-            f"LOAD/READBACK state (bytes/layer) & {_tex_int(numbers['rs2_transfer_bf16_load_bytes']['value'])} & {_tex_int(numbers['rs2_transfer_candidate_load_bytes']['value'])} " + r"\\",
-            f"STEP input (bytes) & {_tex_int(numbers['rs2_transfer_bf16_step_input_bytes']['value'])} & {_tex_int(numbers['rs2_transfer_candidate_step_input_bytes']['value'])} " + r"\\",
-            f"STEP output (bytes) & {_tex_int(numbers['rs2_transfer_bf16_step_output_bytes']['value'])} & {_tex_int(numbers['rs2_transfer_candidate_step_output_bytes']['value'])} " + r"\\",
+            f"LOAD/READBACK state (bytes/layer) & {_tex_int(numbers['rs2_transfer_bf16_load_bytes']['value'])} & {_tex_int(numbers['rs2_transfer_candidate_load_bytes']['value'])} "
+            + r"\\",
+            f"STEP input (bytes) & {_tex_int(numbers['rs2_transfer_bf16_step_input_bytes']['value'])} & {_tex_int(numbers['rs2_transfer_candidate_step_input_bytes']['value'])} "
+            + r"\\",
+            f"STEP output (bytes) & {_tex_int(numbers['rs2_transfer_bf16_step_output_bytes']['value'])} & {_tex_int(numbers['rs2_transfer_candidate_step_output_bytes']['value'])} "
+            + r"\\",
             r"\bottomrule",
             r"\end{tabular}",
         ],
@@ -1038,10 +1385,18 @@ def _append_macros(output: Path, numbers: dict[str, dict[str, object]]) -> Path:
         "RsTwoExtendedRuns": _tex_int(numbers["rs2_extended_run_count"]["value"]),
         "RsTwoExtendedMinCosine": f"{float(numbers['rs2_extended_min_all_token_cosine']['value']):.6f}",
         "RsTwoExtendedMaxStateLTwo": f"{float(numbers['rs2_extended_max_all_token_state_relative_l2']['value']):.6f}",
-        "RsTwoExtendedElementSaturations": _tex_int(numbers["rs2_extended_element_saturations"]["value"]),
-        "RsTwoExtendedAccumulatorSaturations": _tex_int(numbers["rs2_extended_accumulator_saturations"]["value"]),
-        "RsTwoExtendedScaleClamps": _tex_int(numbers["rs2_extended_scale_clamps"]["value"]),
-        "RsTwoLogicalStateBytes": _tex_int(numbers["rs2_candidate_logical_state_bytes"]["value"]),
+        "RsTwoExtendedElementSaturations": _tex_int(
+            numbers["rs2_extended_element_saturations"]["value"]
+        ),
+        "RsTwoExtendedAccumulatorSaturations": _tex_int(
+            numbers["rs2_extended_accumulator_saturations"]["value"]
+        ),
+        "RsTwoExtendedScaleClamps": _tex_int(
+            numbers["rs2_extended_scale_clamps"]["value"]
+        ),
+        "RsTwoLogicalStateBytes": _tex_int(
+            numbers["rs2_candidate_logical_state_bytes"]["value"]
+        ),
         "RsTwoStatePercentOfBfSixteen": f"{float(numbers['rs2_candidate_state_percent_of_bf16']['value']):.2f}",
         "RsTwoStatePercentAboveMxfpEight": f"{float(numbers['rs2_candidate_state_percent_above_mxfp8']['value']):.2f}",
         "RsTwoAllLayerStateMiB": f"{float(numbers['rs2_candidate_all_layer_state_mib']['value']):.2f}",
@@ -1049,9 +1404,13 @@ def _append_macros(output: Path, numbers: dict[str, dict[str, object]]) -> Path:
         "RsTwoHlsLut": _tex_int(numbers["rs2_hls_lut"]["value"]),
         "RsTwoHlsDsp": _tex_int(numbers["rs2_hls_dsp"]["value"]),
         "RsTwoHlsFmax": f"{float(numbers['rs2_hls_estimated_fmax_mhz']['value']):.2f}",
-        "RsTwoHlsNonfoldCycles": _tex_int(numbers["rs2_hls_nonfold_step_cycles_max"]["value"]),
+        "RsTwoHlsNonfoldCycles": _tex_int(
+            numbers["rs2_hls_nonfold_step_cycles_max"]["value"]
+        ),
         "RsTwoHlsFoldCycles": _tex_int(numbers["rs2_hls_fold_cycles_max"]["value"]),
-        "RsTwoHlsAmortizedCycles": _tex_int(round(float(numbers["rs2_hls_amortized_cycles_max"]["value"]))),
+        "RsTwoHlsAmortizedCycles": _tex_int(
+            round(float(numbers["rs2_hls_amortized_cycles_max"]["value"]))
+        ),
         "RsTwoHlsLutRatio": f"{float(numbers['rs2_hls_lut_ratio_to_bf16']['value']):.3f}",
         "RsTwoHlsNonfoldRatio": f"{float(numbers['rs2_hls_nonfold_cycle_ratio_to_bf16']['value']):.3f}",
         "RsTwoHlsAmortizedRatio": f"{float(numbers['rs2_hls_amortized_cycle_ratio_to_bf16']['value']):.3f}",
@@ -1072,7 +1431,21 @@ def _append_macros(output: Path, numbers: dict[str, dict[str, object]]) -> Path:
         "RsTwoRtlTokens": _tex_int(numbers["rs2_rtl_tokens"]["value"]),
         "RsTwoRtlTransactions": _tex_int(numbers["rs2_rtl_transactions"]["value"]),
         "RsTwoRtlOutputs": _tex_int(numbers["rs2_rtl_output_values"]["value"]),
-        "RsTwoRtlStepMean": _tex_int(round(float(numbers["rs2_rtl_step_cycles_mean"]["value"]))),
+        "RsTwoRtlStepMean": _tex_int(
+            round(float(numbers["rs2_rtl_step_cycles_mean"]["value"]))
+        ),
+        "RsTwoOfficialXsimStatus": _tex_value(
+            numbers["rs2_official_xsim_64_token_status"]["value"]
+        ),
+        "RsTwoOfficialXsimTokens": _tex_int(
+            numbers["rs2_official_xsim_tokens"]["value"]
+        ),
+        "RsTwoOfficialXsimTransactions": _tex_int(
+            numbers["rs2_official_xsim_transactions"]["value"]
+        ),
+        "RsTwoOfficialXsimThreads": _tex_int(
+            numbers["rs2_official_xsim_elaboration_threads"]["value"]
+        ),
     }
     retained.extend(
         f"\\newcommand{{\\{name}}}{{{value}}}" for name, value in macros.items()
@@ -1093,6 +1466,11 @@ def generate(output: Path) -> dict[str, object]:
         BF16_VIVADO,
         MXFP8_VIVADO,
         RS2_RTL,
+        RS2_OFFICIAL_XSIM_COMPLETION,
+        RS2_OFFICIAL_XSIM_LOG,
+        RS2_OFFICIAL_XSIM_POSTCHECK,
+        RS2_OFFICIAL_XELAB_LOG,
+        RS2_OFFICIAL_XSIM_COMMAND,
         QWEN,
         SCALE_POLICY,
         INTERFACE,
@@ -1120,6 +1498,7 @@ def generate(output: Path) -> dict[str, object]:
     bf16_route = _load_json(BF16_VIVADO)
     mxfp8_route = _load_json(MXFP8_VIVADO)
     rtl = _load_json(RS2_RTL)
+    official_xsim = _official_xsim_evidence()
     _load_json(QWEN)
     _load_json(SCALE_POLICY)
 
@@ -1144,14 +1523,13 @@ def generate(output: Path) -> dict[str, object]:
         mxfp8_hls,
         route,
         rtl,
+        official_xsim,
         bf16_route,
         mxfp8_route,
         revision,
         timestamp,
     )
-    _add_derived_numbers(
-        numbers, provenance, by_key, line_by_key, revision, timestamp
-    )
+    _add_derived_numbers(numbers, provenance, by_key, line_by_key, revision, timestamp)
     _add_timing_ablation_numbers(numbers, provenance, revision, timestamp)
     if set(numbers) != set(provenance):
         raise ValueError("paper numbers and provenance keys diverged")
@@ -1197,10 +1575,15 @@ def generate(output: Path) -> dict[str, object]:
             ),
             "selected_candidate": candidate["candidate_name"],
             "held_out_status": candidate["gate_results"]["held_out"]["status"],
-            "extended_8192_status": candidate["gate_results"]["extended_development"]["status"],
+            "extended_8192_status": candidate["gate_results"]["extended_development"][
+                "status"
+            ],
             "rtl_64_token_status": rtl["required_64_token_rtl_parity"],
+            "official_xsim_64_token_status": official_xsim["status"],
             "post_route_status": route["status"],
-            "hls_cost_latency_advantage_vs_bf16": hls["comparison"]["hls_cost_latency_advantage_vs_bf16"],
+            "hls_cost_latency_advantage_vs_bf16": hls["comparison"][
+                "hls_cost_latency_advantage_vs_bf16"
+            ],
         }
     )
     asset.setdefault("inputs_sha256", {}).update(

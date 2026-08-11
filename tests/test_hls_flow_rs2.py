@@ -32,8 +32,7 @@ def test_rs2_trace_archive_accepts_64_token_run(tmp_path: Path) -> None:
     _trace_logs(tmp_path, marker)
     _archive_completed_step("rs2-trace-csim", tmp_path)
     archived = (
-        tmp_path
-        / "reports/csim/corrected/rs2_current/trace64/gdn_rs2_top_csim.log"
+        tmp_path / "reports/csim/corrected/rs2_current/trace64/gdn_rs2_top_csim.log"
     )
     assert archived.read_text(encoding="utf-8") == marker
 
@@ -42,7 +41,9 @@ def _cosim_artifacts(root: Path, project: str, marker: str) -> None:
     solution = root / project / "u55c_250mhz"
     report = solution / "sim/report/verilog"
     report.mkdir(parents=True)
-    (solution / "sim/report/gdn_rs2_top_cosim.rpt").write_text("PASS\n", encoding="utf-8")
+    (solution / "sim/report/gdn_rs2_top_cosim.rpt").write_text(
+        "PASS\n", encoding="utf-8"
+    )
     (report / "gdn_rs2_top.log").write_text(marker + "\n", encoding="utf-8")
     for name in ("lat.rpt", "result.transaction.rpt"):
         (report / name).write_text("PASS\n", encoding="utf-8")
@@ -60,9 +61,7 @@ def test_rs2_control_cosim_archive_requires_and_copies_pass(tmp_path: Path) -> N
     _archive_completed_step("rs2-control-cosim", tmp_path)
     archived = tmp_path / "reports/cosim/corrected/rs2_current/control"
     assert (archived / "gdn_rs2_top_cosim.rpt").is_file()
-    assert marker in (archived / "verilog/gdn_rs2_top.log").read_text(
-        encoding="utf-8"
-    )
+    assert marker in (archived / "verilog/gdn_rs2_top.log").read_text(encoding="utf-8")
     assert "C/RTL co-simulation finished: PASS" in (
         archived / "u55c_250mhz.log"
     ).read_text(encoding="utf-8")
@@ -89,9 +88,7 @@ def test_rs2_reset_trace_cosim_archive_requires_and_copies_pass(
     _archive_completed_step("rs2-reset-trace-cosim", tmp_path)
     archived = tmp_path / "reports/cosim/corrected/rs2_current/trace64_reset"
     assert (archived / "gdn_rs2_top_cosim.rpt").is_file()
-    assert marker in (archived / "verilog/gdn_rs2_top.log").read_text(
-        encoding="utf-8"
-    )
+    assert marker in (archived / "verilog/gdn_rs2_top.log").read_text(encoding="utf-8")
 
 
 def test_rs2_reset_trace_cosim_resume_is_optimized_and_registered() -> None:
@@ -115,6 +112,14 @@ def test_rs2_accelerated_reset_cosim_is_guarded_and_registered() -> None:
     assert "Out of memory" in text
 
 
+def test_makefile_exposes_accelerated_reset_trace_cosim() -> None:
+    makefile = (Path(__file__).resolve().parents[1] / "Makefile").read_text(
+        encoding="utf-8"
+    )
+    assert "hls-rs2-reset-trace-cosim-accelerated:" in makefile
+    assert "$(PYTHON) -m scripts.hls_flow rs2-reset-trace-cosim-accelerated" in makefile
+
+
 def test_rs2_accelerated_archive_requires_raw_xsim_and_postcheck(
     tmp_path: Path,
 ) -> None:
@@ -131,12 +136,8 @@ def test_rs2_accelerated_archive_requires_raw_xsim_and_postcheck(
     (verilog / "rs2_accelerated_cosim_complete.txt").write_text(
         "RS2_ACCELERATED_HLS_XSIM_PASS\n", encoding="utf-8"
     )
-    (verilog / "xsim.log").write_text(
-        "RTL Simulation : 66 / 66\n", encoding="utf-8"
-    )
-    (verilog / "xelab.log").write_text(
-        "Using 8 slave threads.\n", encoding="utf-8"
-    )
+    (verilog / "xsim.log").write_text("RTL Simulation : 66 / 66\n", encoding="utf-8")
+    (verilog / "xelab.log").write_text("Using 8 slave threads.\n", encoding="utf-8")
     (verilog / "run_xsim.bat").write_text(
         "xelab --O3 --debug off --mt 8\n", encoding="utf-8"
     )
@@ -146,15 +147,10 @@ def test_rs2_accelerated_archive_requires_raw_xsim_and_postcheck(
 
     _archive_completed_step("rs2-reset-trace-cosim-accelerated", tmp_path)
     archived = (
-        tmp_path
-        / "reports/cosim/corrected/rs2_current/trace64_reset_accelerated"
+        tmp_path / "reports/cosim/corrected/rs2_current/trace64_reset_accelerated"
     )
-    assert marker in (archived / "postcheck/temp0.log").read_text(
-        encoding="utf-8"
-    )
-    assert "66 / 66" in (archived / "verilog/xsim.log").read_text(
-        encoding="utf-8"
-    )
+    assert marker in (archived / "postcheck/temp0.log").read_text(encoding="utf-8")
+    assert "66 / 66" in (archived / "verilog/xsim.log").read_text(encoding="utf-8")
 
     (verilog / "xsim.log").write_text(
         "RTL Simulation : 66 / 66\nOut of memory\n", encoding="utf-8"
