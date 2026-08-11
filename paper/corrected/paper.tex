@@ -680,12 +680,11 @@ parent. Exact C-simulation and physical checks again passed, but setup regressed
 sharply: 80 of the 100 worst paths began in the state-input AXI load FIFO and
 crossed two SLRs into banked URAM control. We reject contiguous banking without
 a separately pipelined load/control plane.
-An eleventh variant combined those banks with snapshot-write locality; all 100
-worst paths moved to the top FSM and timing worsened, so we reject it. In a
-twelfth RTL-only variant, a bounded-fanout hint on the stronger unbanked parent
-replicated controller registers but worsened all three setup metrics. This too
-is rejected; closing 250 MHz requires a redesigned memory-owner/control
-hierarchy.
+An eleventh combination moved all 100 worst paths to the top FSM and worsened
+timing. Two RTL-only fanout-16 hints next targeted the top FSM and fold-write
+addresses. Both regressed setup. The address hint cut those origins from 47 to
+four, but WNS worsened from $-1.294$ to $-1.453$ ns as 59 paths shifted to URAM
+clocks. Closing 250 MHz needs redesigned global control.
 
 \begin{table}[t]
 \centering

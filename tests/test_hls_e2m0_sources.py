@@ -98,6 +98,8 @@ def test_corrected_e2m0_vivado_flows_use_generated_rtl_and_u55c() -> None:
     assert "5.600" in sweep
     assert "report_timing_summary" in sweep
     assert "report_power" in sweep
+    assert "proc insert_e2m0_ooc_clock_buffer" in clock_buffer
+    assert "create_cell -reference BUFGCE ooc_ap_clk_bufg" in clock_buffer
     assert "ooc_ap_clk_bufg" in impl
     assert "prepare_e2m0_ooc_rtl" in flow
     assert '"e2m0-synth"' in flow

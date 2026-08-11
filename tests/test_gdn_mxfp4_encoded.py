@@ -9,7 +9,6 @@ from golden.gdn_fp32 import gdn_recurrence_core_step
 from golden.gdn_mxfp4_encoded import (
     ArithmeticCounters,
     EncodedState,
-    EncodedToken,
     _aligned_sum,
     _decode_integer_arrays,
     _round_shift_rne,

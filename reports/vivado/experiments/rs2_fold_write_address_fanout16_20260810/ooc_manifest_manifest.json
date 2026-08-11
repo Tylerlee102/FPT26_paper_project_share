@@ -1,0 +1,9 @@
+{
+  "output": "build/vivado/rs2_fold_write_address_fanout16_ooc_rtl/gdn_rs2_top.v",
+  "output_sha256": "748BBF0C9BDA4E55344E2BBD824CE6B1C5B391661B9D91E7213DAC2EEDA4C202",
+  "source": "build/experiments/rs2_fold_write_address_fanout16/rtl/gdn_rs2_top.v",
+  "source_sha256": "F1D56BFC78924094ACDE03887D8B708A06817292A54A4EF16AA908B2B25F84C8",
+  "status": "PASS",
+  "timestamp": "2026-08-10T23:01:59.914657+00:00",
+  "transformation": "insert_top_level_bufgce_and_rewire_internal_ap_clk"
+}

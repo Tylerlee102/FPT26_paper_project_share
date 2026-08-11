@@ -1,7 +1,7 @@
 {
   "comment_row_count": 68,
   "directive_row_count": 25,
-  "generated_at": "2026-08-10T22:50:59.532059+00:00",
+  "generated_at": "2026-08-11T00:31:12.409750+00:00",
   "rows": [
     {
       "id": "R01",
@@ -480,6 +480,6 @@
   "traceability_source": "docs/reviewer_traceability.md",
   "traceability_source_sha256": "5C423A096CBA080EE3BB37F559F0527C7CC2DF53BF5DF554349758FA4ADF25AE",
   "visual_audit": "paper/corrected/working_draft_visual_audit.json",
-  "visual_audit_sha256": "5EA5D4EAA09874DF1ED3EC0FF3EC6D929E9152CBE92C810E2AAA91F7FCA8D9EF",
+  "visual_audit_sha256": "A3D44D77B186AB72FFF23D408146CD8B47067A363234024CF036D57A502703D2",
   "visual_audit_status": "PASS"
 }

@@ -154,6 +154,20 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   Pre-synthesis controller
   replication therefore increases register cost and worsens every setup metric;
   it is rejected and not promoted.
+- A thirteenth RTL-only experiment adds `max_fanout=16` only to the two
+  registered primary/residual addresses in the strongest fold-write parent.
+  Parent behavior and exact 64-token C-simulation evidence remain unchanged;
+  the matched route, hold, and DRC complete. The hint reduces targeted
+  address-register origins from 47 to four of the 100 worst setup paths, but
+  reaches -1.453 ns WNS, -18,473.637 ns TNS, and 35,126 failing endpoints.
+  Relative to the parent this is 0.159 ns worse WNS, 5,278.634 ns worse TNS,
+  and 5,958 more failing endpoints. The 5.091 ns worst path is 93% net delay,
+  has five logic levels, one SLR crossing, and fanout 99. The remaining worst
+  paths begin at 59 resident-URAM read clocks, 23 fold-control registers, and
+  14 reset-control registers. The route uses 82,425 LUTs, 70,619 registers,
+  341 BRAM tiles, 598 URAMs, and 12 DSPs. Local address fanout reduction
+  displaces the bottleneck without closing timing; it is rejected and not
+  promoted.
 - The implementation has 26 DRC warnings. It has no critical warnings or
   errors, but shell integration may change placement and timing.
 - The official candidate generated-RTL control smoke passes two early-return
@@ -200,10 +214,10 @@ hypotheses remain visible; none is silently promoted to a positive claim.
   unresolved-reference, page-render, and page-by-page visual checks. It is
   watermarked `WORKING DRAFT - NOT SUBMISSION READY` and is not promoted to a
   final submission PDF.
-- The latest full regression records 412 passed, 2 skipped, and 0 failed tests;
+- The latest full regression records 416 passed, 2 skipped, and 0 failed tests;
   its JUnit artifact is
-  `reports/test_results/final_pytest_20260810_fsm_fanout16.xml`
-  (SHA256 `0FC1295640D222DDB89B8C8BC56D3B5F753F3048E785554C3AE2CCC15F3EAC05`).
+  `reports/test_results/final_pytest_20260810_address_fanout16.xml`
+  (SHA256 `202F2E435645000A8A404473BA2E7982B23685B7DBE64D207FDA9AC4473A8FD7`).
 - One skip,
   `tests.test_reports.TestReports.test_current_hls_cosim_report_passes_when_present`,
   is intentional: the preserved legacy HLS cosim report predates the current

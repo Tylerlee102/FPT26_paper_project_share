@@ -32,10 +32,10 @@
     }
   ],
   "build_manifest": "paper/corrected/working_draft_build_manifest.json",
-  "build_manifest_sha256": "51F80882D85743415597E2E475AAED9FBF04DFE75247C1273EF2172706983114",
+  "build_manifest_sha256": "39A79E71BBECC94D49945992DA7E2C2EEC537748628000135B2DD54AA4C51D11",
   "checklist": "paper/corrected/working_draft_visual_checklist.json",
-  "checklist_sha256": "41A6780111F227836E1CA2280B597583EDD006296C15FD363BE6ECF59D7AB126",
-  "generated_at": "2026-08-10T22:50:59.058060+00:00",
+  "checklist_sha256": "396DB98A9DA1DE0841EDC457373FCACC97DB0E56359187C85AC720AD82C67973",
+  "generated_at": "2026-08-11T00:30:08.541825+00:00",
   "page_count": 9,
   "pages": [
     {
@@ -88,7 +88,7 @@
     },
     {
       "height": 2420,
-      "notes": "Trade-off figure and the first portion of all twelve architecture-ablation paragraphs are readable; the eighth result flows cleanly to page 8 without clipping or overlap.",
+      "notes": "Trade-off figure and the first portion of all thirteen architecture-ablation paragraphs are readable; the eighth result flows cleanly to page 8 without clipping or overlap.",
       "page": 7,
       "path": "reports/rendered/working_draft/page-07.png",
       "sha256": "4D17EF3D3A0CCDC20A3567247B7ACDD7848FDCB04AA8F458D58109578FD7A3DE",
@@ -96,10 +96,10 @@
     },
     {
       "height": 2420,
-      "notes": "The eighth-ablation continuation and complete ninth through twelfth ablations, post-route and power tables, and discussion equations render without clipping, overlap, or broken glyphs.",
+      "notes": "The eighth-ablation continuation and complete ninth through thirteenth ablations, post-route and power tables, and discussion equations render without clipping, overlap, or broken glyphs.",
       "page": 8,
       "path": "reports/rendered/working_draft/page-08.png",
-      "sha256": "D12604635752B1B9A175F994ABD11F8C2AF0DBBEDCC9139A6FC8EB3C8F1738A2",
+      "sha256": "2F0D3408E58D45DA2817582B03CF681B7E0AD3301A06A65DC7189665F6399FFB",
       "width": 1870
     },
     {
@@ -124,5 +124,5 @@
   "submission_eligible": false,
   "visual_audit_status": "PASS",
   "working_draft": "paper/corrected/mxfp4_gdn_working_draft.pdf",
-  "working_draft_sha256": "0C56FF7A29557346AB79F2A51FAEEBE9B3AC85D82076E1F2BADA9B6019BF479D"
+  "working_draft_sha256": "1DF48E09AAA067DAFFBAC601395184C7BBC7FCD614EE078CC4B7EBE19E5A6514"
 }

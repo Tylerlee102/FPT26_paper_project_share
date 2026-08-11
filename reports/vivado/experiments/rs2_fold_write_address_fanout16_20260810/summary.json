@@ -1,0 +1,199 @@
+{
+  "artifact_sha256": {
+    "design_analysis.rpt": "A14B803A3853B04369B96A1C4CEB74B1B74D3C95A743DA1E14258C2A3054961F",
+    "generation_manifest_manifest.json": "879379D028EA6BE8C5363EDF8339992E836D2D9F4337B5E1F283FC72E2F2ECE7",
+    "impl_clock_util.rpt": "FA416529C5123FE010B9F2417703FC0C5EEF62351686A93E9C5E6CA79A70F49D",
+    "impl_drc.rpt": "7AD7ED3F3CBDD8B6641A7DC0067029FE6F2C7E34477D668E746286D4C660306D",
+    "impl_methodology.rpt": "85F197F124D64B02BABD7BB3B5E6BF47EC9F4725F9BCFBBB970818B557FD836F",
+    "impl_power.rpt": "6747242F6045C54B21BCA4755E97CE21B8A10449840BBBFB51462DA093270CE0",
+    "impl_timing.rpt": "265237FB5714CC46A309104E442467D7024FB5D890AE7A188BECB0B84B86DD0A",
+    "impl_util.rpt": "1D615B60AD07B6403405D13C04188C64B34198723B7FA482A00A217CDDEC9F6E",
+    "impl_util_hierarchical.rpt": "95F99150AD622091CCE3F4149A539B524F865C20EB8CB251784E4D3E9A406198",
+    "modified_impl_gdn_rs2_top_p_anonymous_namespace_commit_fold_block.v": "0A2A22028F61FF73EF2B5C22A03EB9200CF0291AC76D1725EDDCB9E2D50F09B4",
+    "ooc_manifest_manifest.json": "2A408852CAFFB0C892CD99C4CD24BB03FE2CA1499E15F597DD24AE36E1E3A009",
+    "vivado_impl_log_vivado_rs2-fold-write-address-fanout16-impl.log": "2C06CF6E8048E065F62D7596E68CB0184999D2867864E5648BEB7C2C80019A63",
+    "worst_100_setup_paths.rpt": "48C69748691899E5F119D96EDD20BF47C508545002E4DD0D841C78A59B650E40"
+  },
+  "decision": {
+    "promoted": false,
+    "reason": "The address origins fall from 47 parent worst paths to four, but setup WNS, TNS, and failing endpoints all regress as critical paths redistribute to resident-URAM clocks, fold control, and reset control.",
+    "status": "REJECT_ADDRESS_FANOUT16_TIMING"
+  },
+  "experiment": "RS2 fold-write registered-address max-fanout 16",
+  "postroute": {
+    "delta_experiment_minus_parent": {
+      "setup_failing_endpoints": 5958,
+      "tns_ns": -5278.633999999998,
+      "wns_ns": -0.15900000000000003
+    },
+    "drc": {
+      "by_rule": {
+        "DPIP-2": 6,
+        "DPOP-3": 7,
+        "DPOP-4": 12,
+        "RTSTAT-10": 1
+      },
+      "critical_warning_count": 0,
+      "error_count": 0,
+      "signoff_status": "PASS_WITH_WARNINGS",
+      "violation_count": 26,
+      "warning_count": 26
+    },
+    "experiment_path_characteristics": {
+      "high_fanout": 99,
+      "logic_delay_ns": 0.327,
+      "logic_levels": 5,
+      "net_delay_ns": 4.764,
+      "path_delay_ns": 5.091,
+      "slr_crossings": 1
+    },
+    "experiment_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 222692,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 76428,
+      "setup_failing_endpoints": 35126,
+      "setup_total_endpoints": 223105,
+      "ths_ns": 0.0,
+      "tns_ns": -18473.637,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.453,
+      "wpws_ns": 1.3
+    },
+    "parent_path_characteristics": {
+      "high_fanout": 307,
+      "logic_delay_ns": 0.469,
+      "logic_levels": 4,
+      "net_delay_ns": 4.524,
+      "path_delay_ns": 4.993,
+      "slr_crossings": 1
+    },
+    "parent_timing": {
+      "hold_failing_endpoints": 0,
+      "hold_total_endpoints": 222740,
+      "pulse_width_failing_endpoints": 0,
+      "pulse_width_total_endpoints": 76473,
+      "setup_failing_endpoints": 29168,
+      "setup_total_endpoints": 223153,
+      "ths_ns": 0.0,
+      "tns_ns": -13195.003,
+      "tpws_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": -1.294,
+      "wpws_ns": 1.3
+    },
+    "parent_utilization": {
+      "block_ram_tiles": {
+        "available": 2016,
+        "used": 341,
+        "utilization_percent": 16.91
+      },
+      "bufgce": {
+        "available": 288,
+        "used": 1,
+        "utilization_percent": 0.35
+      },
+      "clb_luts": {
+        "available": 1303680,
+        "used": 82249,
+        "utilization_percent": 6.31
+      },
+      "clb_registers": {
+        "available": 2607360,
+        "used": 70683,
+        "utilization_percent": 2.71
+      },
+      "dsps": {
+        "available": 9024,
+        "used": 12,
+        "utilization_percent": 0.13
+      },
+      "uram": {
+        "available": 960,
+        "used": 598,
+        "utilization_percent": 62.29
+      }
+    },
+    "utilization": {
+      "block_ram_tiles": {
+        "available": 2016,
+        "used": 341,
+        "utilization_percent": 16.91
+      },
+      "bufgce": {
+        "available": 288,
+        "used": 1,
+        "utilization_percent": 0.35
+      },
+      "clb_luts": {
+        "available": 1303680,
+        "used": 82425,
+        "utilization_percent": 6.32
+      },
+      "clb_registers": {
+        "available": 2607360,
+        "used": 70619,
+        "utilization_percent": 2.71
+      },
+      "dsps": {
+        "available": 9024,
+        "used": 12,
+        "utilization_percent": 0.13
+      },
+      "uram": {
+        "available": 960,
+        "used": 598,
+        "utilization_percent": 62.29
+      }
+    },
+    "vectorless_power_at_failed_4ns_constraint": {
+      "components": {
+        "block_ram_w": 0.241,
+        "clb_logic_w": 0.543,
+        "clocks_w": 0.455,
+        "dsps_w": 0.007,
+        "signals_w": 0.859,
+        "uram_w": 1.009
+      },
+      "confidence": "Medium",
+      "dynamic_w": 3.114,
+      "measured_on_board": false,
+      "method": "Vivado vectorless activity propagation",
+      "static_w": 3.396,
+      "total_on_chip_w": 6.51
+    },
+    "worst_100_startpoint_origins": {
+      "commit_fold_address": 4,
+      "fold_control": 23,
+      "reset_control": 14,
+      "resident_uram_read_clock": 59
+    }
+  },
+  "replication": {
+    "max_instances_in_one_event": 15,
+    "replicated_instance_count": 314,
+    "replication_event_count": 142
+  },
+  "schema": 1,
+  "scope": "synthesis-only RTL attribute experiment; HLS logic unchanged",
+  "source_identity": {
+    "generated_rtl_modified": true,
+    "hls_cpp_modified": false,
+    "modified_impl_sha256": "0A2A22028F61FF73EF2B5C22A03EB9200CF0291AC76D1725EDDCB9E2D50F09B4",
+    "ooc_top_sha256": "748BBF0C9BDA4E55344E2BBD824CE6B1C5B391661B9D91E7213DAC2EEDA4C202",
+    "parent_generated_rtl_immutable": true,
+    "parent_impl_sha256": "CC8724C06A2A369D30055E43DE6FA2EA8CB2B200DA385674EC81AB0175D8E5FF",
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "timestamp": "2026-08-11T00:36:17.255932+00:00",
+  "verification": {
+    "parent_exact_64_token_csim": "PASS",
+    "physical_replication_observed": "PASS",
+    "route_completion": "PASS",
+    "synthesis_only_transform": "PASS",
+    "target_250mhz": "FAIL",
+    "worst_100_path_classification": "PASS"
+  }
+}

@@ -47,3 +47,15 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 addopts = "--basetemp=reports/test_tmp/pytest"
 cache_dir = "reports/test_tmp/pytest_cache"
+
+[tool.ruff.lint.per-file-ignores]
+# These byte-hashed evidence sources retain their registered identities.
+"golden/gdn_e2m0_encoded_vectorized.py" = ["F401"]
+"reports/benchmark/corrected/write_log_development_source_snapshot/scripts/long_sequence_stability.py" = ["F541"]
+"scripts/bf16_vivado_report.py" = ["F541"]
+"scripts/example_report.py" = ["F541", "F841"]
+"scripts/generate_e2m0_hls_trace.py" = ["F401"]
+"scripts/paper_figures.py" = ["F401"]
+"scripts/paper_graph_previews.py" = ["F541"]
+"scripts/plot_write_log_held_out.py" = ["F841"]
+"scripts/qwen_recurrent_capture.py" = ["F401"]

@@ -1,0 +1,24 @@
+{
+  "behavioral_contract": "same fold-write generated RTL behavior; only synthesis fanout hints on the registered primary and residual state addresses",
+  "experiment": "RS2 fold-write registered-address max-fanout 16",
+  "generated_at": "2026-08-10T23:01:43.545116+00:00",
+  "generated_rtl_modified": true,
+  "hls_cpp_modified": false,
+  "output_root": "build/experiments/rs2_fold_write_address_fanout16/rtl",
+  "output_target_sha256": "0A2A22028F61FF73EF2B5C22A03EB9200CF0291AC76D1725EDDCB9E2D50F09B4",
+  "schema": 1,
+  "scope": "synthesis attributes only; HLS C++ and behavioral RTL unchanged",
+  "source_file_count": 153,
+  "source_root": "gdn_rs2_fold_write_hls/u55c_250mhz/syn/verilog",
+  "source_target_sha256": "CC8724C06A2A369D30055E43DE6FA2EA8CB2B200DA385674EC81AB0175D8E5FF",
+  "status": "PASS",
+  "transform": {
+    "attribute": "max_fanout",
+    "declaration_replacements": 2,
+    "registers": [
+      "lshr_ln9_reg_369",
+      "lshr_ln_reg_364"
+    ],
+    "value": 16
+  }
+}

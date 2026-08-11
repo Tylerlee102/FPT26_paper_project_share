@@ -25,6 +25,9 @@ TCL_BY_STEP = {
         "vivado/tcl/run_rs2_fold_control_impl.tcl"
     ),
     "rs2-fold-write-impl": Path("vivado/tcl/run_rs2_fold_write_impl.tcl"),
+    "rs2-fold-write-address-fanout16-impl": Path(
+        "vivado/tcl/run_rs2_fold_write_address_fanout_impl.tcl"
+    ),
     "rs2-layer-banks-impl": Path("vivado/tcl/run_rs2_layer_banks_impl.tcl"),
     "rs2-partial-layer-banks-impl": Path(
         "vivado/tcl/run_rs2_partial_layer_banks_impl.tcl"
@@ -132,6 +135,24 @@ def main(argv: list[str] | None = None) -> int:
                 / "build"
                 / "vivado"
                 / "rs2_fold_write_ooc_rtl"
+                / "gdn_rs2_top.v"
+            ),
+        )
+    elif args.step == "rs2-fold-write-address-fanout16-impl":
+        prepare_rs2_ooc_rtl(
+            source=(
+                root
+                / "build"
+                / "experiments"
+                / "rs2_fold_write_address_fanout16"
+                / "rtl"
+                / "gdn_rs2_top.v"
+            ),
+            output=(
+                root
+                / "build"
+                / "vivado"
+                / "rs2_fold_write_address_fanout16_ooc_rtl"
                 / "gdn_rs2_top.v"
             ),
         )
@@ -308,6 +329,7 @@ def main(argv: list[str] | None = None) -> int:
         "rs2-timing-analysis",
         "rs2-fold-control-impl",
         "rs2-fold-write-impl",
+        "rs2-fold-write-address-fanout16-impl",
         "rs2-layer-banks-impl",
         "rs2-partial-layer-banks-impl",
         "rs2-fold-write-partial-banks-impl",
