@@ -24,7 +24,7 @@ Status describes the requested evidence, not merely whether prose was edited:
 | D1.4 | INT4 is weak; FP8 should be the proper baseline. | A floating-Q/DQ MXFP8-E4M3 state baseline outperforms four-bit state numerically. Its matched native E4M3/E8M0 kernel passes arithmetic and persistent-kernel C-sim, C-synthesis, and all explicit II=1 constraints; the out-of-context image fits, fails 250 MHz, and first closes at the tested 166.67 MHz point. | `paper/corrected/tables/rs2_controlled_long.tex`; `paper/corrected/tables/rs2_hls.tex`; `reports/csynth/corrected/mxfp8_hls_summary.json`; `reports/vivado/baselines/mxfp8/mxfp8_vivado_summary.json` | PASS |
 | D1.5 | Credit Gupta et al. directly. | The Introduction, related work, ownership table, and figure legend explicitly attribute persistent state, paired-head handling, and the five phases to Gupta et al. | `paper/corrected/paper.tex`; `docs/evidence/g0_prior_art_refresh_2026_08_01.md` | PASS |
 | D1.6 | Obtain real data or add fidelity techniques and novelty. | A recurrence-aware two-term RS2/R3 residual/write-log mitigation improves bounded synthetic fidelity. Pinned layer-12 hidden states plus matching checkpoint projections provide q/k/v/alpha/beta recurrence inputs for four real prompt traces. They are only 12--18 tokens and do not support perplexity or downstream-accuracy claims. | `paper/corrected/tables/rs2_stability_gates.tex`; `paper/corrected/tables/qwen_recurrent_stability.tex`; `reports/benchmark/qwen_recurrent_stability_manifest.json` | PASS |
-| D1.7 | Submit as a poster until the evidence is stronger. | The revision is recast as a scoped negative-result paper: uniform MXFP4 fails numerically and in matched HLS cost, while the correction physically fits but misses timing and loses the Pareto argument. Missing model/board evidence is a limitation, not filled by simulation. | `reports/final_completion_gate.json`; `paper/corrected/paper.tex` | PASS |
+| D1.7 | Submit as a poster until the evidence is stronger. | The revision is recast as a scoped negative-result paper: uniform MXFP4 fails numerically and in matched HLS cost, while the correction physically fits but misses timing and loses the Pareto argument. A generated table reports the selected route and thirteen isolated architectural timing experiments, all rejected; missing model/board evidence remains a limitation rather than being filled by simulation. | `paper/corrected/tables/rs2_timing_ablation.tex`; `reports/final_completion_gate.json`; `paper/corrected/paper.tex` | PASS |
 
 ## Reviewer 2
 
@@ -67,8 +67,10 @@ short model-derived recurrence traces are complete. Closed-loop real-model
 quality, board parity and energy, and a same-boundary native-FP4 GPU comparison
 remain externally blocked and are retained as explicit limitations. All-layer
 out-of-context physical fit and routed timing/DRC are reported, but
-complete-model residency and both required 64-token RTL paths are not yet
-established. The completed HLS and routed evidence shows that the selected
+complete-model residency is not established. The direct generated-Verilog
+64-token recurrent path passes exactly; the separate official HLS/XSIM
+64-token path remains in progress. The completed HLS and routed evidence shows
+that the selected
 stability mitigation is not Pareto-superior to BF16. Until the machine gate has
 eleven `PASS` rows, the project remains **NOT PAPER READY**; only a visibly
 watermarked working draft is permitted.
